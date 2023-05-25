@@ -1,6 +1,6 @@
 <nav class="side-nav">
     <a href="" class="intro-x flex items-center pl-5 pt-4">
-        <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="{{url('/')}}/dist/images/logo.svg">
+        <img alt="{{config('app.name')}}" class="w-6" src="{{url('/')}}/dist/images/logo.svg">
         <span class="hidden xl:block text-white text-lg ml-3"> {{config('app.name')}} </span>
     </a>
     <div class="side-nav__devider my-6"></div>
@@ -106,15 +106,21 @@
             </a>
             <ul class="">
                 <li>
-                    <a href="{{url('/')}}" class="side-menu">
+                    <a href="{{route('users')}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="user"></i> </div>
                         <div class="side-menu__title"> users </div>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/')}}" class="side-menu">
+                    <a href="{{route('add.user')}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="user-plus"></i> </div>
                         <div class="side-menu__title"> Add user </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('user.groups')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                        <div class="side-menu__title"> Groups </div>
                     </a>
                 </li>
                 <li>
@@ -133,13 +139,13 @@
             </ul>
         </li>
         <li>
-            <a href="side-menu-inbox.html" class="side-menu">
+            <a href="" class="side-menu">
                 <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
                 <div class="side-menu__title"> Media </div>
             </a>
         </li>
         <li>
-            <a href="side-menu-inbox.html" class="side-menu">
+            <a href="" class="side-menu">
                 <div class="side-menu__icon"> <i data-feather="map-pin"></i> </div>
                 <div class="side-menu__title"> Locations </div>
             </a>
@@ -164,6 +170,18 @@
                     </a>
                 </li>
             </ul>
+        </li>
+        <li>
+            <a href="" class="side-menu">
+                <div class="side-menu__icon"> <i data-feather="settings"></i> </div>
+                <div class="side-menu__title"> Settings </div>
+            </a>
+        </li>
+        <li>
+            <a href="" class="side-menu">
+                <div class="side-menu__icon"> <i data-feather="lock"></i> </div>
+                <div class="side-menu__title"> Logout </div>
+            </a>
         </li>
     </ul>
 </nav>

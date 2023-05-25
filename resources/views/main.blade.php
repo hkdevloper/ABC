@@ -8,7 +8,7 @@
     {{-- Meta Tags --}}
     <title>Business Directory Listing -Admin Panel</title>
     {{-- Styles --}}
-    <link rel="stylesheet" href="{{url("/")}}/dist/css/app.css"> 
+    <link rel="stylesheet" href="{{url("/")}}/dist/css/app.css">
     <link rel="stylesheet" href="{{url("/")}}/dist/css/box-icons.css">
     {{-- Scripts --}}
 </head>
@@ -18,17 +18,31 @@
     <div class="flex">
         @include('components.sidebar')
         <div class="content">
-            <div class="content"> 
+            <div class="content">
                 @include('components.top-bar')
                 @yield('content')
             </div>
         </div>
     </div>
+    {{-- Including Modals --}}
+    @include('components.modals')
     {{-- Scripts --}}
     <script src="{{url('/')}}/dist/js/app.js"></script>
     <script src="{{url('/')}}/src/js/feather.js"></script>
     <script>
         feather.replace()
+    </script>
+    <script src="{{url('/')}}/dist/js/main.js"></script>
+    <script>
+        @if(session()->has('msg'))
+        showToast('{{ session()->get('type', 'info') }}', '{{ session()->get('msg') }}');
+        @endif
+
+        @if($errors->any())
+        @foreach ($errors->all() as $error)
+        showToast('error', '{{ $error }}');
+        @endforeach
+        @endif
     </script>
     @yield('page-scripts')
 </body>

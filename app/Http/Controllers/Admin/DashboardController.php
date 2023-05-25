@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AdminDashboardController extends Controller
+class DashboardController extends Controller
 {
     // Function to view Admin Dashboard
     public function adminDashboard()

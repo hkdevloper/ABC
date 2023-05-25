@@ -1,51 +1,34 @@
-// Function to Show success Toast
-function showSuccessToast(text) {
-    $.toast({
-        heading: 'Success',
-        text: text,
+function showToast(type = 'info', text) {
+    var toastConfig = {
         position: 'top-right',
-        bgColor : '#67e198',
-        icon: 'success',
         hideAfter: 3000,
         stack: 6
-    })
-}
+    };
 
-// Function to show error Toast
-function showErrorToast(text) {
-    $.toast({
-        heading: 'Error',
-        text: text,
-        position: 'top-right',
-        bgColor : '#e66767',
-        icon: 'error',
-        hideAfter: 3000,
-        stack: 6
-    })
-}
+    switch (type) {
+        case 'success':
+            toastConfig.heading = 'Success';
+            toastConfig.bgColor = '#67e198';
+            toastConfig.icon = 'success';
+            break;
+        case 'error':
+            toastConfig.heading = 'Error';
+            toastConfig.bgColor = '#e66767';
+            toastConfig.icon = 'error';
+            break;
+        case 'warning':
+            toastConfig.heading = 'Warning';
+            toastConfig.bgColor = '#e6c667';
+            toastConfig.icon = 'warning';
+            break;
+        case 'info':
+            toastConfig.heading = 'Info';
+            toastConfig.bgColor = '#4fbfff';
+            toastConfig.icon = 'info';
+            break;
+        default:
+            return; // Return early if an invalid type is provided
+    }
 
-// Function to show warning Toast
-function showWarningToast(text) {
-    $.toast({
-        heading: 'Warning',
-        text: text,
-        position: 'top-right',
-        bgColor : '#e6c667',
-        icon: 'warning',
-        hideAfter: 3000,
-        stack: 6
-    })
-}
-
-// Function to show info Toast
-function showInfoToast(text) {
-    $.toast({
-        heading: 'Info',
-        text: text,
-        position: 'top-right',
-        bgColor : '#67e6c6',
-        icon: 'info',
-        hideAfter: 3000,
-        stack: 6
-    })
+    $.toast(Object.assign(toastConfig, { text: text }));
 }
