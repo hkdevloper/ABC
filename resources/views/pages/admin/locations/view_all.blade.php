@@ -9,9 +9,14 @@
                     <h2 class="text-lg font-medium truncate mr-5">
                         Users
                     </h2>
-                    <a href="{{route('add.user')}}" class="ml-auto flex text-theme-1 dark:text-theme-10">
-                        <i data-feather="plus-square" class="w-4 h-4 mr-1"></i> Add New User
-                    </a>
+                    <div class="flex ml-auto">
+                        <a href="{{route('add.location')}}" class="ml-auto note-btn flex text-theme-1 dark:text-theme-10 mx-1">
+                            Add New Location
+                        </a>
+                        <a href="{{route('add.location')}}" class="ml-auto note-btn flex text-theme-1 dark:text-theme-10 mx-1">
+                            Add Multiple Location
+                        </a>
+                    </div>
                 </div>
                 {{-- Main Content goes Here --}}
                 <div class="intro-y datatable-wrapper box p-5 mt-5">
@@ -19,42 +24,30 @@
                         <thead>
                         <tr>
                             <th class="border-b-2 whitespace-no-wrap">#ID</th>
-                            <th class="border-b-2 whitespace-no-wrap">First name</th>
-                            <th class="border-b-2 whitespace-no-wrap">Last name</th>
-                            <th class="border-b-2 whitespace-no-wrap">Group</th>
-                            <th class="border-b-2 whitespace-no-wrap">Approved</th>
-                            <th class="border-b-2 whitespace-no-wrap">Email Verified</th>
-                            <th class="border-b-2 whitespace-no-wrap">Banned</th>
+                            <th class="border-b-2 whitespace-no-wrap">Locations</th>
+                            <th class="border-b-2 whitespace-no-wrap">Slug</th>
+                            <th class="border-b-2 whitespace-no-wrap">Views</th>
+                            <th class="border-b-2 whitespace-no-wrap">Featured</th>
                             <th class="text-center whitespace-no-wrap">ACTIONS</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $data)
+                        @foreach($locations as $data)
                             <tr>
                                 <td class="border-b">{{$data->id}}</td>
-                                <td class="border-b">{{$data->first_name}}</td>
-                                <td class="border-b">{{$data->last_name}}</td>
-                                <td class="border-b">{{$data->user_group}}</td>
+                                <td class="border-b">{{$data->name}}</td>
                                 <td class="border-b">
                                     <div class="mt-3">
-                                        <div class="mt-2"> <input type="checkbox" @if($data->approved) {!! "checked" !!} @endif class="input input--switch border"> </div>
-                                    </div>
-                                </td><td class="border-b">
-                                    <div class="mt-3">
-                                        <div class="mt-2"> <input type="checkbox" @if($data->email_verified) {!! "checked" !!} @endif class="input input--switch border"> </div>
-                                    </div>
-                                </td><td class="border-b">
-                                    <div class="mt-3">
-                                        <div class="mt-2"> <input type="checkbox" @if($data->banned) {!! "checked" !!} @endif class="input input--switch border"> </div>
+                                        <div class="mt-2"> <input type="checkbox" @if($data->featured) {!! "checked" !!} @endif class="input input--switch border"> </div>
                                     </div>
                                 </td>
                                 <td class="table-report__action w-56">
                                     <div class="flex justify-center items-center">
                                         <a class="flex items-center mr-3"
-                                           href="{{route('edit.user', ['id'=>$data->id])}}"> <i
+                                           href="{{route('edit.location', ['id'=>$data->id])}}"> <i
                                                 data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                                         <a class="flex items-center text-theme-6"
-                                           onclick="confirm('Are you sure?') ? window.location.replace('{{route('delete.user', ['id'=> $data->id])}}') : ''"
+                                           onclick="confirm('Are you sure?') ? window.location.replace('{{route('delete.location', ['id'=> $data->id])}}') : ''"
                                            href="javascript:"> <i
                                                 data-feather="trash-2" class="w-4 h-4 mr-1" onclick=""></i> Delete
                                         </a>

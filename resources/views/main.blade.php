@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{url("/")}}/dist/css/app.css">
     <link rel="stylesheet" href="{{url("/")}}/dist/css/box-icons.css">
     {{-- Scripts --}}
+    @yield('head')
 </head>
 
 <body class="app">
@@ -28,21 +29,10 @@
     @include('components.modals')
     {{-- Scripts --}}
     <script src="{{url('/')}}/dist/js/app.js"></script>
+    <script src="{{url('/')}}/dist/js/main.js"></script>
     <script src="{{url('/')}}/src/js/feather.js"></script>
     <script>
         feather.replace()
-    </script>
-    <script src="{{url('/')}}/dist/js/main.js"></script>
-    <script>
-        @if(session()->has('msg'))
-        showToast('{{ session()->get('type', 'info') }}', '{{ session()->get('msg') }}');
-        @endif
-
-        @if($errors->any())
-        @foreach ($errors->all() as $error)
-        showToast('error', '{{ $error }}');
-        @endforeach
-        @endif
     </script>
     @yield('page-scripts')
 </body>

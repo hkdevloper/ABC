@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\LocationController;
+use App\Http\Controllers\admin\MediaController;
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +53,22 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
             Route::post('/edit/{id}', [UserController::class, 'doEditUserGroup'])->name('edit.user.group');
             Route::get('/delete/{id}', [UserController::class, 'doDeleteUserGroup'])->name('delete.user.group');
         });
+    });
+
+    // Routes for handling Location Module
+    Route::prefix('/locations')->group(function () {
+        Route::get('/', [LocationController::class, 'viewLocations'])->name('locations');
+        Route::get('/add', [LocationController::class, 'viewAddLocation'])->name('add.location');
+        Route::post('/add', [LocationController::class, 'doAddLocation'])->name('add.location');
+        Route::get('/edit/{id}', [LocationController::class, 'viewEditLocation'])->name('edit.location');
+        Route::post('/edit/{id}', [LocationController::class, 'doEditLocation'])->name('edit.location');
+        Route::get('/delete/{id}', [LocationController::class, 'doDeleteLocation'])->name('delete.location');
+    });
+
+    // Routes for handling Medias
+    Route::prefix('/medias')->group(function () {
+        Route::get('/', [MediaController::class, 'viewMedia'])->name('media');
+        Route::get('/delete/{id}', [MediaController::class, 'doDeleteMedia'])->name('delete.media');
     });
 });
 

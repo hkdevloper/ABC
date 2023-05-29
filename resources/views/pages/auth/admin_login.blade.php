@@ -65,10 +65,15 @@
 <script src="{{url('/')}}/dist/js/app.js"></script>
 <script src="{{url('/')}}/dist/js/main.js"></script>
 <script>
-{{-- If session has Error --}}
-@if(session()->has('error'))
-    showErrorToast('{{session()->get('error')}}');
-@endif
+    @if(session()->has('msg'))
+    showToast('{{ session()->get('type', 'info') }}', '{{ session()->get('msg') }}');
+    @endif
+
+    @if($errors->any())
+    @foreach ($errors->all() as $error)
+    showToast('error', '{{ $error }}');
+    @endforeach
+    @endif
 </script>
 <!-- END: JS Assets-->
 </body>

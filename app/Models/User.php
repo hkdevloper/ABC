@@ -55,17 +55,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserGroup::class);
     }
-
-    public function hasPermission($permission)
-    {
-        return $this->userGroup->permissions[$permission] ?? false;
-    }
-
-    public function givePermissionTo($permission)
-    {
-        $permissions = $this->userGroup->permissions;
-        $permissions[$permission] = true;
-        $this->userGroup->permissions = $permissions;
-        $this->userGroup->save();
-    }
 }

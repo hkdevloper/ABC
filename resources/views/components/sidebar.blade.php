@@ -139,13 +139,13 @@
             </ul>
         </li>
         <li>
-            <a href="" class="side-menu">
+            <a href="{{route('media')}}" class="side-menu">
                 <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
                 <div class="side-menu__title"> Media </div>
             </a>
         </li>
         <li>
-            <a href="" class="side-menu">
+            <a href="{{route('locations')}}" class="side-menu">
                 <div class="side-menu__icon"> <i data-feather="map-pin"></i> </div>
                 <div class="side-menu__title"> Locations </div>
             </a>
