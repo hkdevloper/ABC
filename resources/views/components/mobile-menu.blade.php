@@ -168,13 +168,70 @@
             </ul>
         </li>
         <li>
-            <a href="" class="menu">
-                <div class="menu__icon"><i data-feather="settings"></i></div>
-                <div class="menu__title"> Settings</div>
+            <a href="javascript:" class="menu">
+                <div class="menu__icon"><i data-feather="tool"></i></div>
+                <div class="menu__title"> Settings <i data-feather="chevron-down" class="menu__sub-icon"></i>
+                </div>
             </a>
+            <ul class="">
+                <li>
+                    <a href="{{route('settings')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="settings"></i></div>
+                        <div class="menu__title"> Settings</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('settings.listing.type')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="list"></i></div>
+                        <div class="menu__title"> Listing type</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('settings.payment.gateways')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="credit-card"></i></div>
+                        <div class="menu__title"> Payment gateways</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('settings.discounts')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="tag"></i></div>
+                        <div class="menu__title"> Discounts</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('settings.tax.rates')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="dollar-sign"></i></div>
+                        <div class="menu__title"> Tax rates</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('settings.language')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="globe"></i></div>
+                        <div class="menu__title"> Language</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('settings.upload.types')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="cloud"></i></div>
+                        <div class="menu__title"> Upload types</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('settings.rating.categories')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="star"></i></div>
+                        <div class="menu__title"> Rating categories</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('settings.scheduled.tasks')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="activity"></i></div>
+                        <div class="menu__title"> Scheduled Tasks</div>
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
-            <a href="" class="menu">
+            <a href="{{route('admin.logout')}}" class="menu">
                 <div class="menu__icon"><i data-feather="lock"></i></div>
                 <div class="menu__title"> Logout</div>
             </a>

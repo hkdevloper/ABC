@@ -27,7 +27,11 @@ Route::prefix('/ajax')->group(function () {
     Route::get('/get-country-list', [AjaxController::class, 'getCountryList'])->name('ajax.get.country.list');
     Route::get('/get-state-list', [AjaxController::class, 'getStateList'])->name('ajax.get.state.list');
     Route::get('/get-city-list', [AjaxController::class, 'getCityList'])->name('ajax.get.city.list');
-});
+    Route::post('/location-featured', [AjaxController::class, 'locationFeatured'])->name('ajax.location.featured');
+    Route::post('/user-status', [AjaxController::class, 'userStatus'])->name('ajax.user.status');
+    Route::post('/payment-gateway-status', [AjaxController::class, 'paymentGatewayStatus'])->name('ajax.payment.gateway.status');
+    Route::post('/tax-rate-compound', [AjaxController::class, 'taxRateCompound'])->name('ajax.tax.rate.compound');
+})->middleware('verify_csrf_token');
 
 // Routes for handling Media Module
 Route::prefix('/media')->group(function () {

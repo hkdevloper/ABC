@@ -24,13 +24,14 @@ class UploadMediaController extends Controller
         $folder = uniqid() . '-' . now()->timestamp;
         $file = $request->file('file');
         $filename = $file->getClientOriginalName();
-        $file->storeAs('public/temp/' . $folder, $filename);
-
         // get mime type of the file
         $mime = $file->getMimeType();
 
         // get size of the file
         $size = $file->getSize();
+        // $file->storeAs('public/temp/' . $folder, $filename);
+        $destinationPath = public_path() . '/uploads/temp/' . $folder . '/';
+        $file->move($destinationPath, $filename);
 
         // get value from header
         $type = $request->header('upload_type');
@@ -57,7 +58,7 @@ class UploadMediaController extends Controller
         // get the file from temporaryFile Database and delete it
         $tempFile = TempFiles::where('folder', $request->folder)->first();
         // remove the file from storage
-        Storage::deleteDirectory('public/temp/' . $request->folder);
+        File::deleteDirectory(public_path('/uploads/temp/' . $request->folder));
         if ($tempFile) {
             $tempFile->delete();
         }

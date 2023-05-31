@@ -10,10 +10,12 @@
                         Users
                     </h2>
                     <div class="flex ml-auto">
-                        <a href="{{route('add.location')}}" class="ml-auto note-btn flex text-theme-1 dark:text-theme-10 mx-1">
+                        <a href="{{route('add.location')}}"
+                           class="ml-auto note-btn flex text-theme-1 dark:text-theme-10 mx-1">
                             Add New Location
                         </a>
-                        <a href="{{route('add.location')}}" class="ml-auto note-btn flex text-theme-1 dark:text-theme-10 mx-1">
+                        <a href="{{route('add.multiple.location')}}"
+                           class="ml-auto note-btn flex text-theme-1 dark:text-theme-10 mx-1">
                             Add Multiple Location
                         </a>
                     </div>
@@ -36,16 +38,27 @@
                             <tr>
                                 <td class="border-b">{{$data->id}}</td>
                                 <td class="border-b">{{$data->name}}</td>
+                                <td class="border-b">{{$data->slug}}</td>
+                                <td class="border-b">00</td>
                                 <td class="border-b">
                                     <div class="mt-3">
-                                        <div class="mt-2"> <input type="checkbox" @if($data->featured) {!! "checked" !!} @endif class="input input--switch border"> </div>
+                                        <div class="mt-2"><input type="checkbox" @if($data->featured)
+                                                {!! "checked" !!}
+                                            @endif data-id="{{$data->id}}" class="input input--switch border"></div>
                                     </div>
                                 </td>
-                                <td class="table-report__action w-56">
+                                <td class="border-b table-report__action w-56">
                                     <div class="flex justify-center items-center">
-                                        <a class="flex items-center mr-3"
-                                           href="{{route('edit.location', ['id'=>$data->id])}}"> <i
-                                                data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                        @if($data->has_children)
+                                            <a class="flex items-center mr-3"
+                                               href="{{route('locations')}}?parent_id={{$data->id}}"> <i
+                                                    data-feather="check-square" class="w-4 h-4 mr-1"></i> Sub locations
+                                            </a>
+                                        @else
+                                            <a class="flex items-center mr-3"
+                                               href="{{route('edit.location', ['id'=>$data->id])}}"> <i
+                                                    data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                        @endif
                                         <a class="flex items-center text-theme-6"
                                            onclick="confirm('Are you sure?') ? window.location.replace('{{route('delete.location', ['id'=> $data->id])}}') : ''"
                                            href="javascript:"> <i
@@ -60,9 +73,40 @@
                 </div>
             </div>
         </div>
-@endsection
+        @endsection
 
-@section('page-scripts')
-    {{-- Scripts for this page goes here --}}
+        @section('page-scripts')
+            {{-- Scripts for this page goes here --}}
+            <script>
+                $(document).ready(function () {
+                    // Attach an event listener to the checkboxes
+                    $('.input--switch').on('change', function () {
+                        // Get the checkbox value
+                        var checkboxValue = $(this).is(':checked') ? 'checked' : 'unchecked';
 
+                        // Get the data-id value of the checked checkbox
+                        var checkboxId = $(this).data('id');
+
+                        // Make the AJAX POST request
+                        $.ajax({
+                            url: '{{route('ajax.location.featured')}}',  // Replace with your endpoint URL
+                            method: 'POST',
+                            data: {featured: checkboxValue, location_id: checkboxId},  // Additional data to send
+                            success: function (response) {
+                                // Handle the response from the server
+                                console.log(response);
+                                if (response.status === 'success') {
+                                    showToast('success', 'Featured status updated successfully');
+                                } else {
+                                    showToast('error', 'Something went wrong');
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                // Handle any errors that occurred during the request
+                                console.error(error);
+                            }
+                        });
+                    });
+                });
+            </script>
 @endsection

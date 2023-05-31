@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('mime_type');
             $table->string('size');
             $table->string('path');
+            $table->string('upload_type')->nullable();
             $table->boolean('is_deletable')->default(true);
             $table->boolean('is_downloadable')->default(true);
             $table->timestamps();

@@ -42,7 +42,7 @@
                                 <td class="table-report__action w-56">
                                     <div class="flex justify-center items-center">
                                         @if($data->is_downloadable)
-                                            <a class="flex items-center mr-3" href="{{\Illuminate\Support\Facades\Storage::download('public/'.$data->path)}}">
+                                            <a class="flex items-center mr-3" href="{{url('/')}}{{$data->path}}" download="{{$data->name}}">
                                                 <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Download </a>
                                         @endif
                                         @if($data->is_deletable)

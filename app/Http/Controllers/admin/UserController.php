@@ -233,4 +233,26 @@ class UserController extends Controller
         return redirect()->route('user.groups')->with('success', 'User group updated successfully');
     }
 
+    // Function to delete user
+    public function doDeleteUser($id)
+    {
+        // if the id is 1 and 2 then don't delete
+        if ($id == 1 || $id == 2) {
+            return redirect()->route('users')->with('error', 'You can not delete this user');
+        }
+        // Find the user
+        $user = User::find($id);
+
+        // If the user is not found then redirect to view all users
+        if (!$user) {
+            return redirect()->route('users')->with('error', 'User not found');
+        }
+
+        // Delete the user
+        $user->delete();
+
+        // Redirect to view all users
+        return redirect()->route('users')->with('success', 'User deleted successfully');
+    }
+
 }

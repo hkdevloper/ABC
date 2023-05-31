@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('folder');
             $table->string('filename');
+            $table->string('size')->nullable();
+            $table->string('mime')->nullable();
+            $table->string('upload_type')->default('root');
             $table->timestamps();
         });
     }

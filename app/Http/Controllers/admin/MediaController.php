@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Media;
 use App\Models\TempFiles;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
@@ -14,23 +15,28 @@ class MediaController extends Controller
     {
         // get temp file details from database
         $temp_file = TempFiles::where('folder', $folder)->first();
-        if(!$temp_file){
+        if (!$temp_file) {
             // if no temp file found
             return false;
         }
         $file_name = time() . '_' . $temp_file->filename;
-        $from = 'public/temp/' . $temp_file->folder . '/' . $temp_file->filename;
-        $to = 'public/uploads/' . $file_name;
-        Storage::move($from, $to);
+        $from = public_path('/uploads/temp/' . $temp_file->folder . '/' . $temp_file->filename);
+        $to = public_path('/uploads/media/' . $file_name);
+        // if media folder not exist create it
+        if (!File::exists(public_path('/uploads/media/'))) {
+            File::makeDirectory(public_path('/uploads/media/'));
+        }
+        // rename file
+        copy($from, $to);
         $data = new Media();
         $data->name = $file_name;
         $data->mime_type = $temp_file->mime;
         $data->upload_type = $temp_file->upload_type;
         $data->size = $temp_file->size;
-        $data->path = 'uploads/' . $file_name;
+        $data->path = '/uploads/media/' . $file_name;
         $data->save();
         // delete temp file from storage
-        Storage::deleteDirectory('public/temp/' . $temp_file->folder);
+        File::deleteDirectory(public_path() . '/uploads/temp/' . $temp_file->folder);
         $temp_file->delete();
         return $data->id;
     }

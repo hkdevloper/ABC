@@ -4,6 +4,9 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use App\Models\PaymentGateway;
+use App\Models\TaxRates;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -27,5 +30,86 @@ class AjaxController extends Controller
     {
         $cities = Location::where('parent_id', $request->state_id)->get();
         return response()->json($cities);
+    }
+
+    // Function to handle checkbox for featured location
+    public function locationFeatured(Request $request){
+        $validate = $request->validate([
+            'location_id' => 'required|integer',
+            'featured' => 'required'
+        ]);
+        $featured = 0;
+        if ($request->featured == 'checked'){
+            $featured = 1;
+        }
+        $location = Location::find($request->location_id);
+        $location->featured = $featured;
+        $location->save();
+        return response()->json(['status' => 'success']);
+    }
+
+    // Function to handle user status
+    public function userStatus(Request $request){
+        $validate = $request->validate([
+            'user_id' => 'required|integer',
+            'status' => 'required',
+            'approve' => 'nullable',
+            'email_verified' => 'nullable',
+            'banned' => 'nullable'
+        ]);
+
+         $value = 0;
+        if ($request->value == 'checked'){
+            $value = 1;
+        }
+        $user = User::find($request->user_id);
+        switch ($request->status) {
+            case 'approve':
+                $user->approved = $value;;
+                break;
+            case 'email_verified':
+                $user->email_verified = $value;
+                break;
+            case 'banned':
+                $user->banned = $value;
+                break;
+            default:
+                $status = 0;
+                break;
+        }
+        $user->save();
+        return response()->json(['status' => 'success']);
+    }
+
+    // Function to handle payment gateway status
+    public function paymentGatewayStatus(Request $request){
+        $validate = $request->validate([
+            'gateway_id' => 'required|integer',
+            'status' => 'required'
+        ]);
+        $value = 0;
+        if ($request->status == 'checked'){
+            $value = 1;
+        }
+        $gateway = PaymentGateway::find($request->gateway_id);
+        $gateway->is_active = $value;
+        $gateway->save();
+        return response()->json(['status' => 'success']);
+    }
+
+    // Function to update compound rate status
+    public function taxRateCompound(Request $request){
+        $validate = $request->validate([
+            'tax_rate_id' => 'required|integer',
+            'status' => 'required'
+        ]);
+        $value = 0;
+        if ($request->status == 'checked'){
+            $value = 1;
+        }
+        $taxRate = TaxRates::find($request->tax_rate_id);
+        $taxRate->compound = $value;
+        $taxRate->save();
+        return response()->json(['status' => 'success']);
     }
 }

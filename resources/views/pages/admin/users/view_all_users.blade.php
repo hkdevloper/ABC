@@ -37,15 +37,26 @@
                                 <td class="border-b">{{$data->user_group}}</td>
                                 <td class="border-b">
                                     <div class="mt-3">
-                                        <div class="mt-2"> <input type="checkbox" @if($data->approved) {!! "checked" !!} @endif class="input input--switch border"> </div>
+                                        <div class="mt-2"><input data-id="{{$data->id}}" data-status="approve" type="checkbox"
+                                                                 @if($data->approved)
+                                                                     {!! "checked" !!}
+                                                                 @endif class="input input--switch border"></div>
                                     </div>
-                                </td><td class="border-b">
+                                </td>
+                                <td class="border-b">
                                     <div class="mt-3">
-                                        <div class="mt-2"> <input type="checkbox" @if($data->email_verified) {!! "checked" !!} @endif class="input input--switch border"> </div>
+                                        <div class="mt-2"><input data-id="{{$data->id}}" data-status="email_verified" type="checkbox"
+                                                                 @if($data->email_verified)
+                                                                     {!! "checked" !!}
+                                                                 @endif class="input input--switch border"></div>
                                     </div>
-                                </td><td class="border-b">
+                                </td>
+                                <td class="border-b">
                                     <div class="mt-3">
-                                        <div class="mt-2"> <input type="checkbox" @if($data->banned) {!! "checked" !!} @endif class="input input--switch border"> </div>
+                                        <div class="mt-2"><input data-id="{{$data->id}}" data-status="banned" type="checkbox"
+                                                                 @if($data->banned)
+                                                                     {!! "checked" !!}
+                                                                 @endif class="input input--switch border"></div>
                                     </div>
                                 </td>
                                 <td class="table-report__action w-56">
@@ -67,9 +78,41 @@
                 </div>
             </div>
         </div>
-@endsection
+        @endsection
 
-@section('page-scripts')
-    {{-- Scripts for this page goes here --}}
+        @section('page-scripts')
+            {{-- Scripts for this page goes here --}}
+            <script>
+                $(document).ready(function () {
+                    // Attach an event listener to the checkboxes
+                    $('.input--switch').on('change', function () {
+                        // Get the checkbox value
+                        var checkboxValue = $(this).is(':checked') ? 'checked' : 'unchecked';
 
+                        // Get the data-id value of the checked checkbox
+                        var userId = $(this).data('id');
+                        var status = $(this).data('status');
+
+                        // Make the AJAX POST request
+                        $.ajax({
+                            url: '{{route('ajax.user.status')}}',  // Replace with your endpoint URL
+                            method: 'POST',
+                            data: {user_id: userId, status: status, value: checkboxValue},  // Additional data to send
+                            success: function (response) {
+                                // Handle the response from the server
+                                console.log(response);
+                                if (response.status === 'success') {
+                                    showToast('success', 'status updated successfully');
+                                } else {
+                                    showToast('error', 'Something went wrong');
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                // Handle any errors that occurred during the request
+                                console.error(error);
+                            }
+                        });
+                    });
+                });
+            </script>
 @endsection

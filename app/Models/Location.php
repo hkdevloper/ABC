@@ -16,16 +16,19 @@ class Location extends Model
     protected $fillable = [
         'name',
         'type',
-        'parent_id'
+        'parent_id',
+        'slug'
     ];
 
     public function parent()
     {
+        // return the parent of a location
         return $this->belongsTo(Location::class, 'parent_id');
     }
 
     public function children()
     {
+        // return all the children of a location
         return $this->hasMany(Location::class, 'parent_id');
     }
 }
