@@ -27,7 +27,7 @@ function showToast(type = 'info', text) {
             toastConfig.icon = 'info';
             break;
         default:
-            return; // Return early if an invalid type is provided
+            return; // Return early if an invalid types is provided
     }
 
     $.toast(Object.assign(toastConfig, { text: text }));

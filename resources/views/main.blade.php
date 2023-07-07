@@ -10,6 +10,9 @@
     {{-- Styles --}}
     <link rel="stylesheet" href="{{url("/")}}/dist/css/app.css">
     <link rel="stylesheet" href="{{url("/")}}/dist/css/box-icons.css">
+    <script src="https://kit.fontawesome.com/cabb64bd6b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{url('dist/css/IconPicker.css')}}">
+    <script src="{{url('dist/js/IconPicker.js')}}"></script>
     {{-- Scripts --}}
     @yield('head')
 </head>

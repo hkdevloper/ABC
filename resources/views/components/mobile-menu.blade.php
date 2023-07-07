@@ -181,7 +181,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('settings.listing.type')}}" class="menu">
+                    <a href="{{route('listing.types')}}" class="menu">
                         <div class="menu__icon"><i data-feather="list"></i></div>
                         <div class="menu__title"> Listing type</div>
                     </a>

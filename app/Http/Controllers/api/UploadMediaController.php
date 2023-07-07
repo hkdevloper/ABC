@@ -24,7 +24,7 @@ class UploadMediaController extends Controller
         $folder = uniqid() . '-' . now()->timestamp;
         $file = $request->file('file');
         $filename = $file->getClientOriginalName();
-        // get mime type of the file
+        // get mime types of the file
         $mime = $file->getMimeType();
 
         // get size of the file

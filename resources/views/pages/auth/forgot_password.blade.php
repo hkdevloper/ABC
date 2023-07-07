@@ -70,7 +70,7 @@
 <script src="{{url('/')}}/dist/js/main.js"></script>
 <script>
     @if(session()->has('msg'))
-    showToast('{{ session()->get('type', 'info') }}', '{{ session()->get('msg') }}');
+    showToast('{{ session()->get('types', 'info') }}', '{{ session()->get('msg') }}');
     @endif
 
     @if($errors->any())

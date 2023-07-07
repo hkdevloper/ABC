@@ -58,6 +58,6 @@ class MediaController extends Controller
         $data = Media::find($id);
         Storage::delete('public/' . $data->path);
         $data->delete();
-        return redirect()->back()->with('success', 'Media Deleted Successfully');
+        return redirect()->back()->with(['msg' => 'Media Deleted Successfully', 'type' => 'success']);
     }
 }

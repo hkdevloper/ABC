@@ -40,7 +40,7 @@ class UserController extends Controller
         // check if user group exists
         $group = UserGroup::find($request->group_id);
         if (!$group) {
-            return redirect()->back()->with('error', 'User group not found');
+            return redirect()->back()->with(['msg' => 'User group not found','types'=> 'error']);
         }
 
 
@@ -62,7 +62,7 @@ class UserController extends Controller
         $user->save();
 
         // Redirect to users page with success message
-        return redirect()->route('users')->with('success', 'User added successfully');
+        return redirect()->route('users')->with(['msg' => 'User Added Successfully', 'type' => 'success']);
     }
 
     // Function to view Edit User
@@ -73,7 +73,7 @@ class UserController extends Controller
 
         // If the user is not found then redirect to users page with error message
         if (!$user) {
-            return redirect()->route('users')->with('error', 'User not found');
+            return redirect()->route('users')->with(['msg' => 'User not found', 'type' => 'error']);
         }
 
         // Get All user groups
@@ -139,7 +139,7 @@ class UserController extends Controller
         $group->save();
 
         // Redirect to view all user groups
-        return redirect()->route('user.groups')->with('success', 'User group added successfully');
+        return redirect()->route('user.groups')->with(['msg' => 'User group added successfully', 'type' => 'success']);
     }
 
     // Function to delete user group
@@ -147,7 +147,7 @@ class UserController extends Controller
     {
         // if the id is 1 and 2 then don't delete
         if ($id == 1 || $id == 2) {
-            return redirect()->route('user.groups')->with('error', 'You can not delete this user group');
+            return redirect()->route('user.groups')->with(['msg' => 'You can not delete this group', 'type' => 'error']);
         }
         // Find the user group
         $group = UserGroup::find($id);
@@ -156,7 +156,7 @@ class UserController extends Controller
         $group->delete();
 
         // Redirect to view all user groups
-        return redirect()->route('user.groups')->with('success', 'User group deleted successfully');
+        return redirect()->route('user.groups')->with(['msg' => 'User group deleted successfully', 'type' => 'success']);
     }
 
     // Function to view Edit User Group
@@ -167,7 +167,7 @@ class UserController extends Controller
 
         // If the user group is not found then redirect to view all user groups
         if (!$group) {
-            return redirect()->route('user.groups')->with('error', 'User group not found');
+            return redirect()->route('user.groups')->with(['msg' => 'User group not found', 'type' => 'error']);
         }
         $id = $group->id;
         $name = $group->name;
@@ -221,7 +221,7 @@ class UserController extends Controller
 
         // Handle Exception if the user group is not found
         if (!$group) {
-            return redirect()->route('user.groups')->with('error', 'User group not found');
+            return redirect()->route('user.groups')->with(['msg' => 'User group not found', 'type' => 'error']);
         }
 
         // Update the user group
@@ -230,7 +230,7 @@ class UserController extends Controller
         $group->save();
 
         // Redirect to view all user groups
-        return redirect()->route('user.groups')->with('success', 'User group updated successfully');
+        return redirect()->route('user.groups')->with(['msg' => 'User group updated successfully', 'type' => 'success']);
     }
 
     // Function to delete user
@@ -238,21 +238,21 @@ class UserController extends Controller
     {
         // if the id is 1 and 2 then don't delete
         if ($id == 1 || $id == 2) {
-            return redirect()->route('users')->with('error', 'You can not delete this user');
+            return redirect()->route('users')->with(['msg' => 'You can not delete this user', 'type' => 'error']);
         }
         // Find the user
         $user = User::find($id);
 
         // If the user is not found then redirect to view all users
         if (!$user) {
-            return redirect()->route('users')->with('error', 'User not found');
+            return redirect()->route('users')->with(['msg' => 'User not found', 'type' => 'error']);
         }
 
         // Delete the user
         $user->delete();
 
         // Redirect to view all users
-        return redirect()->route('users')->with('success', 'User deleted successfully');
+        return redirect()->route('users')->with(['msg' => 'User deleted successfully', 'type' => 'success']);
     }
 
 }

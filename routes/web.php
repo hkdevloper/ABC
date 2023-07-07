@@ -4,9 +4,9 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\admin\MediaController;
 use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +35,16 @@ Route::prefix('/admin')->group(function () {
 // prefix protected routes for Administrator
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'adminDashboard']);
+
+    // Routes for handling Types
+    Route::prefix('types')->group(function (){
+        Route::get('/', [TypeController::class, 'viewTypes'])->name('listing.types');
+        Route::get('/add', [TypeController::class, 'viewAddType'])->name('listing.types.add');
+        Route::post('/add', [TypeController::class, 'doAddType'])->name('listing.types.add');
+        Route::get('/edit/{id}', [TypeController::class, 'viewEditType'])->name('listing.types.edit');
+        Route::post('/edit/{id}', [TypeController::class, 'doEditType'])->name('listing.types.edit');
+        Route::get('/delete/{id}', [TypeController::class, 'doDeleteType'])->name('listing.types.delete');
+    });
 
     // Routes for handling User Module
     Route::prefix('/users')->group(function () {
@@ -77,7 +87,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     // Routes for handling Settings module
     Route::prefix('/settings')->group(function () {
         Route::get('/', [SettingsController::class, 'viewSettings'])->name('settings');
-        Route::get('/listing-type', [SettingsController::class, 'viewListingType'])->name('settings.listing.type');
 
         // Payment gateways
         Route::get('/payment-gateways', [SettingsController::class, 'viewPaymentGateways'])->name('settings.payment.gateways');

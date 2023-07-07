@@ -28,8 +28,7 @@ class AuthController extends Controller
             return redirect()->intended('/admin');
         }
 
-
-        return back()->with(['error' => 'Invalid Login Credentials']);
+        return back()->with(['types' => 'error', 'msg' => 'Invalid Credentials']);
     }
 
     // Function to Log out user
@@ -68,10 +67,10 @@ class AuthController extends Controller
                 $message->subject('Reset Password');
             });
         } catch (Exception $e) {
-            return back()->with('type', 'error')->with('msg', $e->getMessage());
+            return back()->with(['types' => 'error', 'msg' => 'Something went wrong']);
         }
 
-        return back()->with('type', 'success')->with('msg', 'Reset password link sent to your email');
+        return back()->with(['types' => 'success', 'msg' => 'Reset Password link sent to your email']);
 
     }
 
@@ -83,7 +82,7 @@ class AuthController extends Controller
         if ($token_exists) {
             return view('pages.auth.reset_password', ['token' => $token]);
         }
-        return redirect()->route('forgot.password')->with('type', 'error')->with('msg', 'Invalid');
+        return redirect()->route('forgot.password')->with(['types' => 'error', 'msg' => 'Invalid Token']);
     }
 
     // Function to do reset Password
@@ -101,9 +100,9 @@ class AuthController extends Controller
                 'password' => bcrypt($request->password),
             ]);
             DB::table('password_reset_tokens')->where('token', $token)->delete();
-            return redirect()->route('admin.login')->with('type', 'success')->with('msg', 'Password reset successfully');
+            return redirect()->route('admin.login')->with(['types' => 'success', 'msg' => 'Password Reset Successfully']);
         }
-        return redirect()->route('auth.reset_password')->with('type', 'error')->with('msg', 'Invalid Token');
+        return redirect()->route('auth.reset_password')->with(['types' => 'error', 'msg' => 'Invalid Token']);
     }
 
 }

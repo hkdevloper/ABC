@@ -185,7 +185,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('settings.listing.type')}}" class="side-menu">
+                    <a href="{{route('listing.types')}}" class="side-menu">
                         <div class="side-menu__icon"><i data-feather="list"></i></div>
                         <div class="side-menu__title"> Listing type</div>
                     </a>

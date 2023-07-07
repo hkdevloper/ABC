@@ -1,8 +1,8 @@
 import Dropzone from 'dropzone'
 
-(function($) { 
+(function($) {
     "use strict";
-        
+
     // Dropzone
     Dropzone.autoDiscover = false
     $('.dropzone').each(function() {
@@ -20,8 +20,8 @@ import Dropzone from 'dropzone'
         if ($(this).data('file-types')) {
             options.accept = (file, done) => {
                 if ($(this).data('file-types').split('|').indexOf(file.type) === -1) {
-                    alert("Error! Files of this type are not accepted")
-                    done("Error! Files of this type are not accepted")
+                    alert("Error! Files of this types are not accepted")
+                    done("Error! Files of this types are not accepted")
                 } else {
                     console.log("Uploaded")
                     done()

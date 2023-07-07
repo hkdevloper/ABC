@@ -15,7 +15,7 @@ class Location extends Model
 
     protected $fillable = [
         'name',
-        'type',
+        'types',
         'parent_id',
         'slug'
     ];

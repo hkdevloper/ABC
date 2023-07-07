@@ -22,7 +22,7 @@
             {{-- Scripts for this page goes here --}}
             <script>
                 @if(session()->has('msg'))
-                showToast('{{ session()->get('type', 'info') }}', '{{ session()->get('msg') }}');
+                showToast('{{ session()->get('types', 'info') }}', '{{ session()->get('msg') }}');
                 @endif
 
                 @if($errors->any())

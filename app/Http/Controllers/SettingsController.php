@@ -15,12 +15,6 @@ class SettingsController extends Controller
         return view('pages.admin.settings.settings');
     }
 
-    // Function to view settings for listing type
-    public function viewListingType()
-    {
-        return view('pages.admin.settings.listing_type');
-    }
-
     // Function to view settings for discounts
     public function viewDiscounts()
     {
@@ -65,7 +59,7 @@ class SettingsController extends Controller
         $tax->tax_rate_location_id = $request->location_id;
         $tax->compound = $request->compound_tax ? 1 : 0;
         $tax->save();
-        return redirect()->route('settings.tax.rates')->with('msg', 'Tax Rate Added Successfully');
+        return redirect()->route('settings.tax.rates')->with(['msg' => 'Tax Rate Added Successfully', 'type' => 'success']);
     }
 
     // Function to view Add Tax Rates
@@ -95,7 +89,7 @@ class SettingsController extends Controller
         $tax->tax_rate_location_id = $request->location_id;
         $tax->compound = $request->compound_tax ? 1 : 0;
         $tax->save();
-        return redirect()->route('settings.tax.rates')->with('msg', 'Tax Rate Updated Successfully');
+        return redirect()->route('settings.tax.rates')->with(['msg' => 'Tax Rate Updated Successfully', 'type' => 'success']);
     }
 
     // Function to delete tax rates
@@ -103,7 +97,7 @@ class SettingsController extends Controller
     {
         $tax = TaxRates::find($id);
         $tax->delete();
-        return redirect()->route('settings.tax.rates')->with('msg', 'Tax Rate Deleted Successfully');
+        return redirect()->route('settings.tax.rates')->with(['msg', 'Tax Rate Deleted Successfully', 'type' => 'success']);
     }
 
     // Function to view settings for language
@@ -143,7 +137,7 @@ class SettingsController extends Controller
         $category->name = $request->name;
         $category->description = $request->description ? $request->description : '';
         $category->save();
-        return redirect()->route('settings.rating.categories')->with('msg', 'Rating Category Added Successfully');
+        return redirect()->route('settings.rating.categories')->with(['msg', 'Rating Category Added Successfully', 'type' => 'success']);
     }
 
     // Function to view Edit Rating Categories
@@ -165,7 +159,7 @@ class SettingsController extends Controller
         $category->name = $request->name;
         $category->description = $request->description ? $request->description : '';
         $category->save();
-        return redirect()->route('settings.rating.categories')->with('msg', 'Rating Category Updated Successfully');
+        return redirect()->route('settings.rating.categories')->with(['msg', 'Rating Category Updated Successfully', 'type' => 'success']);
     }
 
     // Function to delete rating categories
@@ -173,7 +167,7 @@ class SettingsController extends Controller
     {
         $category = RatingCategory::find($id);
         $category->delete();
-        return redirect()->route('settings.rating.categories')->with('msg', 'Rating Category Deleted Successfully');
+        return redirect()->route('settings.rating.categories')->with(['msg', 'Rating Category Deleted Successfully', 'type' => 'success']);
     }
 
     // Function to view settings for scheduled tasks
@@ -214,7 +208,7 @@ class SettingsController extends Controller
             $gateway->description = $request->description ? $request->description : '';
             $gateway->settings = $settings;
             $gateway->save();
-            return redirect()->route('settings.payment.gateways')->with('msg', 'Payment Gateway Updated Successfully');
+            return redirect()->route('settings.payment.gateways')->with(['msg', 'Payment Gateway Updated Successfully', 'type' => 'success']);
         }
     }
 }

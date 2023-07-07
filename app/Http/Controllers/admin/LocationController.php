@@ -97,7 +97,7 @@ class LocationController extends Controller
         $location = Location::find($id);
 
         if(!$location){
-            return redirect()->back()->with('msg', 'Location not found!');
+            return redirect()->back()->with(['type' => 'error', 'message' => 'Location not found']);
         }
 
         // update seo record
@@ -157,7 +157,7 @@ class LocationController extends Controller
         $location->featured = $request->featured == 'true' ? 1 : 0;
         $location->save();
 
-        return redirect()->back()->with('msg', 'Location Updated Successfully');
+        return redirect()->back()->with(['msg', 'Location Updated Successfully', 'type' => 'success']);
 
 
     }
@@ -230,7 +230,7 @@ class LocationController extends Controller
         $location->featured = $request->featured == 'true' ? 1 : 0;
         $location->save();
 
-        return redirect()->back()->with('success', 'Location Added Successfully');
+        return redirect()->back()->with(['msg', 'Location Added Successfully', 'type' => 'success']);
     }
 
     // Function to do add multiple locations
@@ -276,7 +276,7 @@ class LocationController extends Controller
                 $parent = $record;
             }
         }
-        return redirect()->back()->with('success', 'Location Added Successfully');
+        return redirect()->back()->with(['msg', 'Location Added Successfully', 'type' => 'success']);
     }
 
     // Function to Delete Location
@@ -297,6 +297,6 @@ class LocationController extends Controller
         }
 
         $location->delete();
-        return redirect()->back()->with('success', 'Location Deleted Successfully');
+        return redirect()->back()->with(['msg', 'Location Deleted Successfully', 'type' => 'success']);
     }
 }
