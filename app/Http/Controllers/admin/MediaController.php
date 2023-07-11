@@ -48,7 +48,7 @@ class MediaController extends Controller
         // get all media files
         $medias = Media::all();
         $data = compact('medias');
-        return view('pages.admin.media.view_all')->with($data);
+        return view('pages.admin.media.view_all.blade.php')->with($data);
     }
 
     // Function to Delete Media

@@ -19,6 +19,7 @@
                 </div>
             </a>
             <ul class="">
+                {{--Companies--}}
                 <li>
                     <a href="javascript:" class="side-menu">
                         <div class="side-menu__icon"><i data-feather="box"></i></div>
@@ -59,21 +60,179 @@
                                 <div class="side-menu__title"> Membership</div>
                             </a>
                         </li>
+                    </ul>
+                </li>
+                {{--Classifieds(Products)--}}
+                <li>
+                    <a href="javascript:" class="side-menu">
+                        <div class="side-menu__icon"><i data-feather="shopping-bag"></i></div>
+                        <div class="side-menu__title">
+                            Classifieds
+                            <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
+                        </div>
+                    </a>
+                    <ul class="">
                         <li>
                             <a href="#" class="side-menu">
-                                <div class="side-menu__icon"><i data-feather="file-plus"></i></div>
-                                <div class="side-menu__title"> Import</div>
+                                <div class="side-menu__icon"><i data-feather="hash"></i></div>
+                                <div class="side-menu__title"> View All</div>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="side-menu">
-                                <div class="side-menu__icon"><i data-feather="file-minus"></i></div>
-                                <div class="side-menu__title"> Export</div>
+                                <div class="side-menu__icon"><i data-feather="plus"></i></div>
+                                <div class="side-menu__title"> Add New</div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="star"></i></div>
+                                <div class="side-menu__title"> Reviews</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="archive"></i></div>
+                                <div class="side-menu__title"> Categories</div>
                             </a>
                         </li>
                     </ul>
                 </li>
+                {{--Events--}}
+                <li>
+                    <a href="javascript:" class="side-menu">
+                        <div class="side-menu__icon"><i data-feather="calendar"></i></div>
+                        <div class="side-menu__title">
+                            Events
+                            <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="hash"></i></div>
+                                <div class="side-menu__title"> View All</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="plus"></i></div>
+                                <div class="side-menu__title"> Add New</div>
+                            </a>
+                        </li>
 
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="star"></i></div>
+                                <div class="side-menu__title"> Reviews</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{--Blogs--}}
+                <li>
+                    <a href="javascript:" class="side-menu">
+                        <div class="side-menu__icon"><i data-feather="file-text"></i></div>
+                        <div class="side-menu__title">
+                            Blogs
+                            <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="hash"></i></div>
+                                <div class="side-menu__title"> View All</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="plus"></i></div>
+                                <div class="side-menu__title"> Add New</div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="star"></i></div>
+                                <div class="side-menu__title"> Reviews</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{--Deals--}}
+                <li>
+                    <a href="javascript:" class="side-menu">
+                        <div class="side-menu__icon"><i data-feather="tag"></i></div>
+                        <div class="side-menu__title">
+                            Deals
+                            <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="hash"></i></div>
+                                <div class="side-menu__title"> View All</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="plus"></i></div>
+                                <div class="side-menu__title"> Add New</div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="star"></i></div>
+                                <div class="side-menu__title"> Reviews</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- Jobs --}}
+                <li>
+                    <a href="javascript:" class="side-menu">
+                        <div class="side-menu__icon"><i data-feather="briefcase"></i></div>
+                        <div class="side-menu__title"> Jobs <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="hash"></i></div>
+                                <div class="side-menu__title"> View All</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="plus"></i></div>
+                                <div class="side-menu__title"> Add New</div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="star"></i></div>
+                                <div class="side-menu__title"> Reviews</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="archive"></i></div>
+                                <div class="side-menu__title"> Categories</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="package"></i></div>
+                                <div class="side-menu__title"> Membership</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </li>
         <li>

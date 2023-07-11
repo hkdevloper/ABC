@@ -33,7 +33,7 @@ class LocationController extends Controller
         }
 
         $data = compact('locations');
-        return view('pages.admin.locations.view_all')->with($data);
+        return view('pages.admin.locations.view_all.blade.php')->with($data);
     }
 
 

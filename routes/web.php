@@ -5,9 +5,7 @@ use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\admin\MediaController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ListingController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
