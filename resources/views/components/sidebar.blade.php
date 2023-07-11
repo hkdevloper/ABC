@@ -6,98 +6,95 @@
     <div class="side-nav__devider my-6"></div>
     <ul>
         <li>
-            <a href="{{url('/')}}" class="side-menu side-menu--active">
+            <a href="{{url('/admin')}}" class="side-menu side-menu--active">
                 <div class="side-menu__icon"><i data-feather="home"></i></div>
                 <div class="side-menu__title"> Dashboard</div>
             </a>
         </li>
+        {{-- Content --}}
         <li>
             <a href="javascript:" class="side-menu">
                 <div class="side-menu__icon"><i data-feather="box"></i></div>
-                <div class="side-menu__title"> Listings <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
+                <div class="side-menu__title"> Content <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
                 </div>
             </a>
             <ul class="">
                 <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="hash"></i></div>
-                        <div class="side-menu__title"> Listings</div>
+                    <a href="javascript:" class="side-menu">
+                        <div class="side-menu__icon"><i data-feather="box"></i></div>
+                        <div class="side-menu__title">
+                            Companies
+                            <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
+                        </div>
                     </a>
+                    <ul class="">
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="hash"></i></div>
+                                <div class="side-menu__title"> View All</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="plus"></i></div>
+                                <div class="side-menu__title"> Add New</div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="star"></i></div>
+                                <div class="side-menu__title"> Reviews</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="archive"></i></div>
+                                <div class="side-menu__title"> Categories</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="package"></i></div>
+                                <div class="side-menu__title"> Membership</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="file-plus"></i></div>
+                                <div class="side-menu__title"> Import</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="file-minus"></i></div>
+                                <div class="side-menu__title"> Export</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="plus"></i></div>
-                        <div class="side-menu__title"> Add Listings</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="file-minus"></i></div>
-                        <div class="side-menu__title"> Invoices</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="star"></i></div>
-                        <div class="side-menu__title"> Reviews</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="message-square"></i></div>
-                        <div class="side-menu__title"> Messages</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="alert-octagon"></i></div>
-                        <div class="side-menu__title"> Claims</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="archive"></i></div>
-                        <div class="side-menu__title"> Categories</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="package"></i></div>
-                        <div class="side-menu__title"> Products</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="table"></i></div>
-                        <div class="side-menu__title"> Form Fields</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="file-plus"></i></div>
-                        <div class="side-menu__title"> Import Listings</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="file-minus"></i></div>
-                        <div class="side-menu__title"> Export Listings</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="alert-triangle"></i></div>
-                        <div class="side-menu__title"> Broken Website Links</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="x-octagon"></i></div>
-                        <div class="side-menu__title"> Invalid backlinks</div>
-                    </a>
-                </li>
+
             </ul>
         </li>
+        <li>
+            <a href="#" class="side-menu">
+                <div class="side-menu__icon"><i data-feather="file-minus"></i></div>
+                <div class="side-menu__title"> Invoices</div>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="side-menu">
+                <div class="side-menu__icon"><i data-feather="message-square"></i></div>
+                <div class="side-menu__title"> Messages</div>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="side-menu">
+                <div class="side-menu__icon"><i data-feather="alert-octagon"></i></div>
+                <div class="side-menu__title"> Claims</div>
+            </a>
+        </li>
+        {{-- Users --}}
         <li>
             <a href="javascript:" class="side-menu">
                 <div class="side-menu__icon"><i data-feather="users"></i></div>
@@ -150,6 +147,7 @@
                 <div class="side-menu__title"> Locations</div>
             </a>
         </li>
+        {{-- Email  --}}
         <li>
             <a href="javascript:" class="side-menu">
                 <div class="side-menu__icon"><i data-feather="mail"></i></div>
@@ -171,6 +169,8 @@
                 </li>
             </ul>
         </li>
+
+        {{-- Settings --}}
         <li>
             <a href="javascript:" class="side-menu">
                 <div class="side-menu__icon"><i data-feather="tool"></i></div>
@@ -185,7 +185,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('listing.types')}}" class="side-menu">
+                    <a href="{{url('/')}}" class="side-menu">
                         <div class="side-menu__icon"><i data-feather="list"></i></div>
                         <div class="side-menu__title"> Listing type</div>
                     </a>
@@ -230,6 +230,18 @@
                     <a href="{{route('settings.scheduled.tasks')}}" class="side-menu">
                         <div class="side-menu__icon"><i data-feather="activity"></i></div>
                         <div class="side-menu__title"> Scheduled Tasks</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/')}}" class="side-menu">
+                        <div class="side-menu__icon"><i data-feather="alert-triangle"></i></div>
+                        <div class="side-menu__title"> Broken Website Links</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/')}}" class="side-menu">
+                        <div class="side-menu__icon"><i data-feather="x-octagon"></i></div>
+                        <div class="side-menu__title"> Invalid backlinks</div>
                     </a>
                 </li>
             </ul>

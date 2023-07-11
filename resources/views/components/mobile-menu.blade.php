@@ -6,6 +6,7 @@
         <a href="javascript:" id="mobile-menu-toggler"> <i data-feather="bar-chart-2"
                                                            class="w-8 h-8 text-white transform -rotate-90"></i> </a>
     </div>
+
     <ul class="border-t border-theme-24 py-5 hidden">
         <li>
             <a href="{{url('/')}}" class="menu menu--active">
@@ -13,93 +14,90 @@
                 <div class="menu__title"> Dashboard</div>
             </a>
         </li>
+        {{-- Content --}}
         <li>
             <a href="javascript:" class="menu">
                 <div class="menu__icon"><i data-feather="box"></i></div>
-                <div class="menu__title"> Listings <i data-feather="chevron-down" class="menu__sub-icon"></i>
+                <div class="menu__title"> Content <i data-feather="chevron-down" class="menu__sub-icon"></i>
                 </div>
             </a>
             <ul class="">
                 <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="hash"></i></div>
-                        <div class="menu__title"> Listings</div>
+                    <a href="javascript:" class="menu">
+                        <div class="menu__icon"><i data-feather="box"></i></div>
+                        <div class="menu__title">
+                            Companies
+                            <i data-feather="chevron-down" class="menu__sub-icon"></i>
+                        </div>
                     </a>
+                    <ul class="">
+                        <li>
+                            <a href="#" class="menu">
+                                <div class="menu__icon"><i data-feather="hash"></i></div>
+                                <div class="menu__title"> View All</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu">
+                                <div class="menu__icon"><i data-feather="plus"></i></div>
+                                <div class="menu__title"> Add New</div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="menu">
+                                <div class="menu__icon"><i data-feather="star"></i></div>
+                                <div class="menu__title"> Reviews</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu">
+                                <div class="menu__icon"><i data-feather="archive"></i></div>
+                                <div class="menu__title"> Categories</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu">
+                                <div class="menu__icon"><i data-feather="package"></i></div>
+                                <div class="menu__title"> Membership</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu">
+                                <div class="menu__icon"><i data-feather="file-plus"></i></div>
+                                <div class="menu__title"> Import</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu">
+                                <div class="menu__icon"><i data-feather="file-minus"></i></div>
+                                <div class="menu__title"> Export</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="plus"></i></div>
-                        <div class="menu__title"> Add Listings</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="file-minus"></i></div>
-                        <div class="menu__title"> Invoices</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="star"></i></div>
-                        <div class="menu__title"> Reviews</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="message-square"></i></div>
-                        <div class="menu__title"> Messages</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="alert-octagon"></i></div>
-                        <div class="menu__title"> Claims</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="archive"></i></div>
-                        <div class="menu__title"> Categories</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="package"></i></div>
-                        <div class="menu__title"> Products</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="table"></i></div>
-                        <div class="menu__title"> Form Fields</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="file-plus"></i></div>
-                        <div class="menu__title"> Import Listings</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="file-minus"></i></div>
-                        <div class="menu__title"> Export Listings</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="alert-triangle"></i></div>
-                        <div class="menu__title"> Broken Website Links</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="x-octagon"></i></div>
-                        <div class="menu__title"> Invalid backlinks</div>
-                    </a>
-                </li>
+
             </ul>
         </li>
+        <li>
+            <a href="#" class="menu">
+                <div class="menu__icon"><i data-feather="file-minus"></i></div>
+                <div class="menu__title"> Invoices</div>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="menu">
+                <div class="menu__icon"><i data-feather="message-square"></i></div>
+                <div class="menu__title"> Messages</div>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="menu">
+                <div class="menu__icon"><i data-feather="alert-octagon"></i></div>
+                <div class="menu__title"> Claims</div>
+            </a>
+        </li>
+        {{-- Users --}}
         <li>
             <a href="javascript:" class="menu">
                 <div class="menu__icon"><i data-feather="users"></i></div>
@@ -108,15 +106,21 @@
             </a>
             <ul class="">
                 <li>
-                    <a href="{{url('/')}}" class="menu">
+                    <a href="{{route('users')}}" class="menu">
                         <div class="menu__icon"><i data-feather="user"></i></div>
                         <div class="menu__title"> users</div>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/')}}" class="menu">
+                    <a href="{{route('add.user')}}" class="menu">
                         <div class="menu__icon"><i data-feather="user-plus"></i></div>
                         <div class="menu__title"> Add user</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('user.groups')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="users"></i></div>
+                        <div class="menu__title"> Groups</div>
                     </a>
                 </li>
                 <li>
@@ -146,6 +150,7 @@
                 <div class="menu__title"> Locations</div>
             </a>
         </li>
+        {{-- Email  --}}
         <li>
             <a href="javascript:" class="menu">
                 <div class="menu__icon"><i data-feather="mail"></i></div>
@@ -167,6 +172,8 @@
                 </li>
             </ul>
         </li>
+
+        {{-- Settings --}}
         <li>
             <a href="javascript:" class="menu">
                 <div class="menu__icon"><i data-feather="tool"></i></div>
@@ -181,7 +188,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('listing.types')}}" class="menu">
+                    <a href="{{url('/')}}" class="menu">
                         <div class="menu__icon"><i data-feather="list"></i></div>
                         <div class="menu__title"> Listing type</div>
                     </a>
@@ -228,6 +235,18 @@
                         <div class="menu__title"> Scheduled Tasks</div>
                     </a>
                 </li>
+                <li>
+                    <a href="{{url('/')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="alert-triangle"></i></div>
+                        <div class="menu__title"> Broken Website Links</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/')}}" class="menu">
+                        <div class="menu__icon"><i data-feather="x-octagon"></i></div>
+                        <div class="menu__title"> Invalid backlinks</div>
+                    </a>
+                </li>
             </ul>
         </li>
         <li>
@@ -237,4 +256,5 @@
             </a>
         </li>
     </ul>
+
 </div>
