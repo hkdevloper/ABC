@@ -68,17 +68,6 @@
 <!-- BEGIN: JS Assets-->
 <script src="{{url('/')}}/dist/js/app.js"></script>
 <script src="{{url('/')}}/dist/js/main.js"></script>
-<script>
-    @if(session()->has('msg'))
-    showToast('{{ session()->get('types', 'info') }}', '{{ session()->get('msg') }}');
-    @endif
-
-    @if($errors->any())
-    @foreach ($errors->all() as $error)
-    showToast('error', '{{ $error }}');
-    @endforeach
-    @endif
-</script>
 <!-- END: JS Assets-->
 </body>
 </html>

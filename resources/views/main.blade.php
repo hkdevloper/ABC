@@ -18,26 +18,35 @@
 </head>
 
 <body class="app">
-    @include('components.mobile-menu')
-    <div class="flex">
-        @include('components.sidebar')
+@include('components.mobile-menu')
+<div class="flex">
+    @include('components.sidebar')
+    <div class="content">
         <div class="content">
-            <div class="content">
-                @include('components.top-bar')
-                @yield('content')
-            </div>
+            @include('components.top-bar')
+            @yield('content')
         </div>
     </div>
-    {{-- Including Modals --}}
-    @include('components.modals')
-    {{-- Scripts --}}
-    <script src="{{url('/')}}/dist/js/app.js"></script>
-    <script src="{{url('/')}}/dist/js/main.js"></script>
-    <script src="{{url('/')}}/src/js/feather.js"></script>
-    <script>
-        feather.replace()
-    </script>
-    @yield('page-scripts')
+</div>
+{{-- Including Modals --}}
+@include('components.modals')
+{{-- Scripts --}}
+<script src="{{url('/')}}/dist/js/app.js"></script>
+<script src="{{url('/')}}/dist/js/main.js"></script>
+<script src="{{url('/')}}/src/js/feather.js"></script>
+<script>
+    feather.replace()
+    @if(session()->has('msg'))
+        showToast('{{ session()->get('types', 'info') }}', '{{ session()->get('msg') }}');
+    @else
+        @if($errors->any())
+            @foreach ($errors->all() as $error)
+            showToast('error', '{{ $error }}');
+            @endforeach
+        @endif
+    @endif
+</script>
+@yield('page-scripts')
 </body>
 
 </html>

@@ -1,8 +1,18 @@
 <?php
 
+use App\Http\Controllers\admin\BlogController;
+use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\CompanyController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\DealController;
+use App\Http\Controllers\admin\EventController;
+use App\Http\Controllers\admin\InvoiceController;
+use App\Http\Controllers\admin\JobController;
 use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\admin\MediaController;
+use App\Http\Controllers\admin\MembershipController;
+use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SettingsController;
@@ -34,6 +44,116 @@ Route::prefix('/admin')->group(function () {
 // prefix protected routes for Administrator
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'adminDashboard']);
+
+    // Routes for handling Company Module
+    Route::prefix('/companies')->group(function () {
+        Route::get('/', [CompanyController::class, 'viewCompanies'])->name('companies');
+        Route::get('/add', [CompanyController::class, 'viewAddCompany'])->name('add.company');
+        Route::post('/add', [CompanyController::class, 'doAddCompany'])->name('add.company');
+        Route::get('/edit/{id}', [CompanyController::class, 'viewEditCompany'])->name('edit.company');
+        Route::post('/edit/{id}', [CompanyController::class, 'doEditCompany'])->name('edit.company');
+        Route::get('/delete/{id}', [CompanyController::class, 'doDeleteCompany'])->name('delete.company');
+    });
+
+    // Routes for handling Product Module
+    Route::prefix('/products')->group(function () {
+        Route::get('/', [ProductController::class, 'viewProducts'])->name('products');
+        Route::get('/add', [ProductController::class, 'viewAddProduct'])->name('add.product');
+        Route::post('/add', [ProductController::class, 'doAddProduct'])->name('add.product');
+        Route::get('/edit/{id}', [ProductController::class, 'viewEditProduct'])->name('edit.product');
+        Route::post('/edit/{id}', [ProductController::class, 'doEditProduct'])->name('edit.product');
+        Route::get('/delete/{id}', [ProductController::class, 'doDeleteProduct'])->name('delete.product');
+    });
+
+    // Routes for handling Events Module
+    Route::prefix('/events')->group(function () {
+        Route::get('/', [EventController::class, 'viewEvents'])->name('events');
+        Route::get('/add', [EventController::class, 'viewAddEvent'])->name('add.event');
+        Route::post('/add', [EventController::class, 'doAddEvent'])->name('add.event');
+        Route::get('/edit/{id}', [EventController::class, 'viewEditEvent'])->name('edit.event');
+        Route::post('/edit/{id}', [EventController::class, 'doEditEvent'])->name('edit.event');
+        Route::get('/delete/{id}', [EventController::class, 'doDeleteEvent'])->name('delete.event');
+    });
+
+    // Routes for Blog Module
+    Route::prefix('/blog')->group(function () {
+        Route::get('/', [BlogController::class, 'viewBlogs'])->name('blogs');
+        Route::get('/add', [BlogController::class, 'viewAddBlog'])->name('add.blog');
+        Route::post('/add', [BlogController::class, 'doAddBlog'])->name('add.blog');
+        Route::get('/edit/{id}', [BlogController::class, 'viewEditBlog'])->name('edit.blog');
+        Route::post('/edit/{id}', [BlogController::class, 'doEditBlog'])->name('edit.blog');
+        Route::get('/delete/{id}', [BlogController::class, 'doDeleteBlog'])->name('delete.blog');
+    });
+
+    // Routes for handling Deals Module
+    Route::prefix('/deals')->group(function () {
+        Route::get('/', [DealController::class, 'viewDeals'])->name('deals');
+        Route::get('/add', [DealController::class, 'viewAddDeal'])->name('add.deal');
+        Route::post('/add', [DealController::class, 'doAddDeal'])->name('add.deal');
+        Route::get('/edit/{id}', [DealController::class, 'viewEditDeal'])->name('edit.deal');
+        Route::post('/edit/{id}', [DealController::class, 'doEditDeal'])->name('edit.deal');
+        Route::get('/delete/{id}', [DealController::class, 'doDeleteDeal'])->name('delete.deal');
+    });
+
+    // Routes for handling Jobs Module
+    Route::prefix('/jobs')->group(function () {
+        Route::get('/', [JobController::class, 'viewJobs'])->name('jobs');
+        Route::get('/add', [JobController::class, 'viewAddJob'])->name('add.job');
+        Route::post('/add', [JobController::class, 'doAddJob'])->name('add.job');
+        Route::get('/edit/{id}', [JobController::class, 'viewEditJob'])->name('edit.job');
+        Route::post('/edit/{id}', [JobController::class, 'doEditJob'])->name('edit.job');
+        Route::get('/delete/{id}', [JobController::class, 'doDeleteJob'])->name('delete.job');
+    });
+
+    // Routes for handling Category Module
+    Route::prefix('/categories')->group(function () {
+        Route::get('/', [CategoryController::class, 'viewCategories'])->name('categories');
+        Route::get('/add', [CategoryController::class, 'viewAddCategory'])->name('add.category');
+        Route::post('/add', [CategoryController::class, 'doAddCategory'])->name('add.category');
+        Route::get('/edit/{id}', [CategoryController::class, 'viewEditCategory'])->name('edit.category');
+        Route::post('/edit/{id}', [CategoryController::class, 'doEditCategory'])->name('edit.category');
+        Route::get('/delete/{id}', [CategoryController::class, 'doDeleteCategory'])->name('delete.category');
+    });
+
+    // Routes for handling Review Module
+    Route::prefix('/reviews')->group(function () {
+        Route::get('/', [ReviewController::class, 'viewReviews'])->name('reviews');
+        Route::get('/add', [ReviewController::class, 'viewAddReview'])->name('add.review');
+        Route::post('/add', [ReviewController::class, 'doAddReview'])->name('add.review');
+        Route::get('/edit/{id}', [ReviewController::class, 'viewEditReview'])->name('edit.review');
+        Route::post('/edit/{id}', [ReviewController::class, 'doEditReview'])->name('edit.review');
+        Route::get('/delete/{id}', [ReviewController::class, 'doDeleteReview'])->name('delete.review');
+    });
+
+    // Routes for handling Membership Module
+    Route::prefix('/memberships')->group(function () {
+        Route::get('/', [MembershipController::class, 'viewMemberships'])->name('memberships');
+        Route::get('/add', [MembershipController::class, 'viewAddMembership'])->name('add.membership');
+        Route::post('/add', [MembershipController::class, 'doAddMembership'])->name('add.membership');
+        Route::get('/edit/{id}', [MembershipController::class, 'viewEditMembership'])->name('edit.membership');
+        Route::post('/edit/{id}', [MembershipController::class, 'doEditMembership'])->name('edit.membership');
+        Route::get('/delete/{id}', [MembershipController::class, 'doDeleteMembership'])->name('delete.membership');
+
+        // Routes for handling Membership Plan Module
+        Route::prefix('/plans')->group(function () {
+            Route::get('/', [MembershipController::class, 'viewMembershipPlans'])->name('membership.plans');
+            Route::get('/add', [MembershipController::class, 'viewAddMembershipPlan'])->name('add.membership.plan');
+            Route::post('/add', [MembershipController::class, 'doAddMembershipPlan'])->name('add.membership.plan');
+            Route::get('/edit/{id}', [MembershipController::class, 'viewEditMembershipPlan'])->name('edit.membership.plan');
+            Route::post('/edit/{id}', [MembershipController::class, 'doEditMembershipPlan'])->name('edit.membership.plan');
+            Route::get('/delete/{id}', [MembershipController::class, 'doDeleteMembershipPlan'])->name('delete.membership.plan');
+        });
+    });
+
+    // Routes for handling Invoice Module
+    Route::prefix('/invoices')->group(function () {
+        Route::get('/', [InvoiceController::class, 'viewInvoices'])->name('invoices');
+        Route::get('/add', [InvoiceController::class, 'viewAddInvoice'])->name('add.invoice');
+        Route::post('/add', [InvoiceController::class, 'doAddInvoice'])->name('add.invoice');
+        Route::get('/edit/{id}', [InvoiceController::class, 'viewEditInvoice'])->name('edit.invoice');
+        Route::post('/edit/{id}', [InvoiceController::class, 'doEditInvoice'])->name('edit.invoice');
+        Route::get('/delete/{id}', [InvoiceController::class, 'doDeleteInvoice'])->name('delete.invoice');
+    });
 
     // Routes for handling User Module
     Route::prefix('/users')->group(function () {

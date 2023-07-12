@@ -281,16 +281,6 @@
                 FilePond.parse(document.body);
             </script>
             <script>
-                @if(session()->has('msg'))
-                showToast('{{ session()->get('types', 'info') }}', '{{ session()->get('msg') }}');
-                @endif
-
-                @if($errors->any())
-                @foreach ($errors->all() as $error)
-                showToast('error', '{{ $error }}');
-                @endforeach
-                @endif
-
                 // Map
                 let map = L.map('map-picker').setView([51.505, -0.09], 2);
 

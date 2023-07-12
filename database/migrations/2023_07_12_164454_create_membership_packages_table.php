@@ -11,28 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('memberships', function (Blueprint $table) {
+        Schema::create('membership_packages', function (Blueprint $table) {
             $table->id();
-            $table->boolean('published')->default(false);
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->string('type');
             $table->boolean('hidden')->default(false);
             $table->boolean('featured')->default(false);
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('listing_position');
-            $table->string('extra_categories_limit');
-            $table->string('title_size_limit');
-            $table->string('short_description_size_limit');
-            $table->string('description_size_limit');
-            $table->string('gallery_limit');
-            $table->string('event_dates_limit');
-            $table->json('linked_fields')->nullable();
-            $table->json('linked_categories')->nullable();
             $table->boolean('featured_listings')->default(false);
+            $table->integer('listing_position')->default(0);
             $table->boolean('dedicated_listing_page')->default(false);
+            $table->integer('extra_category_limit')->default(0);
+            $table->integer('title_size_limit')->default(0);
+            $table->integer('short_description_limit')->default(0);
+            $table->integer('description_size_limit')->default(0);
+            $table->integer('gallery_photos_limit')->default(0);
             $table->boolean('show_address')->default(false);
             $table->boolean('show_map')->default(false);
-            $table->boolean('allow_messaging')->default(false);
-            $table->boolean('enable_reviews')->default(false);
+            $table->boolean('allow_messages')->default(false);
+            $table->boolean('enable_review')->default(false);
             $table->boolean('enable_seo')->default(false);
             $table->boolean('require_backlink')->default(false);
             $table->timestamps();
@@ -44,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('membership_packages');
     }
 };

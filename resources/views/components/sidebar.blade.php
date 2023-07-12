@@ -30,32 +30,19 @@
                     </a>
                     <ul class="">
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('companies')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="hash"></i></div>
                                 <div class="side-menu__title"> View All</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('add.company')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="plus"></i></div>
                                 <div class="side-menu__title"> Add New</div>
                             </a>
                         </li>
-
                         <li>
-                            <a href="#" class="side-menu">
-                                <div class="side-menu__icon"><i data-feather="star"></i></div>
-                                <div class="side-menu__title"> Reviews</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="side-menu">
-                                <div class="side-menu__icon"><i data-feather="archive"></i></div>
-                                <div class="side-menu__title"> Categories</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('memberships', ['type'=> 'company'])}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="package"></i></div>
                                 <div class="side-menu__title"> Membership</div>
                             </a>
@@ -67,28 +54,21 @@
                     <a href="javascript:" class="side-menu">
                         <div class="side-menu__icon"><i data-feather="shopping-bag"></i></div>
                         <div class="side-menu__title">
-                            Classifieds
+                            Products
                             <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
                         </div>
                     </a>
                     <ul class="">
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('products')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="hash"></i></div>
                                 <div class="side-menu__title"> View All</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('add.product')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="plus"></i></div>
                                 <div class="side-menu__title"> Add New</div>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="side-menu">
-                                <div class="side-menu__icon"><i data-feather="star"></i></div>
-                                <div class="side-menu__title"> Reviews</div>
                             </a>
                         </li>
                         <li>
@@ -97,35 +77,39 @@
                                 <div class="side-menu__title"> Categories</div>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{route('memberships', ['type'=> 'product'])}}" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="package"></i></div>
+                                <div class="side-menu__title"> Membership</div>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 {{--Events--}}
                 <li>
                     <a href="javascript:" class="side-menu">
                         <div class="side-menu__icon"><i data-feather="calendar"></i></div>
-                        <div class="side-menu__title">
-                            Events
+                        <div class="side-menu__title"> Events
                             <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
                         </div>
                     </a>
                     <ul class="">
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('events')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="hash"></i></div>
                                 <div class="side-menu__title"> View All</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('add.event')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="plus"></i></div>
                                 <div class="side-menu__title"> Add New</div>
                             </a>
                         </li>
-
                         <li>
-                            <a href="#" class="side-menu">
-                                <div class="side-menu__icon"><i data-feather="star"></i></div>
-                                <div class="side-menu__title"> Reviews</div>
+                            <a href="{{route('memberships', ['type'=> 'event'])}}" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="package"></i></div>
+                                <div class="side-menu__title"> Membership</div>
                             </a>
                         </li>
                     </ul>
@@ -141,22 +125,21 @@
                     </a>
                     <ul class="">
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('blogs')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="hash"></i></div>
                                 <div class="side-menu__title"> View All</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('add.blog')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="plus"></i></div>
                                 <div class="side-menu__title"> Add New</div>
                             </a>
                         </li>
-
                         <li>
-                            <a href="#" class="side-menu">
-                                <div class="side-menu__icon"><i data-feather="star"></i></div>
-                                <div class="side-menu__title"> Reviews</div>
+                            <a href="{{route('memberships', ['type'=> 'blog'])}}" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="package"></i></div>
+                                <div class="side-menu__title"> Membership</div>
                             </a>
                         </li>
                     </ul>
@@ -172,22 +155,21 @@
                     </a>
                     <ul class="">
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('deals')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="hash"></i></div>
                                 <div class="side-menu__title"> View All</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('add.deal')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="plus"></i></div>
                                 <div class="side-menu__title"> Add New</div>
                             </a>
                         </li>
-
                         <li>
-                            <a href="#" class="side-menu">
-                                <div class="side-menu__icon"><i data-feather="star"></i></div>
-                                <div class="side-menu__title"> Reviews</div>
+                            <a href="{{route('memberships', ['type'=> 'deal'])}}" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="package"></i></div>
+                                <div class="side-menu__title"> Membership</div>
                             </a>
                         </li>
                     </ul>
@@ -201,32 +183,19 @@
                     </a>
                     <ul class="">
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('jobs')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="hash"></i></div>
                                 <div class="side-menu__title"> View All</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('add.job')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="plus"></i></div>
                                 <div class="side-menu__title"> Add New</div>
                             </a>
                         </li>
-
                         <li>
-                            <a href="#" class="side-menu">
-                                <div class="side-menu__icon"><i data-feather="star"></i></div>
-                                <div class="side-menu__title"> Reviews</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="side-menu">
-                                <div class="side-menu__icon"><i data-feather="archive"></i></div>
-                                <div class="side-menu__title"> Categories</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('memberships', ['type'=> 'job'])}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="package"></i></div>
                                 <div class="side-menu__title"> Membership</div>
                             </a>
@@ -236,7 +205,7 @@
             </ul>
         </li>
         <li>
-            <a href="#" class="side-menu">
+            <a href="{{route('invoices')}}" class="side-menu">
                 <div class="side-menu__icon"><i data-feather="file-minus"></i></div>
                 <div class="side-menu__title"> Invoices</div>
             </a>
@@ -341,12 +310,6 @@
                     <a href="{{route('settings')}}" class="side-menu">
                         <div class="side-menu__icon"><i data-feather="settings"></i></div>
                         <div class="side-menu__title"> Settings</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="list"></i></div>
-                        <div class="side-menu__title"> Listing type</div>
                     </a>
                 </li>
                 <li>

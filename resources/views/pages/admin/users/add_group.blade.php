@@ -42,17 +42,7 @@
         @endsection
 
         @section('page-scripts')
-            <script>
-                @if(session()->has('msg'))
-                showToast('{{ session()->get('types', 'info') }}', '{{ session()->get('msg') }}');
-                @endif
 
-                @if($errors->any())
-                @foreach ($errors->all() as $error)
-                showToast('error', '{{ $error }}');
-                @endforeach
-                @endif
-            </script>
             {{-- Scripts for this page goes here --}}
             <script>
                 let jsonData = {

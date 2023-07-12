@@ -33,7 +33,7 @@ class LocationController extends Controller
         }
 
         $data = compact('locations');
-        return view('pages.admin.locations.view_all.blade.php')->with($data);
+        return view('pages.admin.locations.view_all')->with($data);
     }
 
 
@@ -97,7 +97,7 @@ class LocationController extends Controller
         $location = Location::find($id);
 
         if(!$location){
-            return redirect()->back()->with(['type' => 'error', 'message' => 'Location not found']);
+            return redirect()->back()->with(['type' => 'error', 'msg' => 'Location not found']);
         }
 
         // update seo record
