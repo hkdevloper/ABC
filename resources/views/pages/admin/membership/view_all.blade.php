@@ -22,32 +22,44 @@
                         <thead>
                         <tr>
                             <th class="border-b-2 whitespace-no-wrap">#ID</th>
-                            <th class="border-b-2 whitespace-no-wrap">Name</th>
-                            <th class="border-b-2 whitespace-no-wrap">Upload type</th>
-                            <th class="border-b-2 whitespace-no-wrap">MIME</th>
-                            <th class="border-b-2 whitespace-no-wrap">Size</th>
+                            <th class="border-b-2 whitespace-no-wrap">Package Name</th>
+                            <th class="border-b-2 whitespace-no-wrap">Hidden</th>
+                            <th class="border-b-2 whitespace-no-wrap">Featured</th>
                             <th class="text-center whitespace-no-wrap">ACTIONS</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="{{url('/')}}">
-                                        <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-theme-6"
-                                       onclick="confirm('Are you sure?') ? window.location.replace('{{url('/')}}') : ''"
-                                       href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
-                                                              onclick=""></i> Delete
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach($memberships as $data)
+                            <tr>
+                                <td class="border-b">{{$data->id}}</td>
+                                <td class="border-b">{{$data->name}}</td>
+                                <td class="border-b">
+                                    <div class="mt-2" >
+                                        <label style="width: 180px!important; display: inline-block">Hidden</label>
+                                        <input type="checkbox" class="input input--switch border" {{$data->hidden == 1 ? "checked" : ""}}>
+                                    </div>
+                                </td>
+                                <td class="border-b">
+                                    <div class="mt-2" >
+                                        <label style="width: 180px!important; display: inline-block">Featured</label>
+                                        <input type="checkbox" class="input input--switch border" {{$data->featured == 1 ? "checked" : ""}}>
+                                    </div>
+                                </td>
+                                <td class="table-report__action w-56">
+                                    <div class="flex justify-center items-center">
+                                        <a class="flex items-center mr-3" href="{{route('edit.membership',[$data->id, "type"=>$type])}}">
+                                            <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                        <a class="flex items-center mr-3" href="{{route('membership.plans',["id"=>$data->id, "type"=>$type])}}">
+                                            <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Plans </a>
+                                        <a class="flex items-center text-theme-6"
+                                           onclick="confirm('Are you sure?') ? window.location.replace('{{route('delete.membership', [$data->id])}}') : ''"
+                                           href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
+                                                                  onclick=""></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

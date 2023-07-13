@@ -10,7 +10,7 @@
                         Membership Plans
                     </h2>
                     <div class="flex ml-auto">
-                        <a href="{{route('add.membership.plan')}}"
+                        <a href="{{route('add.membership.plan', ['package_id' => $package_id])}}"
                            class="ml-auto note-btn flex text-theme-1 dark:text-theme-10 mx-1">
                             Add New Plan
                         </a>

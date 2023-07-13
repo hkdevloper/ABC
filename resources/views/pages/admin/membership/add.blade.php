@@ -18,35 +18,35 @@
                         <input type="hidden" name="type" value="{{$type}}">
                         <div>
                             <label>Name</label>
-                            <input type="text" name="name" class="input w-full border mt-2" placeholder="Name">
+                            <input required type="text" name="name" class="input w-full border mt-2" placeholder="Name">
                         </div>
                         <div>
                             <label>Description</label>
-                            <textarea name="description" id="" cols="30" rows="10" class="input w-full border mt-2" placeholder="Description"></textarea>
+                            <textarea required name="description" id="" cols="30" rows="10" class="input w-full border mt-2" placeholder="Description"></textarea>
                         </div>
                         <div>
                             <label>Listing Position</label>
-                            <input type="number" name="listing_position" class="input w-full border mt-2" placeholder="Listing Position">
+                            <input required type="number" name="listing_position" class="input w-full border mt-2" placeholder="Listing Position">
                         </div>
                         <div>
                             <label>Extra Categories Limit</label>
-                            <input type="number" name="extra_categories_limit" class="input w-full border mt-2" placeholder="Extra Categories Limit">
+                            <input required type="number" name="extra_categories_limit" class="input w-full border mt-2" placeholder="Extra Categories Limit">
                         </div>
                         <div>
                             <label>Title Size Limit</label>
-                            <input type="number" name="title_size_limit" class="input w-full border mt-2" placeholder="Title Size Limit">
+                            <input required type="number" name="title_size_limit" class="input w-full border mt-2" placeholder="Title Size Limit">
                         </div>
                         <div>
                             <label>Short Description Size Limit</label>
-                            <input type="number" name="short_description_size_limit" class="input w-full border mt-2" placeholder="Short Description Size Limit">
+                            <input required type="number" name="short_description_size_limit" class="input w-full border mt-2" placeholder="Short Description Size Limit">
                         </div>
                         <div>
                             <label>Description Size Limit</label>
-                            <input type="number" name="description_size_limit" class="input w-full border mt-2" placeholder="Description Size Limit">
+                            <input required type="number" name="description_size_limit" class="input w-full border mt-2" placeholder="Description Size Limit">
                         </div>
                         <div>
                             <label>Gallery Photos Limit</label>
-                            <input type="number" name="gallery_photos_limit" class="input w-full border mt-2" placeholder="Gallery Photos Limit">
+                            <input required type="number" name="gallery_photos_limit" class="input w-full border mt-2" placeholder="Gallery Photos Limit">
                         </div>
                         <div>
                             <label>Features</label>
