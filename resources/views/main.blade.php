@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{url("/")}}/dist/css/app.css">
     <link rel="stylesheet" href="{{url("/")}}/dist/css/box-icons.css">
     <script src="https://kit.fontawesome.com/cabb64bd6b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
     <link rel="stylesheet" href="{{url('dist/css/IconPicker.css')}}">
     <script src="{{url('dist/js/IconPicker.js')}}"></script>
     {{-- Scripts --}}
@@ -45,6 +46,13 @@
             @endforeach
         @endif
     @endif
+</script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
 </script>
 @yield('page-scripts')
 </body>

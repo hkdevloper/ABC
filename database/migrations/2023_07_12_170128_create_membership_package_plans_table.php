@@ -18,8 +18,9 @@ return new class extends Migration
             $table->boolean('hidden')->default(false);
             $table->boolean('auto_approve_listing')->default(false);
             $table->boolean('user_cancellable')->default(false);
+            $table->boolean('used_for_claims')->default(false);
             $table->string('billing_period');
-            $table->integer('number_of_periods')->default(0);
+            $table->integer('billing_interval')->default(0);
             $table->double('price')->default(0);
             $table->integer('user_limit')->default(0);
             $table->integer('per_users_limit')->default(0);

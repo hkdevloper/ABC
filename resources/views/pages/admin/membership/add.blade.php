@@ -22,7 +22,9 @@
                         </div>
                         <div>
                             <label>Description</label>
-                            <textarea required name="description" id="" cols="30" rows="10" class="input w-full border mt-2" placeholder="Description"></textarea>
+                            <textarea required name="description"  cols="30" rows="10" id="editor" class="input w-full border mt-2" placeholder="Description">
+                                Add Package Features Here
+                            </textarea>
                         </div>
                         <div>
                             <label>Listing Position</label>

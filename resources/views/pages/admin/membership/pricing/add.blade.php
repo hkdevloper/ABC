@@ -15,6 +15,8 @@
                 <div class="intro-y datatable-wrapper box p-5 mt-5">
                     <form action="{{route('add.membership.plan')}}" method="post">
                         @csrf
+                        <input type="hidden" name="package_id" value="{{$package_id}}">
+                        <input type="hidden" name="type" value="{{$type}}">
                         <div>
                             <label>Billing Period</label>
                             <select required name="billing_period" id="" class="input w-full border mt-2">
@@ -50,7 +52,7 @@
                             <label>Supported Payment Gateways</label>
                             <select name="supported_payment_gateways[]" id="" class="select2 input w-full border mt-2" multiple required>
                                 @foreach($paymentMethods as $method)
-                                    <option value="{{ $method->name }}">{{ $method->name }}</option>
+                                    <option value="{{ $method->id }}">{{ $method->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -60,16 +62,16 @@
                                 <input type="checkbox" class="input input--switch border" name="listings">
                             </div>
                             <div class="mt-2" >
-                                <label style="width: 180px!important; display: inline-block">Auto-approve Reviews</label>
-                                <input type="checkbox" class="input input--switch border" name="reviews">
+                                <label style="width: 180px!important; display: inline-block">Used for Claiming</label>
+                                <input type="checkbox" class="input input--switch border" name="claims">
                             </div>
                             <div class="mt-2" >
-                                <label style="width: 180px!important; display: inline-block">Auto-approve Comments</label>
-                                <input type="checkbox" class="input input--switch border" name="comments">
+                                <label style="width: 180px!important; display: inline-block">User Cancellable</label>
+                                <input type="checkbox" class="input input--switch border" name="cancellable">
                             </div>
                             <div class="mt-2" >
-                                <label style="width: 180px!important; display: inline-block">Auto-approve Bookings</label>
-                                <input type="checkbox" class="input input--switch border" name="bookings">
+                                <label style="width: 180px!important; display: inline-block">Hidden</label>
+                                <input type="checkbox" class="input input--switch border" name="hidden">
                             </div>
                         </div>
                         <button type="submit" class="button bg-theme-1 text-white mt-5">Submit</button>

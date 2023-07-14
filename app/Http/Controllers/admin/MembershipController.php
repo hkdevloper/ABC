@@ -60,7 +60,8 @@ class MembershipController extends Controller
         ]);
         $plans = MembershipPackagePlan::where('membership_package_id', $request->id)->get();
         $package_id = $request->id;
-        $data = compact('plans', 'package_id');
+        $type = $request->type;
+        $data = compact('plans', 'package_id', 'type');
         return view('pages.admin.membership.pricing.view_all')->with($data);
     }
 
@@ -71,16 +72,26 @@ class MembershipController extends Controller
             'package_id' => 'required|exists:membership_packages,id'
         ]);
         $paymentMethods = PaymentGateway::all();
-        $data = compact('paymentMethods');
+        $package_id = $request->package_id;
+        $type = $request->type;
+        $data = compact('paymentMethods', 'package_id', 'type');
         return view('pages.admin.membership.pricing.add')->with($data);
     }
 
     // Function to view Edit Membership Pricing plans
     public function viewEditMembershipPlan(Request $request, $id)
     {
+        $request->validate([
+            'package_id' => 'required|exists:membership_packages,id',
+            'type' => 'required|in:company,product,deal,job,blog,event'
+        ]);
 
         $paymentMethods = PaymentGateway::all();
-        $data = compact('paymentMethods');
+        $plan = MembershipPackagePlan::find($id);
+        $package_id = $request->package_id;
+        $type = $request->type;
+        $supportedTypes = json_decode($plan->supported_payment_gateways);
+        $data = compact('paymentMethods', 'plan', 'package_id', 'type', 'supportedTypes');
         return view('pages.admin.membership.pricing.edit')->with($data);
     }
 
@@ -142,7 +153,7 @@ class MembershipController extends Controller
         $membership->enable_seo = $request->enable_seo ? 1 : 0;
         $membership->require_backlink = $request->require_backlink ? 1 : 0;
         $membership->save();
-        return redirect()->back()->with(['types' => 'success', 'msg' => 'Membership package Added Successfully']);
+        return redirect()->route('memberships', ['type' => $request->type])->with(['types' => 'success', 'msg' => 'Membership package Added Successfully']);
     }
 
     // Function to do Add Membership Package Plan
@@ -154,8 +165,23 @@ class MembershipController extends Controller
             "users_limit" => "required|numeric",
             "per_users_limit" => "required|numeric",
             "supported_payment_gateways" => "required",
+            'price' => 'required|numeric',
         ]);
-        return $request->all();
+        $plan = new MembershipPackagePlan();
+        $plan->membership_package_id = $request->package_id;
+        $plan->billing_period = $request->billing_period;
+        $plan->billing_interval = $request->billing_interval;
+        $plan->user_limit = $request->users_limit;
+        $plan->per_users_limit = $request->per_users_limit;
+        $plan->supported_payment_gateways = json_encode($request->supported_payment_gateways);
+        $plan->price = $request->price;
+        // boolean values
+        $plan->used_for_claims = $request->claims ? 1 : 0;
+        $plan->auto_approve_listing = $request->listings ? 1 : 0;
+        $plan->user_cancellable = $request->cancellable ? 1 : 0;
+        $plan->hidden = $request->hidden ? 1 : 0;
+        $plan->save();
+        return redirect()->route('membership.plans',["id"=>$request->package_id, "type"=>$request->type])->with(['types' => 'success', 'msg' => 'Membership package plan Added Successfully']);
     }
 
     // Function to do Edit Membership
@@ -200,6 +226,36 @@ class MembershipController extends Controller
         return redirect()->route('memberships', ["type" => $request->type])->with(['types' => 'success', 'msg' => 'Membership package Updated Successfully']);
     }
 
+    // Function to do Edit Membership Plan
+    public function doEditMembershipPlan(Request $request, $id)
+    {
+        $request->validate([
+            "billing_period" => "required|in:day,week,month,year",
+            "billing_interval" => "required|numeric",
+            "users_limit" => "required|numeric",
+            "per_users_limit" => "required|numeric",
+            "supported_payment_gateways" => "required",
+            'price' => 'required|numeric',
+        ]);
+        $plan = MembershipPackagePlan::find($request->id);
+        if (!$plan) {
+            return redirect()->route('membership.plans',["id"=>$request->package_id, "type"=>$request->type])->with(['types' => 'error', 'msg' => 'Invalid Membership Package Plan']);
+        }
+        $plan->billing_period = $request->billing_period;
+        $plan->billing_interval = $request->billing_interval;
+        $plan->user_limit = $request->users_limit;
+        $plan->per_users_limit = $request->per_users_limit;
+        $plan->supported_payment_gateways = json_encode($request->supported_payment_gateways);
+        $plan->price = $request->price;
+        // boolean values
+        $plan->used_for_claims = $request->claims ? 1 : 0;
+        $plan->auto_approve_listing = $request->listings ? 1 : 0;
+        $plan->user_cancellable = $request->cancellable ? 1 : 0;
+        $plan->hidden = $request->hidden ? 1 : 0;
+        $plan->save();
+        return redirect()->route('membership.plans',["id"=>$request->package_id, "type"=>$request->type])->with(['types' => 'success', 'msg' => 'Membership package plan Updated Successfully']);
+    }
+
     // Function to do Delete Membership
     public function doDeleteMembership($id)
     {
@@ -209,6 +265,17 @@ class MembershipController extends Controller
         }
         $membership->delete();
         return redirect()->back()->with(['types' => 'success', 'msg' => 'Membership package Deleted Successfully']);
+    }
+
+    // Function to do Delete Membership Plan
+    public function doDeleteMembershipPlan($id)
+    {
+        $plan = MembershipPackagePlan::find($id);
+        if (!$plan) {
+            return redirect()->back()->with(['types' => 'error', 'msg' => 'Invalid Membership Package Plan']);
+        }
+        $plan->delete();
+        return redirect()->back()->with(['types' => 'success', 'msg' => 'Membership package plan Deleted Successfully']);
     }
 
 }

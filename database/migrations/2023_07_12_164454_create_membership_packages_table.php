@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('membership_packages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('type');
             $table->boolean('hidden')->default(false);
             $table->boolean('featured')->default(false);
