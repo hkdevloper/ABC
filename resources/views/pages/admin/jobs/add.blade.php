@@ -1,5 +1,15 @@
-
 @extends('main')
+
+@section("head")
+    <link rel="stylesheet" href="{{url("/")}}/dist/css/leaflet.css">
+    <script src="{{url("/")}}/dist/js/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css"/>
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+          rel="stylesheet"/>
+@endsection
 
 @section("content")
     <div class="grid grid-cols-12 gap-6">
@@ -12,44 +22,260 @@
                     </h2>
                 </div>
                 {{-- Main Content goes Here --}}
-                @if($packageId == NULL)
-                    <div class="intro-y box flex flex-col lg:flex-row mt-5">
-                        @foreach($membershipPackage as $data)
-                            <div class="intro-y flex-1 px-5 py-16">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card w-12 h-12 text-theme-1 mx-auto"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                                <div class="text-xl font-medium text-center mt-10">{{$data['name']}}</div>
-                                <div class="text-gray-700 text-center mt-5">
-                                    @if($data['description'] != NULL)
-                                        {!! $data['description'] !!}
-                                    @else
-                                        No Description
-                                    @endif
-                                </div>
-                                <div class="intro-y box mt-5">
-                                    @if($data['plans'] == NULL)
-                                        No Plans Available
-                                    @endif
-                                    @foreach($data['plans'] as $plan)
-                                        <a href="{{route('add.company', ['membership_package' => "1"])}}" class="button button--lg block text-white bg-theme-1 rounded-full mx-auto mt-8">{{$plan['billing_interval']}} {{$plan['billing_period']}} for @if($plan['price'] == 0) Free @else{{$plan['price']}}$@endif</a>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endforeach
+                <div class="intro-y datatable-wrapper box p-5 mt-5">
+                    <div>
+                        <label>Email</label>
+                        <input type="email" class="input w-full border mt-2" placeholder="example@gmail.com">
                     </div>
-                @else
-                    <div class="intro-y datatable-wrapper box p-5 mt-5">
-                        <div>
-                            <label>Email</label>
-                            <input type="email" class="input w-full border mt-2" placeholder="example@gmail.com">
-                        </div>
-                        <button type="button" class="button bg-theme-1 text-white mt-5">Submit</button>
-                    </div>
-                @endif
+                    <button type="button" class="button bg-theme-1 text-white mt-5">Submit</button>
+                </div>
             </div>
         </div>
+    </div>
 @endsection
+
 
 @section('page-scripts')
     {{-- Scripts for this page goes here --}}
+    {{-- Filepond Plugins --}}
+    <script
+        src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <script
+        src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+    <script
+        src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script
+        src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    {{--        Filepond JS--}}
+    <script>
+        FilePond.registerPlugin(
+            FilePondPluginFileValidateType,
+            FilePondPluginImageExifOrientation,
+            FilePondPluginImagePreview,
+            FilePondPluginImageCrop,
+            FilePondPluginImageResize,
+            FilePondPluginImageTransform,
+            FilePondPluginImageEdit
+        );
+        let folder = null;
+
+        // Upload Logo
+        FilePond.create(
+            document.getElementById('media_file'),
+            {
+                labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
+                imagePreviewHeight: 170,
+                imageCropAspectRatio: '1:1',
+                imageResizeTargetWidth: 200,
+                imageResizeTargetHeight: 200,
+                allowMultiple: false,
+            }
+        ).setOptions({
+            server: {
+                timeout: 7000,
+                process: {
+                    url: '{{ route('filepond.process') }}',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'upload_type': 'category_thumbnail'
+                    },
+                    withCredentials: false,
+                    onload: (response) => {
+                        response = JSON.parse(response);
+                        folder = response.folder;
+                        $('#media').val(folder);
+                    }
+                },
+                revert: () => {
+                    $.ajax({
+                        url: '{{ route('filepond.revert') }}',
+                        type: 'DELETE',
+                        dataType: 'json',
+                        data: {
+                            folder: folder,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (data) {
+                            $('#media').val('')
+                        }
+                    });
+                },
+            },
+
+        });
+        // Upload Gallery
+        FilePond.create(
+            document.getElementById('media_file_gallery'),
+            {
+                labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
+                imagePreviewHeight: 170,
+                imageCropAspectRatio: '1:1',
+                imageResizeTargetWidth: 200,
+                imageResizeTargetHeight: 200,
+                allowMultiple: false,
+            }
+        ).setOptions({
+            server: {
+                timeout: 7000,
+                process: {
+                    url: '{{ route('filepond.process') }}',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'upload_type': 'category_thumbnail'
+                    },
+                    withCredentials: false,
+                    onload: (response) => {
+                        response = JSON.parse(response);
+                        folder = response.folder;
+                        // multiple gallery
+                        let gallery = $('#gallery').val();
+                        if (gallery === '') {
+                            $('#gallery').val(folder);
+                        } else {
+                            $('#gallery').val(gallery + ',' + folder);
+                        }
+                    }
+                },
+                revert: () => {
+                    $.ajax({
+                        url: '{{ route('filepond.revert') }}',
+                        type: 'DELETE',
+                        dataType: 'json',
+                        data: {
+                            folder: folder,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (data) {
+                            // remove deleted folder from gallery
+                            let gallery = $('#gallery').val();
+                            let newGallery = gallery.replace(folder, '');
+                            $('#gallery').val(newGallery);
+                        }
+                    });
+                },
+            },
+
+        });
+
+        FilePond.parse(document.body);
+    </script>
+    {{--    TagiFY/Slug--}}
+    <script>
+        // Tagify Tag input
+        let input = document.getElementById('tag-keyword');
+        let extra = document.getElementById('extra-keyword');
+        let tagify = new Tagify(input, {
+            whitelist: [],
+            maxTags: 10,
+            dropdown: {
+                enabled: 1,
+                maxItems: 10,
+                classname: "tags-look",
+                closeOnSelect: false
+            }
+        });
+        let tagifyExtra = new Tagify(extra, {
+            whitelist: [],
+            maxTags: 10,
+            dropdown: {
+                enabled: 1,
+                maxItems: 10,
+                classname: "tags-look",
+                closeOnSelect: false
+            }
+        });
+
+        // Slug Generator
+        $('#name').keyup(function () {
+            $('#slug').val(generateSlug($(this).val()));
+        });
+
+        function generateSlug(input) {
+            // Convert input to lowercase and remove leading/trailing whitespaces
+            let slug = input.toLowerCase().trim();
+
+            // Replace special characters with dashes
+            slug = slug.replace(/[^a-z0-9]+/g, '-');
+
+            // Remove any remaining leading/trailing dashes
+            slug = slug.replace(/^-+|-+$/g, '');
+
+            // Return the generated slug
+            return slug;
+        }
+    </script>
+    {{--        MAP Script--}}
+    <script>
+        // Map
+        let map = L.map('map-picker').setView([51.505, -0.09], 2);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        function onMapClick(e) {
+            map.eachLayer(function (layer) {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+            // Create a marker at the clicked location
+            let marker = L.marker(e.latlng).addTo(map);
+
+            $('#longitude').val(e.latlng.lng);
+            $('#latitude').val(e.latlng.lat);
+        }
+
+        map.on('click', onMapClick);
+    </script>
+    {{--        AJAX dropdown location--}}
+    <script>
+        $(document).ready(function () {
+            $.get('{{route('ajax.get.country.list')}}', function (data) {
+                let country = $('#new-location');
+                country.empty();
+                country.append('<option value="">Select Country</option>');
+                $.each(data, function (index, element) {
+                    country.append('<option value="' + element.id + '">' + element.name + '</option>');
+                });
+            });
+
+            // when country is selected
+            $('#new-location').change(function () {
+                let country_id = $(this).val();
+                $.get('{{route('ajax.get.state.list')}}', {country_id: country_id}, function (data) {
+                    let state = $('#new-state');
+                    state.toggle('hidden');
+                    state.empty();
+                    state.append('<option value="">Select State</option>');
+                    $.each(data, function (index, element) {
+                        state.append('<option value="' + element.id + '">' + element.name + '</option>');
+                    });
+                });
+            });
+
+            // when state is selected
+            $('#new-state').change(function () {
+                let state_id = $(this).val();
+                $.get('{{route('ajax.get.city.list')}}', {state_id: state_id}, function (data) {
+                    let city = $('#new-city');
+                    city.toggle('hidden');
+                    city.empty();
+                    city.append('<option value="">Select City</option>');
+                    $.each(data, function (index, element) {
+                        city.append('<option value="' + element.id + '">' + element.name + '</option>');
+                    });
+                });
+            });
+
+        });
+    </script>
 
 @endsection

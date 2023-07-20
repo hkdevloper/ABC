@@ -284,6 +284,7 @@
 
                 FilePond.parse(document.body);
             </script>
+{{--        MAP Script--}}
             <script>
                 // Map
                 let map = L.map('map-picker').setView([51.505, -0.09], 2);
@@ -340,6 +341,7 @@
                     return slug;
                 }
             </script>
+{{--        AJAX dropdown location--}}
             <script>
                 $(document).ready(function () {
                     $.get('{{route('ajax.get.country.list')}}', function (data) {

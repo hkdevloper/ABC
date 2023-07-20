@@ -72,7 +72,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="side-menu">
+                            <a href="{{route('categories', ['type' => 'product'])}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="archive"></i></div>
                                 <div class="side-menu__title"> Categories</div>
                             </a>
@@ -104,6 +104,12 @@
                             <a href="{{route('add.event')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="plus"></i></div>
                                 <div class="side-menu__title"> Add New</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('categories', ['type' => 'event'])}}" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="archive"></i></div>
+                                <div class="side-menu__title"> Categories</div>
                             </a>
                         </li>
                         <li>
@@ -167,6 +173,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{route('categories', ['type' => 'deal'])}}" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="archive"></i></div>
+                                <div class="side-menu__title"> Categories</div>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{route('memberships', ['type'=> 'deal'])}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="package"></i></div>
                                 <div class="side-menu__title"> Membership</div>
@@ -192,6 +204,12 @@
                             <a href="{{route('add.job')}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="plus"></i></div>
                                 <div class="side-menu__title"> Add New</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('categories', ['type' => 'job'])}}" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="archive"></i></div>
+                                <div class="side-menu__title"> Categories</div>
                             </a>
                         </li>
                         <li>

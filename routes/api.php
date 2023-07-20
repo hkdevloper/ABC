@@ -35,6 +35,7 @@ Route::prefix('/ajax')->group(function () {
 
 // Routes for handling Media Module
 Route::prefix('/media')->group(function () {
+    Route::get('/load', [UploadMediaController::class, 'load'])->name('filepond.load');
     Route::post('/process', [UploadMediaController::class, 'upload'])->name('filepond.process');
     Route::delete('/delete', [UploadMediaController::class, 'delete'])->name('filepond.revert');
 });

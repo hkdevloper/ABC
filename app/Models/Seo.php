@@ -10,6 +10,7 @@ class Seo extends Model
     use HasFactory;
 
     protected $table = 'seo';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'title',

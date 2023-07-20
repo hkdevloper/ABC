@@ -42,9 +42,9 @@
                                 <td class="border-b">00</td>
                                 <td class="border-b">
                                     <div class="mt-3">
-                                        <div class="mt-2"><input type="checkbox" @if($data->featured)
-                                                {!! "checked" !!}
-                                            @endif data-id="{{$data->id}}" class="input input--switch border"></div>
+                                        <div class="mt-2">
+                                            <input type="checkbox" @if($data->featured) checked @endif data-id="{{$data->id}}" class="input input--switch border">
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="border-b table-report__action w-56">
