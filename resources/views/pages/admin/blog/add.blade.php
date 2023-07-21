@@ -62,16 +62,6 @@
                                placeholder="AAA>>bb>>c" id="slug" value="{{old('slug')}}">
                     </div>
                     <div class="mt-3">
-                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">Headline</label>
-                        <input name="headline" type="text" class="input w-full border mt-2 flex-1" required
-                               placeholder="Enter Headline here" id="headline" value="{{old('headline')}}">
-                    </div>
-                    <div class="mt-3">
-                        <label>Company Summary</label>
-                        <input type="text" class="input w-full border mt-2" name="summary"
-                               placeholder="Enter Category Summary here">
-                    </div>
-                    <div class="mt-3">
                         <label>Article Content</label>
                         <textarea id="editor" class="input w-full border mt-2" name="content" rows="50"></textarea>
                     </div>

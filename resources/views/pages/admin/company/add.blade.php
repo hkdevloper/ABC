@@ -56,6 +56,12 @@
                         </select>
                     </div>
                     <div class="mt-3">
+                        <label>Company Logo</label>
+                        <input type="file" id="media_file" class="input w-full border mt-2"
+                               placeholder="Enter Category Image here" name="file">
+                    </div>
+                    <input name="media" id="media" type="hidden"/>
+                    <div class="mt-3">
                         <label>Company Name</label>
                         <input id="name" type="text" class="input w-full border mt-2"
                                placeholder="Enter Category Name here" name="category_name">
@@ -65,11 +71,7 @@
                         <input name="slug" type="text" class="input w-full border mt-2 flex-1" required
                                placeholder="AAA>>bb>>c" id="slug" value="{{old('slug')}}">
                     </div>
-                    <div class="mt-3">
-                        <label>Company Summary</label>
-                        <input type="text" class="input w-full border mt-2" name="summary"
-                               placeholder="Enter Category Summary here">
-                    </div>
+
                     <div class="mt-3">
                         <label>Company Description</label>
                         <textarea id="editor" class="input w-full border mt-2" name="description"
@@ -81,6 +83,12 @@
                                placeholder=", (comma seperated values)" id="extra-keyword"
                                value="{{old('extra')}}">
                     </div>
+                    <div class="mt-3">
+                        <label>Company Gallary</label>
+                        <input type="file" id="media_file_gallery" class="input w-full border mt-2" multiple
+                               placeholder="Enter Category Image here" name="file">
+                    </div>
+                    <input name="gallery[]" id="gallery" type="hidden"/>
                     <div class="mt-3">
                         <label>Price Range</label>
                         <select class="select2 input w-full border mt-2">
@@ -94,6 +102,11 @@
                         <label>Phone Number</label>
                         <input type="text" class="input w-full border mt-2" name="phone"
                                placeholder="Enter Phone Number here">
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">Email</label>
+                        <input name="email" type="text" class="input w-full border mt-2 flex-1" required
+                               placeholder="john@mail.com" value="{{old('email')}}">
                     </div>
                     <div class="mt-3">
                         <label>Website</label>
@@ -182,18 +195,8 @@
                                readonly
                                placeholder="" id="latitude" value="{{old('latitude')}}">
                     </div>
-                    <div class="mt-3">
-                        <label>Company Logo</label>
-                        <input type="file" id="media_file" class="input w-full border mt-2"
-                               placeholder="Enter Category Image here" name="file">
-                    </div>
-                    <input name="media" id="media" type="hidden"/>
-                    <div class="mt-3">
-                        <label>Company Gallary</label>
-                        <input type="file" id="media_file_gallery" class="input w-full border mt-2" multiple
-                               placeholder="Enter Category Image here" name="file">
-                    </div>
-                    <input name="gallery[]" id="gallery" type="hidden"/>
+
+
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Title</label>
                         <input name="meta_title" type="text" class="input w-full border mt-2 flex-1" required

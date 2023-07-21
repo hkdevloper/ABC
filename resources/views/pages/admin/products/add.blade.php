@@ -59,11 +59,6 @@
                                placeholder="Enter Category Name here" name="category_name">
                     </div>
                     <div class="mt-3">
-                        <label>SKU</label>
-                        <input id="sku" type="text" class="input w-full border mt-2"
-                               placeholder="Enter SKU Code here" name="sku">
-                    </div>
-                    <div class="mt-3">
                         <label>Price</label>
                         <input id="price" type="text" class="input w-full border mt-2"
                                placeholder="Enter Price here" name="price">
@@ -72,11 +67,6 @@
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Slug</label>
                         <input name="slug" type="text" class="input w-full border mt-2 flex-1" required
                                placeholder="AAA>>bb>>c" id="slug" value="{{old('slug')}}">
-                    </div>
-                    <div class="mt-3">
-                        <label>Summary</label>
-                        <input type="text" class="input w-full border mt-2" name="summary"
-                               placeholder="Enter Category Summary here">
                     </div>
                     <div class="mt-3">
                         <label>Description</label>
@@ -97,16 +87,6 @@
                         <label>Brand</label>
                         <input type="text" class="input w-full border mt-2" name="brand"
                                placeholder="Enter Brand here">
-                    </div>
-                    <div class="mt-3">
-                        <label>Model</label>
-                        <input type="text" class="input w-full border mt-2" name="model"
-                               placeholder="Enter Model here">
-                    </div>
-                    <div class="mt-3">
-                        <label>Website</label>
-                        <input type="text" class="input w-full border mt-2" name="website"
-                               placeholder="Enter Website here">
                     </div>
                     <div class="mt-3">
                         <label>Product Thumbnail</label>

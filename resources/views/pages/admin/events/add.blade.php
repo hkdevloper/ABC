@@ -74,25 +74,9 @@
                                placeholder="Enter End Date & Time here">
                     </div>
                     <div class="mt-3">
-                        <label>Age Range</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select Age Range</option>
-                            <option value="0-15">0-15</option>
-                            <option value="16-21">16-21</option>
-                            <option value="22-40">22-40</option>
-                            <option value="40+">40+</option>
-
-                        </select>
-                    </div>
-                    <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Slug</label>
                         <input name="slug" type="text" class="input w-full border mt-2 flex-1" required
                                placeholder="AAA>>bb>>c" id="slug" value="{{old('slug')}}">
-                    </div>
-                    <div class="mt-3">
-                        <label>Summary</label>
-                        <input type="text" class="input w-full border mt-2" name="summary"
-                               placeholder="Enter Summary here">
                     </div>
                     <div class="mt-3">
                         <label>Description</label>
