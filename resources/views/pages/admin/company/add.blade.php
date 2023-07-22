@@ -23,59 +23,63 @@
                     </a>
                 </div>
                 {{-- Main Content goes Here --}}
-                <div class="intro-y datatable-wrapper box p-5 mt-5">
+                <form action="{{route('add.company')}}" method="post" enctype="multipart/form-data"
+                      class="intro-y datatable-wrapper box p-5 mt-5">
+                    @csrf
                     <div style="display: flex">
                         <div style="margin-right: 50px">
                             <label>Approved</label>
                             <br>
-                            <input type="checkbox" checked class="input w-full input--switch border" name="is_active">
+                            <input type="checkbox" checked class="input w-full input--switch border" name="approved">
                         </div>
                         <div>
                             <label>Claimed</label>
                             <br>
-                            <input type="checkbox" class="input w-full input--switch border" name="is_featured">
+                            <input type="checkbox" class="input w-full input--switch border" name="claimed">
                         </div>
                     </div>
                     <div class="mt-3">
                         <label>Select User</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select user</option>
-                            <option value="2">User 1</option>
-                            <option value="3">User 2</option>
-                            <option value="4">User 3</option>
+                        <select name="user" required class="select2 input w-full border mt-2">
+                            <option selected>Select user</option>
+                            @foreach($users as $user)
+                                <option value="{{$user->id}}">{{$user->first_name}}&nbsp;{{$user->last_name}}
+                                    &nbsp;[Id: {{$user->id}}]
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mt-3">
                         <label>Category</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select Category</option>
-                            <option value="2">Category 1</option>
-                            <option value="3">Category 2</option>
-                            <option value="4">Category 3</option>
-                            <option value="5">Category 4</option>
+                        <select name="category" required class="select2 input w-full border mt-2">
+                            <option selected>Select Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mt-3">
                         <label>Company Logo</label>
-                        <input type="file" id="media_file" class="input w-full border mt-2"
+                        <input type="file" id="media_file" class="input w-full border mt-2" @if(!old('logo')) required
+                               @endif
                                placeholder="Enter Category Image here" name="file">
                     </div>
-                    <input name="media" id="media" type="hidden"/>
+                    <input name="logo" id="media" type="hidden" value="{{old('logo')}}"/>
                     <div class="mt-3">
                         <label>Company Name</label>
-                        <input id="name" type="text" class="input w-full border mt-2"
-                               placeholder="Enter Category Name here" name="category_name">
+                        <input id="name" type="text" class="input w-full border mt-2" required autofocus
+                               value="{{old('name')}}"
+                               placeholder="Enter Category Name here" name="name">
                     </div>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Slug</label>
                         <input name="slug" type="text" class="input w-full border mt-2 flex-1" required
                                placeholder="AAA>>bb>>c" id="slug" value="{{old('slug')}}">
                     </div>
-
                     <div class="mt-3">
                         <label>Company Description</label>
                         <textarea id="editor" class="input w-full border mt-2" name="description"
-                                  placeholder="Enter Category Description here"></textarea>
+                                  placeholder="Enter Category Description here">{{old('description')}}</textarea>
                     </div>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Extra Things</label>
@@ -84,68 +88,79 @@
                                value="{{old('extra')}}">
                     </div>
                     <div class="mt-3">
-                        <label>Company Gallary</label>
+                        <label>Company Gallery</label>
                         <input type="file" id="media_file_gallery" class="input w-full border mt-2" multiple
                                placeholder="Enter Category Image here" name="file">
                     </div>
-                    <input name="gallery[]" id="gallery" type="hidden"/>
-                    <div class="mt-3">
-                        <label>Price Range</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select Range</option>
-                            <option value="$">$</option>
-                            <option value="$$">$$</option>
-                            <option value="$$$">$$$</option>
-                        </select>
-                    </div>
+                    <input name="gallery[]" id="gallery" type="hidden" value="{{old('gallery')}}"/>
                     <div class="mt-3">
                         <label>Phone Number</label>
-                        <input type="text" class="input w-full border mt-2" name="phone"
+                        <input type="text" class="input w-full border mt-2" name="phone" value="{{old('phone')}}"
                                placeholder="Enter Phone Number here">
                     </div>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Email</label>
-                        <input name="email" type="text" class="input w-full border mt-2 flex-1" required
+                        <input name="email" type="email" class="input w-full border mt-2 flex-1" required
                                placeholder="john@mail.com" value="{{old('email')}}">
                     </div>
                     <div class="mt-3">
                         <label>Website</label>
-                        <input type="text" class="input w-full border mt-2" name="website"
+                        <input type="text" class="input w-full border mt-2" name="website" value="{{old('website')}}"
                                placeholder="Enter Website here">
                     </div>
                     <div class="mt-3">
                         <label>Facebook</label>
-                        <input type="text" class="input w-full border mt-2" name="facebook"
+                        <input type="text" class="input w-full border mt-2" name="facebook" value="{{old('facebook')}}"
                                placeholder="Enter Facebook here">
                     </div>
                     <div class="mt-3">
                         <label>Twitter</label>
-                        <input type="text" class="input w-full border mt-2" name="twitter"
+                        <input type="text" class="input w-full border mt-2" name="twitter" value="{{old('twitter')}}"
                                placeholder="Enter Twitter here">
                     </div>
                     <div class="mt-3">
                         <label>Instagram</label>
                         <input type="text" class="input w-full border mt-2" name="instagram"
+                               value="{{old('instagram')}}"
                                placeholder="Enter Instagram here">
                     </div>
                     <div class="mt-3">
                         <label>Linkedin</label>
-                        <input type="text" class="input w-full border mt-2" name="linkedin"
+                        <input type="text" class="input w-full border mt-2" name="linkedin" value="{{old('linkedin')}}"
                                placeholder="Enter Linkedin here">
                     </div>
                     <div class="mt-3">
                         <label>Youtube</label>
-                        <input type="text" class="input w-full border mt-2" name="youtube"
+                        <input type="text" class="input w-full border mt-2" name="youtube" value="{{old('youtube')}}"
                                placeholder="Enter Youtube here">
                     </div>
                     <div class="mt-3">
                         <label>Address</label>
-                        <input type="text" class="input w-full border mt-2" name="address"
+                        <input type="text" class="input w-full border mt-2" name="address" value="{{old('address')}}"
                                placeholder="Enter Address here">
                     </div>
-                    <div class="mt-3">
+                    <div class="mt-3 w-full">
+                        <label>Country</label>
+                        <select name="country" class="select2 input w-full border mt-2" id="country">
+                            <option value="1">Select Country</option>
+                            @foreach($countries as $country)
+                                <option value="{{$country->id}}">{{$country->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mt-3 state hidden w-full">
+                        <label>State</label>
+                        <select name="state" class="select2 input w-full border mt-2" id="state">
+                            <option value="1">Select State</option>
+                            <option value="2">State 1</option>
+                            <option value="3">State 2</option>
+                            <option value="4">State 3</option>
+                            <option value="5">State 4</option>
+                        </select>
+                    </div>
+                    <div class="mt-3 city hidden w-full">
                         <label>City</label>
-                        <select class="select2 input w-full border mt-2">
+                        <select name="city" class="select2 input w-full border mt-2" id="city">
                             <option value="1">Select City</option>
                             <option value="2">City 1</option>
                             <option value="3">City 2</option>
@@ -154,28 +169,8 @@
                         </select>
                     </div>
                     <div class="mt-3">
-                        <label>State</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select State</option>
-                            <option value="2">State 1</option>
-                            <option value="3">State 2</option>
-                            <option value="4">State 3</option>
-                            <option value="5">State 4</option>
-                        </select>
-                    </div>
-                    <div class="mt-3">
-                        <label>Country</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select Country</option>
-                            <option value="2">Country 1</option>
-                            <option value="3">Country 2</option>
-                            <option value="4">Country 3</option>
-                            <option value="5">Country 4</option>
-                        </select>
-                    </div>
-                    <div class="mt-3">
                         <label>Zip Code</label>
-                        <input type="text" class="input w-full border mt-2" name="zip_code"
+                        <input type="text" class="input w-full border mt-2" name="zip_code" value="{{old('zip_code')}}"
                                placeholder="Enter Zip Code here">
                     </div>
                     <div class="mt-3">
@@ -214,8 +209,8 @@
                                required
                                placeholder="" value="{{old('meta_description')}}">
                     </div>
-                    <button type="button" class="button bg-theme-1 text-white mt-5">Submit</button>
-                </div>
+                    <button type="submit" class="button bg-theme-1 text-white mt-5">Submit</button>
+                </form>
             </div>
         </div>
     </div>
@@ -424,21 +419,12 @@
     {{--        AJAX dropdown location--}}
     <script>
         $(document).ready(function () {
-            $.get('{{route('ajax.get.country.list')}}', function (data) {
-                let country = $('#new-location');
-                country.empty();
-                country.append('<option value="">Select Country</option>');
-                $.each(data, function (index, element) {
-                    country.append('<option value="' + element.id + '">' + element.name + '</option>');
-                });
-            });
-
             // when country is selected
-            $('#new-location').change(function () {
+            $('#country').change(function () {
                 let country_id = $(this).val();
                 $.get('{{route('ajax.get.state.list')}}', {country_id: country_id}, function (data) {
-                    let state = $('#new-state');
-                    state.toggle('hidden');
+                    let state = $('#state');
+                    $('.state').toggle('hidden');
                     state.empty();
                     state.append('<option value="">Select State</option>');
                     $.each(data, function (index, element) {
@@ -448,11 +434,11 @@
             });
 
             // when state is selected
-            $('#new-state').change(function () {
+            $('#state').change(function () {
                 let state_id = $(this).val();
                 $.get('{{route('ajax.get.city.list')}}', {state_id: state_id}, function (data) {
-                    let city = $('#new-city');
-                    city.toggle('hidden');
+                    let city = $('#city');
+                    $('.city').toggle('hidden');
                     city.empty();
                     city.append('<option value="">Select City</option>');
                     $.each(data, function (index, element) {

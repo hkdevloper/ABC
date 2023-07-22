@@ -16,7 +16,7 @@ return new class extends Migration
             // parent category
             $table->foreignId('parent_id')->nullable()->constrained('categories')->cascadeOnDelete();
             $table->string('name');
-            $table->enum('type', ['product', 'deals', 'job', 'event']);
+            $table->enum('type', ['product', 'deals', 'job', 'event', 'company']);
             $table->string('slug');
             $table->string('summary')->nullable();
             $table->text('description')->nullable();

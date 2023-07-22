@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function viewCategories(Request $request)
     {
         $request->validate([
-            'type' => 'required|in:product,job,deal,event,',
+            'type' => 'required|in:product,job,deal,event,company',
         ]);
         $type = $request->type;
         $categories = Category::where('type', $type)->get();
@@ -26,7 +26,7 @@ class CategoryController extends Controller
     public function viewAddCategory(Request $request)
     {
         $request->validate([
-            'type' => 'required|in:product,job,deal,event',
+            'type' => 'required|in:product,job,deal,event,company',
         ]);
         $type = $request->type;
         $data = compact('type');
@@ -37,7 +37,7 @@ class CategoryController extends Controller
     public function viewEditCategory(Request $request, $id)
     {
         $request->validate([
-            'type' => 'required|in:product,job,deal,event,',
+            'type' => 'required|in:product,job,deal,event,company',
         ]);
         $type = $request->type;
         $category = Category::find($id);
@@ -53,7 +53,7 @@ class CategoryController extends Controller
     {
         try {
             $request->validate([
-                'type' => 'required|in:product,job,deal,event,',
+                'type' => 'required|in:product,job,deal,event,company',
                 'category_name' => 'required|string|max:255',
                 'slug' => 'required|string|max:255',
                 'summary' => 'required|string|max:255',
@@ -102,7 +102,7 @@ class CategoryController extends Controller
     {
         $request->id = $id;
         $request->validate([
-            'type' => 'required|in:product,job,deal,event,',
+            'type' => 'required|in:product,job,deal,event,company',
             'category_name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
             'summary' => 'required|string|max:255',

@@ -23,31 +23,45 @@
                         <tr>
                             <th class="border-b-2 whitespace-no-wrap">#ID</th>
                             <th class="border-b-2 whitespace-no-wrap">Name</th>
-                            <th class="border-b-2 whitespace-no-wrap">Upload type</th>
-                            <th class="border-b-2 whitespace-no-wrap">MIME</th>
-                            <th class="border-b-2 whitespace-no-wrap">Size</th>
+                            <th class="border-b-2 whitespace-no-wrap">Phone</th>
+                            <th class="border-b-2 whitespace-no-wrap">Email</th>
+                            <th class="border-b-2 whitespace-no-wrap">Approved</th>
+                            <th class="border-b-2 whitespace-no-wrap">Claimed</th>
                             <th class="text-center whitespace-no-wrap">ACTIONS</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="{{url('/')}}">
-                                        <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-theme-6"
-                                       onclick="confirm('Are you sure?') ? window.location.replace('{{url('/')}}') : ''"
-                                       href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
-                                                              onclick=""></i> Delete
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach($companies as $data)
+                            <tr>
+                                <td class="border-b">{{$data->id}}</td>
+                                <td class="border-b">{{$data->name}}</td>
+                                <td class="border-b">{{$data->phone}}</td>
+                                <td class="border-b">{{$data->email}}</td>
+                                <td class="border-b">
+                                    <div class="mt-2">
+                                        <input type="checkbox" @if($data->approved) checked
+                                               @endif data-id="{{$data->id}}" class="input input--switch border">
+                                    </div>
+                                </td>
+                                <td class="border-b">
+                                    <div class="mt-2">
+                                        <input type="checkbox" @if($data->claimed) checked
+                                               @endif data-id="{{$data->id}}" class="input input--switch border">
+                                    </div>
+                                </td>
+                                <td class="table-report__action w-56">
+                                    <div class="flex justify-center items-center">
+                                        <a class="flex items-center mr-3" href="{{route('edit.company', [$data->id])}}">
+                                            <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                        <a class="flex items-center text-theme-6"
+                                           onclick="confirm('Are you sure?') ? window.location.replace('{{url('/')}}') : ''"
+                                           href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
+                                                                  onclick=""></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

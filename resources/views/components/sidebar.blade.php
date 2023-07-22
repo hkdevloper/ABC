@@ -42,6 +42,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{route('categories', ['type' => 'company'])}}" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="archive"></i></div>
+                                <div class="side-menu__title"> Categories</div>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{route('memberships', ['type'=> 'company'])}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="package"></i></div>
                                 <div class="side-menu__title"> Membership</div>
