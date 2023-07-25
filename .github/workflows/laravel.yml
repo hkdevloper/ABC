@@ -21,9 +21,6 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
 
-    - name: Generate application key
-      run: php artisan key:generate
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
