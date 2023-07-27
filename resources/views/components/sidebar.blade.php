@@ -179,13 +179,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('categories', ['type' => 'deal'])}}" class="side-menu">
+                            <a href="{{route('categories', ['type' => 'deals'])}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="archive"></i></div>
                                 <div class="side-menu__title"> Categories</div>
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('memberships', ['type'=> 'deal'])}}" class="side-menu">
+                            <a href="{{route('memberships', ['type'=> 'deals'])}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="package"></i></div>
                                 <div class="side-menu__title"> Membership</div>
                             </a>

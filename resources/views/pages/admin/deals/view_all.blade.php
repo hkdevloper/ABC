@@ -22,32 +22,34 @@
                         <thead>
                         <tr>
                             <th class="border-b-2 whitespace-no-wrap">#ID</th>
-                            <th class="border-b-2 whitespace-no-wrap">Name</th>
-                            <th class="border-b-2 whitespace-no-wrap">Upload type</th>
-                            <th class="border-b-2 whitespace-no-wrap">MIME</th>
-                            <th class="border-b-2 whitespace-no-wrap">Size</th>
+                            <th class="border-b-2 whitespace-no-wrap">Title</th>
+                            <th class="border-b-2 whitespace-no-wrap">Offer Valid</th>
+                            <th class="border-b-2 whitespace-no-wrap">Type</th>
+                            <th class="border-b-2 whitespace-no-wrap">Code</th>
                             <th class="text-center whitespace-no-wrap">ACTIONS</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="{{url('/')}}">
-                                        <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-theme-6"
-                                       onclick="confirm('Are you sure?') ? window.location.replace('{{url('/')}}') : ''"
-                                       href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
-                                                              onclick=""></i> Delete
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach($deals as $deal)
+                            <tr>
+                                <td class="border-b">{{$deal->id}}</td>
+                                <td class="border-b">{{$deal->title}}</td>
+                                <td class="border-b">{{$deal->offer_start_date}} to {{$deal->offer_end_date}}</td>
+                                <td class="border-b">{{$deal->discount_type}}</td>
+                                <td class="border-b">{{$deal->discount_code}}</td>
+                                <td class="table-report__action w-56">
+                                    <div class="flex justify-center items-center">
+                                        <a class="flex items-center mr-3" href="{{route('edit.deal', [$deal->id])}}">
+                                            <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                        <a class="flex items-center text-theme-6"
+                                           onclick="confirm('Are you sure?') ? window.location.replace('{{route('delete.deal', [$deal->id])}}') : ''"
+                                           href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
+                                                                  onclick=""></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

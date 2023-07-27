@@ -22,7 +22,9 @@
                     </h2>
                 </div>
                 {{-- Main Content goes Here --}}
-                <div class="intro-y datatable-wrapper box p-5 mt-5">
+                <form action="{{route('add.deal')}}" method="post" enctype="multipart/form-data"
+                      class="intro-y datatable-wrapper box p-5 mt-5">
+                    @csrf
                     <div style="display: flex">
                         <div style="margin-right: 50px">
                             <label>Approved</label>
@@ -30,39 +32,40 @@
                             <input type="checkbox" checked class="input w-full input--switch border" name="is_active">
                         </div>
                         <div style="margin-right: 50px">
-                            <label>Claimed</label>
+                            <label>Featured</label>
                             <br>
                             <input type="checkbox" class="input w-full input--switch border" name="is_featured">
                         </div>
                         <div>
                             <label>Allow Redeeming</label>
                             <br>
-                            <input type="checkbox" class="input w-full input--switch border" name="is_featured">
+                            <input type="checkbox" class="input w-full input--switch border" name="allow_redeeming">
                         </div>
                     </div>
                     <div class="mt-3">
                         <label>Select User</label>
-                        <select class="select2 input w-full border mt-2">
+                        <select required class="select2 input w-full border mt-2" name="user">
                             <option value="1">Select user</option>
-                            <option value="2">User 1</option>
-                            <option value="3">User 2</option>
-                            <option value="4">User 3</option>
+                            @foreach($users as $user)
+                                <option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}
+                                    [Id: {{$user->id}}]
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mt-3">
                         <label>Category</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select Category</option>
-                            <option value="2">Category 1</option>
-                            <option value="3">Category 2</option>
-                            <option value="4">Category 3</option>
-                            <option value="5">Category 4</option>
+                        <select required class="select2 input w-full border mt-2" name="category">
+                            <option selected>Select Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mt-3">
                         <label>Title</label>
                         <input id="name" type="text" class="input w-full border mt-2"
-                               placeholder="Enter title here" name="title">
+                               placeholder="Enter title here" name="title" value="{{old('title')}}">
                     </div>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Slug</label>
@@ -72,47 +75,51 @@
                     <div class="mt-3">
                         <label>Description</label>
                         <textarea id="editor" class="input w-full border mt-2" name="description"
-                                  placeholder="Enter Category Description here"></textarea>
+                                  placeholder="Enter Category Description here">{{old('description')}}</textarea>
                     </div>
                     {{--Opening date-time --}}
                     <div class="mt-3">
                         <label>Offer start Date-Time</label>
-                        <input type="datetime-local" class="input w-full border mt-2" name="opening_date_time"
+                        <input type="datetime-local" required class="input w-full border mt-2" name="start"
+                               value="{{old('start')}}"
                                placeholder="Enter Opening Date-Time here">
                     </div>
                     {{--Closing date-time --}}
                     <div class="mt-3">
                         <label>Offer end Date-Time</label>
-                        <input type="datetime-local" class="input w-full border mt-2" name="closing_date_time"
+                        <input type="datetime-local" required class="input w-full border mt-2" name="end"
+                               value="{{old('end')}}"
                                placeholder="Enter Closing Date-Time here">
                     </div>
                     <div class="mt-3">
                         <label>Item Price</label>
-                        <input type="text" class="input w-full border mt-2" name="summary"
+                        <input type="text" required class="input w-full border mt-2" name="price"
+                               value="{{old('price')}}"
                                placeholder="$$$">
                     </div>
                     <div class="mt-3">
                         <label>Discount Type</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select Dicount Type</option>
+                        <select required class="select2 input w-full border mt-2" name="type">
+                            <option selected>Select Dicount Type</option>
                             <option value="fixed">Fixed</option>
                             <option value="percentage">Percentage</option>
                         </select>
                     </div>
                     <div class="mt-3">
                         <label>Discount</label>
-                        <input type="text" class="input w-full border mt-2" name="discount"
+                        <input type="text" class="input w-full border mt-2" required name="discount"
+                               value="{{old('discount')}}"
                                placeholder="Enter Discount here">
                     </div>
                     <div class="mt-3">
                         <label>Discount Code</label>
-                        <input type="text" class="input w-full border mt-2" name="code"
+                        <input type="text" class="input w-full border mt-2" required name="code" value="{{old('code')}}"
                                placeholder="Enter Discount Code here">
                     </div>
                     <div class="mt-3">
                         <label>Offer Terns & Conditions</label>
-                        <textarea id="editor_terms" class="editor input w-full border mt-2" name="description"
-                                  placeholder="Enter Category Description here"></textarea>
+                        <textarea id="editor_terms" class="editor input w-full border mt-2" name="tos" required
+                                  placeholder="Enter Category Description here">{{old('tos')}}</textarea>
                     </div>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Title</label>
@@ -131,8 +138,8 @@
                                required
                                placeholder="" value="{{old('meta_description')}}">
                     </div>
-                    <button type="button" class="button bg-theme-1 text-white mt-5">Submit</button>
-                </div>
+                    <button type="submit" class="button bg-theme-1 text-white mt-5">Submit</button>
+                </form>
             </div>
         </div>
     </div>

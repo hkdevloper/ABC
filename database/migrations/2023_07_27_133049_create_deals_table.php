@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->foreignId('seo_id')->nullable()->constrained('seo')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
+            $table->boolean('allow_redeeming')->default(true);
             $table->string('title');
             $table->string('slug');
             $table->text('description')->nullable();
@@ -26,7 +27,7 @@ return new class extends Migration {
             $table->string('price')->nullable();
 
             // Discount type
-            $table->enum('discount_type', ['percentage', 'amount'])->default('percentage');
+            $table->enum('discount_type', ['percentage', 'fixed'])->default('percentage');
 
             // Discount value
             $table->string('discount_value')->nullable();

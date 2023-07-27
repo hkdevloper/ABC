@@ -89,7 +89,7 @@ class BlogController extends Controller
     }
 
     // Function to do Edit blog
-    public function doEditBlog(Request $request)
+    public function doEditBlog(Request $request, $id)
     {
         $request->validate([
             'user' => 'required|integer|exists:users,id',
@@ -102,7 +102,7 @@ class BlogController extends Controller
             'meta_keywords' => 'required|string',
         ]);
 
-        $blog = Blogs::find($request->id);
+        $blog = Blogs::find($id);
         $blog->user_id = $request->user;
         $blog->title = $request->title;
         $blog->slug = $request->slug;
