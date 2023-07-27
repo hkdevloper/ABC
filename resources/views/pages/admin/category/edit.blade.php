@@ -39,6 +39,15 @@
                             </div>
                         </div>
                         <div>
+                            <label>Parent Category</label>
+                            <select class="select2 w-full" name="parent_id">
+                                <option value="0" selected>None</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
                             <label>Category Name</label>
                             <input id="name" value="{{$category->name}}" type="text" class="input w-full border mt-2"
                                    placeholder="Enter Category Name here" name="category_name">

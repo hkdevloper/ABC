@@ -19,41 +19,42 @@
                     </h2>
                 </div>
                 {{-- Main Content goes Here --}}
-                <div class="intro-y datatable-wrapper box p-5 mt-5">
+                <form action="{{route('add.blog')}}" method="post" enctype="multipart/form-data"
+                      class="intro-y datatable-wrapper box p-5 mt-5">
+                    @csrf
                     <div style="display: flex">
                         <div style="margin-right: 50px">
                             <label>Approved</label>
                             <br>
                             <input type="checkbox" checked class="input w-full input--switch border" name="is_active">
                         </div>
-                        <div>
+                        <div style="margin-right: 50px">
                             <label>Claimed</label>
                             <br>
-                            <input type="checkbox" class="input w-full input--switch border" name="is_featured">
+                            <input type="checkbox" value="on" class="input w-full input--switch border"
+                                   name="is_claimed">
+                        </div>
+                        <div>
+                            <label>Featured</label>
+                            <br>
+                            <input type="checkbox" value="on" class="input w-full input--switch border"
+                                   name="is_featured">
                         </div>
                     </div>
                     <div class="mt-3">
                         <label>Select User</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select user</option>
-                            <option value="2">User 1</option>
-                            <option value="3">User 2</option>
-                            <option value="4">User 3</option>
-                        </select>
-                    </div>
-                    <div class="mt-3">
-                        <label>Category</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select Category</option>
-                            <option value="2">Category 1</option>
-                            <option value="3">Category 2</option>
-                            <option value="4">Category 3</option>
-                            <option value="5">Category 4</option>
+                        <select name="user" required class="select2 input w-full border mt-2">
+                            <option value="">Select user</option>
+                            @foreach($users as $user)
+                                <option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}
+                                    [Id: {{$user->id}}]
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mt-3">
                         <label>Title</label>
-                        <input id="name" type="text" class="input w-full border mt-2"
+                        <input id="name" type="text" class="input w-full border mt-2" value="{{old('title')}}"
                                placeholder="Enter Category Name here" name="title">
                     </div>
                     <div class="mt-3">
@@ -63,7 +64,8 @@
                     </div>
                     <div class="mt-3">
                         <label>Article Content</label>
-                        <textarea id="editor" class="input w-full border mt-2" name="content" rows="50"></textarea>
+                        <textarea id="editor" class="input w-full border mt-2" name="contents"
+                                  rows="50">{{old('contents')}}</textarea>
                     </div>
                     <div class="mt-3">
                         <label>Thumbnail</label>
@@ -88,8 +90,8 @@
                                required
                                placeholder="" value="{{old('meta_description')}}">
                     </div>
-                    <button type="button" class="button bg-theme-1 text-white mt-5">Submit</button>
-                </div>
+                    <button type="submit" class="button bg-theme-1 text-white mt-5">Submit</button>
+                </form>
             </div>
         </div>
     </div>

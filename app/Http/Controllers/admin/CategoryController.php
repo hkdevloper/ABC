@@ -17,7 +17,12 @@ class CategoryController extends Controller
             'type' => 'required|in:product,job,deal,event,company',
         ]);
         $type = $request->type;
-        $categories = Category::where('type', $type)->get();
+        if ($request->has('child')) {
+            $categories = Category::find($request->child);
+            $categories = $categories->children;
+        } else {
+            $categories = Category::where('type', $type)->where('parent_id', null)->get();
+        }
         $data = compact('type', 'categories');
         return view('pages.admin.category.view_all')->with($data);
     }
@@ -28,8 +33,9 @@ class CategoryController extends Controller
         $request->validate([
             'type' => 'required|in:product,job,deal,event,company',
         ]);
+        $categories = Category::where('type', $request->type)->get();
         $type = $request->type;
-        $data = compact('type');
+        $data = compact('type', 'categories');
         return view('pages.admin.category.add')->with($data);
     }
 
@@ -41,10 +47,11 @@ class CategoryController extends Controller
         ]);
         $type = $request->type;
         $category = Category::find($id);
+        $categories = Category::where('type', $request->type)->get();
         if ($category->type != $type)
             return view('pages.admin.category.view_all')->with(['msg' => 'Category Not Found', 'types' => 'danger', 'type' => $request->type]);
         $seo = $category->seo;
-        $data = compact('type', 'category', 'seo');
+        $data = compact('type', 'category', 'seo', 'categories');
         return view('pages.admin.category.edit')->with($data);
     }
 
@@ -77,12 +84,20 @@ class CategoryController extends Controller
             $media_id = MediaController::uploadMedia($request->media);
             $category->media_id = $media_id;
 
+            // Create Seo
             $seo = new Seo();
             $seo->title = $request->meta_title;
             $seo->meta_description = $request->meta_description;
             $seo->meta_keywords = $request->meta_keywords;
-
             $seo->save();
+
+            // Handle Parent Category
+            if ($request->has('parent_id') && $request->parent_id != 0 && $request->parent_id != null && $request->parent_id != '') {
+                $parent_category = Category::find($request->parent_id);
+                if (!$parent_category)
+                    return redirect()->back()->with(['msg' => 'Parent Category Not Found', 'types' => 'danger']);
+                $category->parent_id = $parent_category->id;
+            }
             $category->seo_id = $seo->id;
             $category->is_active = $request->is_active ? 1 : 0;
             $category->is_featured = $request->is_featured ? 1 : 0;
@@ -130,6 +145,13 @@ class CategoryController extends Controller
         $seo->meta_description = $request->meta_description;
         $seo->meta_keywords = $request->meta_keywords;
         $seo->save();
+        // Handle Parent Category
+        if ($request->has('parent_id') && $request->parent_id != 0 && $request->parent_id != null && $request->parent_id != '') {
+            $parent_category = Category::find($request->parent_id);
+            if (!$parent_category)
+                return redirect()->back()->with(['msg' => 'Parent Category Not Found', 'types' => 'danger']);
+            $category->parent_id = $parent_category->id;
+        }
         $category->seo_id = $seo->id;
         $category->is_active = $request->is_active == 'on' ? 1 : 0;
         $category->is_featured = $request->is_featured == 'on' ? 1 : 0;

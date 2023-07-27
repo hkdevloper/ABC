@@ -28,7 +28,8 @@
                             <div style="margin-right: 50px">
                                 <label>Published</label>
                                 <br>
-                                <input type="checkbox" checked class="input w-full input--switch border" name="is_active">
+                                <input type="checkbox" checked class="input w-full input--switch border"
+                                       name="is_active">
                             </div>
                             <div>
                                 <label>Featured</label>
@@ -37,8 +38,18 @@
                             </div>
                         </div>
                         <div>
+                            <label>Parent Category</label>
+                            <select class="select2 w-full" name="parent_id">
+                                <option value="0" selected>None</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
                             <label>Category Name</label>
-                            <input id="name" type="text" class="input w-full border mt-2" placeholder="Enter Category Name here" name="category_name">
+                            <input id="name" type="text" class="input w-full border mt-2"
+                                   placeholder="Enter Category Name here" name="category_name">
                         </div>
                         <div>
                             <label class="w-full sm:w-20 sm:text-right sm:mr-5">Slug</label>

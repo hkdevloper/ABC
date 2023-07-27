@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\CompanyController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\DealController;
@@ -12,6 +11,7 @@ use App\Http\Controllers\admin\JobController;
 use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\admin\MediaController;
 use App\Http\Controllers\admin\MembershipController;
+use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\AuthController;
@@ -66,7 +66,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 
     // Routes for handling Events Module
-    Route::prefix('/events')->group(function () {
+    Route::prefix('/event')->group(function () {
         Route::get('/', [EventController::class, 'viewEvents'])->name('events');
         Route::get('/add', [EventController::class, 'viewAddEvent'])->name('add.event');
         Route::post('/add', [EventController::class, 'doAddEvent'])->name('add.event');

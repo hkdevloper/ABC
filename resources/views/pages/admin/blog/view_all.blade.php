@@ -22,32 +22,47 @@
                         <thead>
                         <tr>
                             <th class="border-b-2 whitespace-no-wrap">#ID</th>
-                            <th class="border-b-2 whitespace-no-wrap">Name</th>
-                            <th class="border-b-2 whitespace-no-wrap">Upload type</th>
-                            <th class="border-b-2 whitespace-no-wrap">MIME</th>
-                            <th class="border-b-2 whitespace-no-wrap">Size</th>
+                            <th class="border-b-2 whitespace-no-wrap">User</th>
+                            <th class="border-b-2 whitespace-no-wrap">Title</th>
+                            <th class="border-b-2 whitespace-no-wrap">Approved</th>
+                            <th class="border-b-2 whitespace-no-wrap">Claimed</th>
                             <th class="text-center whitespace-no-wrap">ACTIONS</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="{{url('/')}}">
-                                        <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-theme-6"
-                                       onclick="confirm('Are you sure?') ? window.location.replace('{{url('/')}}') : ''"
-                                       href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
-                                                              onclick=""></i> Delete
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach($blogs as $blog)
+                            <tr>
+                                <td class="border-b">{{$blog->id}}</td>
+                                <td class="border-b">{{$blog->user_id}}</td>
+                                <td class="border-b">{{$blog->title}}</td>
+                                <td class="border-b">
+                                    <div class="flex sm:justify-center items-center">
+                                        <input type="checkbox"
+                                               {{$blog->is_active ? "checked" : ""}} class="input border mr-2"
+                                               id="horizontal-checkbox-chris-evans">
+                                        <label class="cursor-pointer select-none" for="horizontal-checkbox-chris-evans">Approved</label>
+                                    </div>
+                                </td>
+                                <td class="border-b">
+                                    <div class="flex sm:justify-center items-center">
+                                        <input type="checkbox" class="input border mr-2"
+                                               {{$blog->is_claimed ? "checked" : ""}} id="horizontal-checkbox-chris-evans">
+                                        <label class="cursor-pointer select-none" for="horizontal-checkbox-chris-evans">Claimed</label>
+                                    </div>
+                                </td>
+                                <td class="border-b table-report__action w-56">
+                                    <div class="flex justify-center items-center">
+                                        <a class="flex items-center mr-3" href="{{route('edit.blog', [$blog->id])}}">
+                                            <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                        <a class="flex items-center text-theme-6"
+                                           onclick="confirm('Are you sure?') ? window.location.replace('{{route('delete.blog', [$blog->id])}}') : ''"
+                                           href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
+                                                                  onclick=""></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
