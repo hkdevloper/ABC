@@ -1,0 +1,44 @@
+name: Laravel CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch name if it's different
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'  # Adjust this to your Laravel version requirements
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}  # Set this secret in your GitHub repository settings
+        username: ${{ secrets.VPS_USERNAME }}  # Set this secret in your GitHub repository settings
+        key: ${{ secrets.VPS_PRIVATE_KEY }}  # Set this secret in your GitHub repository settings
+        port: 22  # Change this if your VPS SSH port is different
+
+        # Define the commands to be executed on the VPS
+        script: |
+          cd /home/bisdir/htdocs/bisdir.hkdevs.tech/
+          git pull origin main
+          composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+          php artisan migrate --force
+          php artisan optimize
+
