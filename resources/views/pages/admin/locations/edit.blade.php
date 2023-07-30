@@ -29,33 +29,28 @@
                               class="intro-y box p-5"
                               enctype="multipart/form-data">
                             @csrf
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">Featured</label>
                                 <input type="checkbox" name="featured" value="true"
                                        {{$location->featured ? 'checked' : ''}}
                                        class="input input--switch border pt-4">
                             </div>
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">Location</label>
                                 <input name="location_name" type="text" class="input w-full border mt-2 flex-1" required
                                        value="{{$location->name}}" id="name">
                             </div>
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">Slug</label>
                                 <input name="slug" type="text" class="input w-full border mt-2 flex-1" required
                                        value="{{$location->slug}}" id="slug">
                             </div>
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">Summary</label>
                                 <input name="summary" type="text" class="input w-full border mt-2 flex-1"
                                        value="{{$location->slug}}">
                             </div>
-                            <div class="flex flex-col sm:flex-row items-center">
-                                <label class="w-full sm:w-20 sm:text-right sm:mr-5">Description</label>
-                                <textarea rows="10" name="description" class="input w-full border mt-2 flex-1"
-                                          value="{{$location->description}}">{{old('description')}}</textarea>
-                            </div>
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">Placement</label>
                                 <input type="hidden" name="parent_id" value="{{$location->parent_id}}">
                                 <div class="mt-3 p-1">
@@ -98,50 +93,40 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">Cordinates</label>
                                 <div id="map-picker" class="w-full border mt-2 flex-1"
-                                     style="width: 300px; height: 400px;"></div>
+                                     style="width: 100%; height: 400px;"></div>
                             </div>
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">longitude</label>
                                 <input name="longitude" type="text" class="input w-full border mt-2 flex-1" required
                                        readonly
                                        value="{{$location->longitude}}" id="longitude"
                                 >
                             </div>
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">Latitude</label>
                                 <input name="latitude" type="text" class="input w-full border mt-2 flex-1" required
                                        readonly
                                        value="{{$location->latitude}}" id="latitude">
                             </div>
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">Map Zoom Level</label>
                                 <input name="zoom" type="text" class="input w-full border mt-2 flex-1" required
                                        value="{{$location->map_zoom_level}}">
                             </div>
-                            <div class="flex flex-col sm:flex-row items-center">
-                                <label class="w-full sm:w-20 sm:text-right sm:mr-5">Logo</label>
-                                <input name="file" id="logo_image" type="file" class="filepond w-full p-2 m-1"/>
-                            </div>
-                            <div class="flex flex-col sm:flex-row items-center">
-                                <label class="w-full sm:w-20 sm:text-right sm:mr-5">Header Image</label>
-                                <input name="file" id="header_image" type="file" class="filepond w-full p-2 m-1"/>
-                            </div>
-                            <input name="logo_image_id" id="logo_image_id" type="hidden"/>
-                            <input name="header_image_id" id="header_image_id" type="hidden"/>
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Title</label>
                                 <input name="meta_title" type="text" class="input w-full border mt-2 flex-1" required
-                                       value="{{$seo->title}}">
+                                       placeholder="" value="{{$seo->title}}">
                             </div>
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Keywords</label>
                                 <input name="meta_keywords" type="text" class="input w-full border mt-2 flex-1" required
                                        value="{{$seo->meta_keywords}}" id="tag-keyword">
                             </div>
-                            <div class="flex flex-col sm:flex-row items-center">
+                            <div class="mt-3">
                                 <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Description</label>
                                 <input name="meta_description" type="text" class="input w-full border mt-2 flex-1"
                                        required
@@ -160,125 +145,6 @@
         @endsection
 
         @section('page-scripts')
-            {{-- Filepond Plugins --}}
-            <script
-                src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-            <script
-                src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
-            <script
-                src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-            <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
-            <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-            <script
-                src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
-            <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
-
-            <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-            <script>
-                FilePond.registerPlugin(
-                    FilePondPluginFileValidateType,
-                    FilePondPluginImageExifOrientation,
-                    FilePondPluginImagePreview,
-                    FilePondPluginImageCrop,
-                    FilePondPluginImageResize,
-                    FilePondPluginImageTransform,
-                    FilePondPluginImageEdit
-                );
-                let folder = null;
-                // Select the file input and use
-                // create() to turn it into a pond
-                FilePond.create(
-                    document.getElementById('logo_image'),
-                    {
-                        labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
-                        imagePreviewHeight: 170,
-                        imageCropAspectRatio: '1:1',
-                        imageResizeTargetWidth: 200,
-                        imageResizeTargetHeight: 200,
-                        allowMultiple: false,
-                    }
-                ).setOptions({
-                    server: {
-                        timeout: 7000,
-                        process: {
-                            url: '{{ route('filepond.process') }}',
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                'upload_type': 'location_logo'
-                            },
-                            withCredentials: false,
-                            onload: (response) => {
-                                response = JSON.parse(response);
-                                folder = response.folder;
-                                $('#logo_image_id').val(folder);
-                            }
-                        },
-                        revert: () => {
-                            $.ajax({
-                                url: '{{ route('filepond.revert') }}',
-                                type: 'DELETE',
-                                dataType: 'json',
-                                data: {
-                                    folder: folder,
-                                    _token: '{{ csrf_token() }}'
-                                },
-                                success: function (data) {
-                                    $('#logo_image_id').val('')
-                                }
-                            });
-                        },
-                    },
-
-                });
-
-                FilePond.create(
-                    document.getElementById('header_image'),
-                    {
-                        labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
-                        imagePreviewHeight: 170,
-                        imageCropAspectRatio: '1:1',
-                        imageResizeTargetWidth: 200,
-                        imageResizeTargetHeight: 200,
-                        allowMultiple: false,
-                    }
-                ).setOptions({
-                    server: {
-                        timeout: 7000,
-                        process: {
-                            url: '{{ route('filepond.process') }}',
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                'upload_type': 'location_header'
-                            },
-                            withCredentials: false,
-                            onload: (response) => {
-                                response = JSON.parse(response);
-                                folder = response.folder;
-                                $('#header_image_id').val(folder);
-                            }
-                        },
-                        revert: () => {
-                            $.ajax({
-                                url: '{{ route('filepond.revert') }}',
-                                type: 'DELETE',
-                                dataType: 'json',
-                                data: {
-                                    folder: folder,
-                                    _token: '{{ csrf_token() }}'
-                                },
-                                success: function (data) {
-                                    $('#header_image_id').val('')
-                                }
-                            });
-                        },
-                    },
-                });
-
-
-                FilePond.parse(document.body);
-            </script>
             <script>
                 // Map
                 let map = L.map('map-picker').setView([51.505, -0.09], 2);

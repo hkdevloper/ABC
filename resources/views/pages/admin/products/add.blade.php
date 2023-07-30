@@ -21,48 +21,57 @@
                     </h2>
                 </div>
                 {{-- Main Content goes Here --}}
-                <div class="intro-y datatable-wrapper box p-5 mt-5">
+                <form enctype="multipart/form-data" action="{{route('add.product')}}" method="post"
+                      class="intro-y datatable-wrapper box p-5 mt-5">
+                    @csrf
                     <div style="display: flex">
                         <div style="margin-right: 50px">
                             <label>Approved</label>
                             <br>
-                            <input type="checkbox" checked class="input w-full input--switch border" name="is_active">
+                            <input type="checkbox" checked class="input w-full input--switch border" name="is_approved">
+                        </div>
+                        <div style="margin-right: 50px">
+                            <label>Claimed</label>
+                            <br>
+                            <input type="checkbox" class="input w-full input--switch border" name="is_claimed">
                         </div>
                         <div>
-                            <label>Claimed</label>
+                            <label>Featured</label>
                             <br>
                             <input type="checkbox" class="input w-full input--switch border" name="is_featured">
                         </div>
                     </div>
                     <div class="mt-3">
                         <label>Select User</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select user</option>
-                            <option value="2">User 1</option>
-                            <option value="3">User 2</option>
-                            <option value="4">User 3</option>
+                        <select name="user" required class="select2 input w-full border mt-2">
+                            <option selected>Select user</option>
+                            @foreach($users as $user)
+                                <option value="{{$user->id}}">{{$user->first_name}}&nbsp;{{$user->last_name}}
+                                    &nbsp;[Id: {{$user->id}}]
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mt-3">
                         <label>Category</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select Category</option>
-                            <option value="2">Category 1</option>
-                            <option value="3">Category 2</option>
-                            <option value="4">Category 3</option>
-                            <option value="5">Category 4</option>
+                        <select name="category" required class="select2 input w-full border mt-2">
+                            <option selected>Select Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mt-3">
-                        <label>Product Name</label>
-                        <input id="name" type="text" class="input w-full border mt-2"
-                               placeholder="Enter Category Name here" name="category_name">
+                        <label>Product Thumbnail</label>
+                        <input type="file" id="media_file" class="input w-full border mt-2" name="file" required>
                     </div>
+                    <input name="media" id="media" type="hidden" required/>
                     <div class="mt-3">
-                        <label>Price</label>
-                        <input id="price" type="text" class="input w-full border mt-2"
-                               placeholder="Enter Price here" name="price">
+                        <label>Product Name</label>
+                        <input id="name" type="text" class="input w-full border mt-2" required value="{{old('name')}}"
+                               placeholder="Enter Product Name here" name="name">
                     </div>
+
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Slug</label>
                         <input name="slug" type="text" class="input w-full border mt-2 flex-1" required
@@ -71,12 +80,17 @@
                     <div class="mt-3">
                         <label>Description</label>
                         <textarea id="editor" class="input w-full border mt-2" name="description"
-                                  placeholder="Enter Category Description here"></textarea>
+                                  placeholder="Enter Product Description here">{{old('description')}}</textarea>
+                    </div>
+                    <div class="mt-3">
+                        <label>Price</label>
+                        <input id="price" type="text" class="input w-full border mt-2" required value="{{old('price')}}"
+                               placeholder="Enter Price here" name="price">
                     </div>
                     <div class="mt-3">
                         <label>Condition</label>
-                        <select class="select2 input w-full border mt-2">
-                            <option value="1">Select Condition</option>
+                        <select name="condition" class="select2 input w-full border mt-2">
+                            <option>Select Condition</option>
                             <option value="new">New</option>
                             <option value="used">Used</option>
                             <option value="refurbished">Refurbished</option>
@@ -85,20 +99,17 @@
                     </div>
                     <div class="mt-3">
                         <label>Brand</label>
-                        <input type="text" class="input w-full border mt-2" name="brand"
+                        <input type="text" class="input w-full border mt-2" name="brand" required
+                               value="{{old('brand')}}"
                                placeholder="Enter Brand here">
                     </div>
-                    <div class="mt-3">
-                        <label>Product Thumbnail</label>
-                        <input type="file" id="media_file" class="input w-full border mt-2" name="file">
-                    </div>
-                    <input name="media" id="media" type="hidden"/>
+
                     <div class="mt-3">
                         <label>Product Galley</label>
                         <input type="file" id="media_file_gallery" class="input w-full border mt-2" multiple
                                name="file">
                     </div>
-                    <input name="gallery[]" id="gallery" type="hidden"/>
+                    <input name="gallery[]" id="gallery" type="hidden" required/>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Title</label>
                         <input name="meta_title" type="text" class="input w-full border mt-2 flex-1" required
@@ -112,12 +123,11 @@
                     </div>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Description</label>
-                        <input name="meta_description" type="text" class="input w-full border mt-2 flex-1"
-                               required
-                               placeholder="" value="{{old('meta_description')}}">
+                        <input name="meta_description" type="text" class="input w-full border mt-2 flex-1" required
+                               value="{{old('meta_description')}}">
                     </div>
-                    <button type="button" class="button bg-theme-1 text-white mt-5">Submit</button>
-                </div>
+                    <button type="submit" class="button bg-theme-1 text-white mt-5">Submit</button>
+                </form>
             </div>
         </div>
     </div>

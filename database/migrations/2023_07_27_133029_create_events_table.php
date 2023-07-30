@@ -18,17 +18,12 @@ return new class extends Migration {
             $table->json('gallery')->nullable();
             $table->foreignId('seo_id')->nullable()->constrained('seo')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
-            $table->boolean('is_claimed')->default(false);
-            $table->boolean('is_rsvp')->default(false);
             $table->boolean('is_featured')->default(false);
-
             $table->string('title');
             $table->string('slug');
             $table->text('description')->nullable();
-
             $table->dateTime('start');
             $table->dateTime('end');
-
             $table->string('website')->nullable();
             $table->string('address')->nullable();
             $table->foreignId('city_id')->nullable()->constrained('location')->cascadeOnDelete();

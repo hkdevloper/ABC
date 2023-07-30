@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Location;
+use App\Models\Media;
 use App\Models\Seo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -125,9 +126,9 @@ class CompanyController extends Controller
         $company->save();
 
         // get all companies
-        $companies = Company::all();
-        $data = compact('companies');
-        return redirect()->route('companies')->with(['msg' => 'Company Added Successfully', 'types' => 'success', $data]);
+//        $companies = Company::all();
+//        $data = compact('companies');
+        return redirect()->route('companies')->with(['msg' => 'Company Added Successfully', 'types' => 'success']);
     }
 
     // Function to do Edit Company
@@ -232,11 +233,20 @@ class CompanyController extends Controller
 
         $company->gallery = json_encode($gallery);
         $company->save();
+        return redirect()->route('companies')->with(['msg' => 'Company Updated Successfully', 'types' => 'success']);
+    }
 
-        // get all companies
-        $companies = Company::all();
-        $data = compact('companies');
-
-        return redirect()->route('companies')->with(['msg' => 'Company Updated Successfully', 'types' => 'success', $data]);
+    // Function to delete the company
+    public function doDeleteCompany($id)
+    {
+        $company = Company::find($id);
+        // deleting seo
+        $seo = Seo::find($company->seo_id);
+        $seo->delete();
+        // deleting media
+        $media = Media::find($company->media_logo_id);
+        $media->delete();
+        $company->delete();
+        return redirect()->route('companies')->with(['msg' => 'Company Deleted Successfully', 'types' => 'success']);
     }
 }

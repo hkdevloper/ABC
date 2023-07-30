@@ -65,7 +65,6 @@ class DealController extends Controller
         // Boolean
         $deal->is_featured = $request->is_featured ? 1 : 0;
         $deal->is_active = $request->is_active ? 1 : 0;
-        $deal->allow_redeeming = $request->allow_redeeming ? 1 : 0;
 
         $seo = new Seo();
         $seo->title = $request->meta_title;
@@ -127,7 +126,6 @@ class DealController extends Controller
         // Boolean
         $deal->is_featured = $request->is_featured ? 1 : 0;
         $deal->is_active = $request->is_active ? 1 : 0;
-        $deal->allow_redeeming = $request->allow_redeeming ? 1 : 0;
 
         $seo = Seo::find($deal->seo_id);
         $seo->title = $request->meta_title;

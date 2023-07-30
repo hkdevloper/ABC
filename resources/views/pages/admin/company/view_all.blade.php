@@ -54,7 +54,7 @@
                                         <a class="flex items-center mr-3" href="{{route('edit.company', [$data->id])}}">
                                             <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                                         <a class="flex items-center text-theme-6"
-                                           onclick="confirm('Are you sure?') ? window.location.replace('{{url('/')}}') : ''"
+                                           onclick="confirm('Are you sure?') ? window.location.replace('{{route('delete.company', [$data->id])}}') : ''"
                                            href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
                                                                   onclick=""></i> Delete
                                         </a>

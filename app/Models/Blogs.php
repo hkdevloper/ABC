@@ -11,4 +11,9 @@ class Blogs extends Model
 
     protected $table = 'blogs';
     protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'user_id', 'thumbnail_id', 'seo_id', 'is_active', 'is_featured', 'title', 'slug', 'content',
+    ];
+
 }

@@ -11,9 +11,19 @@ class Location extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $countries;
+    public $address;
+    public $zip_code;
+    public $longitude;
+    public $latitude;
+
+    public function __construct($address = null, $zip_code = null, $latitude = null, $longitude = null)
     {
-        //
+        $this->countries = \App\Models\Location::where('parent_id', 0)->orWhere('parent_id', null)->get();
+        $this->address = $address;
+        $this->zip_code = $zip_code;
+        $this->longitude = $longitude;
+        $this->latitude = $latitude;
     }
 
     /**
@@ -21,6 +31,13 @@ class Location extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.location');
+        $data = [
+            'countries' => $this->countries,
+            'address' => $this->address,
+            'zip_code' => $this->zip_code,
+            'longitude' => $this->longitude,
+            'latitude' => $this->latitude,
+        ];
+        return view('components.location')->with($data);
     }
 }

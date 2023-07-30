@@ -10952,6 +10952,10 @@ textarea {
   color: inherit;
 }
 
+.ck-editor__editable {
+    min-height: 250px !important;
+}
+
 /**
  * Use the configured 'mono' font family for elements that
  * are expected to be rendered with a monospace font, falling

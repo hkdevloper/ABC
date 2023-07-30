@@ -44,7 +44,7 @@ return new class extends Migration
                         ]),
             ],
             [
-                'name' => 'Registered User',
+                'name' => 'Registered SelectUser',
                 'permissions' => json_encode([
                     'admin_login' => false,
                     'user_login' => true,

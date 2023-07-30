@@ -38,12 +38,6 @@
                             <input {{$deal->is_featured ? "checked" : ""}} type="checkbox"
                                    class="input w-full input--switch border" name="is_featured">
                         </div>
-                        <div>
-                            <label>Allow Redeeming</label>
-                            <br>
-                            <input {{$deal->allow_redeeming ? "checked" : ""}} type="checkbox"
-                                   class="input w-full input--switch border" name="allow_redeeming">
-                        </div>
                     </div>
                     <div class="mt-3">
                         <label>Select User</label>

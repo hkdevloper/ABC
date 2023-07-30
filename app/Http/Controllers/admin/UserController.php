@@ -17,7 +17,7 @@ class UserController extends Controller
         return view('pages.admin.users.view_all_users')->with('users', $users);
     }
 
-    // Function to view Add User
+    // Function to view Add SelectUser
     public function viewAddUser()
     {
         // Get All user groups
@@ -40,9 +40,8 @@ class UserController extends Controller
         // check if user group exists
         $group = UserGroup::find($request->group_id);
         if (!$group) {
-            return redirect()->back()->with(['msg' => 'User group not found','types'=> 'error']);
+            return redirect()->back()->with(['msg' => 'SelectUser group not found', 'types' => 'error']);
         }
-
 
         // Insert the data into database
         $user = new User();
@@ -62,10 +61,10 @@ class UserController extends Controller
         $user->save();
 
         // Redirect to users page with success message
-        return redirect()->route('users')->with(['msg' => 'User Added Successfully', 'type' => 'success']);
+        return redirect()->route('users')->with(['msg' => 'SelectUser Added Successfully', 'type' => 'success']);
     }
 
-    // Function to view Edit User
+    // Function to view Edit SelectUser
     public function viewEditUser($id)
     {
         // Get the user by id
@@ -73,7 +72,7 @@ class UserController extends Controller
 
         // If the user is not found then redirect to users page with error message
         if (!$user) {
-            return redirect()->route('users')->with(['msg' => 'User not found', 'type' => 'error']);
+            return redirect()->route('users')->with(['msg' => 'SelectUser not found', 'type' => 'error']);
         }
 
         // Get All user groups
@@ -90,7 +89,7 @@ class UserController extends Controller
         return view('pages.admin.users.view_all_groups')->with('groups', $groups);
     }
 
-    // Function to view Add User Group
+    // Function to view Add SelectUser Group
     public function viewAddUserGroup()
     {
         return view('pages.admin.users.add_group');
@@ -139,7 +138,7 @@ class UserController extends Controller
         $group->save();
 
         // Redirect to view all user groups
-        return redirect()->route('user.groups')->with(['msg' => 'User group added successfully', 'type' => 'success']);
+        return redirect()->route('user.groups')->with(['msg' => 'SelectUser group added successfully', 'type' => 'success']);
     }
 
     // Function to delete user group
@@ -156,10 +155,10 @@ class UserController extends Controller
         $group->delete();
 
         // Redirect to view all user groups
-        return redirect()->route('user.groups')->with(['msg' => 'User group deleted successfully', 'type' => 'success']);
+        return redirect()->route('user.groups')->with(['msg' => 'SelectUser group deleted successfully', 'type' => 'success']);
     }
 
-    // Function to view Edit User Group
+    // Function to view Edit SelectUser Group
     public function viewEditUserGroup($id)
     {
         // Find the user group
@@ -167,7 +166,7 @@ class UserController extends Controller
 
         // If the user group is not found then redirect to view all user groups
         if (!$group) {
-            return redirect()->route('user.groups')->with(['msg' => 'User group not found', 'type' => 'error']);
+            return redirect()->route('user.groups')->with(['msg' => 'SelectUser group not found', 'type' => 'error']);
         }
         $id = $group->id;
         $name = $group->name;
@@ -221,7 +220,7 @@ class UserController extends Controller
 
         // Handle Exception if the user group is not found
         if (!$group) {
-            return redirect()->route('user.groups')->with(['msg' => 'User group not found', 'type' => 'error']);
+            return redirect()->route('user.groups')->with(['msg' => 'SelectUser group not found', 'type' => 'error']);
         }
 
         // Update the user group
@@ -230,7 +229,7 @@ class UserController extends Controller
         $group->save();
 
         // Redirect to view all user groups
-        return redirect()->route('user.groups')->with(['msg' => 'User group updated successfully', 'type' => 'success']);
+        return redirect()->route('user.groups')->with(['msg' => 'SelectUser group updated successfully', 'type' => 'success']);
     }
 
     // Function to delete user
@@ -245,14 +244,14 @@ class UserController extends Controller
 
         // If the user is not found then redirect to view all users
         if (!$user) {
-            return redirect()->route('users')->with(['msg' => 'User not found', 'type' => 'error']);
+            return redirect()->route('users')->with(['msg' => 'SelectUser not found', 'type' => 'error']);
         }
 
         // Delete the user
         $user->delete();
 
         // Redirect to view all users
-        return redirect()->route('users')->with(['msg' => 'User deleted successfully', 'type' => 'success']);
+        return redirect()->route('users')->with(['msg' => 'SelectUser deleted successfully', 'type' => 'success']);
     }
 
 }

@@ -28,12 +28,6 @@
                             <br>
                             <input type="checkbox" checked class="input w-full input--switch border" name="is_active">
                         </div>
-                        <div style="margin-right: 50px">
-                            <label>Claimed</label>
-                            <br>
-                            <input type="checkbox" value="on" class="input w-full input--switch border"
-                                   name="is_claimed">
-                        </div>
                         <div>
                             <label>Featured</label>
                             <br>

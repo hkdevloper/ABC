@@ -31,11 +31,6 @@
                             <input type="checkbox" checked class="input w-full input--switch border" name="is_active">
                         </div>
                         <div style="margin-right: 50px">
-                            <label>Claimed</label>
-                            <br>
-                            <input type="checkbox" class="input w-full input--switch border" name="is_claimed">
-                        </div>
-                        <div style="margin-right: 50px">
                             <label>Allow RSVPs</label>
                             <br>
                             <input type="checkbox" class="input w-full input--switch border" name="is_rsvp">
@@ -49,9 +44,11 @@
                     <div class="mt-3">
                         <label>Select User</label>
                         <select name="user" required class="select2 input w-full border mt-2">
-                            <option selected>Select user</option>
+                            <option>Select user</option>
                             @foreach($users as $user)
-                                <option value="{{$user->id}}">{{$user->first_name}}&nbsp;{{$user->last_name}}
+                                <option
+                                    {{$user->id == old('user') ? "selected" : ""}} value="{{$user->id}}">{{$user->first_name}}
+                                    &nbsp;{{$user->last_name}}
                                     &nbsp;[Id: {{$user->id}}]
                                 </option>
                             @endforeach
@@ -60,26 +57,18 @@
                     <div class="mt-3">
                         <label>Category</label>
                         <select name="category" required class="select2 input w-full border mt-2">
-                            <option selected>Select Category</option>
+                            <option>Select Category</option>
                             @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option
+                                    {{$category->id == old('category') ? "selected" : ""}} value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mt-3">
                         <label>Event Title</label>
-                        <input id="name" type="text" class="input w-full border mt-2"
-                               placeholder="Enter event title here" name="category_name">
-                    </div>
-                    <div class="mt-3">
-                        <label>Event Start Date & Time</label>
-                        <input type="datetime-local" class="input w-full border mt-2" name="start_date"
-                               placeholder="Enter Start Date & Time here">
-                    </div>
-                    <div class="mt-3">
-                        <label>Event End Date & Time</label>
-                        <input type="datetime-local" class="input w-full border mt-2" name="end_date"
-                               placeholder="Enter End Date & Time here">
+                        <input id="name" type="text" class="input w-full border mt-2" required autofocus
+                               autocomplete="off" value="{{old('title')}}"
+                               placeholder="Enter event title here" name="title">
                     </div>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Slug</label>
@@ -87,13 +76,27 @@
                                placeholder="AAA>>bb>>c" id="slug" value="{{old('slug')}}">
                     </div>
                     <div class="mt-3">
+                        <label>Event Start Date & Time</label>
+                        <input type="datetime-local" class="input w-full border mt-2" name="start" required
+                               value="{{old('start')}}"
+                               placeholder="Enter Start Date & Time here">
+                    </div>
+                    <div class="mt-3">
+                        <label>Event End Date & Time</label>
+                        <input type="datetime-local" class="input w-full border mt-2" name="end" required
+                               value="{{old('end')}}"
+                               placeholder="Enter End Date & Time here">
+                    </div>
+
+                    <div class="mt-3">
                         <label>Description</label>
                         <textarea id="editor" class="input w-full border mt-2" name="description"
-                                  placeholder="Enter Description here"></textarea>
+                                  placeholder="Enter Description here">{{old('description')}}</textarea>
                     </div>
                     <div class="mt-3">
                         <label>Address</label>
                         <input type="text" class="input w-full border mt-2" name="address"
+                               value="{{old('address')}}"
                                placeholder="Enter Address here">
                     </div>
                     <div class="mt-3 w-full">
@@ -105,23 +108,61 @@
                             @endforeach
                         </select>
                     </div>
-                    <x-location></x-location>
+                    <div class="mt-3 state hidden w-full">
+                        <label style="display: block; width: 100%">State</label>
+                        <select name="state" class="select2 input w-full border mt-2" style="width: 100% !important;"
+                                id="state">
+                            <option value="1">Select State</option>
+                        </select>
+                    </div>
+                    <div class="mt-3 city hidden w-full">
+                        <label style="display: block; width: 100%">City</label>
+                        <select name="city" class="select2 input w-full border mt-2" id="city"
+                                style="width: 100% !important;">
+                            <option value="1">Select City</option>
+                        </select>
+                    </div>
+                    <div class="mt-3">
+                        <label>Zip Code</label>
+                        <input type="text" class="input w-full border mt-2" name="zip_code"
+                               value="{{old('zip_code')}}"
+                               placeholder="Enter Zip Code here">
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">Cordinates</label>
+                        <div id="map-picker" class="w-full border mt-2 flex-1"
+                             style="width: 100%; height: 400px;"></div>
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">longitude</label>
+                        <input name="longitude" type="text" class="input w-full border mt-2 flex-1" required
+                               readonly
+                               placeholder="" id="longitude"
+                               value="{{old('longitude')}}">
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">Latitude</label>
+                        <input name="latitude" type="text" class="input w-full border mt-2 flex-1" required
+                               readonly
+                               placeholder="" id="latitude" value="{{old('latitude')}}">
+                    </div>
+
                     <div class="mt-3">
                         <label>Website</label>
-                        <input type="text" class="input w-full border mt-2" name="website"
+                        <input type="url" class="input w-full border mt-2" name="website" value="{{old('website')}}"
                                placeholder="Enter Website here">
                     </div>
                     <div class="mt-3">
                         <label>Event Thumbnail</label>
-                        <input type="file" id="media_file" class="input w-full border mt-2" name="file">
+                        <input type="file" id="media_file" class="input w-full border mt-2" name="file" required>
                     </div>
-                    <input name="media" id="media" type="hidden"/>
+                    <input name="thumbnail" id="media" type="hidden" required/>
                     <div class="mt-3">
                         <label>Event Galley</label>
-                        <input type="file" id="media_file_gallery" class="input w-full border mt-2" multiple
+                        <input type="file" id="media_file_gallery" class="input w-full border mt-2" multiple required
                                name="file">
                     </div>
-                    <input name="gallery[]" id="gallery" type="hidden"/>
+                    <input name="gallery[]" id="gallery" type="hidden" required/>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Title</label>
                         <input name="meta_title" type="text" class="input w-full border mt-2 flex-1" required
@@ -135,11 +176,12 @@
                     </div>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Description</label>
-                        <input name="meta_description" type="text" class="input w-full border mt-2 flex-1"
-                               required
-                               placeholder="" value="{{old('meta_description')}}">
+                        <input name="meta_description" type="text" class="input w-full border mt-2 flex-1" required
+                               placeholder=""
+                               value="{{old('meta_description')}}">
                     </div>
-                    <button type="button" class="button bg-theme-1 text-white mt-5">Submit</button>
+
+                    <button type="submit" class="button bg-theme-1 text-white mt-5">Submit</button>
                 </form>
             </div>
         </div>
@@ -276,6 +318,31 @@
 
         FilePond.parse(document.body);
     </script>
+    {{--        MAP Script--}}
+    <script>
+        // Map
+        let map = L.map('map-picker').setView([51.505, -0.09], 2);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        function onMapClick(e) {
+            map.eachLayer(function (layer) {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+            // Create a marker at the clicked location
+            let marker = L.marker(e.latlng).addTo(map);
+
+            $('#longitude').val(e.latlng.lng);
+            $('#latitude').val(e.latlng.lat);
+        }
+
+        map.on('click', onMapClick);
+    </script>
     {{--    TagiFY/Slug--}}
     <script>
         // Tagify Tag input
@@ -320,5 +387,45 @@
             // Return the generated slug
             return slug;
         }
+    </script>
+    {{--        AJAX dropdown location--}}
+    <script>
+        $(document).ready(function () {
+            // when country is selected
+            $('#country').change(function () {
+                let country_id = $(this).val();
+                $.get('{{route('ajax.get.state.list')}}', {country_id: country_id}, function (data) {
+                    let state = $('#state');
+                    if ($('.state').hasClass('hidden')) {
+                        $('.state').removeClass('hidden');
+                    }
+                    state.empty();
+                    state.append('<option value="">Select State</option>');
+                    $.each(data, function (index, element) {
+                        state.append('<option value="' + element.id + '">' + element.name + '</option>');
+                    });
+                });
+            });
+
+            // when state is selected
+            $('#state').change(function () {
+                let state_id = $(this).val();
+                $.get('{{route('ajax.get.city.list')}}', {state_id: state_id}, function (data) {
+                    let city = $('#city');
+                    // check if city is hidden
+                    // $('.city').toggle('hidden');
+                    if ($('.city').hasClass('hidden')) {
+                        $('.city').removeClass('hidden');
+                    }
+
+                    city.empty();
+                    city.append('<option value="">Select City</option>');
+                    $.each(data, function (index, element) {
+                        city.append('<option value="' + element.id + '">' + element.name + '</option>');
+                    });
+                });
+            });
+
+        });
     </script>
 @endsection

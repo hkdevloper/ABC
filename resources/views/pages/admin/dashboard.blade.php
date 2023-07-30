@@ -12,31 +12,32 @@
                 </h2>
             </div>
             <div class="grid grid-cols-12 gap-6 mt-5">
-                <x-dashboard.general-report-card title="Total Revenue" icon="dollar-sign" value="4.510" name="Total Revenue"
-                    status="bar-chart-2" />
+                <x-dashboard.general-report-card title="Total Revenue" icon="dollar-sign" value="4.510"
+                                                 name="Total Revenue" status="bar-chart-2"/>
                 <x-dashboard.general-report-card title="Users" icon="user" value="4.510" name="Total Users"
-                    status="bar-chart-2" />
+                                                 status="bar-chart-2"/>
                 <x-dashboard.general-report-card title="Total Locations" icon="map" value="4.510" name="Locations"
-                    status="bar-chart-2" />
+                                                 status="bar-chart-2"/>
                 <x-dashboard.general-report-card title="Total Listings" icon="list" value="4.510" name="Listings"
-                    status="bar-chart-2" />
+                                                 status="bar-chart-2"/>
                 <x-dashboard.general-report-card title="Total Events" icon="radio" value="4.510" name="Events"
-                    status="bar-chart-2" />
+                                                 status="bar-chart-2"/>
                 <x-dashboard.general-report-card title="Total Classifieds" icon="box" value="4.510" name="Cllasifieds"
-                    status="bar-chart-2" />
+                                                 status="bar-chart-2"/>
                 <x-dashboard.general-report-card title="Total Properties" icon="home" value="4.510" name="Properties"
-                    status="bar-chart-2" />
+                                                 status="bar-chart-2"/>
                 <x-dashboard.general-report-card title="Total Jobs" icon="briefcase" value="4.510" name="Jobs" status="bar-chart-2" />
                 <x-dashboard.general-report-card title="Total Deals" icon="framer" value="4.510" name="Deals"
-                    status="bar-chart-2" />
+                                                 status="bar-chart-2"/>
                 <x-dashboard.general-report-card title="Total Articles" icon="book" value="4.510" name="Articles"
-                    status="bar-chart-2" />
+                                                 status="bar-chart-2"/>
             </div>
         </div>
     </div>
-    @endsection
+</div>
+@endsection
 
-    @section('page-scripts')
+@section('page-scripts')
     {{-- Scripts for this page goes here --}}
 
-    @endsection
+@endsection

@@ -34,7 +34,7 @@
                             <tr>
                                 <td class="border-b">{{$event->id}}</td>
                                 <td class="border-b">{{$event->title}}</td>
-                                <td class="border-b">{{$vent->category}}</td>
+                                <td class="border-b">{{$event->category}}</td>
                                 <td class="border-b">{{$event->start}}</td>
                                 <td class="border-b">{{$event->end}}</td>
                                 <td class="table-report__action w-56">
@@ -42,7 +42,7 @@
                                         <a class="flex items-center mr-3" href="{{route('edit.event', [$event->id])}}">
                                             <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                                         <a class="flex items-center text-theme-6"
-                                           onclick="confirm('Are you sure?') ? window.location.replace('{{route('delete.event', [$vent->id])}}') : ''"
+                                           onclick="confirm('Are you sure?') ? window.location.replace('{{route('delete.event', [$event->id])}}') : ''"
                                            href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
                                                                   onclick=""></i> Delete
                                         </a>

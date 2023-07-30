@@ -28,59 +28,6 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-        // dummy usernames
-        $usernames = ['jack', 'John', 'joe', 'jim', 'james', 'jane', 'jill', 'jessica', 'julie', 'jennifer', 'josh', 'jordan', 'jacob', 'jake', 'jason', 'julian', 'joseph', 'jared', 'jenna', 'juliana', 'juliet', 'julio', 'julius', 'juliana', 'juliette', 'julianne', 'julis', 'julissa', 'julietta'];
-
-        $records = [];
-        foreach ($usernames as $username) {
-            $records[] = [
-                'first_name' => $usernames[array_rand($usernames)],
-                'last_name' => $usernames[array_rand($usernames)],
-                'email' => $username . rand(101, 999) . '@mail.com',
-                'password' => bcrypt($username),
-                'email_verified' => true,
-                'user_group_id' => 2,
-                'approved' => true,
-                'taxable' => true,
-                'banned' => false,
-                'banned_reason' => null,
-                'balance' => 0,
-            ];
-        }
-
-        DB::table('users')->insert($records);
-
-        // Insert Demo Admin and Demo User
-        DB::table('users')->insert(
-            [
-                [
-                    'first_name' => 'Demo',
-                    'last_name' => 'Admin',
-                    'email' => 'admin@mail.com',
-                    'password' => bcrypt('admin'),
-                    'email_verified' => true,
-                    'user_group_id' => 1,
-                    'approved' => true,
-                    'taxable' => true,
-                    'banned' => false,
-                    'banned_reason' => null,
-                    'balance' => 0,
-                ],
-                [
-                    'first_name' => 'Demo',
-                    'last_name' => 'User',
-                    'email' => 'user@mail.com',
-                    'password' => bcrypt('user'),
-                    'email_verified' => true,
-                    'user_group_id' => 2,
-                    'approved' => true,
-                    'taxable' => true,
-                    'banned' => false,
-                    'banned_reason' => null,
-                    'balance' => 0,
-                ]
-            ]
-        );
     }
 
     /**

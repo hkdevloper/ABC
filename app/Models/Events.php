@@ -24,7 +24,6 @@ class Events extends Model
         'seo_id',
         'is_active',
         'is_claimed',
-        'is_rsvp',
         'is_featured',
         'start',
         'end',
@@ -41,6 +40,6 @@ class Events extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Models\EventCategory', 'category_id');
+        return $this->belongsTo('App\Models\Category', 'category_id');
     }
 }

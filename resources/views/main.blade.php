@@ -69,6 +69,7 @@
     IconPicker.Run('#GetIconPicker');
 </script>
 @yield('page-scripts')
+@yield('components-scripts')
 </body>
 
 </html>

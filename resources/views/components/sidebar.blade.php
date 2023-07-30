@@ -6,7 +6,7 @@
     <div class="side-nav__devider my-6"></div>
     <ul>
         <li>
-            <a href="{{url('/admin')}}" class="side-menu side-menu--active">
+            <a href="{{url('/admin')}}" class="side-menu">
                 <div class="side-menu__icon"><i data-feather="home"></i></div>
                 <div class="side-menu__title"> Dashboard</div>
             </a>
@@ -149,6 +149,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{route('categories', ['type' => 'blogs'])}}" class="side-menu">
+                                <div class="side-menu__icon"><i data-feather="archive"></i></div>
+                                <div class="side-menu__title"> Categories</div>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{route('memberships', ['type'=> 'blog'])}}" class="side-menu">
                                 <div class="side-menu__icon"><i data-feather="package"></i></div>
                                 <div class="side-menu__title"> Membership</div>
@@ -266,25 +272,24 @@
                         <div class="side-menu__title"> Add user</div>
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('user.groups')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="users"></i></div>
-                        <div class="side-menu__title"> Groups</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="user-check"></i></div>
-                        <div class="side-menu__title"> Approve</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="file-text"></i></div>
-                        <div class="side-menu__title"> User Form Fields</div>
-                    </a>
-                </li>
-
+                {{--                <li>--}}
+                {{--                    <a href="{{route('user.groups')}}" class="side-menu">--}}
+                {{--                        <div class="side-menu__icon"><i data-feather="users"></i></div>--}}
+                {{--                        <div class="side-menu__title"> Groups</div>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
+                {{--                <li>--}}
+                {{--                    <a href="{{url('/')}}" class="side-menu">--}}
+                {{--                        <div class="side-menu__icon"><i data-feather="user-check"></i></div>--}}
+                {{--                        <div class="side-menu__title"> Approve</div>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
+                {{--                <li>--}}
+                {{--                    <a href="{{url('/')}}" class="side-menu">--}}
+                {{--                        <div class="side-menu__icon"><i data-feather="file-text"></i></div>--}}
+                {{--                        <div class="side-menu__title"> User Form Fields</div>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
             </ul>
         </li>
         <li>

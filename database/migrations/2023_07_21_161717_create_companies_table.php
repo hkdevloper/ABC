@@ -14,9 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->boolean('approved')->default(true);
             $table->boolean('claimed')->default(true);
-//            $table->foreign('user_id')->references('id')->on('users');
             $table->foreignId('user_id')->nullable()->constrained('users');
-//            $table->foreign('category_id')->references('id')->on('categories');
             $table->foreignId('category_id')->nullable()->constrained('categories');
             $table->string('name');
             $table->string('slug');
@@ -32,7 +30,6 @@ return new class extends Migration {
             $table->string('linkdin')->nullable();
             $table->string('youtube')->nullable();
             $table->text('address')->nullable();
-            // Foreign keys to location table city column
             $table->foreignId('city_id')->nullable()->constrained('location')->cascadeOnDelete();
             $table->foreignId('state_id')->nullable()->constrained('location')->cascadeOnDelete();
             $table->foreignId('country_id')->nullable()->constrained('location')->cascadeOnDelete();

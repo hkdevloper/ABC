@@ -17,24 +17,15 @@ return new class extends Migration {
             $table->foreignId('seo_id')->nullable()->constrained('seo')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
-            $table->boolean('allow_redeeming')->default(true);
             $table->string('title');
             $table->string('slug');
             $table->text('description')->nullable();
-            // offer start and end date
             $table->datetime('offer_start_date')->nullable();
             $table->dateTime('offer_end_date')->nullable();
             $table->string('price')->nullable();
-
-            // Discount type
             $table->enum('discount_type', ['percentage', 'fixed'])->default('percentage');
-
-            // Discount value
             $table->string('discount_value')->nullable();
-
-            // Discount code
             $table->string('discount_code')->nullable();
-
             $table->text('terms_and_conditions')->nullable();
             $table->timestamps();
         });

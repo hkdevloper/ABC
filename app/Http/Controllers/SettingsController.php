@@ -137,7 +137,7 @@ class SettingsController extends Controller
         $category->name = $request->name;
         $category->description = $request->description ? $request->description : '';
         $category->save();
-        return redirect()->route('settings.rating.categories')->with(['msg', 'Rating Category Added Successfully', 'type' => 'success']);
+        return redirect()->route('settings.rating.categories')->with(['msg', 'Rating SelectCategory Added Successfully', 'type' => 'success']);
     }
 
     // Function to view Edit Rating Categories
@@ -159,7 +159,7 @@ class SettingsController extends Controller
         $category->name = $request->name;
         $category->description = $request->description ? $request->description : '';
         $category->save();
-        return redirect()->route('settings.rating.categories')->with(['msg', 'Rating Category Updated Successfully', 'type' => 'success']);
+        return redirect()->route('settings.rating.categories')->with(['msg', 'Rating SelectCategory Updated Successfully', 'type' => 'success']);
     }
 
     // Function to delete rating categories
@@ -167,7 +167,7 @@ class SettingsController extends Controller
     {
         $category = RatingCategory::find($id);
         $category->delete();
-        return redirect()->route('settings.rating.categories')->with(['msg', 'Rating Category Deleted Successfully', 'type' => 'success']);
+        return redirect()->route('settings.rating.categories')->with(['msg', 'Rating SelectCategory Deleted Successfully', 'type' => 'success']);
     }
 
     // Function to view settings for scheduled tasks

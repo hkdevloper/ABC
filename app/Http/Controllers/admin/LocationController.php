@@ -4,11 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Location;
-use App\Models\Media;
 use App\Models\Seo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class LocationController extends Controller
@@ -62,11 +59,8 @@ class LocationController extends Controller
             ];
             $seo = (object)$seo;
         }
-        // Find Medias
-        $logo = Media::where($location->logo_image_id)->first()->path;
-        $header = Media::where($location->header_image_id)->first()->path;
 
-        $data = compact('location', 'seo', 'logo', 'header');
+        $data = compact('location', 'seo');
         return view('pages.admin.locations.edit')->with($data);
     }
 
@@ -76,20 +70,15 @@ class LocationController extends Controller
             'location_name' => 'required',
             'slug' => 'required',
             'summary' => 'nullable',
-            'description' => 'nullable',
             'placement' => 'nullable',
             'new_location' => 'nullable',
             'sub_location' => 'nullable',
-            'before_location' => 'nullable',
-            'after_location' => 'nullable',
             'longitude' => 'required',
             'latitude' => 'required',
             'zoom' => 'nullable',
             'meta_title' => 'nullable',
             'meta_keywords' => 'nullable',
             'meta_description' => 'nullable',
-            'logo_image_id' => 'nullable',
-            'header_image_id' => 'nullable',
             'featured' => 'nullable',
         ]);
 
@@ -113,25 +102,6 @@ class LocationController extends Controller
             $location->seo_id = $seo->id;
         }
 
-        // update logo if logo id is present
-        if($request->logo_image_id && $request->header_image_id){
-            // update logo image
-            $logo = Media::find($request->logo_image_id);
-            $header = Media::find($request->header_image_id);
-
-            if($logo && $header){
-                // update header image
-                $logo->path = $request->logo_image_id;
-                $header->path = $request->header_image_id;
-                $logo->save();
-                $header->save();
-
-                // update location
-                $location->media_logo_id = $logo;
-                $location->media_header_image_id = $header;
-            }
-        }
-
         $parent_id = $request->parent_id;
         if($request->placement){
             // get parent id
@@ -139,10 +109,6 @@ class LocationController extends Controller
                 $parent_id = 0;
             } elseif ($request->placement == 'rd-sub') {
                 $parent_id = $request->new_location;
-            } elseif ($request->placement == 'rd-before') {
-                $parent_id = $request->before_location;
-            } elseif ($request->placement == 'rd-after') {
-                $parent_id = $request->after_location;
             }
         }
 
@@ -150,7 +116,6 @@ class LocationController extends Controller
         $location->slug = $request->slug;
         $location->summary = $request->summary ? $request->summary : '';
         $location->parent_id = $parent_id;
-        $location->description = $request->description ? $request->description : '';
         $location->longitude = $request->longitude ? $request->longitude : 90.123;
         $location->latitude = $request->latitude ? $request->latitude : 45.123;
         $location->map_zoom_level = $request->zoom ? $request->zoom : 2;
@@ -176,20 +141,15 @@ class LocationController extends Controller
             'location_name' => 'required',
             'slug' => 'required',
             'summary' => 'required',
-            'description' => 'nullable',
             'placement' => 'required',
             'new_location' => 'nullable',
             'sub_location' => 'nullable',
-            'before_location' => 'nullable',
-            'after_location' => 'nullable',
             'longitude' => 'required',
             'latitude' => 'required',
             'zoom' => 'required',
             'meta_title' => 'required',
             'meta_keywords' => 'required',
             'meta_description' => 'required',
-            'logo_image_id' => 'required',
-            'header_image_id' => 'required',
             'featured' => 'nullable',
         ]);
 
@@ -209,24 +169,16 @@ class LocationController extends Controller
             $parent_id = 0;
         } elseif ($request->placement == 'rd-sub') {
             $parent_id = $request->new_location;
-        } elseif ($request->placement == 'rd-before') {
-            $parent_id = $request->before_location;
-        } elseif ($request->placement == 'rd-after') {
-            $parent_id = $request->after_location;
         }
-
         $location = new Location();
         $location->name = $request->location_name;
         $location->slug = $request->slug;
         $location->summary = $request->summary;
         $location->parent_id = $parent_id;
-        $location->description = $request->description;
         $location->longitude = $request->longitude;
         $location->latitude = $request->latitude;
         $location->map_zoom_level = $request->zoom;
         $location->seo_id = $seo->id;
-        $location->media_logo_id = $logo;
-        $location->media_header_image_id = $header;
         $location->featured = $request->featured == 'true' ? 1 : 0;
         $location->save();
 
@@ -286,15 +238,7 @@ class LocationController extends Controller
 
         // Delete records from SEO table
         $seo = Seo::find($location->seo_id);
-        $logo = Media::find($location->media_logo_id);
-        $header = Media::find($location->media_header_image_id);
-        if ($seo && $logo && $header) {
-            $seo->delete();
-            File::delete(public_path('/' . $logo->path));
-            File::delete(public_path($header->path));
-            $logo->delete();
-            $header->delete();
-        }
+        $seo?->delete();
 
         $location->delete();
         return redirect()->back()->with(['msg', 'Location Deleted Successfully', 'type' => 'success']);
