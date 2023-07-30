@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\MembershipPackage;
+use App\Models\Category;
+use App\Models\Events;
+use App\Models\Location;
+use App\Models\Seo;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -11,42 +15,144 @@ class EventController extends Controller
     // Function to view All Events
     public function viewEvents()
     {
-        return view('pages.admin.events.view_all');
+        $events = Events::all();
+        foreach ($events as $event) {
+            // get category name from category id
+            $event->category = $event->category->name;
+        }
+        $data = compact('events');
+        return view('pages.admin.events.view_all')->with($data);
+    }
+
+    public function initCrudView(): array
+    {
+        // get all the users
+        $users = User::all();
+        // get all the categories
+        $categories = Category::where('type', 'company')->get();
+        // get all the Countries from location table
+        $countries = Location::where('parent_id', 0)->orWhere('parent_id', null)->get();
+
+        return compact('users', 'categories', 'countries');
     }
 
     // Function to view Add Event
     public function viewAddEvent(Request $request)
     {
-        $packageId = null;
-        // check if request has Membership package
-        if ($request->has('membership_package')) {
-            $packageId = $request->membership_package;
-        }
-        $packages = MembershipPackage::where('type', 'event')->get();
-        $membershipPackage = [];
-        foreach ($packages as $package) {
-            $member = [];
-            $member['id'] = $package->id;
-            $member['name'] = $package->name;
-            $member['description'] = $package->description;
-            $member['plans'] = [];
-            foreach ($package->plans as $plan) {
-                $member['plans'][] = [
-                    'id' => $plan->id,
-                    'price' => $plan->price,
-                    'billing_period' => $plan->billing_period,
-                    'billing_interval' => $plan->billing_interval,
-                ];
-            }
-            $membershipPackage[] = $member;
-        }
-        $data = compact('packageId', 'membershipPackage');
+        $data = $this->initCrudView(); // get all the users, categories, countries and states
         return view('pages.admin.events.add')->with($data);
     }
 
     // Function to view Edit Event
-    public function viewEditEvent()
+    public function viewEditEvent($id)
     {
-        return view('pages.admin.events.edit');
+        $event = Events::find($id);
+        if (!$event) {
+            return redirect()->route('admin.events.view')->with(['msg', 'Event not found', 'types' => 'error']);
+        }
+        $data = compact('event');
+        return view('pages.admin.events.edit')->with($data);
+    }
+
+    // Function to do Add Event
+    public function doAddEvent(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required',
+            'category_id' => 'required',
+            'user_id' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
+            'zip' => 'required',
+            'thumbnail' => 'required',
+            'gallery' => 'required',
+            'meta_title' => 'required',
+            'meta_description' => 'required',
+            'meta_keywords' => 'required',
+        ]);
+
+        $event = new Events();
+        $event->title = $request->title;
+        $event->slug = $request->slug;
+        $event->category_id = $request->category_id;
+        $event->user_id = $request->user_id;
+        $event->start = $request->start;
+        $event->end = $request->end;
+        $event->address = $request->address;
+        $event->city_id = $request->city;
+        $event->state_id = $request->state;
+        $event->country_id = $request->country;
+        $event->zip_code = $request->zip;
+
+        // Boolean values
+        $event->is_active = $request->is_active ? 1 : 0;
+        $event->is_featured = $request->is_featured ? 1 : 0;
+        $event->is_rsvp = $request->is_rsvp ? 1 : 0;
+        $event->is_claimed = $request->is_claimed ? 1 : 0;
+
+        // storing media
+        $media_logo_id = MediaController::uploadMedia($request->thumbnail);
+        $event->thumbnail_id = $media_logo_id;
+        $event->gallery = $request->gallery;
+
+        // Set SEO
+        $seo = new Seo();
+        $seo->title = $request->meta_title;
+        $seo->meta_description = $request->meta_description;
+        $seo->meta_keywords = $request->meta_keywords;
+        $seo->save();
+
+        $event->seo_id = $seo->id;
+
+        $event->save();
+
+        return redirect()->route('admin.events.view')->with(['msg', 'Event added successfully', 'types' => 'success']);
+    }
+
+    // Function to do Edit Event
+    public function doEditEvent(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required',
+            'category_id' => 'required',
+            'user_id' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
+            'zip' => 'required',
+            'thumbnail' => 'required',
+            'gallery' => 'required',
+            'meta_title' => 'required',
+            'meta_description' => 'required',
+            'meta_keywords' => 'required',
+        ]);
+
+        $event = Events::find($id);
+        if (!$event) {
+            return redirect()->route('admin.events.view')->with(['msg', 'Event not found', 'types' => 'error']);
+        }
+        $event->save();
+
+        return redirect()->route('admin.events.view')->with(['msg', 'Event updated successfully', 'types' => 'success']);
+    }
+
+    // Function to do Delete Event
+    public function doDeleteEvent($id)
+    {
+        $event = Events::find($id);
+        if (!$event) {
+            return redirect()->route('admin.events.view')->with(['msg', 'Event not found', 'types' => 'error']);
+        }
+        $event->delete();
+        return redirect()->route('admin.events.view')->with(['msg', 'Event deleted successfully', 'types' => 'success']);
     }
 }

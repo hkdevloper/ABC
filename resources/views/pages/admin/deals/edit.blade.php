@@ -108,7 +108,7 @@
                     <div class="mt-3">
                         <label>Discount Type</label>
                         <select required class="select2 input w-full border mt-2" name="type">
-                            <option selected>Select Dicount Type</option>
+                            <option selected>Select Discount Type</option>
                             <option {{$deal->discount_type == 'fixed' ? "selected" : ""}} value="fixed">Fixed</option>
                             <option {{$deal->discount_type == 'percentage' ? "selected" : ""}} value="percentage">
                                 Percentage

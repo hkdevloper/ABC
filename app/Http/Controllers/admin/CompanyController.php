@@ -36,7 +36,7 @@ class CompanyController extends Controller
         // get all the categories
         $categories = Category::where('type', 'company')->get();
         // get all the Countries from location table
-        $countries = Location::where('parent_id', 0)->get();
+        $countries = Location::where('parent_id', 0)->orWhere('parent_id', null)->get();
 
         return compact('users', 'categories', 'countries');
     }
