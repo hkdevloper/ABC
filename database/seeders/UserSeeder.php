@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -12,8 +12,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Make an Admin and a User
-        \App\Models\User::factory()->create([
+        // Make an Admin and a SelectUser
+        User::factory()->create([
             [
                 'first_name' => 'Demo',
                 'last_name' => 'Admin',
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'first_name' => 'Demo',
-                'last_name' => 'User',
+                'last_name' => 'SelectUser',
                 'email' => 'user@mail.com',
                 'password' => bcrypt('user'),
                 'email_verified' => true,

@@ -39,7 +39,7 @@ class UserGroupSeeder extends Seeder
                 ],
             ],
                 [
-                    'name' => 'Registered User',
+                    'name' => 'Registered SelectUser',
                     'permissions' => [
                         'admin_login' => false,
                         'user_login' => true,

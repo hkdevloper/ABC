@@ -11,9 +11,15 @@ class Seo extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $seo;
+
+    public function __construct($seo = null)
     {
-        //
+        if ($seo) {
+            $this->seo = \App\Models\Seo::find($seo);
+        } else {
+            $this->seo = null;
+        }
     }
 
     /**
@@ -21,6 +27,6 @@ class Seo extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.seo');
+        return view('components.seo')->with(['seo' => $this->seo]);
     }
 }

@@ -105,7 +105,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::get('/delete/{id}', [JobController::class, 'doDeleteJob'])->name('delete.job');
     });
 
-    // Routes for handling Category Module
+    // Routes for handling SelectCategory Module
     Route::prefix('/categories')->group(function () {
         Route::get('/', [CategoryController::class, 'viewCategories'])->name('categories');
         Route::get('/add', [CategoryController::class, 'viewAddCategory'])->name('add.category');
@@ -155,7 +155,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::get('/delete/{id}', [InvoiceController::class, 'doDeleteInvoice'])->name('delete.invoice');
     });
 
-    // Routes for handling User Module
+    // Routes for handling SelectUser Module
     Route::prefix('/users')->group(function () {
         Route::get('/', [UserController::class, 'viewUsers'])->name('users');
         Route::get('/add', [UserController::class, 'viewAddUser'])->name('add.user');

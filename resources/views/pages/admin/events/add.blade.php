@@ -49,9 +49,11 @@
                     <div class="mt-3">
                         <label>Select User</label>
                         <select name="user" required class="select2 input w-full border mt-2">
-                            <option selected>Select user</option>
+                            <option>Select user</option>
                             @foreach($users as $user)
-                                <option value="{{$user->id}}">{{$user->first_name}}&nbsp;{{$user->last_name}}
+                                <option
+                                    {{$user->id == old('user') ? "selected" : ""}} value="{{$user->id}}">{{$user->first_name}}
+                                    &nbsp;{{$user->last_name}}
                                     &nbsp;[Id: {{$user->id}}]
                                 </option>
                             @endforeach
@@ -60,25 +62,30 @@
                     <div class="mt-3">
                         <label>Category</label>
                         <select name="category" required class="select2 input w-full border mt-2">
-                            <option selected>Select Category</option>
+                            <option>Select Category</option>
                             @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option
+                                    {{$category->id == old('category') ? "selected" : ""}} value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select>
                     </div>
+
                     <div class="mt-3">
                         <label>Event Title</label>
-                        <input id="name" type="text" class="input w-full border mt-2"
-                               placeholder="Enter event title here" name="category_name">
+                        <input id="name" type="text" class="input w-full border mt-2" required autofocus
+                               autocomplete="off" value="{{old('title')}}"
+                               placeholder="Enter event title here" name="title">
                     </div>
                     <div class="mt-3">
                         <label>Event Start Date & Time</label>
-                        <input type="datetime-local" class="input w-full border mt-2" name="start_date"
+                        <input type="datetime-local" class="input w-full border mt-2" name="start" required
+                               value="{{old('start')}}"
                                placeholder="Enter Start Date & Time here">
                     </div>
                     <div class="mt-3">
                         <label>Event End Date & Time</label>
-                        <input type="datetime-local" class="input w-full border mt-2" name="end_date"
+                        <input type="datetime-local" class="input w-full border mt-2" name="end" required
+                               value="{{old('end')}}"
                                placeholder="Enter End Date & Time here">
                     </div>
                     <div class="mt-3">
@@ -89,11 +96,12 @@
                     <div class="mt-3">
                         <label>Description</label>
                         <textarea id="editor" class="input w-full border mt-2" name="description"
-                                  placeholder="Enter Description here"></textarea>
+                                  placeholder="Enter Description here">{{old('description')}}</textarea>
                     </div>
                     <div class="mt-3">
                         <label>Address</label>
                         <input type="text" class="input w-full border mt-2" name="address"
+                               value="{{old('address') ? old('address') : ''}}"
                                placeholder="Enter Address here">
                     </div>
                     <div class="mt-3 w-full">
@@ -105,41 +113,80 @@
                             @endforeach
                         </select>
                     </div>
-                    <x-location></x-location>
+                    <div class="mt-3 state hidden w-full">
+                        <label style="display: block; width: 100%">State</label>
+                        <select name="state" class="select2 input w-full border mt-2" style="width: 100% !important;"
+                                id="state">
+                            <option value="1">Select State</option>
+                        </select>
+                    </div>
+                    <div class="mt-3 city hidden w-full">
+                        <label style="display: block; width: 100%">City</label>
+                        <select name="city" class="select2 input w-full border mt-2" id="city"
+                                style="width: 100% !important;">
+                            <option value="1">Select City</option>
+                        </select>
+                    </div>
+                    <div class="mt-3">
+                        <label>Zip Code</label>
+                        <input type="text" class="input w-full border mt-2" name="zip_code"
+                               value="{{old('zip_code') ? old('zip_code') : ''}}"
+                               placeholder="Enter Zip Code here">
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">Cordinates</label>
+                        <div id="map-picker" class="w-full border mt-2 flex-1"
+                             style="width: 100%; height: 400px;"></div>
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">longitude</label>
+                        <input name="longitude" type="text" class="input w-full border mt-2 flex-1" required
+                               readonly
+                               placeholder="" id="longitude"
+                               value="{{old('longitude') ? old('longitude') : ''}}">
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">Latitude</label>
+                        <input name="latitude" type="text" class="input w-full border mt-2 flex-1" required
+                               readonly
+                               placeholder="" id="latitude" value="{{old('latitude') ? old('latitude'): ''}}">
+                    </div>
+
                     <div class="mt-3">
                         <label>Website</label>
-                        <input type="text" class="input w-full border mt-2" name="website"
+                        <input type="url" class="input w-full border mt-2" name="website" value="{{old('website')}}"
                                placeholder="Enter Website here">
                     </div>
                     <div class="mt-3">
                         <label>Event Thumbnail</label>
-                        <input type="file" id="media_file" class="input w-full border mt-2" name="file">
+                        <input type="file" id="media_file" class="input w-full border mt-2" name="file" required>
                     </div>
-                    <input name="media" id="media" type="hidden"/>
+                    <input name="thumbnail" id="media" type="hidden" required/>
                     <div class="mt-3">
                         <label>Event Galley</label>
-                        <input type="file" id="media_file_gallery" class="input w-full border mt-2" multiple
+                        <input type="file" id="media_file_gallery" class="input w-full border mt-2" multiple required
                                name="file">
                     </div>
-                    <input name="gallery[]" id="gallery" type="hidden"/>
+                    <input name="gallery[]" id="gallery" type="hidden" required/>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Title</label>
                         <input name="meta_title" type="text" class="input w-full border mt-2 flex-1" required
-                               placeholder="" value="{{old('meta_title')}}">
+                               placeholder="" value="{{$seo->title ? $seo->title : old('meta_title')}}">
                     </div>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Keywords</label>
                         <input name="meta_keywords" type="text" class="input w-full border mt-2 flex-1" required
                                placeholder=", (comma seperated values)" id="tag-keyword"
-                               value="{{old('meta_keywords')}}">
+                               value="{{$seo->meta_keywords ? $seo->meta_keywords : old('meta_keywords')}}">
                     </div>
                     <div class="mt-3">
                         <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Description</label>
-                        <input name="meta_description" type="text" class="input w-full border mt-2 flex-1"
-                               required
-                               placeholder="" value="{{old('meta_description')}}">
+                        <input name="meta_description" type="text" class="input w-full border mt-2 flex-1" required
+                               placeholder=""
+                               value="{{$seo->meta_description ? $seo->meta_description : old('meta_description')}}">
                     </div>
-                    <button type="button" class="button bg-theme-1 text-white mt-5">Submit</button>
+
+                    <button type="submit" class="button bg-theme-1 text-white mt-5">Submit</button>
                 </form>
             </div>
         </div>
@@ -277,6 +324,50 @@
         FilePond.parse(document.body);
     </script>
     {{--    TagiFY/Slug--}}
+    <script>
+        // Tagify Tag input
+        let input = document.getElementById('tag-keyword');
+        let extra = document.getElementById('extra-keyword');
+        let tagify = new Tagify(input, {
+            whitelist: [],
+            maxTags: 10,
+            dropdown: {
+                enabled: 1,
+                maxItems: 10,
+                classname: "tags-look",
+                closeOnSelect: false
+            }
+        });
+        let tagifyExtra = new Tagify(extra, {
+            whitelist: [],
+            maxTags: 10,
+            dropdown: {
+                enabled: 1,
+                maxItems: 10,
+                classname: "tags-look",
+                closeOnSelect: false
+            }
+        });
+
+        // Slug Generator
+        $('#name').keyup(function () {
+            $('#slug').val(generateSlug($(this).val()));
+        });
+
+        function generateSlug(input) {
+            // Convert input to lowercase and remove leading/trailing whitespaces
+            let slug = input.toLowerCase().trim();
+
+            // Replace special characters with dashes
+            slug = slug.replace(/[^a-z0-9]+/g, '-');
+
+            // Remove any remaining leading/trailing dashes
+            slug = slug.replace(/^-+|-+$/g, '');
+
+            // Return the generated slug
+            return slug;
+        }
+    </script>
     <script>
         // Tagify Tag input
         let input = document.getElementById('tag-keyword');

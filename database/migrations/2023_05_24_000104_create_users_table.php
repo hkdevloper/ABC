@@ -50,7 +50,7 @@ return new class extends Migration
 
         DB::table('users')->insert($records);
 
-        // Insert Demo Admin and Demo User
+        // Insert Demo Admin and Demo SelectUser
         DB::table('users')->insert(
             [
                 [
@@ -68,7 +68,7 @@ return new class extends Migration
                 ],
                 [
                     'first_name' => 'Demo',
-                    'last_name' => 'User',
+                    'last_name' => 'SelectUser',
                     'email' => 'user@mail.com',
                     'password' => bcrypt('user'),
                     'email_verified' => true,

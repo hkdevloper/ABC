@@ -27,7 +27,7 @@ class CategoryController extends Controller
         return view('pages.admin.category.view_all')->with($data);
     }
 
-    // Function to view Add Category
+    // Function to view Add SelectCategory
     public function viewAddCategory(Request $request)
     {
         $request->validate([
@@ -39,7 +39,7 @@ class CategoryController extends Controller
         return view('pages.admin.category.add')->with($data);
     }
 
-    // Function to view Edit Category
+    // Function to view Edit SelectCategory
     public function viewEditCategory(Request $request, $id)
     {
         $request->validate([
@@ -49,13 +49,13 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $categories = Category::where('type', $request->type)->get();
         if ($category->type != $type)
-            return view('pages.admin.category.view_all')->with(['msg' => 'Category Not Found', 'types' => 'danger', 'type' => $request->type]);
+            return view('pages.admin.category.view_all')->with(['msg' => 'SelectCategory Not Found', 'types' => 'danger', 'type' => $request->type]);
         $seo = $category->seo;
         $data = compact('type', 'category', 'seo', 'categories');
         return view('pages.admin.category.edit')->with($data);
     }
 
-    // Function to Do Add Category
+    // Function to Do Add SelectCategory
     public function doAddCategory(Request $request)
     {
         try {
@@ -91,11 +91,11 @@ class CategoryController extends Controller
             $seo->meta_keywords = $request->meta_keywords;
             $seo->save();
 
-            // Handle Parent Category
+            // Handle Parent SelectCategory
             if ($request->has('parent_id') && $request->parent_id != 0 && $request->parent_id != null && $request->parent_id != '') {
                 $parent_category = Category::find($request->parent_id);
                 if (!$parent_category)
-                    return redirect()->back()->with(['msg' => 'Parent Category Not Found', 'types' => 'danger']);
+                    return redirect()->back()->with(['msg' => 'Parent SelectCategory Not Found', 'types' => 'danger']);
                 $category->parent_id = $parent_category->id;
             }
             $category->seo_id = $seo->id;
@@ -106,13 +106,13 @@ class CategoryController extends Controller
             $categories = Category::where('type', $request->type)->get();
             $type = $request->type;
             $data = compact('type', 'categories');
-            return redirect()->route('categories', ['type' => $request->type])->with(['msg' => 'Category Added Successfully', 'types' => 'success', $data]);
+            return redirect()->route('categories', ['type' => $request->type])->with(['msg' => 'SelectCategory Added Successfully', 'types' => 'success', $data]);
         } catch (Exception $e) {
             return redirect()->back()->with(['msg' => 'Something Went Wrong', 'types' => 'danger']);
         }
     }
 
-    // Function to Do Edit Category
+    // Function to Do Edit SelectCategory
     public function doEditCategory(Request $request, $id)
     {
         $request->id = $id;
@@ -130,7 +130,7 @@ class CategoryController extends Controller
         $type = $request->type;
         $category = Category::find($id);
         if ($category->type != $type)
-            return view('pages.admin.category.view_all')->with(['msg' => 'Category Not Found', 'types' => 'danger', 'type' => $request->type]);
+            return view('pages.admin.category.view_all')->with(['msg' => 'SelectCategory Not Found', 'types' => 'danger', 'type' => $request->type]);
         $category->name = $request->category_name;
         $category->slug = $request->slug;
         $category->summary = $request->summary;
@@ -145,11 +145,11 @@ class CategoryController extends Controller
         $seo->meta_description = $request->meta_description;
         $seo->meta_keywords = $request->meta_keywords;
         $seo->save();
-        // Handle Parent Category
+        // Handle Parent SelectCategory
         if ($request->has('parent_id') && $request->parent_id != 0 && $request->parent_id != null && $request->parent_id != '') {
             $parent_category = Category::find($request->parent_id);
             if (!$parent_category)
-                return redirect()->back()->with(['msg' => 'Parent Category Not Found', 'types' => 'danger']);
+                return redirect()->back()->with(['msg' => 'Parent SelectCategory Not Found', 'types' => 'danger']);
             $category->parent_id = $parent_category->id;
         }
         $category->seo_id = $seo->id;
@@ -159,19 +159,19 @@ class CategoryController extends Controller
         $categories = Category::where('type', $request->type)->get();
         $type = $request->type;
         $data = compact('type', 'categories');
-        return redirect()->route('categories', ['type' => $request->type])->with(['msg' => 'Category Updated Successfully', 'types' => 'success', $data]);
+        return redirect()->route('categories', ['type' => $request->type])->with(['msg' => 'SelectCategory Updated Successfully', 'types' => 'success', $data]);
     }
 
-    // Function to Delete Category
+    // Function to Delete SelectCategory
     public function doDeleteCategory(Request $request, $id)
     {
         $category = Category::find($id);
         if (!$category)
-            return view('pages.admin.category.view_all')->with(['msg' => 'Category Not Found', 'types' => 'danger', 'type' => $request->type]);
+            return view('pages.admin.category.view_all')->with(['msg' => 'SelectCategory Not Found', 'types' => 'danger', 'type' => $request->type]);
         $category->delete();
         $type = $request->type;
         $categories = Category::where('type', $request->type)->get();
         $data = compact('type', 'categories');
-        return redirect()->back()->with(['msg' => 'Category Deleted Successfully', 'types' => 'success', $data]);
+        return redirect()->back()->with(['msg' => 'SelectCategory Deleted Successfully', 'types' => 'success', $data]);
     }
 }
