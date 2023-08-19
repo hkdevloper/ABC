@@ -223,5 +223,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 });
 
-
-
+// Prefix routes for Frontend
+Route::get('/', function () {
+    return view('welcome');
+});

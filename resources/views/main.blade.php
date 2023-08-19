@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- Meta Tags --}}
-    <title>Business Directory Listing -Admin Panel</title>
+    <title>{{config()->get('app.name')}}</title>
     {{-- Styles --}}
     <link rel="stylesheet" href="{{url("/")}}/dist/css/app.css">
     <link rel="stylesheet" href="{{url("/")}}/dist/css/box-icons.css">
@@ -48,25 +48,29 @@
     @endif
 </script>
 <script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-    // Default options
-    IconPicker.Init({
-        // Required: You have to set the path of IconPicker JSON file to "jsonUrl" option. e.g. '/content/plugins/IconPicker/dist/iconpicker-1.5.0.json'
-        jsonUrl: '{{url('/')}}/dist/json/iconpicker.json',
-        // Optional: Change the buttons or search placeholder text according to the language.
-        searchPlaceholder: 'Search Icon',
-        showAllButton: 'Show All',
-        cancelButton: 'Cancel',
-        noResultsFound: 'No results found.', // v1.5.0 and the next versions
-        borderRadius: '20px', // v1.5.0 and the next versions
-    });
+    try{
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+        // Default options
+        IconPicker.Init({
+            // Required: You have to set the path of IconPicker JSON file to "jsonUrl" option. e.g. '/content/plugins/IconPicker/dist/iconpicker-1.5.0.json'
+            jsonUrl: '{{url('/')}}/dist/json/iconpicker.json',
+            // Optional: Change the buttons or search placeholder text according to the language.
+            searchPlaceholder: 'Search Icon',
+            showAllButton: 'Show All',
+            cancelButton: 'Cancel',
+            noResultsFound: 'No results found.', // v1.5.0 and the next versions
+            borderRadius: '20px', // v1.5.0 and the next versions
+        });
 
-    // Select your Button element (ID or Class)
-    IconPicker.Run('#GetIconPicker');
+        // Select your Button element (ID or Class)
+        IconPicker.Run('#GetIconPicker');
+    }catch (e){
+        console.log(e);
+    }
 </script>
 @yield('page-scripts')
 @yield('components-scripts')
