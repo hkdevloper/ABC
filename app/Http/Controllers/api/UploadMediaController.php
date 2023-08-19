@@ -5,12 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\TempFiles;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Sopamo\LaravelFilepond\Filepond;
 
 class UploadMediaController extends Controller
 {
@@ -41,7 +36,7 @@ class UploadMediaController extends Controller
         $tempFile->folder = $folder;
         $tempFile->mime = $mime;
         $tempFile->size = $size;
-        $tempFile->upload_type = $type;
+        $tempFile->upload_type = $type ? $type : 'unknown';
         $tempFile->filename = $filename;
         $tempFile->save();
 

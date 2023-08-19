@@ -9,7 +9,7 @@
 
     <ul class="border-t border-theme-24 py-5 hidden">
         <li>
-            <a href="{{url('/')}}" class="menu menu--active">
+            <a href="{{url('/admin')}}" class="side-menu">
                 <div class="menu__icon"><i data-feather="home"></i></div>
                 <div class="menu__title"> Dashboard</div>
             </a>
@@ -22,6 +22,7 @@
                 </div>
             </a>
             <ul class="">
+                {{--Companies--}}
                 <li>
                     <a href="javascript:" class="menu">
                         <div class="menu__icon"><i data-feather="box"></i></div>
@@ -32,55 +33,212 @@
                     </a>
                     <ul class="">
                         <li>
-                            <a href="#" class="menu">
+                            <a href="{{route('companies')}}" class="menu">
                                 <div class="menu__icon"><i data-feather="hash"></i></div>
                                 <div class="menu__title"> View All</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="menu">
+                            <a href="{{route('add.company')}}" class="menu">
                                 <div class="menu__icon"><i data-feather="plus"></i></div>
                                 <div class="menu__title"> Add New</div>
                             </a>
                         </li>
-
                         <li>
-                            <a href="#" class="menu">
-                                <div class="menu__icon"><i data-feather="star"></i></div>
-                                <div class="menu__title"> Reviews</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu">
+                            <a href="{{route('categories', ['type' => 'company'])}}" class="menu">
                                 <div class="menu__icon"><i data-feather="archive"></i></div>
                                 <div class="menu__title"> Categories</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="menu">
+                            <a href="{{route('memberships', ['type'=> 'company'])}}" class="menu">
                                 <div class="menu__icon"><i data-feather="package"></i></div>
                                 <div class="menu__title"> Membership</div>
                             </a>
                         </li>
+                    </ul>
+                </li>
+                {{--Classifieds(Products)--}}
+                <li>
+                    <a href="javascript:" class="menu">
+                        <div class="menu__icon"><i data-feather="shopping-bag"></i></div>
+                        <div class="menu__title">
+                            Products
+                            <i data-feather="chevron-down" class="menu__sub-icon"></i>
+                        </div>
+                    </a>
+                    <ul class="">
                         <li>
-                            <a href="#" class="menu">
-                                <div class="menu__icon"><i data-feather="file-plus"></i></div>
-                                <div class="menu__title"> Import</div>
+                            <a href="{{route('products')}}" class="menu">
+                                <div class="menu__icon"><i data-feather="hash"></i></div>
+                                <div class="menu__title"> View All</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="menu">
-                                <div class="menu__icon"><i data-feather="file-minus"></i></div>
-                                <div class="menu__title"> Export</div>
+                            <a href="{{route('add.product')}}" class="menu">
+                                <div class="menu__icon"><i data-feather="plus"></i></div>
+                                <div class="menu__title"> Add New</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('categories', ['type' => 'product'])}}" class="menu">
+                                <div class="menu__icon"><i data-feather="archive"></i></div>
+                                <div class="menu__title"> Categories</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('memberships', ['type'=> 'product'])}}" class="menu">
+                                <div class="menu__icon"><i data-feather="package"></i></div>
+                                <div class="menu__title"> Membership</div>
                             </a>
                         </li>
                     </ul>
                 </li>
-
+                {{--Events--}}
+                <li>
+                    <a href="javascript:" class="menu">
+                        <div class="menu__icon"><i data-feather="calendar"></i></div>
+                        <div class="menu__title"> Events
+                            <i data-feather="chevron-down" class="menu__sub-icon"></i>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="{{route('events')}}" class="menu">
+                                <div class="menu__icon"><i data-feather="hash"></i></div>
+                                <div class="menu__title"> View All</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('add.event')}}" class="menu">
+                                <div class="menu__icon"><i data-feather="plus"></i></div>
+                                <div class="menu__title"> Add New</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('categories', ['type' => 'event'])}}" class="menu">
+                                <div class="menu__icon"><i data-feather="archive"></i></div>
+                                <div class="menu__title"> Categories</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('memberships', ['type'=> 'event'])}}" class="menu">
+                                <div class="menu__icon"><i data-feather="package"></i></div>
+                                <div class="menu__title"> Membership</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{--Blogs--}}
+                <li>
+                    <a href="javascript:" class="menu">
+                        <div class="menu__icon"><i data-feather="file-text"></i></div>
+                        <div class="menu__title">
+                            Blogs
+                            <i data-feather="chevron-down" class="menu__sub-icon"></i>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="{{route('blogs')}}" class="menu">
+                                <div class="menu__icon"><i data-feather="hash"></i></div>
+                                <div class="menu__title"> View All</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('add.blog')}}" class="menu">
+                                <div class="menu__icon"><i data-feather="plus"></i></div>
+                                <div class="menu__title"> Add New</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('categories', ['type' => 'blogs'])}}" class="menu">
+                                <div class="menu__icon"><i data-feather="archive"></i></div>
+                                <div class="menu__title"> Categories</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('memberships', ['type'=> 'blog'])}}" class="menu">
+                                <div class="menu__icon"><i data-feather="package"></i></div>
+                                <div class="menu__title"> Membership</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{--Deals--}}
+                <li>
+                    <a href="javascript:" class="menu">
+                        <div class="menu__icon"><i data-feather="tag"></i></div>
+                        <div class="menu__title">
+                            Deals
+                            <i data-feather="chevron-down" class="menu__sub-icon"></i>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="{{route('deals')}}" class="menu">
+                                <div class="menu__icon"><i data-feather="hash"></i></div>
+                                <div class="menu__title"> View All</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('add.deal')}}" class="menu">
+                                <div class="menu__icon"><i data-feather="plus"></i></div>
+                                <div class="menu__title"> Add New</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('categories', ['type' => 'deals'])}}" class="menu">
+                                <div class="menu__icon"><i data-feather="archive"></i></div>
+                                <div class="menu__title"> Categories</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('memberships', ['type'=> 'deals'])}}" class="menu">
+                                <div class="menu__icon"><i data-feather="package"></i></div>
+                                <div class="menu__title"> Membership</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- Jobs --}}
+                <li>
+                    <a href="javascript:" class="menu">
+                        <div class="menu__icon"><i data-feather="briefcase"></i></div>
+                        <div class="menu__title"> Jobs <i data-feather="chevron-down" class="menu__sub-icon"></i>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="{{route('jobs')}}" class="menu">
+                                <div class="menu__icon"><i data-feather="hash"></i></div>
+                                <div class="menu__title"> View All</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('add.job')}}" class="menu">
+                                <div class="menu__icon"><i data-feather="plus"></i></div>
+                                <div class="menu__title"> Add New</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('categories', ['type' => 'job'])}}" class="menu">
+                                <div class="menu__icon"><i data-feather="archive"></i></div>
+                                <div class="menu__title"> Categories</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('memberships', ['type'=> 'job'])}}" class="menu">
+                                <div class="menu__icon"><i data-feather="package"></i></div>
+                                <div class="menu__title"> Membership</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </li>
         <li>
-            <a href="#" class="menu">
+            <a href="{{route('invoices')}}" class="menu">
                 <div class="menu__icon"><i data-feather="file-minus"></i></div>
                 <div class="menu__title"> Invoices</div>
             </a>
@@ -117,25 +275,24 @@
                         <div class="menu__title"> Add user</div>
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('user.groups')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="users"></i></div>
-                        <div class="menu__title"> Groups</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="user-check"></i></div>
-                        <div class="menu__title"> Approve</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="file-text"></i></div>
-                        <div class="menu__title"> User Form Fields</div>
-                    </a>
-                </li>
-
+                {{--                <li>--}}
+                {{--                    <a href="{{route('user.groups')}}" class="menu">--}}
+                {{--                        <div class="menu__icon"><i data-feather="users"></i></div>--}}
+                {{--                        <div class="menu__title"> Groups</div>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
+                {{--                <li>--}}
+                {{--                    <a href="{{url('/')}}" class="menu">--}}
+                {{--                        <div class="menu__icon"><i data-feather="user-check"></i></div>--}}
+                {{--                        <div class="menu__title"> Approve</div>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
+                {{--                <li>--}}
+                {{--                    <a href="{{url('/')}}" class="menu">--}}
+                {{--                        <div class="menu__icon"><i data-feather="file-text"></i></div>--}}
+                {{--                        <div class="menu__title"> User Form Fields</div>--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
             </ul>
         </li>
         <li>
@@ -150,28 +307,6 @@
                 <div class="menu__title"> Locations</div>
             </a>
         </li>
-        {{-- Email  --}}
-        <li>
-            <a href="javascript:" class="menu">
-                <div class="menu__icon"><i data-feather="mail"></i></div>
-                <div class="menu__title"> Email <i data-feather="chevron-down" class="menu__sub-icon"></i>
-                </div>
-            </a>
-            <ul class="">
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="mail"></i></div>
-                        <div class="menu__title"> Email queue</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="send"></i></div>
-                        <div class="menu__title"> Email Templates</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
 
         {{-- Settings --}}
         <li>
@@ -184,13 +319,7 @@
                 <li>
                     <a href="{{route('settings')}}" class="menu">
                         <div class="menu__icon"><i data-feather="settings"></i></div>
-                        <div class="menu__title"> Settings</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="list"></i></div>
-                        <div class="menu__title"> Listing type</div>
+                        <div class="menu__title"> General</div>
                     </a>
                 </li>
                 <li>
@@ -212,27 +341,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('settings.language')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="globe"></i></div>
-                        <div class="menu__title"> Language</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('settings.upload.types')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="cloud"></i></div>
-                        <div class="menu__title"> Upload types</div>
-                    </a>
-                </li>
-                <li>
                     <a href="{{route('settings.rating.categories')}}" class="menu">
                         <div class="menu__icon"><i data-feather="star"></i></div>
                         <div class="menu__title"> Rating categories</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('settings.scheduled.tasks')}}" class="menu">
-                        <div class="menu__icon"><i data-feather="activity"></i></div>
-                        <div class="menu__title"> Scheduled Tasks</div>
                     </a>
                 </li>
                 <li>

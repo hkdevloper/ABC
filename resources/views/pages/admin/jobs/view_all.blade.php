@@ -21,33 +21,67 @@
                     <table class="table table-report table-report--bordered display datatable w-full">
                         <thead>
                         <tr>
-                            <th class="border-b-2 whitespace-no-wrap">#ID</th>
-                            <th class="border-b-2 whitespace-no-wrap">Name</th>
-                            <th class="border-b-2 whitespace-no-wrap">Upload type</th>
-                            <th class="border-b-2 whitespace-no-wrap">MIME</th>
-                            <th class="border-b-2 whitespace-no-wrap">Size</th>
+                            <th class="-2 whitespace-no-wrap">#ID</th>
+                            <th class="-2 whitespace-no-wrap">Title</th>
+                            <th class="-2 whitespace-no-wrap">Description</th>
+                            <th class="-2 whitespace-no-wrap">Valid Until</th>
+                            <th class="-2 whitespace-no-wrap">Type</th>
+                            <th class="-2 whitespace-no-wrap">Salary</th>
+                            <th class="-2 whitespace-no-wrap">Organization</th>
+                            <th class="-2 whitespace-no-wrap">Overview</th>
+                            <th class="-2 whitespace-no-wrap">Experience</th>
                             <th class="text-center whitespace-no-wrap">ACTIONS</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="border-b"></td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="{{url('/')}}">
-                                        <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-theme-6"
-                                       onclick="confirm('Are you sure?') ? window.location.replace('{{url('/')}}') : ''"
-                                       href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
-                                                              onclick=""></i> Delete
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        @if(!$jobs)
+                            <tr>
+                                <td colspan="10" class="text-center">No Jobs Found</td>
+                            </tr>
+                        @endif
+                        @foreach($jobs as $job)
+                            <tr>
+                                <td class="">
+                                    <div class="font-medium whitespace-no-wrap">{{$job->id}}</div>
+                                </td>
+                                <td class="">
+                                    <div class="font-medium ">{{$job->title}}</div>
+                                </td>
+                                <td class="">
+                                    <div class="font-medium whitespace-no-wrap">{{$job->description}}</div>
+                                </td>
+                                <td class="">
+                                    <div class="font-medium ">{{$job->valid_until}}</div>
+                                </td>
+                                <td class="">
+                                    <div class="font-medium ">{{$job->type}}</div>
+                                </td>
+                                <td class="">
+                                    <div class="font-medium ">{{$job->salary}}</div>
+                                </td>
+                                <td class="">
+                                    <div class="font-medium ">{{$job->organization}}</div>
+                                </td>
+                                <td class="">
+                                    <div class="font-medium whitespace-no-wrap">{{$job->overview}}</div>
+                                </td>
+                                <td class="">
+                                    <div class="font-medium whitespace-no-wrap">{{$job->experience}}</div>
+                                </td>
+                                <td class="table-report__action w-56">
+                                    <div class="flex justify-center items-center">
+                                        <a class="flex items-center mr-3"
+                                           href="{{route('edit.job', [$job->id])}}">
+                                            <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                        <a class="flex items-center text-theme-6"
+                                           onclick="confirm('Are you sure?') ? window.location.replace('{{route('delete.job', [$job->id])}}') : ''"
+                                           href="javascript:"> <i data-feather="trash-2" class="w-4 h-4 mr-1"
+                                                                  onclick=""></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

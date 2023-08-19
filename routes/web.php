@@ -38,7 +38,6 @@ Route::prefix('/admin')->group(function () {
     Route::post('/forgot-password', [AuthController::class, 'doForgotPassword'])->name('forgot.password');
     Route::get('/reset-password', [AuthController::class, 'viewResetPassword'])->name('reset.password');
     Route::post('/reset-password', [AuthController::class, 'doResetPassword'])->name('reset.password');
-
 });
 
 // prefix protected routes for Administrator
@@ -213,10 +212,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/tax-rates/edit/{id}', [SettingsController::class, 'doEditTaxRates'])->name('settings.tax.rates.edit');
         Route::get('/tax-rates/delete/{id}', [SettingsController::class, 'doDeleteTaxRate'])->name('settings.tax.rates.delete');
 
-
-        Route::get('/language', [SettingsController::class, 'viewLanguage'])->name('settings.language');
-        Route::get('/upload-types', [SettingsController::class, 'viewUploadTypes'])->name('settings.upload.types');
-
         // Rating Categories
         Route::get('/rating-categories', [SettingsController::class, 'viewRatingCategories'])->name('settings.rating.categories');
         Route::get('/rating-categories/add', [SettingsController::class, 'viewAddRatingCategories'])->name('settings.rating.categories.add');
@@ -225,8 +220,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/rating-categories/edit/{id}', [SettingsController::class, 'doEditRatingCategories'])->name('settings.rating.categories.edit');
         Route::get('/rating-categories/delete/{id}', [SettingsController::class, 'doDeleteRatingCategories'])->name('settings.rating.categories.delete');
 
-        // Scheduled Tasks
-        Route::get('/scheduled-tasks', [SettingsController::class, 'viewScheduledTasks'])->name('settings.scheduled.tasks');
     });
 });
 

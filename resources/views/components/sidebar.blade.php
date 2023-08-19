@@ -304,28 +304,6 @@
                 <div class="side-menu__title"> Locations</div>
             </a>
         </li>
-        {{-- Email  --}}
-        <li>
-            <a href="javascript:" class="side-menu">
-                <div class="side-menu__icon"><i data-feather="mail"></i></div>
-                <div class="side-menu__title"> Email <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
-                </div>
-            </a>
-            <ul class="">
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="mail"></i></div>
-                        <div class="side-menu__title"> Email queue</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="send"></i></div>
-                        <div class="side-menu__title"> Email Templates</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
 
         {{-- Settings --}}
         <li>
@@ -338,7 +316,7 @@
                 <li>
                     <a href="{{route('settings')}}" class="side-menu">
                         <div class="side-menu__icon"><i data-feather="settings"></i></div>
-                        <div class="side-menu__title"> Settings</div>
+                        <div class="side-menu__title"> General</div>
                     </a>
                 </li>
                 <li>
@@ -360,27 +338,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('settings.language')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="globe"></i></div>
-                        <div class="side-menu__title"> Language</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('settings.upload.types')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="cloud"></i></div>
-                        <div class="side-menu__title"> Upload types</div>
-                    </a>
-                </li>
-                <li>
                     <a href="{{route('settings.rating.categories')}}" class="side-menu">
                         <div class="side-menu__icon"><i data-feather="star"></i></div>
                         <div class="side-menu__title"> Rating categories</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('settings.scheduled.tasks')}}" class="side-menu">
-                        <div class="side-menu__icon"><i data-feather="activity"></i></div>
-                        <div class="side-menu__title"> Scheduled Tasks</div>
                     </a>
                 </li>
                 <li>

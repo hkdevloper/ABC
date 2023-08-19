@@ -15,6 +15,11 @@ class LocationsTableSeeder extends Seeder
         Location::factory()->count(50)->create();
         $locations = Location::all();
         foreach ($locations as $location) {
+            if (rand(0, 2) == 1) {
+                $location->parent_id = null;
+                $location->save();
+                continue;
+            }
             $location->parent_id = Location::inRandomOrder()->first()->id;
             $location->save();
         }

@@ -3,44 +3,37 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\MembershipPackage;
+use App\Models\Category;
+use App\Models\Jobs;
+use App\Models\Location;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
+    public function initCrudView(): array
+    {
+        // get all the users
+        $users = User::all();
+        // get all the categories
+        $categories = Category::where('type', 'product')->get();
+        // get all the Countries from location table
+        $countries = Location::where('parent_id', 0)->orWhere('parent_id', null)->get();
+
+        return compact('users', 'categories', 'countries');
+    }
     // Function to view All Jobs
     public function viewJobs()
     {
-        return view('pages.admin.jobs.view_all');
+        $jobs = Jobs::all();
+        $data = compact('jobs');
+        return view('pages.admin.jobs.view_all')->with($data);
     }
 
     // Function to view Add Job
     public function viewAddJob(Request $request)
     {
-        $packageId = null;
-        // check if request has Membership package
-        if ($request->has('membership_package')) {
-            $packageId = $request->membership_package;
-        }
-        $packages = MembershipPackage::where('type', 'job')->get();
-        $membershipPackage = [];
-        foreach ($packages as $package) {
-            $member = [];
-            $member['id'] = $package->id;
-            $member['name'] = $package->name;
-            $member['description'] = $package->description;
-            $member['plans'] = [];
-            foreach ($package->plans as $plan) {
-                $member['plans'][] = [
-                    'id' => $plan->id,
-                    'price' => $plan->price,
-                    'billing_period' => $plan->billing_period,
-                    'billing_interval' => $plan->billing_interval,
-                ];
-            }
-            $membershipPackage[] = $member;
-        }
-        $data = compact('packageId', 'membershipPackage');
+        $data = $this->initCrudView(); // get all the users, categories, countries and states
         return view('pages.admin.jobs.add')->with($data);
     }
 

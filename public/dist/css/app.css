@@ -6419,8 +6419,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .app {
   background-repeat: no-repeat;
   background-attachment: fixed;
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
 }
 
 .login {
@@ -6957,10 +6955,6 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
   font-family: Roboto;
   font-size: 0.875rem;
   --text-opacity: 1;
@@ -6976,7 +6970,6 @@ body {
 }
 
 .content {
-  border-radius: 30px;
   padding: 0px 22px;
   min-height: 100vh;
   --bg-opacity: 1;

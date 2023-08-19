@@ -1,5 +1,4 @@
 @extends('main')
-
 @section("head")
     <link rel="stylesheet" href="{{url("/")}}/dist/css/leaflet.css">
     <script src="{{url("/")}}/dist/js/leaflet.js"></script>
@@ -18,17 +17,190 @@
             <div class="col-span-12 mt-8">
                 <div class="intro-y flex items-center h-10">
                     <h2 class="text-lg font-medium truncate mr-5">
-                        Add Job
+                        Add New Job
                     </h2>
                 </div>
                 {{-- Main Content goes Here --}}
-                <div class="intro-y datatable-wrapper box p-5 mt-5">
-                    <div>
-                        <label>Email</label>
-                        <input type="email" class="input w-full border mt-2" placeholder="example@gmail.com">
+                <form action="{{route('add.job')}}" method="post" enctype="multipart/form-data"
+                      class="intro-y datatable-wrapper box p-5 mt-5">
+                    <div style="display: flex">
+                        <div style="margin-right: 50px">
+                            <label>Approved</label>
+                            <br>
+                            <input type="checkbox" checked class="input w-full input--switch border" name="is_approved">
+                        </div>
+                        <div style="margin-right: 50px">
+                            <label>Featured</label>
+                            <br>
+                            <input type="checkbox" class="input w-full input--switch border" name="is_featured">
+                        </div>
                     </div>
-                    <button type="button" class="button bg-theme-1 text-white mt-5">Submit</button>
-                </div>
+                    <div class="mt-3">
+                        <label>Select User</label>
+                        <select name="user" required class="select2 input w-full border mt-2">
+                            <option selected>Select user</option>
+                            @foreach($users as $user)
+                                <option value="{{$user->id}}">{{$user->first_name}}&nbsp;{{$user->last_name}}
+                                    &nbsp;[Id: {{$user->id}}]
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mt-3">
+                        <label>Category</label>
+                        <select name="category" required class="select2 input w-full border mt-2">
+                            <option selected>Select Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mt-3">
+                        <label>Job Thumbnail</label>
+                        <input type="file" id="media_file" class="input w-full border mt-2" name="file" required>
+                    </div>
+                    <input name="media" id="media" type="hidden" required/>
+                    <div class="mb-4">
+                        <label class="block mb-1">Title</label>
+                        <input type="text" name="title" class="input w-full border mt-1" placeholder="Title"
+                               value="{{ old('title') }}">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-1">Slug</label>
+                        <input type="text" name="slug" class="input w-full border mt-1" placeholder="Slug"
+                               value="{{ old('slug') }}">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-1">Summary</label>
+                        <input type="text" name="summary" class="input w-full border mt-1" placeholder="Summary"
+                               value="{{ old('summary') }}">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-1">Description</label>
+                        <textarea name="description" class="input w-full border mt-1" rows="4"
+                                  placeholder="Description">{{ old('description') }}</textarea>
+                    </div>
+                    <div class="mt-3">
+                        <label>Job Galley</label>
+                        <input type="file" id="media_file_gallery" class="input w-full border mt-2" multiple
+                               name="file">
+                    </div>
+                    <input name="gallery[]" id="gallery" type="hidden" required/>
+                    <div class="mb-4">
+                        <label class="block mb-1">Valid Until</label>
+                        <input type="datetime-local" name="valid_until" class="input w-full border mt-1"
+                               value="{{ old('valid_until') }}">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-1">Employment Type</label>
+                        <input type="text" name="employment_type" class="input w-full border mt-1"
+                               placeholder="Employment Type" value="{{ old('employment_type') }}">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-1">Salary</label>
+                        <input type="text" name="salary" class="input w-full border mt-1" placeholder="Salary"
+                               value="{{ old('salary') }}">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-1">Organization</label>
+                        <input type="text" name="organization" class="input w-full border mt-1"
+                               placeholder="Organization" value="{{ old('organization') }}">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-1">Overview</label>
+                        <textarea name="overview" class="input w-full border mt-1" rows="4"
+                                  placeholder="Overview">{{ old('overview') }}</textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-1">Education</label>
+                        <textarea name="education" class="input w-full border mt-1" rows="4"
+                                  placeholder="Education">{{ old('education') }}</textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-1">Experience</label>
+                        <textarea name="experience" class="input w-full border mt-1" rows="4"
+                                  placeholder="Experience">{{ old('experience') }}</textarea>
+                    </div>
+                    <div class="mt-3">
+                        <label>Address</label>
+                        <input type="text" class="input w-full border mt-2" name="address"
+                               value="{{old('address')}}"
+                               placeholder="Enter Address here">
+                    </div>
+                    <div class="mt-3 w-full">
+                        <label>Country</label>
+                        <select name="country" class="select2 input w-full border mt-2" id="country">
+                            <option value="1">Select Country</option>
+                            @foreach($countries as $country)
+                                <option value="{{$country->id}}">{{$country->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mt-3 state hidden w-full">
+                        <label style="display: block; width: 100%">State</label>
+                        <select name="state" class="select2 input w-full border mt-2" style="width: 100% !important;"
+                                id="state">
+                            <option value="1">Select State</option>
+                        </select>
+                    </div>
+                    <div class="mt-3 city hidden w-full">
+                        <label style="display: block; width: 100%">City</label>
+                        <select name="city" class="select2 input w-full border mt-2" id="city"
+                                style="width: 100% !important;">
+                            <option value="1">Select City</option>
+                        </select>
+                    </div>
+                    <div class="mt-3">
+                        <label>Zip Code</label>
+                        <input type="text" class="input w-full border mt-2" name="zip_code"
+                               value="{{old('zip_code')}}"
+                               placeholder="Enter Zip Code here">
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">Cordinates</label>
+                        <div id="map-picker" class="w-full border mt-2 flex-1"
+                             style="width: 100%; height: 400px;"></div>
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">longitude</label>
+                        <input name="longitude" type="text" class="input w-full border mt-2 flex-1" required
+                               readonly
+                               placeholder="" id="longitude"
+                               value="{{old('longitude')}}">
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">Latitude</label>
+                        <input name="latitude" type="text" class="input w-full border mt-2 flex-1" required
+                               readonly
+                               placeholder="" id="latitude" value="{{old('latitude')}}">
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Title</label>
+                        <input name="meta_title" type="text" class="input w-full border mt-2 flex-1" required
+                               placeholder="" value="{{old('meta_title')}}">
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Keywords</label>
+                        <input name="meta_keywords" type="text" class="input w-full border mt-2 flex-1" required
+                               placeholder=", (comma seperated values)" id="tag-keyword"
+                               value="{{old('meta_keywords')}}">
+                    </div>
+                    <div class="mt-3">
+                        <label class="w-full sm:w-20 sm:text-right sm:mr-5">Meta Description</label>
+                        <input name="meta_description" type="text" class="input w-full border mt-2 flex-1" required
+                               value="{{old('meta_description')}}">
+                    </div>
+                    <button type="submit" class="button bg-theme-1 text-white mt-5">Submit</button>
+                </form>
             </div>
         </div>
     </div>
