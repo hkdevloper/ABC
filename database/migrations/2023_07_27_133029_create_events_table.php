@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('category_id')->nullable()->constrained('categories');
             $table->foreignId('thumbnail_id')->nullable()->constrained('media')->cascadeOnDelete();
-            $table->json('gallery')->nullable();
+            $table->json('gallery');
             $table->foreignId('seo_id')->nullable()->constrained('seo')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);

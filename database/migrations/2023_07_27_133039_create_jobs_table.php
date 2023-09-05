@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->text('education')->nullable();
             $table->text('experience')->nullable();
             $table->foreignId('thumbnail_id')->nullable()->constrained('media')->cascadeOnDelete();
-            $table->json('gallery')->nullable();
+            $table->json('gallery');
             $table->string('website')->nullable();
             $table->text('address')->nullable();
             $table->foreignId('city_id')->nullable()->constrained('location')->cascadeOnDelete();

@@ -223,6 +223,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 });
 
+
+// prefix routes for User
+
+
+
 // Prefix routes for Frontend
 Route::get('/', function () {
     return view('welcome');

@@ -29,7 +29,6 @@
     </div>
     @include('includes.header')
     @yield('content')
-
 </main>
 <script src="{{url('/')}}/user/assets/js/others/plugins-core/aos.js"></script>
 <script src="{{url('/')}}/user/assets/js/others/plugins-script/aos.js"></script>

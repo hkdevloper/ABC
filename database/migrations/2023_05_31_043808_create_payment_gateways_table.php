@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(0);
             $table->string('name');
             $table->text('description');
-            $table->json('settings')->nullable();
+            $table->json('settings');
             $table->timestamps();
         });
 

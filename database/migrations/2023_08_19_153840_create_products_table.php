@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('condition')->nullable();
             $table->string('brand')->nullable();
             $table->foreignId('thumbnail_id')->nullable()->constrained('media')->cascadeOnDelete();
-            $table->json('gallery')->nullable();
+            $table->json('gallery');
             $table->timestamps();
         });
     }
