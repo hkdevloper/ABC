@@ -1,101 +1,57 @@
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
 .hk-devs-menuItems {
-    cursor: default;
-    list-style-type: none;
-    position: relative
-}
-
-.hk-devs-menuItems a {
-    color: #474d6a;
-    color: var(--N700, #474d6a);
+    @apply cursor-default list-none relative;
+  }
+  .hk-devs-menuItems a {
+    @apply text-[#474d6a] text-[color:var(--N700,#474d6a)] flex text-base pr-0;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
-    font-size: 16px;
-    padding-right: 0
-}
-
-.hk-devs-menuItems__item-count {
+  }
+  .hk-devs-menuItems__item-count {
+    @apply border border border-[color:var(--A100,#ffedf2)] box-border text-[#f05537] text-[color:var(--S100,#f05537)] text-[11px] font-bold h-6 leading-[14px] max-w-[100px] overflow-hidden text-center text-ellipsis whitespace-nowrap ml-2.5 px-2.5 py-[5px] rounded-xl border-solid border-[#ffedf2];
     background: #fff;
     background: var(--N100, #fff);
-    border: 1px solid #ffedf2;
-    border: 1px solid var(--A100, #ffedf2);
-    border-radius: 12px;
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    color: #f05537;
-    color: var(--S100, #f05537);
-    font-size: 11px;
-    font-weight: 700;
-    height: 24px;
-    line-height: 14px;
-    margin-left: 10px;
-    max-width: 100px;
-    overflow: hidden;
-    padding: 5px 10px;
-    text-align: center;
     -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    white-space: nowrap
-}
-
-[dir=ltr] .hk-devs-menus {
-    padding-left: 0
-}
-
-[dir=rtl] .hk-devs-menus {
-    padding-right: 0
-}
-
-.hk-devs-menus {
+  }
+  [dir="ltr"] .hk-devs-menus {
+    @apply pl-0;
+  }
+  [dir="rtl"] .hk-devs-menus {
+    @apply pr-0;
+  }
+  .hk-devs-menus {
+    @apply box-border flex opacity-100 relative absolute transition-opacity duration-[0.1s] ease-[ease-out] delay-[0.25s] m-0 left-52 top-6;
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
-    left: 208px;
-    margin: 0;
-    opacity: 1;
     pointer-events: all;
-    position: relative;
-    position: absolute;
-    top: 24px;
-    -webkit-transition: opacity .1s ease-out;
-    -o-transition: opacity .1s ease-out;
-    transition: opacity .1s ease-out;
-    -webkit-transition-delay: .25s;
-    -o-transition-delay: .25s;
-    transition-delay: .25s
-}
-
-.hk-devs-menus>li {
-    margin-right: 36px;
-    padding-bottom: 24px
-}
-
-.hk-devs-company-logo {
-    color: #121224;
-    color: var(--N800, #121224);
-    color: #717b9e;
-    color: var(--N600, #717b9e);
-    display: inline-block;
+    -webkit-transition: opacity 0.1s ease-out;
+    -o-transition: opacity 0.1s ease-out;
+    -webkit-transition-delay: 0.25s;
+    -o-transition-delay: 0.25s;
+  }
+  .hk-devs-menus > li {
+    @apply mr-9 pb-6;
+  }
+  .hk-devs-company-logo {
+    @apply text-[#121224] text-[color:var(--N800,#121224)] text-[#717b9e] text-[color:var(--N600,#717b9e)] inline-block text-[15px] leading-5 relative no-underline top-1;
     font-family: Satoshi;
     font-family: var(--font-family, "Satoshi");
-    font-size: 15px;
-    line-height: 20px;
-    position: relative;
-    text-decoration: none;
-    top: 4px
-}
-
-.hk-devs-,
-button,
-input {
+  }
+  .hk-devs-,
+  button,
+  input {
+    @apply font-normal;
     font-family: Satoshi;
     font-family: var(--font-family, "Satoshi");
-    font-weight: 400
-}
-
-.hk-devs- {
+  }
+  .hk-devs- {
+    @apply shadow-none box-border flex flex-row grow-0 shrink-0 flex-nowrap justify-center min-w-[1200px] sticky transition-[-webkit-box-shadow] duration-[0.1s] ease-[ease-out] transition-shadow duration-[0.1s] ease-[ease-out] z-[99] left-0 top-0;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-negative: 0;
@@ -104,129 +60,62 @@ input {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     -webkit-box-shadow: none;
-    box-shadow: none;
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
     -ms-flex-direction: row;
-    flex-direction: row;
-    flex-grow: 0;
-    flex-shrink: 0;
     -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    justify-content: center;
-    left: 0;
-    min-width: 1200px;
-    position: sticky;
-    top: 0;
-    -webkit-transition: -webkit-box-shadow .1s ease-out;
-    transition: -webkit-box-shadow .1s ease-out;
-    -o-transition: box-shadow .1s ease-out;
-    transition: box-shadow .1s ease-out;
-    transition: box-shadow .1s ease-out, -webkit-box-shadow .1s ease-out;
-    z-index: 99
-}
-
-.hk-devs-,
-.hk-devs- .hk-devs-__placeholder {
-    background-color: #fff;
-    background-color: var(--N100, #fff);
-    height: 72px
-}
-
-.hk-devs-__wrapper {
+    -webkit-transition: -webkit-box-shadow 0.1s ease-out;
+    -o-transition: box-shadow 0.1s ease-out;
+    transition: box-shadow 0.1s ease-out, -webkit-box-shadow 0.1s ease-out;
+  }
+  .hk-devs-,
+  .hk-devs- .hk-devs-__placeholder {
+    @apply bg-white bg-[color:var(--N100,#fff)] h-[72px];
+  }
+  .hk-devs-__wrapper {
+    @apply box-border flex h-full relative w-[1120px];
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    position: relative;
-    width: 1120px
-}
-
-.hk-devs-__logo {
-    height: 20.44px;
-    position: absolute;
-    top: 24px
-}
-
-.hk-devs-footer__separator {
+  }
+  .hk-devs-__logo {
+    @apply h-[20.44px] absolute top-6;
+  }
+  .hk-devs-footer__separator {
+    @apply h-px opacity-80 w-[1120px] mx-auto my-10;
     background: #e7e7f1;
     background: var(--N400, #e7e7f1);
-    height: 1px;
-    margin: 40px auto;
-    opacity: .8;
-    width: 1120px
-}
-
-.hk-devs-log-reg {
-    opacity: 1;
+  }
+  .hk-devs-log-reg {
+    @apply opacity-100 absolute transition-opacity duration-[0.1s] ease-[ease-out] delay-[0.25s] right-[148px] top-[15px];
     pointer-events: all;
-    position: absolute;
-    right: 148px;
-    top: 15px;
-    -webkit-transition: opacity .1s ease-out;
-    -o-transition: opacity .1s ease-out;
-    transition: opacity .1s ease-out;
-    -webkit-transition-delay: .25s;
-    -o-transition-delay: .25s;
-    transition-delay: .25s
-}
-
-.hk-devs-log-reg>a {
+    -webkit-transition: opacity 0.1s ease-out;
+    -o-transition: opacity 0.1s ease-out;
+    -webkit-transition-delay: 0.25s;
+    -o-transition-delay: 0.25s;
+  }
+  .hk-devs-log-reg > a {
+    @apply items-center border border border-[color:var(--P100,#275df5)] box-border cursor-pointer inline-flex text-base font-bold leading-5 no-underline px-5 py-2.5 rounded-[50px] border-solid border-[#275df5];
     -webkit-box-align: center;
     -ms-flex-align: center;
-    align-items: center;
-    border: 1px solid #275df5;
-    border: 1px solid var(--P100, #275df5);
-    border-radius: 50px;
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    cursor: pointer;
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
-    display: inline-flex;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 20px;
     outline: 0;
-    padding: 10px 20px;
-    text-decoration: none
-}
-
-.hk-devs-log-reg .hk-devs-lg-rg__login {
-    background-color: #fff;
-    background-color: var(--N100, #fff);
-    border-color: #275df5;
-    border-color: var(--P100, #275df5);
-    color: #275df5;
-    color: var(--P100, #275df5);
-    height: 40px;
-    width: 82px
-}
-
-.hk-devs-log-reg .hk-devs-lg-rg__login:focus,
-.hk-devs-log-reg .hk-devs-lg-rg__login:hover {
-    background-color: #f7f7f9;
-    background-color: var(--N300, #f7f7f9)
-}
-
-.hk-devs-log-reg .hk-devs-lg-rg__register {
-    background-color: #f05537;
-    background-color: var(--S100, #f05537);
-    border-color: #f05537;
-    border-color: var(--S100, #f05537);
-    color: #fff;
-    color: var(--N100, #fff);
-    height: 40px;
-    margin-left: 10px;
-    width: 101px
-}
-
-.hk-devs-log-reg .hk-devs-lg-rg__register:focus,
-.hk-devs-log-reg .hk-devs-lg-rg__register:hover {
-    background-color: #fc7358
-}
+  }
+  .hk-devs-log-reg .hk-devs-lg-rg__login {
+    @apply bg-white bg-[color:var(--N100,#fff)] border-[color:var(--P100,#275df5)] text-[#275df5] text-[color:var(--P100,#275df5)] h-10 w-[82px] border-[#275df5];
+  }
+  .hk-devs-log-reg .hk-devs-lg-rg__login:focus,
+  .hk-devs-log-reg .hk-devs-lg-rg__login:hover {
+    @apply bg-[#f7f7f9] bg-[color:var(--N300,#f7f7f9)];
+  }
+  .hk-devs-log-reg .hk-devs-lg-rg__register {
+    @apply bg-[#f05537] bg-[color:var(--S100,#f05537)] border-[color:var(--S100,#f05537)] text-white text-[color:var(--N100,#fff)] h-10 w-[101px] ml-2.5 border-[#f05537];
+  }
+  .hk-devs-log-reg .hk-devs-lg-rg__register:focus,
+  .hk-devs-log-reg .hk-devs-lg-rg__register:hover {
+    @apply bg-[#fc7358];
+  }
+  

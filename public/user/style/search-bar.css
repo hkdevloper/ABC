@@ -1,215 +1,113 @@
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
 div .verticalTrack {
-    opacity: 0 !important;
-    transition: all .3s !important
-}
-
-div .verticalTrack:hover {
-    opacity: 1 !important;
+    @apply opacity-0 transition-all duration-[0.3s] hover:opacity-100 hover:transition-all hover:duration-[0.3s] hover:w-2.5;
+  }
+  div .verticalTrack:hover {
     background: #d9d9d9 !important;
-    transition: all .3s !important
-}
-
-div .verticalThumb:hover {
-    background: #a0a0a0 !important
-}
-
-div .verticalTrack:hover {
-    width: 10px !important
-}
-
-div:hover>.verticalTrack {
-    opacity: 1 !important;
-    transition: all .3s !important
-}
-
-.suggestor-tag {
-    padding: 4px 8px 6px;
-    font-weight: 600;
-    background-color: #f1f9fe;
-    color: #010c1f;
-    border-radius: 24px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    align-items: center;
-    max-width: 300px;
-    margin: 2px
-}
-
-.suggestor-tag {
-    border: 1px solid #add9fb
-}
-
-.suggestor-tag .star {
-    color: #8993a4;
-    cursor: pointer
-}
-
-.suggestor-tag .leading-icon,
-.suggestor-tag .star {
-    font-size: 14px;
-    margin-right: 4px
-}
-
-.suggestor-tag.active .star {
-    color: #0078db
-}
-
-.flex-row {
-    display: flex
-}
-
-.flex-wrap {
-    flex-wrap: wrap
-}
-
-@-webkit-keyframes slide {
-    0% {
-        top: calc(100% + 10px);
-        opacity: 0
-    }
-
-    to {
-        top: calc(100% + 2px);
-        opacity: 1
-    }
-}
-
-@keyframes slide {
-    0% {
-        top: calc(100% + 10px);
-        opacity: 0
-    }
-
-    to {
-        top: calc(100% + 2px);
-        opacity: 1
-    }
-}
-
-.suggestor-wrapper {
-    position: relative
-}
-
-.suggestor-wrapper.active .suggestor-box {
-    border-color: #0078db !important
-}
-
-.suggestor-wrapper .suggestor-box {
-    position: relative;
-    width: 100%;
-    border: 1px solid #dbdde6;
-    border-radius: 4px;
-    padding: 4px 12px
-}
-
-.suggestor-wrapper .suggestor-box .suggestor-input {
-    border: none;
-    flex-grow: 1;
-    min-width: 145px;
-    font-size: 14px;
-    line-height: 20px;
-    color: #091e42;
-    padding: 8px 0;
-    font-weight: 500
-}
-
-.suggestor-wrapper .suggestor-box .suggestor-input:active,
-.suggestor-wrapper .suggestor-box .suggestor-input:focus {
-    outline: 0
-}
-
-li,
-ul {
-    list-style-type: none
-}
-
-.qsbWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-family: var(--font-family, "Satoshi")
-}
-
-.qsbWrapper .qsb {
-    display: flex;
-    align-items: center;
-    padding: 16px 20px;
+  }
+  div .verticalThumb:hover {
+    background: #a0a0a0 !important;
+  }
+  div:hover > .verticalTrack {
+    @apply opacity-100 transition-all duration-[0.3s];
+  }
+  .suggestor-tag {
+    @apply font-semibold bg-[#f1f9fe] text-[#010c1f] flex items-end justify-center items-center max-w-[300px] m-0.5 pt-1 pb-1.5 px-2 rounded-3xl border border-solid border-[#add9fb];
+  }
+  .suggestor-tag .star {
+    @apply text-[#8993a4] cursor-pointer;
+  }
+  .suggestor-tag .leading-icon,
+  .suggestor-tag .star {
+    @apply text-sm mr-1;
+  }
+  .suggestor-tag.active .star {
+    @apply text-[#0078db];
+  }
+  .flex-row {
+    @apply flex;
+  }
+  .flex-wrap {
+    @apply flex-wrap;
+  }
+  .suggestor-wrapper {
+    @apply relative;
+  }
+  .suggestor-wrapper.active .suggestor-box {
+    @apply border-[#0078db];
+  }
+  .suggestor-wrapper .suggestor-box {
+    @apply relative w-full border rounded px-3 py-1 border-solid border-[#dbdde6];
+  }
+  .suggestor-wrapper .suggestor-box .suggestor-input {
+    @apply grow min-w-[145px] text-sm leading-5 text-[#091e42] font-medium px-0 py-2 border-[none];
+  }
+  .suggestor-wrapper .suggestor-box .suggestor-input:active,
+  .suggestor-wrapper .suggestor-box .suggestor-input:focus {
+    outline: 0;
+  }
+  li,
+  ul {
+    @apply list-none;
+  }
+  .qsbWrapper {
+    @apply flex items-center justify-center flex-col;
+    font-family: var(--font-family, "Satoshi");
+  }
+  .qsbWrapper .qsb {
+    @apply flex items-center box-border shadow-[0_25px_60px_rgba(113,106,147,0.2)] px-5 py-4 rounded-[40px];
     background: #fff;
-    box-sizing: border-box;
-    box-shadow: 0 25px 60px rgba(113, 106, 147, .2);
-    border-radius: 40px
-}
-
-.qsbWrapper .qsb .searchIcon {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    margin-right: 10px
-}
-
-.qsbWrapper .qsb .keywordSugg .suggestor-box {
-    width: 336.67px;
-    padding-right: 10px
-}
-
-.qsbWrapper .qsb .suggestor-wrapper div:first-child div:first-child {
-    overflow-y: unset !important
-}
-
-.qsbWrapper .qsb .suggestor-wrapper .suggestor-box {
-    border: none;
-    padding: unset
-}
-
-.qsbWrapper .qsb .suggestor-wrapper .suggestor-box .suggestor-input {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 23px;
-    color: var(--N800)
-}
-
-.qsbWrapper .qsb .suggestor-wrapper .suggestor-box .suggestor-input::-webkit-input-placeholder {
-    color: var(--N500);
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 23px
-}
-
-.qsbWrapper .qsb .suggestor-wrapper .suggestor-box .suggestor-input:-ms-input-placeholder {
-    color: var(--N500);
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 23px
-}
-
-.qsbWrapper .qsb .suggestor-wrapper .suggestor-box .suggestor-input::placeholder {
-    color: var(--N500);
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 23px
-}
-
-.qsbWrapper .qsb .verticalTrack {
+  }
+  .qsbWrapper .qsb .searchIcon {
+    @apply inline-block w-6 h-6 mr-2.5;
+  }
+  .qsbWrapper .qsb .keywordSugg .suggestor-box {
+    @apply w-[336.67px] pr-2.5;
+  }
+  .qsbWrapper .qsb .suggestor-wrapper div:first-child div:first-child {
+    overflow-y: unset !important;
+  }
+  .qsbWrapper .qsb .suggestor-wrapper .suggestor-box {
+    @apply p-[unset] border-[none];
+  }
+  .qsbWrapper .qsb .suggestor-wrapper .suggestor-box .suggestor-input {
+    @apply font-medium text-lg leading-[23px] text-[color:var(--N800)];
+  }
+  .qsbWrapper
+    .qsb
+    .suggestor-wrapper
+    .suggestor-box
+    .suggestor-input::-webkit-input-placeholder {
+    @apply text-[color:var(--N500)] font-medium text-lg leading-[23px];
+  }
+  .qsbWrapper
+    .qsb
+    .suggestor-wrapper
+    .suggestor-box
+    .suggestor-input:-ms-input-placeholder {
+    @apply text-[color:var(--N500)] font-medium text-lg leading-[23px];
+  }
+  .qsbWrapper
+    .qsb
+    .suggestor-wrapper
+    .suggestor-box
+    .suggestor-input::placeholder {
+    @apply text-[color:var(--N500)] font-medium text-lg leading-[23px];
+  }
+  .qsbWrapper .qsb .verticalTrack {
+    @apply rounded-[42px];
     background: 0 0 !important;
-    border-radius: 42px !important
-}
-
-.qsbWrapper .qsb .verticalThumb {
-    width: 4px !important;
+  }
+  .qsbWrapper .qsb .verticalThumb {
+    @apply w-1 rounded-[42px];
     background: #e7e7f1 !important;
-    border-radius: 42px !important
-}
-
-.qsbWrapper .qsb .qsbSubmit {
-    margin-left: 14px;
-    padding: 10px 35px;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
+  }
+  .qsbWrapper .qsb .qsbSubmit {
+    @apply font-bold text-base leading-5 text-white cursor-pointer ml-3.5 px-[35px] py-2.5 rounded-[40px];
     background: var(--P100);
-    border-radius: 40px;
-    color: #fff;
-    cursor: pointer
-}
+  }
+  

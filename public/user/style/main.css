@@ -6,16 +6,18 @@
 * Link:     www.hkdevs.tech
 */
 
+/* Tailwind CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* HkDevs custom styles*/
 @import url('./fonts.css');
 @import url('./globals.css');
 @import url('./header-footer.css');
 @import url('./search-bar.css');
-@import url('./container.css');
 @import url('./content.css');
-@import url('./drawer.css');
 @import url('./home-page.css');
-@import url('./responsive.css');
 @import url('./widgets.css');
 @import url('./owl-carousel.css');
 @import url('./modified.css');
-@import url('./tailwind.css');

@@ -1,43 +1,35 @@
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
 .homepage .widget-placeholder {
-    min-height: 100vh
-}
-
-.homepage .hkdevs-js-wdgt {
-    margin: 35px 0;
-    display: inline-block;
-    padding: 0;
-    box-shadow: none
-}
-
-.homepage .hkdevs-js-wdgt.hkdevs-homepage-register-widget {
-    margin: 28px 0 0
-}
-
-.homepage .hkdevs-js-wdgt.trending-hkdevs-wdgt {
-    overflow: visible;
-    margin: 0 0 5px;
-    padding-top: 15px
-}
-
-.homepage .hkdevs-js-wdgt.hkdevs-homepage-qsb-header-wdgt {
-    margin: 80px 0 28px;
-    background: inherit !important
-}
-
-.homepage .hkdevs-js-wdgt.hkdevs-homepage-industry-wdgt {
-    overflow: visible
-}
-
-.homepage .hkdevs-js-wdgt.hkdevs-homepage-industry-wdgt.hkdevs-js-wdgt {
-    margin-top: 35px;
-    margin-bottom: 0
-}
-
-.homepage .hkdevs-js-wdgt.ni-desktop-homepage-v2_mainSection_homepageEventsWdgt_event {
-    margin-top: 1px;
-    margin-bottom: 1px
-}
-
-.homepage #mainSection\.branding-premium .hkdevs-js-wdgt {
-    margin: 35px 0
-}
+    @apply min-h-screen;
+  }
+  .homepage .hkdevs-js-wdgt {
+    @apply inline-block shadow-none mx-0 my-[35px] p-0;
+  }
+  .homepage .hkdevs-js-wdgt.hkdevs-homepage-register-widget {
+    @apply mt-7 mb-0 mx-0;
+  }
+  .homepage .hkdevs-js-wdgt.trending-hkdevs-wdgt {
+    @apply overflow-visible mt-0 mb-[5px] mx-0 pt-[15px];
+  }
+  .homepage .hkdevs-js-wdgt.hkdevs-homepage-qsb-header-wdgt {
+    @apply mt-20 mb-7 mx-0;
+    background: inherit !important;
+  }
+  .homepage .hkdevs-js-wdgt.hkdevs-homepage-industry-wdgt {
+    @apply overflow-visible;
+  }
+  .homepage .hkdevs-js-wdgt.hkdevs-homepage-industry-wdgt.hkdevs-js-wdgt {
+    @apply mt-[35px] mb-0;
+  }
+  .homepage
+    .hkdevs-js-wdgt.ni-desktop-homepage-v2_mainSection_homepageEventsWdgt_event {
+    @apply my-px;
+  }
+  .homepage #mainSection\.branding-premium .hkdevs-js-wdgt {
+    @apply mx-0 my-[35px];
+  }
+  

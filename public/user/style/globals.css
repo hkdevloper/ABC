@@ -1,93 +1,66 @@
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
 * {
-    padding: 0;
-    margin: 0;
+    @apply box-border m-0 p-0;
     list-style: none;
-    box-sizing: border-box
-}
-
-a,
-a:focus,
-a:hover,
-a:visited {
+  }
+  a,
+  a:focus,
+  a:hover,
+  a:visited {
+    @apply no-underline;
     outline: 0;
-    text-decoration: none
-}
-
-a,
-body,
-div,
-p,
-span {
-    user-select: text !important
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-    cursor: auto;
-    user-select: text !important
-}
-
-input::-ms-clear,
-input::-ms-reveal {
-    display: none
-}
-
-body {
+  }
+  a,
+  body,
+  div,
+  p,
+  span {
+    @apply select-text;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    @apply cursor-auto select-text;
+  }
+  input::-ms-clear,
+  input::-ms-reveal {
+    @apply hidden;
+  }
+  body {
+    @apply text-sm leading-[18px] text-[#1b2437] m-0;
     background: #fff;
-    font-size: 14px;
-    line-height: 18px;
-    margin: 0;
-    color: #1b2437
-}
-
-.container {
-    width: 1120px;
-    margin: auto
-}
-
-.container * {
-    box-sizing: border-box
-}
-
-img[src*="https://logs.hkdevs.com"] {
-    display: none !important
-}
-
-.qsb-header-container {
-    padding: 70px 0 39px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    background: linear-gradient(180deg, #f5f4fa, rgba(251, 251, 253, 0))
-}
-
-.qsb-header-container * {
-    font-family: var(--font-family, "Satoshi")
-}
-
-.qsb-header-container .qsb-title {
-    font-weight: 900;
-    font-size: 40px;
-    line-height: 54px;
-    color: var(--N800);
-    margin-bottom: 10px
-}
-
-.qsb-header-container .qsb-byLine {
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 23px;
-    color: var(--N800)
-}
-
-[data-theme=one-theme] {
+  }
+  .container {
+    @apply w-[1120px] m-auto;
+  }
+  .container * {
+    @apply box-border;
+  }
+  img[src*="https://logs.hkdevs.com"] {
+    @apply hidden;
+  }
+  .qsb-header-container {
+    @apply flex flex-col items-center justify-center w-full pt-[70px] pb-[39px] px-0;
+    background: linear-gradient(180deg, #f5f4fa, rgba(251, 251, 253, 0));
+  }
+  .qsb-header-container * {
+    font-family: var(--font-family, "Satoshi");
+  }
+  .qsb-header-container .qsb-title {
+    @apply font-black text-[40px] leading-[54px] text-[color:var(--N800)] mb-2.5;
+  }
+  .qsb-header-container .qsb-byLine {
+    @apply font-medium text-xl leading-[23px] text-[color:var(--N800)];
+  }
+  [data-theme="one-theme"] {
     --font-family: Satoshi, "Satoshi Fallback";
     --P100: #275df5;
     --P200: #b0c8ff;
@@ -127,88 +100,64 @@ img[src*="https://logs.hkdevs.com"] {
     --br10: 10px;
     --background: #f5f5f5;
     --missingDetailsBg: #fff5f5;
-    --profilePerfBg: #ecf5ff
-}
-
-a,
-b,
-body,
-center,
-details,
-div,
-footer,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-header,
-html,
-i,
-img,
-label,
-li,
-main,
-nav,
-object,
-p,
-s,
-section,
-span,
-sub,
-ul {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    vertical-align: baseline;
+    --profilePerfBg: #ecf5ff;
+  }
+  a,
+  b,
+  body,
+  center,
+  details,
+  div,
+  footer,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  header,
+  html,
+  i,
+  img,
+  label,
+  li,
+  main,
+  nav,
+  object,
+  p,
+  s,
+  section,
+  span,
+  sub,
+  ul {
+    @apply text-[100%] align-baseline box-border m-0 p-0 border-0;
     word-wrap: break-word;
-    box-sizing: border-box
-}
-
-details,
-footer,
-header,
-main,
-nav,
-section {
-    display: block
-}
-
-li,
-ul {
-    list-style-type: none
-}
-
-[hidden] {
-    display: none
-}
-
-input {
-    box-sizing: border-box
-}
-
-@media only screen and (max-width:1270px) {
+  }
+  details,
+  footer,
+  header,
+  main,
+  nav,
+  section {
+    @apply block;
+  }
+  li,
+  ul {
+    @apply list-none;
+  }
+  [hidden] {
+    @apply hidden;
+  }
+  input {
+    @apply box-border;
+  }
+  @media only screen and (max-width: 1270px) {
     html {
-        width: -webkit-fit-content;
-        width: -moz-fit-content;
-        width: fit-content
+      @apply w-[-webkit-fit-content] w-[-moz-fit-content] w-fit;
     }
-}
-
-.container .content .chip {
+  }
+  .container .content .chip {
+    @apply border font-medium text-[13px] leading-[18px] text-[#445578] w-auto h-auto inline-block max-w-full ml-0 mr-1.5 mt-1.5 mb-0 px-3 py-1 rounded-[14px] border-solid border-[#d3e1ea];
     background: #fff;
-    border: 1px solid #d3e1ea;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 18px;
-    color: #445578;
-    width: auto;
-    height: auto;
-    padding: 4px 12px;
-    border-radius: 14px;
-    margin: 6px 6px 0 0;
-    display: inline-block;
-    max-width: 100%
-}
+  }
+  
