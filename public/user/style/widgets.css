@@ -1,180 +1,107 @@
-/* Container css*/
-/* All widget */
 .hkdevs-wdgt {
     min-width: 50px;
     min-height: 50px;
     width: 100%;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: hidden
 }
 
 .hkdevs-wdgt .wdgt-track-view {
     line-height: 1px;
-    height: 1px;
+    height: 1px
 }
 
-/* Html type widget  css*/
 .hkdevs-html-wdgt {
     overflow-x: auto;
     overflow-y: hidden;
-    width: 100%;
+    width: 100%
 }
 
-/*
-JS type widget css
-*/
 .hkdevs-js-wdgt {
-    background-color: #ffffff;
+    background-color: #fff;
     border-radius: 4px;
-    -webkit-box-shadow: 0 1px 4px 0 rgba(0, 106, 194, 0.2);
-    box-shadow: 0 1px 4px 0 rgba(0, 106, 194, 0.2);
-    margin: 0px 0px 10px 0px;
-    padding: 0px 24px;
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0, 106, 194, .2);
+    box-shadow: 0 1px 4px 0 rgba(0, 106, 194, .2);
+    margin: 0 0 10px 0;
+    padding: 0 24px;
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    box-sizing: border-box
 }
 
 .hkdevs-js-wdgt * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 0px;
-    margin: 0px;
-    word-break: break-word;
+    padding: 0;
+    margin: 0;
+    word-break: break-word
 }
 
 .hkdevs-js-wdgt ul {
-    list-style: none;
+    list-style: none
 }
 
 .hkdevs-js-wdgt ul li {
-    list-style-type: none;
+    list-style-type: none
 }
 
 .hkdevs-js-wdgt a,
+.hkdevs-js-wdgt a:focus,
 .hkdevs-js-wdgt a:hover,
-.hkdevs-js-wdgt a:visited,
-.hkdevs-js-wdgt a:focus {
-    text-decoration: none;
+.hkdevs-js-wdgt a:visited {
+    text-decoration: none
 }
 
 #document-section-widgets .hkdevs-wdgt {
-    /*
-		position: relative;
-		width: 0;
-		height: 0;
-		left: -200%; */
     min-width: auto !important;
     min-height: auto !important;
     width: 0 !important;
-    height: 0 !important;
+    height: 0 !important
 }
 
 .wdgt-overlay-container {
     position: fixed;
-    z-index: 999999;
+    z-index: 999999
 }
 
 .wdgt-overlay-container.wdgt-overlay-top-left {
     top: 100px;
-    left: 36px;
+    left: 36px
 }
 
 .wdgt-overlay-container.wdgt-overlay-bottom-left {
     bottom: 100px;
-    left: 36px;
+    left: 36px
 }
 
 .wdgt-overlay-container.wdgt-overlay-bottom-right {
     bottom: 100px;
-    right: 36px;
+    right: 36px
 }
 
 .wdgt-overlay-container.wdgt-overlay-top-right {
     top: 100px;
-    right: 36px;
+    right: 36px
 }
 
-.wdgt-overlay-container .wdgt-overlay-inventory {
-    margin-bottom: 10px;
-}
-
-.wdgt-overlay-container .wdgt-overlay-inventory:last-child {
-    margin-bottom: 0;
-}
-
-@media only screen and (max-width: 668px) {
+@media only screen and (max-width:668px) {
 
     .wdgt-overlay-container.wdgt-overlay-bottom-left,
     .wdgt-overlay-container.wdgt-overlay-bottom-right {
         right: 36px;
         bottom: 100px;
-        left: 36px;
+        left: 36px
     }
 
-    .wdgt-overlay-container.wdgt-overlay-top-right,
-    .wdgt-overlay-container.wdgt-overlay-top-left {
+    .wdgt-overlay-container.wdgt-overlay-top-left,
+    .wdgt-overlay-container.wdgt-overlay-top-right {
         left: 36px;
         top: 100px;
-        right: 36px;
+        right: 36px
     }
 }
 
-.hkdevs-wdgt-shimmer {
-    height: 100%;
-    margin: 15px 0px;
-    width: 100%;
-}
-
-.hkdevs-wdgt-shimmer .header-shimmer {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-radius: 4px;
-    background: white;
-    padding: 24px;
-}
-
-.hkdevs-wdgt-shimmer .shimmer-cont {
-    margin-top: 30px;
-}
-
-.hkdevs-wdgt-shimmer .animated-background {
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    -webkit-animation-name: placeHolderShimmer;
-    animation-name: placeHolderShimmer;
-    -webkit-animation-timing-function: linear;
-    animation-timing-function: linear;
-    background: #f6f7f8;
-    background: -webkit-gradient(linear, left top, right top, color-stop(8%, #f4f5f7), color-stop(18%, #e5e5e5), color-stop(33%, #f4f5f7));
-    background: -o-linear-gradient(left, #f4f5f7 8%, #e5e5e5 18%, #f4f5f7 33%);
-    background: linear-gradient(to right, #f4f5f7 8%, #e5e5e5 18%, #f4f5f7 33%);
-    background-size: 800px 104px;
-    position: relative;
-    height: 14px;
-    border-radius: 7px;
-}
-
-.hkdevs-wdgt-shimmer .animated-background:first-of-type {
-    width: 85%;
-}
-
-.hkdevs-wdgt-shimmer .animated-background:nth-of-type(2n) {
-    width: 70%;
-    margin-top: 10px;
-}
-
-.hkdevs-wdgt-shimmer .animated-background:nth-of-type(3n) {
-    width: 70%;
-    margin-top: 10px;
-}
-
-
 .hkdevs-trending-container {
-    padding: 20px 0 30px;
+    padding: 20px 0 30px
 }
 
 .hkdevs-trending-container .ntc__heading {
@@ -183,7 +110,7 @@ JS type widget css
     font-weight: 700;
     font-size: 16px;
     line-height: 20px;
-    color: var(--N800, #121224);
+    color: var(--N800, #121224)
 }
 
 .hkdevs-trending-container .ntc__chips-row {
@@ -196,20 +123,20 @@ JS type widget css
     margin-bottom: 16px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 0 28px;
+    padding: 0 28px
 }
 
 .hkdevs-trending-container .ntc__chips-row:last-child {
     margin-bottom: 0;
-    padding: 0 85.5px;
+    padding: 0 85.5px
 }
 
 .hkdevs-trending-container .ntc__chips-row:nth-child(3) .ntc__chip-label {
-    max-width: 95px;
+    max-width: 95px
 }
 
 .hkdevs-trending-container .ntc__chips-row:nth-child(3) .ntc__chip-wrapper {
-    width: unset;
+    width: unset
 }
 
 .hkdevs-trending-container .ntc__chip-wrapper {
@@ -223,22 +150,22 @@ JS type widget css
     align-items: center;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    background: #FFFFFF;
-    border: 1px solid #E7E7F1;
-    -webkit-box-shadow: 0px 6px 12px var(--Ev100, rgba(30, 10, 58, 0.04));
-    box-shadow: 0px 6px 12px var(--Ev100, rgba(30, 10, 58, 0.04));
+    background: #fff;
+    border: 1px solid #e7e7f1;
+    -webkit-box-shadow: 0 6px 12px var(--Ev100, rgba(30, 10, 58, .04));
+    box-shadow: 0 6px 12px var(--Ev100, rgba(30, 10, 58, .04));
     border-radius: 10px;
     padding: 16px;
-    margin-right: 16px;
+    margin-right: 16px
 }
 
 .hkdevs-trending-container .ntc__chip-wrapper:last-child {
-    margin-right: 0;
+    margin-right: 0
 }
 
 .hkdevs-trending-container .ntc__chip-wrapper:hover {
-    -webkit-box-shadow: 0px 14px 40px var(--Ev400, rgba(30, 10, 58, 0.1));
-    box-shadow: 0px 14px 40px var(--Ev400, rgba(30, 10, 58, 0.1));
+    -webkit-box-shadow: 0 14px 40px var(--Ev400, rgba(30, 10, 58, .1));
+    box-shadow: 0 14px 40px var(--Ev400, rgba(30, 10, 58, .1))
 }
 
 .hkdevs-trending-container .ntc__chip-logo {
@@ -247,7 +174,7 @@ JS type widget css
     height: 38px;
     border-radius: 50%;
     margin-right: 12px;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .hkdevs-trending-container .ntc__chip-label {
@@ -260,212 +187,10 @@ JS type widget css
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    max-width: 95px;
+    max-width: 95px
 }
 
 .hkdevs-trending-container .ntc__chip-arrow {
     position: relative;
-    overflow: hidden;
-}
-
-
-.role-collection-wdgt .card-container {
-    width: 1120px;
-    margin-top: 40px;
-    position: relative;
-    height: 335px;
-    border-radius: 20px;
-    margin-bottom: 50px;
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 240, 226, 0)), to(#FFF0E2));
-    background: -o-linear-gradient(top, rgba(255, 240, 226, 0) 0%, #FFF0E2 100%);
-    background: linear-gradient(180deg, rgba(255, 240, 226, 0) 0%, #FFF0E2 100%);
-    border: 1px solid #FFE9D6;
-}
-
-.role-collection-wdgt .card-container .left-section {
-    position: absolute;
-    width: 420px;
-    padding-left: 60px;
-    padding-top: 25px;
-}
-
-.role-collection-wdgt .card-container .left-section .role-img {
-    height: 175px;
-    width: 389px;
-}
-
-.role-collection-wdgt .card-container .left-section .heading {
-    width: 275px;
-    margin-top: 6px;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 31px;
-    color: var(--N800, #121224);
-}
-
-.role-collection-wdgt .card-container .left-section .sub-heading {
-    margin-top: 12px;
-    width: 360px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    color: var(--N700, #474D6A);
-}
-
-.role-collection-wdgt .card-container .right-section {
-    top: -38px;
-    left: 584px;
-    position: relative;
-    height: 411px;
-    width: 476px;
-    background: var(--N100, #FFFFFF);
-    border: 1px solid var(--N400, #E7E7F1);
-    border-radius: 20px;
-    -webkit-box-shadow: var(--box-shadow1, 0px 6px 12px rgba(30, 10, 58, 0.04));
-    box-shadow: var(--box-shadow1, 0px 6px 12px rgba(30, 10, 58, 0.04));
-}
-
-.role-collection-wdgt .card-container .right-section .chip-container {
-    padding-top: 61px;
-    padding-left: 24px;
-}
-
-.role-collection-wdgt .card-container .right-section .chip-container .chip-case {
-    position: relative;
-    display: -webkit-inline-flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    height: 74px;
-    width: 207px;
-    margin-right: 12px;
-    margin-bottom: 22px;
-}
-
-.role-collection-wdgt .card-container .right-section .chip-container .chip-case .chip {
-    cursor: pointer;
-    width: 202px;
-    height: 74px;
-    background: var(--N100, #FFFFFF);
-    border: 1px solid var(--N400, #E7E7F1);
-    border-radius: 16px;
-}
-
-.role-collection-wdgt .card-container .right-section .chip-container .chip-case .chip .chip-text {
-    position: relative;
-    display: table-cell;
-    vertical-align: middle;
-    height: 74px;
-    left: 20px;
-    font-style: normal;
-}
-
-.role-collection-wdgt .card-container .right-section .chip-container .chip-case .chip .chip-text .chip-heading {
-    display: block;
-    max-width: 160px;
-    overflow: hidden;
-    white-space: nowrap;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    color: var(--N800, #121224);
-    margin-bottom: 6px;
-}
-
-.role-collection-wdgt .card-container .right-section .chip-container .chip-case .chip .chip-text .chip-count {
-    font-weight: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    color: var(--N700, #474D6A);
-}
-
-.role-collection-wdgt .card-container .right-section .chip-container .chip-case .chip .chip-text .arrow-icon {
-    margin-left: 10px;
-    position: relative;
-    top: 2px;
-    width: auto;
-    height: 13px;
-}
-
-.role-collection-wdgt .card-container .right-section .chip-container .chip-case .chip:hover {
-    border: 1px solid var(--N400, #E7E7F1);
-    -webkit-box-shadow: var(--box-shadow1, 0px 6px 12px rgba(30, 10, 58, 0.04));
-    box-shadow: var(--box-shadow1, 0px 6px 12px rgba(30, 10, 58, 0.04));
-    -webkit-transform: scale(1.07, 1.17);
-    -ms-transform: scale(1.07, 1.17);
-    transform: scale(1.07, 1.17);
-    -webkit-transition: all 10ms ease-in-out;
-    -o-transition: all 10ms ease-in-out;
-    transition: all 10ms ease-in-out;
-}
-
-.role-collection-wdgt .card-container .right-section .chip-container .chip-case .chip:hover .chip-text {
-    -webkit-transform: scale(0.93, 0.86);
-    -ms-transform: scale(0.93, 0.86);
-    transform: scale(0.93, 0.86);
-}
-
-.role-collection-wdgt .card-container .right-section .chip-container .chip-case .chip:hover .chip-text .chip-heading {
-    max-height: 48px;
-    overflow-y: hidden;
-    overflow-x: visible;
-    white-space: normal;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
-.role-collection-wdgt .swiper-button-next,
-.role-collection-wdgt .swiper-button-prev {
-    color: VAR(--N500, #979EC2);
-    border: 1px solid var(--N400, #E7E7F1);
-    top: 50% !important;
-    background-image: url(//static.naukimg.com/s/7/0/assets/images/src/common/components/assets/arrow.645e86a1.svg);
-    padding: 19px;
-    height: 40px;
-    width: 20px;
-    border-radius: 100%;
-    background-size: 9px 14px !important;
-    background-color: var(--N100, #FFFFFF);
-}
-
-.role-collection-wdgt .swiper-button-next {
-    right: -22px !important;
-}
-
-.role-collection-wdgt .swiper-button-prev {
-    left: -22px !important;
-    -webkit-transform: scaleX(-1);
-    -ms-transform: scaleX(-1);
-    transform: scaleX(-1);
-}
-
-.role-collection-wdgt .swiper-button-disabled {
-    display: none;
-}
-
-.role-collection-wdgt .swiper-pagination {
-    bottom: 40px !important;
-}
-
-.role-collection-wdgt .swiper-pagination-bullet {
-    width: 6px !important;
-    height: 6px !important;
-}
-
-.role-collection-wdgt .swiper-pagination-bullet-active {
-    background: var(--N700, #474D6A) !important;
-    width: 16px !important;
-    height: 6px !important;
-    border-radius: 37px !important;
-}
-
-.role-collection-wdgt .swiper-container {
-    position: static !important;
+    overflow: hidden
 }
