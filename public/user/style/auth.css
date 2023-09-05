@@ -1,0 +1,409 @@
+.login-layer {
+    background-color: #fff;
+    width: 340px;
+    margin: 0px 36px;
+    padding-bottom: 30px;
+    font-size: 11px
+}
+
+.login-layer .head {
+    color: #091e42;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    margin: unset
+}
+
+.login-layer .head a {
+    color: #4A90E2;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    margin-top: 5px;
+    float: right
+}
+
+.login-layer .emptydiv {
+    height: 140px
+}
+
+.login-layer .social-media {
+    margin-top: 17px;
+    border-radius: 20px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+    height: 40px
+}
+
+.login-layer .social-media > div {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+    border: none !important;
+    border-radius: 2px;
+    cursor: pointer
+}
+
+.login-layer .social-media > div:first-of-type {
+    margin-right: 12px
+}
+
+.login-layer .social-media > div span {
+    margin: 1px 16px 0px 1px;
+    color: #091e42;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px
+}
+
+.login-layer .social-media .google {
+    border-radius: 20px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0);
+    margin-right: 0px !important;
+    margin-bottom: 5px;
+    width: auto !important
+}
+
+.login-layer .social-media .google span {
+    margin-left: 56px;
+    color: #757575;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    line-height: 16px;
+    text-align: left
+}
+
+.login-layer .social-media .facebook {
+    border-radius: 20px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+    width: auto !important
+}
+
+.login-layer .social-media .facebook span {
+    margin-left: 50px;
+    color: #757575;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    line-height: 16px;
+    text-align: left
+}
+
+.login-layer .social-media.disabled {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%)
+}
+
+.login-layer .fb-icon {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAAAAXNSR0IArs4c6QAABmxJREFUaAXdWmtsFFUUvmdmm267s4W0RbYPlBAVE0T4oRKQKPjDqCFRiSQSxR/GRH/5SrBd6o9NtI9VUIN/QP2jwcRHomKMD2KCjxpADInEopiIPNptAUmk28fS3ZnjOVt2O9vOztyZnaVbJtnsnXPP+c73zZmZe+fOgPB5W7QtebNuiHUoxDJEsVQIXAwg6oSA8GQqTJJ9mPZPkv04CNGnKuL7M13h3/2kQrilb81tw2tRwOMk5gESco03RDhHZPaCwPcT8bpebxhTUSUJa4omNwoUnYh40xRk6S0A+FOA6BjsDn/qFc2TsObo8B0GitdI1GqviaXiQBxQQGxNdNf9LOVvcnIlrLljbBFm9J0o8EETRtmbIOBzCKjPJDprz8gmkxbWEh1braP+mUBcKAvuqx/AWRXUhwa6aw/I4CoyTk3RkS2Goe+fNVFMkg4oc2AuMpxtKxaLobIrNdol0GiTAbtiPqDEnw6GtsViYBTLGSjWwfZd46PdQhgv2vnMSh8daOLGRSl6wItWrKl95FFEY8+sEJdMCqA8NtijfWDlbimstWPsdl3Xf6DxKWgV5JPtb7rbnaDx6l+6gNICoZbadTTIRwCxlf7rnfLQeJdCodw51BM6PN13hrBFsdHm9LhBjtg83bnkfYBBmkrtUFD9JBGvOW2HtziG81PjI+eIR5WdH+ElqlXl1lNdIcKe2mbcFTMpY2c5RFF1dgeD2pKhHm2HkyimdzIG/03RtGth84TOnAu3gorxKZjJZA4VupS+R0cvSvO/HrdIkbbkhHPFJlEDgcCq/s7aX3I5CipG19WruQ7//uFDL6Lc5s/oetwckxcWiY7eTzeLu8ydpbb54g7WwPOl4kjFI65jDTnfvDBAoytn9O0fxXsnY9qQb3gOQGYN2QE60j56G6K+wiHOdTcqyheyQZs+RvXg0UuLhZGuycWkDRoA6L4vu9EZt4K18O1/cuYBxhY3AHKJQJ83v/Ynp3K1tqeuz4j07t4jI2t8GTdZixCHs6cioNgoR9aV14XjbZC0i4hEkwsyOPErTXDv9kUUJctpUVpfSt1AoC12BLz00XoGzSjsNyLxLHnMs/dy18taWJOiZ9Lr3YXKedPDqG21GIVIrJRDc+el6xPrFLo2l7sL89EbRKOPaHkoRLiFlhTEjXnLVdJgTVQxXHKV6MnLYE1UMfD14s2jz2KDNfHt/vIK7Swy8T912HZpQCLfRaHAGiu/ajUwbmU326oDVZsv6Zn8TMPcpwjcYBiiYGJr7ndqkzA8S07XOTla9dNFqtNq7TGrPhnbqVdq/inmF2lPbiJuxbod7HhWoRcELKziNjpoS72SYk0KTTMrUhgVy7Mw1sR3xYoUhoCex1fWRBWDP7yWvFxxtETRQhXTvOPDMaUqgN96ByhPJOq699OQKFVV4T7l9MvhPipdf3koekPVS7i+WAtryo5jdD7vo9I/4ZYG3Yzr6bactoqju9qhwZ7wWqu+nK2pPdlLGKty+6Z/GsZMey6aWS3kn33QpMezb1zEFroiBuj5Y8aP5muOg3/WxyKW8C7zKkwltQfwNftlARqCGr37razTUUrENCfW0FCtZddZssL6YkALk7B9mt8c3IXtk1rypyLJqgm9Q+uA5+egmixl5q4uDL2d458/lxMxGKO52Ru5jrn2T29oXu9/AfIT77wwFrKgIbyTFmH+mnOiiHNjY/gtM+8CYUe3wigo6mYqK11zc2NjrsyZuZsZFwjjjkRX6AgCdJidKrnNXJnzdI4zhLHDYFdoBx2J76Y7V9o+c2SuVrwshVEA1qD2MAUctAqqENtB5shcrfhYCmPHE3G4OK8+fA8Fuv7cxyqRnzbmxNyYYzHcosI4gNfe64PavQT0YzGAK21nLszJ6b2ArTAmTSP5CAS1+wgwP/hdaTG5fMyBuTCnnK3Yv+NElQMnB2/xFL0x3Etf6bxLk9SmYoBlsfPXBqA8Odgd+koW37FiZqAhAlZBW05P3R+Z7WVtUy7Oybnd5HEljIEHuuHCUE/4EVUoK2mWsodmmZbPY25IzPSFNGNzDs7FOWf62FukTkUriIG49hvZt7TExqKYyjyX/XQWcYGVr6yNrqHz/OksBNU3B2K1/bJxVn70oOvPRu+64NqOkWXZD51RrKeHyOqheN0GO/RI2/CX9Ax1iaqznz94Pt2p9ZE4y3HJDseq739IESpTn6NNrQAAAABJRU5ErkJggg==) no-repeat;
+    width: 18px;
+    height: 17px;
+    margin: 11px 11px 11px 16px;
+    background-size: 18px 17px
+}
+
+.login-layer .google-icon {
+    background: url(data:image/png;base64,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) no-repeat;
+    width: 18px;
+    height: 18px;
+    margin: 11px 11px 11px 16px;
+    background-size: 18px 18px
+}
+
+.login-layer .ensure-new {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    margin: 12px 0 20px;
+    color: #8993a4;
+    text-align: left
+}
+
+.login-layer .or-sec {
+    margin: 0 auto;
+    width: 100%;
+    border-bottom: 1px solid #d4dfef;
+    position: relative;
+    margin-bottom: 28px;
+    margin-top: 10px
+}
+
+.login-layer .or-text {
+    position: absolute;
+    left: 45%;
+    background: white;
+    width: 20px;
+    text-align: center;
+    margin-top: -7px;
+    font-size: 12px;
+    color: #8993a4
+}
+
+.login-layer input {
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 2px;
+    border: 1px solid #8993a4;
+    padding: 8px 12px;
+    width: 100%;
+    outline: none;
+    box-sizing: border-box
+}
+
+.login-layer input.err-border {
+    border: 1px solid #da534d
+}
+
+.login-layer .label {
+    font-size: 12px;
+    line-height: 20px;
+    padding-top: 7px
+}
+
+.login-layer .forgot-pass {
+    padding: unset;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: -25px;
+    clear: both
+}
+
+.login-layer .btn-primary {
+    margin-top: 30px;
+    text-transform: capitalize;
+    width: 100%;
+    display: inline-block;
+    background-color: #4a90e2;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    min-width: 123px;
+    padding: 8px 16px;
+    height: 36px;
+    color: #ffffff;
+    font-weight: 500;
+    text-align: center;
+    line-height: 18px;
+    cursor: pointer;
+    font-size: 14px;
+    border-width: 0
+}
+
+.login-layer .loginButton {
+    margin-bottom: 11px
+}
+
+.login-layer .otpButton {
+    background-color: #fff;
+    color: #4a90e2;
+    margin-top: 0px;
+    margin-bottom: 15px
+}
+
+.login-layer .orSec {
+    text-align: center
+}
+
+.login-layer .orSec .ortext {
+    color: #8993a4;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px
+}
+
+.login-layer .textTransform {
+    text-transform: none;
+    box-shadow: none
+}
+
+.login-layer .reg-now {
+    text-align: center;
+    font-size: 12px;
+    color: #666
+}
+
+.login-layer .reg-now > a {
+    font-weight: 500
+}
+
+.login-layer .err,
+.login-layer .server-err {
+    font-size: 11px;
+    color: #da534d;
+    padding: 3px 0px
+}
+
+.login-layer .server-err {
+    margin-bottom: 10px
+}
+
+.login-layer form {
+    margin-top: 30px
+}
+
+.login-layer form .form-row {
+    width: 100%;
+    margin-bottom: 30px;
+    font-size: 12px;
+    position: relative
+}
+
+.login-layer form .form-row .label {
+    color: #091e42;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    display: block;
+    margin-bottom: 4px
+}
+
+.login-layer form .form-row .formInput {
+    background-color: #ffffff;
+    border: 1px solid #dadee5;
+    border-radius: 2px;
+    height: 36px
+}
+
+.login-layer form .form-row .showhide {
+    position: absolute;
+    top: 33px;
+    right: 0rem;
+    padding: 0.4rem 1rem;
+    cursor: pointer
+}
+
+.login-layer form .form-row .blue-text {
+    color: #4a90e2
+}
+
+.login-layer form .forgot-pass {
+    color: #4a90e2;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: right
+}
+
+.login-layer form .otpMobileVerifyContainer .inputHeader {
+    color: #091e42;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px
+}
+
+.login-layer form .otpMobileVerifyContainer .col .input-box {
+    position: relative;
+    display: inline-block;
+    width: 100%
+}
+
+.login-layer form .otpMobileVerifyContainer .col .input-box .mobileInputt {
+    margin-top: 5px;
+    padding: 10px 10px 10px 45px;
+    display: block
+}
+
+.login-layer form .otpMobileVerifyContainer .col .input-box .mobileInputt.error {
+    border-color: #da534d
+}
+
+.login-layer form .otpMobileVerifyContainer .col .input-box .mobileInputt.bdunset {
+    width: 44%;
+    border: none;
+    display: inline-block
+}
+
+.login-layer form .otpMobileVerifyContainer .col .input-box .unit {
+    position: absolute;
+    display: block;
+    left: 8px;
+    top: 17.5px;
+    z-index: 9;
+    color: #000;
+    font-size: 14px
+}
+
+.login-layer form .otpMobileVerifyContainer .col .input-box .disable {
+    color: rgba(0, 0, 0, 0.26)
+}
+
+.login-layer form .otpMobileVerifyContainer .col .input-box .EditNum {
+    color: #4a90e2;
+    cursor: pointer;
+    width: 5%;
+    font-size: 14px;
+    position: absolute;
+    top: 19px
+}
+
+.login-layer form .otpMobileVerifyContainer .col .otpInput {
+    margin-top: 24px
+}
+
+.login-layer form .otpMobileVerifyContainer .col .otpInput .inputHeader {
+    color: #091e42;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    margin-top: 24px
+}
+
+.login-layer form .otpMobileVerifyContainer .col .otpInput .mobileInput {
+    margin-top: 5px
+}
+
+.login-layer form .otpMobileVerifyContainer .col .otpInput .mobileInput.error {
+    border-color: #da534d
+}
+
+.login-layer form .otpMobileVerifyContainer .col .partialMessageLabel.label {
+    margin-top: 10px
+}
+
+.login-layer form .otpMobileVerifyContainer .col .label .mobiledescription {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    margin-top: 4px
+}
+
+.login-layer form .otpMobileVerifyContainer .col .label .err {
+    color: #da534d
+}
+
+.login-layer form .otpMobileVerifyContainer .sndbtn {
+    width: 100%;
+    margin: 30px 0 0;
+    background-color: #4a90e2;
+    text-transform: none;
+    margin-bottom: 11px
+}
+
+.login-layer form .otpMobileVerifyContainer .sndbtn.disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+    background-color: #cccccc
+}
+
+.login-layer form .otpMobileVerifyContainer .orSec {
+    text-align: center;
+    width: 100%
+}
+
+.login-layer form .otpMobileVerifyContainer .orSec .ortext {
+    color: #8993a4;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    display: inline-block
+}
+
+.login-layer form .otpMobileVerifyContainer .orSec .email-btn-block {
+    width: 100%;
+    text-transform: none;
+    margin-bottom: 30px;
+    background-color: #fff;
+    color: #4a90e2;
+    border: 1px solid #4a90e2;
+    margin-top: 10px
+}

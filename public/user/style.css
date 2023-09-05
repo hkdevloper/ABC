@@ -1,0 +1,464 @@
+/*
+* Author: 	HkDevelopers
+* Date: 	10/10/2021
+* Purpose: 	Style the page
+* License: 	Not for commercial use
+* Link:     www.hkdevs.tech
+*/
+
+:root {
+    /*
+    * ------ Colors ------
+    * 1. Primary
+    * 2. Secondary
+    * 3. Danger
+    * 4. Success
+    * 5. Info
+    * 6. Warning
+    * 7. Light
+    * 8. Dark
+    * 9. Link
+    * 10. Disabled
+    * 11. Outline
+    */
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --danger: #dc3545;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --light: #f1f4f7;
+    --dark: #343a40;
+    --link: #007bff;
+    --disabled: #6c757d;
+    --outline: #6c757d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+}
+
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+/* Globals */
+
+.card {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hide {
+    display: none;
+}
+
+.pill {
+    display: absolute;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    padding: 10px 16px;
+    margin: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.pill:hover {
+    cursor: pointer;
+}
+
+.pill-active {
+    color: #3641e7;
+    border: 2px solid #3641e7;
+}
+
+.btn {
+    border: none;
+    padding: 10px 3px;
+    border-radius: 24px 24px 24px 24px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+/* Layout */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col {
+    flex: 1;
+}
+
+/* Text */
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Colors */
+
+.text-primary {
+    color: var(--primary);
+}
+
+.text-secondary {
+    color: var(--secondary);
+}
+
+.text-danger {
+    color: var(--danger);
+}
+
+.text-success {
+    color: var(--success);
+}
+
+/* Floats */
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+/* Margins and paddings */
+
+.m-0 {
+    margin: 0;
+}
+
+.m-1 {
+    margin: 1rem;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+
+/* Borders */
+
+.border {
+    border: 1px solid #ccc;
+}
+
+.border-0 {
+    border: none;
+}
+
+/* Radius */
+
+.rounded {
+    border-radius: 0.25rem;
+}
+
+
+/* ---------Buttons----------
+* 1. Primary Button
+* 2. Secondary Button
+* 3. Warning Button
+* 4. Success Button
+* 5. Info Button
+* 6. Danger Button
+* 7. Light Button
+* 8. Dark Button
+* 9. Link Button
+* 10. Disabled Button
+* 11. Outline Button
+* 12. Rounded Button
+*/
+/* Buttons */
+
+.button {
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    border: 1px solid;
+    font-size: 1rem;
+}
+
+/* Primary */
+.button-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+/* Secondary */
+.button-secondary {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: #fff;
+}
+
+/* Success */
+.button-success {
+    background: var(--success);
+    border-color: var(--success);
+    color: #fff;
+}
+
+/* Info */
+.button-info {
+    background: var(--info);
+    border-color: var(--info);
+    color: #fff;
+}
+
+/* Warning */
+.button-warning {
+    background: var(--warning);
+    border-color: var(--warning);
+    color: #212529;
+}
+
+/* Danger */
+.button-danger {
+    background: var(--danger);
+    border-color: var(--danger);
+    color: #fff;
+}
+
+/* Light */
+.button-light {
+    background: var(--light);
+    border-color: var(--light);
+    color: #212529;
+}
+
+/* Dark */
+.button-dark {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: #fff;
+}
+
+
+/* Header Section */
+
+.logo img {
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+}
+
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    width: 50%;
+    max-width: 400px;
+}
+
+.search-icon {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #666;
+}
+
+
+.search-container {
+    display: absolute;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+}
+
+
+.search-input {
+    flex: 1;
+    border: none;
+    padding: 10px 16px;
+    width: 55vw;
+    font-size: 16px;
+    outline: none;
+}
+
+
+.search-button {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0 24px 24px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #357ae8;
+}
+
+.search-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+/* Banner section */
+.banner img {
+    width: 100vw;
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Listing Sections */
+
+.listing-card {
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+}
+
+.listing-card:hover {
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    transition: 0.3s;
+}
+
+.listing-logo img {
+    max-width: 50px;
+    max-height: 50px;
+    margin-right: 10px;
+}
+
+.result-details {
+    flex: 1;
+}
+
+.result-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a0dab;
+    text-decoration: none;
+}
+
+.listing-description {
+    font-size: 14px;
+    color: #545454;
+    margin: 5px 0;
+}
+
+.result-link {
+    font-size: 14px;
+    color: #006621;
+    text-decoration: none;
+}
+
+.list-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.list-tag {
+    background-color: #f1f1f1;
+    color: #3641e7;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.tag-container {
+    margin: 10px auto;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-data {
+    width: max-content !important;
+}
+
+/* Banner Section */
+
+/* Most Demanding Category Section */
+
+
+/* How it works Section */
+
+
+/* Footer Section */
+.footer {
+    /* display: relative; */
+    background-color: #fff;
+    color: #000000;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    font-size: 1rem;
+    bottom: 0;
+    width: 100%;
+}

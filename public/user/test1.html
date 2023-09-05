@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="style.css" rel="stylesheet"/>
+    <link href="responsive.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+          rel="stylesheet"/>
+    <title>Homepage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <!-- Custom StyleSheets -->
+    <style>
+        .most-demanding-category {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: var(--light);
+        }
+
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row-reverse;
+            margin-bottom: 1rem;
+        }
+
+        .right {
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        .left {
+            font-size: 2rem;
+        }
+
+        .most-demanding-category h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .most-demanding-category a {
+            font-size: 1.1rem;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .category-item {
+            display: inline-block;
+            width: 30%;
+            margin: 0 1rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            vertical-align: top;
+        }
+
+        .category-icon {
+            color: var(--primary);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--primary);
+            border-radius: 50%;
+            padding: 0.2rem;
+            width: 80px;
+            margin: 10px auto;
+        }
+
+        .category-icon span {
+            font-size: 2rem;
+        }
+
+        .category-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-link {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+<!-- Header Section -->
+<header class="bg-white py-4 hidden sm:flex flex-col">
+    <div class="container mx-auto py-4 flex justify-between items-center">
+        <img alt="Logo" class="w-1/4 h-12 mr-4" src="ex.png">
+        <div class="flex-grow flex items-center mx-10">
+            <div class="relative w-full rounded-lg overflow-hidden">
+                <div class="flex items-center shadow bg-white shadow-sm">
+                    <span class="material-symbols-outlined text-gray-500 ml-3">search</span>
+                    <input class="bg-transparent py-5 px-5 border-0 w-full focus:outline-none" placeholder="Search"
+                           type="text">
+                    <button class="flex items-center justify-center bg-blue-300 p-2">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Icon and Links -->
+        <div class="flex items-center space-x-4">
+            <button class="bg-orange-300 hover:bg-orange-400 text-gray-800 font-bold py-2 px-4 rounded">
+                Post your Requirements
+            </button>
+            <div class="text-gray-800">
+                <a href="">SignIn</a> | <a href="">Join Free</a>
+            </div>
+        </div>
+    </div>
+    <div class="flex w-full mx-auto justify-center overflow-x-auto">
+        <!-- Navigation links (same as before) -->
+        <span
+            class="bg-blue-300 px-4 py-3 hover:bg-blue-600 items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+                Home
+            </span>
+
+        <span
+            class="bg-white-200 shadow border px-4 py-3 hover:bg-gray-300 items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                <span class="material-symbols-outlined mx-1">
+                    business
+                </span>
+                Company
+            </span>
+
+        <span
+            class="bg-gray-200 px-4 py-3 hover:bg-gray-300 items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                <span class="material-symbols-outlined mx-1">
+                    production_quantity_limits
+                </span>
+                Products
+            </span>
+
+        <span
+            class="bg-gray-200 px-4 py-3 hover:bg-gray-300 items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                <span class="material-symbols-outlined mx-1">
+                    event
+                </span>
+                Events
+            </span>
+
+        <span
+            class="bg-gray-200 px-4 py-3 hover:bg-gray-300 items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                <span class="material-symbols-outlined mx-1">
+                    local_offer
+                </span>
+                Deals
+            </span>
+
+        <span
+            class="bg-gray-200 px-4 py-3 hover:bg-gray-300 items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                <span class="material-symbols-outlined mx-1">
+                    menu_book
+                </span>
+                Blogs
+            </span>
+
+        <span
+            class="bg-gray-200 px-4 py-3 hover:bg-gray-300 items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                <span class="material-symbols-outlined mx-1">
+                    work
+                </span>
+                Jobs
+            </span>
+    </div>
+</header>
+
+<!-- Mobile menu -->
+<header class="bg-white py-4 sm:hidden">
+    <div class="container mx-auto py-4 flex justify-between items-center">
+        <div class="w-25 ml-2">
+            <img alt="Logo" class="w-full h-12" src="logo.png">
+        </div>
+        <div class="flex-grow flex items-center mr-4">
+            <div class="relative w-full rounded-lg overflow-hidden">
+                <div class="flex items-center border border-white bg-white shadow-sm">
+                    <span class="material-symbols-outlined ml-3">search</span>
+                    <input class="bg-transparent py-2 pr-3 pl-1 w-full focus:outline-none" placeholder="Search"
+                           type="text">
+                    <button class="flex items-center justify-center bg-blue-300 p-2">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="cursor-pointer mr-2" id="mobile-menu-toggle">
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Menu (Hidden by default) -->
+<div class="bg-white fixed inset-0 transform translate-x-full sm:hidden overflow-y-auto" id="mobile-menu">
+    <div class="mx-auto py-4">
+        <div class="flex space-arround items-center mb-4">
+            <img alt="Logo" class="w-auto h-12 mr-4" src="ex.png">
+            <div class="cursor-pointer" id="mobile-menu-close">
+                    <span class="material-symbols-outlined">
+                        close
+                    </span>
+            </div>
+        </div>
+        <div class="flex flex-col space-y-2">
+            <!-- Navigation links (same as before) -->
+            <button class="bg-orange-300 hover:bg-orange-400 text-gray-800 font-bold py-2 px-4 rounded">
+                Post your Requirements
+            </button>
+            <span
+                class="bg-blue-300 px-4 py-3 hover:bg-blue-600 items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                    <span class="material-symbols-outlined">
+                        home
+                    </span>
+                    Home
+                </span>
+
+            <span
+                class="bg-white px-4 py-3 hover:bg-white items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                    <span class="material-symbols-outlined mx-1">
+                        business
+                    </span>
+                    Company
+                </span>
+
+            <span
+                class="bg-white px-4 py-3 hover:bg-white items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                    <span class="material-symbols-outlined mx-1">
+                        production_quantity_limits
+                    </span>
+                    Products
+                </span>
+
+            <span
+                class="bg-white px-4 py-3 hover:bg-white items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                    <span class="material-symbols-outlined mx-1">
+                        event
+                    </span>
+                    Events
+                </span>
+
+            <span
+                class="bg-white px-4 py-3 hover:bg-white items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                    <span class="material-symbols-outlined mx-1">
+                        local_offer
+                    </span>
+                    Deals
+                </span>
+
+            <span
+                class="bg-white px-4 py-3 hover:bg-white items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                    <span class="material-symbols-outlined mx-1">
+                        menu_book
+                    </span>
+                    Blogs
+                </span>
+
+            <span
+                class="bg-white px-4 py-3 hover:bg-white items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                    <span class="material-symbols-outlined mx-1">
+                        work
+                    </span>
+                    Jobs
+                </span>
+            <span
+                class="bg-white px-4 py-3 hover:bg-white items-center justify-center text-sm md:text-base md:px-6 md:py-4">
+                    <span class="material-symbols-outlined mx-1">
+                        <span class="ai-user"></span>
+                    </span>
+                    <a href="">SignIn</a> | <a href="">Join Free</a>
+                </span>
+        </div>
+    </div>
+</div>
+
+
+<!-- Listing Items Section -->
+<section class="bg-white p-3 mt-4 container">
+    <div class="shadow my-3 p-2 flex">
+
+        <!-- Main content -->
+        <div class="w-full sm:w-3/4">
+            <h1 class="text-3xl">
+                Search Results
+            </h1>
+            <hr>
+            <!-- Card Section -->
+            <div class="">
+                <!-- Card Item -->
+                <div class="mt-5">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0">
+                            <img alt="Company Logo" class="w-16 h-16 mb-2 md:mb-0 md:mr-4" src="logo.png">
+                        </div>
+                        <div class="ml-4 text-left md:text-left">
+                            <h3 class="text-lg font-medium">
+                                <a class="hover:underline" href="#">Sample Title</a>
+                            </h3>
+                            <p>Lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </div>
+
+
+                    <p class="mb-4">
+                        This is a sample search result description providing some information about the result.
+                    </p>
+
+                    <p class="text-sm mb-4">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate modi a expedita quos sint
+                        est sed
+                        veritatis provident, corrupti, cumque quibusdam explicabo ducimus soluta similique! Lorem
+                        ipsum
+                        dolor
+                        sit amet, consectetur adipisicing elit. Maiores, labore!
+                    </p>
+
+                    <div class="flex flex-wrap gap-2">
+                            <span
+                                class="bg-blue-100 text-blue-600 text-sm inline-flex items-center px-2.5 py-1 rounded">
+                                #tag1
+                            </span>
+                        <span
+                            class="bg-blue-100 text-blue-600 text-sm inline-flex items-center px-2.5 py-1 rounded">
+                                #tag2
+                            </span>
+                        <span
+                            class="bg-blue-100 text-blue-600 text-sm inline-flex items-center px-2.5 py-1 rounded">
+                                #tag3
+                            </span>
+                        <span
+                            class="bg-blue-100 text-blue-600 text-sm inline-flex items-center px-2.5 py-1 rounded">
+                                #tag4
+                            </span>
+                        <span
+                            class="bg-blue-100 text-blue-600 text-sm inline-flex items-center px-2.5 py-1 rounded">
+                                #tag5
+                            </span>
+                        <!-- more tags -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="w-1/4 hidden sm:block">
+            <!-- Sidebar content goes here -->
+            <ul class="space-y-4 px-5">
+                <li>
+                    <a class="text-blue-600 hover:underline" href="#">Sidebar Item 1</a>
+                </li>
+                <li>
+                    <a class="text-blue-600 hover:underline" href="#">Sidebar Item 2</a>
+                </li>
+                <!-- Add more sidebar items as needed -->
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Most Demanding Category Section -->
+<section class="bg-gray-100 container py-16">
+    <div class="top p-8">
+        <a class="right" href="#">Explore All Categories >></a>
+        <h1 class="left">Most Demanding Category</h1>
+    </div>
+
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-0">
+        <div class="bg-white flex justify-between items-center w-1/2 rounded-lg p-2 mx-2">
+            <img alt="Category 1 Icon" class="w-12 h-12 mx-auto mb-2" src="logo.png">
+            <h3 class="text-sm font-medium">Category 1</h3>
+        </div>
+
+        <div class="bg-white flex justify-between items-center w-1/2 rounded-lg p-2 mx-2">
+            <img alt="Category 2 Icon" class="w-12 h-12 mx-auto mb-2" src="logo.png">
+            <h3 class="text-sm font-medium">Category 2</h3>
+        </div>
+
+        <div class="bg-white flex justify-between items-center w-1/2 rounded-lg p-2 mx-2">
+            <img alt="Category 3 Icon" class="w-12 h-12 mx-auto mb-2" src="logo.png">
+            <h3 class="text-sm font-medium">Category 3</h3>
+        </div>
+
+        <div class="bg-white flex justify-between items-center w-1/2 rounded-lg p-2 mx-2">
+            <img alt="Category 4 Icon" class="w-12 h-12 mx-auto mb-2" src="logo.png">
+            <h3 class="text-sm font-medium">Category 4</h3>
+        </div>
+    </div>
+</section>
+
+
+<!-- Products Card Section -->
+<section class="bg-gray-100 container py-16">
+    <div class="top p-8">
+        <a class="right" href="#">Explore All Listings >></a>
+        <h1 class="left">Featured Listings</h1>
+    </div>
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img alt="" class="w-full h-48 object-cover" src="banner.png">
+            <div class="p-6">
+                <p class="text-blue-500 text-sm font-medium">
+                    <a href="#">#Tag</a>
+                </p>
+
+                <h3 class="text-lg font-medium mb-4">
+                    <a href="#">Card Title</a>
+                </h3>
+
+                <p class="text-gray-600">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+                </p>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img alt="" class="w-full h-48 object-cover" src="banner.png">
+            <div class="p-6">
+                <p class="text-blue-500 text-sm font-medium">
+                    <a href="#">#Tag</a>
+                </p>
+
+                <h3 class="text-lg font-medium mb-4">
+                    <a href="#">Card Title</a>
+                </h3>
+
+                <p class="text-gray-600">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+                </p>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img alt="" class="w-full h-48 object-cover" src="banner.png">
+            <div class="p-6">
+                <p class="text-blue-500 text-sm font-medium">
+                    <a href="#">#Tag</a>
+                </p>
+
+                <h3 class="text-lg font-medium mb-4">
+                    <a href="#">Card Title</a>
+                </h3>
+
+                <p class="text-gray-600">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+                </p>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img alt="" class="w-full h-48 object-cover" src="banner.png">
+            <div class="p-6">
+                <p class="text-blue-500 text-sm font-medium">
+                    <a href="#">#Tag</a>
+                </p>
+
+                <h3 class="text-lg font-medium mb-4">
+                    <a href="#">Card Title</a>
+                </h3>
+
+                <p class="text-gray-600">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Work section -->
+<section class="bg-gray-100 container py-16">
+
+    <div class="container mx-auto text-center">
+
+        <h2 class="text-3xl font-bold mb-4">Our Work Process</h2>
+
+        <h3 class="text-xl font-medium mb-8">How it works?</h3>
+
+    </div>
+
+    <div class="container mx-auto">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            <!-- Register Account card -->
+
+            <div class="bg-white rounded-lg px-6 py-8 text-center">
+                <svg class="w-12 h-12 text-blue-500 mx-auto" fill="none" stroke="currentColor"
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="2"/>
+                </svg>
+
+                <h3 class="text-xl font-medium mt-4 mb-2">Register your Account</h3>
+
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, id.</p>
+            </div>
+
+            <div class="bg-white rounded-lg px-6 py-8 text-center">
+                <svg class="w-12 h-12 text-blue-500 mx-auto" fill="none" stroke="currentColor"
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="2"/>
+                </svg>
+
+                <h3 class="text-xl font-medium mt-4 mb-2">We Are Here to Help</h3>
+
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, id.</p>
+            </div>
+
+            <div class="bg-white rounded-lg px-6 py-8 text-center">
+                <svg class="w-12 h-12 text-blue-500 mx-auto" fill="none" stroke="currentColor"
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="2"/>
+                    <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="2"/>
+                </svg>
+
+                <h3 class="text-xl font-medium mt-4 mb-2">Apply for Job/Hire</h3>
+
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, id.</p>
+            </div>
+            <div class="bg-white rounded-lg px-6 py-8 text-center">
+                <svg class="w-12 h-12 text-blue-500 mx-auto" fill="none" stroke="currentColor"
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="2"/>
+                    <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="2"/>
+                </svg>
+
+                <h3 class="text-xl font-medium mt-4 mb-2">Apply for Job/Hire</h3>
+
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, id.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container mx-auto mt-16">
+        <div class="border-t border-gray-300"></div>
+    </div>
+
+</section>
+
+<!-- Pricing Section -->
+<section class="text-gray-600 body-font overflow-hidden">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-20">
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Subscription Packages</h1>
+        </div>
+        <div class="flex flex-wrap -m-4">
+            <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
+                <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+                    <h2 class="text-sm tracking-widest title-font mb-1 font-medium">START</h2>
+                    <h1 class="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">Free</h1>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>5 Free Listing
+                    </p>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Post upto 5 Categories
+                    </p>
+                    <p class="flex items-center text-gray-600 mb-6">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Featured Listing
+                    </p>
+                    <button
+                        class="flex items-center mt-auto bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">
+                        Purchase
+                        Now
+                        <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-linecap="round"
+                             stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
+                <div
+                    class="h-full p-6 rounded-lg border-2 border-indigo-500 flex flex-col relative overflow-hidden">
+                        <span
+                            class="bg-indigo-500 px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">POPULAR</span>
+                    <h2 class="text-sm tracking-widest title-font mb-1 font-medium">PRO</h2>
+                    <h1
+                        class="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
+                        <span>$38</span>
+                    </h1>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Dedicated Listing Page
+                    </p>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>5 Extra Categories
+                    </p>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Requires Backlink
+                    </p>
+                    <p class="flex items-center text-gray-600 mb-6">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>SEO
+                    </p>
+                    <button
+                        class="flex items-center mt-auto bg-indigo-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-600 rounded">
+                        Purchase
+                        Now
+                        <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-linecap="round"
+                             stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
+                <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+                    <h2 class="text-sm tracking-widest title-font mb-1 font-medium">BUSINESS</h2>
+                    <h1
+                        class="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
+                        <span>$56</span>
+                    </h1>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Messaging
+                    </p>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Show Address
+                    </p>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Messaging
+                    </p>
+                    <button
+                        class="flex items-center mt-auto bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">
+                        Purchase
+                        Now
+                        <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-linecap="round"
+                             stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
+                <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+                    <h2 class="text-sm tracking-widest title-font mb-1 font-medium">SPECIAL</h2>
+                    <h1
+                        class="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
+                        <span>$72</span>
+                    </h1>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Vexillologist pitchfork
+                    </p>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Tumeric plaid portland
+                    </p>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Hexagon neutra unicorn
+                    </p>
+                    <p class="flex items-center text-gray-600 mb-2">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Vexillologist pitchfork
+                    </p>
+                    <p class="flex items-center text-gray-600 mb-6">
+                            <span
+                                class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 rounded-full flex-shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-linecap="round"
+                                     stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Mixtape chillwave tumeric
+                    </p>
+                    <button
+                        class="flex items-center mt-auto bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">
+                        Purchase
+                        Now
+                        <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-linecap="round"
+                             stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<div class="footer">
+    <p>
+        India &nbsp;&nbsp; | &nbsp;&nbsp; &copy; 2023 Hkdevs. <br> All rights
+        reserved.
+    </p>
+</div>
+
+<!-- Page Scripts -->
+<script>
+    var cont = 0;
+
+    function loopSlider() {
+        var xx = setInterval(function () {
+            switch (cont) {
+                case 0: {
+                    $("#slider-1").fadeOut(400);
+                    $("#slider-2").delay(400).fadeIn(400);
+                    $("#sButton1").removeClass("bg-blue-800");
+                    $("#sButton2").addClass("bg-blue-800");
+                    cont = 1;
+                    break;
+                }
+                case 1: {
+                    $("#slider-2").fadeOut(400);
+                    $("#slider-1").delay(400).fadeIn(400);
+                    $("#sButton2").removeClass("bg-blue-800");
+                    $("#sButton1").addClass("bg-blue-800");
+                    cont = 0;
+                    break;
+                }
+            }
+        }, 8000);
+    }
+
+    function reinitLoop(time) {
+        clearInterval(xx);
+        setTimeout(loopSlider(), time);
+    }
+
+    function sliderButton1() {
+
+        $("#slider-2").fadeOut(400);
+        $("#slider-1").delay(400).fadeIn(400);
+        $("#sButton2").removeClass("bg-blue-800");
+        $("#sButton1").addClass("bg-blue-800");
+        reinitLoop(4000);
+        cont = 0
+    }
+
+    function sliderButton2() {
+        $("#slider-1").fadeOut(400);
+        $("#slider-2").delay(400).fadeIn(400);
+        $("#sButton1").removeClass("bg-blue-800");
+        $("#sButton2").addClass("bg-blue-800");
+        reinitLoop(4000);
+        cont = 1
+    }
+
+    $(window).ready(function () {
+        $("#slider-2").hide();
+        $("#sButton1").addClass("bg-blue-800");
+        loopSlider();
+    });
+
+    function checkForConsole() {
+        if (window.console && window.console.firebug) {
+            document.body.innerHTML = "<h1>Console is not allowed.</h1>";
+            // You might also want to take more drastic measures here
+        } else {
+            setTimeout(checkForConsole, 1000); // Check every second
+        }
+    }
+
+    // Start checking for the console
+    checkForConsole();
+</script>
+<script>
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenu.classList.add('translate-x-0');
+    });
+
+    mobileMenuClose.addEventListener('click', () => {
+        mobileMenu.classList.remove('translate-x-0');
+    });
+</script>
+
+<script>
+    var sliders = document.querySelectorAll('.slider');
+    var buttons = document.querySelectorAll('.slider-button');
+    var currentSlider = 1;
+
+    function loopSlider(sliderIndex) {
+        return setInterval(function () {
+            var nextSlider = sliderIndex % sliders.length + 1;
+
+            $(`[data-slider="${sliderIndex}"]`).fadeOut(400);
+            $(`[data-slider="${nextSlider}"]`).delay(400).fadeIn(400);
+
+            $(`[data-target="${sliderIndex}"]`).removeClass("bg-blue-800");
+            $(`[data-target="${nextSlider}"]`).addClass("bg-blue-800");
+
+            currentSlider = nextSlider;
+        }, 8000);
+    }
+
+    function reinitLoop(time) {
+        clearInterval(xx);
+        setTimeout(function () {
+            xx = loopSlider(currentSlider);
+        }, time);
+    }
+
+    function sliderButtonClick(event) {
+        var targetSlider = event.target.dataset.target;
+        $(`.slider[data-slider="${currentSlider}"]`).fadeOut(400);
+        $(`.slider[data-slider="${targetSlider}"]`).delay(400).fadeIn(400);
+
+        $(`.slider-button[data-target="${currentSlider}"]`).removeClass("bg-blue-800");
+        $(`.slider-button[data-target="${targetSlider}"]`).addClass("bg-blue-800");
+
+        reinitLoop(4000);
+        currentSlider = targetSlider;
+    }
+
+    var xx;
+
+    $(document).ready(function () {
+        sliders.hide();
+        $(`.slider[data-slider="${currentSlider}"]`).show();
+        $(`.slider-button[data-target="${currentSlider}"]`).addClass("bg-blue-800");
+        xx = loopSlider(currentSlider);
+    });
+
+    buttons.forEach(button => {
+        button.addEventListener('click', sliderButtonClick);
+    });
+</script>
+
+
+</body>
+
+</html>

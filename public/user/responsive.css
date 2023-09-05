@@ -1,0 +1,100 @@
+/* Mobile */
+@media (max-width: 576px) {
+
+    /* global */
+    .hide-sm {
+        display: none;
+    }
+
+    /* Header Section */
+    .logo img {
+        width: 100vw;
+        max-width: 100%;
+    }
+
+    .search-container {
+        display: none;
+    }
+
+    .search-input {
+        width: calc(100% - 50px);
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .tag-container {
+        overflow-x: scroll;
+        width: auto;
+        margin: 0 0 1rem 0;
+    }
+
+    .tag-container .pill {
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+    /* Listing Section  */
+    .listing-card {
+        flex-direction: column;
+    }
+
+    .site-logo {
+        margin: 0 0 1rem 0;
+    }
+
+    /* Most Demand Category Section */
+    .top {
+        flex-direction: column;
+    }
+
+    .right {
+        margin-bottom: 0.5rem;
+    }
+
+    .category-item {
+        width: 100% !important;
+    }
+
+}
+
+/* Tablet */
+@media (min-width: 577px) and (max-width: 992px) {
+
+    /* Global */
+    .hide-md {
+        display: none;
+    }
+
+    /* Header Section */
+    .search-container {
+        width: 60%;
+    }
+
+    .search-input {
+        width: calc(100% - 50px);
+    }
+
+    /* Listing Section  */
+    .site-logo {
+        margin-right: 2rem;
+    }
+
+    /* Most Demand Category Section  */
+
+
+}
+
+/* Desktop */
+@media (min-width: 993px) {
+
+    /* Globals */
+    .hide-lg {
+        display: none;
+    }
+
+    /* Most Demand Category Section */
+
+}
