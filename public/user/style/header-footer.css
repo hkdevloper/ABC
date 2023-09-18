@@ -118,4 +118,28 @@
   .hk-devs-log-reg .hk-devs-lg-rg__register:hover {
     @apply bg-[#fc7358];
   }
+
+  .primary-btn {
+    @apply items-center border border border-[color:var(--P100,#275df5)] box-border cursor-pointer inline-flex text-base font-bold leading-5 no-underline px-5 py-2.5 rounded-[50px] border-solid border-[#275df5];
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-sizing: border-box;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    outline: 0;
+  }
+
+  .primary-btn:focus, 
+  .primary-btn:hover {
+    @apply bg-[#f7f7f9] bg-[color:var(--N300,#f7f7f9)];
+  } 
+
+  .secondary-btn {
+    @apply bg-[#f05537] bg-[color:var(--S100,#f05537)] border-[color:var(--S100,#f05537)] text-white text-[color:var(--N100,#fff)] h-10 w-[101px] ml-2.5 border-[#f05537];
+  } 
+
+  .secondary-btn:focus, 
+  .secondary-btn:hover {
+    @apply bg-[#fc7358];
+  } 
   

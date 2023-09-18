@@ -2575,7 +2575,7 @@ ul {
 
 .feature-card-container {
   box-sizing: border-box;
-  width: 322px;
+  
   border: 1px solid #e7e7f1;
   border-radius: 20px;
   cursor: pointer
@@ -2589,7 +2589,7 @@ ul {
   position: relative;
   height: 110px;
   left: -1px;
-  width: 322px;
+  
   border-radius: 20px 20px 0 0
 }
 
