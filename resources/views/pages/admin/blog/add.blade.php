@@ -1,4 +1,4 @@
-@extends('main')
+@extends('layouts.main-admin')
 @section("head")
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>

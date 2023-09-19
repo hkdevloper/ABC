@@ -14,7 +14,7 @@ class AuthController extends Controller
     // Function to view Admin Login
     public function viewAdminLogin()
     {
-        return view('pages.auth.admin_login');
+        return view('pages.admin-auth.admin_login');
     }
 
     // Function to Log in user
@@ -46,7 +46,7 @@ class AuthController extends Controller
     // Function to view Forgot Password
     public function viewForgotPassword()
     {
-        return view('pages.auth.forgot_password');
+        return view('pages.admin-auth.forgot_password');
     }
 
     // Function to do Forgot Password
@@ -80,7 +80,7 @@ class AuthController extends Controller
         $token = $request->input('token');
         $token_exists = DB::table('password_reset_tokens')->where('token', $token)->exists();
         if ($token_exists) {
-            return view('pages.auth.reset_password', ['token' => $token]);
+            return view('pages.admin-auth.reset_password', ['token' => $token]);
         }
         return redirect()->route('forgot.password')->with(['types' => 'error', 'msg' => 'Invalid Token']);
     }
@@ -102,7 +102,7 @@ class AuthController extends Controller
             DB::table('password_reset_tokens')->where('token', $token)->delete();
             return redirect()->route('admin.login')->with(['types' => 'success', 'msg' => 'Password Reset Successfully']);
         }
-        return redirect()->route('auth.reset_password')->with(['types' => 'error', 'msg' => 'Invalid Token']);
+        return redirect()->route('admin-auth.reset_password')->with(['types' => 'error', 'msg' => 'Invalid Token']);
     }
 
 }

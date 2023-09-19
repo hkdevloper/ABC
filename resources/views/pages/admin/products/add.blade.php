@@ -1,4 +1,4 @@
-@extends('main')
+@extends('layouts.main-admin')
 @section("head")
     {{--    <link rel="stylesheet" href="{{url("/")}}/dist/css/leaflet.css">--}}
     {{--    <script src="{{url("/")}}/dist/js/leaflet.js"></script>--}}
