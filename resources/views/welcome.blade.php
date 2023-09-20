@@ -10,24 +10,35 @@
     </div>
 
     <!-- Search Section -->
-    <section class="bg-blue-100 py-4">
-        <div class="container mx-auto w-full flex   flex-col items-center">
-            <h1 class="text-2xl font-semibold text-blue-900">Get the best deal from Best Company</h1>
-            <div class="text-gray-600">5 lakh+ Companies & Products for you to explore</div>
-            <div class="mt-4 flex items-center">
-                <i class="fa fa-search text-blue-700"></i>
+    <section class="bg-blue-100 py-4 h-[60vh] flex flex-col items-center justify-center">
+        <div class="container mx-auto w-full flex flex-col items-center justify-center">
+            <h1 class="text-5xl font-semibold text-blue-900">Get the best deal from Best Company</h1>
+            <div class="text-gray-600 text-3xl my-4">5 lakh+ Companies & Products for you to explore</div>
+            <div class="mt-4 flex items-center mt-3">
                 <div class="relative ml-2">
-                    <input class="border border-blue-300 rounded-full py-2 px-4 w-72 focus:outline-none"
-                           placeholder="Enter Company Name/Products" type="text">
+                    <input list="searchList" class="border border-blue-300 rounded-full p-4 w-[80vw] focus:outline-none"
+                           placeholder="Enter Company/Products Name..." type="text">
+                    <div
+                        class="absolute top-full left-0 mt-2 w-[80vw] bg-white shadow-lg border border-gray-300 rounded-lg"
+                        id="searchSuggestions">
+                        <datalist id="searchList">
+                            <option value="Apple">
+                            <option value="Banana">
+                            <option value="Cherry">
+                            <option value="Date">
+                            <option value="Grape">
+                            <option value="Lemon">
+                            <option value="Orange">
+                        </datalist>
+                    </div>
                 </div>
                 <button
-                    class="bg-blue-500 text-white py-2 px-4 rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out">
-                    Search
+                    class="bg-blue-500 text-white p-4 rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out w-[60px]">
+                    <i class="fa fa-search text-white"></i>
                 </button>
             </div>
         </div>
     </section>
-
 
     <!-- Main Content  -->
     <section class="container homepage">
@@ -144,29 +155,30 @@
                             <h2 class="text-2xl font-semibold">Featured companies</h2>
                             <div class="mt-4">
                                 <div
-                                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-1">
+                                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-1">
                                     @for($i = 1; $i < 9; $i++)
-                                        <div class="bg-white m-2 p-4 card flex flex-col items-center">
-                                            <center>
-                                                <img src="https://via.placeholder.com/100x100" alt=""
-                                                     class="w-16 h-16 object-contain">
-                                            </center>
-                                            <h3 class="text-lg font-semibold mt-4 text-center">
-                                                <a href="#" class="text-blue-900 hover:underline text-center w-full">Cognizant</a>
-                                            </h3>
-                                            <div class="flex items-center mt-2">
-            <span class="text-yellow-500">
-                <i class="fa-regular fa-star"></i>
-            </span>
-                                                <span class="text-gray-600 ml-1">3.9</span>
-                                                <span class="text-gray-600 ml-2">36.5K+ reviews</span>
+                                        <div class="bg-white m-2 card flex flex-row items-center">
+                                            <img src="https://via.placeholder.com/100x150" alt=""
+                                                 class="w-32 h-100 object-cover rounded-l-lg">
+                                            <div class="ml-4 flex-grow">
+                                                <h3 class="text-lg font-semibold text-blue-900 hover:underline">
+                                                    <a href="#" class="text-blue-900 hover:underline">Cognizant</a>
+                                                </h3>
+                                                <div class="flex items-center mt-2">
+                                                    <span class="text-yellow-500">
+                                                        <i class="fa-regular fa-star"></i>
+                                                    </span>
+                                                    <span class="text-gray-600 ml-1">3.9</span>
+                                                    <span class="text-gray-600 ml-2">36.5K+ reviews</span>
+                                                </div>
+                                                <p class="text-gray-700 mt-2">Leading ITeS company with global
+                                                    presence.</p>
+                                                <button
+                                                    class="border border-blue-500 text-blue-500 py-1 px-2 rounded-full relative top-0 right-0 mt-2 mr-2 text-center hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out"
+                                                    onclick="window.location.href='{{ route('view.company', ['hkdeveloper']) }}'">
+                                                    view Company
+                                                </button>
                                             </div>
-                                            <p class="text-gray-700 mt-2">Leading ITeS company with global presence.</p>
-                                            <button
-                                                class="border border-blue-500 text-blue-500 py-2 px-4 rounded-full mt-4 block text-center hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out"
-                                                onclick="window.location.href='{{ route('view.company', ['hkdeveloper']) }}'">
-                                                View Company
-                                            </button>
                                         </div>
                                     @endfor
                                 </div>
@@ -180,7 +192,6 @@
                         </div>
                     </div>
                 </section>
-
 
                 <!-- Why Choose Us Section -->
                 <section class="text-gray-600 body-font">
@@ -196,8 +207,8 @@
                                 <div class="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>
                             </div>
                         </div>
-                        <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
-                            <div class="p-4 md:w-1/3 flex flex-col text-center items-center">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                            <div class="p-4 w-full flex flex-col text-center items-center card">
                                 <div
                                     class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0">
                                     <svg fill="none" stroke="currentColor" stroke-linecap="round"
@@ -213,7 +224,7 @@
                                         banh mi pug VHS try-hard.</p>
                                 </div>
                             </div>
-                            <div class="p-4 md:w-1/3 flex flex-col text-center items-center">
+                            <div class="p-4 w-full flex flex-col text-center items-center card mx-1">
                                 <div
                                     class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0">
                                     <svg fill="none" stroke="currentColor" stroke-linecap="round"
@@ -231,7 +242,7 @@
                                         banh mi pug VHS try-hard.</p>
                                 </div>
                             </div>
-                            <div class="p-4 md:w-1/3 flex flex-col text-center items-center">
+                            <div class="p-4 w-full flex flex-col text-center items-center card">
                                 <div
                                     class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0">
                                     <svg fill="none" stroke="currentColor" stroke-linecap="round"
