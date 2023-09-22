@@ -15,7 +15,7 @@ jobs:
 
       - name: Deploy to DigitalOcean
         run: |
-          ssh root@68.183.103.93 "cd /path/to/your/laravel/app && git pull origin main"
+          ssh root@68.183.103.93 "cd /home/bisdir/htdocs/bisdir.hkdevs.tech/ && git pull origin main"
         env:
           VPS_IP: 68.183.103.93
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
