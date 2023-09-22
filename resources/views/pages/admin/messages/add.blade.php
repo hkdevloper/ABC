@@ -1,5 +1,4 @@
-
-@extends('main')
+@extends('layouts.main-admin')
 
 @section("content")
     <div class="grid grid-cols-12 gap-6">

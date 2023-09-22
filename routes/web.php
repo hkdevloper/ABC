@@ -15,8 +15,17 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController as UserBlogController;
+use App\Http\Controllers\CompanyController as UserCompanyController;
+use App\Http\Controllers\DealController as UserDealController;
+use App\Http\Controllers\EventController as UserEventController;
+use App\Http\Controllers\JobController as UserJobController;
+use App\Http\Controllers\ProductController as UserProductController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\UserForumController;
 use Illuminate\Support\Facades\Route;
+
+/* User Controllers */
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +38,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// prefix routes for Administrator
+/* --------------------- prefix routes for Admin Authentication --------------------- */
 Route::prefix('/admin')->group(function () {
     Route::get('/login', [AuthController::class, 'viewAdminLogin'])->name('admin.login');
     Route::post('/login', [AuthController::class, 'doLogin'])->name('admin.login');
@@ -40,8 +49,21 @@ Route::prefix('/admin')->group(function () {
     Route::post('/reset-password', [AuthController::class, 'doResetPassword'])->name('reset.password');
 });
 
-// prefix protected routes for Administrator
-Route::prefix('admin')->middleware(['auth'])->group(function () {
+/* --------------------- prefix routes for User Authentication --------------------- */
+Route::prefix('/auth/user')->group(function () {
+    Route::get('/login', [AuthController::class, 'viewUserLogin'])->name('user.login');
+    Route::get('/register', [AuthController::class, 'viewUserRegister'])->name('user.register');
+    Route::post('/login', [AuthController::class, 'doLogin'])->name('user.login');
+    Route::post('/register', [AuthController::class, 'doRegister'])->name('user.register');
+    Route::get('/logout', [AuthController::class, 'doLogout'])->name('user.logout');
+    Route::get('/forgot', [AuthController::class, 'viewUserForgotPassword'])->name('user.forgot.password');
+    Route::post('/forgot-password', [AuthController::class, 'doForgotPassword'])->name('forgot.password');
+    Route::get('/reset', [AuthController::class, 'viewUserResetPassword'])->name('user.reset.password');
+    Route::post('/reset-password', [AuthController::class, 'doResetPassword'])->name('reset.password');
+});
+
+/* --------------------- prefix routes for Admin --------------------- */
+Route::prefix('admin')->middleware(['admin-auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'adminDashboard']);
 
     // Routes for handling Company Module
@@ -223,12 +245,44 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 });
 
+/* --------------------- prefix routes for User --------------------- */
 
-// prefix routes for User
-
-
-
-// Prefix routes for Frontend
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('company')->group(function () {
+    Route::get('/', [UserCompanyController::class, 'viewCompanyList'])->name('company');
+    Route::get('/{name}', [UserCompanyController::class, 'viewCompanyDetails'])->name('view.company');
+});
+
+Route::prefix('product')->group(function () {
+    Route::get('/', [UserProductController::class, 'viewProductList'])->name('products');
+    Route::get('/{name}', [UserProductController::class, 'viewProductDetails'])->name('view.product');
+});
+
+Route::prefix('event')->group(function () {
+    Route::get('/', [UserEventController::class, 'viewEventList'])->name('events');
+    Route::get('/{name}', [UserEventController::class, 'viewEventDetails'])->name('view.event');
+});
+
+Route::prefix('blog')->group(function () {
+    Route::get('/', [UserBlogController::class, 'viewBlogList'])->name('blogs');
+    Route::get('/{name}', [UserBlogController::class, 'viewBlogDetails'])->name('view.blog');
+});
+
+Route::prefix('deal')->group(function () {
+    Route::get('/', [UserDealController::class, 'viewDealList'])->name('deals');
+    Route::get('/{name}', [UserDealController::class, 'viewDealDetails'])->name('view.deal');
+});
+
+Route::prefix('job')->group(function () {
+    Route::get('/', [UserJobController::class, 'viewJobList'])->name('jobs');
+    Route::get('/{name}', [UserJobController::class, 'viewJobDetails'])->name('view.job');
+});
+
+Route::prefix('forum')->group(function () {
+    Route::get('/', [UserForumController::class, 'viewForumList'])->name('forum');
+    Route::get('/{name}', [UserForumController::class, 'viewForumDetails'])->name('view.forum');
+});
+

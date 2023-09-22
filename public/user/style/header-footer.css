@@ -1,0 +1,145 @@
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
+.hk-devs-menuItems {
+    @apply cursor-default list-none relative;
+  }
+  .hk-devs-menuItems a {
+    @apply text-[#474d6a] text-[color:var(--N700,#474d6a)] flex text-base pr-0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+  }
+  .hk-devs-menuItems__item-count {
+    @apply border border border-[color:var(--A100,#ffedf2)] box-border text-[#f05537] text-[color:var(--S100,#f05537)] text-[11px] font-bold h-6 leading-[14px] max-w-[100px] overflow-hidden text-center text-ellipsis whitespace-nowrap ml-2.5 px-2.5 py-[5px] rounded-xl border-solid border-[#ffedf2];
+    background: #fff;
+    background: var(--N100, #fff);
+    -webkit-box-sizing: border-box;
+    -o-text-overflow: ellipsis;
+  }
+  [dir="ltr"] .hk-devs-menus {
+    @apply pl-0;
+  }
+  [dir="rtl"] .hk-devs-menus {
+    @apply pr-0;
+  }
+  .hk-devs-menus {
+    @apply box-border flex opacity-100 relative absolute transition-opacity duration-[0.1s] ease-[ease-out] delay-[0.25s] m-0 left-52 top-6;
+    -webkit-box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    pointer-events: all;
+    -webkit-transition: opacity 0.1s ease-out;
+    -o-transition: opacity 0.1s ease-out;
+    -webkit-transition-delay: 0.25s;
+    -o-transition-delay: 0.25s;
+  }
+  .hk-devs-menus > li {
+    @apply mr-9 pb-6;
+  }
+  .hk-devs-company-logo {
+    @apply text-[#121224] text-[color:var(--N800,#121224)] text-[#717b9e] text-[color:var(--N600,#717b9e)] inline-block text-[15px] leading-5 relative no-underline top-1;
+    font-family: Satoshi;
+    font-family: var(--font-family, "Satoshi");
+  }
+  .hk-devs-,
+  button,
+  input {
+    @apply font-normal;
+    font-family: Satoshi;
+    font-family: var(--font-family, "Satoshi");
+  }
+  .hk-devs- {
+    @apply shadow-none box-border flex flex-row grow-0 shrink-0 flex-nowrap justify-center min-w-[1200px] sticky transition-[-webkit-box-shadow] duration-[0.1s] ease-[ease-out] transition-shadow duration-[0.1s] ease-[ease-out] z-[99] left-0 top-0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-negative: 0;
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-box-shadow: none;
+    -webkit-box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -ms-flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    -webkit-transition: -webkit-box-shadow 0.1s ease-out;
+    -o-transition: box-shadow 0.1s ease-out;
+    transition: box-shadow 0.1s ease-out, -webkit-box-shadow 0.1s ease-out;
+  }
+  .hk-devs-,
+  .hk-devs- .hk-devs-__placeholder {
+    @apply bg-white bg-[color:var(--N100,#fff)] h-[72px];
+  }
+  .hk-devs-__wrapper {
+    @apply box-border flex h-full relative w-[1120px];
+    -webkit-box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+  }
+  .hk-devs-__logo {
+    @apply h-[20.44px] absolute top-6;
+  }
+  .hk-devs-footer__separator {
+    @apply h-px opacity-80 w-[1120px] mx-auto my-10;
+    background: #e7e7f1;
+    background: var(--N400, #e7e7f1);
+  }
+  .hk-devs-log-reg {
+    @apply opacity-100 absolute transition-opacity duration-[0.1s] ease-[ease-out] delay-[0.25s] right-[148px] top-[15px];
+    pointer-events: all;
+    -webkit-transition: opacity 0.1s ease-out;
+    -o-transition: opacity 0.1s ease-out;
+    -webkit-transition-delay: 0.25s;
+    -o-transition-delay: 0.25s;
+  }
+  .hk-devs-log-reg > a {
+    @apply items-center border border border-[color:var(--P100,#275df5)] box-border cursor-pointer inline-flex text-base font-bold leading-5 no-underline px-5 py-2.5 rounded-[50px] border-solid border-[#275df5];
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-sizing: border-box;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    outline: 0;
+  }
+  .hk-devs-log-reg .hk-devs-lg-rg__login {
+    @apply bg-white bg-[color:var(--N100,#fff)] border-[color:var(--P100,#275df5)] text-[#275df5] text-[color:var(--P100,#275df5)] h-10 w-[82px] border-[#275df5];
+  }
+  .hk-devs-log-reg .hk-devs-lg-rg__login:focus,
+  .hk-devs-log-reg .hk-devs-lg-rg__login:hover {
+    @apply bg-[#f7f7f9] bg-[color:var(--N300,#f7f7f9)];
+  }
+  .hk-devs-log-reg .hk-devs-lg-rg__register {
+    @apply bg-[#f05537] bg-[color:var(--S100,#f05537)] border-[color:var(--S100,#f05537)] text-white text-[color:var(--N100,#fff)] h-10 w-[101px] ml-2.5 border-[#f05537];
+  }
+  .hk-devs-log-reg .hk-devs-lg-rg__register:focus,
+  .hk-devs-log-reg .hk-devs-lg-rg__register:hover {
+    @apply bg-[#fc7358];
+  }
+
+  .primary-btn {
+    @apply items-center border border border-[color:var(--P100,#275df5)] box-border cursor-pointer inline-flex text-base font-bold leading-5 no-underline px-5 py-2.5 rounded-[50px] border-solid border-[#275df5];
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-sizing: border-box;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    outline: 0;
+  }
+
+  .primary-btn:focus, 
+  .primary-btn:hover {
+    @apply bg-[#f7f7f9] bg-[color:var(--N300,#f7f7f9)];
+  } 
+
+  .secondary-btn {
+    @apply bg-[#f05537] bg-[color:var(--S100,#f05537)] border-[color:var(--S100,#f05537)] text-white text-[color:var(--N100,#fff)] h-10 w-[101px] ml-2.5 border-[#f05537];
+  } 
+
+  .secondary-btn:focus, 
+  .secondary-btn:hover {
+    @apply bg-[#fc7358];
+  } 
+  

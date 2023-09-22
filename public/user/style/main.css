@@ -1,0 +1,23 @@
+/*
+* Author: 	HkDevelopers
+* Date: 	10/10/2021
+* Purpose: 	Style the page
+* License: 	Not for commercial use
+* Link:     www.hkdevs.tech
+*/
+
+/* Tailwind CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* HkDevs custom styles*/
+@import url('./fonts.css');
+@import url('./globals.css');
+@import url('./header-footer.css');
+@import url('./search-bar.css');
+@import url('./content.css');
+@import url('./home-page.css');
+@import url('./widgets.css');
+@import url('./owl-carousel.css');
+@import url('./modified.css');

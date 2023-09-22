@@ -1,0 +1,163 @@
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
+* {
+    @apply box-border m-0 p-0;
+    list-style: none;
+  }
+  a,
+  a:focus,
+  a:hover,
+  a:visited {
+    @apply no-underline;
+    outline: 0;
+  }
+  a,
+  body,
+  div,
+  p,
+  span {
+    @apply select-text;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    @apply cursor-auto select-text;
+  }
+  input::-ms-clear,
+  input::-ms-reveal {
+    @apply hidden;
+  }
+  body {
+    @apply text-sm leading-[18px] text-[#1b2437] m-0;
+    background: #fff;
+  }
+  .container {
+    @apply w-[1120px] m-auto;
+  }
+  .container * {
+    @apply box-border;
+  }
+  img[src*="https://logs.hkdevs.com"] {
+    @apply hidden;
+  }
+  .qsb-header-container {
+    @apply flex flex-col items-center justify-center w-full pt-[70px] pb-[39px] px-0;
+    background: linear-gradient(180deg, #f5f4fa, rgba(251, 251, 253, 0));
+  }
+  .qsb-header-container * {
+    font-family: var(--font-family, "Satoshi");
+  }
+  .qsb-header-container .qsb-title {
+    @apply font-black text-[40px] leading-[54px] text-[color:var(--N800)] mb-2.5;
+  }
+  .qsb-header-container .qsb-byLine {
+    @apply font-medium text-xl leading-[23px] text-[color:var(--N800)];
+  }
+  [data-theme="one-theme"] {
+    --font-family: Satoshi, "Satoshi Fallback";
+    --P100: #275df5;
+    --P200: #b0c8ff;
+    --S100: #f05537;
+    --S200: #ffbfad;
+    --N100: #fff;
+    --N200: #fff;
+    --N300: #f7f7f9;
+    --N400: #e7e7f1;
+    --N500: #979ec2;
+    --N600: #717b9e;
+    --N700: #474d6a;
+    --N800: #121224;
+    --I100: #f04141;
+    --I200: #47b749;
+    --I300: #fdaa29;
+    --I400: #8951ff;
+    --A100: #ffedf2;
+    --A200: #efedff;
+    --A300: #ecf5ff;
+    --A400: #fff3dd;
+    --A500: #ffedf2;
+    --D100: #0d1734;
+    --D200: #35063e;
+    --G100_T: #fff;
+    --G100_B: #ffedf2;
+    --G200_T: #fff;
+    --G200_B: #efedff;
+    --G300_T: #fff;
+    --G300_B: #edf4ff;
+    --G400_T: #fff;
+    --G400_B: #fff3dd;
+    --V100: rgba(236, 245, 255, 0.5019607843137255);
+    --box-shadow1: 0px 6px 12px rgba(30, 10, 58, 0.04);
+    --box-shadow2: 0px 6px 25px rgba(30, 10, 58, 0.08);
+    --border: 1px solid #e7e7f1;
+    --br10: 10px;
+    --background: #f5f5f5;
+    --missingDetailsBg: #fff5f5;
+    --profilePerfBg: #ecf5ff;
+  }
+  a,
+  b,
+  body,
+  center,
+  details,
+  div,
+  footer,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  header,
+  html,
+  i,
+  img,
+  label,
+  li,
+  main,
+  nav,
+  object,
+  p,
+  s,
+  section,
+  span,
+  sub,
+  ul {
+    @apply text-[100%] align-baseline box-border m-0 p-0 border-0;
+    word-wrap: break-word;
+  }
+  details,
+  footer,
+  header,
+  main,
+  nav,
+  section {
+    @apply block;
+  }
+  li,
+  ul {
+    @apply list-none;
+  }
+  [hidden] {
+    @apply hidden;
+  }
+  input {
+    @apply box-border;
+  }
+  @media only screen and (max-width: 1270px) {
+    html {
+      @apply w-[-webkit-fit-content] w-[-moz-fit-content] w-fit;
+    }
+  }
+  .container .content .chip {
+    @apply border font-medium text-[13px] leading-[18px] text-[#445578] w-auto h-auto inline-block max-w-full ml-0 mr-1.5 mt-1.5 mb-0 px-3 py-1 rounded-[14px] border-solid border-[#d3e1ea];
+    background: #fff;
+  }
+  

@@ -1,4 +1,4 @@
-@extends('main')
+@extends('layouts.main-admin')
 
 @section("content")
     <div class="grid grid-cols-12 gap-6">
@@ -35,7 +35,7 @@
                                                 data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                                         @if($data->allow_delete == 1)
                                             <a class="flex items-center text-theme-6" onclick="confirm('Are you sure?') ? window.location.replace('{{route('delete.user.group', ['id'=> $data->id])}}') : ''"
-                                               href="javascript:;"> <i
+                                               href="javascript:"> <i
                                                     data-feather="trash-2" class="w-4 h-4 mr-1" onclick=""></i> Delete
                                             </a>
                                         @endif

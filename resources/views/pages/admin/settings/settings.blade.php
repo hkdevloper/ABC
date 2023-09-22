@@ -1,4 +1,4 @@
-@extends('main')
+@extends('layouts.main-admin')
 
 @section("content")
     {{-- Main Content goes Here --}}
