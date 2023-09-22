@@ -135,7 +135,6 @@
     <orderEntry type="library" name="filepond-plugin-image-edit" level="application" />
     <orderEntry type="library" name="filepond-plugin-image-exif-orientation" level="application" />
     <orderEntry type="library" name="@furcan/iconpicker" level="application" />
-    <orderEntry type="library" name="cabb64bd6b" level="application" />
     <orderEntry type="library" name="ckeditor" level="application" />
     <orderEntry type="library" name="cabb64bd6b" level="application" />
   </component>

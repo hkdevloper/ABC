@@ -33,11 +33,14 @@
                 <li>
                     <a href="{{ route('blogs') }}" class="text-gray-700 hover:text-purple-600">Blogs</a>
                 </li>
+                <li>
+                    <a href="{{ route('forum') }}" class="text-gray-700 hover:text-purple-600">Forum</a>
+                </li>
             </ul>
         </nav>
         <div class="hidden lg:flex space-x-4 items-center">
-            <a href="#" class="text-gray-700 hover:text-purple-600">Login</a>
-            <a href="#"
+            <a href="{{route('user.login')}}" class="text-gray-700 hover:text-purple-600">Login</a>
+            <a href="{{route('user.register')}}"
                class="text-white bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-white">Register</a>
         </div>
     </div>

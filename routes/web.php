@@ -22,6 +22,7 @@ use App\Http\Controllers\EventController as UserEventController;
 use App\Http\Controllers\JobController as UserJobController;
 use App\Http\Controllers\ProductController as UserProductController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\UserForumController;
 use Illuminate\Support\Facades\Route;
 
 /* User Controllers */
@@ -49,13 +50,15 @@ Route::prefix('/admin')->group(function () {
 });
 
 /* --------------------- prefix routes for User Authentication --------------------- */
-Route::prefix('/user')->group(function () {
+Route::prefix('/auth/user')->group(function () {
     Route::get('/login', [AuthController::class, 'viewUserLogin'])->name('user.login');
+    Route::get('/register', [AuthController::class, 'viewUserRegister'])->name('user.register');
     Route::post('/login', [AuthController::class, 'doLogin'])->name('user.login');
+    Route::post('/register', [AuthController::class, 'doRegister'])->name('user.register');
     Route::get('/logout', [AuthController::class, 'doLogout'])->name('user.logout');
-    Route::get('/forgot-password', [AuthController::class, 'viewForgotPassword'])->name('forgot.password');
+    Route::get('/forgot', [AuthController::class, 'viewUserForgotPassword'])->name('user.forgot.password');
     Route::post('/forgot-password', [AuthController::class, 'doForgotPassword'])->name('forgot.password');
-    Route::get('/reset-password', [AuthController::class, 'viewResetPassword'])->name('reset.password');
+    Route::get('/reset', [AuthController::class, 'viewUserResetPassword'])->name('user.reset.password');
     Route::post('/reset-password', [AuthController::class, 'doResetPassword'])->name('reset.password');
 });
 
@@ -276,5 +279,10 @@ Route::prefix('deal')->group(function () {
 Route::prefix('job')->group(function () {
     Route::get('/', [UserJobController::class, 'viewJobList'])->name('jobs');
     Route::get('/{name}', [UserJobController::class, 'viewJobDetails'])->name('view.job');
+});
+
+Route::prefix('forum')->group(function () {
+    Route::get('/', [UserForumController::class, 'viewForumList'])->name('forum');
+    Route::get('/{name}', [UserForumController::class, 'viewForumDetails'])->name('view.forum');
 });
 

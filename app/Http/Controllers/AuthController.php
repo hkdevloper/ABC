@@ -17,6 +17,18 @@ class AuthController extends Controller
         return view('pages.admin-auth.admin_login');
     }
 
+    // Function to view User Login
+    public function viewUserLogin()
+    {
+        return view('pages.user.auth.login');
+    }
+
+    // Function to view User Register
+    public function viewUserRegister()
+    {
+        return view('pages.user.auth.register');
+    }
+
     // Function to Log in user
     public function doLogin(Request $request)
     {
@@ -43,10 +55,27 @@ class AuthController extends Controller
         return redirect('/admin/login');
     }
 
-    // Function to view Forgot Password
+    // Function to view Admin Forgot Password
     public function viewForgotPassword()
     {
         return view('pages.admin-auth.forgot_password');
+    }
+
+    // public function to view user forgot password
+    public function viewUserForgotPassword()
+    {
+        return view('pages.user.auth.forgot-password');
+    }
+
+    // public function to view user reset password
+    public function viewUserResetPassword(Request $request)
+    {
+//        $token = $request->input('token');
+//        $token_exists = DB::table('password_reset_tokens')->where('token', $token)->exists();
+//        if ($token_exists) {
+        return view('pages.user.auth.reset_password');
+//        }
+//        return redirect()->route('user.forgot.password')->with(['types' => 'error', 'msg' => 'Invalid Token']);
     }
 
     // Function to do Forgot Password

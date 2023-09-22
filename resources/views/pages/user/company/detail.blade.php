@@ -2,14 +2,11 @@
 
 @section('head')
     <style>
+        /* Base styles for all screen sizes */
+
         div:hover > .verticalTrack {
             opacity: 1 !important;
             transition: all 0.3s !important;
-        }
-
-        .width100 {
-            width: 100%;
-            display: inline-block;
         }
 
         .imageWrapper .itemContainer .origImg {
@@ -53,11 +50,6 @@
 
         .read-more {
             line-height: 14px;
-        }
-
-        .read-more-text {
-            color: #1b2437;
-            overflow-wrap: break-word;
         }
 
         .company-page {
@@ -497,28 +489,10 @@
             font-size: 16px;
         }
 
-        .typ-40Medium {
-            font-size: 40px;
-            font-weight: 500;
-            line-height: 31px;
-        }
-
         .typ-24Black {
             font-size: 24px;
             font-weight: 900;
             line-height: 30px;
-        }
-
-        .typ-20Bold {
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 26px;
-        }
-
-        .typ-18Bold {
-            font-size: 18px;
-            font-weight: 700;
-            line-height: 23px;
         }
 
         .typ-16Bold {
@@ -530,11 +504,6 @@
             font-size: 16px;
             line-height: 20px;
         }
-
-        .typ-16Medium {
-            font-weight: 500;
-        }
-
         .typ-14Bold {
             font-weight: 700;
         }
@@ -549,32 +518,56 @@
             font-weight: 500;
         }
 
-        .typ-12Bold {
-            font-weight: 700;
         }
 
-        .typ-12Bold,
-        .typ-12Medium {
-            font-size: 12px;
-            line-height: 15px;
-        }
+        /* Add media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            .company-page-body-wrapper .company-page-body {
+                width: 100%;
+                padding: 0 16px;
+            }
 
-        .typ-12Medium {
-            font-weight: 500;
-        }
+            .tabs-container .tab-list-wrapper .tab-list .tab-list-item {
+                font-size: 14px;
+                padding: 0 8px;
+            }
 
-        .typ-11Bold {
-            font-weight: 700;
-        }
+            .Banner.isCoverBanner {
+                height: 300px;
+            }
 
-        .typ-11Bold,
-        .typ-11Medium {
-            font-size: 11px;
-            line-height: 14px;
-        }
+            .Banner .right-text {
+                font-size: 12px;
+                top: 16px;
+                right: 16px;
+            }
 
-        .typ-11Medium {
-            font-weight: 500;
+            .claimNowWapper {
+                width: 100%;
+            }
+
+            .claimNowWapper .right-text {
+                font-size: 10px;
+                bottom: 8px;
+                right: 16px;
+            }
+
+            .typ-24Black {
+                font-size: 20px;
+                line-height: 24px;
+            }
+
+            .typ-16Bold,
+            .typ-16Medium {
+                font-size: 14px;
+                line-height: 18px;
+            }
+
+            .typ-14Bold,
+            .typ-14Medium {
+                font-size: 12px;
+                line-height: 16px;
+            }
         }
     </style>
 @endsection

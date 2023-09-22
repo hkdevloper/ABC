@@ -71,7 +71,7 @@
                                                     <div class="feature-card-header-image-container">
                                                         <div class="feature-card-image-container">
                                                             <img alt="feature-card" class="feature-card-image" height=""
-                                                                 src="https://via.placeholder.com/300x100" width="">
+                                                                 src="https://via.placeholder.com/300x300" width="">
                                                             <div class="feature-card-image-overlay"></div>
                                                             <div class="feature-card-date-rewards-container">
                                                                 <div class="feature-card-date-label">
@@ -133,9 +133,13 @@
                                                                     RS. {{rand(99,999)}}</p>
                                                             </div>
                                                             <div class="cta-container">
-                                                                <a class="cta-link"
-                                                                   href="{{route('view.event', [generateRandomEventTitle()])}}">
-                                                                    View details</a>
+                                                                <button
+                                                                    onclick="window.location.href = '{{route('view.event', [generateRandomEventTitle()])}}'"
+                                                                    class="text-indigo-500 border border-indigo-500 hover:bg-indigo-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                                    type="button"
+                                                                >
+                                                                    View details
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>

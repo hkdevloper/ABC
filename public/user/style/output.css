@@ -2575,10 +2575,13 @@ ul {
 
 .card {
   box-sizing: border-box;
-  
   border: 1px solid #e7e7f1;
   border-radius: 20px;
   cursor: pointer
+}
+
+.card-hovered {
+    box-shadow: 0 14px 40px rgba(30, 10, 58, .1), 0 6px 12px rgba(30, 10, 58, .04) !important;
 }
 
 .card .feature-card-header-image-container {
@@ -2589,14 +2592,14 @@ ul {
   position: relative;
   height: 110px;
   left: -1px;
-  
+
   border-radius: 20px 20px 0 0
 }
 
 .card .feature-card-header-image-container .feature-card-image-container .feature-card-image {
   border-radius: 20px 20px 0 0;
   width: 100%;
-  height: 100%
+    height: 100%;
 }
 
 .card .feature-card-header-image-container .feature-card-image-container .feature-card-image-overlay {
@@ -2604,7 +2607,7 @@ ul {
   border-radius: 20px 20px 0 0;
   top: 0;
   width: 100%;
-  height: 110px;
+    height: 100%;
   background: var(--N800, #121224);
   opacity: .7
 }
