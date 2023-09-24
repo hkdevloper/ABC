@@ -9,7 +9,7 @@
                 <!-- Content Section -->
                 <section class="text-gray-600 body-font">
                     <div class="container lg:px-24 md:px-12 py-6 mx-auto flex flex-wrap">
-                        <!-- Product List BLock -->
+                        <!-- Product List Block -->
                         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
                             <div class="flex flex-col mb-10 lg:items-center items-center justify-center">
                                 <!-- Product list Item -->
@@ -25,18 +25,17 @@
                                     }
                                 @endphp
                                 @for($i=1; $i<10;$i++)
-                                    <div class="m-2 card desktop-homepage-events-wdgt dark:bg-neutral-700">
+                                    <div class="m-2 card">
                                         <!-- Logo and Details Div -->
-                                        <div class="flex items-center justify-between pr-1">
-                                            <!-- Logo -->
+                                        <div class="flex items-center justify-between pr-1 w-full">
                                             <img src="https://via.placeholder.com/300x300" alt="Product Image"
-                                                 class="w-100 h-40 object-cover rounded-l-lg mr-3">
+                                                 class="w-[150px] h-[150px] object-cover rounded-l-lg mr-3">
                                             <div class="flex items-center">
                                                 <div class="block">
                                                     <h2 class="text-gray-900 text-base font-semibold mb-1">{{ generateRandomProductTitle() }}</h2>
                                                     <p class="text-gray-600 text-xs">Lorem ipsum dolor sit amet
-                                                        consectetur
-                                                        adipisicing elit. Hic deleniti dolorem dolorum debitis quaerat.
+                                                        consectetur adipisicing elit. Hic deleniti dolorem dolorum
+                                                        debitis quaerat.
                                                         Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                                                     <div class="flex items-center mt-2 flex-wrap">
                                                         <x-bladewind::tag label="hkdevs" color="purple" class="mx-1"/>
@@ -81,7 +80,8 @@
                                     </nav>
                                 </div>
                             </div>
-
+                            <!-- Pagination -->
+                            <x-user.pagination/>
                         </div>
                         <!-- Side Block -->
                         @include('includes.sidebar')

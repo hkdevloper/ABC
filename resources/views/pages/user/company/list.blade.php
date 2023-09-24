@@ -13,7 +13,7 @@
                         <!-- Companies List -->
                         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
                             <!-- Company List Search -->
-                            <x-bladewind::input :placeholder="'Search Companies'" name="search" class="mx-2 w-[98%]"/>
+                            <x-bladewind::input :placeholder="'Search Companies'" name="search" class="w-[99%]"/>
 
                             <div class="flex flex-col mb-10 lg:items-start items-center">
                                 <!-- Company list Item -->
@@ -36,7 +36,7 @@
                                 @endphp
 
                                 @for($i=1; $i<10;$i++)
-                                    <div class="m-2 card block p-4 w-95">
+                                    <div class="m-2 card p-4">
                                         <!-- Logo and Details Div -->
                                         <div class="flex items-start justify-between">
                                             <div class="flex items-center">
@@ -52,7 +52,7 @@
                                                         <x-bladewind::icon name="check-badge" type="solid"
                                                                            class="text-green-400 @if(rand(0,1)) hidden @endif"/>
                                                     </h2>
-                                                    <div class="flex items-center">
+                                                    <div class="flex items-center text-sm">
                                                         <x-bladewind::icon name="map-pin" type="solid"
                                                                            class="text-green-300"/>
                                                         <span class="mx-1">{{generateRandomLocation()}}</span>
@@ -77,36 +77,12 @@
                                         <div class="mt-2 text-xs">
                                             <p>{{generateRandomDescription()}}</p>
                                         </div>
-
                                     </div>
                                 @endfor
 
                             </div>
-                            <!-- Product Pagination -->
-                            <div class="flex justify-center mb-2">
-                                <nav class="bg-white rounded-full shadow-md">
-                                    <ul class="inline-flex p-2 space-x-2">
-                                        <li>
-                                            <a href="#"
-                                               class="px-3 py-2 rounded-l-full hover:bg-blue-500 hover:text-white">
-                                                <i class="fas fa-angle-double-left"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="px-3 py-2 hover:bg-blue-500 hover:text-white">1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="px-3 py-2 hover:bg-blue-500 hover:text-white">2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                               class="px-3 py-2 rounded-r-full hover:bg-blue-500 hover:text-white">
-                                                <i class="fas fa-angle-double-right"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
+                            <!-- Pagination -->
+                            <x-user.pagination/>
                         </div>
                         @include('includes.sidebar')
                     </div>
