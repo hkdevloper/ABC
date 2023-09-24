@@ -16,21 +16,8 @@
             <div class="text-gray-600 text-3xl my-4">5 lakh+ Companies & Products for you to explore</div>
             <div class="mt-4 flex items-center mt-3">
                 <div class="relative ml-2">
-                    <input list="searchList" class="border border-blue-300 rounded-full p-4 w-[80vw] focus:outline-none"
+                    <input list="searchList" class="rounded-full p-4 w-[40vw] focus:outline-none card-hovered"
                            placeholder="Enter Company/Products Name..." type="text">
-                    <div
-                        class="absolute top-full left-0 mt-2 w-[80vw] bg-white shadow-lg border border-gray-300 rounded-lg"
-                        id="searchSuggestions">
-                        <datalist id="searchList">
-                            <option value="Apple">
-                            <option value="Banana">
-                            <option value="Cherry">
-                            <option value="Date">
-                            <option value="Grape">
-                            <option value="Lemon">
-                            <option value="Orange">
-                        </datalist>
-                    </div>
                 </div>
                 <button
                     class="bg-blue-500 text-white p-4 rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out w-[60px]">

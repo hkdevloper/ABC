@@ -3,47 +3,12 @@
 @section('content')
     <section class="homepage">
         <div class="widget-placeholder">
+            <!-- Header Section -->
+            <x-user.header :title="'Blogs'"/>
             <div class="hkdevs-wdgt-section">
                 <!-- Content Section -->
                 <section class="text-gray-600 body-font">
-                    <div class="border flex justify-between items-center"
-                         style="width: 100%; height: 100px; background: rgb(15, 12, 114);">
-                        <h1 class="text-white text-4xl mx-12">Products</h1>
-                        <!-- Filter Section -->
-                        <div class="p-4 md:flex md:justify-between">
-                            <!-- Search Input -->
-                            <div class="relative mb-4 md:mb-0 mx-1">
-                                <input type="text"
-                                       class=" rounded-full bg-white w-full py-2 px-4 pl-10 focus:outline-none"
-                                       placeholder="Search products...">
-                                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <i class="fa fa-search"></i>
-                                </span>
-                            </div>
-
-                            <!-- Category Filter -->
-                            <div class="mb-4 md:mb-0 mx-1">
-                                <select class="rounded-md bg-white py-2 px-4 focus:outline-none">
-                                    <option value="">All Categories</option>
-                                    <option value="category1">Category 1</option>
-                                    <option value="category2">Category 2</option>
-                                    <!-- Add more category options as needed -->
-                                </select>
-                            </div>
-
-                            <!-- Pricing Filter -->
-                            <div class="mb-4 md:mb-0 mx-1">
-                                <select class=" rounded-md bg-white py-2 px-4 focus:outline-none">
-                                    <option value="">All Prices</option>
-                                    <option value="price1">Price 1</option>
-                                    <option value="price2">Price 2</option>
-                                    <!-- Add more pricing options as needed -->
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="px-2 py-6 mx-auto flex flex-wrap">
+                    <div class="container lg:px-24 md:px-12 py-6 mx-auto flex flex-wrap">
                         <!-- Product List BLock -->
                         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
                             <div class="flex flex-col mb-10 lg:items-center items-center justify-center">
@@ -62,32 +27,29 @@
                                 @for($i=1; $i<10;$i++)
                                     <div class="m-2 card desktop-homepage-events-wdgt dark:bg-neutral-700">
                                         <!-- Logo and Details Div -->
-                                        <div class="flex items-start justify-between">
+                                        <div class="flex items-center justify-between pr-1">
+                                            <!-- Logo -->
+                                            <img src="https://via.placeholder.com/300x300" alt="Product Image"
+                                                 class="w-100 h-40 object-cover rounded-l-lg mr-3">
                                             <div class="flex items-center">
-                                                <!-- Logo -->
-                                                <img src="https://via.placeholder.com/600x400" alt="Product Image"
-                                                     width="180" height="150" class="mr-5 inline-block rounded-l-lg">
-
-                                                <!-- Details -->
                                                 <div class="block">
-                                                    <h2 class="text-gray-900 text-lg font-semibold mb-1">{{ generateRandomProductTitle() }}</h2>
-                                                    <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur
+                                                    <h2 class="text-gray-900 text-base font-semibold mb-1">{{ generateRandomProductTitle() }}</h2>
+                                                    <p class="text-gray-600 text-xs">Lorem ipsum dolor sit amet
+                                                        consectetur
                                                         adipisicing elit. Hic deleniti dolorem dolorum debitis quaerat.
                                                         Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                                    <div class="flex items-center mt-2">
-                                                    <span class="bg-blue-200 text-xs px-2 py-1 mx-1 rounded-lg">#Tag
-                                                        1</span>
-                                                        <span class="bg-blue-200 text-xs px-2 py-1 mx-1 rounded-lg">#Tag
-                                                        2</span>
-                                                        <span class="bg-blue-200 text-xs px-2 py-1 mx-1 rounded-lg">#Tag
-                                                        3</span>
+                                                    <div class="flex items-center mt-2 flex-wrap">
+                                                        <x-bladewind::tag label="hkdevs" color="purple" class="mx-1"/>
+                                                        <x-bladewind::tag label="codecanyon" color="purple"
+                                                                          class="mx-1"/>
+                                                        <x-bladewind::tag label="theme" color="purple" class="mx-1"/>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <a href="{{route('view.product', [generateRandomProductTitle()])}}"
-                                               class="mt-4 py-[.688rem] px-4 inline-flex justify-center items-center gap-2 rounded-md border-2 border-gray-200 font-semibold bg-purple-100 text-blue-500 hover:text-blue hover:bg-blue-100 hover:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:ring-offset-2 transition-all text-sm dark:border-gray-700 dark:hover:border-blue-500"
-                                               style="position: relative; top: 10px; right: 10px;">View <i
+                                               class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full p-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-[100px]"
+                                               style="border: 1px solid;">View <i
                                                     class="fa-solid fa-arrow-up-right-from-square"></i>
                                             </a>
                                         </div>

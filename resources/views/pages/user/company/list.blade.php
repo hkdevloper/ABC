@@ -3,52 +3,18 @@
 @section('content')
     <section class="homepage">
         <div class="widget-placeholder">
+            <!-- Header Section -->
+            <x-user.header :title="'Blogs'"/>
             <div class="hkdevs-wdgt-section">
                 <!-- Content Section -->
                 <section class="text-gray-600 body-font">
-                    {{-- Filter Section--}}
-                    <div class="border flex justify-between items-center mt-2"
-                         style="width: 100%; height: 100px; background: rgb(15, 12, 114);">
-                        <h1 class="text-white text-4xl mx-12">Companies</h1>
-                        <!-- Filter Section -->
-                        <div class="p-4 md:flex md:justify-between">
-                            <!-- Search Input -->
-                            <div class="relative mb-4 md:mb-0 mx-1">
-                                <input type="text"
-                                       class=" rounded-full bg-white w-full py-2 px-4 pl-10 focus:outline-none"
-                                       placeholder="Search Companies...">
-                                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <i class="fa fa-search"></i>
-                                </span>
-                            </div>
-
-                            <!-- Category Filter -->
-                            <div class="mb-4 md:mb-0 mx-1">
-                                <select
-                                    class="rounded-md bg-white py-2 px-4 focus:outline-none">
-                                    <option value="">All Categories</option>
-                                    <option value="category1">Category 1</option>
-                                    <option value="category2">Category 2</option>
-                                    <!-- Add more category options as needed -->
-                                </select>
-                            </div>
-
-                            <!-- Pricing Filter -->
-                            <div class="mb-4 md:mb-0 mx-1">
-                                <select
-                                    class=" rounded-md bg-white py-2 px-4 focus:outline-none">
-                                    <option value="">All Locations</option>
-                                    <option value="price1">Location 1</option>
-                                    <option value="price2">Location 2</option>
-                                    <!-- Add more pricing options as needed -->
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="container px-5 py-12 mx-auto flex flex-wrap">
+                    {{-- Main Section --}}
+                    <div class="container lg:px-24 md:px-12 py-6 mx-auto flex flex-wrap">
                         <!-- Companies List -->
                         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
+                            <!-- Company List Search -->
+                            <x-bladewind::input :placeholder="'Search Companies'" name="search" class="mx-2 w-[98%]"/>
+
                             <div class="flex flex-col mb-10 lg:items-start items-center">
                                 <!-- Company list Item -->
                                 @php
@@ -80,28 +46,35 @@
 
                                                 <!-- Details -->
                                                 <div class="inline-block">
-                                                    <h2 class="text-green-600 text-sm mb-1">Featured</h2>
-                                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-1">{{generateRandomCompanyName()}}</h2>
+                                                    <h2 class="text-green-600 text-sm mb-1 @if(rand(0,1)) hidden @endif ">
+                                                        Featured</h2>
+                                                    <h2 class="text-gray-900 text-base title-font font-medium mb-1">{{generateRandomCompanyName()}}
+                                                        <x-bladewind::icon name="check-badge" type="solid"
+                                                                           class="text-green-400 @if(rand(0,1)) hidden @endif"/>
+                                                    </h2>
                                                     <div class="flex items-center">
-                                                        <i class="fa-solid fa-location-dot text-green-600"></i>
+                                                        <x-bladewind::icon name="map-pin" type="solid"
+                                                                           class="text-green-300"/>
                                                         <span class="mx-1">{{generateRandomLocation()}}</span>
-                                                        <i class="fa-solid fa-star text-yellow-400"></i>
+                                                        <x-bladewind::icon name="star" type="solid"
+                                                                           class="text-orange-300"/>
                                                         <span class="mx-1">{{rand(1,99)/10}} Review</span>
-                                                        <i class="fa-solid fa-eye"></i>
+                                                        <x-bladewind::icon name="eye" type="solid"
+                                                                           class="text-purple-300"/>
                                                         <span class="mx-1">{{rand(1,99)/10}}K Views</span>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <a href="{{route('view.company', [generateRandomLocation()])}}"
-                                               class="mt-4 py-[.688rem] px-4 inline-flex justify-center items-center gap-2 rounded-md border-2 border-gray-200 font-semibold bg-purple-100 text-blue-500 hover:text-blue hover:bg-blue-100 hover:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:ring-offset-2 transition-all text-sm dark:border-gray-700 dark:hover:border-blue-500"
-                                               style="position: relative; top: 10px; right: 10px;">View <i
+                                               class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full p-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-[70px]"
+                                               style="border: 1px solid;">View <i
                                                     class="fa-solid fa-arrow-up-right-from-square"></i>
                                             </a>
                                         </div>
 
                                         <!-- Description -->
-                                        <div class="mt-8">
+                                        <div class="mt-2 text-xs">
                                             <p>{{generateRandomDescription()}}</p>
                                         </div>
 

@@ -18,7 +18,10 @@
     <script src="{{url('/')}}/user/js/fw.js"></script>
     <script src="{{url('/')}}/user/js/owl-carousel.js"></script>
     <script src="{{url('/')}}/user/js/ckeditor.js"></script>
+    <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet"/>
     @yield('head')
+    @bukStyles(true)
 </head>
 
 <body>
@@ -45,6 +48,8 @@
     @include('includes.requirements')
     @include('includes.footer')
 </main>
+<script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
+<script src="//unpkg.com/alpinejs" defer></script>
 <script src="{{url('/')}}/user/js/main.js"></script>
 <script>
     $(document).ready(function () {
@@ -66,6 +71,7 @@
 </script>
 @yield('page-scripts')
 @yield('components-scripts')
+@bukScripts(true)
 </body>
 
 </html>

@@ -3,48 +3,14 @@
 @section('content')
     <section class="homepage">
         <div class="widget-placeholder">
+            <!-- Header Section -->
+            <x-user.header :title="'Blogs'"/>
+
             <div class="hkdevs-wdgt-section">
                 <!-- Content Section -->
                 <section class="text-gray-600 body-font">
-                    {{-- Filter Section --}}
-                    <div class="border flex justify-between items-center"
-                         style="width: 100%; height: 100px; background: rgb(15, 12, 114);">
-                        <h1 class="text-white text-4xl mx-12">Events</h1>
-                        <!-- Filter Section -->
-                        <div class="p-4 md:flex md:justify-between">
-                            <!-- Search Input -->
-                            <div class="relative mb-4 md:mb-0 mx-1">
-                                <input type="text"
-                                       class=" rounded-full bg-white w-full py-2 px-4 pl-10 focus:outline-none"
-                                       placeholder="Search Events...">
-                                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <i class="fa fa-search"></i>
-                                </span>
-                            </div>
 
-                            <!-- Category Filter -->
-                            <div class="mb-4 md:mb-0 mx-1">
-                                <select class="rounded-md bg-white py-2 px-4 focus:outline-none">
-                                    <option value="">All Categories</option>
-                                    <option value="category1">Category 1</option>
-                                    <option value="category2">Category 2</option>
-                                    <!-- Add more category options as needed -->
-                                </select>
-                            </div>
-
-                            <!-- Pricing Filter -->
-                            <div class="mb-4 md:mb-0 mx-1">
-                                <select class=" rounded-md bg-white py-2 px-4 focus:outline-none">
-                                    <option value="">All Prices</option>
-                                    <option value="price1">Price 1</option>
-                                    <option value="price2">Price 2</option>
-                                    <!-- Add more pricing options as needed -->
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="px-2 py-6 mx-auto flex flex-wrap">
+                    <div class="container lg:px-24 md:px-12 py-6 mx-auto flex flex-wrap">
                         <!-- Event List BLock -->
                         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
                             <div class="flex flex-col mb-10 lg:items-center items-center justify-center">
@@ -67,22 +33,10 @@
 
                                         @for($i=1; $i<10;$i++)
                                             <div class="w-100">
-                                                <div class="card desktop-homepage-events-wdgt">
-                                                    <div class="feature-card-header-image-container">
-                                                        <div class="feature-card-image-container">
-                                                            <img alt="feature-card" class="feature-card-image" height=""
-                                                                 src="https://via.placeholder.com/300x300" width="">
-                                                            <div class="feature-card-image-overlay"></div>
-                                                            <div class="feature-card-date-rewards-container">
-                                                                <div class="feature-card-date-label">
-                                                                    Entry closes in {{rand(1,9)}}d
-                                                                </div>
-                                                                <div class="ribbon-2">
-                                                                    <p class="rewards-label">{{ generateRandomEventTitle() }}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <div class="card desktop-homepage-events-wdgt overflow-hidden">
+                                                    <img class="w-full h-40 object-cover"
+                                                         src="https://via.placeholder.com/300x300"
+                                                         alt="Event Thumbnail">
                                                     <div class="card-body">
                                                         <div class="organizer-container">
                                                             <div class="organizer-logo-container"><img
@@ -133,13 +87,11 @@
                                                                     RS. {{rand(99,999)}}</p>
                                                             </div>
                                                             <div class="cta-container">
-                                                                <button
-                                                                    onclick="window.location.href = '{{route('view.event', [generateRandomEventTitle()])}}'"
-                                                                    class="text-indigo-500 border border-indigo-500 hover:bg-indigo-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                                                    type="button"
-                                                                >
-                                                                    View details
-                                                                </button>
+                                                                <a href="{{route('view.event', [generateRandomEventTitle()])}}"
+                                                                   class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs"
+                                                                   style="border: 1px solid;">
+                                                                    View Details
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>

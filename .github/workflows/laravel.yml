@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Deploy to DigitalOcean
         run: |
           ssh root@68.183.103.93 "cd /home/bisdir/htdocs/bisdir.hkdevs.tech/ && git pull origin main"
