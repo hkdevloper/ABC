@@ -1,6 +1,6 @@
 <!-- Navbar Section -->
 <header class="bg-white shadow-md py-2">
-    <div class="container mx-auto flex items-center justify-between px-4">
+    <div class="container lg:px-24 md:px-12 mx-auto flex flex-wrap items-center justify-between px-4">
         <a alt="company Logo" href="{{url('/')}}" class="flex items-center">
             <img alt="company Logo" src="https://via.placeholder.com/100x100" width="50" height="50"
                  class="object-cover overflow-hidden">
@@ -16,7 +16,8 @@
         <nav class="hidden lg:flex md:flex space-x-4 items-center">
             <ul class="hidden lg:flex md:flex space-x-4 items-center">
                 <li>
-                    <a href="{{ url('/') }}" class="text-gray-700 hover:text-purple-600">Home</a>
+                    <a href="{{ url('/') }}"
+                       class="text-gray-700 hover:text-purple-600 text-purple-500 p-2 border border-1 border-solid border-purple-500 rounded-full">Home</a>
                 </li>
                 <li>
                     <a href="{{ route('company') }}" class="text-gray-700 hover:text-purple-600">Companies</a>
@@ -48,22 +49,25 @@
     <div id="mobile-menu" class="lg:hidden hidden bg-white">
         <ul class="text-gray-700">
             <li>
-                <a href="{{ url('/') }}" class="block py-2 px-4 hover:bg-purple-100">Home</a>
+                <a href="{{ url('/') }}" class="text-gray-700 hover:text-purple-600">Home</a>
             </li>
             <li>
-                <a href="{{ route('company') }}" class="block py-2 px-4 hover:bg-purple-100">Companies</a>
+                <a href="{{ route('company') }}" class="text-gray-700 hover:text-purple-600">Companies</a>
             </li>
             <li>
-                <a href="{{ route('products') }}" class="block py-2 px-4 hover:bg-purple-100">Products</a>
+                <a href="{{ route('products') }}" class="text-gray-700 hover:text-purple-600">Products</a>
             </li>
             <li>
-                <a href="{{ route('events') }}" class="block py-2 px-4 hover:bg-purple-100">Events</a>
+                <a href="{{ route('events') }}" class="text-gray-700 hover:text-purple-600">Events</a>
             </li>
             <li>
-                <a href="{{ route('jobs') }}" class="block py-2 px-4 hover:bg-purple-100">Jobs</a>
+                <a href="{{ route('jobs') }}" class="text-gray-700 hover:text-purple-600">Jobs</a>
             </li>
             <li>
-                <a href="{{ route('blogs') }}" class="block py-2 px-4 hover:bg-purple-100">Blogs</a>
+                <a href="{{ route('blogs') }}" class="text-gray-700 hover:text-purple-600">Blogs</a>
+            </li>
+            <li>
+                <a href="{{ route('forum') }}" class="text-gray-700 hover:text-purple-600">Forum</a>
             </li>
         </ul>
     </div>

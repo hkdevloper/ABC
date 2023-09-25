@@ -6,6 +6,8 @@
       <data directive="@auth" injection="true" prefix="&lt;?php&#10;if(auth()-&gt;guard(" suffix=")-&gt;check()): ?&gt;" />
       <data directive="@aware" injection="true" prefix="&lt;?php $attributes = $attributes-&gt;exceptProps(" suffix="); ?&gt;" />
       <data directive="@break" injection="true" prefix="&lt;?php&#10;if(" suffix=") break; ?&gt;" />
+      <data directive="@bukScripts" injection="true" prefix="&lt;?php _bladeDirective(" suffix="); ?&gt;" />
+      <data directive="@bukStyles" injection="true" prefix="&lt;?php _bladeDirective(" suffix="); ?&gt;" />
       <data directive="@can" injection="true" prefix="&lt;?php&#10;if (app(\Illuminate\Contracts\Auth\Access\Gate::class)-&gt;check(" suffix=")): ?&gt;" />
       <data directive="@canany" injection="true" prefix="&lt;?php&#10;if (app(\Illuminate\Contracts\Auth\Access\Gate::class)-&gt;any(" suffix=")): ?&gt;" />
       <data directive="@cannot" injection="true" prefix="&lt;?php&#10;if (app(\Illuminate\Contracts\Auth\Access\Gate::class)-&gt;denies(" suffix=")): ?&gt;" />

@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+    content: [
+        "./src/**/*.{html,js}",
+        "./node_modules/tw-elements/dist/js/**/*.js"
+    ],
   theme: {
     extend: {
       colors: {
@@ -51,6 +54,8 @@ module.exports = {
   },
     plugins: [
         require('@tailwindcss/forms'),
+        require("tw-elements/dist/plugin.cjs")
     ],
+    darkMode: "class"
 }
 

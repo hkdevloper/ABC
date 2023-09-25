@@ -249,7 +249,7 @@ Route::prefix('admin')->middleware(['admin-auth'])->group(function () {
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::prefix('company')->group(function () {
     Route::get('/', [UserCompanyController::class, 'viewCompanyList'])->name('company');

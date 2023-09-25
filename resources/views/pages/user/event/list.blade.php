@@ -95,7 +95,6 @@
                                                 </div>
                                             </div>
                                         @endfor
-                                        <!-- Repeat similar code for Event Items 2, 3, and 4 -->
                                     </div>
                                 </div>
                                 <!-- Pagination -->

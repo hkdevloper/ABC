@@ -12,11 +12,9 @@
 @import 'tailwindcss/utilities';
 
 /* HkDevs custom styles*/
-@import url('./fonts.css');
 @import url('./globals.css');
 @import url('./header-footer.css');
 @import url('./search-bar.css');
-@import url('./content.css');
 @import url('./home-page.css');
 @import url('./widgets.css');
 @import url('./owl-carousel.css');

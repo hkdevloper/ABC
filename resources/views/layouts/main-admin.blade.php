@@ -8,12 +8,12 @@
     {{-- Meta Tags --}}
     <title>{{config()->get('app.name')}}</title>
     {{-- Styles --}}
-    <link rel="stylesheet" href="{{url("/")}}/dist/css/app.css">
-    <link rel="stylesheet" href="{{url("/")}}/dist/css/box-icons.css">
+    <link rel="stylesheet" href="{{asset("dist/css/app.css")}}">
+    <link rel="stylesheet" href="{{asset("dist/css/box-icons.css")}}">
     <script src="https://kit.fontawesome.com/cabb64bd6b.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
-    <link rel="stylesheet" href="{{url('dist/css/IconPicker.css')}}">
-    <script src="{{url('dist/js/IconPicker.js')}}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js" defer crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{asset('dist/css/IconPicker.css')}}">
+    <script src="{{asset('dist/js/IconPicker.js')}}"></script>
     {{-- Scripts --}}
     @yield('head')
 </head>
@@ -32,9 +32,9 @@
 {{-- Including Modals --}}
 @include('components.modals')
 {{-- Scripts --}}
-<script src="{{url('/')}}/dist/js/app.js"></script>
-<script src="{{url('/')}}/dist/js/main.js"></script>
-<script src="{{url('/')}}/src/js/feather.js"></script>
+<script src="{{asset('dist/js/app.js')}}"></script>
+<script src="{{asset('dist/js/main.js')}}"></script>
+<script src="{{asset('src/js/feather.js')}}"></script>
 <script>
     feather.replace()
     @if(session()->has('msg'))
@@ -57,7 +57,7 @@
         // Default options
         IconPicker.Init({
             // Required: You have to set the path of IconPicker JSON file to "jsonUrl" option. e.g. '/content/plugins/IconPicker/dist/iconpicker-1.5.0.json'
-            jsonUrl: '{{url('/')}}/dist/json/iconpicker.json',
+            jsonUrl: '{{asset('dist/json/iconpicker.json')}}',
             // Optional: Change the buttons or search placeholder text according to the language.
             searchPlaceholder: 'Search Icon',
             showAllButton: 'Show All',
