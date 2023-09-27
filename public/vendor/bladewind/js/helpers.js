@@ -300,3 +300,45 @@ filterTable = (keyword, table) => {
             unhide(tr, true) : hide(tr, true);
     });
 }
+
+selectTag = (value, name) => {
+    let input = domEl(`input[name="${name}"]`);
+    let max_selection = input.getAttribute('data-max-selection');
+    let tag = domEl(`.bw-${name}-${value}`);
+    let css = tag.getAttribute('class');
+    if (input.value.includes(value)) { // remove
+        let keyword = `(,?)${value}`;
+        input.value = input.value.replace(input.value.match(keyword)[0], '');
+        changeCss(tag, css.match(/bg-[\w]+-500/)[0], 'remove', true);
+        changeCss(tag, (css.match(/bg-[\w]+-500/)[0]).replace('500', '200'), 'add', true);
+        changeCss(tag, css.match(/text-[\w]+-50/)[0], 'remove', true);
+        changeCss(tag, (css.match(/text-[\w]+-50/)[0]).replace('50', '500'), 'add', true);
+    } else { // add
+        let total_selected = (input.value === '') ? 0 : input.value.split(',').length;
+        if (total_selected < max_selection) {
+            input.value += ',' + value;
+            changeCss(tag, css.match(/bg-[\w]+-200/)[0], 'remove', true);
+            changeCss(tag, (css.match(/bg-[\w]+-200/)[0]).replace('200', '500'), 'add', true);
+            changeCss(tag, css.match(/text-[\w]+-500/)[0], 'remove', true);
+            changeCss(tag, (css.match(/text-[\w]+-500/)[0]).replace('500', '50'), 'add', true);
+        } else {
+            showNotification(input.getAttribute('data-error-heading'), input.getAttribute('data-error-message'), 'error');
+        }
+    }
+    stripComma(input)
+}
+
+stripComma = (el) => {
+    if (el.value.startsWith(',')) {
+        el.value = el.value.replace(/^,/, '');
+    }
+}
+
+highlightSelectedTags = (values, name) => {
+    if (values !== '') {
+        let values_array = values.split(',');
+        for (let x = 0; x < values_array.length; x++) {
+            selectTag(values_array[x].trim(), name);
+        }
+    }
+}
