@@ -39,11 +39,19 @@
                 </li>
             </ul>
         </nav>
-        <div class="hidden lg:flex space-x-4 items-center">
-            <a href="{{route('user.login')}}" class="text-gray-700 hover:text-purple-600">Login</a>
-            <a href="{{route('user.register')}}"
-               class="text-white bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-white">Register</a>
-        </div>
+        @if(auth()->user())
+            <div class="hidden lg:flex md:flex items-center">
+                <a href="{{route('home')}}"
+                   class="text-gray-700 hover:text-purple-600 text-purple-500 p-2 border border-1 border-solid border-purple-500 rounded-full">Dashboard</a>
+                <a href="{{route('user.logout')}}"
+                   class="text-gray-700 hover:text-purple-600 text-purple-500 p-2 border border-1 border-solid border-purple-500 rounded-full">Logout</a>
+            </div>
+        @else
+            <div class="hidden lg:flex space-x-4 items-center">
+                <a href="{{route('user.login')}}" class="text-gray-700 hover:text-purple-600">Login</a>
+                <a href="{{route('user.register')}}" class="text-white bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-white">Register</a>
+            </div>
+        @endif
     </div>
     <!-- Mobile Menu (Hamburger Menu) -->
     <div id="mobile-menu" class="lg:hidden hidden bg-white">

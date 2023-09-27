@@ -28,7 +28,7 @@
     </section>
 
     <!-- Main Content  -->
-    <section class="container homepage">
+    <section class="container lg:px-24 md:px-12 py-6 mx-auto homepage">
         <div class="widget-placeholder">
             <div class="hkdevs-wdgt-section">
                 <!-- Categories section -->
