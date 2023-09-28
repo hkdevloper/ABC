@@ -24,6 +24,7 @@ use App\Http\Controllers\ProductController as UserProductController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserForumController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /* User Controllers */
 
@@ -51,6 +52,13 @@ Route::prefix('/admin')->group(function () {
 
 /* --------------------- prefix routes for User Authentication --------------------- */
 Route::prefix('/auth/user')->group(function () {
+    function checkUserLogin()
+    {
+        if (auth()->guard('web')->check()) {
+            return redirect()->route('home');
+        }
+    }
+    checkUserLogin();
     Route::get('/login', [AuthController::class, 'viewUserLogin'])->name('user.login');
     Route::get('/register', [AuthController::class, 'viewUserRegister'])->name('user.register');
     Route::post('/login', [AuthController::class, 'doLogin'])->name('user.login');
@@ -248,6 +256,10 @@ Route::prefix('admin')->middleware(['admin-auth'])->group(function () {
 /* --------------------- prefix routes for User --------------------- */
 
 Route::get('/', function () {
+    // Forgot session
+    Session::forget('menu');
+    // Store Session for Home Menu Active
+    Session::put('menu', 'home');
     return view('welcome');
 })->name('home');
 

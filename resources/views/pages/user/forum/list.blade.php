@@ -73,7 +73,7 @@
                                                     Answer
                                                 </button>
                                                 <button class="text-purple-500 hover:underline ml-2">
-                                                    Share
+                                                    <i class='bx bx-share-alt'></i>
                                                 </button>
                                             </div>
                                         </div>

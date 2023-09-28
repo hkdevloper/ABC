@@ -16,26 +16,25 @@
         <nav class="hidden lg:flex md:flex space-x-4 items-center">
             <ul class="hidden lg:flex md:flex space-x-4 items-center">
                 <li>
-                    <a href="{{ url('/') }}"
-                       class="text-gray-700 hover:text-purple-600 text-purple-500 p-2 border border-1 border-solid border-purple-500 rounded-full">Home</a>
+                    <a href="{{ url('/') }}" class="text-gray-700 hover:text-purple-600 rounded-full {{ session()->get('menu') == 'home' ? 'text-purple-500 p-2 border border-1 border-solid border-purple-500' : '' }}">Home</a>
                 </li>
                 <li>
-                    <a href="{{ route('company') }}" class="text-gray-700 hover:text-purple-600">Companies</a>
+                    <a href="{{ route('company') }}" class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'company' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Companies</a>
                 </li>
                 <li>
-                    <a href="{{ route('products') }}" class="text-gray-700 hover:text-purple-600">Products</a>
+                    <a href="{{ route('products') }}" class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'product' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Products</a>
                 </li>
                 <li>
-                    <a href="{{ route('events') }}" class="text-gray-700 hover:text-purple-600">Events</a>
+                    <a href="{{ route('events') }}" class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'event' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Events</a>
                 </li>
                 <li>
-                    <a href="{{ route('jobs') }}" class="text-gray-700 hover:text-purple-600">Jobs</a>
+                    <a href="{{ route('jobs') }}" class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'job' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Jobs</a>
                 </li>
                 <li>
-                    <a href="{{ route('blogs') }}" class="text-gray-700 hover:text-purple-600">Blogs</a>
+                    <a href="{{ route('blogs') }}" class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'blog' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Blogs</a>
                 </li>
                 <li>
-                    <a href="{{ route('forum') }}" class="text-gray-700 hover:text-purple-600">Forum</a>
+                    <a href="{{ route('forum') }}" class="text-gray-700 hover:text-purple-600  border-purple-500 rounded-full {{ session()->get('menu') == 'forum' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Forum</a>
                 </li>
             </ul>
         </nav>

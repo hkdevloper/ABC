@@ -14,10 +14,13 @@
                         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
                             <!-- Company List Filter -->
                             <div class="flex flex-wrap items-center justify-between card overflow-hidden mx-2 px-2">
-                                <div>Showing Result <strong>10</strong> of <strong>{{rand(10,99)}}</strong></div>
+                                <div>
+                                    <span class="text-sm">Showing Result <strong class="text-purple-600">10</strong> of <strong  class="text-purple-600">{{rand(10,99)}}</strong> Products</span>
+                                </div>
                                 <div class="flex flex-wrap items-center justify-center">
-                                    <select
-                                        class="border border-solid border-gray-300 text-gray-900 text-sm w-auto p-2.5 m-2 focus:outline-none focus:border-0">
+                                    <label for="sort-by">Sort By</label>
+                                    <select id="sort-by"
+                                            class="border border-solid border-gray-300 text-gray-900 text-sm w-auto p-2.5 m-2 focus:outline-none focus:border-0 card">
                                         <option selected>Filter All</option>
                                         <option value="US">United States</option>
                                         <option value="CA">Canada</option>
@@ -26,12 +29,11 @@
                                     </select>
 
                                     <a href="{{route('company')}}"
-                                       class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full p-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-100"
+                                       class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full p-3 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-100"
                                        style="border: 1px solid;">List your Company </a>
                                 </div>
                             </div>
-
-
+                            <!-- Company List -->
                             <div class="flex flex-col mb-10 lg:items-start items-center">
                                 <!-- Company list Item -->
                                 @php

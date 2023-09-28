@@ -5,23 +5,15 @@
     <meta charset="utf-8">
     <title>{{ config()->get('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ asset('user/style/bx-icons.css')}}" rel="stylesheet">
-    <link href="{{ asset('user/style/fontawesome.css')}}" rel="stylesheet">
+    <link href="{{asset('user/style/boxicons-2.1.4/css/main.css')}}" rel="stylesheet">
     <link href="{{ asset('user/style/output.css')}}" rel="stylesheet">
+    <link href="{{ asset('user/style/tw-elements.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <script src="{{ asset('user/js/jquery.js')}}"></script>
     <script src="{{ asset('user/js/tailwind.js')}}"></script>
     <script src="{{ asset('user/js/fw.js')}}"></script>
-    <script src="{{ asset('user/js/ckeditor.js')}}"></script>
-    <link
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
-        rel="stylesheet"/>
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet"/>
-
+{{--    <script src="{{ asset('user/js/ckeditor.js')}}"></script>--}}
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -59,7 +51,6 @@
 <script src="{{ asset('user/js/owl-carousel.js')}}></script>
 <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 <script src="{{ asset('user/js/alpine.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script src="{{ asset('user/js/main.js')}}"></script>
 <script>
     // Initialization for ES Users
@@ -72,7 +63,7 @@
 </script>
 <script>
     @if(session()->has('msg'))
-    showToast('{{ session()->get('types', 'info') }}', '{{ session()->get('msg') }}');
+    showToast('{{ session()->get('type', 'info') }}', '{{ session()->get('msg') }}');
     @else
     @if($errors->any())
     @foreach ($errors->all() as $error)

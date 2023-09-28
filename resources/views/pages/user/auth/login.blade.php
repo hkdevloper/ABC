@@ -31,8 +31,8 @@
                                 Sign in
                             </button>
                             <a href="{{ route('user.register') }}"
-                               class="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-500 border border-black hover:border-white focus:ring focus:ring-indigo-500 focus:outline-none">
-                                Register
+                               class="text-purple-500 py-2 px-4 hover:text-purple-900">
+                                   Create an account
                             </a>
                         </div>
                     </div>

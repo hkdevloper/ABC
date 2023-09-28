@@ -21,7 +21,7 @@
                 </div>
                 <button
                     class="bg-blue-500 text-white p-4 rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out w-[60px]">
-                    <i class="fa fa-search text-white"></i>
+                    <i class='bx bx-search-alt-2 text-lg' ></i>
                 </button>
             </div>
         </div>
@@ -187,8 +187,103 @@
                     </div>
                 </section>
 
+                <!-- Featured Events -->
+                <section class="bg-white">
+                    <div class="container mx-auto">
+                        <div class="p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-semibold inline-block">Featured Events</span>
+                                <a href="{{route('events')}}"
+                                   class="bg-purple-500 text-white py-2 px-4 rounded-full mt-4 mr-4 hover:bg-purple-600 transition duration-300 ease-in-out">View
+                                    all Events</a>
+                            </div>
+                            <div class="mt-4 relative">
+                                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+                                    @php
+                                        function generateRandomEventTitle(): string {
+                                            $eventTypes = ["Conference", "Seminar", "Workshop", "Webinar", "Exhibition", "Symposium", "Panel Discussion", "Networking Event", "Hackathon", "Meetup"];
+                                            $topics = ["Technology", "Business", "Science", "Art", "Health", "Education", "Environment", "Finance", "Sports", "Music"];
+
+                                            $randomEventType = $eventTypes[array_rand($eventTypes)];
+                                            $randomTopic = $topics[array_rand($topics)];
+
+                                            return $randomEventType . " on " . $randomTopic;
+                                        }
+                                    @endphp
+
+                                    @for($i=1; $i<=6;$i++)
+                                        <div class="card desktop-homepage-events-wdgt overflow-hidden">
+                                            <img class="w-full h-40 object-cover"
+                                                 src="https://via.placeholder.com/300x300"
+                                                 alt="Event Thumbnail">
+                                            <div class="card-body">
+                                                <div class="organizer-container flex items-start">
+                                                    <div class="organizer-logo-container">
+                                                        <img alt="company logo" class="logo-img"
+                                                             height="100" width="100"
+                                                             src="https://via.placeholder.com/100x100">
+                                                    </div>
+                                                    <div class="organizer-description-container ml-3">
+                                                        <p class="feature-card-heading">{{ generateRandomEventTitle() }}</p>
+                                                        <p class="feature-card-organizer">{{ generateRandomEventTitle() }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="chips-container mt-2">
+                                                    <div class="chip">
+                                                        <p class="chip-label">{{ generateRandomEventTitle() }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="feature-card-stats-container mt-2 flex items-center">
+                                                    <div class="feature-card-date-container flex items-center">
+                                                        <img alt="User icon" class="naukicon-calendar"
+                                                             height="16" width="16"
+                                                             src="https://static.naukimg.com/s/0/0/i/Events/icons/calendar-ot.svg">
+                                                        @php
+                                                            $randomTimestamp = rand(strtotime('2023-01-01 00:00:00'), strtotime('2023-12-31 23:59:59'));
+                                                            $randomDate = date('d M, g:i A', $randomTimestamp);
+                                                        @endphp
+                                                        <p class="feature-card-date-label ml-1">{{ $randomDate }}</p>
+                                                    </div>
+                                                    <div class="registered-user-container ml-4 flex items-center">
+                                                        <img alt="User icon" class="naukicon-user"
+                                                             height="16" width="16"
+                                                             src="https://static.naukimg.com/s/0/0/i/Events/icons/user-ot.svg">
+                                                        <p class="registered-count-label ml-1">{{rand(1,99) / 10}}K
+                                                            Enrolled</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="footer-separator"></div>
+                                                <div
+                                                    class="semi-circle-container flex items-center justify-between">
+                                                    <div class="left semi-circle"></div>
+                                                    <div class="right semi-circle"></div>
+                                                </div>
+                                                <div
+                                                    class="card-footer-container flex items-center justify-between">
+                                                    <div class="feature-card-type-tag-container">
+                                                        <p class="feature-card-type-label">RS. {{rand(99,999)}}</p>
+                                                    </div>
+                                                    <div class="cta-container">
+                                                        <a href="{{route('view.event', [generateRandomEventTitle()])}}"
+                                                           class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs"
+                                                           style="border: 1px solid;">View Details
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endfor
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
                 <!-- Why Choose Us Section -->
-                <section class="text-gray-600 body-font">
+                <section class="text-gray-600 body-font mt-3">
                     <div class="container px-5 py-4 mx-auto">
                         <div class="text-center mb-10">
                             <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">

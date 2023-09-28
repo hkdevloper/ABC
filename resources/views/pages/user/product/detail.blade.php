@@ -8,7 +8,6 @@
                 <section class="text-gray-600 body-font container">
                     <!-- Content Box -->
                     <div class="px-2 py-6 mx-auto flex flex-wrap">
-
                         <!-- Product List BLock -->
                         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
                             <div class="container mx-auto">
@@ -44,28 +43,47 @@
                                 <h2 class="text-2xl font-semibold">Related Products</h2>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-4">
                                     <!-- Related Product 1 -->
-                                    @for($i=1;$i<=6;$i++)
-                                        <div class="card rounded-lg overflow-hidden">
-                                            <img src="https://via.placeholder.com/400x500" alt="Product Image"
-                                                 class="w-full h-48 object-cover object-center">
-                                            <div class="px-4 py-4">
-                                                <h2 class="text-xl font-semibold text-gray-800">Product Name</h2>
-                                                <p class="text-gray-600">Category: Business Services</p>
-                                                <p class="text-gray-600">Price: $99.99</p>
-                                                <div class="mt-2 flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                         class="h-5 w-5 text-yellow-500" fill="none" viewBox="0 0 24 24"
-                                                         stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                              stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                                    </svg>
-                                                    <p class="text-gray-600 ml-2">4.5 (25 reviews)</p>
+                                    @php
+                                        function generateRandomProductTitle() {
+                                            $adjectives = ["Premium", "Deluxe", "Elegant", "Quality", "Modern", "Unique", "Luxurious", "Stylish", "Sleek", "Innovative"];
+                                            $nouns = ["Widget", "Gadget", "Device", "Tool", "Accessory", "Item", "Product", "Apparatus", "Contraption", "Instrument"];
+
+                                            $randomAdjective = $adjectives[array_rand($adjectives)];
+                                            $randomNoun = $nouns[array_rand($nouns)];
+
+                                            return $randomAdjective . " " . $randomNoun;
+                                        }
+                                    @endphp
+
+                                    @for($i=1; $i<=6;$i++)
+                                        <div class="m-2 card">
+                                            <!-- Logo and Details Div -->
+                                            <div class="flex flex-col items-center justify-between w-full">
+                                                <img src="https://via.placeholder.com/300x300" alt="Product Image"
+                                                     class="w-full h-[150px] object-cover rounded-t-lg mb-3">
+                                                <div class="flex items-center p-1">
+                                                    <div class="block">
+                                                        <h2 class="text-gray-900 text-base font-semibold mb-1">{{ generateRandomProductTitle() }}</h2>
+                                                        <p class="text-gray-600 text-xs">Lorem ipsum dolor sit amet
+                                                            consectetur adipisicing elit. Hic deleniti dolorem dolorum
+                                                            debitis quaerat. Lorem ipsum dolor sit amet consectetur
+                                                            adipisicing elit.</p>
+                                                        <div class="flex flex-wrap my-2">
+                                                            <span class="bg-purple-100 text-purple-600 px-2 py-1 rounded-full text-xs font-semibold mr-2 mb-2">Tech</span>
+                                                            <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs font-semibold mr-2 mb-2">Coding</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="px-4 py-2 bg-blue-200 text-white">
-                                                <a href="{{route('view.product', ['something'])}}"
-                                                   class="block text-center text-black font-semibold hover:underline">View
-                                                    Details</a>
+
+                                                <div class="flex justify-between items-center w-full px-2">
+                                                    <button class="text-purple-500 hover:underline ml-2">
+                                                        <i class='bx bx-share-alt'></i>
+                                                    </button>
+                                                    <a href="{{route('view.product', [generateRandomProductTitle()])}}"
+                                                       class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full p-2 hover:bg-purple-600 transition duration-300 ease-in-out text-sm border border-1 border-solid border-purple-500 w-1/2 text-center mb-1">View
+                                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     @endfor
