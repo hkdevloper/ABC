@@ -7,36 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<?php echo e(asset('user/style/boxicons-2.1.4/css/main.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('user/style/output.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('user/style/tw-elements.min.css')); ?>" rel="stylesheet"/>
+
     <link href="<?php echo e(asset('vendor/bladewind/css/animate.min.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('vendor/bladewind/css/bladewind-ui.min.css')); ?>" rel="stylesheet">
     <script src="<?php echo e(asset('user/js/jquery.js')); ?>"></script>
     <script src="<?php echo e(asset('user/js/tailwind.js')); ?>"></script>
     <script src="<?php echo e(asset('user/js/fw.js')); ?>"></script>
 
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                fontFamily: {
-                    sans: ["Roboto", "sans-serif"],
-                    body: ["Roboto", "sans-serif"],
-                    mono: ["ui-monospace", "monospace"],
-                },
-            },
-            plugins: [
-                require("@tailwindcss/forms"),
-                require("@tailwindcss/typography"),
-                require("@tailwindcss/aspect-ratio"),
-                require('flowbite/plugin'),
-            ],
-            corePlugins: {
-                preflight: false,
-            },
-        };
-    </script>
     <?php echo $__env->yieldContent('head'); ?>
     <?php echo BladeUIKit\BladeUIKit::outputStyles(true); ?>
+    <?php echo app('Illuminate\Foundation\Vite')('resources/css/app.css'); ?>
+    <?php echo app('Illuminate\Foundation\Vite')('resources/js/app.js'); ?>
 </head>
 
 <body>
@@ -52,11 +33,13 @@
 <script src="<?php echo e(asset('vendor/bladewind/js/helpers.js')); ?>"></script>
 <script src="<?php echo e(asset('user/js/alpine.js')); ?>"></script>
 <script src="<?php echo e(asset('user/js/main.js')); ?>"></script>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
 <script>
-    // Initialization for ES Users
-    import {Select, initTE} from "tw-elements";
-
-    initTE({Select});
+    initTE({
+        Select,
+        Tab,
+        Datatable,
+    });
     $(document).ready(function () {
         $('.owl-carousel').owlCarousel();
     });

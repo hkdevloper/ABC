@@ -1,6 +1,4 @@
-@extends('layouts.main-user-list')
-
-@section('head')
+<?php $__env->startSection('head'); ?>
     <style>
         /* Base styles for all screen sizes */
 
@@ -570,9 +568,9 @@
             }
         }
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="company-page">
         <div class="company-page-header">
             <div data-test="banner" class="Banner  isCoverBanner">
@@ -743,11 +741,13 @@
                             </div>
                         </div>
                         <div class="rightContainer Overview">
-                            @include('includes.sidebar')
+                            <?php echo $__env->make('includes.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.main-user-list', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hacki\OneDrive\Desktop\Business Directory\Admin\resources\views/pages/user/company/detail.blade.php ENDPATH**/ ?>

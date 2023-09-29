@@ -1,6 +1,4 @@
-@extends('layouts.main-user-list')
-
-@section('head')
+<?php $__env->startSection('head'); ?>
     <style>
         [data-tabs-target] {
             cursor: pointer;
@@ -15,9 +13,9 @@
         }
     </style>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <section class="homepage">
         <div class="widget-placeholder">
             <div class="hkdevs-wdgt-section">
@@ -107,7 +105,7 @@
 
                                     <!--Tabs content-->
                                     <div>
-                                        {{--Home Tab--}}
+                                        
                                         <div
                                             class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:flex justify-between"
                                             id="tabs-home3"
@@ -198,7 +196,7 @@
 
                                             <!--Tabs content-->
                                             <div class="my-2 w-4/5">
-                                                {{--Company Tab--}}
+                                                
                                                 <div
                                                     class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                                     id="tabs-company03"
@@ -208,7 +206,7 @@
                                                     <!-- Company List -->
                                                     <div class="flex flex-col mb-10 lg:items-start items-center">
                                                         <!-- Company list Item -->
-                                                        @php
+                                                        <?php
                                                             function generateRandomCompanyName() {
                                                                 $companies = ["Tech Solutions", "Innovative Ventures", "Global Enterprises", "Digital Innovators", "Creative Minds Inc.", "Smart Tech Co.", "Eco-Friendly Solutions", "FutureTech Corp", "Data Wizards", "Infinite Ideas Ltd"];
                                                                 return $companies[array_rand($companies)];
@@ -224,9 +222,9 @@
                                                                 $description = substr($loremIpsum, 0, 255); // Limit to 255 characters
                                                                 return $description;
                                                             }
-                                                        @endphp
+                                                        ?>
 
-                                                        @for($i=1; $i<4;$i++)
+                                                        <?php for($i=1; $i<4;$i++): ?>
                                                             <div class="m-2 card p-4">
                                                                 <!-- Logo and Details Div -->
                                                                 <div class="flex items-start justify-between">
@@ -239,25 +237,78 @@
                                                                         <div class="inline-block">
                                                                             <h2 class="text-green-600 text-sm mb-1">
                                                                                 Featured</h2>
-                                                                            <h2 class="text-gray-900 text-base title-font font-medium mb-1">{{generateRandomCompanyName()}}
-                                                                                <x-bladewind::icon name="check-badge" type="solid"
-                                                                                                   class="text-green-400"/>
+                                                                            <h2 class="text-gray-900 text-base title-font font-medium mb-1"><?php echo e(generateRandomCompanyName()); ?>
+
+                                                                                <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'bladewind::components.icon','data' => ['name' => 'check-badge','type' => 'solid','class' => 'text-green-400']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('bladewind::icon'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['name' => 'check-badge','type' => 'solid','class' => 'text-green-400']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal71c6471fa76ce19017edc287b6f4508c)): ?>
+<?php $component = $__componentOriginal71c6471fa76ce19017edc287b6f4508c; ?>
+<?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
+<?php endif; ?>
                                                                             </h2>
                                                                             <div class="flex items-center text-sm">
-                                                                                <x-bladewind::icon name="map-pin" type="solid"
-                                                                                                   class="text-green-300"/>
-                                                                                <span class="mx-1">{{generateRandomLocation()}}</span>
-                                                                                <x-bladewind::icon name="star" type="solid"
-                                                                                                   class="text-orange-300"/>
-                                                                                <span class="mx-1">{{rand(1,99)/10}} Review</span>
-                                                                                <x-bladewind::icon name="eye" type="solid"
-                                                                                                   class="text-purple-300"/>
-                                                                                <span class="mx-1">{{rand(1,99)/10}}K Views</span>
+                                                                                <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'bladewind::components.icon','data' => ['name' => 'map-pin','type' => 'solid','class' => 'text-green-300']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('bladewind::icon'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['name' => 'map-pin','type' => 'solid','class' => 'text-green-300']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal71c6471fa76ce19017edc287b6f4508c)): ?>
+<?php $component = $__componentOriginal71c6471fa76ce19017edc287b6f4508c; ?>
+<?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
+<?php endif; ?>
+                                                                                <span class="mx-1"><?php echo e(generateRandomLocation()); ?></span>
+                                                                                <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'bladewind::components.icon','data' => ['name' => 'star','type' => 'solid','class' => 'text-orange-300']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('bladewind::icon'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['name' => 'star','type' => 'solid','class' => 'text-orange-300']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal71c6471fa76ce19017edc287b6f4508c)): ?>
+<?php $component = $__componentOriginal71c6471fa76ce19017edc287b6f4508c; ?>
+<?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
+<?php endif; ?>
+                                                                                <span class="mx-1"><?php echo e(rand(1,99)/10); ?> Review</span>
+                                                                                <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'bladewind::components.icon','data' => ['name' => 'eye','type' => 'solid','class' => 'text-purple-300']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('bladewind::icon'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['name' => 'eye','type' => 'solid','class' => 'text-purple-300']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal71c6471fa76ce19017edc287b6f4508c)): ?>
+<?php $component = $__componentOriginal71c6471fa76ce19017edc287b6f4508c; ?>
+<?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
+<?php endif; ?>
+                                                                                <span class="mx-1"><?php echo e(rand(1,99)/10); ?>K Views</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
 
-                                                                    <a href="{{route('view.company', [generateRandomLocation()])}}"
+                                                                    <a href="<?php echo e(route('view.company', [generateRandomLocation()])); ?>"
                                                                        class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full p-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-[70px]"
                                                                        style="border: 1px solid;">View <i
                                                                             class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -266,16 +317,30 @@
 
                                                                 <!-- Description -->
                                                                 <div class="mt-2 text-xs">
-                                                                    <p>{{generateRandomDescription()}}</p>
+                                                                    <p><?php echo e(generateRandomDescription()); ?></p>
                                                                 </div>
                                                             </div>
-                                                        @endfor
+                                                        <?php endfor; ?>
 
                                                     </div>
                                                     <!-- Pagination -->
-                                                    <x-user.pagination/>
+                                                    <?php if (isset($component)) { $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467 = $component; } ?>
+<?php $component = App\View\Components\User\Pagination::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('user.pagination'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\User\Pagination::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467)): ?>
+<?php $component = $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467; ?>
+<?php unset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467); ?>
+<?php endif; ?>
                                                 </div>
-                                                {{--Products Tab--}}
+                                                
                                                 <div
                                                     class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                                     id="tabs-product03"
@@ -284,7 +349,7 @@
                                                     <!-- Product List -->
                                                     <div class="flex flex-col mb-10 lg:items-center items-center justify-center">
                                                         <!-- Product list Item -->
-                                                        @php
+                                                        <?php
                                                             function generateRandomProductTitle() {
                                                                 $adjectives = ["Premium", "Deluxe", "Elegant", "Quality", "Modern", "Unique", "Luxurious", "Stylish", "Sleek", "Innovative"];
                                                                 $nouns = ["Widget", "Gadget", "Device", "Tool", "Accessory", "Item", "Product", "Apparatus", "Contraption", "Instrument"];
@@ -294,8 +359,8 @@
 
                                                                 return $randomAdjective . " " . $randomNoun;
                                                             }
-                                                        @endphp
-                                                        @for($i=1; $i<10;$i++)
+                                                        ?>
+                                                        <?php for($i=1; $i<10;$i++): ?>
                                                             <div class="m-2 card">
                                                                 <!-- Logo and Details Div -->
                                                                 <div class="flex items-center justify-between pr-1 w-full">
@@ -303,33 +368,88 @@
                                                                          class="w-[150px] h-[150px] object-cover rounded-l-lg mr-3">
                                                                     <div class="flex items-center">
                                                                         <div class="block">
-                                                                            <h2 class="text-gray-900 text-base font-semibold mb-1">{{ generateRandomProductTitle() }}</h2>
+                                                                            <h2 class="text-gray-900 text-base font-semibold mb-1"><?php echo e(generateRandomProductTitle()); ?></h2>
                                                                             <p class="text-gray-600 text-xs">Lorem ipsum dolor sit amet
                                                                                 consectetur adipisicing elit. Hic deleniti dolorem dolorum
                                                                                 debitis quaerat.
                                                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                                                                             <div class="flex items-center mt-2 flex-wrap">
-                                                                                <x-bladewind::tag label="hkdevs" color="purple" class="mx-1"/>
-                                                                                <x-bladewind::tag label="codecanyon" color="purple"
-                                                                                                  class="mx-1"/>
-                                                                                <x-bladewind::tag label="theme" color="purple" class="mx-1"/>
+                                                                                <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'bladewind::components.tag','data' => ['label' => 'hkdevs','color' => 'purple','class' => 'mx-1']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('bladewind::tag'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['label' => 'hkdevs','color' => 'purple','class' => 'mx-1']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal71c6471fa76ce19017edc287b6f4508c)): ?>
+<?php $component = $__componentOriginal71c6471fa76ce19017edc287b6f4508c; ?>
+<?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
+<?php endif; ?>
+                                                                                <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'bladewind::components.tag','data' => ['label' => 'codecanyon','color' => 'purple','class' => 'mx-1']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('bladewind::tag'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['label' => 'codecanyon','color' => 'purple','class' => 'mx-1']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal71c6471fa76ce19017edc287b6f4508c)): ?>
+<?php $component = $__componentOriginal71c6471fa76ce19017edc287b6f4508c; ?>
+<?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
+<?php endif; ?>
+                                                                                <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'bladewind::components.tag','data' => ['label' => 'theme','color' => 'purple','class' => 'mx-1']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('bladewind::tag'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['label' => 'theme','color' => 'purple','class' => 'mx-1']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal71c6471fa76ce19017edc287b6f4508c)): ?>
+<?php $component = $__componentOriginal71c6471fa76ce19017edc287b6f4508c; ?>
+<?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
+<?php endif; ?>
                                                                             </div>
                                                                         </div>
                                                                     </div>
 
-                                                                    <a href="{{route('view.product', [generateRandomProductTitle()])}}"
+                                                                    <a href="<?php echo e(route('view.product', [generateRandomProductTitle()])); ?>"
                                                                        class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full p-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-[100px]"
                                                                        style="border: 1px solid;">View <i
                                                                             class="fa-solid fa-arrow-up-right-from-square"></i>
                                                                     </a>
                                                                 </div>
                                                             </div>
-                                                        @endfor
+                                                        <?php endfor; ?>
                                                     </div>
                                                     <!-- Pagination -->
-                                                    <x-user.pagination/>
+                                                    <?php if (isset($component)) { $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467 = $component; } ?>
+<?php $component = App\View\Components\User\Pagination::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('user.pagination'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\User\Pagination::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467)): ?>
+<?php $component = $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467; ?>
+<?php unset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467); ?>
+<?php endif; ?>
                                                 </div>
-                                                {{--Jobs Tab--}}
+                                                
                                                 <div
                                                     class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                                     id="tabs-jobs03"
@@ -338,7 +458,7 @@
                                                     <!-- Job List -->
                                                     <div class="flex flex-col mb-10 lg:items-center items-center justify-center">
                                                         <!-- Job list Item -->
-                                                        @for($i=1; $i<10;$i++)
+                                                        <?php for($i=1; $i<10;$i++): ?>
                                                             <div class="m-2 card desktop-homepage-events-wdgt dark:bg-neutral-700 w-full">
                                                                 <!-- Logo and Details Div -->
                                                                 <div class="flex items-center justify-between pr-2">
@@ -346,27 +466,41 @@
                                                                         <img src="https://via.placeholder.com/150x150" alt="Job Thumbnail"
                                                                              class="w-[150px] h-[120px] object-cover rounded-l-lg mr-3">
                                                                         <div class="block">
-                                                                            <h2 class="text-gray-900 text-lg font-semibold mb-1">{{ generateRandomProductTitle() }}</h2>
+                                                                            <h2 class="text-gray-900 text-lg font-semibold mb-1"><?php echo e(generateRandomProductTitle()); ?></h2>
                                                                             <p class="text-gray-400">Jamnagar, Gujarat 361320</p>
                                                                             <p class="text-purple-600">Full Stack Developer</p>
                                                                             <p class="text-gray-400">Posted 2 days ago</p>
                                                                         </div>
                                                                     </div>
 
-                                                                    <a href="{{route('view.job', ['fullstack'])}}"
+                                                                    <a href="<?php echo e(route('view.job', ['fullstack'])); ?>"
                                                                        class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs"
                                                                        style="border: 1px solid;">
                                                                         View Details
                                                                     </a>
                                                                 </div>
                                                             </div>
-                                                        @endfor
+                                                        <?php endfor; ?>
                                                         <!-- Pagination -->
                                                     </div>
                                                     <!-- Pagination -->
-                                                    <x-user.pagination/>
+                                                    <?php if (isset($component)) { $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467 = $component; } ?>
+<?php $component = App\View\Components\User\Pagination::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('user.pagination'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\User\Pagination::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467)): ?>
+<?php $component = $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467; ?>
+<?php unset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467); ?>
+<?php endif; ?>
                                                 </div>
-                                                {{--Events Tab--}}
+                                                
                                                 <div
                                                     class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                                     id="tabs-event03"
@@ -377,7 +511,7 @@
                                                         <!-- Event list Grid -->
                                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2">
                                                             <!-- Event Items-->
-                                                            @php
+                                                            <?php
                                                                 function generateRandomEventTitle(): string {
                                                                     $eventTypes = ["Conference", "Seminar", "Workshop", "Webinar", "Exhibition", "Symposium", "Panel Discussion", "Networking Event", "Hackathon", "Meetup"];
                                                                     $topics = ["Technology", "Business", "Science", "Art", "Health", "Education", "Environment", "Finance", "Sports", "Music"];
@@ -387,9 +521,9 @@
 
                                                                     return $randomEventType . " on " . $randomTopic;
                                                                 }
-                                                            @endphp
+                                                            ?>
 
-                                                            @for($i=1; $i<10;$i++)
+                                                            <?php for($i=1; $i<10;$i++): ?>
                                                                 <div class="card desktop-homepage-events-wdgt overflow-hidden">
                                                                     <img class="w-full h-40 object-cover"
                                                                          src="https://via.placeholder.com/300x300"
@@ -402,13 +536,13 @@
                                                                                      src="https://via.placeholder.com/100x100">
                                                                             </div>
                                                                             <div class="organizer-description-container ml-3">
-                                                                                <p class="feature-card-heading">{{ generateRandomEventTitle() }}</p>
-                                                                                <p class="feature-card-organizer">{{ generateRandomEventTitle() }}</p>
+                                                                                <p class="feature-card-heading"><?php echo e(generateRandomEventTitle()); ?></p>
+                                                                                <p class="feature-card-organizer"><?php echo e(generateRandomEventTitle()); ?></p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="chips-container mt-2">
                                                                             <div class="chip">
-                                                                                <p class="chip-label">{{ generateRandomEventTitle() }}</p>
+                                                                                <p class="chip-label"><?php echo e(generateRandomEventTitle()); ?></p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="feature-card-stats-container mt-2 flex items-center">
@@ -416,17 +550,17 @@
                                                                                 <img alt="User icon" class="naukicon-calendar"
                                                                                      height="16" width="16"
                                                                                      src="https://static.naukimg.com/s/0/0/i/Events/icons/calendar-ot.svg">
-                                                                                @php
+                                                                                <?php
                                                                                     $randomTimestamp = rand(strtotime('2023-01-01 00:00:00'), strtotime('2023-12-31 23:59:59'));
                                                                                     $randomDate = date('d M, g:i A', $randomTimestamp);
-                                                                                @endphp
-                                                                                <p class="feature-card-date-label ml-1">{{ $randomDate }}</p>
+                                                                                ?>
+                                                                                <p class="feature-card-date-label ml-1"><?php echo e($randomDate); ?></p>
                                                                             </div>
                                                                             <div class="registered-user-container ml-4 flex items-center">
                                                                                 <img alt="User icon" class="naukicon-user"
                                                                                      height="16" width="16"
                                                                                      src="https://static.naukimg.com/s/0/0/i/Events/icons/user-ot.svg">
-                                                                                <p class="registered-count-label ml-1">{{rand(1,99) / 10}}K
+                                                                                <p class="registered-count-label ml-1"><?php echo e(rand(1,99) / 10); ?>K
                                                                                     Enrolled</p>
                                                                             </div>
                                                                         </div>
@@ -441,10 +575,10 @@
                                                                         <div
                                                                             class="card-footer-container flex items-center justify-between">
                                                                             <div class="feature-card-type-tag-container">
-                                                                                <p class="feature-card-type-label">RS. {{rand(99,999)}}</p>
+                                                                                <p class="feature-card-type-label">RS. <?php echo e(rand(99,999)); ?></p>
                                                                             </div>
                                                                             <div class="cta-container">
-                                                                                <a href="{{route('view.event', [generateRandomEventTitle()])}}"
+                                                                                <a href="<?php echo e(route('view.event', [generateRandomEventTitle()])); ?>"
                                                                                    class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs"
                                                                                    style="border: 1px solid;">View Details
                                                                                 </a>
@@ -452,13 +586,27 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            @endfor
+                                                            <?php endfor; ?>
                                                         </div>
                                                     </div>
                                                     <!-- Pagination -->
-                                                    <x-user.pagination/>
+                                                    <?php if (isset($component)) { $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467 = $component; } ?>
+<?php $component = App\View\Components\User\Pagination::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('user.pagination'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\User\Pagination::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467)): ?>
+<?php $component = $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467; ?>
+<?php unset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467); ?>
+<?php endif; ?>
                                                 </div>
-                                                {{--Blogs Tab--}}
+                                                
                                                 <div
                                                     class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                                     id="tabs-blog03"
@@ -467,7 +615,7 @@
                                                     <!-- Blog List -->
                                                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2">
                                                         <!-- Blog list Item -->
-                                                        @for($i=1; $i<10; $i++)
+                                                        <?php for($i=1; $i<10; $i++): ?>
                                                             <div class="bg-white card overflow-hidden w-full mb-4">
                                                                 <div class="relative">
                                                                     <img class="w-full h-60 object-cover"
@@ -497,7 +645,7 @@
                                                                                 <i class="fas fa-share"></i> Share
                                                                             </button>
                                                                         </div>
-                                                                        <a href="{{route('view.blog', ['something'])}}"
+                                                                        <a href="<?php echo e(route('view.blog', ['something'])); ?>"
                                                                            class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full px-2 py-1 hover:bg-purple-600 transition duration-300 ease-in-out text-xs"
                                                                            style="border: 1px solid;">
                                                                             Read More
@@ -505,12 +653,26 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        @endfor
+                                                        <?php endfor; ?>
                                                     </div>
                                                     <!-- Pagination -->
-                                                    <x-user.pagination/>
+                                                    <?php if (isset($component)) { $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467 = $component; } ?>
+<?php $component = App\View\Components\User\Pagination::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('user.pagination'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\User\Pagination::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467)): ?>
+<?php $component = $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467; ?>
+<?php unset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467); ?>
+<?php endif; ?>
                                                 </div>
-                                                {{--Deals Tab--}}
+                                                
                                                 <div
                                                     class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                                     id="tabs-deal03"
@@ -518,11 +680,25 @@
                                                     aria-labelledby="tabs-deal-tab03">
                                                     Deals
                                                     <!-- Pagination -->
-                                                    <x-user.pagination/>
+                                                    <?php if (isset($component)) { $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467 = $component; } ?>
+<?php $component = App\View\Components\User\Pagination::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('user.pagination'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\User\Pagination::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467)): ?>
+<?php $component = $__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467; ?>
+<?php unset($__componentOriginal9713b3c0f0505c6f78c60e7ef61c5467); ?>
+<?php endif; ?>
                                                 </div>
                                             </div>
                                         </div>
-                                        {{--Profile Tab--}}
+                                        
                                         <div
                                             class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                             id="tabs-profile3"
@@ -530,7 +706,7 @@
                                             aria-labelledby="tabs-profile-tab3">
                                             User Profile Tab
                                         </div>
-                                        {{--Messages Tab--}}
+                                        
                                         <div
                                             class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                             id="tabs-messages3"
@@ -538,7 +714,7 @@
                                             aria-labelledby="tabs-profile-tab3">
                                             <div id="datatable"></div>
                                         </div>
-                                        {{--Settings Tab--}}
+                                        
                                         <div
                                             class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                             id="tabs-settings"
@@ -569,8 +745,10 @@
             </div>
         </div>
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('page-scripts')
+<?php $__env->startSection('page-scripts'); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.main-user-list', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\hacki\OneDrive\Desktop\Business Directory\Admin\resources\views/pages/user/auth/dashboard.blade.php ENDPATH**/ ?>

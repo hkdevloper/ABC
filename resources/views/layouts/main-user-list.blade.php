@@ -7,36 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{asset('user/style/boxicons-2.1.4/css/main.css')}}" rel="stylesheet">
     <link href="{{ asset('user/style/output.css')}}" rel="stylesheet">
-    <link href="{{ asset('user/style/tw-elements.min.css') }}" rel="stylesheet"/>
+{{--    <link href="{{ asset('user/style/tw-elements.min.css') }}" rel="stylesheet"/>--}}
     <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <script src="{{ asset('user/js/jquery.js')}}"></script>
     <script src="{{ asset('user/js/tailwind.js')}}"></script>
     <script src="{{ asset('user/js/fw.js')}}"></script>
 {{--    <script src="{{ asset('user/js/ckeditor.js')}}"></script>--}}
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                fontFamily: {
-                    sans: ["Roboto", "sans-serif"],
-                    body: ["Roboto", "sans-serif"],
-                    mono: ["ui-monospace", "monospace"],
-                },
-            },
-            plugins: [
-                require("@tailwindcss/forms"),
-                require("@tailwindcss/typography"),
-                require("@tailwindcss/aspect-ratio"),
-                require('flowbite/plugin'),
-            ],
-            corePlugins: {
-                preflight: false,
-            },
-        };
-    </script>
     @yield('head')
     @bukStyles(true)
+    @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
 
 <body>
@@ -52,11 +33,13 @@
 <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 <script src="{{ asset('user/js/alpine.js')}}"></script>
 <script src="{{ asset('user/js/main.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
 <script>
-    // Initialization for ES Users
-    import {Select, initTE} from "tw-elements";
-
-    initTE({Select});
+    initTE({
+        Select,
+        Tab,
+        Datatable,
+    });
     $(document).ready(function () {
         $('.owl-carousel').owlCarousel();
     });
