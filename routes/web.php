@@ -52,13 +52,6 @@ Route::prefix('/admin')->group(function () {
 
 /* --------------------- prefix routes for User Authentication --------------------- */
 Route::prefix('/auth/user')->group(function () {
-    function checkUserLogin()
-    {
-        if (auth()->guard('web')->check()) {
-            return redirect()->route('home');
-        }
-    }
-    checkUserLogin();
     Route::get('/login', [AuthController::class, 'viewUserLogin'])->name('user.login');
     Route::get('/register', [AuthController::class, 'viewUserRegister'])->name('user.register');
     Route::post('/login', [AuthController::class, 'doLogin'])->name('user.login');
@@ -68,6 +61,15 @@ Route::prefix('/auth/user')->group(function () {
     Route::post('/forgot-password', [AuthController::class, 'doForgotPassword'])->name('forgot.password');
     Route::get('/reset', [AuthController::class, 'viewUserResetPassword'])->name('user.reset.password');
     Route::post('/reset-password', [AuthController::class, 'doResetPassword'])->name('reset.password');
+
+    // Protected Routes
+    Route::middleware(['web'])->group(function () {
+        Route::get('/dashboard', [AuthController::class, 'userDashboard'])->name('user.dashboard');
+        Route::get('/profile', [AuthController::class, 'viewUserProfile'])->name('user.profile');
+        Route::post('/profile', [AuthController::class, 'doUserProfile'])->name('user.profile');
+        Route::get('/change-password', [AuthController::class, 'viewUserChangePassword'])->name('user.change.password');
+        Route::post('/change-password', [AuthController::class, 'doUserChangePassword'])->name('user.change.password');
+    });
 });
 
 /* --------------------- prefix routes for Admin --------------------- */

@@ -134,4 +134,12 @@ class AuthController extends Controller
         return redirect()->route('admin-auth.reset_password')->with(['types' => 'error', 'msg' => 'Invalid Token']);
     }
 
+    /* ----------------------- User Auth ------------------------ */
+
+    // Function to view User Dashboard
+    public function userDashboard()
+    {
+        return view('pages.user.auth.dashboard');
+    }
+
 }
