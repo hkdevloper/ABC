@@ -1,7 +1,7 @@
-vendor
-node_modules
-storage
-.idea
+vendor/
+node_modules/
+storage/
+.idea/
 .env
 .cache
 *.iml
