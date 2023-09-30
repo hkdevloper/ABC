@@ -37,10 +37,34 @@ class AuthController extends Controller
         $remember_me = $request->input('remember_me'); // This is optional
         if (Auth::attempt(['email' => $email, 'password' => $password, 'approved' => 1, 'banned' => 0], $remember_me)) {
             $request->session()->regenerate();
-            return redirect()->intended('/admin');
+            if(Auth::user()->user_group_id == 1){
+                return redirect()->route('admin.dashboard');
+            }
+            return redirect()->route('user.dashboard');
         }
 
         return back()->with(['types' => 'error', 'msg' => 'Invalid Credentials']);
+    }
+
+    // Function to Register user
+    public function doRegister(Request $request){
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+        ]);
+
+        $user = new \App\Models\User();
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name ?? '';
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->approved = 1;
+        $user->email_verified = 1;
+        $user->user_group_id = 2;
+        $user->save();
+        return redirect()->route('user.login')->with(['types' => 'success', 'msg' => 'Registered Successfully']);
     }
 
     // Function to Log out user
@@ -139,7 +163,41 @@ class AuthController extends Controller
     // Function to view User Dashboard
     public function userDashboard()
     {
-        return view('pages.user.auth.dashboard');
+        $user = \auth()->user();
+        if (!$user) {
+            return redirect()->route('user.login')->with(['types' => 'error', 'msg' => 'Please Login to Continue']);
+        }
+        return view('pages.user.auth.dashboard')->with(['user' => $user]);
+    }
+
+    // Function to Edit User Profile
+    public function editUserProfile(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'email' => 'required|email|unique:users,email,' . Auth::user()->id,
+            'phone' => 'nullable|numeric|digits:10',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'state' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
+            'pincode' => 'nullable|numeric|digits:6',
+        ]);
+
+        $user = Auth::user();
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->city = $request->city;
+        $user->state = $request->state;
+        $user->country = $request->country;
+        $user->pincode = $request->pincode;
+        $user->save();
+
+        return back()->with(['types' => 'success', 'msg' => 'Profile Updated Successfully']);
     }
 
 }

@@ -40,10 +40,30 @@
         </nav>
         @if(auth()->user())
             <div class="hidden lg:flex md:flex items-center">
-                <a href="{{route('home')}}"
-                   class="text-gray-700 hover:text-purple-600 text-purple-500 p-2 border border-1 border-solid border-purple-500 rounded-full">Dashboard</a>
-                <a href="{{route('user.logout')}}"
-                   class="text-gray-700 hover:text-purple-600 text-purple-500 p-2 border border-1 border-solid border-purple-500 rounded-full">Logout</a>
+                <a href="#"
+                   class="hover:text-purple-600 p-2">
+                    <i class="fas fa-bell mr-2"></i>
+                </a>
+                <div class="relative" data-te-dropdown-ref>
+                    <button
+                        class="flex items-center"
+                        type="button"
+                        id="dropdownMenuButton1"
+                        data-te-dropdown-toggle-ref
+                        aria-expanded="false"
+                        data-te-ripple-init
+                        data-te-ripple-color="light">
+                    <span class="text-gray-700">{{ $user->first_name }}</span>
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar" class="w-10 h-10 rounded-full mx-2">
+                    </button>
+                <ul class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+                    aria-labelledby="dropdownMenuButton1"
+                    data-te-dropdown-menu-ref>
+                    <li>
+                        <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600" href="{{ route('user.logout') }}" data-te-dropdown-item-ref ><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
+                    </li>
+                </ul>
+                </div>
             </div>
         @else
             <div class="hidden lg:flex space-x-4 items-center">

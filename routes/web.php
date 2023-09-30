@@ -66,7 +66,7 @@ Route::prefix('/auth/user')->group(function () {
     Route::middleware(['web'])->group(function () {
         Route::get('/dashboard', [AuthController::class, 'userDashboard'])->name('user.dashboard');
         Route::get('/profile', [AuthController::class, 'viewUserProfile'])->name('user.profile');
-        Route::post('/profile', [AuthController::class, 'doUserProfile'])->name('user.profile');
+        Route::post('/profile', [AuthController::class, 'editUserProfile'])->name('user.profile');
         Route::get('/change-password', [AuthController::class, 'viewUserChangePassword'])->name('user.change.password');
         Route::post('/change-password', [AuthController::class, 'doUserChangePassword'])->name('user.change.password');
     });

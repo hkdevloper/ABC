@@ -1,22 +1,5 @@
 @extends('layouts.main-user-list')
 
-@section('head')
-    <style>
-        [data-tabs-target] {
-            cursor: pointer;
-        }
-
-        .active {
-            display: block;
-        }
-
-        [role="tabpanel"] {
-            display: none;
-        }
-    </style>
-
-@endsection
-
 @section('content')
     <section class="homepage">
         <div class="widget-placeholder">
@@ -32,10 +15,10 @@
                                     <div class="card bg-light-purple p-4 mb-4">
                                         <div class="flex items-center justify-between">
                                             <div>
-                                                <h2 class="text-2xl font-semibold">Hardik</h2>
+                                                <h2 class="text-2xl font-semibold">{{$user->first_name}} {{$user->last_name}}</h2>
                                                 <p class="text-gray-500">DOB: 14/09/2002</p>
                                                 <p class="text-gray-500">Location: Jam Kalyanpur, Gujarat</p>
-                                                <p class="text-gray-500">Email: hardik@example.com</p>
+                                                <p class="text-gray-500">Email: {{$user->email}}</p>
                                             </div>
                                             <div class="rounded-b-full h-[160px] w-[160px] overflow-hidden mr-4">
                                                 <img src="https://via.placeholder.com/500x500" alt="User Profile Image"
@@ -376,20 +359,19 @@
                                                     <div class="flex flex-col mb-10 lg:items-center items-center justify-center">
                                                         <!-- Event list Grid -->
                                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2">
-                                                            <!-- Event Items-->
                                                             @php
-                                                                function generateRandomEventTitle(): string {
-                                                                    $eventTypes = ["Conference", "Seminar", "Workshop", "Webinar", "Exhibition", "Symposium", "Panel Discussion", "Networking Event", "Hackathon", "Meetup"];
-                                                                    $topics = ["Technology", "Business", "Science", "Art", "Health", "Education", "Environment", "Finance", "Sports", "Music"];
+                                                                function generateRandomEventTitle() {
+        $eventTypes = ["Conference", "Seminar", "Workshop", "Webinar", "Exhibition", "Symposium", "Panel Discussion", "Networking Event", "Hackathon", "Meetup"];
+        $topics = ["Technology", "Business", "Science", "Art", "Health", "Education", "Environment", "Finance", "Sports", "Music"];
 
-                                                                    $randomEventType = $eventTypes[array_rand($eventTypes)];
-                                                                    $randomTopic = $topics[array_rand($topics)];
+        $randomEventType = $eventTypes[array_rand($eventTypes)];
+        $randomTopic = $topics[array_rand($topics)];
 
-                                                                    return $randomEventType . " on " . $randomTopic;
-                                                                }
+        return $randomEventType . " on " . $randomTopic;
+    }
                                                             @endphp
-
-                                                            @for($i=1; $i<10;$i++)
+                                                            <!-- Event Items-->
+                                                           @for($i=1; $i<10;$i++)
                                                                 <div class="card desktop-homepage-events-wdgt overflow-hidden">
                                                                     <img class="w-full h-40 object-cover"
                                                                          src="https://via.placeholder.com/300x300"
@@ -402,7 +384,7 @@
                                                                                      src="https://via.placeholder.com/100x100">
                                                                             </div>
                                                                             <div class="organizer-description-container ml-3">
-                                                                                <p class="feature-card-heading">{{ generateRandomEventTitle() }}</p>
+                                                                                <p class="feature-card-heading">{{  generateRandomEventTitle() }}</p>
                                                                                 <p class="feature-card-organizer">{{ generateRandomEventTitle() }}</p>
                                                                             </div>
                                                                         </div>
@@ -426,8 +408,7 @@
                                                                                 <img alt="User icon" class="naukicon-user"
                                                                                      height="16" width="16"
                                                                                      src="https://static.naukimg.com/s/0/0/i/Events/icons/user-ot.svg">
-                                                                                <p class="registered-count-label ml-1">{{rand(1,99) / 10}}K
-                                                                                    Enrolled</p>
+                                                                                <p class="registered-count-label ml-1">{{rand(1,99) / 10}}K Enrolled</p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -445,7 +426,7 @@
                                                                             </div>
                                                                             <div class="cta-container">
                                                                                 <a href="{{route('view.event', [generateRandomEventTitle()])}}"
-                                                                                   class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs"
+                                                                                   class="text-purple-500 hover:text-white rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs"
                                                                                    style="border: 1px solid;">View Details
                                                                                 </a>
                                                                             </div>
@@ -528,7 +509,36 @@
                                             id="tabs-profile3"
                                             role="tabpanel"
                                             aria-labelledby="tabs-profile-tab3">
-                                            User Profile Tab
+                                            <div class="mx-auto bg-white p-6 rounded shadow-md">
+                                                <h2 class="text-2xl font-semibold mb-4">Edit Profile</h2>
+                                                <form action="{{ route('user.profile') }}" method="POST">
+                                                    @csrf
+                                                    <div class="mb-4">
+                                                        <label for="first_name" class="block text-gray-600">First Name</label>
+                                                        <input type="text" id="first_name" name="first_name" value="{{ $user->first_name }}" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:border-blue-400" required>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <label for="last_name" class="block text-gray-600">Last Name</label>
+                                                        <input type="text" id="last_name" name="last_name" value="{{ $user->last_name }}" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:border-blue-400" required>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <label for="email" class="block text-gray-600">Email</label>
+                                                        <input type="email" id="email" name="email" value="{{ $user->email }}" class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:border-blue-400" required>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <label class="block text-gray-600">Email Verified</label>
+                                                        <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                                            <input type="checkbox" readonly disabled id="email_verified" name="email_verified" {{ $user->email_verified ? 'checked' : '' }} class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer">
+                                                            <label for="email_verified" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                                        </div>
+                                                        <label for="email_verified" class="text-gray-700">Verify Email</label>
+                                                    </div>
+                                                    <!-- Add other fields and indicators as needed -->
+                                                    <div class="mt-6">
+                                                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full focus:outline-none focus:shadow-outline-blue active:bg-blue-700">Save Changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                         {{--Messages Tab--}}
                                         <div
