@@ -6,6 +6,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/laravel-9
 .env
 .env.backup
 .env.production
