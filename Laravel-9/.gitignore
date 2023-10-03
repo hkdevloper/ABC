@@ -1,0 +1,9 @@
+vendor/
+node_modules/
+storage/
+.idea/
+.env
+.cache
+*.iml
+*.lock
+*.log
