@@ -1,0 +1,86 @@
+@extends('layouts.main-admin')
+
+@section("content")
+    <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-12 xxl:col-span-9 grid grid-cols-12 gap-6">
+            <!-- BEGIN: General Report -->
+            <div class="col-span-12 mt-8">
+                <div class="intro-y flex items-center h-10">
+                    <h2 class="text-lg font-medium truncate mr-5">
+                        Edit Plan
+                    </h2>
+                </div>
+                {{-- Main Content goes Here --}}
+                <div class="intro-y datatable-wrapper box p-5 mt-5">
+                    <form action="{{route('add.membership.plan')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="package_id" value="{{$package_id}}">
+                        <input type="hidden" name="type" value="{{$type}}">
+                        <div>
+                            <label>Billing Period</label>
+                            <select required name="billing_period" id="" class="input w-full border mt-2">
+                                <option selected value="month">Monthly</option>
+                                <option value="year">Yearly</option>
+                                <option value="day">Daily</option>
+                                <option value="week">Weekly</option>
+                                <option value="lifetime">Lifetime</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Billing Interval</label>
+                            <input required type="number" name="billing_interval" class="input w-full border mt-2" placeholder="Billing Interval" value="{{$plan->billing_interval}}">
+                        </div>
+                        <div class="relative mt-2">
+                            <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600">
+                                $
+                            </div>
+                            <input required type="text" class="input px-12 w-full border col-span-4" placeholder="Price" name="price" value="{{$plan->price}}">
+                            <div class="absolute top-0 right-0 rounded-r w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600">
+                                .00
+                            </div>
+                        </div>
+                        <div>
+                            <label>Users Limit</label>
+                            <input required type="number" name="users_limit" class="input w-full border mt-2" placeholder="Users Limit" value="{{$plan->user_limit}}">
+                        </div>
+                        <div>
+                            <label>Per Users Limit</label>
+                            <input required type="number" name="per_users_limit" class="input w-full border mt-2" placeholder="Per Users Limit" value="{{$plan->per_users_limit}}">
+                        </div>
+                        <div>
+                            <label>Supported Payment Gateways</label>
+                            <select name="supported_payment_gateways[]" id="" class="select2 input w-full border mt-2" multiple required>
+                                @foreach($paymentMethods as $method)
+                                    <option value="{{$method->id}}" @if(in_array($method->id, $supportedTypes)) selected @endif>{{$method->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <div class="mt-2" >
+                                <label style="width: 180px!important; display: inline-block">Auto-approve Listings</label>
+                                <input type="checkbox" class="input input--switch border" name="listings" @if($plan->auto_approve_listing == 1) checked @endif>
+                            </div>
+                            <div class="mt-2" >
+                                <label style="width: 180px!important; display: inline-block">Used for Claiming</label>
+                                <input type="checkbox" class="input input--switch border" name="claims" @if($plan->used_for_claims == 1) checked @endif>
+                            </div>
+                            <div class="mt-2" >
+                                <label style="width: 180px!important; display: inline-block">User Cancellable</label>
+                                <input type="checkbox" class="input input--switch border" name="cancellable" @if($plan->user_cancellable == 1) checked @endif>
+                            </div>
+                            <div class="mt-2" >
+                                <label style="width: 180px!important; display: inline-block">Hidden</label>
+                                <input type="checkbox" class="input input--switch border" name="hidden" @if($plan->hidden == 1) checked @endif>
+                            </div>
+                        </div>
+                        <button type="submit" class="button bg-theme-1 text-white mt-5">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+@endsection
+
+@section('page-scripts')
+    {{-- Scripts for this page goes here --}}
+
+@endsection
