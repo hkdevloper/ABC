@@ -31,5 +31,11 @@ class Company extends Model
         return $this->belongsTo(Seo::class, 'seo_id');
     }
 
+    // get the media that owns the company
+    public function mediaLogo()
+    {
+        return $this->hasOne(Media::class, 'media_logo_id');
+    }
+
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UserCompanyDataTable;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -161,15 +162,14 @@ class AuthController extends Controller
     /* ----------------------- User Auth ------------------------ */
 
     // Function to view User Dashboard
-    public function userDashboard()
+    public function userDashboard(UserCompanyDataTable $dataTable)
     {
         $user = \auth()->user();
         if (!$user) {
             return redirect()->route('user.login')->with(['types' => 'error', 'msg' => 'Please Login to Continue']);
         }
-        return view('pages.user.auth.dashboard')->with(['user' => $user]);
+        return $dataTable->render('pages.user.auth.dashboard')->with(['user' => $user]);
     }
-
     // Function to Edit User Profile
     public function editUserProfile(Request $request)
     {
