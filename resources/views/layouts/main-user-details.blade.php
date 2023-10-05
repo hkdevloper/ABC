@@ -69,9 +69,9 @@
 <script src="{{ asset('user/js/main.js')}}"></script>
 <script>
     // Initialization for ES Users
-    import {Select, initTE} from "tw-elements";
+    import {Select, initTE, Datatable} from "tw-elements";
 
-    initTE({Select});
+    initTE({Select, Datatable});
     $(document).ready(function () {
         $('.owl-carousel').owlCarousel();
     });

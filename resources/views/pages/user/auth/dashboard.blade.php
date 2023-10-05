@@ -1,5 +1,9 @@
 @extends('layouts.main-user-list')
 
+@section('head')
+
+@endsection
+
 @section('content')
     <section class="homepage">
         <div class="widget-placeholder">
@@ -183,13 +187,13 @@
                                             <div class="mx-2 w-full p-2 h-auto card rounded-none">
                                                 {{--Company Tab--}}
                                                 <div
-                                                    class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+                                                    class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block w-full"
                                                     id="tabs-company03"
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-company-tab03"
                                                     data-te-tab-active>
                                                     <!-- Company List -->
-                                                    {{$dataTable->table()}}
+                                                    <div id="datatable"></div>
                                                 </div>
                                                 {{--Products Tab--}}
                                                 <div
@@ -198,7 +202,6 @@
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-product-tab03">
                                                     <!-- Product List -->
-                                                    Product
                                                 </div>
                                                 {{--Jobs Tab--}}
                                                 <div
@@ -298,7 +301,7 @@
                                             id="tabs-messages3"
                                             role="tabpanel"
                                             aria-labelledby="tabs-profile-tab3">
-                                            <div id="datatable"></div>
+                                            Messages
                                         </div>
                                         {{--Settings Tab--}}
                                         <div
@@ -334,5 +337,5 @@
 @endsection
 
 @section('page-scripts')
-    {{ $dataTable->scripts() }}
+
 @endsection
