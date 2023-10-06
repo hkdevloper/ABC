@@ -193,7 +193,11 @@
                                                     aria-labelledby="tabs-company-tab03"
                                                     data-te-tab-active>
                                                     <!-- Company List -->
-                                                    <div id="datatable"></div>
+                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
+                                                        <h1 class="text-xl font-semibold mb-2 ">Companies</h1>
+                                                        <a href="#" class="text-blue-500 hover:underline">Add New</a>
+                                                    </div>
+                                                    <div class="datatable"></div>
                                                 </div>
                                                 {{--Products Tab--}}
                                                 <div
@@ -202,6 +206,11 @@
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-product-tab03">
                                                     <!-- Product List -->
+                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
+                                                        <h1 class="text-xl font-semibold mb-2 ">Products</h1>
+                                                        <a href="#" class="text-blue-500 hover:underline">Add New</a>
+                                                    </div>
+                                                    <div class="datatable"></div>
                                                 </div>
                                                 {{--Jobs Tab--}}
                                                 <div
@@ -210,7 +219,11 @@
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-job-tab03">
                                                     <!-- Job List -->
-                                                    Job
+                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
+                                                        <h1 class="text-xl font-semibold mb-2 ">Jobs</h1>
+                                                        <a href="#" class="text-blue-500 hover:underline">Add New</a>
+                                                    </div>
+                                                    <div class="datatable"></div>
                                                 </div>
                                                 {{--Events Tab--}}
                                                 <div
@@ -219,7 +232,11 @@
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-event-tab03">
                                                     <!-- Event List -->
-                                                    Event
+                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
+                                                        <h1 class="text-xl font-semibold mb-2 ">Events</h1>
+                                                        <a href="#" class="text-blue-500 hover:underline">Add New</a>
+                                                    </div>
+                                                    <div class="datatable"></div>
                                                 </div>
                                                 {{--Blogs Tab--}}
                                                 <div
@@ -228,7 +245,11 @@
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-blog-tab03">
                                                     <!-- Blog List -->
-                                                    Blog
+                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
+                                                        <h1 class="text-xl font-semibold mb-2 ">Blogs</h1>
+                                                        <a href="#" class="text-blue-500 hover:underline">Add New</a>
+                                                    </div>
+                                                    <div class="datatable"></div>
                                                 </div>
                                                 {{--Deals Tab--}}
                                                 <div
@@ -236,7 +257,12 @@
                                                     id="tabs-deal03"
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-deal-tab03">
-                                                    Deals
+                                                    <!-- Deal List -->
+                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
+                                                        <h1 class="text-xl font-semibold mb-2 ">Deals</h1>
+                                                        <a href="#" class="text-blue-500 hover:underline">Add New</a>
+                                                    </div>
+                                                    <div class="datatable"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -301,7 +327,7 @@
                                             id="tabs-messages3"
                                             role="tabpanel"
                                             aria-labelledby="tabs-profile-tab3">
-                                            Messages
+                                            <div class="datatable"></div>
                                         </div>
                                         {{--Settings Tab--}}
                                         <div
@@ -327,7 +353,6 @@
                                     </div>
                                 </div>
                             </section>
-
                         </div>
                     </div>
                 </section>

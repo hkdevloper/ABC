@@ -37,18 +37,7 @@
                             <!-- Product List -->
                             <div class="flex flex-col mb-10 lg:items-center items-center justify-center">
                                 <!-- Product list Item -->
-                                @php
-                                    function generateRandomProductTitle() {
-                                        $adjectives = ["Premium", "Deluxe", "Elegant", "Quality", "Modern", "Unique", "Luxurious", "Stylish", "Sleek", "Innovative"];
-                                        $nouns = ["Widget", "Gadget", "Device", "Tool", "Accessory", "Item", "Product", "Apparatus", "Contraption", "Instrument"];
-
-                                        $randomAdjective = $adjectives[array_rand($adjectives)];
-                                        $randomNoun = $nouns[array_rand($nouns)];
-
-                                        return $randomAdjective . " " . $randomNoun;
-                                    }
-                                @endphp
-                                @for($i=1; $i<10;$i++)
+                                @foreach($data as $product)
                                     <div class="m-2 card">
                                         <!-- Logo and Details Div -->
                                         <div class="flex items-center justify-between pr-1 w-full">
@@ -56,11 +45,8 @@
                                                  class="w-[150px] h-[150px] object-cover rounded-l-lg mr-3">
                                             <div class="flex items-center">
                                                 <div class="block">
-                                                    <h2 class="text-gray-900 text-base font-semibold mb-1">{{ generateRandomProductTitle() }}</h2>
-                                                    <p class="text-gray-600 text-xs">Lorem ipsum dolor sit amet
-                                                        consectetur adipisicing elit. Hic deleniti dolorem dolorum
-                                                        debitis quaerat.
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                                    <h2 class="text-gray-900 text-base font-semibold mb-1">{{ $product->name }}</h2>
+                                                    <p class="text-gray-600 text-xs">{{$product->description}}</p>
                                                     <div class="flex items-center mt-2 flex-wrap">
                                                         <x-bladewind::tag label="hkdevs" color="purple" class="mx-1"/>
                                                         <x-bladewind::tag label="codecanyon" color="purple"
@@ -70,14 +56,13 @@
                                                 </div>
                                             </div>
 
-                                            <a href="{{route('view.product', [generateRandomProductTitle()])}}"
-                                               class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full p-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-[100px]"
-                                               style="border: 1px solid;">View <i
-                                                    class="fa-solid fa-arrow-up-right-from-square"></i>
+                                            <a href="{{route('view.product', [$product->slug])}}"
+                                               class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full p-2 transition duration-300 ease-in-out text-xs w-[100px]"
+                                               style="border: 1px solid;">View <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                             </a>
                                         </div>
                                     </div>
-                                @endfor
+                                @endforeach
                             </div>
                             <!-- Pagination -->
                             <x-user.pagination/>

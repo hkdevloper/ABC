@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Events;
 use Illuminate\Support\Facades\Session;
 
 class EventController extends Controller
@@ -13,7 +14,8 @@ class EventController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'event');
-        return view('pages.user.event.list');
+        $data = Events::all();
+        return view('pages.user.event.list')->with('data', $data);
     }
 
     // Function to view Event Details

@@ -31,6 +31,10 @@ Route::prefix('/ajax')->group(function () {
     Route::post('/user-status', [AjaxController::class, 'userStatus'])->name('ajax.user.status');
     Route::post('/payment-gateway-status', [AjaxController::class, 'paymentGatewayStatus'])->name('ajax.payment.gateway.status');
     Route::post('/tax-rate-compound', [AjaxController::class, 'taxRateCompound'])->name('ajax.tax.rate.compound');
+
+    // Get All
+    Route::get('/get-all', [AjaxController::class, 'getAll'])->name('ajax.get.all');
+
 })->middleware('verify_csrf_token');
 
 // Routes for handling Media Module

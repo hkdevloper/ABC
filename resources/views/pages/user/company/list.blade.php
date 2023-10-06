@@ -36,26 +36,8 @@
                             <!-- Company List -->
                             <div class="flex flex-col mb-10 lg:items-start items-center">
                                 <!-- Company list Item -->
-                                @php
-                                    function generateRandomCompanyName() {
-                                        $companies = ["Tech Solutions", "Innovative Ventures", "Global Enterprises", "Digital Innovators", "Creative Minds Inc.", "Smart Tech Co.", "Eco-Friendly Solutions", "FutureTech Corp", "Data Wizards", "Infinite Ideas Ltd"];
-                                        return $companies[array_rand($companies)];
-                                    }
-
-                                    function generateRandomLocation() {
-                                        $locations = ["New York", "San Francisco", "London", "Berlin", "Sydney", "Tokyo", "Toronto", "Singapore", "Mumbai", "Dubai"];
-                                        return $locations[array_rand($locations)];
-                                    }
-
-                                    function generateRandomDescription() {
-                                        $loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac libero eu ligula accumsan tempus. Nulla facilisi. Sed nec nisi nec libero bibendum dignissim. Phasellus nec ultricies nunc. Donec vel bibendum mauris. Fusce a erat vel felis bibendum congue.";
-                                        $description = substr($loremIpsum, 0, 255); // Limit to 255 characters
-                                        return $description;
-                                    }
-                                @endphp
-
-                                @for($i=1; $i<10;$i++)
-                                    <div class="m-2 card p-4">
+                                @foreach($data as $company)
+                                    <div class="m-2 card p-4 w-full">
                                         <!-- Logo and Details Div -->
                                         <div class="flex items-start justify-between">
                                             <div class="flex items-center">
@@ -67,14 +49,14 @@
                                                 <div class="inline-block">
                                                     <h2 class="text-green-600 text-sm mb-1 @if(rand(0,1)) hidden @endif ">
                                                         Featured</h2>
-                                                    <h2 class="text-gray-900 text-base title-font font-medium mb-1">{{generateRandomCompanyName()}}
+                                                    <h2 class="text-gray-900 text-base title-font font-medium mb-1">{{$company->name}}
                                                         <x-bladewind::icon name="check-badge" type="solid"
                                                                            class="text-green-400 @if(rand(0,1)) hidden @endif"/>
                                                     </h2>
                                                     <div class="flex items-center text-sm">
                                                         <x-bladewind::icon name="map-pin" type="solid"
                                                                            class="text-green-300"/>
-                                                        <span class="mx-1">{{generateRandomLocation()}}</span>
+                                                        <span class="mx-1">{{$company->address}}</span>
                                                         <x-bladewind::icon name="star" type="solid"
                                                                            class="text-orange-300"/>
                                                         <span class="mx-1">{{rand(1,99)/10}} Review</span>
@@ -85,7 +67,7 @@
                                                 </div>
                                             </div>
 
-                                            <a href="{{route('view.company', [generateRandomLocation()])}}"
+                                            <a href="{{route('view.company', [$company->slug])}}"
                                                class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full p-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-[70px]"
                                                style="border: 1px solid;">View <i
                                                     class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -93,12 +75,11 @@
                                         </div>
 
                                         <!-- Description -->
-                                        <div class="mt-2 text-xs">
-                                            <p>{{generateRandomDescription()}}</p>
+                                        <div class="mt-2 text-xs w-full">
+                                            <p>{{$company->description}}</p>
                                         </div>
                                     </div>
-                                @endfor
-
+                                @endforeach
                             </div>
                             <!-- Pagination -->
                             <x-user.pagination/>

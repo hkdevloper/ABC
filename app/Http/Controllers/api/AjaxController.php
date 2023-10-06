@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blogs;
+use App\Models\Company;
+use App\Models\Deals;
+use App\Models\Events;
+use App\Models\Jobs;
 use App\Models\Location;
 use App\Models\PaymentGateway;
+use App\Models\Product;
 use App\Models\TaxRates;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -111,5 +117,48 @@ class AjaxController extends Controller
         $taxRate->compound = $value;
         $taxRate->save();
         return response()->json(['status' => 'success']);
+    }
+
+    // Function to Get All
+    public function getAll(Request $request){
+        $request->validate([
+            'table' => 'required'
+        ]);
+        $table = $request->table;
+        switch ($table) {
+            case 'company':
+                $data = Company::all();
+                $columns = ['id', 'name', 'email', 'phone', 'address', 'city', 'state', 'country', 'zip', 'featured', 'status', 'created_at'];
+                return response()->json(compact('data', 'columns'));
+                break;
+            case 'product':
+                $data = Product::all();
+                $columns = ['id', 'name', 'price', 'discount', 'discount_type', 'featured', 'status', 'created_at'];
+                return response()->json(compact('data', 'columns'));
+                break;
+            case 'event':
+                $data = Events::all();
+                $columns = ['id', 'name', 'price', 'discount', 'discount_type', 'featured', 'status', 'created_at'];
+                return response()->json(compact('data', 'columns'));
+                break;
+            case 'job':
+                $data = Jobs::all();
+                $columns = ['id', 'name', 'price', 'discount', 'discount_type', 'featured', 'status', 'created_at'];
+                return response()->json(compact('data', 'columns'));
+                break;
+            case 'blog':
+                $data = Blogs::all();
+                $columns = ['id', 'name', 'price', 'discount', 'discount_type', 'featured', 'status', 'created_at'];
+                return response()->json(compact('data', 'columns'));
+                break;
+            case 'deals':
+                $data = Deals::all();
+                $columns = ['id', 'name', 'price', 'discount', 'discount_type', 'featured', 'status', 'created_at'];
+                return response()->json(compact('data', 'columns'));
+                break;
+            default:
+                return response()->json(['status' => 'error', 'message' => 'Invalid Table Name']);
+                break;
+        }
     }
 }

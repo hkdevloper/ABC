@@ -73,7 +73,7 @@ Route::prefix('/auth/user')->group(function () {
 });
 
 /* --------------------- prefix routes for Admin --------------------- */
-Route::prefix('admin')->middleware(['admin-auth'])->group(function () {
+Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'adminDashboard']);
 
     // Routes for handling Company Module

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
@@ -13,7 +14,8 @@ class CompanyController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'company');
-        return view('pages.user.company.list');
+        $data = Company::all();
+        return view('pages.user.company.list')->with('data', $data);
     }
 
     //Function to view Company Details

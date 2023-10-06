@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
@@ -13,7 +14,8 @@ class ProductController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'product');
-        return view('pages.user.product.list');
+        $data = Product::all();
+        return view('pages.user.product.list')->with('data', $data);
     }
 
     // Function to view Product Details
