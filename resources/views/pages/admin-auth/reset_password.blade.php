@@ -38,7 +38,7 @@
         </div>
         <!-- END: Login Info -->
         <!-- BEGIN: Login Form -->
-        <form action="{{route('reset.password')}}" method="post"
+        <form action="{{route('admin.reset.password')}}" method="post"
               class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
             @csrf
             <input type="hidden" name="token" value="{{$token}}">

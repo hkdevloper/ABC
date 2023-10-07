@@ -38,7 +38,7 @@
         </div>
         <!-- END: Login Info -->
         <!-- BEGIN: Login Form -->
-        <form action="{{route('forgot.password')}}" method="post"
+        <form action="{{route('admin.forgot.password')}}" method="post"
               class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
             @csrf
             <div

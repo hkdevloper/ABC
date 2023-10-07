@@ -35,7 +35,8 @@
         </div>
         <!-- END: Login Info -->
         <!-- BEGIN: Login Form -->
-        <form action="" method="post" class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
+        <form action="{{route('admin.login')}}" method="post"
+              class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
             @csrf
             <div class="my-auto mx-auto xl:ml-20 bg-white xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
                 <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
@@ -51,7 +52,7 @@
                         <input name="remember" value="true" type="checkbox" class="input border mr-2" id="remember-me">
                         <label class="cursor-pointer select-none" for="remember-me">Remember me</label>
                     </div>
-                    <a href="{{route('forgot.password')}}">Forgot Password?</a>
+                    <a href="{{route('admin.forgot.password')}}">Forgot Password?</a>
                 </div>
                 <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                     <button type="submit" class="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3">Login</button>

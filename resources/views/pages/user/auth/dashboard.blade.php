@@ -17,30 +17,29 @@
 
                                     <!-- User Profile Card -->
                                     <div class="card bg-light-purple p-4 mb-4">
-                                        <div class="flex items-center justify-between">
-                                            <div>
-                                                <h2 class="text-2xl font-semibold">{{$user->first_name}} {{$user->last_name}}</h2>
-                                                <p class="text-gray-500">DOB: 14/09/2002</p>
-                                                <p class="text-gray-500">Location: Jam Kalyanpur, Gujarat</p>
-                                                <p class="text-gray-500">Email: {{$user->email}}</p>
+                                        <div class="flex md:flex-row items-center justify-between">
+                                            <div class="mb-4 md:mb-0 md:mr-4">
+                                                <h2 class="text-lg font-semibold">{{$user->first_name}} {{$user->last_name}}</h2>
+                                                <p class="text-gray-500 text-base">Balance: <span
+                                                        class="text-purple-500 text-base">{{$user->balance}}</span></p>
+                                                <p class="text-gray-500 text-base">Email: {{$user->email}}</p>
                                             </div>
-                                            <div class="rounded-b-full h-[160px] w-[160px] overflow-hidden mr-4">
+                                            <div
+                                                class="rounded-b-full h-16 w-40 md:h-[160px] md:w-[160px] overflow-hidden">
                                                 <img src="https://via.placeholder.com/500x500" alt="User Profile Image"
                                                      class="w-full h-full object-cover">
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!--Tabs navigation-->
-                                    <ul
-                                        class="mb-4 flex list-none flex-row flex-wrap border-b-0 pl-0"
-                                        id="tabs-tab3"
-                                        role="tablist"
-                                        data-te-nav-ref>
+
+                                    <ul class="mb-4 flex list-none flex-row border-b-0 pl-0 w-[100vw] overflow-hidden"
+                                        id="tabs-tab3" role="tablist" data-te-nav-ref>
+                                        {{-- Dashboard --}}
                                         <li role="presentation">
                                             <a
                                                 href="#tabs-home3"
-                                                class="my-2 block border-solid border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-purple-500 data-[te-nav-active]:text-purple-600 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+                                                class="my-2 block border-solid border-x-0 border-b-2 border-t-0 border-transparent px-3 md:px-7 py-2 md:py-3.5 text-xs md:text-sm font-medium uppercase  leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-purple-500 data-[te-nav-active]:text-purple-600 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
                                                 id="tabs-home-tab3"
                                                 data-te-toggle="pill"
                                                 data-te-target="#tabs-home3"
@@ -51,56 +50,90 @@
                                             >Home</a
                                             >
                                         </li>
+                                        {{-- Listings --}}
                                         <li role="presentation">
-                                            <a
-                                                href="#tabs-profile3"
-                                                class="my-2 block border-solid border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-purple-500 data-[te-nav-active]:text-purple-600 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
-                                                id="tabs-profile-tab3"
-                                                data-te-toggle="pill"
-                                                data-te-target="#tabs-profile3"
-                                                role="tab"
-                                                aria-controls="tabs-profile3"
-                                                aria-selected="false"
-                                            >Profile</a
-                                            >
+                                            <a href="#tabs-listings3"
+                                               class="my-2 block border-solid border-x-0 border-b-2 border-t-0 border-transparent px-3 md:px-7 py-2 md:py-3.5 text-xs md:text-sm font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-purple-500 data-[te-nav-active]:text-purple-600 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+                                               id="tabs-listings-tab3" data-te-toggle="pill"
+                                               data-te-target="#tabs-listings3" role="tab"
+                                               aria-controls="tabs-listings3" aria-selected="false">Listings</a>
                                         </li>
+                                        {{-- Messages --}}
                                         <li role="presentation">
-                                            <a
-                                                href="#tabs-messages3"
-                                                class="my-2 block border-solid border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-purple-500 data-[te-nav-active]:text-purple-600 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
-                                                id="tabs-messages-tab3"
-                                                data-te-toggle="pill"
-                                                data-te-target="#tabs-messages3"
-                                                role="tab"
-                                                aria-controls="tabs-messages3"
-                                                aria-selected="false"
-                                            >Messages</a
-                                            >
+                                            <a href="#tabs-messages3"
+                                               class="my-2 block border-solid border-x-0 border-b-2 border-t-0 border-transparent px-3 md:px-7 py-2 md:py-3.5 text-xs md:text-sm font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-purple-500 data-[te-nav-active]:text-purple-600 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+                                               id="tabs-messages-tab3" data-te-toggle="pill"
+                                               data-te-target="#tabs-messages3" role="tab"
+                                               aria-controls="tabs-messages3" aria-selected="false">Messages</a>
                                         </li>
+                                        {{-- Settings --}}
                                         <li role="presentation">
-                                            <a
-                                                href="#tabs-settings"
-                                                class="my-2 block border-solid border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-purple-500 data-[te-nav-active]:text-purple-600 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
-                                                id="tabs-messages-tab4"
-                                                data-te-toggle="pill"
-                                                data-te-target="#tabs-settings"
-                                                role="tab"
-                                                aria-controls="tabs-settings"
-                                                aria-selected="false"
-                                            >Settings</a
-                                            >
+                                            <a href="#tabs-settings"
+                                               class="my-2 block border-solid border-x-0 border-b-2 border-t-0 border-transparent px-3 md:px-7 py-2 md:py-3.5 text-xs md:text-sm font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-purple-500 data-[te-nav-active]:text-purple-600 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+                                               id="tabs-messages-tab4" data-te-toggle="pill"
+                                               data-te-target="#tabs-settings" role="tab" aria-controls="tabs-settings"
+                                               aria-selected="false">Settings</a>
                                         </li>
                                     </ul>
 
+
                                     <!--Tabs content-->
                                     <div>
-                                        {{--Home Tab--}}
+                                        {{--Dashboard Tab--}}
                                         <div
                                             class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:flex justify-between"
                                             id="tabs-home3"
                                             role="tabpanel"
                                             data-te-tab-active
                                             aria-labelledby="tabs-home-tab3">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                                <!-- Card 1 -->
+                                                <div class="bg-white p-4 rounded-lg card">
+                                                    <div class="flex justify-between items-center">
+                                                        <span
+                                                            class="text-3xl font-semibold text-purple-500">{{rand(10,999)}}</span>
+                                                        <i class="fas fa-flag text-2xl text-purple-500"></i>
+                                                    </div>
+                                                    <h2 class="text-lg font-semibold mt-2">Pending Listings</h2>
+                                                </div>
+
+                                                <!-- Card 2 -->
+                                                <div class="bg-white p-4 rounded-lg card">
+                                                    <div class="flex justify-between items-center">
+                                                        <span
+                                                            class="text-3xl font-semibold text-purple-500">{{rand(10,999)}}</span>
+                                                        <i class="fas fa-flag text-2xl text-purple-500"></i>
+                                                    </div>
+                                                    <h2 class="text-lg font-semibold mt-2">Pending Listings</h2>
+                                                </div>
+
+                                                <!-- Card 3 -->
+                                                <div class="bg-white p-4 rounded-lg card">
+                                                    <div class="flex justify-between items-center">
+                                                        <span
+                                                            class="text-3xl font-semibold text-purple-500">{{rand(10,999)}}</span>
+                                                        <i class="fas fa-flag text-2xl text-purple-500"></i>
+                                                    </div>
+                                                    <h2 class="text-lg font-semibold mt-2">Pending Claims</h2>
+                                                </div>
+
+                                                <!-- Card 4 -->
+                                                <div class="bg-white p-4 rounded-lg card">
+                                                    <div class="flex justify-between items-center">
+                                                        <span
+                                                            class="text-3xl font-semibold text-purple-500">{{rand(10,999)}}</span>
+                                                        <i class="fas fa-flag text-2xl text-purple-500"></i>
+                                                    </div>
+                                                    <h2 class="text-lg font-semibold mt-2">Unpaid Invoices</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- Listings Tab--}}
+                                        <div
+                                            class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:flex justify-between"
+                                            id="tabs-listings3"
+                                            role="tabpanel"
+                                            aria-labelledby="tabs-listings-tab3">
                                             <div class="w-1/7">
                                                 <!--Tabs navigation-->
                                                 <ul
@@ -192,12 +225,57 @@
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-company-tab03"
                                                     data-te-tab-active>
-                                                    <!-- Company List -->
-                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
-                                                        <h1 class="text-xl font-semibold mb-2 ">Companies</h1>
-                                                        <a href="#" class="text-blue-500 hover:underline">Add New</a>
+                                                    <!-- Company Logo and Title -->
+                                                    <div class="flex items-center justify-between">
+                                                        <!-- Company Logo -->
+                                                        <div class="flex items-center mb-3">
+                                                            <img src="https://via.placeholder.com/500x500"
+                                                                 alt="Company Logo" class="w-20 h-20 rounded-full mr-4">
+                                                            <!-- Company Title -->
+                                                            <div>
+                                                                <h2 class="text-4xl font-semibold text-purple-800">
+                                                                    Company Name</h2>
+                                                                <p class="text-gray-600">Industry: Technology</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Highlight Buttons -->
+                                                        <div class="space-x-4">
+                                                            <button
+                                                                class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600">
+                                                                Edit
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="datatable"></div>
+
+                                                    <!-- Location -->
+                                                    <p class="text-gray-600 mt-4">
+                                                        <i class="fas fa-map-marker-alt mr-2 text-purple-600"></i>
+                                                        Location: City, State
+                                                    </p>
+
+                                                    <!-- About Us -->
+                                                    <div class="mt-4">
+                                                        <h3 class="text-2xl font-semibold text-purple-800">About Us</h3>
+                                                        <p class="text-gray-600 mt-2">
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                                                            eget nisl sed mauris auctor ultrices. Nullam scelerisque
+                                                            quam ac ultrices.
+                                                        </p>
+                                                    </div>
+
+                                                    <!-- Contact Information -->
+                                                    <div class="mt-4">
+                                                        <h3 class="text-2xl font-semibold text-purple-800">Contact
+                                                            Information</h3>
+                                                        <p class="text-gray-600 mt-2">
+                                                            <i class="fas fa-envelope mr-2 text-purple-600"></i>
+                                                            Email: info@company.com
+                                                        </p>
+                                                        <p class="text-gray-600 mt-2">
+                                                            <i class="fas fa-phone-alt mr-2 text-purple-600"></i>
+                                                            Phone: +1 (123) 456-7890
+                                                        </p>
+                                                    </div>
                                                 </div>
                                                 {{--Products Tab--}}
                                                 <div
@@ -206,11 +284,12 @@
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-product-tab03">
                                                     <!-- Product List -->
-                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
+                                                    <div
+                                                        class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
                                                         <h1 class="text-xl font-semibold mb-2 ">Products</h1>
                                                         <a href="#" class="text-blue-500 hover:underline">Add New</a>
                                                     </div>
-                                                    <div class="datatable"></div>
+                                                    <div class="datatable" data-table="product"></div>
                                                 </div>
                                                 {{--Jobs Tab--}}
                                                 <div
@@ -219,11 +298,12 @@
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-job-tab03">
                                                     <!-- Job List -->
-                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
+                                                    <div
+                                                        class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
                                                         <h1 class="text-xl font-semibold mb-2 ">Jobs</h1>
                                                         <a href="#" class="text-blue-500 hover:underline">Add New</a>
                                                     </div>
-                                                    <div class="datatable"></div>
+                                                    <div class="datatable" data-table="jobs"></div>
                                                 </div>
                                                 {{--Events Tab--}}
                                                 <div
@@ -232,11 +312,12 @@
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-event-tab03">
                                                     <!-- Event List -->
-                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
+                                                    <div
+                                                        class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
                                                         <h1 class="text-xl font-semibold mb-2 ">Events</h1>
                                                         <a href="#" class="text-blue-500 hover:underline">Add New</a>
                                                     </div>
-                                                    <div class="datatable"></div>
+                                                    <div class="datatable" data-table="events"></div>
                                                 </div>
                                                 {{--Blogs Tab--}}
                                                 <div
@@ -245,11 +326,12 @@
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-blog-tab03">
                                                     <!-- Blog List -->
-                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
+                                                    <div
+                                                        class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
                                                         <h1 class="text-xl font-semibold mb-2 ">Blogs</h1>
                                                         <a href="#" class="text-blue-500 hover:underline">Add New</a>
                                                     </div>
-                                                    <div class="datatable"></div>
+                                                    <div class="datatable" data-table="blog"></div>
                                                 </div>
                                                 {{--Deals Tab--}}
                                                 <div
@@ -258,67 +340,13 @@
                                                     role="tabpanel"
                                                     aria-labelledby="tabs-deal-tab03">
                                                     <!-- Deal List -->
-                                                    <div class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
+                                                    <div
+                                                        class="p-4 bg-purple-100 rounded-lg flex justify-between items-center">
                                                         <h1 class="text-xl font-semibold mb-2 ">Deals</h1>
                                                         <a href="#" class="text-blue-500 hover:underline">Add New</a>
                                                     </div>
-                                                    <div class="datatable"></div>
+                                                    <div class="datatable" data-table="deals"></div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        {{--Profile Tab--}}
-                                        <div
-                                            class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
-                                            id="tabs-profile3"
-                                            role="tabpanel"
-                                            aria-labelledby="tabs-profile-tab3">
-                                            <div class="mx-auto bg-white p-6 rounded shadow-md">
-                                                <h2 class="text-2xl font-semibold mb-4">Edit Profile</h2>
-                                                <form action="{{ route('user.profile') }}" method="POST">
-                                                    @csrf
-                                                    <div class="mb-4">
-                                                        <label for="first_name" class="block text-gray-600">First
-                                                            Name</label>
-                                                        <input type="text" id="first_name" name="first_name"
-                                                               value="{{ $user->first_name }}"
-                                                               class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:border-blue-400"
-                                                               required>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="last_name" class="block text-gray-600">Last
-                                                            Name</label>
-                                                        <input type="text" id="last_name" name="last_name"
-                                                               value="{{ $user->last_name }}"
-                                                               class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:border-blue-400"
-                                                               required>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="email" class="block text-gray-600">Email</label>
-                                                        <input type="email" id="email" name="email"
-                                                               value="{{ $user->email }}"
-                                                               class="w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:border-blue-400"
-                                                               required>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label class="block text-gray-600">Email Verified</label>
-                                                        <div
-                                                            class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                                                            <input type="checkbox" readonly disabled id="email_verified"
-                                                                   name="email_verified"
-                                                                   {{ $user->email_verified ? 'checked' : '' }} class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer">
-                                                            <label for="email_verified"
-                                                                   class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                                                        </div>
-                                                        <label for="email_verified" class="text-gray-700">Verify Email</label>
-                                                    </div>
-                                                    <!-- Add other fields and indicators as needed -->
-                                                    <div class="mt-6">
-                                                        <button type="submit"
-                                                                class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full focus:outline-none focus:shadow-outline-blue active:bg-blue-700">
-                                                            Save Changes
-                                                        </button>
-                                                    </div>
-                                                </form>
                                             </div>
                                         </div>
                                         {{--Messages Tab--}}
@@ -327,7 +355,19 @@
                                             id="tabs-messages3"
                                             role="tabpanel"
                                             aria-labelledby="tabs-profile-tab3">
-                                            <div class="datatable"></div>
+                                            <div class="bg-white p-4 rounded-lg card">
+                                                <!-- Card Header -->
+                                                <div class="flex justify-between items-center">
+                                                    <h2 class="text-lg font-semibold">Important Message</h2>
+                                                    <i class="fas fa-exclamation-circle text-2xl text-red-500"></i>
+                                                </div>
+                                                <!-- Card Content -->
+                                                <p class="text-gray-600 mt-2">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget
+                                                    nisl sed mauris auctor ultrices. Nullam scelerisque quam ac
+                                                    ultrices.
+                                                </p>
+                                            </div>
                                         </div>
                                         {{--Settings Tab--}}
                                         <div
@@ -335,20 +375,27 @@
                                             id="tabs-settings"
                                             role="tabpanel"
                                             aria-labelledby="tabs-profile-tab4">
-                                            <div class="relative mb-4 flex flex-wrap items-stretch">
-  <span
-      class="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
-      id="basic-addon1"
-  >@</span
-  >
-                                                <input
-                                                    type="text"
-                                                    class="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
-                                                    placeholder="Username"
-                                                    aria-label="Username"
-                                                    aria-describedby="basic-addon1"/>
-                                            </div>
+                                            <div class="py-12">
+                                                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                                                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                                                        <div class="max-w-xl">
+                                                            <livewire:profile.update-profile-information-form/>
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                                                        <div class="max-w-xl">
+                                                            <livewire:profile.update-password-form/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                                                        <div class="max-w-xl">
+                                                            <livewire:profile.delete-user-form/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

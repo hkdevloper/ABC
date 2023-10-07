@@ -71,7 +71,7 @@ class AjaxController extends Controller
         $user = User::find($request->user_id);
         switch ($request->status) {
             case 'approve':
-                $user->approved = $value;;
+                $user->approved = $value;
                 break;
             case 'email_verified':
                 $user->email_verified = $value;
@@ -132,16 +132,47 @@ class AjaxController extends Controller
                 return response()->json(compact('data', 'columns'));
                 break;
             case 'product':
+                /* Fields to be displayed in the table
+                 * 1. Category
+                 * 2. IsActive
+                 * 3. Featured
+                 * 4. IsClaimed
+                 * 5. Name
+                 * 6. Condition
+                 * 7. Price
+                 * 8. Brand Name
+                 * 9. ID
+                 * */
                 $data = Product::all();
                 $columns = ['id', 'name', 'price', 'discount', 'discount_type', 'featured', 'status', 'created_at'];
                 return response()->json(compact('data', 'columns'));
                 break;
             case 'event':
+                /* Fields to be displayed in the table
+                 * 1. Category
+                 * 2. IsActive
+                 * 3. Featured
+                 * 4. IsClaimed
+                 * 5. Title
+                 * 6. Start
+                 * 7. End
+                 * 8. ID
+                 * */
                 $data = Events::all();
                 $columns = ['id', 'name', 'price', 'discount', 'discount_type', 'featured', 'status', 'created_at'];
                 return response()->json(compact('data', 'columns'));
                 break;
             case 'job':
+                /* Fields to be displayed in the table
+                 * 1. Category
+                 * 2. IsActive
+                 * 3. Featured
+                 * 4. IsClaimed
+                 * 5. Title
+                 * 6. Salary
+                 * 7. Summary
+                 * 8. ID
+                 * */
                 $data = Jobs::all();
                 $columns = ['id', 'name', 'price', 'discount', 'discount_type', 'featured', 'status', 'created_at'];
                 return response()->json(compact('data', 'columns'));

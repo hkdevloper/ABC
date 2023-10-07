@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\UserCompanyDataTable;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -56,7 +58,14 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = new \App\Models\User();
+        // Send Verification Email to User
+        $token = Str::random(64);
+        DB::table('email_verification_tokens')->insert([
+            'email' => $request->email,
+            'token' => $token,
+        ]);
+
+        $user = new User();
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name ?? '';
         $user->email = $request->email;
@@ -95,12 +104,12 @@ class AuthController extends Controller
     // public function to view user reset password
     public function viewUserResetPassword(Request $request)
     {
-//        $token = $request->input('token');
-//        $token_exists = DB::table('password_reset_tokens')->where('token', $token)->exists();
-//        if ($token_exists) {
+        $token = $request->input('token');
+        $token_exists = DB::table('password_reset_tokens')->where('token', $token)->exists();
+        if ($token_exists) {
         return view('pages.user.auth.reset_password');
-//        }
-//        return redirect()->route('user.forgot.password')->with(['types' => 'error', 'msg' => 'Invalid Token']);
+        }
+        return redirect()->route('user.forgot.password')->with(['types' => 'error', 'msg' => 'Invalid Token']);
     }
 
     // Function to do Forgot Password
@@ -164,6 +173,8 @@ class AuthController extends Controller
     // Function to view User Dashboard
     public function userDashboard(UserCompanyDataTable $dataTable)
     {
+        // Forgot session
+        Session::forget('menu');
         $user = \auth()->user();
         if (!$user) {
             return redirect()->route('user.login')->with(['types' => 'error', 'msg' => 'Please Login to Continue']);

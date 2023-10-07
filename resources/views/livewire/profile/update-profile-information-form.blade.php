@@ -8,12 +8,14 @@ use Livewire\Volt\Component;
 
 new class extends Component
 {
-    public string $name = '';
+    public string $first_name = '';
+    public string $last_name = '';
     public string $email = '';
 
     public function mount(): void
     {
-        $this->name = auth()->user()->name;
+        $this->first_name = auth()->user()->first_name;
+        $this->last_name = auth()->user()->last_name;
         $this->email = auth()->user()->email;
     }
 
@@ -22,7 +24,8 @@ new class extends Component
         $user = auth()->user();
 
         $validated = $this->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
         ]);
 
@@ -68,9 +71,16 @@ new class extends Component
 
     <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="first_name" :value="__('First name')"/>
+            <x-text-input wire:model="first_name" id="first_name" name="first_name" type="text"
+                          class="mt-1 block w-full" required autofocus autocomplete="first_name"/>
+            <x-input-error class="mt-2" :messages="$errors->get('first_name')"/>
+        </div>
+        <div>
+            <x-input-label for="last_name" :value="__('Last name')"/>
+            <x-text-input wire:model="last_name" id="last_name" name="last_name" type="text" class="mt-1 block w-full"
+                          required autofocus autocomplete="last_name"/>
+            <x-input-error class="mt-2" :messages="$errors->get('last_name')"/>
         </div>
 
         <div>

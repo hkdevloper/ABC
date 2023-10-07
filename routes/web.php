@@ -44,10 +44,10 @@ Route::prefix('/admin')->group(function () {
     Route::get('/login', [AuthController::class, 'viewAdminLogin'])->name('admin.login');
     Route::post('/login', [AuthController::class, 'doLogin'])->name('admin.login');
     Route::get('/logout', [AuthController::class, 'doLogout'])->name('admin.logout');
-    Route::get('/forgot-password', [AuthController::class, 'viewForgotPassword'])->name('forgot.password');
-    Route::post('/forgot-password', [AuthController::class, 'doForgotPassword'])->name('forgot.password');
-    Route::get('/reset-password', [AuthController::class, 'viewResetPassword'])->name('reset.password');
-    Route::post('/reset-password', [AuthController::class, 'doResetPassword'])->name('reset.password');
+    Route::get('/forgot-password', [AuthController::class, 'viewForgotPassword'])->name('admin.forgot.password');
+    Route::post('/forgot-password', [AuthController::class, 'doForgotPassword'])->name('admin.forgot.password');
+    Route::get('/reset-password', [AuthController::class, 'viewResetPassword'])->name('admin.reset.password');
+    Route::post('/reset-password', [AuthController::class, 'doResetPassword'])->name('admin.reset.password');
 });
 
 /* --------------------- prefix routes for User Authentication --------------------- */
@@ -57,7 +57,7 @@ Route::prefix('/auth/user')->group(function () {
     Route::post('/login', [AuthController::class, 'doLogin'])->name('user.login');
     Route::post('/register', [AuthController::class, 'doRegister'])->name('user.register');
     Route::get('/logout', [AuthController::class, 'doLogout'])->name('user.logout');
-    Route::get('/forgot', [AuthController::class, 'viewUserForgotPassword'])->name('user.forgot.password');
+    Route::get('/forgot-password', [AuthController::class, 'viewUserForgotPassword'])->name('user.forgot.password');
     Route::post('/forgot-password', [AuthController::class, 'doForgotPassword'])->name('forgot.password');
     Route::get('/reset', [AuthController::class, 'viewUserResetPassword'])->name('user.reset.password');
     Route::post('/reset-password', [AuthController::class, 'doResetPassword'])->name('reset.password');
@@ -65,8 +65,6 @@ Route::prefix('/auth/user')->group(function () {
     // Protected Routes
     Route::middleware(['web'])->group(function () {
         Route::get('/dashboard', [AuthController::class, 'userDashboard'])->name('user.dashboard');
-        Route::get('/profile', [AuthController::class, 'viewUserProfile'])->name('user.profile');
-        Route::post('/profile', [AuthController::class, 'editUserProfile'])->name('user.profile');
         Route::get('/change-password', [AuthController::class, 'viewUserChangePassword'])->name('user.change.password');
         Route::post('/change-password', [AuthController::class, 'doUserChangePassword'])->name('user.change.password');
     });
