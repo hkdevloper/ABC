@@ -16,34 +16,40 @@
         <nav class="hidden lg:flex md:flex space-x-4 items-center">
             <ul class="hidden lg:flex md:flex space-x-4 items-center">
                 <li>
-                    <a href="{{ url('/') }}" class="text-gray-700 hover:text-purple-600 rounded-full {{ session()->get('menu') == 'home' ? 'text-purple-500 p-2 border border-1 border-solid border-purple-500' : '' }}">Home</a>
+                    <a href="{{ url('/') }}"
+                       class="text-gray-700 hover:text-purple-600 rounded-full {{ session()->get('menu') == 'home' ? 'text-purple-500 p-2 border border-1 border-solid border-purple-500' : '' }}">Home</a>
                 </li>
                 <li>
-                    <a href="{{ route('company') }}" class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'company' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Companies</a>
+                    <a href="{{ route('company') }}"
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'company' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Companies</a>
                 </li>
                 <li>
-                    <a href="{{ route('products') }}" class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'product' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Products</a>
+                    <a href="{{ route('products') }}"
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'product' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Products</a>
                 </li>
                 <li>
-                    <a href="{{ route('events') }}" class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'event' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Events</a>
+                    <a href="{{ route('events') }}"
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'event' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Events</a>
                 </li>
                 <li>
-                    <a href="{{ route('jobs') }}" class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'job' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Jobs</a>
+                    <a href="{{ route('jobs') }}"
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'job' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Jobs</a>
                 </li>
                 <li>
-                    <a href="{{ route('blogs') }}" class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'blog' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Blogs</a>
+                    <a href="{{ route('blogs') }}"
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'blog' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Blogs</a>
                 </li>
                 <li>
-                    <a href="{{ route('forum') }}" class="text-gray-700 hover:text-purple-600  border-purple-500 rounded-full {{ session()->get('menu') == 'forum' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Forum</a>
+                    <a href="{{ route('forum') }}"
+                       class="text-gray-700 hover:text-purple-600  border-purple-500 rounded-full {{ session()->get('menu') == 'forum' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Forum</a>
                 </li>
             </ul>
         </nav>
         @if(auth()->user() && auth()->user()->first_name != "")
             <div class="hidden lg:flex md:flex items-center">
-                <a href="#"
-                   class="hover:text-purple-600 p-2">
-                    <i class="fas fa-bell mr-2"></i>
-                </a>
+                <div class="relative m-6 inline-flex w-fit">
+                    <i class="fas fa-bell text-gray-500 text-lg"></i>
+                </div>
                 <div class="relative" data-te-dropdown-ref>
                     <button
                         class="flex items-center"
@@ -53,25 +59,31 @@
                         aria-expanded="false"
                         data-te-ripple-init
                         data-te-ripple-color="light">
-                    <span class="text-gray-700">{{ auth()->user()->first_name }}</span>
-                    <img src="https://via.placeholder.com/100x100" alt="User Avatar" class="w-10 h-10 rounded-full mx-2">
+                        <span class="text-gray-700">{{ auth()->user()->first_name }}</span>
+                        <img src="https://via.placeholder.com/100x100" alt="User Avatar"
+                             class="w-10 h-10 rounded-full mx-2">
                     </button>
-                <ul class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
-                    aria-labelledby="dropdownMenuButton1"
-                    data-te-dropdown-menu-ref>
-                    <li>
-                        <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600" href="{{ route('user.dashboard') }}" data-te-dropdown-item-ref ><i class="fas fa-sign-out-alt mr-2"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600" href="{{ route('user.logout') }}" data-te-dropdown-item-ref ><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
-                    </li>
-                </ul>
+                    <ul class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+                        aria-labelledby="dropdownMenuButton1"
+                        data-te-dropdown-menu-ref>
+                        <li>
+                            <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                               href="{{ route('user.dashboard') }}" data-te-dropdown-item-ref><i
+                                    class="fas fa-sign-out-alt mr-2"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                               href="{{ route('user.logout') }}" data-te-dropdown-item-ref><i
+                                    class="fas fa-sign-out-alt mr-2"></i> Logout</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         @else
             <div class="hidden lg:flex space-x-4 items-center">
                 <a href="{{route('user.login')}}" class="text-gray-700 hover:text-purple-600">Login</a>
-                <a href="{{route('user.register')}}" class="text-white bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-white">Register</a>
+                <a href="{{route('user.register')}}"
+                   class="text-white bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-white">Register</a>
             </div>
         @endif
     </div>
