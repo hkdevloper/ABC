@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 
-class BlogController extends Controller
+class UserBlogController extends Controller
 {
     // Function to View Blog List
     public function viewBlogList()

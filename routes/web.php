@@ -15,12 +15,12 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BlogController as UserBlogController;
-use App\Http\Controllers\CompanyController as UserCompanyController;
-use App\Http\Controllers\DealController as UserDealController;
-use App\Http\Controllers\EventController as UserEventController;
-use App\Http\Controllers\JobController as UserJobController;
-use App\Http\Controllers\ProductController as UserProductController;
+use App\Http\Controllers\UserBlogController;
+use App\Http\Controllers\UserCompanyController;
+use App\Http\Controllers\UserDealController;
+use App\Http\Controllers\UserEventController;
+use App\Http\Controllers\UserJobController;
+use App\Http\Controllers\UserProductController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserForumController;
 use Illuminate\Support\Facades\Route;
@@ -76,12 +76,12 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     // Routes for handling Company Module
     Route::prefix('/companies')->group(function () {
-        Route::get('/', [CompanyController::class, 'viewCompanies'])->name('companies');
-        Route::get('/add', [CompanyController::class, 'viewAddCompany'])->name('add.company');
-        Route::post('/add', [CompanyController::class, 'doAddCompany'])->name('add.company');
-        Route::get('/edit/{id}', [CompanyController::class, 'viewEditCompany'])->name('edit.company');
-        Route::post('/edit/{id}', [CompanyController::class, 'doEditCompany'])->name('edit.company');
-        Route::get('/delete/{id}', [CompanyController::class, 'doDeleteCompany'])->name('delete.company');
+        Route::get('/', [UserCompanyController::class, 'viewCompanies'])->name('companies');
+        Route::get('/add', [UserCompanyController::class, 'viewAddCompany'])->name('add.company');
+        Route::post('/add', [UserCompanyController::class, 'doAddCompany'])->name('add.company');
+        Route::get('/edit/{id}', [UserCompanyController::class, 'viewEditCompany'])->name('edit.company');
+        Route::post('/edit/{id}', [UserCompanyController::class, 'doEditCompany'])->name('edit.company');
+        Route::get('/delete/{id}', [UserCompanyController::class, 'doDeleteCompany'])->name('delete.company');
     });
 
     // Routes for handling Product Module
@@ -116,12 +116,12 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     // Routes for handling Deals Module
     Route::prefix('/deals')->group(function () {
-        Route::get('/', [DealController::class, 'viewDeals'])->name('deals');
-        Route::get('/add', [DealController::class, 'viewAddDeal'])->name('add.deal');
-        Route::post('/add', [DealController::class, 'doAddDeal'])->name('add.deal');
-        Route::get('/edit/{id}', [DealController::class, 'viewEditDeal'])->name('edit.deal');
-        Route::post('/edit/{id}', [DealController::class, 'doEditDeal'])->name('edit.deal');
-        Route::get('/delete/{id}', [DealController::class, 'doDeleteDeal'])->name('delete.deal');
+        Route::get('/', [UserDealController::class, 'viewDeals'])->name('deals');
+        Route::get('/add', [UserDealController::class, 'viewAddDeal'])->name('add.deal');
+        Route::post('/add', [UserDealController::class, 'doAddDeal'])->name('add.deal');
+        Route::get('/edit/{id}', [UserDealController::class, 'viewEditDeal'])->name('edit.deal');
+        Route::post('/edit/{id}', [UserDealController::class, 'doEditDeal'])->name('edit.deal');
+        Route::get('/delete/{id}', [UserDealController::class, 'doDeleteDeal'])->name('delete.deal');
     });
 
     // Routes for handling Jobs Module
@@ -271,6 +271,7 @@ Route::prefix('company')->group(function () {
 Route::prefix('product')->group(function () {
     Route::get('/', [UserProductController::class, 'viewProductList'])->name('products');
     Route::get('/{name}', [UserProductController::class, 'viewProductDetails'])->name('view.product');
+    Route::get('/add', [UserProductController::class, 'viewAddProduct'])->name('add.product');
 });
 
 Route::prefix('event')->group(function () {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 
-class DealController extends Controller
+class UserDealController extends Controller
 {
     // Function to view Deal List
     public function viewDealList()

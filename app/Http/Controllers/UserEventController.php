@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Events;
 use Illuminate\Support\Facades\Session;
 
-class EventController extends Controller
+class UserEventController extends Controller
 {
     //  Function to view Event List
     public function viewEventList()

@@ -21,8 +21,7 @@
                     role="tab"
                     aria-controls="tabs-home3"
                     aria-selected="true"
-                >Home</a
-                >
+                >Dashboard</a>
             </li>
             {{-- Products --}}
             <li role="presentation">

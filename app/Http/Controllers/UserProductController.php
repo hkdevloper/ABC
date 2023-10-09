@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
-class ProductController extends Controller
+class UserProductController extends Controller
 {
     //  Function to view Product List
     public function viewProductList()
@@ -22,5 +22,10 @@ class ProductController extends Controller
     public function viewProductDetails()
     {
         return view('pages.user.product.detail');
+    }
+
+    // public function to view Add Product
+    public function viewAddProduct(){
+        
     }
 }

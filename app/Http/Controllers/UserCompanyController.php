@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Support\Facades\Session;
 
-class CompanyController extends Controller
+class UserCompanyController extends Controller
 {
     // Function to View Company List
     public function viewCompanyList()

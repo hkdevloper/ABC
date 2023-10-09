@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 
-class JobController extends Controller
+class UserJobController extends Controller
 {
     // Function to view Job List
     public function viewJobList()
