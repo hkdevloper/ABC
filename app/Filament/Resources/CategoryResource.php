@@ -8,15 +8,18 @@ use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Str;
 
 class CategoryResource extends Resource
 {
@@ -29,16 +32,18 @@ class CategoryResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->live(debounce: 500)
                     ->required()
+                    ->maxLength(191)
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                TextInput::make('slug')
                     ->maxLength(191),
                 TextInput::make('type')
                     ->required()
                     ->maxLength(191),
-                TextInput::make('slug')
-                    ->maxLength(191),
                 TextInput::make('summary')
                     ->maxLength(191),
-                Textarea::make('description')
+                Forms\Components\RichEditor::make('description')
                     ->maxLength(65535)
                     ->columnSpanFull(),
                 Toggle::make('is_active')
@@ -47,8 +52,7 @@ class CategoryResource extends Resource
                     ->required(),
                 Select::make('parent_id')
                     ->relationship('parent', 'name'),
-                Section::make('seo_id')
-                    ->label('SEO Details')
+                Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
@@ -56,7 +60,7 @@ class CategoryResource extends Resource
                             ->maxLength(191),
                         TextInput::make('meta_description')
                             ->maxLength(300),
-                        TextInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords'),
                     ])->columns(3),
             ])->columns(4);
     }

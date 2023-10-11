@@ -9,10 +9,12 @@ use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -39,21 +41,25 @@ class BlogResource extends Resource
                     ->required(),
                 Toggle::make('is_featured')
                     ->required(),
-                FileUpload::make('thumbnail')
-                    ->directory('blog/thumbnail')
-                    ->visibility('public')
-                    ->required(),
+                Section::make('Images')
+                    ->schema([
+                        FileUpload::make('thumbnail')
+                            ->directory('blog/thumbnail')
+                            ->visibility('public')
+                            ->required(),
+                    ]),
                 TextInput::make('title')
+                    ->live(debounce: 500)
                     ->required()
-                    ->maxLength(191),
+                    ->maxLength(191)
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
                     ->required()
                     ->maxLength(191),
-                TextInput::make('tags'),
-                Textarea::make('content')
+                TagsInput::make('tags'),
+                Forms\Components\MarkdownEditor::make('content')
                     ->columnSpanFull(),
-                Section::make('seo_id')
-                    ->label('SEO Details')
+                Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
@@ -61,7 +67,7 @@ class BlogResource extends Resource
                             ->maxLength(191),
                         TextInput::make('meta_description')
                             ->maxLength(300),
-                        TextInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords'),
                     ])->columns(3),
             ])->columns(4);
     }

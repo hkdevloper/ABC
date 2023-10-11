@@ -8,6 +8,7 @@ use App\Models\Address;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -65,16 +66,15 @@ class AddressResource extends Resource
                 Textarea::make('description')
                     ->maxLength(65535)
                     ->columnSpanFull(),
-                Section::make('seo_id')
-                    ->label('SEO Details')
+                Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
-                        Forms\Components\TextInput::make('title')
+                        TextInput::make('title')
                             ->required()
                             ->maxLength(191),
-                        Forms\Components\TextInput::make('meta_description')
+                        TextInput::make('meta_description')
                             ->maxLength(300),
-                        Forms\Components\TextInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords'),
                     ])->columns(3),
             ])->columns(4);
     }

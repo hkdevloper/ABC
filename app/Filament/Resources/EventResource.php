@@ -7,17 +7,21 @@ use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Str;
 
 class EventResource extends Resource
 {
@@ -31,13 +35,7 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('user_id')
-                    ->relationship('user', 'name'),
-                Select::make('category_id')
-                    ->relationship('category', 'name'),
-                TextInput::make('thumbnail')
-                    ->maxLength(191),
-                TextInput::make('gallery'),
+
                 Toggle::make('is_active')
                     ->required(),
                 Toggle::make('is_featured')
@@ -46,22 +44,39 @@ class EventResource extends Resource
                     ->required(),
                 Toggle::make('is_approved')
                     ->required(),
-                TextInput::make('title')
+                Select::make('user_id')
+                    ->relationship('user', 'name'),
+                Select::make('category_id')
+                    ->relationship('category', 'name'),
+                TextInput::make('name')
+                    ->live(debounce: 500)
                     ->required()
-                    ->maxLength(191),
+                    ->maxLength(191)
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
                     ->required()
                     ->maxLength(191),
-                Textarea::make('description')
+                Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
                 DateTimePicker::make('start')
                     ->required(),
                 DateTimePicker::make('end')
                     ->required(),
                 TextInput::make('website')
+                    ->url()
                     ->maxLength(191),
-                Section::make('address_id')
-                    ->label('Address Details')
+                Section::make('Images')
+                    ->schema([
+                        FileUpload::make('thumbnail')
+                            ->directory('event/thumbnail')
+                            ->visibility('public')
+                            ->required(),
+                        FileUpload::make('gallery')
+                            ->directory('event/gallery')
+                            ->visibility('public'),
+                    ])->columns(2),
+
+                Section::make('Address Details')
                     ->relationship('address')
                     ->schema([
                         TextInput::make('address_line_1')
@@ -97,8 +112,7 @@ class EventResource extends Resource
                             ->maxLength(65535)
                             ->columnSpanFull(),
                     ])->columns(4),
-                Section::make('seo_id')
-                    ->label('SEO Details')
+                Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
@@ -106,7 +120,7 @@ class EventResource extends Resource
                             ->maxLength(191),
                         TextInput::make('meta_description')
                             ->maxLength(300),
-                        TextInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords'),
                     ])->columns(3),
             ])->columns(4);
     }

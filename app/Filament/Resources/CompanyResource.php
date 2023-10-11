@@ -9,15 +9,18 @@ use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Str;
 
 class CompanyResource extends Resource
 {
@@ -44,21 +47,27 @@ class CompanyResource extends Resource
                 Select::make('category_id')
                     ->relationship('category', 'name'),
                 TextInput::make('name')
+                    ->live(debounce: 500)
                     ->required()
-                    ->maxLength(191),
+                    ->maxLength(191)
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
                     ->required()
                     ->maxLength(191),
-                Textarea::make('description')
+                Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
-                TextInput::make('extra_things')
+                TagsInput::make('extra_things')
                     ->required(),
-                FileUpload::make('logo')
-                    ->directory('companies/logo')
-                    ->required(),
-                FileUpload::make('gallery')
-                    ->directory('companies/gallery')
-                    ->multiple(),
+
+                Section::make('Images')
+                    ->schema([
+                        FileUpload::make('logo')
+                            ->directory('companies/logo')
+                            ->required(),
+                        FileUpload::make('gallery')
+                            ->directory('companies/gallery')
+                            ->multiple(),
+                    ])->columns(2),
                 TextInput::make('phone')
                     ->tel()
                     ->maxLength(191),
@@ -113,8 +122,7 @@ class CompanyResource extends Resource
                             ->maxLength(65535)
                             ->columnSpanFull(),
                     ])->columns(4),
-                Section::make('seo_id')
-                    ->label('SEO Details')
+                Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
@@ -122,7 +130,7 @@ class CompanyResource extends Resource
                             ->maxLength(191),
                         TextInput::make('meta_description')
                             ->maxLength(300),
-                        TextInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords'),
                     ])->columns(3),
             ])->columns(4);
     }

@@ -9,15 +9,18 @@ use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Str;
 
 class DealResource extends Resource
 {
@@ -30,40 +33,49 @@ class DealResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('user_id')
-                    ->relationship('user', 'name'),
-                Select::make('category_id')
-                    ->relationship('category', 'name'),
                 Toggle::make('is_active')
                     ->required(),
                 Toggle::make('is_featured')
                     ->required(),
+                Select::make('user_id')
+                    ->relationship('user', 'name'),
+                Select::make('category_id')
+                    ->relationship('category', 'name'),
                 TextInput::make('title')
+                    ->live(debounce: 500)
                     ->required()
-                    ->maxLength(191),
+                    ->maxLength(191)
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
                     ->required()
                     ->maxLength(191),
-                Textarea::make('description')
+                TextInput::make('price')
+                    ->numeric()
+                    ->prefix('$'),
+                Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
                 DateTimePicker::make('offer_start_date'),
                 DateTimePicker::make('offer_end_date'),
-                TextInput::make('price')
-                    ->maxLength(191),
-                TextInput::make('discount_type')
-                    ->required()
-                    ->maxLength(191)
-                    ->default('percentage'),
-                TextInput::make('discount_value')
-                    ->required()
-                    ->maxLength(191),
-                TextInput::make('discount_code')
-                    ->required()
-                    ->maxLength(191),
-                Textarea::make('terms_and_conditions')
+
+                Section::make('Discount Details')
+                ->schema([
+                    Select::make('discount_type')
+                        ->required()
+                        ->options([
+                            'percentage' => 'Percentage',
+                            'fixed' => 'Fixed',
+                        ])
+                        ->default('percentage'),
+                    TextInput::make('discount_value')
+                        ->required()
+                        ->maxLength(191),
+                    TextInput::make('discount_code')
+                        ->required()
+                        ->maxLength(191),
+                ])->columns(3),
+                Forms\Components\RichEditor::make('terms_and_conditions')
                     ->columnSpanFull(),
-                Section::make('seo_id')
-                    ->label('SEO Details')
+                Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
@@ -71,7 +83,7 @@ class DealResource extends Resource
                             ->maxLength(191),
                         TextInput::make('meta_description')
                             ->maxLength(300),
-                        TextInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords'),
                     ])->columns(3),
             ])->columns(4);
     }
