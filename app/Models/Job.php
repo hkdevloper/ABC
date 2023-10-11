@@ -56,4 +56,9 @@ class Job extends Model
     {
         return $this->belongsTo(Seo::class);
     }
+
+    public function address() : BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
 }

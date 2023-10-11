@@ -41,6 +41,7 @@ class BlogResource extends Resource
                     ->required(),
                 FileUpload::make('thumbnail')
                     ->directory('blog/thumbnail')
+                    ->visibility('public')
                     ->required(),
                 TextInput::make('title')
                     ->required()
@@ -82,7 +83,7 @@ class BlogResource extends Resource
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_featured')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('thumbnail')
+                Tables\Columns\ImageColumn::make('thumbnail')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
