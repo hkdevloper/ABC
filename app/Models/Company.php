@@ -18,6 +18,7 @@ class Company extends Model
         'is_featured',
         'user_id',
         'category_id',
+        'seo_id',
         'name',
         'slug',
         'description',
@@ -52,6 +53,11 @@ class Company extends Model
     public function category() : BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function seo() : BelongsTo
+    {
+        return $this->belongsTo(Seo::class);
     }
 
     public function address() : BelongsTo

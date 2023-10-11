@@ -6,6 +6,11 @@ use App\Filament\Resources\AddressResource\Pages;
 use App\Filament\Resources\AddressResource\RelationManagers;
 use App\Models\Address;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -26,43 +31,52 @@ class AddressResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Toggle::make('is_featured')
+                Toggle::make('is_featured')
                     ->required(),
-                Forms\Components\TextInput::make('address_line_1')
+                TextInput::make('address_line_1')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('address_line_2')
+                TextInput::make('address_line_2')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\Select::make('country_id')
+                Select::make('country_id')
                     ->relationship('country', 'name')
                     ->required(),
-                Forms\Components\Select::make('state_id')
+                Select::make('state_id')
                     ->relationship('state', 'name')
                     ->required(),
-                Forms\Components\Select::make('city_id')
+                Select::make('city_id')
                     ->relationship('city', 'name')
                     ->required(),
-                Forms\Components\TextInput::make('zip_code')
+                TextInput::make('zip_code')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('longitude')
+                TextInput::make('longitude')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('latitude')
+                TextInput::make('latitude')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('map_zoom_level')
+                TextInput::make('map_zoom_level')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('summary')
+                TextInput::make('summary')
                     ->maxLength(300),
-                Forms\Components\Textarea::make('description')
+                Textarea::make('description')
                     ->maxLength(65535)
                     ->columnSpanFull(),
-                Forms\Components\Select::make('seo_id')
-                    ->relationship('seo', 'title'),
-            ]);
+                Section::make('seo_id')
+                    ->label('SEO Details')
+                    ->relationship('seo')
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->required()
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('meta_description')
+                            ->maxLength(300),
+                        Forms\Components\TextInput::make('meta_keywords'),
+                    ])->columns(3),
+            ])->columns(4);
     }
 
     public static function table(Table $table): Table

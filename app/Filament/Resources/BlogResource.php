@@ -6,6 +6,12 @@ use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -25,28 +31,38 @@ class BlogResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
+                Select::make('user_id')
                     ->relationship('user', 'name'),
-                Forms\Components\Select::make('seo_id')
-                    ->relationship('seo', 'title'),
-                Forms\Components\Select::make('category_id')
+                Select::make('category_id')
                     ->relationship('category', 'name'),
-                Forms\Components\Toggle::make('is_active')
+                Toggle::make('is_active')
                     ->required(),
-                Forms\Components\Toggle::make('is_featured')
+                Toggle::make('is_featured')
                     ->required(),
-                Forms\Components\TextInput::make('thumbnail')
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('title')
+                FileUpload::make('thumbnail')
+                    ->directory('blog/thumbnail')
+                    ->required(),
+                TextInput::make('title')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('slug')
+                TextInput::make('slug')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('tags'),
-                Forms\Components\Textarea::make('content')
+                TextInput::make('tags'),
+                Textarea::make('content')
                     ->columnSpanFull(),
-            ]);
+                Section::make('seo_id')
+                    ->label('SEO Details')
+                    ->relationship('seo')
+                    ->schema([
+                        TextInput::make('title')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('meta_description')
+                            ->maxLength(300),
+                        TextInput::make('meta_keywords'),
+                    ])->columns(3),
+            ])->columns(4);
     }
 
     public static function table(Table $table): Table

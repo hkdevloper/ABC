@@ -6,6 +6,12 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -25,39 +31,51 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
+                Select::make('user_id')
                     ->relationship('user', 'name'),
-                Forms\Components\Select::make('category_id')
+                Select::make('category_id')
                     ->relationship('category', 'name'),
-                Forms\Components\Select::make('seo_id')
-                    ->relationship('seo', 'title'),
-                Forms\Components\Toggle::make('is_active')
+                Toggle::make('is_active')
                     ->required(),
-                Forms\Components\Toggle::make('is_featured')
+                Toggle::make('is_featured')
                     ->required(),
-                Forms\Components\Toggle::make('is_claimed')
+                Toggle::make('is_claimed')
                     ->required(),
-                Forms\Components\Toggle::make('is_approved')
+                Toggle::make('is_approved')
                     ->required(),
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('slug')
+                TextInput::make('slug')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\Textarea::make('description')
+                Textarea::make('description')
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('price')
+                TextInput::make('price')
                     ->numeric()
                     ->prefix('$'),
-                Forms\Components\TextInput::make('condition')
+                TextInput::make('condition')
                     ->maxLength(191),
-                Forms\Components\TextInput::make('brand')
+                TextInput::make('brand')
                     ->maxLength(191),
-                Forms\Components\TextInput::make('thumbnail')
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('gallery'),
-            ]);
+                FileUpload::make('thumbnail')
+                    ->directory('product/thumbnail')
+                    ->required(),
+                FileUpload::make('gallery')
+                    ->directory('product/gallery')
+                    ->multiple(),
+                Section::make('seo_id')
+                    ->label('SEO Details')
+                    ->relationship('seo')
+                    ->schema([
+                        TextInput::make('title')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('meta_description')
+                            ->maxLength(300),
+                        TextInput::make('meta_keywords'),
+                    ])->columns(3),
+            ])->columns(4);
     }
 
     public static function table(Table $table): Table

@@ -6,6 +6,12 @@ use App\Filament\Resources\DealResource\Pages;
 use App\Filament\Resources\DealResource\RelationManagers;
 use App\Models\Deal;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -24,41 +30,50 @@ class DealResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
+                Select::make('user_id')
                     ->relationship('user', 'name'),
-                Forms\Components\Select::make('category_id')
+                Select::make('category_id')
                     ->relationship('category', 'name'),
-                Forms\Components\Select::make('seo_id')
-                    ->relationship('seo', 'title'),
-                Forms\Components\Toggle::make('is_active')
+                Toggle::make('is_active')
                     ->required(),
-                Forms\Components\Toggle::make('is_featured')
+                Toggle::make('is_featured')
                     ->required(),
-                Forms\Components\TextInput::make('title')
+                TextInput::make('title')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('slug')
+                TextInput::make('slug')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\Textarea::make('description')
+                Textarea::make('description')
                     ->columnSpanFull(),
-                Forms\Components\DateTimePicker::make('offer_start_date'),
-                Forms\Components\DateTimePicker::make('offer_end_date'),
-                Forms\Components\TextInput::make('price')
+                DateTimePicker::make('offer_start_date'),
+                DateTimePicker::make('offer_end_date'),
+                TextInput::make('price')
                     ->maxLength(191),
-                Forms\Components\TextInput::make('discount_type')
+                TextInput::make('discount_type')
                     ->required()
                     ->maxLength(191)
                     ->default('percentage'),
-                Forms\Components\TextInput::make('discount_value')
+                TextInput::make('discount_value')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('discount_code')
+                TextInput::make('discount_code')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\Textarea::make('terms_and_conditions')
+                Textarea::make('terms_and_conditions')
                     ->columnSpanFull(),
-            ]);
+                Section::make('seo_id')
+                    ->label('SEO Details')
+                    ->relationship('seo')
+                    ->schema([
+                        TextInput::make('title')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('meta_description')
+                            ->maxLength(300),
+                        TextInput::make('meta_keywords'),
+                    ])->columns(3),
+            ])->columns(4);
     }
 
     public static function table(Table $table): Table

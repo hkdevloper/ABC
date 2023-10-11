@@ -6,6 +6,8 @@ use App\Filament\Resources\CountryResource\Pages;
 use App\Filament\Resources\CountryResource\RelationManagers;
 use App\Models\Country;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -25,22 +27,22 @@ class CountryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('code')
+                TextInput::make('code')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('phone_code')
+                TextInput::make('phone_code')
                     ->tel()
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('currency')
+                TextInput::make('currency')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\Toggle::make('featured')
+                Toggle::make('featured')
                     ->required(),
-            ]);
+            ])->columns(4);
     }
 
     public static function table(Table $table): Table

@@ -6,6 +6,11 @@ use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,28 +28,37 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('type')
+                TextInput::make('type')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('slug')
+                TextInput::make('slug')
                     ->maxLength(191),
-                Forms\Components\TextInput::make('summary')
+                TextInput::make('summary')
                     ->maxLength(191),
-                Forms\Components\Textarea::make('description')
+                Textarea::make('description')
                     ->maxLength(65535)
                     ->columnSpanFull(),
-                Forms\Components\Toggle::make('is_active')
+                Toggle::make('is_active')
                     ->required(),
-                Forms\Components\Toggle::make('is_featured')
+                Toggle::make('is_featured')
                     ->required(),
-                Forms\Components\Select::make('parent_id')
+                Select::make('parent_id')
                     ->relationship('parent', 'name'),
-                Forms\Components\Select::make('seo_id')
-                    ->relationship('seo', 'title'),
-            ]);
+                Section::make('seo_id')
+                    ->label('SEO Details')
+                    ->relationship('seo')
+                    ->schema([
+                        TextInput::make('title')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('meta_description')
+                            ->maxLength(300),
+                        TextInput::make('meta_keywords'),
+                    ])->columns(3),
+            ])->columns(4);
     }
 
     public static function table(Table $table): Table
@@ -93,14 +107,14 @@ class CategoryResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -108,5 +122,5 @@ class CategoryResource extends Resource
             'create' => Pages\CreateCategory::route('/create'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
-    }    
+    }
 }

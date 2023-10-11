@@ -6,7 +6,12 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -22,36 +27,42 @@ class UserResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
+            ->schema(components: [
+                TextInput::make('name')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('email')
+                TextInput::make('email')
                     ->email()
                     ->required()
                     ->maxLength(191),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
-                Forms\Components\TextInput::make('password')
+                DateTimePicker::make('email_verified_at'),
+                TextInput::make('password')
                     ->password()
                     ->required()
                     ->maxLength(191),
-                Forms\Components\Toggle::make('approved')
+                Toggle::make('approved')
                     ->required(),
-                Forms\Components\Toggle::make('taxable')
+                Toggle::make('taxable')
                     ->required(),
-                Forms\Components\Toggle::make('banned')
+                Toggle::make('banned')
+                    ->live()
                     ->required(),
-                Forms\Components\TextInput::make('banned_reason')
+                TextInput::make('banned_reason')
+                    ->live()
+                    ->required(fn (Get $get) => $get('banned'))
                     ->maxLength(500),
-                Forms\Components\TextInput::make('balance')
+                TextInput::make('balance')
                     ->required()
                     ->maxLength(191)
                     ->default(0),
-                Forms\Components\TextInput::make('type')
+                Select::make('type')
+                    ->options([
+                        'user' => 'User',
+                        'admin' => 'Admin',
+                    ])
                     ->required()
-                    ->maxLength(191)
                     ->default('user'),
-            ]);
+            ])->columns(4);
     }
 
     public static function table(Table $table): Table
@@ -64,7 +75,8 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('approved')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('taxable')
@@ -72,7 +84,8 @@ class UserResource extends Resource
                 Tables\Columns\IconColumn::make('banned')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('banned_reason')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('balance')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
@@ -101,14 +114,14 @@ class UserResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -116,5 +129,5 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }    
+    }
 }

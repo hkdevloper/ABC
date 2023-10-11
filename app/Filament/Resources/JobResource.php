@@ -6,6 +6,13 @@ use App\Filament\Resources\JobResource\Pages;
 use App\Filament\Resources\JobResource\RelationManagers;
 use App\Models\Job;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -26,51 +33,97 @@ class JobResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
+                Select::make('user_id')
                     ->relationship('user', 'name'),
-                Forms\Components\Select::make('category_id')
+                Select::make('category_id')
                     ->relationship('category', 'name'),
-                Forms\Components\Select::make('seo_id')
-                    ->relationship('seo', 'title'),
-                Forms\Components\Toggle::make('is_active')
+                Toggle::make('is_active')
                     ->required(),
-                Forms\Components\Toggle::make('is_featured')
+                Toggle::make('is_featured')
                     ->required(),
-                Forms\Components\TextInput::make('title')
+                TextInput::make('title')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('slug')
+                TextInput::make('slug')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('summary')
+                TextInput::make('summary')
                     ->maxLength(191),
-                Forms\Components\Textarea::make('description')
+                Textarea::make('description')
                     ->columnSpanFull(),
-                Forms\Components\DateTimePicker::make('valid_until'),
-                Forms\Components\TextInput::make('employment_type')
+                DateTimePicker::make('valid_until'),
+                TextInput::make('employment_type')
                     ->maxLength(191),
-                Forms\Components\TextInput::make('salary')
+                TextInput::make('salary')
                     ->maxLength(191),
-                Forms\Components\TextInput::make('organization')
+                TextInput::make('organization')
                     ->maxLength(191),
-                Forms\Components\Textarea::make('overview')
+                Textarea::make('overview')
                     ->maxLength(65535)
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('education')
+                Textarea::make('education')
                     ->maxLength(65535)
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('experience')
+                Textarea::make('experience')
                     ->maxLength(65535)
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('thumbnail')
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('gallery')
+                FileUpload::make('thumbnail')
+                    ->directory('events/thumbnail')
                     ->required(),
-                Forms\Components\TextInput::make('website')
+                FileUpload::make('gallery')
+                    ->directory('events/gallery')
+                    ->multiple(),
+                TextInput::make('website')
                     ->maxLength(191),
-                Forms\Components\TextInput::make('address_id')
-                    ->numeric(),
-            ]);
+                Section::make('address_id')
+                    ->label('Address Details')
+                    ->relationship('address')
+                    ->schema([
+                        TextInput::make('address_line_1')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('address_line_2')
+                            ->required()
+                            ->maxLength(191),
+                        Select::make('country_id')
+                            ->relationship('country', 'name')
+                            ->required(),
+                        Select::make('state_id')
+                            ->relationship('state', 'name')
+                            ->required(),
+                        Select::make('city_id')
+                            ->relationship('city', 'name')
+                            ->required(),
+                        TextInput::make('zip_code')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('longitude')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('latitude')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('map_zoom_level')
+                            ->required()
+                            ->numeric(),
+                        TextInput::make('summary')
+                            ->maxLength(300),
+                        Textarea::make('description')
+                            ->maxLength(65535)
+                            ->columnSpanFull(),
+                    ])->columns(4),
+                Section::make('seo_id')
+                    ->label('SEO Details')
+                    ->relationship('seo')
+                    ->schema([
+                        TextInput::make('title')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('meta_description')
+                            ->maxLength(300),
+                        TextInput::make('meta_keywords'),
+                    ])->columns(3),
+            ])->columns(4);
     }
 
     public static function table(Table $table): Table

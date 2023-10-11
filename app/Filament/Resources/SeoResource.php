@@ -6,6 +6,7 @@ use App\Filament\Resources\SeoResource\Pages;
 use App\Filament\Resources\SeoResource\RelationManagers;
 use App\Models\Seo;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,13 +24,13 @@ class SeoResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
+                TextInput::make('title')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('meta_description')
+                TextInput::make('meta_description')
                     ->maxLength(300),
-                Forms\Components\TextInput::make('meta_keywords'),
-            ]);
+                TextInput::make('meta_keywords'),
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
@@ -64,14 +65,14 @@ class SeoResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -79,5 +80,5 @@ class SeoResource extends Resource
             'create' => Pages\CreateSeo::route('/create'),
             'edit' => Pages\EditSeo::route('/{record}/edit'),
         ];
-    }    
+    }
 }

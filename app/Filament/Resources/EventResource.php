@@ -6,6 +6,12 @@ use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -25,40 +31,84 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
+                Select::make('user_id')
                     ->relationship('user', 'name'),
-                Forms\Components\Select::make('category_id')
+                Select::make('category_id')
                     ->relationship('category', 'name'),
-                Forms\Components\Select::make('seo_id')
-                    ->relationship('seo', 'title'),
-                Forms\Components\TextInput::make('thumbnail')
+                TextInput::make('thumbnail')
                     ->maxLength(191),
-                Forms\Components\TextInput::make('gallery'),
-                Forms\Components\Toggle::make('is_active')
+                TextInput::make('gallery'),
+                Toggle::make('is_active')
                     ->required(),
-                Forms\Components\Toggle::make('is_featured')
+                Toggle::make('is_featured')
                     ->required(),
-                Forms\Components\Toggle::make('is_claimed')
+                Toggle::make('is_claimed')
                     ->required(),
-                Forms\Components\Toggle::make('is_approved')
+                Toggle::make('is_approved')
                     ->required(),
-                Forms\Components\TextInput::make('title')
+                TextInput::make('title')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('slug')
+                TextInput::make('slug')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\Textarea::make('description')
+                Textarea::make('description')
                     ->columnSpanFull(),
-                Forms\Components\DateTimePicker::make('start')
+                DateTimePicker::make('start')
                     ->required(),
-                Forms\Components\DateTimePicker::make('end')
+                DateTimePicker::make('end')
                     ->required(),
-                Forms\Components\TextInput::make('website')
+                TextInput::make('website')
                     ->maxLength(191),
-                Forms\Components\Select::make('address_id')
-                    ->relationship('address', 'id'),
-            ]);
+                Section::make('address_id')
+                    ->label('Address Details')
+                    ->relationship('address')
+                    ->schema([
+                        TextInput::make('address_line_1')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('address_line_2')
+                            ->required()
+                            ->maxLength(191),
+                        Select::make('country_id')
+                            ->relationship('country', 'name')
+                            ->required(),
+                        Select::make('state_id')
+                            ->relationship('state', 'name')
+                            ->required(),
+                        Select::make('city_id')
+                            ->relationship('city', 'name')
+                            ->required(),
+                        TextInput::make('zip_code')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('longitude')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('latitude')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('map_zoom_level')
+                            ->required()
+                            ->numeric(),
+                        TextInput::make('summary')
+                            ->maxLength(300),
+                        Textarea::make('description')
+                            ->maxLength(65535)
+                            ->columnSpanFull(),
+                    ])->columns(4),
+                Section::make('seo_id')
+                    ->label('SEO Details')
+                    ->relationship('seo')
+                    ->schema([
+                        TextInput::make('title')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('meta_description')
+                            ->maxLength(300),
+                        TextInput::make('meta_keywords'),
+                    ])->columns(3),
+            ])->columns(4);
     }
 
     public static function table(Table $table): Table

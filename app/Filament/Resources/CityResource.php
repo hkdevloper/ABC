@@ -6,6 +6,9 @@ use App\Filament\Resources\CityResource\Pages;
 use App\Filament\Resources\CityResource\RelationManagers;
 use App\Models\City;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -25,15 +28,17 @@ class CityResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\Toggle::make('featured')
+                Toggle::make('featured')
+                    ->default(false)
                     ->required(),
-                Forms\Components\Select::make('state_id')
+                Select::make('state_id')
+                    ->label('State')
                     ->relationship('state', 'name')
                     ->required(),
-            ]);
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
