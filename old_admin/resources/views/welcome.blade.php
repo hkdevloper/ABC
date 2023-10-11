@@ -187,7 +187,7 @@
                     </div>
                 </section>
 
-                <!-- Featured Events -->
+                <!-- Featured Event -->
                 <section class="bg-white">
                     <div class="container mx-auto">
                         <div class="p-4">

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blogs;
 use App\Models\Company;
 use App\Models\Deals;
-use App\Models\Events;
+use App\Models\Event;
 use App\Models\Jobs;
 use App\Models\Location;
 use App\Models\PaymentGateway;
@@ -158,7 +158,7 @@ class AjaxController extends Controller
                  * 7. End
                  * 8. ID
                  * */
-                $data = Events::all();
+                $data = Event::all();
                 $columns = ['id', 'name', 'price', 'discount', 'discount_type', 'featured', 'status', 'created_at'];
                 return response()->json(compact('data', 'columns'));
                 break;

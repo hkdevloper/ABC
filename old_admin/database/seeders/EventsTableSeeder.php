@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Events;
+use App\Models\Event;
 use Illuminate\Database\Seeder;
 
 class EventsTableSeeder extends Seeder
@@ -12,6 +12,6 @@ class EventsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Events::factory()->count(30)->create();
+        Event::factory()->count(30)->create();
     }
 }

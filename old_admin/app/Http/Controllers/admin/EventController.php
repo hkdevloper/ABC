@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Events;
+use App\Models\Event;
 use App\Models\Location;
 use App\Models\Seo;
 use App\Models\User;
@@ -12,10 +12,10 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    // Function to view All Events
+    // Function to view All Event
     public function viewEvents()
     {
-        $events = Events::all();
+        $events = Event::all();
         foreach ($events as $event) {
             // get category name from category id
             $event->category = $event->category->name;
@@ -46,7 +46,7 @@ class EventController extends Controller
     // Function to view Edit Event
     public function viewEditEvent($id)
     {
-        $event = Events::find($id);
+        $event = Event::find($id);
 
         if (!$event) {
             return redirect()->route('events')->with(['msg', 'Event not found', 'types' => 'error']);
@@ -85,7 +85,7 @@ class EventController extends Controller
             'meta_keywords' => 'required',
         ]);
 
-        $event = new Events();
+        $event = new Event();
         $event->title = $request->title;
         $event->slug = $request->slug;
         $event->description = $request->description;
@@ -156,7 +156,7 @@ class EventController extends Controller
             'meta_keywords' => 'required',
         ]);
 
-        $event = Events::find($id);
+        $event = Event::find($id);
         $event->title = $request->title;
         $event->slug = $request->slug;
         $event->description = $request->description;
@@ -216,7 +216,7 @@ class EventController extends Controller
     // Function to do Delete Event
     public function doDeleteEvent($id)
     {
-        $event = Events::find($id);
+        $event = Event::find($id);
         if (!$event) {
             return redirect()->route('events')->with(['msg', 'Event not found', 'types' => 'error']);
         }

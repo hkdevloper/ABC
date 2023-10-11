@@ -94,7 +94,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::get('/delete/{id}', [ProductController::class, 'doDeleteProduct'])->name('delete.product');
     });
 
-    // Routes for handling Events Module
+    // Routes for handling Event Module
     Route::prefix('/event')->group(function () {
         Route::get('/', [EventController::class, 'viewEvents'])->name('events');
         Route::get('/add', [EventController::class, 'viewAddEvent'])->name('add.event');

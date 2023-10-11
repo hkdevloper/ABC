@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Events;
+use App\Models\Event;
 use Illuminate\Support\Facades\Session;
 
 class UserEventController extends Controller
@@ -14,7 +14,7 @@ class UserEventController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'event');
-        $data = Events::all();
+        $data = Event::all();
         return view('pages.user.event.list')->with('data', $data);
     }
 

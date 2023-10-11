@@ -4,7 +4,7 @@
     <section class="homepage">
         <div class="widget-placeholder">
             <!-- Header Section -->
-            <x-user.header :title="'Events'"/>
+            <x-user.header :title="'Event'"/>
 
             <div class="hkdevs-wdgt-section">
                 <!-- Content Section -->

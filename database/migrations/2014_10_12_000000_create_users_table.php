@@ -17,9 +17,30 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('approved')->default(false);
+            $table->boolean('taxable')->default(false);
+            $table->boolean('banned')->default(false);
+            $table->string('banned_reason', 500)->nullable();
+            $table->string('balance')->default(0);
+            $table->string('type')->default('user'); // [user, Admin]
             $table->rememberToken();
             $table->timestamps();
         });
+
+        // Create new admin user
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@mail.com',
+            'password' => Hash::make('admin'),
+            'type' => 'Admin',
+            'approved' => true,
+            'taxable' => true,
+            'banned' => false,
+            'banned_reason' => null,
+            'balance' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     /**

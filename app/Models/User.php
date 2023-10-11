@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'approved',
+        'taxable',
+        'banned',
+        'banned_reason',
+        'balance',
     ];
 
     /**
@@ -41,5 +46,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'approved' => 'boolean',
+        'taxable' => 'boolean',
+        'banned' => 'boolean',
+        'balance' => 'decimal:2',
     ];
 }

@@ -94,7 +94,7 @@
                         </li>
                     </ul>
                 </li>
-                {{--Events--}}
+                {{--Event--}}
                 <li>
                     <a href="javascript:" class="menu">
                         <div class="menu__icon"><i data-feather="calendar"></i></div>

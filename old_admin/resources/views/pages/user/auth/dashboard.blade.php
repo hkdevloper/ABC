@@ -39,7 +39,7 @@
                    data-te-target="#tabs-jobs03" role="tab" aria-controls="tabs-jobs03"
                    aria-selected="false">Jobs</a>
             </li>
-            {{--Events--}}
+            {{--Event--}}
             <li role="presentation">
                 <a href="#tabs-event03"
                    class="my-2 block border-solid border-x-0 border-b-2 border-t-0 border-transparent px-3 md:px-7 py-2 md:py-3.5 text-xs md:text-sm font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-purple-500 data-[te-nav-active]:text-purple-600 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
@@ -207,7 +207,7 @@
                 </div>
                 <div class="datatable" data-table="jobs"></div>
             </div>
-            {{--Events Tab--}}
+            {{--Event Tab--}}
             <div
                 class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                 id="tabs-event03"
