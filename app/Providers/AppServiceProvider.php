@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,5 +23,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // Key length was too long error fix
         Schema::defaultStringLength(191);
+
+        // Un-guarding mass assignment
+        Model::unguard();
     }
 }
