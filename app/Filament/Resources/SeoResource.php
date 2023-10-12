@@ -41,6 +41,8 @@ class SeoResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('meta_description')
                     ->searchable(),
+                Tables\Columns\TagsColumn::make('meta_keywords')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
