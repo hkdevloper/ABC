@@ -50,6 +50,7 @@ class BlogResource extends Resource
                 Section::make()
                     ->schema([
                         Select::make('category_id')
+                            ->required()
                             ->relationship('category', 'name'),
                         TextInput::make('title')
                             ->live(debounce: 500)

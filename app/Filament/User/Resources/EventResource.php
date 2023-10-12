@@ -38,6 +38,7 @@ class EventResource extends Resource
                 Section::make('')
                     ->schema([
                         Select::make('category_id')
+                            ->required()
                             ->relationship('category', 'name'),
                         TextInput::make('name')
                             ->live(debounce: 500)

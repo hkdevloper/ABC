@@ -36,6 +36,7 @@ class JobResource extends Resource
         return $form
             ->schema([
                 Select::make('category_id')
+                    ->required()
                     ->relationship('category', 'name'),
                 TextInput::make('name')
                     ->live(debounce: 500)
