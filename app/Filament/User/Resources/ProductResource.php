@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\User\Resources;
 
-use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Filament\User\Resources\ProductResource\Pages;
+use App\Filament\User\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -27,23 +27,14 @@ class ProductResource extends Resource
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Management';
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Toggle::make('is_active')
-                    ->required(),
-                Toggle::make('is_featured')
-                    ->required(),
-                Toggle::make('is_claimed')
-                    ->required(),
-                Toggle::make('is_approved')
-                    ->required(),
-                Select::make('user_id')
-                    ->relationship('user', 'name'),
+                Section::make()
+            ->schema([
                 Select::make('category_id')
                     ->relationship('category', 'name'),
                 TextInput::make('name')
@@ -54,8 +45,6 @@ class ProductResource extends Resource
                 TextInput::make('slug')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\RichEditor::make('description')
-                    ->columnSpanFull(),
                 TextInput::make('price')
                     ->numeric()
                     ->prefix('$'),
@@ -65,10 +54,12 @@ class ProductResource extends Resource
                         'used' => 'Used',
                         'refurbished' => 'Refurbished',
                     ])
-
                     ->required(),
                 TextInput::make('brand')
                     ->maxLength(191),
+            ])->columns(3),
+                Forms\Components\RichEditor::make('description')
+                    ->columnSpanFull(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
@@ -77,6 +68,7 @@ class ProductResource extends Resource
                             ->required(),
                         FileUpload::make('gallery')
                             ->directory('product/gallery')
+                            ->multiple()
                             ->visibility('public'),
                     ])->columns(2),
                 Section::make('SEO Details')
@@ -96,35 +88,40 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->label('Thumbnail')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('seo.title')
                     ->numeric()
-                    ->sortable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label('Active')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_featured')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_claimed')
+                    ->label('Featured')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_approved')
+                    ->label('Approved')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Product Name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
+                    ->label('Slug')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('price')
+                    ->label('Price')
                     ->money()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('condition')
+                    ->label('Condition')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('brand')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('thumbnail')
+                    ->label('Brand')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -139,7 +136,11 @@ class ProductResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ViewAction::make()
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
