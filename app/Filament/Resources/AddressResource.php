@@ -58,14 +58,6 @@ class AddressResource extends Resource
                 TextInput::make('latitude')
                     ->required()
                     ->maxLength(191),
-                TextInput::make('map_zoom_level')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('summary')
-                    ->maxLength(300),
-                Textarea::make('description')
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
@@ -104,14 +96,10 @@ class AddressResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('latitude')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('map_zoom_level')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('summary')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('seo.title')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

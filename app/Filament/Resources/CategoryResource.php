@@ -35,12 +35,19 @@ class CategoryResource extends Resource
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
                     ->maxLength(191),
-                TextInput::make('type')
+                Select::make('type')
                     ->required()
-                    ->maxLength(191),
+                    ->options([
+                        "company" => "Company",
+                        "product" => "Product",
+                        "job" => "Job",
+                        "deal" => "Deals",
+                        "blog" => "Blog",
+                        "event" => "Event",
+                    ]),
                 TextInput::make('summary')
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('description')
@@ -82,10 +89,11 @@ class CategoryResource extends Resource
                 Tables\Columns\IconColumn::make('is_featured')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('parent.name')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Parent Category')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('seo.title')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

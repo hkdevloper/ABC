@@ -7,6 +7,7 @@ use App\Filament\User\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -36,6 +37,7 @@ class BlogResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->label('Thumbnail')
                             ->disk('public')
                             ->directory('blog/thumbnail')
                             ->image()
@@ -50,29 +52,44 @@ class BlogResource extends Resource
                 Section::make()
                     ->schema([
                         Select::make('category_id')
+                            ->label('Select Category')
                             ->required()
                             ->relationship('category', 'name'),
                         TextInput::make('title')
+                            ->label('Title')
+                            ->placeholder('Enter title')
                             ->live(debounce: 500)
                             ->required()
                             ->maxLength(191)
                             ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')
+                            ->label('Slug')
+                            ->placeholder('Enter slug')
                             ->required()
                             ->maxLength(191),
-                        TagsInput::make('tags'),
-                        Forms\Components\MarkdownEditor::make('content')
+                        TagsInput::make('tags')
+                            ->label('Tags')
+                            ->placeholder('Enter tags')
+                            ->required(),
+                        MarkdownEditor::make('content')
+                            ->label('Content')
                             ->columnSpanFull(),
                     ])->columns(4),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
+                            ->label('SEO Title')
+                            ->placeholder('Enter title')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('meta_description')
+                            ->label('Meta Description')
                             ->maxLength(300),
-                        TagsInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords')
+                            ->label('Meta Keywords')
+                            ->placeholder('Enter keywords')
+                            ->required(),
                     ])->columns(3)
             ]);
     }
@@ -126,7 +143,10 @@ class BlogResource extends Resource
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->where('user_id', auth()->user()->id);
+            });
     }
 
     public static function getRelations(): array

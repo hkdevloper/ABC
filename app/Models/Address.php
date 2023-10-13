@@ -23,7 +23,6 @@ class Address extends Model
         'zip_code',
         'latitude',
         'longitude',
-        'map_zoom_level',
         'summary',
         'description',
         'seo_id',

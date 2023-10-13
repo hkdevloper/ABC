@@ -36,20 +36,28 @@ class ProductResource extends Resource
                 Section::make()
             ->schema([
                 Select::make('category_id')
+                    ->label('Select Category')
                     ->required()
                     ->relationship('category', 'name'),
                 TextInput::make('name')
+                    ->label('Product Name')
+                    ->placeholder('Enter product name')
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
+                    ->label('Slug')
+                    ->placeholder('Enter slug')
                     ->required()
                     ->maxLength(191),
                 TextInput::make('price')
+                    ->label('Price')
+                    ->placeholder('Enter price')
                     ->numeric()
                     ->prefix('$'),
                 Select::make('condition')
+                    ->label('Select Condition')
                     ->options([
                         'new' => 'New',
                         'used' => 'Used',
@@ -57,6 +65,8 @@ class ProductResource extends Resource
                     ])
                     ->required(),
                 TextInput::make('brand')
+                    ->label('Brand')
+                    ->placeholder('Enter brand')
                     ->maxLength(191),
             ])->columns(3),
                 Forms\Components\RichEditor::make('description')
@@ -64,10 +74,14 @@ class ProductResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->label('Thumbnail')
+                            ->disk('public')
                             ->directory('product/thumbnail')
                             ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
+                            ->label('Gallery')
+                            ->disk('public')
                             ->directory('product/gallery')
                             ->multiple()
                             ->visibility('public'),
@@ -76,11 +90,17 @@ class ProductResource extends Resource
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
+                            ->label('SEO Title')
+                            ->placeholder('Enter title')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('meta_description')
+                            ->label('Meta Description')
                             ->maxLength(300),
-                        TagsInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords')
+                            ->label('Meta Keywords')
+                            ->placeholder('Enter keywords')
+                            ->required(),
                     ])->columns(3),
             ])->columns(4);
     }
@@ -150,7 +170,10 @@ class ProductResource extends Resource
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->where('user_id', auth()->user()->id);
+            });
     }
 
     public static function getRelations(): array

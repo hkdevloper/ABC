@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
+use App\Models\City;
 use App\Models\Event;
+use App\Models\State;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -15,12 +17,14 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 use Str;
 
 class EventResource extends Resource
@@ -48,7 +52,7 @@ class EventResource extends Resource
                     ->relationship('user', 'name'),
                 Select::make('category_id')
                     ->relationship('category', 'name'),
-                TextInput::make('name')
+                TextInput::make('title')
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(191)
@@ -68,10 +72,12 @@ class EventResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->disk('public')
                             ->directory('event/thumbnail')
                             ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
+                            ->disk('public')
                             ->directory('event/gallery')
                             ->visibility('public'),
                     ])->columns(2),
@@ -86,13 +92,22 @@ class EventResource extends Resource
                             ->required()
                             ->maxLength(191),
                         Select::make('country_id')
+                            ->live()
                             ->relationship('country', 'name')
+                            ->searchable()
                             ->required(),
                         Select::make('state_id')
-                            ->relationship('state', 'name')
+                            ->live()
+                            ->options(fn (Get $get): Collection => State::query()
+                                ->where('country_id', $get('country_id'))
+                                ->pluck('name', 'id'))
+                            ->searchable()
                             ->required(),
                         Select::make('city_id')
-                            ->relationship('city', 'name')
+                            ->options(fn (Get $get): Collection => City::query()
+                                ->where('state_id', $get('state_id'))
+                                ->pluck('name', 'id'))
+                            ->searchable()
                             ->required(),
                         TextInput::make('zip_code')
                             ->required()
@@ -103,14 +118,6 @@ class EventResource extends Resource
                         TextInput::make('latitude')
                             ->required()
                             ->maxLength(191),
-                        TextInput::make('map_zoom_level')
-                            ->required()
-                            ->numeric(),
-                        TextInput::make('summary')
-                            ->maxLength(300),
-                        Textarea::make('description')
-                            ->maxLength(65535)
-                            ->columnSpanFull(),
                     ])->columns(4),
                 Section::make('SEO Details')
                     ->relationship('seo')
@@ -135,11 +142,14 @@ class EventResource extends Resource
                 Tables\Columns\TextColumn::make('category.name')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('title')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('seo.title')
                     ->numeric()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
-                Tables\Columns\TextColumn::make('thumbnail')
-                    ->searchable(),
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->disk('public'),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_featured')
@@ -148,21 +158,23 @@ class EventResource extends Resource
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_approved')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('slug')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('start')
-                    ->dateTime()
+                    ->label('Start Date')
+                    // Format: Sep 10, 2021 12:00 AM
+                    ->dateTime('M d, Y h:i A')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('end')
-                    ->dateTime()
+                    ->label('End Date')
+                    // Format: Sep 10, 2021 12:00 AM
+                    ->dateTime('M d, Y h:i A')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('website')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('address.id')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

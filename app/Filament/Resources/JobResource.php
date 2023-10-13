@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\JobResource\Pages;
 use App\Filament\Resources\JobResource\RelationManagers;
+use App\Models\City;
 use App\Models\Job;
+use App\Models\State;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -15,12 +17,14 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 use Str;
 
 class JobResource extends Resource
@@ -45,7 +49,7 @@ class JobResource extends Resource
                     ->relationship('user', 'name'),
                 Select::make('category_id')
                     ->relationship('category', 'name'),
-                TextInput::make('name')
+                TextInput::make('title')
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(191)
@@ -78,9 +82,11 @@ class JobResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->disk('public')
                             ->directory('events/thumbnail')
                             ->required(),
                         FileUpload::make('gallery')
+                            ->disk('public')
                             ->directory('events/gallery')
                             ->multiple(),
                     ])->columns(2),
@@ -94,13 +100,22 @@ class JobResource extends Resource
                             ->required()
                             ->maxLength(191),
                         Select::make('country_id')
+                            ->live()
                             ->relationship('country', 'name')
+                            ->searchable()
                             ->required(),
                         Select::make('state_id')
-                            ->relationship('state', 'name')
+                            ->live()
+                            ->options(fn (Get $get): Collection => State::query()
+                                ->where('country_id', $get('country_id'))
+                                ->pluck('name', 'id'))
+                            ->searchable()
                             ->required(),
                         Select::make('city_id')
-                            ->relationship('city', 'name')
+                            ->options(fn (Get $get): Collection => City::query()
+                                ->where('state_id', $get('state_id'))
+                                ->pluck('name', 'id'))
+                            ->searchable()
                             ->required(),
                         TextInput::make('zip_code')
                             ->required()
@@ -111,14 +126,6 @@ class JobResource extends Resource
                         TextInput::make('latitude')
                             ->required()
                             ->maxLength(191),
-                        TextInput::make('map_zoom_level')
-                            ->required()
-                            ->numeric(),
-                        TextInput::make('summary')
-                            ->maxLength(300),
-                        Textarea::make('description')
-                            ->maxLength(65535)
-                            ->columnSpanFull(),
                     ])->columns(4),
                 Section::make('SEO Details')
                     ->relationship('seo')
@@ -137,6 +144,8 @@ class JobResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->disk('public'),
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
@@ -145,6 +154,7 @@ class JobResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('seo.title')
                     ->numeric()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
@@ -153,10 +163,13 @@ class JobResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('summary')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('valid_until')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('employment_type')
@@ -165,13 +178,10 @@ class JobResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('organization')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('thumbnail')
-                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('website')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('address_id')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -96,6 +96,9 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->disk('public')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
@@ -104,6 +107,7 @@ class ProductResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('seo.title')
                     ->numeric()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
@@ -116,6 +120,7 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->money()
@@ -124,8 +129,7 @@ class ProductResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('brand')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('thumbnail')
-                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

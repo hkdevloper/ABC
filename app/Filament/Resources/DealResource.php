@@ -98,30 +98,31 @@ class DealResource extends Resource
                 Tables\Columns\TextColumn::make('category.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('seo.title')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('title')
+                    ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_featured')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('offer_start_date')
-                    ->dateTime()
+                    ->label('Offer Start')
+                    ->dateTime('M d, Y h:i A')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('offer_end_date')
-                    ->dateTime()
+                    ->label('Offer End')
+                    ->dateTime('M d, Y h:i A')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('discount_type')
+                    ->label('Type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('discount_value')
+                    ->label('Value')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('discount_code')
+                    ->label('Code')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CompanyResource\Pages;
 use App\Filament\Resources\CompanyResource\RelationManagers;
+use App\Models\City;
 use App\Models\Company;
+use App\Models\State;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -14,12 +16,14 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 use Str;
 
 class CompanyResource extends Resource
@@ -96,13 +100,22 @@ class CompanyResource extends Resource
                             ->required()
                             ->maxLength(191),
                         Select::make('country_id')
+                            ->live()
                             ->relationship('country', 'name')
+                            ->searchable()
                             ->required(),
                         Select::make('state_id')
-                            ->relationship('state', 'name')
+                            ->live()
+                            ->options(fn (Get $get): Collection => State::query()
+                                ->where('country_id', $get('country_id'))
+                                ->pluck('name', 'id'))
+                            ->searchable()
                             ->required(),
                         Select::make('city_id')
-                            ->relationship('city', 'name')
+                            ->options(fn (Get $get): Collection => City::query()
+                                    ->where('state_id', $get('state_id'))
+                                    ->pluck('name', 'id'))
+                            ->searchable()
                             ->required(),
                         TextInput::make('zip_code')
                             ->required()
@@ -113,14 +126,6 @@ class CompanyResource extends Resource
                         TextInput::make('latitude')
                             ->required()
                             ->maxLength(191),
-                        TextInput::make('map_zoom_level')
-                            ->required()
-                            ->numeric(),
-                        TextInput::make('summary')
-                            ->maxLength(300),
-                        Textarea::make('description')
-                            ->maxLength(65535)
-                            ->columnSpanFull(),
                     ])->columns(4),
                 Section::make('SEO Details')
                     ->relationship('seo')
@@ -139,14 +144,9 @@ class CompanyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\IconColumn::make('is_approved')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_claimed')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_featured')
-                    ->boolean(),
+                Tables\Columns\ImageColumn::make('logo')
+                    ->disk('public')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
@@ -156,28 +156,39 @@ class CompanyResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('logo')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\IconColumn::make('is_approved')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('is_claimed')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('is_active')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('is_featured')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('website')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('facebook')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('twitter')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('instagram')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('linkdin')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('youtube')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('address.id')
-                    ->numeric()
-                    ->sortable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

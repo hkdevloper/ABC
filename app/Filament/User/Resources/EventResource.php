@@ -38,23 +38,37 @@ class EventResource extends Resource
                 Section::make('')
                     ->schema([
                         Select::make('category_id')
+                            ->label('Select Category')
                             ->required()
                             ->relationship('category', 'name'),
-                        TextInput::make('name')
+                        TextInput::make('title')
+                            ->label('Event Title')
+                            ->placeholder('Enter event title')
                             ->live(debounce: 500)
                             ->required()
                             ->maxLength(191)
                             ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')
+                            ->label('Slug')
+                            ->placeholder('Enter slug')
                             ->required()
                             ->maxLength(191),
 
                         DateTimePicker::make('start')
+                            ->label('Event Start Date')
+                            ->prefixIcon('heroicon-o-calendar')
+                            ->default(now())
                             ->required(),
                         DateTimePicker::make('end')
+                            ->label('Event End Date')
+                            ->prefixIcon('heroicon-o-calendar')
+                            ->default(now()->addDays(1))
                             ->required(),
                         TextInput::make('website')
+                            ->label('Website')
+                            ->placeholder('Enter website')
                             ->url()
+                            ->prefix('https://')
                             ->maxLength(191),
                     ])->columns(3),
                 Forms\Components\RichEditor::make('description')
@@ -62,10 +76,12 @@ class EventResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->label('Thumbnail')
                             ->directory('event/thumbnail')
                             ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
+                            ->label('Gallery')
                             ->directory('event/gallery')
                             ->visibility('public'),
                     ])->columns(2),
@@ -74,48 +90,55 @@ class EventResource extends Resource
                     ->relationship('address')
                     ->schema([
                         TextInput::make('address_line_1')
+                            ->label('Address Line 1')
+                            ->placeholder('Enter address line 1')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('address_line_2')
+                            ->label('Address Line 2')
+                            ->placeholder('Enter address line 2')
                             ->required()
                             ->maxLength(191),
                         Select::make('country_id')
+                            ->label('Country')
                             ->relationship('country', 'name')
                             ->required(),
                         Select::make('state_id')
+                            ->label('State')
                             ->relationship('state', 'name')
                             ->required(),
                         Select::make('city_id')
+                            ->label('City')
                             ->relationship('city', 'name')
                             ->required(),
                         TextInput::make('zip_code')
+                            ->label('Zip Code')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('longitude')
+                            ->label('Longitude')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('latitude')
+                            ->label('Latitude')
                             ->required()
                             ->maxLength(191),
-                        TextInput::make('map_zoom_level')
-                            ->required()
-                            ->numeric(),
-                        TextInput::make('summary')
-                            ->maxLength(300),
-                        Textarea::make('description')
-                            ->maxLength(65535)
-                            ->columnSpanFull(),
-//                        Map::make('location')
                     ])->columns(4),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
+                            ->label('SEO Title')
+                            ->placeholder('Enter title')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('meta_description')
+                            ->label('Meta Description')
                             ->maxLength(300),
-                        TagsInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords')
+                            ->label('Meta Keywords')
+                            ->placeholder('Enter keywords')
+                            ->required(),
                     ])->columns(3),
             ])->columns(4);
     }
@@ -179,7 +202,10 @@ class EventResource extends Resource
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->where('user_id', auth()->user()->id);
+            });
     }
 
     public static function getRelations(): array
