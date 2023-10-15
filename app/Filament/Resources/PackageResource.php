@@ -33,7 +33,7 @@ class PackageResource extends Resource
                     Forms\Components\Toggle::make('is_new')
                         ->default(true)
                         ->required(),
-                    Forms\Components\Toggle::make('status')
+                    Forms\Components\Toggle::make('is_active')
                         ->default(true)
                         ->required(),
                 ])->columns(5),
@@ -86,7 +86,7 @@ class PackageResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('duration_type')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('status')
+                Tables\Columns\IconColumn::make('is_active')
                     ->boolean()
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_featured')
