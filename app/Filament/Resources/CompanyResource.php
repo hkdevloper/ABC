@@ -7,6 +7,7 @@ use App\Filament\Resources\CompanyResource\RelationManagers;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\State;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -48,21 +49,31 @@ class CompanyResource extends Resource
                     ->required(),
                 Select::make('user_id')
                     ->relationship('user', 'name'),
-                Select::make('category_id')
-                    ->relationship('category', 'name'),
+                SelectTree::make('category_id')
+                    ->label('Select Category')
+                    ->withCount()
+                    ->emptyLabel('Oops! No Category Found')
+                    ->relationship('category', 'name', 'parent_id', function ($query){
+                        return $query->where('type', 'company');
+                    }),
                 TextInput::make('name')
+                    ->label('Enter Company Name')
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(function (Set $set, ?string $state){
+                        $set('slug', Str::slug($state));
+                        $set('seo.title', $state);
+                    }),
                 TextInput::make('slug')
+                    ->label('Enter Company Slug')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
                 TagsInput::make('extra_things')
+                    ->label('Extra Things')
                     ->required(),
-
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('logo')
@@ -73,38 +84,50 @@ class CompanyResource extends Resource
                             ->multiple(),
                     ])->columns(2),
                 TextInput::make('phone')
+                    ->label('Phone Number')
                     ->tel()
                     ->maxLength(191),
                 TextInput::make('email')
+                    ->label('Email Address')
                     ->email()
                     ->maxLength(191),
                 TextInput::make('website')
+                    ->label('Website')
                     ->maxLength(191),
                 TextInput::make('facebook')
+                    ->label('Facebook')
                     ->maxLength(191),
                 TextInput::make('twitter')
+                    ->label('Twitter')
                     ->maxLength(191),
                 TextInput::make('instagram')
+                    ->label('Instagram')
                     ->maxLength(191),
                 TextInput::make('linkdin')
+                    ->label('Linkdin')
                     ->maxLength(191),
                 TextInput::make('youtube')
+                    ->label('Youtube')
                     ->maxLength(191),
                 Section::make('Address')
                     ->relationship('address')
                     ->schema([
                         TextInput::make('address_line_1')
+                            ->label('Address Line 1')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('address_line_2')
+                            ->label('Address Line 2')
                             ->required()
                             ->maxLength(191),
                         Select::make('country_id')
+                            ->label('Select Country')
                             ->live()
                             ->relationship('country', 'name')
                             ->searchable()
                             ->required(),
                         Select::make('state_id')
+                            ->label('Select State')
                             ->live()
                             ->options(fn (Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
@@ -112,18 +135,22 @@ class CompanyResource extends Resource
                             ->searchable()
                             ->required(),
                         Select::make('city_id')
+                            ->label('Select City')
                             ->options(fn (Get $get): Collection => City::query()
                                     ->where('state_id', $get('state_id'))
                                     ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
                         TextInput::make('zip_code')
+                            ->label('Zip Code')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('longitude')
+                            ->label('Longitude')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('latitude')
+                            ->label('Latitude')
                             ->required()
                             ->maxLength(191),
                     ])->columns(4),
@@ -131,11 +158,14 @@ class CompanyResource extends Resource
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
+                            ->label('Enter SEO Title')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('meta_description')
-                            ->maxLength(300),
-                        TagsInput::make('meta_keywords'),
+                            ->label('Enter SEO Meta Description')
+                            ->maxLength(70),
+                        TagsInput::make('meta_keywords')
+                            ->label('Enter SEO Meta Keywords'),
                     ])->columns(3),
             ])->columns(4);
     }

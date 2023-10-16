@@ -6,6 +6,7 @@ use App\Filament\User\Resources\EventResource\Pages;
 use App\Filament\User\Resources\EventResource\RelationManagers;
 use App\Models\Event;
 use Cheesegrits\FilamentGoogleMaps\Fields\Map;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -37,10 +38,13 @@ class EventResource extends Resource
             ->schema([
                 Section::make('')
                     ->schema([
-                        Select::make('category_id')
+                        SelectTree::make('category_id')
                             ->label('Select Category')
-                            ->required()
-                            ->relationship('category', 'name'),
+                            ->withCount()
+                            ->emptyLabel('Oops! No Category Found')
+                            ->relationship('category', 'name', 'parent_id', function ($query){
+                                return $query->where('type', 'event');
+                            }),
                         TextInput::make('title')
                             ->label('Event Title')
                             ->placeholder('Enter event title')

@@ -7,6 +7,7 @@ use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\City;
 use App\Models\Event;
 use App\Models\State;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -50,13 +51,21 @@ class EventResource extends Resource
                     ->required(),
                 Select::make('user_id')
                     ->relationship('user', 'name'),
-                Select::make('category_id')
-                    ->relationship('category', 'name'),
+                SelectTree::make('category_id')
+                    ->label('Select Category')
+                    ->withCount()
+                    ->emptyLabel('Oops! No Category Found')
+                    ->relationship('category', 'name', 'parent_id', function ($query){
+                        return $query->where('type', 'event');
+                    }),
                 TextInput::make('title')
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(function (Set $set, ?string $state){
+                        $set('slug', Str::slug($state));
+                        $set('seo.title', $state);
+                    }),
                 TextInput::make('slug')
                     ->required()
                     ->maxLength(191),
@@ -149,6 +158,8 @@ class EventResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 Tables\Columns\ImageColumn::make('thumbnail')
+                    ->directory('blog/thumbnail')
+                    ->visibility('public')
                     ->disk('public'),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),

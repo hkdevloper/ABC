@@ -29,12 +29,15 @@ class CityResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->label('Enter City Name')
                     ->required()
                     ->maxLength(191),
                 Toggle::make('featured')
+                    ->label('Featured')
                     ->default(false)
                     ->required(),
                 Select::make('state_id')
+                    ->label('Select State')
                     ->label('State')
                     ->relationship('state', 'name')
                     ->required(),

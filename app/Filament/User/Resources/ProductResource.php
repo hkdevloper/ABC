@@ -5,6 +5,7 @@ namespace App\Filament\User\Resources;
 use App\Filament\User\Resources\ProductResource\Pages;
 use App\Filament\User\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -35,10 +36,13 @@ class ProductResource extends Resource
             ->schema([
                 Section::make()
             ->schema([
-                Select::make('category_id')
+                SelectTree::make('category_id')
                     ->label('Select Category')
-                    ->required()
-                    ->relationship('category', 'name'),
+                    ->withCount()
+                    ->emptyLabel('Oops! No Category Found')
+                    ->relationship('category', 'name', 'parent_id', function ($query){
+                        return $query->where('type', 'event');
+                    }),
                 TextInput::make('name')
                     ->label('Product Name')
                     ->placeholder('Enter product name')

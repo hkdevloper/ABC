@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -32,13 +33,16 @@ class CategoryResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->label('Enter Category Name')
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
+                    ->label('Slug')
                     ->maxLength(191),
                 Select::make('type')
+                    ->label('Select Type')
                     ->required()
                     ->options([
                         "company" => "Company",
@@ -49,16 +53,30 @@ class CategoryResource extends Resource
                         "event" => "Event",
                     ]),
                 TextInput::make('summary')
-                    ->maxLength(191),
+                    ->label('Enter Summary')
+                    ->live(debounce: 500)
+                    ->required()
+                    ->maxLength(191)
+                    ->afterStateUpdated(function (Set $set, ?string $state){
+                        $set('seo.title', $state);
+                    }),
                 Forms\Components\RichEditor::make('description')
+                    ->label('Description')
                     ->maxLength(65535)
                     ->columnSpanFull(),
                 Toggle::make('is_active')
+                    ->label('Is Active')
                     ->required(),
                 Toggle::make('is_featured')
+                    ->label('Is Featured')
                     ->required(),
-                Select::make('parent_id')
-                    ->relationship('parent', 'name'),
+                SelectTree::make('parent_id')
+                    ->label('Select Category')
+                    ->withCount()
+                    ->emptyLabel('Oops! No Category Found')
+                    ->relationship('parent', 'name', 'parent_id', function ($query){
+                        return $query;
+                    }),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([

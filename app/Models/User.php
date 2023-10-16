@@ -19,8 +19,10 @@ class User extends Authenticatable implements FilamentUser
         if($panel->getId() === 'admin'){
             return $this->type === 'Admin';
         }
-        if($panel->getId() === 'user'){
-            return $this->type === 'user';
+        if($panel->getId() === 'user' || $this->type === 'Admin'){
+            if($this->approved && !$this->banned){
+                return $this->type === 'user';
+            }
         }
         return false;
     }

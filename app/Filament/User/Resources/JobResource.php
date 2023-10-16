@@ -5,6 +5,7 @@ namespace App\Filament\User\Resources;
 use App\Filament\User\Resources\JobResource\Pages;
 use App\Filament\User\Resources\JobResource\RelationManagers;
 use App\Models\Job;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -36,9 +37,13 @@ class JobResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('category_id')
-                    ->required()
-                    ->relationship('category', 'name'),
+                SelectTree::make('category_id')
+                    ->label('Select Category')
+                    ->withCount()
+                    ->emptyLabel('Oops! No Category Found')
+                    ->relationship('category', 'name', 'parent_id', function ($query){
+                        return $query->where('type', 'event');
+                    }),
                 TextInput::make('title')
                     ->label('Job Title')
                     ->placeholder('Enter job title')

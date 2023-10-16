@@ -28,19 +28,24 @@ class CountryResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->label('Enter Country Name')
                     ->required()
                     ->maxLength(191),
                 TextInput::make('code')
+                    ->label('Enter Country Code')
                     ->required()
                     ->maxLength(191),
                 TextInput::make('phone_code')
+                    ->label('Enter Phone Code')
                     ->tel()
                     ->required()
                     ->maxLength(191),
                 TextInput::make('currency')
+                    ->label('Enter Currency')
                     ->required()
                     ->maxLength(191),
                 Toggle::make('featured')
+                    ->label('Featured')
                     ->required(),
             ])->columns(4);
     }

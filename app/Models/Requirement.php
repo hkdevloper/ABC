@@ -10,7 +10,6 @@ class Requirement extends Model
     use HasFactory;
     protected $table = 'requirements';
     protected $primaryKey = 'id';
-
     protected $fillable = [
         'name',
         'description',

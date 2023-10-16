@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\DealResource\Pages;
 use App\Filament\Resources\DealResource\RelationManagers;
 use App\Models\Deal;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Section;
@@ -34,32 +35,47 @@ class DealResource extends Resource
         return $form
             ->schema([
                 Toggle::make('is_active')
+                    ->label('Is Active')
                     ->required(),
                 Toggle::make('is_featured')
+                    ->label('Is Featured')
                     ->required(),
                 Select::make('user_id')
+                    ->label('Select User')
                     ->relationship('user', 'name'),
-                Select::make('category_id')
-                    ->relationship('category', 'name'),
+                SelectTree::make('category_id')
+                    ->label('Select Category')
+                    ->withCount()
+                    ->emptyLabel('Oops! No Category Found')
+                    ->relationship('category', 'name', 'parent_id', function ($query){
+                        return $query->where('type', 'deal');
+                    }),
                 TextInput::make('title')
+                    ->label('Enter Title')
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(function (Set $set, ?string $state){
+                        $set('slug', Str::slug($state));
+                        $set('seo.title', $state);
+                }),
                 TextInput::make('slug')
+                    ->label('Slug')
                     ->required()
                     ->maxLength(191),
                 TextInput::make('price')
+                    ->label('Price')
                     ->numeric()
                     ->prefix('$'),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
-                DateTimePicker::make('offer_start_date'),
-                DateTimePicker::make('offer_end_date'),
+                DateTimePicker::make('offer_start_date')->label('Offer Start'),
+                DateTimePicker::make('offer_end_date')->label('Offer End'),
 
                 Section::make('Discount Details')
                 ->schema([
                     Select::make('discount_type')
+                        ->label('Select Discount Type')
                         ->required()
                         ->options([
                             'percentage' => 'Percentage',
@@ -67,9 +83,11 @@ class DealResource extends Resource
                         ])
                         ->default('percentage'),
                     TextInput::make('discount_value')
+                        ->label('Discount Value')
                         ->required()
                         ->maxLength(191),
                     TextInput::make('discount_code')
+                        ->label('Discount Code')
                         ->required()
                         ->maxLength(191),
                 ])->columns(3),
@@ -79,11 +97,17 @@ class DealResource extends Resource
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
+                            ->label('Meta Title')
                             ->required()
+                            ->default(function (Forms\Get $get) {
+                                return $get('title');
+                            })
                             ->maxLength(191),
                         TextInput::make('meta_description')
+                            ->label('Meta Description')
                             ->maxLength(300),
-                        TagsInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords')->label('Meta Keywords'),
+
                     ])->columns(3),
             ])->columns(4);
     }

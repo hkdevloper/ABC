@@ -5,6 +5,7 @@ namespace App\Filament\User\Resources;
 use App\Filament\User\Resources\BlogResource\Pages;
 use App\Filament\User\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
@@ -51,10 +52,13 @@ class BlogResource extends Resource
                     ]),
                 Section::make()
                     ->schema([
-                        Select::make('category_id')
+                        SelectTree::make('category_id')
                             ->label('Select Category')
-                            ->required()
-                            ->relationship('category', 'name'),
+                            ->withCount()
+                            ->emptyLabel('Oops! No Category Found')
+                            ->relationship('category', 'name', 'parent_id', function ($query){
+                                return $query->where('type', 'event');
+                            }),
                         TextInput::make('title')
                             ->label('Title')
                             ->placeholder('Enter title')

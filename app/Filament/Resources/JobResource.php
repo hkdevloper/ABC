@@ -7,6 +7,7 @@ use App\Filament\Resources\JobResource\RelationManagers;
 use App\Models\City;
 use App\Models\Job;
 use App\Models\State;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -47,8 +48,13 @@ class JobResource extends Resource
                     ->required(),
                 Select::make('user_id')
                     ->relationship('user', 'name'),
-                Select::make('category_id')
-                    ->relationship('category', 'name'),
+                SelectTree::make('category_id')
+                    ->label('Select Category')
+                    ->withCount()
+                    ->emptyLabel('Oops! No Category Found')
+                    ->relationship('category', 'name', 'parent_id', function ($query){
+                        return $query->where('type', 'job');
+                    }),
                 TextInput::make('title')
                     ->live(debounce: 500)
                     ->required()
@@ -58,7 +64,14 @@ class JobResource extends Resource
                     ->required()
                     ->maxLength(191),
                 TextInput::make('summary')
-                    ->maxLength(191),
+                    ->label('Enter Summary')
+                    ->live(debounce: 500)
+                    ->required()
+                    ->maxLength(191)
+                    ->afterStateUpdated(function (Set $set, ?string $state){
+                        $set('slug', Str::slug($state));
+                        $set('seo.title', $state);
+                    }),
                 TextInput::make('website')
                     ->maxLength(191),
                 Textarea::make('description')

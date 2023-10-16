@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -44,13 +45,21 @@ class ProductResource extends Resource
                     ->required(),
                 Select::make('user_id')
                     ->relationship('user', 'name'),
-                Select::make('category_id')
-                    ->relationship('category', 'name'),
+                SelectTree::make('category_id')
+                    ->label('Select Category')
+                    ->withCount()
+                    ->emptyLabel('Oops! No Category Found')
+                    ->relationship('category', 'name', 'parent_id', function ($query){
+                        return $query->where('type', 'product');
+                    }),
                 TextInput::make('name')
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(function (Set $set, ?string $state){
+                        $set('slug', Str::slug($state));
+                        $set('seo.title', $state);
+                    }),
                 TextInput::make('slug')
                     ->required()
                     ->maxLength(191),

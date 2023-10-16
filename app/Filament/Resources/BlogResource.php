@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -35,26 +36,40 @@ class BlogResource extends Resource
         return $form
             ->schema([
                 Select::make('user_id')
+                    ->label('Select User')
                     ->relationship('user', 'name'),
-                Select::make('category_id')
-                    ->relationship('category', 'name'),
+                SelectTree::make('category_id')
+                    ->label('Select Category')
+                    ->withCount()
+                    ->emptyLabel('Oops! No Category Found')
+                    ->relationship('category', 'name', 'parent_id', function ($query){
+                        return $query->where('type', 'blog');
+                    }),
                 Toggle::make('is_active')
+                    ->label('Is Active')
                     ->required(),
                 Toggle::make('is_featured')
+                    ->label('Is Featured')
                     ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
                             ->directory('blog/thumbnail')
                             ->visibility('public')
+                            ->optimize('webp')
                             ->required(),
                     ]),
                 TextInput::make('title')
+                    ->label('Enter Title')
                     ->live(debounce: 500)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(function (Set $set, ?string $state){
+                        $set('slug', Str::slug($state));
+                        $set('seo.title', $state);
+                    }),
                 TextInput::make('slug')
+                    ->label('Blog Slug url')
                     ->required()
                     ->maxLength(191),
                 TagsInput::make('tags'),

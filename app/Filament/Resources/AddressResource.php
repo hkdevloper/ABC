@@ -57,17 +57,7 @@ class AddressResource extends Resource
                     ->maxLength(191),
                 TextInput::make('latitude')
                     ->required()
-                    ->maxLength(191),
-                Section::make('SEO Details')
-                    ->relationship('seo')
-                    ->schema([
-                        TextInput::make('title')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('meta_description')
-                            ->maxLength(300),
-                        TagsInput::make('meta_keywords'),
-                    ])->columns(3),
+                    ->maxLength(191)
             ])->columns(4);
     }
 
