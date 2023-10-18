@@ -40,11 +40,9 @@
                                     <x-bladewind::contact-card
                                         class="w-[400px]"
                                         style="border: 1px solid #e2e8f0;"
-                                        name="Michael K. Ocansey"
-                                        mobile="+233.123.456.789"
-                                        position="Senior Copywriter"
-                                        email="mike@bladewindui.com"
-                                        birthday="01-May-2000"></x-bladewind::contact-card>
+                                        name="{{$company->name}}"
+                                        mobile="{{$company->phone}}"
+                                        email="{{$company->email}}"></x-bladewind::contact-card>
                                 @endforeach
                             </div>
                         </div>
