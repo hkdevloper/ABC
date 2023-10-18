@@ -42,14 +42,19 @@ class EventResource extends Resource
             ->schema([
 
                 Toggle::make('is_active')
+                    ->label('Active')
                     ->required(),
                 Toggle::make('is_featured')
+                    ->label('Featured')
                     ->required(),
                 Toggle::make('is_claimed')
+                    ->label('Claimed')
                     ->required(),
                 Toggle::make('is_approved')
+                    ->label('Approved')
                     ->required(),
                 Select::make('user_id')
+                    ->label('Select User')
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
@@ -71,9 +76,11 @@ class EventResource extends Resource
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
-                DateTimePicker::make('start')
+                Forms\Components\DatePicker::make('start')
+                    ->label('Start Date')
                     ->required(),
-                DateTimePicker::make('end')
+                Forms\Components\DatePicker::make('end')
+                    ->label('End Date')
                     ->required(),
                 TextInput::make('website')
                     ->url()
@@ -104,6 +111,7 @@ class EventResource extends Resource
                             ->live()
                             ->relationship('country', 'name')
                             ->searchable()
+                            ->default(101)
                             ->required(),
                         Select::make('state_id')
                             ->live()
@@ -158,7 +166,6 @@ class EventResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 Tables\Columns\ImageColumn::make('thumbnail')
-                    ->directory('blog/thumbnail')
                     ->visibility('public')
                     ->disk('public'),
                 Tables\Columns\IconColumn::make('is_active')

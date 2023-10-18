@@ -4,9 +4,12 @@ namespace App\Filament\User\Resources;
 
 use App\Filament\User\Resources\JobResource\Pages;
 use App\Filament\User\Resources\JobResource\RelationManagers;
+use App\Models\City;
 use App\Models\Job;
+use App\Models\State;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -17,12 +20,14 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 use Str;
 
 class JobResource extends Resource
@@ -65,10 +70,9 @@ class JobResource extends Resource
                     ->placeholder('Enter website')
                     ->prefix('https://')
                     ->maxLength(191),
-                DateTimePicker::make('valid_until')
+                DatePicker::make('valid_until')
                     ->label('Valid Until')
-                    ->prefixIcon('heroicon-o-calendar')
-                    ->default(now()->addDay()),
+                    ->prefixIcon('heroicon-o-calendar'),
                 TextInput::make('employment_type')
                     ->label('Employment Type')
                     ->placeholder('Enter employment type')
@@ -96,13 +100,17 @@ class JobResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
-                            ->label('Thumbnail')
-                            ->directory('events/thumbnail')
+                            ->label('Thumbnail Image')
+                            ->directory('job/thumbnail')
+                            ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
-                            ->label('Gallery')
-                            ->directory('events/gallery')
-                            ->multiple(),
+                            ->label('Job gallery')
+                            ->directory('job/gallery')
+                            ->multiple()
+                            ->maxFiles(5)
+                            ->visibility('public')
+                            ->required(),
                     ])->columns(2),
                 Section::make('Address Details')
                     ->relationship('address')
@@ -119,15 +127,25 @@ class JobResource extends Resource
                             ->maxLength(191),
                         Select::make('country_id')
                             ->label('Country')
+                            ->live()
                             ->relationship('country', 'name')
+                            ->default(101)
+                            ->searchable()
                             ->required(),
                         Select::make('state_id')
                             ->label('State')
-                            ->relationship('state', 'name')
+                            ->live()
+                            ->options(fn (Get $get): Collection => State::query()
+                                ->where('country_id', $get('country_id'))
+                                ->pluck('name', 'id'))
+                            ->searchable()
                             ->required(),
                         Select::make('city_id')
                             ->label('City')
-                            ->relationship('city', 'name')
+                            ->options(fn (Get $get): Collection => City::query()
+                                ->where('state_id', $get('state_id'))
+                                ->pluck('name', 'id'))
+                            ->searchable()
                             ->required(),
                         TextInput::make('zip_code')
                             ->label('Zip Code')

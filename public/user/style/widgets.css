@@ -1,0 +1,108 @@
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
+.hkdevs-wdgt {
+    @apply min-w-[50px] min-h-[50px] w-full overflow-x-auto overflow-y-hidden;
+  }
+  .hkdevs-wdgt .wdgt-track-view {
+    @apply leading-[1px] h-px;
+  }
+  .hkdevs-html-wdgt {
+    @apply overflow-x-auto overflow-y-hidden w-full;
+  }
+  .hkdevs-js-wdgt {
+    @apply bg-white rounded shadow-[0_1px_4px_0_rgba(0,106,194,0.2)] box-border mt-0 mb-2.5 mx-0 px-6 py-0;
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0, 106, 194, 0.2);
+    -webkit-box-sizing: border-box;
+  }
+  .hkdevs-js-wdgt * {
+    @apply box-border m-0 p-0;
+    -webkit-box-sizing: border-box;
+    word-break: break-word;
+  }
+  .hkdevs-js-wdgt ul {
+    list-style: none;
+  }
+  .hkdevs-js-wdgt ul li {
+    @apply list-none;
+  }
+  .hkdevs-js-wdgt a,
+  .hkdevs-js-wdgt a:focus,
+  .hkdevs-js-wdgt a:hover,
+  .hkdevs-js-wdgt a:visited {
+    @apply no-underline;
+  }
+  #document-section-widgets .hkdevs-wdgt {
+    @apply min-w-[auto] min-h-[auto] w-0 h-0;
+  }
+  .wdgt-overlay-container {
+    @apply fixed z-[999999];
+  }
+  .wdgt-overlay-container.wdgt-overlay-top-left {
+    @apply left-9 top-[100px];
+  }
+  .wdgt-overlay-container.wdgt-overlay-bottom-left {
+    @apply left-9 bottom-[100px];
+  }
+  .wdgt-overlay-container.wdgt-overlay-bottom-right {
+    @apply right-9 bottom-[100px];
+  }
+  .wdgt-overlay-container.wdgt-overlay-top-right {
+    @apply right-9 top-[100px];
+  }
+  @media only screen and (max-width: 668px) {
+    .wdgt-overlay-container.wdgt-overlay-bottom-left,
+    .wdgt-overlay-container.wdgt-overlay-bottom-right {
+      @apply bottom-[100px] inset-x-9;
+    }
+    .wdgt-overlay-container.wdgt-overlay-top-left,
+    .wdgt-overlay-container.wdgt-overlay-top-right {
+      @apply top-[100px] inset-x-9;
+    }
+  }
+  .hkdevs-trending-container {
+    @apply pt-5 pb-[30px] px-0;
+  }
+  .hkdevs-trending-container .ntc__heading {
+    @apply text-center font-bold text-base leading-5 text-[color:var(--N800,#121224)] mb-5;
+  }
+  .hkdevs-trending-container .ntc__chips-row {
+    @apply flex justify-center box-border mb-4 px-7 py-0 last:mb-0 last:px-[85.5px] last:py-0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-box-sizing: border-box;
+  }
+  .hkdevs-trending-container .ntc__chips-row:nth-child(3) .ntc__chip-label {
+    @apply max-w-[95px];
+  }
+  .hkdevs-trending-container .ntc__chips-row:nth-child(3) .ntc__chip-wrapper {
+    @apply w-[unset];
+  }
+  .hkdevs-trending-container .ntc__chip-wrapper {
+    @apply w-full h-[70px] flex items-center box-border border shadow-[0_6px_12px_var(--Ev100,rgba(30,10,58,0.04))] mr-4 p-4 rounded-[10px] border-solid border-[#e7e7f1] last:mr-0 hover:shadow-[0_14px_40px_var(--Ev400,rgba(30,10,58,0.1))];
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-sizing: border-box;
+    background: #fff;
+    -webkit-box-shadow: 0 6px 12px var(--Ev100, rgba(30, 10, 58, 0.04));
+  }
+  .hkdevs-trending-container .ntc__chip-wrapper:hover {
+    -webkit-box-shadow: 0 14px 40px var(--Ev400, rgba(30, 10, 58, 0.1));
+  }
+  .hkdevs-trending-container .ntc__chip-logo {
+    @apply min-w-[38px] max-w-[38px] h-[38px] overflow-hidden mr-3 rounded-[50%];
+  }
+  .hkdevs-trending-container .ntc__chip-label {
+    @apply font-bold text-base leading-5 text-[color:var(--N800,#121224)] text-ellipsis whitespace-nowrap overflow-hidden max-w-[95px] mr-1.5;
+    -o-text-overflow: ellipsis;
+  }
+  .hkdevs-trending-container .ntc__chip-arrow {
+    @apply relative overflow-hidden;
+  }
+  

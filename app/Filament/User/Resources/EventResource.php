@@ -4,7 +4,9 @@ namespace App\Filament\User\Resources;
 
 use App\Filament\User\Resources\EventResource\Pages;
 use App\Filament\User\Resources\EventResource\RelationManagers;
+use App\Models\City;
 use App\Models\Event;
+use App\Models\State;
 use Cheesegrits\FilamentGoogleMaps\Fields\Map;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
@@ -17,12 +19,14 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 use Str;
 
 class EventResource extends Resource
@@ -80,14 +84,17 @@ class EventResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
-                            ->label('Thumbnail')
+                            ->label('Thumbnail Image')
                             ->directory('event/thumbnail')
                             ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
-                            ->label('Gallery')
+                            ->label('Event gallery')
                             ->directory('event/gallery')
-                            ->visibility('public'),
+                            ->multiple()
+                            ->maxFiles(5)
+                            ->visibility('public')
+                            ->required(),
                     ])->columns(2),
 
                 Section::make('Address Details')
@@ -105,15 +112,25 @@ class EventResource extends Resource
                             ->maxLength(191),
                         Select::make('country_id')
                             ->label('Country')
+                            ->live()
                             ->relationship('country', 'name')
+                            ->default(101)
+                            ->searchable()
                             ->required(),
                         Select::make('state_id')
                             ->label('State')
-                            ->relationship('state', 'name')
+                            ->live()
+                            ->options(fn (Get $get): Collection => State::query()
+                                ->where('country_id', $get('country_id'))
+                                ->pluck('name', 'id'))
+                            ->searchable()
                             ->required(),
                         Select::make('city_id')
                             ->label('City')
-                            ->relationship('city', 'name')
+                            ->options(fn (Get $get): Collection => City::query()
+                                ->where('state_id', $get('state_id'))
+                                ->pluck('name', 'id'))
+                            ->searchable()
                             ->required(),
                         TextInput::make('zip_code')
                             ->label('Zip Code')
@@ -152,13 +169,13 @@ class EventResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('seo.title')
                     ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('thumbnail')
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->disk('public')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
@@ -172,12 +189,13 @@ class EventResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('start')
-                    ->dateTime()
+                    ->dateTime('d M Y')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('end')
-                    ->dateTime()
+                    ->dateTime('d M Y')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('website')
+                    ->url('website')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')

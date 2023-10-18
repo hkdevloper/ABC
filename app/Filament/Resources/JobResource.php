@@ -113,11 +113,14 @@ class JobResource extends Resource
                             ->required()
                             ->maxLength(191),
                         Select::make('country_id')
+                            ->label('Select Country')
                             ->live()
                             ->relationship('country', 'name')
+                            ->default(101)
                             ->searchable()
                             ->required(),
                         Select::make('state_id')
+                            ->label('Select State')
                             ->live()
                             ->options(fn (Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
@@ -125,6 +128,7 @@ class JobResource extends Resource
                             ->searchable()
                             ->required(),
                         Select::make('city_id')
+                            ->label('Select City')
                             ->options(fn (Get $get): Collection => City::query()
                                 ->where('state_id', $get('state_id'))
                                 ->pluck('name', 'id'))

@@ -3,7 +3,6 @@
 namespace App\Filament\User\Resources;
 
 use App\Filament\User\Resources\BlogResource\Pages;
-use App\Filament\User\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
@@ -38,15 +37,8 @@ class BlogResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
-                            ->label('Thumbnail')
-                            ->disk('public')
+                            ->label('Thumbnail Image')
                             ->directory('blog/thumbnail')
-                            ->image()
-                            ->orientImagesFromExif(false)
-                            ->previewable(false)
-                            ->maxFiles(1)
-                            ->maxSize(1024 * 1024 * 2)
-                            ->downloadable()
                             ->visibility('public')
                             ->required(),
                     ]),
@@ -107,7 +99,6 @@ class BlogResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
