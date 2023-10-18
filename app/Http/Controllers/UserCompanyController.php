@@ -15,12 +15,12 @@ class UserCompanyController extends Controller
         // Store Session for Home Menu Active
         Session::put('menu', 'company');
         $data = Company::all();
-        return view('pages.user.company.list')->with('data', $data);
+        return view('pages.company.list')->with('data', $data);
     }
 
     //Function to view Company Details
     public function viewCompanyDetails()
     {
-        return view('pages.user.company.detail');
+        return view('pages.company.detail');
     }
 }

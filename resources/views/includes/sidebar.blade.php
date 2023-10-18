@@ -1,5 +1,5 @@
 <!-- Side Block -->
-<div class="flex flex-col flex-wrap lg:py-6 lg:pl-3 -mb-10 lg:w-1/4 lg:text-left text-center card h-full">
+<div class="flex flex-col flex-wrap lg:text-left text-center card h-full">
     <!-- Google Ad Block -->
     <div class="flex flex-col mb-10 lg:items-start items-center">
         <div class="flex-grow">

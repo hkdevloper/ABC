@@ -13,12 +13,12 @@ class UserJobController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'job');
-        return view('pages.user.job.list');
+        return view('pages.job.list');
     }
 
     // Function to view Job Details
     public function viewJobDetails()
     {
-        return view('pages.user.job.detail');
+        return view('pages.job.detail');
     }
 }

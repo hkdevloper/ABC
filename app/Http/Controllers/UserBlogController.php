@@ -12,12 +12,12 @@ class UserBlogController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'blog');
-        return view('pages.user.blogs.list');
+        return view('pages.blogs.list');
     }
 
     //Function to view Blog Details
     public function viewBlogDetails()
     {
-        return view('pages.user.blogs.detail');
+        return view('pages.blogs.detail');
     }
 }

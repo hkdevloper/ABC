@@ -15,17 +15,17 @@ class UserProductController extends Controller
         // Store Session for Home Menu Active
         Session::put('menu', 'product');
         $data = Product::all();
-        return view('pages.user.product.list')->with('data', $data);
+        return view('pages.product.list')->with('data', $data);
     }
 
     // Function to view Product Details
     public function viewProductDetails()
     {
-        return view('pages.user.product.detail');
+        return view('pages.product.detail');
     }
 
     // public function to view Add Product
     public function viewAddProduct(){
-        
+
     }
 }

@@ -7,13 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
-    <link href="{{asset('user/style/boxicons-2.1.4/css/main.css')}}" rel="stylesheet">
+    <link href="{{ asset('user/style/boxicons-2.1.4/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('user/style/output.css')}}" rel="stylesheet">
     <script src="{{ asset('user/js/jquery.js')}}"></script>
     <script src="{{ asset('user/js/fw.js')}}"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     @yield('head')
-
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 </head>
@@ -29,8 +27,6 @@
 <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 <script src="{{ asset('user/js/alpine.js')}}"></script>
 <script src="{{ asset('user/js/main.js')}}"></script>
-<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 @yield('page-scripts')
 @yield('components-scripts')
 </body>

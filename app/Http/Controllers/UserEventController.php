@@ -15,12 +15,12 @@ class UserEventController extends Controller
         // Store Session for Home Menu Active
         Session::put('menu', 'event');
         $data = Event::all();
-        return view('pages.user.event.list')->with('data', $data);
+        return view('pages.event.list')->with('data', $data);
     }
 
     // Function to view Event Details
     public function viewEventDetails()
     {
-        return view('pages.user.event.detail');
+        return view('pages.event.detail');
     }
 }

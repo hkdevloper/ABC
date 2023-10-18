@@ -13,12 +13,12 @@ class UserForumController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'forum');
-        return view('pages.user.forum.list');
+        return view('pages.forum.list');
     }
 
     // Function to view Forum Detail
     public function viewForumDetails()
     {
-        return view('pages.user.forum.detail');
+        return view('pages.forum.detail');
     }
 }
