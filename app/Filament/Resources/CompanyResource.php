@@ -154,7 +154,7 @@ class CompanyResource extends Resource
                             ->label('Latitude')
                             ->required()
                             ->maxLength(191),
-                        LeafletMap::make('location')
+                        LeafletMap::make('location')->columnSpanFull()
                     ])->columns(4),
                 Section::make('SEO Details')
                     ->relationship('seo')
