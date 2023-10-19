@@ -6,6 +6,8 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -16,12 +18,12 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        if($panel->getId() === 'admin'){
+        if ($panel->getId() === 'admin') {
             return $this->type === 'Admin';
         }
-        if($panel->getId() === 'user'){
+        if ($panel->getId() === 'user') {
             return true;
-            if($this->approved && !$this->banned){
+            if ($this->approved && !$this->banned) {
                 return $this->type === 'user' || $this->type === 'Admin';
             }
         }
@@ -67,4 +69,9 @@ class User extends Authenticatable implements FilamentUser
         'banned' => 'boolean',
         'balance' => 'decimal:2',
     ];
+
+    public function company() : BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'user_id', 'id');
+    }
 }

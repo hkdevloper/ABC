@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CompanyResource\Pages;
 use App\Filament\Resources\CompanyResource\RelationManagers;
+use App\Forms\Components\LeafletMap;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\State;
@@ -154,6 +155,7 @@ class CompanyResource extends Resource
                             ->label('Latitude')
                             ->required()
                             ->maxLength(191),
+                        LeafletMap::make('location')
                     ])->columns(4),
                 Section::make('SEO Details')
                     ->relationship('seo')

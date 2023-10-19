@@ -19,7 +19,7 @@ class ForumResource extends Resource
 {
     protected static ?string $model = Forum::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
 
     public static function getEmailVerifiedMiddleware(Panel $panel): string
     {
@@ -83,7 +83,10 @@ class ForumResource extends Resource
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->where('user_id', auth()->user()->id);
+            });
     }
 
     public static function getRelations(): array
