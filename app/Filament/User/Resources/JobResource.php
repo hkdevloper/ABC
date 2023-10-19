@@ -47,7 +47,7 @@ class JobResource extends Resource
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query){
-                        return $query->where('type', 'event');
+                        return $query->where('type', 'job');
                     }),
                 TextInput::make('title')
                     ->label('Job Title')

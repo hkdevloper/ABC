@@ -49,7 +49,7 @@ class BlogResource extends Resource
                             ->withCount()
                             ->emptyLabel('Oops! No Category Found')
                             ->relationship('category', 'name', 'parent_id', function ($query){
-                                return $query->where('type', 'event');
+                                return $query->where('type', 'blog');
                             }),
                         TextInput::make('title')
                             ->label('Title')
