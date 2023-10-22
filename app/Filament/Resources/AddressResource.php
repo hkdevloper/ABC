@@ -42,12 +42,15 @@ class AddressResource extends Resource
                     ->maxLength(191),
                 Select::make('country_id')
                     ->relationship('country', 'name')
+                    ->searchable()
                     ->required(),
                 Select::make('state_id')
                     ->relationship('state', 'name')
+                    ->searchable()
                     ->required(),
                 Select::make('city_id')
                     ->relationship('city', 'name')
+                    ->searchable()
                     ->required(),
                 TextInput::make('zip_code')
                     ->required()

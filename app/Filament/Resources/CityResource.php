@@ -38,7 +38,8 @@ class CityResource extends Resource
                     ->required(),
                 Select::make('state_id')
                     ->label('Select State')
-                    ->label('State')
+                    ->native(false)
+                    ->searchable()
                     ->relationship('state', 'name')
                     ->required(),
             ])->columns(3);

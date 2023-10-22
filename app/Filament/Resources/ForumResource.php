@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ForumResource\Pages;
 use App\Filament\Resources\ForumResource\RelationManagers;
 use App\Models\Forum;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Form;
@@ -30,6 +31,13 @@ class ForumResource extends Resource
                 Forms\Components\MarkdownEditor::make('body')
                     ->required()
                     ->columnSpanFull(),
+                SelectTree::make('category_id')
+                    ->label('Select Category')
+                    ->withCount()
+                    ->emptyLabel('Oops! No Category Found')
+                    ->relationship('category', 'name', 'parent_id', function ($query){
+                        return $query->where('type', 'forum');
+                    }),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->required(),

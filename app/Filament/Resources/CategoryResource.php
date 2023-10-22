@@ -51,6 +51,7 @@ class CategoryResource extends Resource
                         "deal" => "Deals",
                         "blog" => "Blog",
                         "event" => "Event",
+                        "forum" => "Forum",
                     ]),
                 TextInput::make('summary')
                     ->label('Enter Summary')
