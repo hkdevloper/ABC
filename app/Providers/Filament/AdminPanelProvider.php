@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Widgets\StatsOverview;
 use Awcodes\FilamentQuickCreate\QuickCreatePlugin;
 use Awcodes\Overlook\OverlookPlugin;
 use Awcodes\Overlook\Widgets\OverlookWidget;
@@ -49,7 +50,7 @@ class AdminPanelProvider extends PanelProvider
                     ]),
             ])
             ->widgets([
-                OverlookWidget::class,
+                StatsOverview::class,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

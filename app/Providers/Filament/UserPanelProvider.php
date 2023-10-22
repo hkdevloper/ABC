@@ -9,6 +9,7 @@ use App\Filament\Resources\JobResource;
 use App\Filament\Resources\ProductResource;
 use App\Filament\User\Resources\BlogResource;
 use App\Filament\User\Resources\CompanyResource;
+use App\Filament\Widgets\StatsOverview;
 use App\Http\Middleware\HkEmailVerification;
 use Filament\Http\Controllers\Auth\EmailVerificationController;
 use Filament\Http\Middleware\Authenticate;
@@ -141,7 +142,9 @@ class UserPanelProvider extends PanelProvider
                 Dashboard::class
             ])
             ->discoverWidgets(in: app_path('Filament/User/Widgets'), for: 'App\\Filament\\User\\Widgets')
-            ->widgets([])
+            ->widgets([
+                StatsOverview::class,
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
