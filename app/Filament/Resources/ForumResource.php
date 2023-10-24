@@ -28,11 +28,12 @@ class ForumResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\MarkdownEditor::make('body')
+                Forms\Components\RichEditor::make('body')
                     ->required()
                     ->columnSpanFull(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
+                    ->enableBranchNode()
                     ->withCount()
                     ->required()
                     ->emptyLabel('Oops! No Category Found')

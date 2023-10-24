@@ -44,6 +44,7 @@ class JobResource extends Resource
             ->schema([
                 SelectTree::make('category_id')
                     ->label('Select Category')
+                    ->enableBranchNode()
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query){
@@ -52,7 +53,7 @@ class JobResource extends Resource
                 TextInput::make('title')
                     ->label('Job Title')
                     ->placeholder('Enter job title')
-                    ->live(debounce: 500)
+                    ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
@@ -127,14 +128,14 @@ class JobResource extends Resource
                             ->maxLength(191),
                         Select::make('country_id')
                             ->label('Country')
-                            ->live()
+                            ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->default(101)
                             ->searchable()
                             ->required(),
                         Select::make('state_id')
                             ->label('State')
-                            ->live()
+                            ->live(onBlur: true)
                             ->options(fn (Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))

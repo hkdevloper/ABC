@@ -29,6 +29,17 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
     protected static ?int $navigationSort = 2;
+    public function mount(): void
+    {
+        if(!auth()->user()->canManageSettings()){
+            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+            if($company){
+                redirect('/user/dashboard/companies/'.$company->id);
+            }else{
+                redirect('/user/dashboard/companies/create');
+            }
+        }
+    }
 
     public static function form(Form $form): Form
     {
@@ -38,6 +49,7 @@ class ProductResource extends Resource
             ->schema([
                 SelectTree::make('category_id')
                     ->label('Select Category')
+                    ->enableBranchNode()
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query){
@@ -46,7 +58,7 @@ class ProductResource extends Resource
                 TextInput::make('name')
                     ->label('Product Name')
                     ->placeholder('Enter product name')
-                    ->live(debounce: 500)
+                    ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),

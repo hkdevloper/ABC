@@ -40,6 +40,7 @@ class BlogResource extends Resource
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
+                    ->enableBranchNode()
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query){
@@ -62,7 +63,7 @@ class BlogResource extends Resource
                     ]),
                 TextInput::make('title')
                     ->label('Enter Title')
-                    ->live(debounce: 500)
+                    ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state){

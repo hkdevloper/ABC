@@ -50,13 +50,14 @@ class JobResource extends Resource
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
+                    ->enableBranchNode()
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query){
                         return $query->where('type', 'job');
                     }),
                 TextInput::make('title')
-                    ->live(debounce: 500)
+                    ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
@@ -65,7 +66,7 @@ class JobResource extends Resource
                     ->maxLength(191),
                 TextInput::make('summary')
                     ->label('Enter Summary')
-                    ->live(debounce: 500)
+                    ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state){
@@ -114,14 +115,14 @@ class JobResource extends Resource
                             ->maxLength(191),
                         Select::make('country_id')
                             ->label('Select Country')
-                            ->live()
+                            ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->default(101)
                             ->searchable()
                             ->required(),
                         Select::make('state_id')
                             ->label('Select State')
-                            ->live()
+                            ->live(onBlur: true)
                             ->options(fn (Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))

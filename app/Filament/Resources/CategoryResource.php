@@ -34,7 +34,7 @@ class CategoryResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->label('Enter Category Name')
-                    ->live(debounce: 500)
+                    ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
@@ -55,7 +55,7 @@ class CategoryResource extends Resource
                     ]),
                 TextInput::make('summary')
                     ->label('Enter Summary')
-                    ->live(debounce: 500)
+                    ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state){

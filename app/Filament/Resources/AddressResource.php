@@ -38,7 +38,7 @@ class AddressResource extends Resource
                     ->required()
                     ->maxLength(191),
                 TextInput::make('address_line_2')
-                    ->required()
+                    ->nullable()
                     ->maxLength(191),
                 Select::make('country_id')
                     ->relationship('country', 'name')

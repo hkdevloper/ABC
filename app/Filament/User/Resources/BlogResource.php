@@ -31,6 +31,17 @@ class BlogResource extends Resource
     protected static ?int $navigationSort = 6;
 
     protected static bool $shouldRegisterNavigation = false;
+    public function mount(): void
+    {
+        if(!auth()->user()->canManageSettings()){
+            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+            if($company){
+                redirect('/user/dashboard/companies/'.$company->id);
+            }else{
+                redirect('/user/dashboard/companies/create');
+            }
+        }
+    }
 
     public static function form(Form $form): Form
     {
@@ -48,6 +59,7 @@ class BlogResource extends Resource
                     ->schema([
                         SelectTree::make('category_id')
                             ->label('Select Category')
+                            ->enableBranchNode()
                             ->withCount()
                             ->emptyLabel('Oops! No Category Found')
                             ->relationship('category', 'name', 'parent_id', function ($query){
@@ -56,7 +68,7 @@ class BlogResource extends Resource
                         TextInput::make('title')
                             ->label('Title')
                             ->placeholder('Enter title')
-                            ->live(debounce: 500)
+                            ->live(onBlur: true)
                             ->required()
                             ->maxLength(191)
                             ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),

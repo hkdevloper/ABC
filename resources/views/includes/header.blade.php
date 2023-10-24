@@ -48,7 +48,7 @@
         @if(auth()->user() && auth()->user()->name != "")
             <div class="hidden lg:flex md:flex items-center">
                 <div class="relative" data-te-dropdown-ref>
-                    <a href="{{url('user/dashboard')}}"
+                    <a href="{{auth()->user()->type == 'Admin' ? url('admin') : url('user/dashboard')}}"
                         class="flex items-center"
                         type="button"
                         id="dropdownMenuButton1"

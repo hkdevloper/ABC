@@ -46,6 +46,7 @@ class ProductResource extends Resource
                 Select::make('user_id')
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
+                    ->enableBranchNode()
                     ->label('Select Category')
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
@@ -53,7 +54,7 @@ class ProductResource extends Resource
                         return $query->where('type', 'product');
                     }),
                 TextInput::make('name')
-                    ->live(debounce: 500)
+                    ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state){

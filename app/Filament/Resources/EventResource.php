@@ -58,13 +58,14 @@ class EventResource extends Resource
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
+                    ->enableBranchNode()
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query){
                         return $query->where('type', 'event');
                     }),
                 TextInput::make('title')
-                    ->live(debounce: 500)
+                    ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state){
@@ -108,13 +109,13 @@ class EventResource extends Resource
                             ->required()
                             ->maxLength(191),
                         Select::make('country_id')
-                            ->live()
+                            ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()
                             ->default(101)
                             ->required(),
                         Select::make('state_id')
-                            ->live()
+                            ->live(onBlur: true)
                             ->options(fn (Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))

@@ -52,7 +52,16 @@ class UserPanelProvider extends PanelProvider
                     NavigationItem::make('Dashboard')
                         ->icon('heroicon-o-home')
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.pages.dashboard'))
-                        ->url(fn (): string => Dashboard::getUrl()),
+                        ->url(fn (): string => Dashboard::getUrl())
+                        ->visible(function (){
+                            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+                            if($company){
+                                if($company->is_approved){
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }),
                     NavigationItem::make('Company Profile')
                         ->icon('heroicon-o-building-office-2')
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.company'))

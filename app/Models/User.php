@@ -22,14 +22,26 @@ class User extends Authenticatable implements FilamentUser
             return $this->type === 'Admin';
         }
         if ($panel->getId() === 'user') {
-            return true;
             if ($this->approved && !$this->banned) {
-                return $this->type === 'user' || $this->type === 'Admin';
+                return $this->type === 'user';
             }
         }
         return false;
     }
 
+    public function canManageSettings(): bool
+    {
+        if($this->type === 'Admin'){
+            return true;
+        }
+        $company = Company::where('user_id', $this->id)->orderBy('created_at', 'desc')->first();
+        if($company){
+            if($company->is_approved){
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * The attributes that are mass assignable.
      *

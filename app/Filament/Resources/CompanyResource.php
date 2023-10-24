@@ -51,6 +51,7 @@ class CompanyResource extends Resource
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
+                    ->enableBranchNode()
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query){
@@ -58,7 +59,7 @@ class CompanyResource extends Resource
                     }),
                 TextInput::make('name')
                     ->label('Enter Company Name')
-                    ->live(debounce: 500)
+                    ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state){
@@ -122,14 +123,14 @@ class CompanyResource extends Resource
                             ->maxLength(191),
                         Select::make('country_id')
                             ->label('Select Country')
-                            ->live()
+                            ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->default(101)
                             ->searchable()
                             ->required(),
                         Select::make('state_id')
                             ->label('Select State')
-                            ->live()
+                            ->live(onBlur: true)
                             ->options(fn (Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))

@@ -45,10 +45,10 @@ class UserResource extends Resource
                 Toggle::make('taxable')
                     ->required(),
                 Toggle::make('banned')
-                    ->live()
+                    ->live(onBlur: true)
                     ->required(),
                 TextInput::make('banned_reason')
-                    ->live()
+                    ->live(onBlur: true)
                     ->required(fn (Get $get) => $get('banned'))
                     ->maxLength(500),
                 TextInput::make('balance')
