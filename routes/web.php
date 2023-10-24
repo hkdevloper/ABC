@@ -7,6 +7,9 @@ use App\Http\Controllers\UserEventController;
 use App\Http\Controllers\UserForumController;
 use App\Http\Controllers\UserJobController;
 use App\Http\Controllers\UserProductController;
+use App\Models\Company;
+use App\Models\Product;
+use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,9 +29,28 @@ Route::get('/', function () {
     Session::forget('menu');
     // Store Session for Home Menu Active
     Session::put('menu', 'home');
-    $products = [];
-    $companies = [];
-    $events = [];
+    $p = Product::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
+    $c = Company::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
+    $e = Event::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
+
+    // get the 10-random records from the database if is less than 10 then it will return all
+    if(count($p) > 10){
+        $products = $p->random(10);
+    }else{
+        $products = $p;
+    }
+
+    if(count($c) > 10){
+        $companies = $c->random(10);
+    }else{
+        $companies = $c;
+    }
+
+    if(count($e) > 10){
+        $events = $e->random(10);
+    }else{
+        $events = $e;
+    }
     $data  = compact('products', 'companies', 'events');
     return view('welcome')->with($data);
 })->name('home');
@@ -41,7 +63,6 @@ Route::prefix('company')->group(function () {
 Route::prefix('product')->group(function () {
     Route::get('/', [UserProductController::class, 'viewProductList'])->name('products');
     Route::get('/{name}', [UserProductController::class, 'viewProductDetails'])->name('view.product');
-    Route::get('/add', [UserProductController::class, 'viewAddProduct'])->name('add.product');
 });
 
 Route::prefix('event')->group(function () {

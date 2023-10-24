@@ -8,12 +8,13 @@ use Illuminate\View\Component;
 
 class BreadCrumb extends Component
 {
+    public $data;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -21,6 +22,6 @@ class BreadCrumb extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components..user.bread-crumb');
+        return view('components.user.bread-crumb')->with('data', $this->data);
     }
 }

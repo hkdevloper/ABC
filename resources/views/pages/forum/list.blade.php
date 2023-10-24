@@ -4,7 +4,7 @@
     <section class="homepage">
         <div class="widget-placeholder">
             <!-- Header Section -->
-            <x-user.header :title="'Forums'"/>
+            <x-user.header :title="'Forums'" :breadcrumb="['Home', 'Forum', 'List']"/>
             <div class="hkdevs-wdgt-section">
                 <!-- Content Section -->
                 <section class="text-gray-600 body-font">

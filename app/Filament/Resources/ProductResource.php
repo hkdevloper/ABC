@@ -81,12 +81,17 @@ class ProductResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->label('Thumbnail Image')
                             ->directory('product/thumbnail')
                             ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
+                            ->label('Product gallery')
                             ->directory('product/gallery')
-                            ->visibility('public'),
+                            ->multiple()
+                            ->maxFiles(5)
+                            ->visibility('public')
+                            ->required(),
                     ])->columns(2),
                 Section::make('SEO Details')
                     ->relationship('seo')

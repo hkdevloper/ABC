@@ -12,11 +12,12 @@ class Header extends Component
      * Create a new component instance.
      */
     public string $title;
+    public array $breadcrumb;
 
-    public function __construct($title)
+    public function __construct($title, $breadcrumb = ['Home'])
     {
-        // Assign the Value to the Public Variable
         $this->title = $title;
+        $this->breadcrumb = $breadcrumb;
     }
 
     /**
@@ -25,7 +26,8 @@ class Header extends Component
     public function render(): View|Closure|string
     {
         $data = [
-            'title' => $this->title
+            'title' => $this->title,
+            'breadcrumb' => $this->breadcrumb
         ];
         return view('components..user.header')->with('data');
     }

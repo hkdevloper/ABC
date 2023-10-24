@@ -115,23 +115,17 @@
                                    @foreach($products as $product)
                                         <div class="bg-white rounded-lg p-4 card">
                                             <div class="flex items-center justify-between mb-2">
-                                                <span class="text-blue-900 font-semibold">Product {{$i}}</span>
-                                                <img src="https://bit.ly/3ZkHndD" alt="arrow-icon" class="w-4 h-4">
+                                                <span class="text-blue-900 font-semibold">{{$product->name}}</span>
+                                                <img src="{{url('storage/' . $product->thumbnail)}}" alt="arrow-icon" class="w-4 h-4">
                                             </div>
                                             <span class="text-gray-600">1.4K+ Sold</span>
                                             <div class="flex mt-2">
-                                                <div class="w-1/3 mr-2">
-                                                    <img src="https://via.placeholder.com/100x100" alt=""
-                                                         class="w-full rounded-lg">
-                                                </div>
-                                                <div class="w-1/3 mr-2">
-                                                    <img src="https://via.placeholder.com/100x100" alt=""
-                                                         class="w-full rounded-lg">
-                                                </div>
-                                                <div class="w-1/3">
-                                                    <img src="https://via.placeholder.com/100x100" alt=""
-                                                         class="w-full rounded-lg">
-                                                </div>
+                                                @foreach($product->gallery as $item)
+                                                    <div class="w-1/3 mr-2">
+                                                        <img src="{{url('storage/'. $item)}}" alt=""
+                                                             class="w-full rounded-lg">
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                    @endforeach
@@ -156,13 +150,13 @@
                                     @foreach($companies as $company)
                                         <div class="bg-white m-2 p-3 card flex flex-col lg:flex-row items-center">
                                             <div class="w-32 h-32 lg:w-1/3 lg:h-auto lg:mr-4">
-                                                <img src="https://via.placeholder.com/100x150" alt="Company Logo"
+                                                <img src="{{url('storage/' . $company->logo)}}" alt="Company Logo"
                                                      class="w-full h-full object-cover rounded-lg">
                                             </div>
                                             <div class="flex-grow">
                                                 <h3 class="text-xl font-semibold text-purple-900 hover:underline">
                                                     <a href="{{route('view.company', ['cognizant'])}}"
-                                                       class="text-purple-900 hover:underline">Cognizant</a>
+                                                       class="text-purple-900 hover:underline">{{$company->name}}</a>
                                                 </h3>
                                                 <div class="flex items-center mt-2">
                             <span class="text-yellow-500">
@@ -171,8 +165,7 @@
                                                     <span class="text-gray-600 ml-1">3.9</span>
                                                     <span class="text-gray-600 ml-2">36.5K+ reviews</span>
                                                 </div>
-                                                <p class="text-gray-700 mt-2">Leading ITeS company with a global
-                                                    presence.</p>
+                                                <p class="text-gray-700 mt-2">{{$company->summary}}</p>
                                                 <button
                                                     class="border border-purple-500 text-purple-500 py-2 px-4 mt-3 rounded-full hover:bg-purple-500 hover:text-white transition duration-300 ease-in-out">
                                                     View Company
@@ -198,27 +191,21 @@
                                     all Events</a>
                             </div>
                             <div class="mt-4 relative">
-                                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-2">
                                     @foreach($events as $event)
                                         <div class="card desktop-homepage-events-wdgt overflow-hidden">
                                             <img class="w-full h-40 object-cover"
-                                                 src="https://via.placeholder.com/300x300"
+                                                 src="{{url('storage/'.$event->thumbnail)}}"
                                                  alt="Event Thumbnail">
                                             <div class="card-body">
                                                 <div class="organizer-container flex items-start">
-                                                    <div class="organizer-logo-container">
-                                                        <img alt="company logo" class="logo-img"
-                                                             height="100" width="100"
-                                                             src="https://via.placeholder.com/100x100">
-                                                    </div>
                                                     <div class="organizer-description-container ml-3">
-                                                        <p class="feature-card-heading">{{ generateRandomEventTitle() }}</p>
-                                                        <p class="feature-card-organizer">{{ generateRandomEventTitle() }}</p>
+                                                        <p class="feature-card-heading">{{ $event->title }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="chips-container mt-2">
                                                     <div class="chip">
-                                                        <p class="chip-label">{{ generateRandomEventTitle() }}</p>
+                                                        <p class="chip-label">{{ $event->website }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="feature-card-stats-container mt-2 flex items-center">
@@ -226,11 +213,7 @@
                                                         <img alt="User icon" class="naukicon-calendar"
                                                              height="16" width="16"
                                                              src="https://static.naukimg.com/s/0/0/i/Events/icons/calendar-ot.svg">
-                                                        @php
-                                                            $randomTimestamp = rand(strtotime('2023-01-01 00:00:00'), strtotime('2023-12-31 23:59:59'));
-                                                            $randomDate = date('d M, g:i A', $randomTimestamp);
-                                                        @endphp
-                                                        <p class="feature-card-date-label ml-1">{{ $randomDate }}</p>
+                                                        <p class="feature-card-date-label ml-1">{{ date('d M Y', (int)$event->start) }}</p>
                                                     </div>
                                                     <div class="registered-user-container ml-4 flex items-center">
                                                         <img alt="User icon" class="naukicon-user"
@@ -248,14 +231,13 @@
                                                     <div class="left semi-circle"></div>
                                                     <div class="right semi-circle"></div>
                                                 </div>
-                                                <div
-                                                    class="card-footer-container flex items-center justify-between">
-                                                    <div class="feature-card-type-tag-container">
-                                                        <p class="feature-card-type-label">RS. {{rand(99,999)}}</p>
-                                                    </div>
-                                                    <div class="cta-container">
-                                                        <a href="{{route('view.event', [generateRandomEventTitle()])}}"
-                                                           class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs"
+                                                <div class="card-footer-container flex items-center justify-between">
+                                                    {{--                                                    <div class="feature-card-type-tag-container">--}}
+                                                    {{--                                                        <p class="feature-card-type-label">RS. {{$event->price}}</p>--}}
+                                                    {{--                                                    </div>--}}
+                                                    <div class="cta-container w-full">
+                                                        <a href="{{route('view.event', [$event->slug])}}"
+                                                           class="block text-center text-purple-500 hover:text-white rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-100"
                                                            style="border: 1px solid;">View Details
                                                         </a>
                                                     </div>

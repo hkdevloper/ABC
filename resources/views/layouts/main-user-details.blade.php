@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <title>{{ config()->get('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <link href="{{asset('user/style/boxicons-2.1.4/css/main.css')}}" rel="stylesheet">
     <link href="{{ asset('user/style/output.css')}}" rel="stylesheet">
     <link href="{{ asset('user/style/tw-elements.min.css') }}" rel="stylesheet"/>
     <script src="{{ asset('user/js/jquery.js')}}"></script>
-    <script src="{{ asset('user/js/tailwind.js')}}"></script>
     <script src="{{ asset('user/js/fw.js')}}"></script>
     <script>
         tailwind.config = {
@@ -35,7 +35,6 @@
         };
     </script>
     @yield('head')
-    @bukStyles(true)
 </head>
 
 <body>
@@ -79,6 +78,5 @@
 
 @yield('page-scripts')
 @yield('components-scripts')
-@bukScripts(true)
 </body>
 </html>

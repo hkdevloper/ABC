@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Event;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 class UserEventController extends Controller
@@ -14,8 +16,10 @@ class UserEventController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'event');
-        $data = Event::all();
-        return view('pages.event.list')->with('data', $data);
+        $events = Event::where('is_approved', 1)->where('is_active', 1)->paginate(10);
+        $categories = Category::where('type', 'event')->where('is_active', 1)->get();
+        $data = compact('events', 'categories');
+        return view('pages.event.list')->with($data);
     }
 
     // Function to view Event Details

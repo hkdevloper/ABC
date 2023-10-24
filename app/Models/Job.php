@@ -61,4 +61,9 @@ class Job extends Model
     {
         return $this->belongsTo(Address::class);
     }
+
+    public function getJobAddressAttribute(): string
+    {
+        return "{$this->address->address_line_1}, {$this->address->address_line_2}, {$this->address->country->name}, {$this->address->state->name}, {$this->address->city->name}, {$this->address->zip_code}";
+    }
 }
