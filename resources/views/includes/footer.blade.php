@@ -3,10 +3,10 @@
     <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
             <img src="https://via.placeholder.com/100x100" width="50" height="50" alt="">
-            <span class="ml-3 text-xl">HkDevs</span>
+            <span class="ml-3 text-xl">{{config()->get('app.name') }}</span>
         </a>
         <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">&copy;
-            2023 HkDevs - All Rights Reserved </p>
+            2023 {{config()->get('app.name') }} — All Rights Reserved </p>
         <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
                 <a class="text-gray-500">
                     <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
