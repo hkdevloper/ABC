@@ -40,14 +40,19 @@ class CompanyResource extends Resource
         return $form
             ->schema([
                 Toggle::make('is_approved')
+                    ->label('Approved')
                     ->required(),
                 Toggle::make('is_claimed')
+                    ->label('Claimed')
                     ->required(),
                 Toggle::make('is_active')
+                    ->label('Active')
                     ->required(),
                 Toggle::make('is_featured')
+                    ->label('Featured')
                     ->required(),
                 Select::make('user_id')
+                    ->label('Select User')
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
@@ -73,14 +78,20 @@ class CompanyResource extends Resource
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
                 TagsInput::make('extra_things')
-                    ->label('Extra Things')
+                    ->label('Tags')
                     ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('logo')
+                            ->label('Logo')
                             ->directory('companies/logo')
                             ->required(),
+                        FileUpload::make('banner')
+                            ->label('Banner')
+                            ->directory('companies/banner')
+                            ->required(),
                         FileUpload::make('gallery')
+                            ->label('Gallery')
                             ->directory('companies/gallery')
                             ->multiple(),
                     ])->columns(2),
@@ -147,15 +158,6 @@ class CompanyResource extends Resource
                             ->label('Zip Code')
                             ->required()
                             ->maxLength(191),
-                        TextInput::make('longitude')
-                            ->label('Longitude')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('latitude')
-                            ->label('Latitude')
-                            ->required()
-                            ->maxLength(191),
-                        LeafletMap::make('location')->columnSpanFull()->dehydrated(false)
                     ])->columns(4),
                 Section::make('SEO Details')
                     ->relationship('seo')

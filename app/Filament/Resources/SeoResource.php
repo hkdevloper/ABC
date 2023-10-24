@@ -25,11 +25,13 @@ class SeoResource extends Resource
         return $form
             ->schema([
                 TextInput::make('title')
+                    ->label('Title')
                     ->required()
                     ->maxLength(191),
                 TextInput::make('meta_description')
+                    ->label('Meta Description')
                     ->maxLength(300),
-                TextInput::make('meta_keywords'),
+                TextInput::make('meta_keywords')->label('Meta Keywords'),
             ])->columns(3);
     }
 
@@ -38,10 +40,13 @@ class SeoResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('meta_description')
+                    ->label('Meta Description')
                     ->searchable(),
                 Tables\Columns\TagsColumn::make('meta_keywords')
+                    ->label('Meta Keywords')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

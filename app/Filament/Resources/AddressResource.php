@@ -33,34 +33,35 @@ class AddressResource extends Resource
         return $form
             ->schema([
                 Toggle::make('is_featured')
+                    ->label('Featured')
                     ->required(),
                 TextInput::make('address_line_1')
+                    ->label('Address Line 1')
                     ->required()
                     ->maxLength(191),
                 TextInput::make('address_line_2')
+                    ->label('Address Line 2')
                     ->nullable()
                     ->maxLength(191),
                 Select::make('country_id')
+                    ->label('Select Country')
                     ->relationship('country', 'name')
                     ->searchable()
                     ->required(),
                 Select::make('state_id')
+                    ->label('Select State')
                     ->relationship('state', 'name')
                     ->searchable()
                     ->required(),
                 Select::make('city_id')
+                    ->label('Select City')
                     ->relationship('city', 'name')
                     ->searchable()
                     ->required(),
                 TextInput::make('zip_code')
+                    ->label('Zip Code')
                     ->required()
                     ->maxLength(191),
-                TextInput::make('longitude')
-                    ->required()
-                    ->maxLength(191),
-                TextInput::make('latitude')
-                    ->required()
-                    ->maxLength(191)
             ])->columns(4);
     }
 
@@ -70,28 +71,20 @@ class AddressResource extends Resource
             ->columns([
                 Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
                 Tables\Columns\TextColumn::make('address_line_1')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('address_line_2')
+                    ->label('Address')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country.name')
-                    ->numeric()
+                    ->label('Country')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('state.name')
-                    ->numeric()
+                    ->label('State')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('city.name')
-                    ->numeric()
+                    ->label('City')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('zip_code')
+                    ->label('ZIP CODE')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('longitude')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('latitude')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('seo.title')
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

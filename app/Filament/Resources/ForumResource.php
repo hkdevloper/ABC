@@ -26,9 +26,11 @@ class ForumResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
+                    ->label('Enter Title')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\RichEditor::make('body')
+                Forms\Components\MarkdownEditor::make('body')
+                    ->label('Enter Description')
                     ->required()
                     ->columnSpanFull(),
                 SelectTree::make('category_id')
@@ -41,6 +43,7 @@ class ForumResource extends Resource
                         return $query->where('type', 'forum');
                     })->placeholder('Select Category'),
                 Forms\Components\Select::make('user_id')
+                    ->label('Select User')
                     ->relationship('user', 'name')
                     ->default(function () {
                         return auth()->user()->id;

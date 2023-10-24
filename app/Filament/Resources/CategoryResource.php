@@ -32,6 +32,14 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
+                Section::make()->schema([
+                    Toggle::make('is_active')
+                        ->label('Active')
+                        ->required(),
+                    Toggle::make('is_featured')
+                        ->label('Featured')
+                        ->required(),
+                ])->columns(),
                 TextInput::make('name')
                     ->label('Enter Category Name')
                     ->live(onBlur: true)
@@ -53,24 +61,6 @@ class CategoryResource extends Resource
                         "event" => "Event",
                         "forum" => "Forum",
                     ]),
-                TextInput::make('summary')
-                    ->label('Enter Summary')
-                    ->live(onBlur: true)
-                    ->required()
-                    ->maxLength(191)
-                    ->afterStateUpdated(function (Set $set, ?string $state){
-                        $set('seo.title', $state);
-                    }),
-                Forms\Components\RichEditor::make('description')
-                    ->label('Description')
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
-                Toggle::make('is_active')
-                    ->label('Is Active')
-                    ->required(),
-                Toggle::make('is_featured')
-                    ->label('Is Featured')
-                    ->required(),
                 SelectTree::make('parent_id')
                     ->label('Select Category')
                     ->withCount()
@@ -78,6 +68,10 @@ class CategoryResource extends Resource
                     ->relationship('parent', 'name', 'parent_id', function ($query){
                         return $query;
                     }),
+                Forms\Components\RichEditor::make('description')
+                    ->label('Description')
+                    ->maxLength(65535)
+                    ->columnSpanFull(),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
@@ -95,13 +89,15 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Image')
+                    ->disk('public')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('summary')
                     ->searchable(),
                 Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
                 Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),

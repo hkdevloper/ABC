@@ -84,7 +84,7 @@ class BlogResource extends Resource
                         MarkdownEditor::make('content')
                             ->label('Content')
                             ->columnSpanFull(),
-                    ])->columns(4),
+                    ])->columnSpanFull(),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
@@ -100,7 +100,7 @@ class BlogResource extends Resource
                             ->label('Meta Keywords')
                             ->placeholder('Enter keywords')
                             ->required(),
-                    ])->columns(3)
+                    ])->columnSpanFull(),
             ]);
     }
 
@@ -109,6 +109,7 @@ class BlogResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail')
+                    ->label('Thumbnail')
                     ->disk('public')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('seo.title')
@@ -117,6 +118,7 @@ class BlogResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('category.name')
+                    ->label('Category')
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Active')

@@ -36,14 +36,19 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Toggle::make('is_active')
+                    ->label('Active')
                     ->required(),
                 Toggle::make('is_featured')
+                    ->label('Featured')
                     ->required(),
                 Toggle::make('is_claimed')
+                    ->label('Claimed')
                     ->required(),
                 Toggle::make('is_approved')
+                    ->label('Approved')
                     ->required(),
                 Select::make('user_id')
+                    ->label('Select User')
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->enableBranchNode()
@@ -54,6 +59,7 @@ class ProductResource extends Resource
                         return $query->where('type', 'product');
                     }),
                 TextInput::make('name')
+                    ->label('Enter Product Name')
                     ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
@@ -62,14 +68,17 @@ class ProductResource extends Resource
                         $set('seo.title', $state);
                     }),
                 TextInput::make('slug')
+                    ->label('Slug')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
                 TextInput::make('price')
+                    ->label('Price')
                     ->numeric()
                     ->prefix('$'),
                 Select::make('condition')
+                    ->label('Condition')
                     ->options([
                         'new' => 'New',
                         'used' => 'Used',
@@ -78,6 +87,7 @@ class ProductResource extends Resource
 
                     ->required(),
                 TextInput::make('brand')
+                    ->label('Brand')
                     ->maxLength(191),
                 Section::make('Images')
                     ->schema([
@@ -98,11 +108,14 @@ class ProductResource extends Resource
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
+                            ->label('Meta Title')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('meta_description')
+                            ->label('Meta Description')
                             ->maxLength(300),
-                        TagsInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords')
+                            ->label('Meta Keywords'),
                     ])->columns(3),
             ])->columns(4);
     }

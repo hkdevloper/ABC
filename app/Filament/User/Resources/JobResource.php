@@ -125,6 +125,10 @@ class JobResource extends Resource
                         TextInput::make('address_line_2')
                             ->label('Address Line 2')
                             ->placeholder('Enter address line 2')
+                            ->default('')
+                            ->maxLength(191),
+                        TextInput::make('zip_code')
+                            ->label('Zip Code')
                             ->required()
                             ->maxLength(191),
                         Select::make('country_id')
@@ -149,21 +153,7 @@ class JobResource extends Resource
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                        TextInput::make('zip_code')
-                            ->label('Zip Code')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('longitude')
-                            ->label('Longitude')
-                            ->default('')
-                            ->hidden()
-                            ->maxLength(191),
-                        TextInput::make('latitude')
-                            ->label('Latitude')
-                            ->default('')
-                            ->hidden()
-                            ->maxLength(191),
-                    ])->columns(4),
+                    ])->columns(3),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
@@ -179,7 +169,7 @@ class JobResource extends Resource
                             ->label('Meta Keywords')
                             ->placeholder('Enter keywords')
                             ->required(),
-                    ])->columns(3),
+                    ])->columnSpanFull(),
             ])->columns(4);
     }
 

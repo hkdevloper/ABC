@@ -65,6 +65,7 @@ class EventResource extends Resource
                         return $query->where('type', 'event');
                     }),
                 TextInput::make('title')
+                    ->label('Enter Title')
                     ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
@@ -73,9 +74,11 @@ class EventResource extends Resource
                         $set('seo.title', $state);
                     }),
                 TextInput::make('slug')
+                    ->label('Slug')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\RichEditor::make('description')
+                Forms\Components\MarkdownEditor::make('description')
+                    ->label('Description')
                     ->columnSpanFull(),
                 Forms\Components\DatePicker::make('start')
                     ->label('Start Date')
@@ -84,16 +87,20 @@ class EventResource extends Resource
                     ->label('End Date')
                     ->required(),
                 TextInput::make('website')
+                    ->label('Website')
+                    ->prefix('https://')
                     ->url()
                     ->maxLength(191),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->label('Thumbnail Image')
                             ->disk('public')
                             ->directory('event/thumbnail')
                             ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
+                            ->label('Gallery')
                             ->disk('public')
                             ->directory('event/gallery')
                             ->visibility('public'),
@@ -103,18 +110,22 @@ class EventResource extends Resource
                     ->relationship('address')
                     ->schema([
                         TextInput::make('address_line_1')
+                            ->label('Address Line 1')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('address_line_2')
+                            ->label('Address Line 2')
                             ->required()
                             ->maxLength(191),
                         Select::make('country_id')
+                            ->label('Country')
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()
                             ->default(101)
                             ->required(),
                         Select::make('state_id')
+                            ->label('State')
                             ->live(onBlur: true)
                             ->options(fn (Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
@@ -122,18 +133,14 @@ class EventResource extends Resource
                             ->searchable()
                             ->required(),
                         Select::make('city_id')
+                            ->label('City')
                             ->options(fn (Get $get): Collection => City::query()
                                 ->where('state_id', $get('state_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
                         TextInput::make('zip_code')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('longitude')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('latitude')
+                            ->label('Zip Code')
                             ->required()
                             ->maxLength(191),
                     ])->columns(4),
@@ -141,11 +148,14 @@ class EventResource extends Resource
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
+                            ->label('Title')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('meta_description')
+                            ->label('Meta Description')
                             ->maxLength(300),
-                        TagsInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords')
+                            ->label('Meta Keywords'),
                     ])->columns(3),
             ])->columns(4);
     }

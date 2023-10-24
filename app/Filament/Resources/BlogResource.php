@@ -43,7 +43,7 @@ class BlogResource extends Resource
                     ->enableBranchNode()
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
+                    ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'blog');
                     }),
                 Toggle::make('is_active')
@@ -66,7 +66,7 @@ class BlogResource extends Resource
                     ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(function (Set $set, ?string $state){
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
                         $set('seo.title', $state);
                     }),
@@ -95,23 +95,22 @@ class BlogResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('seo.title')
-                    ->numeric()
+                    ->label('User')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
+                    ->label('Category')
                     ->sortable(),
-                Tables\Columns\ToggleColumn::make('is_approved')->label('Approved'),
-                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
-                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
                 Tables\Columns\ImageColumn::make('thumbnail')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
+                    ->label('Slug')
                     ->searchable(),
+                Tables\Columns\ToggleColumn::make('is_approved')->label('Approved'),
+                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
+                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

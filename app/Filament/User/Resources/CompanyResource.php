@@ -109,26 +109,32 @@ class CompanyResource extends Resource
                 TextInput::make('youtube')
                     ->label('Youtube')
                     ->maxLength(191),
-                Section::make('Address')
+                Section::make('Address Details')
                     ->relationship('address')
                     ->schema([
                         TextInput::make('address_line_1')
                             ->label('Address Line 1')
+                            ->placeholder('Enter address line 1')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('address_line_2')
                             ->label('Address Line 2')
+                            ->placeholder('Enter address line 2')
                             ->default('')
                             ->maxLength(191),
+                        TextInput::make('zip_code')
+                            ->label('Zip Code')
+                            ->required()
+                            ->maxLength(191),
                         Select::make('country_id')
-                            ->label('Select Country')
+                            ->label('Country')
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->default(101)
                             ->searchable()
                             ->required(),
                         Select::make('state_id')
-                            ->label('Select State')
+                            ->label('State')
                             ->live(onBlur: true)
                             ->options(fn (Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
@@ -136,32 +142,13 @@ class CompanyResource extends Resource
                             ->searchable()
                             ->required(),
                         Select::make('city_id')
-                            ->label('Select City')
+                            ->label('City')
                             ->options(fn (Get $get): Collection => City::query()
                                 ->where('state_id', $get('state_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                        TextInput::make('zip_code')
-                            ->label('Zip Code')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('longitude')
-                            ->label('Longitude')
-                            ->hidden()
-                            ->default('')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('latitude')
-                            ->label('Latitude')
-                            ->hidden()
-                            ->default('')
-                            ->required()
-                            ->maxLength(191),
-                        LeafletMap::make('location')
-                            ->dehydrated(false)
-                            ->columnSpanFull(),
-                    ])->columns(4),
+                    ])->columns(3),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
@@ -174,7 +161,7 @@ class CompanyResource extends Resource
                             ->maxLength(70),
                         TagsInput::make('meta_keywords')
                             ->label('Enter SEO Meta Keywords'),
-                    ])->columns(3),
+                    ])->columnSpanFull(),
             ])->columns(4);
     }
 

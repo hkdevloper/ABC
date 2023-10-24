@@ -11,6 +11,7 @@ use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -43,10 +44,13 @@ class JobResource extends Resource
             ->schema([
 
                 Toggle::make('is_active')
+                    ->label('Active')
                     ->required(),
                 Toggle::make('is_featured')
+                    ->label('Featured')
                     ->required(),
                 Select::make('user_id')
+                    ->label('Select User')
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
@@ -57,11 +61,13 @@ class JobResource extends Resource
                         return $query->where('type', 'job');
                     }),
                 TextInput::make('title')
+                    ->label('Enter Title')
                     ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
+                    ->label('Slug')
                     ->required()
                     ->maxLength(191),
                 TextInput::make('summary')
@@ -74,32 +80,48 @@ class JobResource extends Resource
                         $set('seo.title', $state);
                     }),
                 TextInput::make('website')
+                    ->label('Enter Website')
+                    ->prefix('https://')
+                    ->url()
                     ->maxLength(191),
                 Textarea::make('description')
+                    ->label('Enter Description')
+                    ->maxLength(65535)
                     ->columnSpanFull(),
-                DateTimePicker::make('valid_until'),
+                DateTimePicker::make('valid_until')
+                    ->label('Valid Until')
+                    ->before(today()->addYear())
+                    ->required(),
                 TextInput::make('employment_type')
+                    ->label('Enter Employment Type')
                     ->maxLength(191),
                 TextInput::make('salary')
+                    ->label('Enter Salary')
                     ->maxLength(191),
-                TextInput::make('organization')
+                MarkdownEditor::make('organization')
+                    ->label('Enter Organization')
                     ->maxLength(191),
-                Textarea::make('overview')
+                MarkdownEditor::make('overview')
+                    ->label('Enter Overview')
                     ->maxLength(65535)
                     ->columnSpanFull(),
-                Textarea::make('education')
+                MarkdownEditor::make('education')
+                    ->label('Enter Education')
                     ->maxLength(65535)
                     ->columnSpanFull(),
-                Textarea::make('experience')
+                MarkdownEditor::make('experience')
+                    ->label('Enter Experience')
                     ->maxLength(65535)
                     ->columnSpanFull(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->label('Thumbnail')
                             ->disk('public')
                             ->directory('events/thumbnail')
                             ->required(),
                         FileUpload::make('gallery')
+                            ->label('Gallery')
                             ->disk('public')
                             ->directory('events/gallery')
                             ->multiple(),
@@ -108,9 +130,11 @@ class JobResource extends Resource
                     ->relationship('address')
                     ->schema([
                         TextInput::make('address_line_1')
+                            ->label('Address Line 1')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('address_line_2')
+                            ->label('Address Line 2')
                             ->required()
                             ->maxLength(191),
                         Select::make('country_id')
@@ -135,25 +159,18 @@ class JobResource extends Resource
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                        TextInput::make('zip_code')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('longitude')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('latitude')
-                            ->required()
-                            ->maxLength(191),
                     ])->columns(4),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
+                            ->label('Meta Title')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('meta_description')
+                            ->label('Meta Description')
                             ->maxLength(300),
-                        TagsInput::make('meta_keywords'),
+                        TagsInput::make('meta_keywords')->label('Meta Keywords'),
                     ])->columns(3),
             ])->columns(4);
     }

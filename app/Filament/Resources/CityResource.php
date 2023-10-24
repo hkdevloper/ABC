@@ -50,11 +50,13 @@ class CityResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Name')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('featured')
+                    ->label('Featured')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('state.name')
-                    ->numeric()
+                    ->label('State')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

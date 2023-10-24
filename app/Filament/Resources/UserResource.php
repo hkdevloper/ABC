@@ -29,33 +29,42 @@ class UserResource extends Resource
         return $form
             ->schema(components: [
                 TextInput::make('name')
+                    ->label('Enter User Full Name')
                     ->required()
                     ->maxLength(191),
                 TextInput::make('email')
+                    ->label('Enter User Email')
                     ->email()
                     ->required()
                     ->maxLength(191),
-                DateTimePicker::make('email_verified_at'),
+                DateTimePicker::make('email_verified_at')->label('Email Verified At'),
                 TextInput::make('password')
+                    ->label('Enter User Password')
                     ->password()
                     ->required()
                     ->maxLength(191),
                 Toggle::make('approved')
+                    ->label('Approved')
                     ->required(),
                 Toggle::make('taxable')
+                    ->label('Taxable')
                     ->required(),
                 Toggle::make('banned')
+                    ->label('Banned')
                     ->live(onBlur: true)
                     ->required(),
                 TextInput::make('banned_reason')
+                    ->label('Banned Reason')
                     ->live(onBlur: true)
                     ->required(fn (Get $get) => $get('banned'))
                     ->maxLength(500),
                 TextInput::make('balance')
+                    ->label('Balance')
                     ->required()
                     ->maxLength(191)
                     ->default(0),
                 Select::make('type')
+                    ->label('Select Type')
                     ->options([
                         'user' => 'User',
                         'admin' => 'Admin',

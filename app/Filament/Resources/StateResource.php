@@ -29,11 +29,14 @@ class StateResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->label('Enter State Name')
                     ->required()
                     ->maxLength(191),
                 Toggle::make('featured')
+                    ->label('Featured')
                     ->required(),
                 Select::make('country_id')
+                    ->label('Select Country')
                     ->relationship('country', 'name')
                     ->native(false)
                     ->searchable()

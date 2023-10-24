@@ -75,7 +75,7 @@ class ProductResource extends Resource
                     ->placeholder('Enter brand')
                     ->maxLength(191),
             ])
-                    ->columns(3),
+                    ->columnSpanFull(),
                 MarkdownEditor::make('description')
                     ->columnSpanFull(),
                 Section::make('Images')
@@ -108,7 +108,7 @@ class ProductResource extends Resource
                             ->label('Meta Keywords')
                             ->placeholder('Enter keywords')
                             ->required(),
-                    ])->columns(3),
+                    ])->columnSpanFull(),
             ])->columns(4);
     }
 
