@@ -23,8 +23,13 @@ class UserJobController extends Controller
     }
 
     // Function to view Job Details
-    public function viewJobDetails()
+    public function viewJobDetails($slug)
     {
-        return view('pages.job.detail');
+        // Forgot session
+        Session::forget('menu');
+        $job = Job::where('slug', $slug)->first();
+        $related_jobs = Job::where('category_id', $job->category_id)->where('is_approved', 1)->where('is_active', 1)->where('id', '!=', $job->id)->get();
+        $data = compact('job', 'related_jobs');
+        return view('pages.job.detail')->with($data);
     }
 }

@@ -34,4 +34,9 @@ class Forum extends Model
     {
         return $this->hasMany(ForumReply::class);
     }
+
+    public function countAnswers() : int
+    {
+        return $this->forumReplies()->count();
+    }
 }

@@ -22,8 +22,12 @@ class UserCompanyController extends Controller
     }
 
     //Function to view Company Details
-    public function viewCompanyDetails()
+    public function viewCompanyDetails($slug)
     {
-        return view('pages.company.detail');
+        // Forgot session
+        Session::forget('menu');
+        $company = Company::where('slug', $slug)->first();
+        $data = compact('company');
+        return view('pages.company.detail')->with($data);
     }
 }

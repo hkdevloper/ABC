@@ -602,27 +602,23 @@
                 <div class="company-info-container">
                     <div class="company-photo">
                         <div class="company-photo-wrapper">
-                            <img class="photo" src="https://via.placeholder.com/160x160" alt="media" height="160"
-                                 width="160">
+                            <img class="photo" src="{{url('storage/' . $company->logo)}}" alt="media" height="160" width="160">
                         </div>
                     </div>
                     <div class="company-info">
-                        <div class="heading-line"><h1 class="head-cont typ-24Black " title="HkDevelopers">
-                                HkDevelopers</h1><a
-                                class="company-info-rnr"
-                                href="https://www.ambitionbox.com/reviews/bharti-HkDevelopers-reviews?utm_campaign=companyPage_ratings&amp;utm_medium=desktop&amp;utm_source=naukri"
-                                title="Powered by Ambition Box" target="_blank"><i
-                                    class="naukicon naukicon-rating-yellow-star star"></i><span
-                                    class="typ-14Bold">4.0 </span>
-                                <div class="vertical-separator"></div>
-                                <span class="reviews typ-14Medium">(10.9K reviews)</span></a></div>
+                        <div class="heading-line">
+                            <h1 class="head-cont typ-24Black">{{$company->name}}</h1>
+                            <a class="company-info-rnr"
+                                href="#"
+                                title="Powered by Ambition Box" target="_blank">
+                                <span class="reviews typ-14Medium">(10.9K reviews)</span>
+                            </a>
+                        </div>
                         <div class="tag-line typ-14Medium mb-2">Express Yourself</div>
                         <div class="chips-container p-2">
-                            <span class="chip px-2 py-1 card typ-14Medium">Telecom / ISP</span>
-                            <span class="chip px-2 py-1 card typ-14Medium">Public</span>
-                            <span class="chip px-2 py-1 card typ-14Medium">Indian MNC</span>
-                            <span class="chip px-2 py-1 card typ-14Medium">B2C</span>
-                            <span class="chip px-2 py-1 card typ-14Medium">B2B</span>
+                            @foreach($company->extra_things as $tag)
+                                <span class="chip px-2 py-1 card typ-14Medium">#{{$tag}}</span>
+                            @endforeach
                         </div>
                         <div class="flex space-x-4 mt-2">
                             <a class="flex items-center cursor-pointer hover:bg-blue-100 card p-2">
@@ -690,60 +686,42 @@
                     </div>
                     <div class="tab-content" style="top: 45px;">
                         <div class="leftContainer Overview">
-                            <div class="about-us mediaAbout card p-4"><h2
-                                    class="about-us-title typ-16Bold">About us</h2>
-                                <div class="content-container">
-                                    <div class="read-more ">
-                                        <span class="typ-14Medium">
-                                            HkDevelopers is a leading global telecommunications company with operations in 18 countries across Asia and Africa. Headquartered in New Delhi, India, the company ranks amongst the top 3 mobile service providers globally in terms of subscribers. In India, the company's product offerings include 2G, 3G and 4G wireless services, mobile commerce, fixed line services, high speed home broadband, DTH, enterprise services including national & international long distance services to carriers. In the rest of the geographies, it offers 2G, 3G, 4G wireless services and mobile commerce. HkDevelopers had over 403 million customers across its operations at the end of March 2019.
-                                            <br>
-                                            <br>
-                                            Over the last 5 years, the company has transformed from a pure-play mobile operator to a portfolio of business. HkDevelopers has a leadership position in mobile broadband with a pan India 3G/4G footprint. In addition, HkDevelopers has a dominant share of the mobile enterprise market and an extensive national and international fiber backbone. This has helped us transform into a truly integrated telecommunications company.
-                                            <br>
-                                            <br>
-                                            HkDevelopers is committed to delivering delightful customer experiences and together with our group companies, we are building a future ready network that touches every Indian. Guided by the vision of HkDevelopers with our group companies, we are committed to contributing towards building a digitally empowered society.
-                                            <br>
-                                            <br>
-                                            HkDevelopers is a listed company and is a part of HkDevelopers Group.
-                                        </span>
+                            {!! $company->description !!}
+                        </div>
+                        <div class="rightContainer Overview">
+                            <!-- Side Block -->
+                            <div class="flex flex-col lg:py-6 lg:pl-3 -mb-10 lg:w-1/4 lg:text-left text-center card h-full">
+                                <!-- Google Ad Block -->
+                                <div class="flex flex-col mb-10 lg:items-start items-center">
+                                    <div class="flex-grow">
+                                        <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Google Ad 1</h2>
+                                        <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four
+                                            dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
+                                        <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                                 stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2"
+                                                 viewBox="0 0 24 24">
+                                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col mb-10 lg:items-start items-center">
+                                    <div class="flex-grow">
+                                        <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Google Ad 2</h2>
+                                        <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four
+                                            dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
+                                        <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
+                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                                 stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2"
+                                                 viewBox="0 0 24 24">
+                                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="more-info mb-4 card p-4">
-                                <h4 class="more-info-title typ-16Bold">More Information</h4>
-                                <table class="w-full">
-                                    <tr class="info-item">
-                                        <td class="key-label typ-14Bold">Type</td>
-                                        <td class=" typ-14Bold">:</td>
-                                        <td class="val typ-14Medium">Public</td>
-                                    </tr>
-                                    <tr class="info-item">
-                                        <td class="key-label typ-14Bold">Founded</td>
-                                        <td class=" typ-14Bold">:</td>
-                                        <td class="val typ-14Medium">1995<span class="years"> (28 yrs old)</span></td>
-                                    </tr>
-                                    <tr class="info-item">
-                                        <td class="key-label typ-14Bold">Company Size</td>
-                                        <td class=" typ-14Bold">:</td>
-                                        <td class="val typ-14Medium">10001-50000</td>
-                                    </tr>
-                                    <tr class="info-item">
-                                        <td class="key-label typ-14Bold">Headquarters</td>
-                                        <td class=" typ-14Bold">:</td>
-                                        <td class="val typ-14Medium">Gurgaon/Gurugram, Haryana</td>
-                                    </tr>
-                                    <tr class="info-item">
-                                        <td class="key-label typ-14Bold">Website</td>
-                                        <td class=" typ-14Bold">:</td>
-                                        <td class="links typ-14Bold"><a href="https://www.HkDevelopers.in/"
-                                                                        target="_blank">https://www.HkDevelopers.in/</a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="rightContainer Overview">
-                            @include('includes.sidebar')
+
                         </div>
                     </div>
                 </div>

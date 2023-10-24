@@ -23,8 +23,14 @@ class UserEventController extends Controller
     }
 
     // Function to view Event Details
-    public function viewEventDetails()
+    public function viewEventDetails($slug)
     {
-        return view('pages.event.detail');
+        // Forgot session
+        Session::forget('menu');
+
+        $event = Event::where('slug', $slug)->where('is_approved', 1)->where('is_active', 1)->first();
+        $related_events = Event::where('category_id', $event->category_id)->where('is_approved', 1)->where('is_active', 1)->where('id', '!=', $event->id)->get();
+        $data = compact('event', 'related_events');
+        return view('pages.event.detail')->with($data);
     }
 }

@@ -45,7 +45,7 @@
         <div class="widget-placeholder">
             <div class="hkdevs-wdgt-section">
                 <!-- Content Section -->
-                <section class="text-gray-600 body-font">
+                <section class="container lg:px-24 md:px-12 py-6 mx-auto">
                     <div class="px-2 py-6 mx-auto flex flex-wrap">
                         <!-- Product List BLock -->
                         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">

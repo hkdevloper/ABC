@@ -23,8 +23,14 @@ class UserBlogController extends Controller
     }
 
     //Function to view Blog Details
-    public function viewBlogDetails()
+    public function viewBlogDetails($slug)
     {
-        return view('pages.blogs.detail');
+        // Forgot session
+        Session::forget('menu');
+
+        $blog = Blog::where('slug', $slug)->where('is_approved', 1)->where('is_active', 1)->first();
+        $related_blogs = Blog::where('category_id', $blog->category_id)->where('is_approved', 1)->where('is_active', 1)->where('id', '!=', $blog->id)->get();
+        $data = compact('blog', 'related_blogs');
+        return view('pages.blogs.detail')->with($data);
     }
 }

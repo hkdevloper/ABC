@@ -19,6 +19,8 @@ class UserDealController extends Controller
     // Function to view Deal Details
     public function viewDealDetails()
     {
+        // Forgot session
+        Session::forget('menu');
         return view('pages.deals.detail');
     }
 }

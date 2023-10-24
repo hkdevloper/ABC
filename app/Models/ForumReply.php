@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use http\Exception\BadConversionException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ForumReply extends Model
 {
@@ -15,15 +17,14 @@ class ForumReply extends Model
         'body',
         'user_id',
         'forum_id',
-        'body'
     ];
 
-    public function user()
+    public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function forum()
+    public function forum(): BelongsTo
     {
         return $this->belongsTo(Forum::class);
     }

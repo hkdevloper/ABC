@@ -47,7 +47,7 @@
                                                 </div>
                                             </div>
 
-                                            <a href="{{route('view.job', ['fullstack'])}}"
+                                            <a href="{{route('view.job', [$job->slug])}}"
                                                class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs"
                                                style="border: 1px solid;">
                                                 View Details

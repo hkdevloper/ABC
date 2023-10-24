@@ -57,35 +57,36 @@ Route::get('/', function () {
 
 Route::prefix('company')->group(function () {
     Route::get('/', [UserCompanyController::class, 'viewCompanyList'])->name('company');
-    Route::get('/{name}', [UserCompanyController::class, 'viewCompanyDetails'])->name('view.company');
+    Route::get('/{slug}', [UserCompanyController::class, 'viewCompanyDetails'])->name('view.company');
 });
 
 Route::prefix('product')->group(function () {
     Route::get('/', [UserProductController::class, 'viewProductList'])->name('products');
-    Route::get('/{name}', [UserProductController::class, 'viewProductDetails'])->name('view.product');
+    Route::get('/{slug}', [UserProductController::class, 'viewProductDetails'])->name('view.product');
 });
 
 Route::prefix('event')->group(function () {
     Route::get('/', [UserEventController::class, 'viewEventList'])->name('events');
-    Route::get('/{name}', [UserEventController::class, 'viewEventDetails'])->name('view.event');
+    Route::get('/{slug}', [UserEventController::class, 'viewEventDetails'])->name('view.event');
 });
 
 Route::prefix('blog')->group(function () {
     Route::get('/', [UserBlogController::class, 'viewBlogList'])->name('blogs');
-    Route::get('/{name}', [UserBlogController::class, 'viewBlogDetails'])->name('view.blog');
+    Route::get('/{slug}', [UserBlogController::class, 'viewBlogDetails'])->name('view.blog');
 });
 
 Route::prefix('deal')->group(function () {
     Route::get('/', [UserDealController::class, 'viewDealList'])->name('deals');
-    Route::get('/{name}', [UserDealController::class, 'viewDealDetails'])->name('view.deal');
+    Route::get('/{slug}', [UserDealController::class, 'viewDealDetails'])->name('view.deal');
 });
 
 Route::prefix('job')->group(function () {
     Route::get('/', [UserJobController::class, 'viewJobList'])->name('jobs');
-    Route::get('/{name}', [UserJobController::class, 'viewJobDetails'])->name('view.job');
+    Route::get('/{slug}', [UserJobController::class, 'viewJobDetails'])->name('view.job');
 });
 
 Route::prefix('forum')->group(function () {
     Route::get('/', [UserForumController::class, 'viewForumList'])->name('forum');
-    Route::get('/{name}', [UserForumController::class, 'viewForumDetails'])->name('view.forum');
+    Route::get('/{id}/{title}', [UserForumController::class, 'viewForumDetails'])->name('view.forum');
+    Route::post('/answer-forum', [UserForumController::class, 'answerForum'])->name('forum.reply');
 });

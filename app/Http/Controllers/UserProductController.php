@@ -23,8 +23,14 @@ class UserProductController extends Controller
     }
 
     // Function to view Product Details
-    public function viewProductDetails()
+    public function viewProductDetails($slug)
     {
-        return view('pages.product.detail');
+        // Forgot session
+        Session::forget('menu');
+
+        $product = Product::where('slug', $slug)->first();
+        $related_products = Product::where('category_id', $product->category_id)->where('id', '!=', $product->id)->where('is_approved', 1)->where('is_active', 1)->get();
+        $data = compact('product', 'related_products');
+        return view('pages.product.detail')->with($data);
     }
 }
