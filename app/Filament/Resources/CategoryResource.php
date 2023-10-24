@@ -103,10 +103,8 @@ class CategoryResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('summary')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_featured')
-                    ->boolean(),
+                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
+                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
                 Tables\Columns\TextColumn::make('parent.name')
                     ->label('Parent Category')
                     ->searchable()
@@ -124,7 +122,17 @@ class CategoryResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // filters for status
+                Tables\Filters\Filter::make('is_active')
+                    ->label('Active')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_active', 1);
+                    }),
+                Tables\Filters\Filter::make('is_featured')
+                    ->label('Featured')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_featured', 1);
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

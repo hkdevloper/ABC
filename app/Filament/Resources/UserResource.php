@@ -77,12 +77,9 @@ class UserResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('approved')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('taxable')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('banned')
-                    ->boolean(),
+                Tables\Columns\ToggleColumn::make('approved')->label('Approved'),
+                Tables\Columns\ToggleColumn::make('taxable')->label('Taxable'),
+                Tables\Columns\ToggleColumn::make('banned')->label('Banned'),
                 Tables\Columns\TextColumn::make('banned_reason')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -100,7 +97,17 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // filters for status
+                Tables\Filters\Filter::make('is_approved')
+                    ->label('Approved')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_approved', 1);
+                    }),
+                Tables\Filters\Filter::make('is_active')
+                    ->label('Active')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_active', 1);
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

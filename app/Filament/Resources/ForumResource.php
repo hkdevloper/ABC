@@ -34,12 +34,16 @@ class ForumResource extends Resource
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->withCount()
+                    ->required()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query){
                         return $query->where('type', 'forum');
-                    }),
+                    })->placeholder('Select Category'),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
+                    ->default(function () {
+                        return auth()->user()->id;
+                    })
                     ->required(),
             ])->columns(1);
     }
@@ -48,14 +52,20 @@ class ForumResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('title')
+                    ->limit(25)
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('body')
-                    ->limit(50)
+                    ->limit(30)
                     ->sortable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\ToggleColumn::make('is_approved')->label('Approved'),
+                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
+                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -64,10 +74,24 @@ class ForumResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\Column::make('Answers')->view('tables.columns.forum-answers-action')
             ])
             ->filters([
-                //
+                // filters for status
+                Tables\Filters\Filter::make('is_approved')
+                    ->label('Approved')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_approved', 1);
+                    }),
+                Tables\Filters\Filter::make('is_active')
+                    ->label('Active')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_active', 1);
+                    }),
+                Tables\Filters\Filter::make('is_featured')
+                    ->label('Featured')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_featured', 1);
+                    }),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([

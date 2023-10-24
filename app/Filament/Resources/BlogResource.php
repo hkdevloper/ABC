@@ -102,10 +102,9 @@ class BlogResource extends Resource
                 Tables\Columns\TextColumn::make('category.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_featured')
-                    ->boolean(),
+                Tables\Columns\ToggleColumn::make('is_approved')->label('Approved'),
+                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
+                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
                 Tables\Columns\ImageColumn::make('thumbnail')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
@@ -122,7 +121,22 @@ class BlogResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // filters for status
+                Tables\Filters\Filter::make('is_approved')
+                    ->label('Approved')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_approved', 1);
+                    }),
+                Tables\Filters\Filter::make('is_active')
+                    ->label('Active')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_active', 1);
+                    }),
+                Tables\Filters\Filter::make('is_featured')
+                    ->label('Featured')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_featured', 1);
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

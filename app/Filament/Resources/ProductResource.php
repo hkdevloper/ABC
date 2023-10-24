@@ -123,14 +123,10 @@ class ProductResource extends Resource
                     ->numeric()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_featured')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_claimed')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_approved')
-                    ->boolean(),
+                Tables\Columns\ToggleColumn::make('is_approved')->label('Approved'),
+                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
+                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
+                Tables\Columns\ToggleColumn::make('is_claimed')->label('Claimed'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
@@ -154,7 +150,22 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // filters for status
+                Tables\Filters\Filter::make('is_approved')
+                    ->label('Approved')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_approved', 1);
+                    }),
+                Tables\Filters\Filter::make('is_active')
+                    ->label('Active')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_active', 1);
+                    }),
+                Tables\Filters\Filter::make('is_featured')
+                    ->label('Featured')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_featured', 1);
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

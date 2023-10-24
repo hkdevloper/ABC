@@ -68,8 +68,7 @@ class AddressResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\IconColumn::make('is_featured')
-                    ->boolean(),
+                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
                 Tables\Columns\TextColumn::make('address_line_1')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address_line_2')
@@ -103,7 +102,12 @@ class AddressResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // filters for status
+                Tables\Filters\Filter::make('is_featured')
+                    ->label('Featured')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('is_featured', 1);
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
