@@ -36,18 +36,6 @@ class EventResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-megaphone';
     protected static ?int $navigationSort = 4;
 
-    public function mount(): void
-    {
-        if(!auth()->user()->canManageSettings()){
-            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
-            if($company){
-                redirect('/user/dashboard/companies/'.$company->id);
-            }else{
-                redirect('/user/dashboard/companies/create');
-            }
-        }
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -121,7 +109,7 @@ class EventResource extends Resource
                         TextInput::make('address_line_2')
                             ->label('Address Line 2')
                             ->placeholder('Enter address line 2')
-                            ->required()
+                            ->default('')
                             ->maxLength(191),
                         Select::make('country_id')
                             ->label('Country')
@@ -151,11 +139,13 @@ class EventResource extends Resource
                             ->maxLength(191),
                         TextInput::make('longitude')
                             ->label('Longitude')
-                            ->required()
+                            ->default('')
+                            ->hidden()
                             ->maxLength(191),
                         TextInput::make('latitude')
                             ->label('Latitude')
-                            ->required()
+                            ->default('')
+                            ->hidden()
                             ->maxLength(191),
                     ])->columns(4),
                 Section::make('SEO Details')

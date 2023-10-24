@@ -63,19 +63,25 @@ class CompanyResource extends Resource
                     ->required()
                     ->maxLength(191),
                 TagsInput::make('extra_things')
-                    ->label('Extra Things')
+                    ->label('Tags')
                     ->required(),
-                Forms\Components\RichEditor::make('description')
+                Forms\Components\MarkdownEditor::make('description')
+                    ->default('')
                     ->columnSpanFull(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('logo')
+                            ->label('Logo')
                             ->directory('companies/logo')
                             ->required(),
+                        FileUpload::make('banner')
+                            ->label('Banner')
+                            ->directory('companies/banner'),
                         FileUpload::make('gallery')
+                            ->label('Gallery')
                             ->directory('companies/gallery')
                             ->multiple(),
-                    ])->columns(2),
+                    ])->columns(3),
                 TextInput::make('phone')
                     ->label('Phone Number')
                     ->tel()
@@ -86,6 +92,7 @@ class CompanyResource extends Resource
                     ->maxLength(191),
                 TextInput::make('website')
                     ->label('Website')
+                    ->url()
                     ->maxLength(191),
                 TextInput::make('facebook')
                     ->label('Facebook')
@@ -111,7 +118,7 @@ class CompanyResource extends Resource
                             ->maxLength(191),
                         TextInput::make('address_line_2')
                             ->label('Address Line 2')
-                            ->required()
+                            ->default('')
                             ->maxLength(191),
                         Select::make('country_id')
                             ->label('Select Country')
@@ -141,10 +148,14 @@ class CompanyResource extends Resource
                             ->maxLength(191),
                         TextInput::make('longitude')
                             ->label('Longitude')
+                            ->hidden()
+                            ->default('')
                             ->required()
                             ->maxLength(191),
                         TextInput::make('latitude')
                             ->label('Latitude')
+                            ->hidden()
+                            ->default('')
                             ->required()
                             ->maxLength(191),
                         LeafletMap::make('location')

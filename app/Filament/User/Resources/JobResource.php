@@ -12,6 +12,7 @@ use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -89,13 +90,13 @@ class JobResource extends Resource
                     ->maxLength(191),
                 Section::make()
             ->schema([
-                RichEditor::make('description')
+                MarkdownEditor::make('description')
                     ->maxLength(65535),
-                RichEditor::make('overview')
+                MarkdownEditor::make('overview')
                     ->maxLength(65535),
-                RichEditor::make('education')
+                MarkdownEditor::make('education')
                     ->maxLength(65535),
-                RichEditor::make('experience')
+                MarkdownEditor::make('experience')
                     ->maxLength(65535),
             ])->columns(2),
                 Section::make('Images')
@@ -154,11 +155,13 @@ class JobResource extends Resource
                             ->maxLength(191),
                         TextInput::make('longitude')
                             ->label('Longitude')
-                            ->required()
+                            ->default('')
+                            ->hidden()
                             ->maxLength(191),
                         TextInput::make('latitude')
                             ->label('Latitude')
-                            ->required()
+                            ->default('')
+                            ->hidden()
                             ->maxLength(191),
                     ])->columns(4),
                 Section::make('SEO Details')

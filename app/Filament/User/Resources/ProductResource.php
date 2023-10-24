@@ -8,6 +8,7 @@ use App\Models\Product;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -29,24 +30,12 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
     protected static ?int $navigationSort = 2;
-    public function mount(): void
-    {
-        if(!auth()->user()->canManageSettings()){
-            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
-            if($company){
-                redirect('/user/dashboard/companies/'.$company->id);
-            }else{
-                redirect('/user/dashboard/companies/create');
-            }
-        }
-    }
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Section::make()
-            ->schema([
+                ->schema([
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
@@ -74,6 +63,7 @@ class ProductResource extends Resource
                     ->prefix('$'),
                 Select::make('condition')
                     ->label('Select Condition')
+                    ->native(false)
                     ->options([
                         'new' => 'New',
                         'used' => 'Used',
@@ -84,8 +74,9 @@ class ProductResource extends Resource
                     ->label('Brand')
                     ->placeholder('Enter brand')
                     ->maxLength(191),
-            ])->columns(3),
-                Forms\Components\RichEditor::make('description')
+            ])
+                    ->columns(3),
+                MarkdownEditor::make('description')
                     ->columnSpanFull(),
                 Section::make('Images')
                     ->schema([

@@ -24,6 +24,7 @@ class Company extends Model
         'description',
         'extra_things',
         'logo',
+        'banner',
         'gallery',
         'phone',
         'email',

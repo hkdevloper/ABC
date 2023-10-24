@@ -108,22 +108,27 @@ class BlogResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->disk('public')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('seo.title')
+                    ->label('SEO')
                     ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('category.name')
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label('Active')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_featured')
+                    ->label('Featured')
                     ->boolean(),
-                Tables\Columns\ImageColumn::make('thumbnail')
-                    ->disk('public')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
+                    ->label('Slug')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
