@@ -9,6 +9,8 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateBlog extends CreateRecord
 {
     protected static string $resource = BlogResource::class;
+    protected static bool $canCreateAnother = false;
+
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
@@ -16,4 +18,5 @@ class CreateBlog extends CreateRecord
             'user_id' => auth()->user()->id,
         ]);
     }
+
 }

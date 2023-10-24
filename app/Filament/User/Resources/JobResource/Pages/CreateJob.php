@@ -9,6 +9,8 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateJob extends CreateRecord
 {
     protected static string $resource = JobResource::class;
+    protected static bool $canCreateAnother = false;
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         return array_merge($data, [

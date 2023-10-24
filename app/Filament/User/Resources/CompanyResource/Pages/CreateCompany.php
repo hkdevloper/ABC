@@ -9,6 +9,8 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateCompany extends CreateRecord
 {
     protected static string $resource = CompanyResource::class;
+    protected static bool $canCreateAnother = false;
+
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
