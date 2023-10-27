@@ -54,6 +54,11 @@ class CompanyResource extends Resource
                 Select::make('user_id')
                     ->label('Select User')
                     ->relationship('user', 'name'),
+                Select::make('business_type')->options([
+                    'manufacturer' => 'Manufacturer',
+                    'distributor' => 'Distributor',
+                    'retailer' => 'Retailer',
+                ])->required(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
@@ -77,8 +82,9 @@ class CompanyResource extends Resource
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
-                TagsInput::make('extra_things')
-                    ->label('Tags')
+                TextInput::make('extra_things')
+                    ->label('Products Name')
+                    ->helperText('Enter your Products Name Seperated By Comma.')
                     ->required(),
                 Section::make('Images')
                     ->schema([
@@ -88,77 +94,82 @@ class CompanyResource extends Resource
                             ->required(),
                         FileUpload::make('banner')
                             ->label('Banner')
-                            ->directory('companies/banner')
-                            ->required(),
+                            ->directory('companies/banner'),
                         FileUpload::make('gallery')
                             ->label('Gallery')
+                            ->helperText('Add your company photos, Certificates etc')
                             ->directory('companies/gallery')
+                            ->maxFiles(4)
                             ->multiple(),
-                    ])->columns(2),
-                TextInput::make('phone')
-                    ->label('Phone Number')
-                    ->tel()
-                    ->maxLength(191),
-                TextInput::make('email')
-                    ->label('Email Address')
-                    ->email()
-                    ->maxLength(191),
-                TextInput::make('website')
-                    ->label('Website')
-                    ->maxLength(191),
-                TextInput::make('facebook')
-                    ->label('Facebook')
-                    ->maxLength(191),
-                TextInput::make('twitter')
-                    ->label('Twitter')
-                    ->maxLength(191),
-                TextInput::make('instagram')
-                    ->label('Instagram')
-                    ->maxLength(191),
-                TextInput::make('linkdin')
-                    ->label('Linkdin')
-                    ->maxLength(191),
-                TextInput::make('youtube')
-                    ->label('Youtube')
-                    ->maxLength(191),
-                Section::make('Address')
+                    ])->columns(1),
+                Section::make('Social Details')
+                    ->schema([
+                        TextInput::make('facebook')
+                            ->label('Facebook')
+                            ->maxLength(191),
+                        TextInput::make('twitter')
+                            ->label('Twitter')
+                            ->maxLength(191),
+                        TextInput::make('instagram')
+                            ->label('Instagram')
+                            ->maxLength(191),
+                        TextInput::make('linkdin')
+                            ->label('Linkdin')
+                            ->maxLength(191),
+                        TextInput::make('youtube')
+                            ->label('Youtube')
+                            ->maxLength(191),
+                    ])->columns(1),
+                Section::make('Address Details')
                     ->relationship('address')
                     ->schema([
-                        TextInput::make('address_line_1')
-                            ->label('Address Line 1')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('address_line_2')
-                            ->label('Address Line 2')
-                            ->required()
-                            ->maxLength(191),
                         Select::make('country_id')
-                            ->label('Select Country')
+                            ->label('Country')
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->default(101)
                             ->searchable()
                             ->required(),
                         Select::make('state_id')
-                            ->label('Select State')
+                            ->label('State')
                             ->live(onBlur: true)
-                            ->options(fn (Get $get): Collection => State::query()
+                            ->options(fn(Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
                         Select::make('city_id')
-                            ->label('Select City')
-                            ->options(fn (Get $get): Collection => City::query()
-                                    ->where('state_id', $get('state_id'))
-                                    ->pluck('name', 'id'))
+                            ->label('City')
+                            ->options(fn(Get $get): Collection => City::query()
+                                ->where('state_id', $get('state_id'))
+                                ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
                         TextInput::make('zip_code')
                             ->label('Zip Code')
                             ->required()
                             ->maxLength(191),
-                    ])->columns(4),
+                        Forms\Components\Textarea::make('address_line_1')
+                            ->label('Address Line 1')
+                            ->placeholder('Enter address line 1')
+                            ->required()
+                            ->maxLength(191),
+                    ])->columns(1),
+                Section::make('Contact Details')
+                    ->schema([
+                        TextInput::make('phone')
+                            ->label('Phone Number')
+                            ->tel()
+                            ->maxLength(191),
+                        TextInput::make('email')
+                            ->label('Email Address')
+                            ->email()
+                            ->maxLength(191),
+                        TextInput::make('website')
+                            ->label('Website')
+                            ->url()
+                            ->maxLength(191),
+                    ])->columns(1),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
@@ -166,12 +177,12 @@ class CompanyResource extends Resource
                             ->label('Enter SEO Title')
                             ->required()
                             ->maxLength(191),
+                        TagsInput::make('meta_keywords')
+                            ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')
                             ->maxLength(70),
-                        TagsInput::make('meta_keywords')
-                            ->label('Enter SEO Meta Keywords'),
-                    ])->columns(3),
+                    ])->columns(1),
             ])->columns(4);
     }
 
@@ -180,28 +191,18 @@ class CompanyResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('logo')
+                    ->label('Logo')
                     ->disk('public')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('phone')
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Category')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\ToggleColumn::make('is_approved')->label('Approved'),
                 Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
                 Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
-                Tables\Columns\ToggleColumn::make('is_claimed')->label('Claimed'),
                 Tables\Columns\TextColumn::make('website')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),

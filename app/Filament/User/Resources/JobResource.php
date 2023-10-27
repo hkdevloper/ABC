@@ -48,7 +48,7 @@ class JobResource extends Resource
                     ->enableBranchNode()
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
+                    ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'job');
                     }),
                 TextInput::make('title')
@@ -57,80 +57,55 @@ class JobResource extends Resource
                     ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
                     ->label('Slug')
                     ->placeholder('Enter slug')
                     ->required()
                     ->maxLength(191),
-                TextInput::make('summary')
-                    ->label('Summary')
-                    ->placeholder('Enter summary')
-                    ->maxLength(191),
-                TextInput::make('website')
-                    ->label('Website')
-                    ->placeholder('Enter website')
-                    ->prefix('https://')
-                    ->maxLength(191),
-                DatePicker::make('valid_until')
-                    ->label('Valid Until')
-                    ->prefixIcon('heroicon-o-calendar'),
-                TextInput::make('employment_type')
-                    ->label('Employment Type')
-                    ->placeholder('Enter employment type')
-                    ->maxLength(191),
-                TextInput::make('salary')
-                    ->label('Salary')
-                    ->placeholder('Enter salary')
-                    ->prefixIcon('heroicon-o-currency-dollar')
-                    ->maxLength(191),
                 TextInput::make('organization')
                     ->label('Organization')
                     ->placeholder('Enter organization')
                     ->maxLength(191),
-                Section::make()
-            ->schema([
                 MarkdownEditor::make('description')
-                    ->maxLength(65535),
-                MarkdownEditor::make('overview')
-                    ->maxLength(65535),
-                MarkdownEditor::make('education')
-                    ->maxLength(65535),
-                MarkdownEditor::make('experience')
-                    ->maxLength(65535),
-            ])->columns(2),
+                    ->maxLength(65535)
+                    ->columnSpanFull(),
+                Section::make()->schema([
+                    DatePicker::make('valid_until')
+                        ->label('Valid Until')
+                        ->prefixIcon('heroicon-o-calendar'),
+                    TextInput::make('employment_type')
+                        ->label('Employment Type')
+                        ->placeholder('Enter employment type')
+                        ->maxLength(191),
+                    TextInput::make('salary')
+                        ->label('Salary')
+                        ->placeholder('Enter salary')
+                        ->prefixIcon('heroicon-o-currency-dollar')
+                        ->maxLength(191),
+                ])->columns(3),
+                Section::make()
+                    ->schema([
+                        MarkdownEditor::make('education')
+                            ->label('Education/Qualification')
+                            ->required()
+                            ->maxLength(65535),
+                        MarkdownEditor::make('experience')
+                            ->label('Experience')
+                            ->required()
+                            ->maxLength(65535),
+                    ])->columns(2),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
-                            ->label('Thumbnail Image')
+                            ->label('Company Logo')
                             ->directory('job/thumbnail')
                             ->visibility('public')
                             ->required(),
-                        FileUpload::make('gallery')
-                            ->label('Job gallery')
-                            ->directory('job/gallery')
-                            ->multiple()
-                            ->maxFiles(5)
-                            ->visibility('public')
-                            ->required(),
-                    ])->columns(2),
+                    ])->columns(1),
                 Section::make('Address Details')
                     ->relationship('address')
                     ->schema([
-                        TextInput::make('address_line_1')
-                            ->label('Address Line 1')
-                            ->placeholder('Enter address line 1')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('address_line_2')
-                            ->label('Address Line 2')
-                            ->placeholder('Enter address line 2')
-                            ->default('')
-                            ->maxLength(191),
-                        TextInput::make('zip_code')
-                            ->label('Zip Code')
-                            ->required()
-                            ->maxLength(191),
                         Select::make('country_id')
                             ->label('Country')
                             ->live(onBlur: true)
@@ -141,73 +116,64 @@ class JobResource extends Resource
                         Select::make('state_id')
                             ->label('State')
                             ->live(onBlur: true)
-                            ->options(fn (Get $get): Collection => State::query()
+                            ->options(fn(Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
                         Select::make('city_id')
                             ->label('City')
-                            ->options(fn (Get $get): Collection => City::query()
+                            ->options(fn(Get $get): Collection => City::query()
                                 ->where('state_id', $get('state_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                    ])->columns(3),
+                        TextInput::make('zip_code')
+                            ->label('Zip Code')
+                            ->required()
+                            ->maxLength(191),
+                        Forms\Components\Textarea::make('address_line_1')
+                            ->label('Address Line 1')
+                            ->placeholder('Enter address line 1')
+                            ->required()
+                            ->maxLength(191),
+                    ])->columns(1),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
-                            ->label('SEO Title')
-                            ->placeholder('Enter title')
+                            ->label('Enter SEO Title')
                             ->required()
                             ->maxLength(191),
-                        TextInput::make('meta_description')
-                            ->label('Meta Description')
-                            ->maxLength(300),
                         TagsInput::make('meta_keywords')
-                            ->label('Meta Keywords')
-                            ->placeholder('Enter keywords')
-                            ->required(),
-                    ])->columnSpanFull(),
-            ])->columns(4);
+                            ->label('Enter SEO Meta Keywords'),
+                        TextInput::make('meta_description')
+                            ->label('Enter SEO Meta Description')
+                            ->maxLength(70),
+                    ])->columns(1),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('seo.title')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_featured')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('summary')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('valid_until')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('employment_type')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('salary')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('organization')
-                    ->searchable(),
                 Tables\Columns\ImageColumn::make('thumbnail')
+                    ->label('Thumbnail')
                     ->disk('public')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('website')
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Title')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Category')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('is_approved')
+                    ->label('Approved')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('is_featured')
+                    ->label('Featured')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

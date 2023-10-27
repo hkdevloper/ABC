@@ -40,13 +40,18 @@ class CompanyResource extends Resource
             ->schema([
                 Hidden::make('user_id')
                     ->default(auth()->user()->id),
+                Select::make('business_type')->options([
+                    'manufacturer' => 'Manufacturer',
+                    'distributor' => 'Distributor',
+                    'retailer' => 'Retailer',
+                ])->required(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
                     ->enableBranchNode()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
+                    ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'company');
                     }),
                 TextInput::make('name')
@@ -54,7 +59,7 @@ class CompanyResource extends Resource
                     ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(function (Set $set, ?string $state){
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
                         $set('seo.title', $state);
                     }),
@@ -62,12 +67,13 @@ class CompanyResource extends Resource
                     ->label('Enter Company Slug')
                     ->required()
                     ->maxLength(191),
-                TagsInput::make('extra_things')
-                    ->label('Tags')
-                    ->required(),
                 Forms\Components\MarkdownEditor::make('description')
                     ->default('')
                     ->columnSpanFull(),
+                TextInput::make('extra_things')
+                    ->label('Products Name')
+                    ->helperText('Enter your Products Name Seperated By Comma.')
+                    ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('logo')
@@ -79,53 +85,32 @@ class CompanyResource extends Resource
                             ->directory('companies/banner'),
                         FileUpload::make('gallery')
                             ->label('Gallery')
+                            ->helperText('Add your company photos, Certificates etc')
                             ->directory('companies/gallery')
+                            ->maxFiles(5)
                             ->multiple(),
-                    ])->columns(3),
-                TextInput::make('phone')
-                    ->label('Phone Number')
-                    ->tel()
-                    ->maxLength(191),
-                TextInput::make('email')
-                    ->label('Email Address')
-                    ->email()
-                    ->maxLength(191),
-                TextInput::make('website')
-                    ->label('Website')
-                    ->url()
-                    ->maxLength(191),
-                TextInput::make('facebook')
-                    ->label('Facebook')
-                    ->maxLength(191),
-                TextInput::make('twitter')
-                    ->label('Twitter')
-                    ->maxLength(191),
-                TextInput::make('instagram')
-                    ->label('Instagram')
-                    ->maxLength(191),
-                TextInput::make('linkdin')
-                    ->label('Linkdin')
-                    ->maxLength(191),
-                TextInput::make('youtube')
-                    ->label('Youtube')
-                    ->maxLength(191),
+                    ])->columns(1),
+                Section::make('Social Details')
+                    ->schema([
+                        TextInput::make('facebook')
+                            ->label('Facebook')
+                            ->maxLength(191),
+                        TextInput::make('twitter')
+                            ->label('Twitter')
+                            ->maxLength(191),
+                        TextInput::make('instagram')
+                            ->label('Instagram')
+                            ->maxLength(191),
+                        TextInput::make('linkdin')
+                            ->label('Linkdin')
+                            ->maxLength(191),
+                        TextInput::make('youtube')
+                            ->label('Youtube')
+                            ->maxLength(191),
+                    ])->columns(1),
                 Section::make('Address Details')
                     ->relationship('address')
                     ->schema([
-                        TextInput::make('address_line_1')
-                            ->label('Address Line 1')
-                            ->placeholder('Enter address line 1')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('address_line_2')
-                            ->label('Address Line 2')
-                            ->placeholder('Enter address line 2')
-                            ->default('')
-                            ->maxLength(191),
-                        TextInput::make('zip_code')
-                            ->label('Zip Code')
-                            ->required()
-                            ->maxLength(191),
                         Select::make('country_id')
                             ->label('Country')
                             ->live(onBlur: true)
@@ -136,19 +121,43 @@ class CompanyResource extends Resource
                         Select::make('state_id')
                             ->label('State')
                             ->live(onBlur: true)
-                            ->options(fn (Get $get): Collection => State::query()
+                            ->options(fn(Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
                         Select::make('city_id')
                             ->label('City')
-                            ->options(fn (Get $get): Collection => City::query()
+                            ->options(fn(Get $get): Collection => City::query()
                                 ->where('state_id', $get('state_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                    ])->columns(3),
+                        TextInput::make('zip_code')
+                            ->label('Zip Code')
+                            ->required()
+                            ->maxLength(191),
+                        Forms\Components\Textarea::make('address_line_1')
+                            ->label('Address Line 1')
+                            ->placeholder('Enter address line 1')
+                            ->required()
+                            ->maxLength(191),
+                    ])->columns(1),
+                Section::make('Contact Details')
+                    ->schema([
+                        TextInput::make('phone')
+                            ->label('Phone Number')
+                            ->tel()
+                            ->maxLength(191),
+                        TextInput::make('email')
+                            ->label('Email Address')
+                            ->email()
+                            ->maxLength(191),
+                        TextInput::make('website')
+                            ->label('Website')
+                            ->url()
+                            ->maxLength(191),
+                    ])->columns(1),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
@@ -156,13 +165,13 @@ class CompanyResource extends Resource
                             ->label('Enter SEO Title')
                             ->required()
                             ->maxLength(191),
+                        TagsInput::make('meta_keywords')
+                            ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')
                             ->maxLength(70),
-                        TagsInput::make('meta_keywords')
-                            ->label('Enter SEO Meta Keywords'),
-                    ])->columnSpanFull(),
-            ])->columns(4);
+                    ])->columns(1),
+            ])->columns(1);
     }
 
     public static function getRelations(): array

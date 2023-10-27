@@ -47,7 +47,7 @@ class EventResource extends Resource
                             ->enableBranchNode()
                             ->withCount()
                             ->emptyLabel('Oops! No Category Found')
-                            ->relationship('category', 'name', 'parent_id', function ($query){
+                            ->relationship('category', 'name', 'parent_id', function ($query) {
                                 return $query->where('type', 'event');
                             }),
                         TextInput::make('title')
@@ -62,26 +62,22 @@ class EventResource extends Resource
                             ->placeholder('Enter slug')
                             ->required()
                             ->maxLength(191),
-
-                        DateTimePicker::make('start')
-                            ->label('Event Start Date')
-                            ->prefixIcon('heroicon-o-calendar')
-                            ->default(now())
-                            ->required(),
-                        DateTimePicker::make('end')
-                            ->label('Event End Date')
-                            ->prefixIcon('heroicon-o-calendar')
-                            ->default(now()->addDays(1))
-                            ->required(),
-                        TextInput::make('website')
-                            ->label('Website')
-                            ->placeholder('Enter website')
-                            ->url()
-                            ->prefix('https://')
-                            ->maxLength(191),
+                        Forms\Components\RichEditor::make('description')
+                            ->columnSpanFull(),
+                        Section::make()
+                            ->schema([
+                                DateTimePicker::make('start')
+                                    ->label('Event Start Date')
+                                    ->prefixIcon('heroicon-o-calendar')
+                                    ->default(now())
+                                    ->required(),
+                                DateTimePicker::make('end')
+                                    ->label('Event End Date')
+                                    ->prefixIcon('heroicon-o-calendar')
+                                    ->default(now()->addDays(1))
+                                    ->required(),
+                            ])->columns(2),
                     ])->columnSpanFull(),
-                Forms\Components\RichEditor::make('description')
-                    ->columnSpanFull(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
@@ -93,27 +89,13 @@ class EventResource extends Resource
                             ->label('Event gallery')
                             ->directory('event/gallery')
                             ->multiple()
-                            ->maxFiles(5)
+                            ->maxFiles(4)
                             ->visibility('public')
                             ->required(),
                     ])->columns(2),
                 Section::make('Address Details')
                     ->relationship('address')
                     ->schema([
-                        TextInput::make('address_line_1')
-                            ->label('Address Line 1')
-                            ->placeholder('Enter address line 1')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('address_line_2')
-                            ->label('Address Line 2')
-                            ->placeholder('Enter address line 2')
-                            ->default('')
-                            ->maxLength(191),
-                        TextInput::make('zip_code')
-                            ->label('Zip Code')
-                            ->required()
-                            ->maxLength(191),
                         Select::make('country_id')
                             ->label('Country')
                             ->live(onBlur: true)
@@ -124,35 +106,41 @@ class EventResource extends Resource
                         Select::make('state_id')
                             ->label('State')
                             ->live(onBlur: true)
-                            ->options(fn (Get $get): Collection => State::query()
+                            ->options(fn(Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
                         Select::make('city_id')
                             ->label('City')
-                            ->options(fn (Get $get): Collection => City::query()
+                            ->options(fn(Get $get): Collection => City::query()
                                 ->where('state_id', $get('state_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                    ])->columns(3),
+                        TextInput::make('zip_code')
+                            ->label('Zip Code')
+                            ->required()
+                            ->maxLength(191),
+                        Forms\Components\Textarea::make('address_line_1')
+                            ->label('Address Line 1')
+                            ->placeholder('Enter address line 1')
+                            ->required()
+                            ->maxLength(191),
+                    ])->columns(1),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
-                            ->label('SEO Title')
-                            ->placeholder('Enter title')
+                            ->label('Enter SEO Title')
                             ->required()
                             ->maxLength(191),
-                        TextInput::make('meta_description')
-                            ->label('Meta Description')
-                            ->maxLength(300),
                         TagsInput::make('meta_keywords')
-                            ->label('Meta Keywords')
-                            ->placeholder('Enter keywords')
-                            ->required(),
-                    ])->columnSpanFull(),
+                            ->label('Enter SEO Meta Keywords'),
+                        TextInput::make('meta_description')
+                            ->label('Enter SEO Meta Description')
+                            ->maxLength(70),
+                    ])->columns(1),
             ])->columns(4);
     }
 
@@ -160,36 +148,22 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('category.name')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('seo.title')
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\ImageColumn::make('thumbnail')
+                    ->label('Thumbnail')
                     ->disk('public')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('is_active')
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Title')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Category')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('is_approved')
+                    ->label('Approved')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_featured')
+                    ->label('Featured')
                     ->boolean(),
-                Tables\Columns\IconColumn::make('is_approved')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('start')
-                    ->dateTime('d M Y')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('end')
-                    ->dateTime('d M Y')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('website')
-                    ->url('website')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

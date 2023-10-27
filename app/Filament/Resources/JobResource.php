@@ -70,20 +70,6 @@ class JobResource extends Resource
                     ->label('Slug')
                     ->required()
                     ->maxLength(191),
-                TextInput::make('summary')
-                    ->label('Enter Summary')
-                    ->live(onBlur: true)
-                    ->required()
-                    ->maxLength(191)
-                    ->afterStateUpdated(function (Set $set, ?string $state){
-                        $set('slug', Str::slug($state));
-                        $set('seo.title', $state);
-                    }),
-                TextInput::make('website')
-                    ->label('Enter Website')
-                    ->prefix('https://')
-                    ->url()
-                    ->maxLength(191),
                 Textarea::make('description')
                     ->label('Enter Description')
                     ->maxLength(65535)
@@ -101,10 +87,6 @@ class JobResource extends Resource
                 MarkdownEditor::make('organization')
                     ->label('Enter Organization')
                     ->maxLength(191),
-                MarkdownEditor::make('overview')
-                    ->label('Enter Overview')
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
                 MarkdownEditor::make('education')
                     ->label('Enter Education')
                     ->maxLength(65535)
@@ -120,58 +102,55 @@ class JobResource extends Resource
                             ->disk('public')
                             ->directory('events/thumbnail')
                             ->required(),
-                        FileUpload::make('gallery')
-                            ->label('Gallery')
-                            ->disk('public')
-                            ->directory('events/gallery')
-                            ->multiple(),
-                    ])->columns(2),
+                    ])->columns(1),
                 Section::make('Address Details')
                     ->relationship('address')
                     ->schema([
-                        TextInput::make('address_line_1')
-                            ->label('Address Line 1')
-                            ->required()
-                            ->maxLength(191),
-                        TextInput::make('address_line_2')
-                            ->label('Address Line 2')
-                            ->required()
-                            ->maxLength(191),
                         Select::make('country_id')
-                            ->label('Select Country')
+                            ->label('Country')
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->default(101)
                             ->searchable()
                             ->required(),
                         Select::make('state_id')
-                            ->label('Select State')
+                            ->label('State')
                             ->live(onBlur: true)
-                            ->options(fn (Get $get): Collection => State::query()
+                            ->options(fn(Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
                         Select::make('city_id')
-                            ->label('Select City')
-                            ->options(fn (Get $get): Collection => City::query()
+                            ->label('City')
+                            ->options(fn(Get $get): Collection => City::query()
                                 ->where('state_id', $get('state_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                    ])->columns(4),
+                        TextInput::make('zip_code')
+                            ->label('Zip Code')
+                            ->required()
+                            ->maxLength(191),
+                        Forms\Components\Textarea::make('address_line_1')
+                            ->label('Address Line 1')
+                            ->placeholder('Enter address line 1')
+                            ->required()
+                            ->maxLength(191),
+                    ])->columns(1),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
-                            ->label('Meta Title')
+                            ->label('Enter SEO Title')
                             ->required()
                             ->maxLength(191),
+                        TagsInput::make('meta_keywords')
+                            ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
-                            ->label('Meta Description')
-                            ->maxLength(300),
-                        TagsInput::make('meta_keywords')->label('Meta Keywords'),
-                    ])->columns(3),
+                            ->label('Enter SEO Meta Description')
+                            ->maxLength(70),
+                    ])->columns(1),
             ])->columns(4);
     }
 
@@ -180,42 +159,18 @@ class JobResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail')
-                    ->disk('public'),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Thumbnail')
+                    ->disk('public')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Title')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('seo.title')
-                    ->numeric()
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->sortable(),
+                    ->label('Category')
+                    ->searchable(),
                 Tables\Columns\ToggleColumn::make('is_approved')->label('Approved'),
                 Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
                 Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('summary')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('valid_until')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('employment_type')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('salary')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('organization')
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('website')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

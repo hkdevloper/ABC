@@ -30,54 +30,58 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
     protected static ?int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Section::make()
-                ->schema([
-                SelectTree::make('category_id')
-                    ->label('Select Category')
-                    ->enableBranchNode()
-                    ->withCount()
-                    ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
-                        return $query->where('type', 'product');
-                    }),
-                TextInput::make('name')
-                    ->label('Product Name')
-                    ->placeholder('Enter product name')
-                    ->live(onBlur: true)
-                    ->required()
-                    ->maxLength(191)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
-                TextInput::make('slug')
-                    ->label('Slug')
-                    ->placeholder('Enter slug')
-                    ->required()
-                    ->maxLength(191),
-                TextInput::make('price')
-                    ->label('Price')
-                    ->placeholder('Enter price')
-                    ->numeric()
-                    ->prefix('$'),
-                Select::make('condition')
-                    ->label('Select Condition')
-                    ->native(false)
-                    ->options([
-                        'new' => 'New',
-                        'used' => 'Used',
-                        'refurbished' => 'Refurbished',
+                    ->schema([
+                        SelectTree::make('category_id')
+                            ->label('Select Category')
+                            ->enableBranchNode()
+                            ->withCount()
+                            ->emptyLabel('Oops! No Category Found')
+                            ->relationship('category', 'name', 'parent_id', function ($query) {
+                                return $query->where('type', 'product');
+                            }),
+                        TextInput::make('name')
+                            ->label('Product Name')
+                            ->placeholder('Enter product name')
+                            ->live(onBlur: true)
+                            ->required()
+                            ->maxLength(191)
+                            ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                        TextInput::make('slug')
+                            ->label('Slug')
+                            ->placeholder('Enter slug')
+                            ->required()
+                            ->maxLength(191),
+                        MarkdownEditor::make('description')
+                            ->columnSpanFull(),
                     ])
-                    ->required(),
-                TextInput::make('brand')
-                    ->label('Brand')
-                    ->placeholder('Enter brand')
-                    ->maxLength(191),
-            ])
                     ->columnSpanFull(),
-                MarkdownEditor::make('description')
-                    ->columnSpanFull(),
+                Section::make()
+                    ->schema([
+                        TextInput::make('price')
+                            ->label('Price')
+                            ->placeholder('Enter price')
+                            ->numeric()
+                            ->prefix('$'),
+                        Select::make('condition')
+                            ->label('Select Condition')
+                            ->native(false)
+                            ->options([
+                                'new' => 'New',
+                                'used' => 'Used',
+                                'refurbished' => 'Refurbished',
+                            ])
+                            ->required(),
+                        TextInput::make('brand')
+                            ->label('Brand')
+                            ->placeholder('Enter brand')
+                            ->maxLength(191),
+                    ])->columns(3),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
@@ -86,10 +90,10 @@ class ProductResource extends Resource
                             ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
-                            ->label('Product gallery')
+                            ->label('Product Photos')
                             ->directory('product/gallery')
                             ->multiple()
-                            ->maxFiles(5)
+                            ->maxFiles(4)
                             ->visibility('public')
                             ->required(),
                     ])->columns(2),
@@ -97,18 +101,15 @@ class ProductResource extends Resource
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
-                            ->label('SEO Title')
-                            ->placeholder('Enter title')
+                            ->label('Enter SEO Title')
                             ->required()
                             ->maxLength(191),
-                        TextInput::make('meta_description')
-                            ->label('Meta Description')
-                            ->maxLength(300),
                         TagsInput::make('meta_keywords')
-                            ->label('Meta Keywords')
-                            ->placeholder('Enter keywords')
-                            ->required(),
-                    ])->columnSpanFull(),
+                            ->label('Enter SEO Meta Keywords'),
+                        TextInput::make('meta_description')
+                            ->label('Enter SEO Meta Description')
+                            ->maxLength(70),
+                    ])->columns(1),
             ])->columns(4);
     }
 
@@ -118,39 +119,20 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail')
                     ->label('Thumbnail')
+                    ->disk('public')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('seo.title')
-                    ->numeric()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->label('Active')
+                    ->label('Category')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('is_approved')
+                    ->label('Approved')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_featured')
                     ->label('Featured')
                     ->boolean(),
-                Tables\Columns\IconColumn::make('is_approved')
-                    ->label('Approved')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('name')
-                    ->label('Product Name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->label('Slug')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('price')
-                    ->label('Price')
-                    ->money()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('condition')
-                    ->label('Condition')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('brand')
-                    ->label('Brand')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

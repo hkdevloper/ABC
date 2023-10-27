@@ -89,18 +89,15 @@ class BlogResource extends Resource
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
-                            ->label('SEO Title')
-                            ->placeholder('Enter title')
+                            ->label('Enter SEO Title')
                             ->required()
                             ->maxLength(191),
-                        TextInput::make('meta_description')
-                            ->label('Meta Description')
-                            ->maxLength(300),
                         TagsInput::make('meta_keywords')
-                            ->label('Meta Keywords')
-                            ->placeholder('Enter keywords')
-                            ->required(),
-                    ])->columnSpanFull(),
+                            ->label('Enter SEO Meta Keywords'),
+                        TextInput::make('meta_description')
+                            ->label('Enter SEO Meta Description')
+                            ->maxLength(70),
+                    ])->columns(1),
             ]);
     }
 
@@ -112,27 +109,19 @@ class BlogResource extends Resource
                     ->label('Thumbnail')
                     ->disk('public')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('seo.title')
-                    ->label('SEO')
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Title')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->label('Active')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\IconColumn::make('is_approved')
+                    ->label('Approved')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_featured')
                     ->label('Featured')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('title')
-                    ->label('Title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->label('Slug')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

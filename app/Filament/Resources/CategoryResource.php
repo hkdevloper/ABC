@@ -76,12 +76,15 @@ class CategoryResource extends Resource
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
+                            ->label('Enter SEO Title')
                             ->required()
                             ->maxLength(191),
+                        TagsInput::make('meta_keywords')
+                            ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
-                            ->maxLength(300),
-                        TagsInput::make('meta_keywords'),
-                    ])->columns(3),
+                            ->label('Enter SEO Meta Description')
+                            ->maxLength(70),
+                    ])->columns(1),
             ])->columns(4);
     }
 

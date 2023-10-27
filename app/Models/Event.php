@@ -26,7 +26,6 @@ class Event extends Model
         'description',
         'start',
         'end',
-        'website',
         'address_id',
     ];
     protected $casts = [

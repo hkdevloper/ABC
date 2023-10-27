@@ -84,7 +84,6 @@ class ProductResource extends Resource
                         'used' => 'Used',
                         'refurbished' => 'Refurbished',
                     ])
-
                     ->required(),
                 TextInput::make('brand')
                     ->label('Brand')
@@ -97,10 +96,10 @@ class ProductResource extends Resource
                             ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
-                            ->label('Product gallery')
+                            ->label('Product Photos')
                             ->directory('product/gallery')
                             ->multiple()
-                            ->maxFiles(5)
+                            ->maxFiles(4)
                             ->visibility('public')
                             ->required(),
                     ])->columns(2),
@@ -108,15 +107,15 @@ class ProductResource extends Resource
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
-                            ->label('Meta Title')
+                            ->label('Enter SEO Title')
                             ->required()
                             ->maxLength(191),
-                        TextInput::make('meta_description')
-                            ->label('Meta Description')
-                            ->maxLength(300),
                         TagsInput::make('meta_keywords')
-                            ->label('Meta Keywords'),
-                    ])->columns(3),
+                            ->label('Enter SEO Meta Keywords'),
+                        TextInput::make('meta_description')
+                            ->label('Enter SEO Meta Description')
+                            ->maxLength(70),
+                    ])->columns(1),
             ])->columns(4);
     }
 
@@ -125,35 +124,18 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail')
+                    ->label('Thumbnail')
                     ->disk('public')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('seo.title')
-                    ->numeric()
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->sortable(),
+                    ->label('Category')
+                    ->searchable(),
                 Tables\Columns\ToggleColumn::make('is_approved')->label('Approved'),
                 Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
                 Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
-                Tables\Columns\ToggleColumn::make('is_claimed')->label('Claimed'),
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->money()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('condition')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('brand')
-                    ->searchable(),
-
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

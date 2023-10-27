@@ -98,18 +98,15 @@ class DealResource extends Resource
                     ->relationship('seo')
                     ->schema([
                         TextInput::make('title')
-                            ->label('Meta Title')
+                            ->label('Enter SEO Title')
                             ->required()
-                            ->default(function (Forms\Get $get) {
-                                return $get('title');
-                            })
                             ->maxLength(191),
+                        TagsInput::make('meta_keywords')
+                            ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
-                            ->label('Meta Description')
-                            ->maxLength(300),
-                        TagsInput::make('meta_keywords')->label('Meta Keywords'),
-
-                    ])->columns(3),
+                            ->label('Enter SEO Meta Description')
+                            ->maxLength(70),
+                    ])->columns(1),
             ])->columns(4);
     }
 

@@ -26,16 +26,12 @@ class Job extends Model
         'employment_type',
         'salary',
         'organization',
-        'overview',
         'education',
         'experience',
         'thumbnail',
-        'gallery',
-        'website',
         'address_id',
     ];
     protected $casts = [
-        'gallery' => 'array',
         'valid_until' => 'datetime',
         'is_approved' => 'boolean',
         'is_active' => 'boolean',
@@ -64,6 +60,6 @@ class Job extends Model
 
     public function getJobAddressAttribute(): string
     {
-        return "{$this->address->address_line_1}, {$this->address->address_line_2}, {$this->address->country->name}, {$this->address->state->name}, {$this->address->city->name}, {$this->address->zip_code}";
+        return "{$this->address->address_line_1}, {$this->address->country->name}, {$this->address->state->name}, {$this->address->city->name}, {$this->address->zip_code}";
     }
 }
