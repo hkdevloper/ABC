@@ -40,7 +40,6 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
-
                 Toggle::make('is_active')
                     ->label('Active')
                     ->required(),
@@ -78,6 +77,20 @@ class EventResource extends Resource
                     ->required()
                     ->maxLength(191),
                 Forms\Components\MarkdownEditor::make('description')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'heading',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'undo',
+                    ])
                     ->label('Description')
                     ->columnSpanFull(),
                 Forms\Components\DatePicker::make('start')

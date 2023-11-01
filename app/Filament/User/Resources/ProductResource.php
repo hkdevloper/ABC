@@ -58,6 +58,20 @@ class ProductResource extends Resource
                             ->required()
                             ->maxLength(191),
                         MarkdownEditor::make('description')
+                            ->toolbarButtons([
+                                'blockquote',
+                                'bold',
+                                'bulletList',
+                                'codeBlock',
+                                'heading',
+                                'italic',
+                                'link',
+                                'orderedList',
+                                'redo',
+                                'strike',
+                                'table',
+                                'undo',
+                            ])
                             ->columnSpanFull(),
                     ])
                     ->columnSpanFull(),

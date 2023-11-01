@@ -76,6 +76,20 @@ class BlogResource extends Resource
                     ->maxLength(191),
                 TagsInput::make('tags'),
                 Forms\Components\MarkdownEditor::make('content')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'heading',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'undo',
+                    ])
                     ->columnSpanFull(),
                 Section::make('SEO Details')
                     ->relationship('seo')

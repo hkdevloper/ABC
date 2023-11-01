@@ -83,6 +83,20 @@ class BlogResource extends Resource
                             ->required(),
                         MarkdownEditor::make('content')
                             ->label('Content')
+                            ->toolbarButtons([
+                                'blockquote',
+                                'bold',
+                                'bulletList',
+                                'codeBlock',
+                                'heading',
+                                'italic',
+                                'link',
+                                'orderedList',
+                                'redo',
+                                'strike',
+                                'table',
+                                'undo',
+                            ])
                             ->columnSpanFull(),
                     ])->columnSpanFull(),
                 Section::make('SEO Details')

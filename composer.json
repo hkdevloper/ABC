@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "amidesfahani/filament-tinyeditor": "^1.0",
         "awcodes/filament-quick-create": "^3.1",
         "awcodes/overlook": "^2.0",
         "codewithdennis/filament-select-tree": "^3.1",

@@ -35,6 +35,20 @@ class ForumResource extends Resource
                     ->required()
                     ->maxLength(191),
                 Forms\Components\MarkdownEditor::make('body')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'heading',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'undo',
+                    ])
                     ->label('Description')
                     ->required()
                     ->columnSpanFull(),

@@ -86,13 +86,55 @@ class JobResource extends Resource
                     ->maxLength(191),
                 MarkdownEditor::make('organization')
                     ->label('Enter Organization')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'heading',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'undo',
+                    ])
                     ->maxLength(191),
                 MarkdownEditor::make('education')
                     ->label('Enter Education')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'heading',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'undo',
+                    ])
                     ->maxLength(65535)
                     ->columnSpanFull(),
                 MarkdownEditor::make('experience')
                     ->label('Enter Experience')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'heading',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'undo',
+                    ])
                     ->maxLength(65535)
                     ->columnSpanFull(),
                 Section::make('Images')

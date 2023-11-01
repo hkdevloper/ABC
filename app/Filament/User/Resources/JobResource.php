@@ -68,6 +68,20 @@ class JobResource extends Resource
                     ->placeholder('Enter organization')
                     ->maxLength(191),
                 MarkdownEditor::make('description')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'heading',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'undo',
+                    ])
                     ->maxLength(65535)
                     ->columnSpanFull(),
                 Section::make()->schema([
@@ -88,9 +102,37 @@ class JobResource extends Resource
                     ->schema([
                         MarkdownEditor::make('education')
                             ->label('Education/Qualification')
+                            ->toolbarButtons([
+                                'blockquote',
+                                'bold',
+                                'bulletList',
+                                'codeBlock',
+                                'heading',
+                                'italic',
+                                'link',
+                                'orderedList',
+                                'redo',
+                                'strike',
+                                'table',
+                                'undo',
+                            ])
                             ->required()
                             ->maxLength(65535),
                         MarkdownEditor::make('experience')
+                            ->toolbarButtons([
+                                'blockquote',
+                                'bold',
+                                'bulletList',
+                                'codeBlock',
+                                'heading',
+                                'italic',
+                                'link',
+                                'orderedList',
+                                'redo',
+                                'strike',
+                                'table',
+                                'undo',
+                            ])
                             ->label('Experience')
                             ->required()
                             ->maxLength(65535),

@@ -69,6 +69,20 @@ class CompanyResource extends Resource
                     ->maxLength(191),
                 Forms\Components\MarkdownEditor::make('description')
                     ->default('')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'heading',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'undo',
+                    ])
                     ->columnSpanFull(),
                 TextInput::make('extra_things')
                     ->label('Products Name')
