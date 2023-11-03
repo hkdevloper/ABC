@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import preset from './vendor/filament/support/tailwind.config.preset'
+import {theme as defaultTheme} from "./public/user/js/tailwind.js";
 
 export default {
     preset: [preset],
@@ -8,10 +9,19 @@ export default {
         './resources/views/filament/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
         './vendor/awcodes/filament-quick-create/resources/**/*.blade.php',
-        './vendor/awcodes/overlook/resources/**/*.blade.php'
+        './vendor/awcodes/overlook/resources/**/*.blade.php',
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+        './resources/**/*.vue',
     ],
     theme: {
-        extend: {},
+        extend: {
+
+        },
+        screens: {
+            'xs': '475px',
+            ...defaultTheme.screens,
+        }
     },
     plugins: [],
 }

@@ -3343,7 +3343,7 @@ ul {
 }
 
 .homepage .widget-placeholder {
-  min-height: 100vh
+  min-height: 100%;
 }
 
 .homepage .hkdevs-js-wdgt {
