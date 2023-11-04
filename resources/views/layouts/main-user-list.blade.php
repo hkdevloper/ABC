@@ -12,6 +12,7 @@
     <link href="{{ asset('user/style/output.css')}}" rel="stylesheet">
     <script src="{{ asset('user/js/jquery.js')}}"></script>
     <script src="{{ asset('user/js/fw.js')}}"></script>
+    @include('includes.ads-config')
     @yield('head')
 </head>
 
