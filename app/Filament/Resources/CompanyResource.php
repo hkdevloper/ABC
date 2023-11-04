@@ -76,16 +76,16 @@ class CompanyResource extends Resource
                         $set('slug', Str::slug($state));
                         $set('seo.title', $state);
                     }),
+                TagsInput::make('extra_things')
+                    ->label('Products Name')
+                    ->helperText('Enter your Products Name Seperated By Comma.')
+                    ->required(),
                 TextInput::make('slug')
                     ->label('Enter Company Slug')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
-                TextInput::make('extra_things')
-                    ->label('Products Name')
-                    ->helperText('Enter your Products Name Seperated By Comma.')
-                    ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('logo')

@@ -8,13 +8,15 @@
             <div class="hkdevs-wdgt-section">
                 <!-- Content Section -->
                 <section class="text-gray-600 body-font">
+                    {{-- Main Section --}}
                     <div class="container lg:px-24 md:px-12 py-6 mx-auto flex flex-wrap">
                         <!-- Product List Block -->
                         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
                             <!-- Product List Filter -->
                             <div class="flex flex-wrap items-center justify-between card overflow-hidden mx-2 px-2">
                                 <div class="flex items-center justify-center w-100">
-                                    <label for="sort-by"></label><select id="sort-by" class="border border-solid border-gray-300 text-gray-900 text-sm p-2.5 m-2 focus:outline-none focus:border-0 card w-[150px]">
+                                    <label for="sort-by"></label><select id="sort-by"
+                                                                         class="border border-solid border-gray-300 text-gray-900 text-sm p-2.5 m-2 focus:outline-none focus:border-0 card w-[150px]">
                                         <option selected>Filter All</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
@@ -37,7 +39,7 @@
                                         <div class="flex items-center justify-between pr-1 w-full">
                                             <div class="flex">
                                                 <img src="{{url('storage/'.$product->thumbnail)}}" alt="Product Image"
-                                                     class="w-[150px] h-[150px] object-cover rounded-l-lg mr-3">
+                                                     class="w-[150px] h-[150px] object-cover mr-3">
                                                 <div class="flex items-center">
                                                     <div class="block">
                                                         <h2 class="text-gray-900 text-base font-semibold mb-1">{{ $product->name }}</h2>
