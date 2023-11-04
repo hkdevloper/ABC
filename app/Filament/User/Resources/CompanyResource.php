@@ -84,7 +84,7 @@ class CompanyResource extends Resource
                         'undo',
                     ])
                     ->columnSpanFull(),
-                TextInput::make('extra_things')
+                TagsInput::make('extra_things')
                     ->label('Products Name')
                     ->helperText('Enter your Products Name Seperated By Comma.')
                     ->required(),
