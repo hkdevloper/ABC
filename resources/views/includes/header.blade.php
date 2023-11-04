@@ -12,8 +12,8 @@
                 </svg>
             </button>
         </div>
-        <nav class="xs:hidden lg:flex md:flex space-x-4 items-center">
-            <ul class="xs:hidden lg:flex md:flex space-x-4 items-center">
+        <nav class="hidden lg:flex md:flex space-x-4 items-center">
+            <ul class="hidden lg:flex md:flex space-x-4 items-center">
                 <li>
                     <a href="{{ url('/') }}"
                        class="text-gray-700 hover:text-purple-600 rounded-full {{ session()->get('menu') == 'home' ? 'text-purple-500 p-2 border border-1 border-solid border-purple-500' : '' }}">Home</a>
@@ -45,7 +45,7 @@
             </ul>
         </nav>
         @if(auth()->user() && auth()->user()->name != "")
-            <div class="xs:hidden lg:flex md:flex items-center">
+            <div class="hidden lg:flex md:flex items-center">
                 <div class="relative" data-te-dropdown-ref>
                     <a href="{{auth()->user()->type == 'Admin' ? url('admin') : url('user/dashboard')}}"
                        class="flex items-center"
@@ -62,7 +62,7 @@
                 </div>
             </div>
         @else
-            <div class="xs:hidden lg:flex space-x-4 items-center">
+            <div class="hidden lg:flex space-x-4 items-center">
                 <a href="{{url('user/dashboard/login')}}" class="text-gray-700 hover:text-purple-600">Login</a>
                 <a href="{{url('user/dashboard/register')}}"
                    class="text-white bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-white">Register</a>

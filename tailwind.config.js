@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import preset from './vendor/filament/support/tailwind.config.preset'
-import {theme as defaultTheme} from "./public/user/js/tailwind.js";
-
+import defaultTheme from 'tailwindcss/defaultTheme'
 export default {
     preset: [preset],
     content: [
@@ -19,7 +18,6 @@ export default {
 
         },
         screens: {
-            'xs': '475px',
             ...defaultTheme.screens,
         }
     },

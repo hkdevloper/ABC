@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <title>{{ config()->get('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-{{--    <script src="https://cdn.tailwindcss.com"></script>--}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/style/boxicons-2.1.4/css/main.css') }}" rel="stylesheet">
