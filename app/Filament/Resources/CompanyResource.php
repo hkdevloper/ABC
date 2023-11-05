@@ -71,6 +71,7 @@ class CompanyResource extends Resource
                     ->label('Enter Company Name')
                     ->live(onBlur: true)
                     ->required()
+                    ->unique()
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state){
                         $set('slug', Str::slug($state));
@@ -78,13 +79,31 @@ class CompanyResource extends Resource
                     }),
                 TagsInput::make('extra_things')
                     ->label('Products Name')
-                    ->helperText('Enter your Products Name Seperated By Comma.')
+                    ->splitKeys(['Tab', ' ', ','])
+                    ->helperText('List your products name separated by comma')
                     ->required(),
                 TextInput::make('slug')
                     ->label('Enter Company Slug')
                     ->required()
+                    ->unique()
+                    ->live(onBlur: true)
                     ->maxLength(191),
-                Forms\Components\RichEditor::make('description')
+                Forms\Components\MarkdownEditor::make('description')
+                    ->default('')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'heading',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'undo',
+                    ])
                     ->columnSpanFull(),
                 Section::make('Images')
                     ->schema([
@@ -178,6 +197,7 @@ class CompanyResource extends Resource
                             ->required()
                             ->maxLength(191),
                         TagsInput::make('meta_keywords')
+                            ->splitKeys(['Tab', ' ', ','])
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')

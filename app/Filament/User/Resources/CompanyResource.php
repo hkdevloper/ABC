@@ -58,6 +58,7 @@ class CompanyResource extends Resource
                     ->label('Enter Company Name')
                     ->live(onBlur: true)
                     ->required()
+                    ->unique()
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
@@ -65,6 +66,7 @@ class CompanyResource extends Resource
                     }),
                 TextInput::make('slug')
                     ->label('Enter Company Slug')
+                    ->unique()
                     ->required()
                     ->maxLength(191),
                 Forms\Components\MarkdownEditor::make('description')
@@ -84,9 +86,9 @@ class CompanyResource extends Resource
                         'undo',
                     ])
                     ->columnSpanFull(),
-                TagsInput::make('extra_things')
+                TextInput::make('extra_things')
                     ->label('Products Name')
-                    ->helperText('Enter your Products Name Seperated By Comma.')
+                    ->helperText('List your products name with comma separated')
                     ->required(),
                 Section::make('Images')
                     ->schema([
@@ -180,6 +182,7 @@ class CompanyResource extends Resource
                             ->required()
                             ->maxLength(191),
                         TagsInput::make('meta_keywords')
+                            ->splitKeys(['Tab', ' ', ','])
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')

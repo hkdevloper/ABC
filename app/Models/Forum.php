@@ -39,4 +39,10 @@ class Forum extends Model
     {
         return $this->forumReplies()->count();
     }
+
+    public function delete() : bool
+    {
+        $this->forumReplies()->delete();
+        return parent::delete();
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CompanyResource\RelationManagers\UserRelationManager;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
@@ -38,26 +39,6 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(191),
                 DateTimePicker::make('email_verified_at')->label('Email Verified At'),
-                TextInput::make('password')
-                    ->label('Enter User Password')
-                    ->password()
-                    ->required()
-                    ->maxLength(191),
-                Toggle::make('approved')
-                    ->label('Approved')
-                    ->required(),
-                Toggle::make('taxable')
-                    ->label('Taxable')
-                    ->required(),
-                Toggle::make('banned')
-                    ->label('Banned')
-                    ->live(onBlur: true)
-                    ->required(),
-                TextInput::make('banned_reason')
-                    ->label('Banned Reason')
-                    ->live(onBlur: true)
-                    ->required(fn (Get $get) => $get('banned'))
-                    ->maxLength(500),
                 TextInput::make('balance')
                     ->label('Balance')
                     ->required()
@@ -71,7 +52,38 @@ class UserResource extends Resource
                     ])
                     ->required()
                     ->default('user'),
-            ])->columns(4);
+                Forms\Components\Section::make('Status')
+                    ->schema([
+                        Toggle::make('approved')
+                            ->label('Approved')
+                            ->required(),
+                        Toggle::make('taxable')
+                            ->label('Taxable')
+                            ->required(),
+                        Toggle::make('banned')
+                            ->label('Banned')
+                            ->live(onBlur: true)
+                            ->required(),
+                        Toggle::make('update_password')
+                            ->label('Update Password')
+                            ->dehydrated(false)
+                            ->live(onBlur: true)
+                            ->hidden(fn(Get $get) => !$get('id'))
+                            ->required(fn(Get $get) => $get('update_password')),
+                    ])->columns(4),
+                TextInput::make('password')
+                    ->label('Password')
+                    ->live(onBlur: true)
+                    ->hidden(fn(Get $get) => !$get('update_password'))
+                    ->required(fn(Get $get) => $get('update_password'))
+                    ->maxLength(191),
+                TextInput::make('banned_reason')
+                    ->label('Banned Reason')
+                    ->live(onBlur: true)
+                    ->hidden(fn(Get $get) => !$get('banned'))
+                    ->required(fn(Get $get) => $get('banned'))
+                    ->maxLength(500),
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
@@ -134,7 +146,13 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\CompanyRelationManager::class,
+            RelationManagers\ProductRelationManager::class,
+            RelationManagers\EventRelationManager::class,
+            RelationManagers\JobsRelationManager::class,
+            RelationManagers\BlogsRelationManager::class,
+            RelationManagers\DealsRelationManager::class,
+            RelationManagers\ForumsRelationManager::class,
         ];
     }
 

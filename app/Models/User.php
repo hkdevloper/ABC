@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -86,4 +87,59 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->belongsTo(Company::class, 'user_id', 'id');
     }
+
+    public function profile() : HasOne
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'id');
+    }
+
+    public function blogs() : BelongsTo
+    {
+        return $this->belongsTo(Blog::class, 'user_id', 'id');
+    }
+
+    public function deals() : BelongsTo
+    {
+        return $this->belongsTo(Deal::class, 'user_id', 'id');
+    }
+
+    public function events() : BelongsTo
+    {
+        return $this->belongsTo(Event::class, 'user_id', 'id');
+    }
+
+    public function forums() : BelongsTo
+    {
+        return $this->belongsTo(Forum::class, 'user_id', 'id');
+    }
+
+    public function jobs() : BelongsTo
+    {
+        return $this->belongsTo(Job::class, 'user_id', 'id');
+    }
+
+    public function products() : BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'user_id', 'id');
+    }
+
+    public function forumReplies() : BelongsTo
+    {
+        return $this->belongsTo(ForumReply::class, 'user_id', 'id');
+    }
+
+    public function delete() : bool
+    {
+        $this->company()->delete();
+        $this->blogs()->delete();
+        $this->deals()->delete();
+        $this->events()->delete();
+        $this->forums()->delete();
+        $this->jobs()->delete();
+        $this->products()->delete();
+        $this->forumReplies()->delete();
+        return parent::delete();
+    }
+
+
 }

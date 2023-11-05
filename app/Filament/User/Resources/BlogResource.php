@@ -79,6 +79,7 @@ class BlogResource extends Resource
                             ->maxLength(191),
                         TagsInput::make('tags')
                             ->label('Tags')
+                            ->splitKeys(['Tab', ' ', ','])
                             ->placeholder('Enter tags')
                             ->required(),
                         MarkdownEditor::make('content')
@@ -107,6 +108,7 @@ class BlogResource extends Resource
                             ->required()
                             ->maxLength(191),
                         TagsInput::make('meta_keywords')
+                            ->splitKeys(['Tab', ' ', ','])
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')

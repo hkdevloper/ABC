@@ -58,7 +58,7 @@ class Company extends Model
 
     public function seo() : BelongsTo
     {
-        return $this->belongsTo(Seo::class);
+        return $this->belongsTo(Seo::class, 'seo_id', 'id');
     }
 
     public function address() : BelongsTo

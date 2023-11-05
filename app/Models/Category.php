@@ -19,6 +19,7 @@ class Category extends Model
         'image',
         'description',
         'is_active',
+        'is_deleted',
         'is_featured',
         'parent_id',
         'seo_id',
@@ -70,6 +71,21 @@ class Category extends Model
     public function events() : HasMany
     {
         return $this->hasMany(Event::class, 'category_id');
+    }
+
+    public function forums() : HasMany
+    {
+        return $this->hasMany(Forum::class, 'category_id');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('is_featured', 1);
     }
 
 }

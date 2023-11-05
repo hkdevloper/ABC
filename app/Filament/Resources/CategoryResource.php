@@ -19,6 +19,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Str;
 
@@ -80,6 +81,7 @@ class CategoryResource extends Resource
                             ->required()
                             ->maxLength(191),
                         TagsInput::make('meta_keywords')
+                            ->splitKeys(['Tab', ' ', ','])
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')
@@ -91,6 +93,9 @@ class CategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->where('is_deleted', 0);
+            })
             ->columns([
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Image')
@@ -138,7 +143,25 @@ class CategoryResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->requiresConfirmation()
+                        ->action(function (Collection $records) {
+                            $data = $records->all();
+                            foreach ($data as $item) {
+                                $category = Category::find($item->id);
+                                // Delete Related Data
+                                $category->seo()->delete();
+                                $category->children()->delete();
+                                $category->companies()->delete();
+                                $category->products()->delete();
+                                $category->jobs()->delete();
+                                $category->deals()->delete();
+                                $category->blogs()->delete();
+                                $category->events()->delete();
+                                $category->forums()->delete();
+                                $category->delete();
+                            }
+                        }),
                 ]),
             ])
             ->emptyStateActions([

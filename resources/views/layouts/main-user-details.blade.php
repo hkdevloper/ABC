@@ -27,13 +27,13 @@
                 require("@tailwindcss/forms"),
                 require("@tailwindcss/typography"),
                 require("@tailwindcss/aspect-ratio"),
-                require('flowbite/plugin'),
             ],
             corePlugins: {
                 preflight: false,
             },
         };
     </script>
+    @include('includes.ads-config')
     @yield('head')
 </head>
 

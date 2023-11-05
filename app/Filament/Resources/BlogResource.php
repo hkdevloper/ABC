@@ -74,7 +74,9 @@ class BlogResource extends Resource
                     ->label('Blog Slug url')
                     ->required()
                     ->maxLength(191),
-                TagsInput::make('tags'),
+                TagsInput::make('tags')
+                    ->splitKeys(['Tab', ' ', ','])
+                    ->required(),
                 Forms\Components\MarkdownEditor::make('content')
                     ->toolbarButtons([
                         'blockquote',
@@ -99,6 +101,7 @@ class BlogResource extends Resource
                             ->required()
                             ->maxLength(191),
                         TagsInput::make('meta_keywords')
+                            ->splitKeys(['Tab', ' ', ','])
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')
