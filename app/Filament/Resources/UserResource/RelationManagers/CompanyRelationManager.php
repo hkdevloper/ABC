@@ -13,17 +13,6 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CompanyRelationManager extends RelationManager
 {
     protected static string $relationship = 'company';
-
-    public function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->maxLength(255),
-            ]);
-    }
-
     public function isReadOnly(): bool
     {
         return true;

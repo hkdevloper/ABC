@@ -58,7 +58,9 @@ class CompanyResource extends Resource
                     'manufacturer' => 'Manufacturer',
                     'distributor' => 'Distributor',
                     'retailer' => 'Retailer',
-                ])->required(),
+                ])
+                    ->label('Select Business Type')
+                    ->required(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
@@ -71,7 +73,7 @@ class CompanyResource extends Resource
                     ->label('Enter Company Name')
                     ->live(onBlur: true)
                     ->required()
-                    ->unique()
+                    ->unique(ignoreRecord: true)
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state){
                         $set('slug', Str::slug($state));
@@ -85,7 +87,7 @@ class CompanyResource extends Resource
                 TextInput::make('slug')
                     ->label('Enter Company Slug')
                     ->required()
-                    ->unique()
+                    ->unique(ignoreRecord: true)
                     ->live(onBlur: true)
                     ->maxLength(191),
                 Forms\Components\MarkdownEditor::make('description')
@@ -186,7 +188,6 @@ class CompanyResource extends Resource
                             ->maxLength(191),
                         TextInput::make('website')
                             ->label('Website')
-                            ->url()
                             ->maxLength(191),
                     ])->columns(1),
                 Section::make('SEO Details')

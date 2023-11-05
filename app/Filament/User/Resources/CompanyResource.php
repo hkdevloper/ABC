@@ -58,7 +58,7 @@ class CompanyResource extends Resource
                     ->label('Enter Company Name')
                     ->live(onBlur: true)
                     ->required()
-                    ->unique()
+                    ->unique(ignoreRecord: true)
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
@@ -66,7 +66,7 @@ class CompanyResource extends Resource
                     }),
                 TextInput::make('slug')
                     ->label('Enter Company Slug')
-                    ->unique()
+                    ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(191),
                 Forms\Components\MarkdownEditor::make('description')
