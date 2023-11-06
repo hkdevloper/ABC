@@ -21,7 +21,6 @@
         "laravel/tinker": "^2.8",
         "mkocansey/bladewind": "^2.3",
         "njxqlus/filament-progressbar": "^1.0",
-        "shipu/web-installer": "^1.0",
         "solution-forest/filament-tree": "^2.0"
     },
     "require-dev": {
