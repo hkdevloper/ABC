@@ -135,14 +135,13 @@
                             </div>
                             <hr>
                             <div class="mt-4">
-                                <div
-                                    class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
                                     @foreach($products as $product)
-                                        <div class="bg-white rounded-lg p-4 card">
+                                        <a href="{{route('view.product', [$product->slug])}}" class="bg-white rounded-lg p-4 card">
                                             <div class="flex items-center justify-between mb-2">
                                                 <span class="text-blue-900 font-semibold">{{$product->name}}</span>
                                                 <img src="{{url('storage/' . $product->thumbnail)}}" alt="arrow-icon"
-                                                     class="w-4 h-4">
+                                                     class="w-[25px] h-[25px] md:w-[40px] md:h-[40px] rounded">
                                             </div>
                                             <span class="text-gray-600">1.4K+ Sold</span>
                                             <div class="flex mt-2">
@@ -153,7 +152,7 @@
                                                     </div>
                                                 @endforeach
                                             </div>
-                                        </div>
+                                        </a>
                                     @endforeach
                                 </div>
                             </div>
@@ -200,10 +199,10 @@
                                                     <span class="text-gray-600 ml-2">36.5K+ reviews</span>
                                                 </div>
                                                 <p class="text-gray-700 mt-2">{{$company->summary}}</p>
-                                                <button
+                                                <a href="{{route('view.company', [$company->slug])}}"
                                                     class="border border-purple-500 text-purple-500 py-2 px-4 mt-3 rounded-full hover:bg-purple-500 hover:text-white transition duration-300 ease-in-out">
                                                     View Company
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                     @endforeach
@@ -335,8 +334,7 @@
                                     </svg>
                                 </div>
                                 <div class="flex-grow">
-                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Direct Chat with
-                                        business lister</h2>
+                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Direct Chat with business lister</h2>
                                     <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four
                                         dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing
                                         banh mi pug VHS try-hard.</p>

@@ -118,4 +118,14 @@ Route::post('/requirements/submit', function (Request $request){
     return redirect()->back()->with('success', 'Requirement submitted successfully');
 })->name('requirements.submit');
 
+Route::get('search', function (Request $request){
+    $search = $request->search;
+    $products = Product::where('name', 'like', '%'.$search.'%')->get();
+    $companies = Company::where('name', 'like', '%'.$search.'%')->get();
+    $events = Event::where('name', 'like', '%'.$search.'%')->get();
+    $blogs = \App\Models\Blog::where('title', 'like', '%'.$search.'%')->get();
+    $data = compact('products', 'companies', 'events');
+    return view('pages.search')->with($data);
+})->name('search');
+
 
