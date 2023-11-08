@@ -9,7 +9,7 @@
             <div class="flex flex-col mb-10 lg:items-center items-center justify-center mx-2">
                 <!-- Company list Item -->
                 @foreach($companies as $company)
-                    <div class="m-2 card w-full">
+                    <div class="m-2">
                         <!-- Logo and Details Div -->
                         <div class="flex flex-col md:flex-row items-start justify-between">
                             <div class="flex items-center justify-between md:mr-5">

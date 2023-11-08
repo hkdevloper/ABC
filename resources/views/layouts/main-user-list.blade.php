@@ -41,9 +41,9 @@
     @yield('head')
 </head>
 
-<body class="container">
-<main>
+<body>
     @include('includes.header')
+<main class="container">
     @yield('content')
     <livewire:requirement/>
     @include('includes.modals')
