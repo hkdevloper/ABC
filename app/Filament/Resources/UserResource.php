@@ -8,6 +8,7 @@ use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -38,7 +39,6 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(191),
-                DateTimePicker::make('email_verified_at')->label('Email Verified At'),
                 TextInput::make('balance')
                     ->label('Balance')
                     ->required()
@@ -47,11 +47,41 @@ class UserResource extends Resource
                 Select::make('type')
                     ->label('Select Type')
                     ->options([
-                        'user' => 'User',
-                        'admin' => 'Admin',
+                        'User' => 'User',
+                        'Admin' => 'Admin',
                     ])
                     ->required()
                     ->default('user'),
+                TextInput::make('password')
+                    ->password()
+                    ->label('Password')
+                    ->live(onBlur: true)
+                    ->required(fn(Get $get) => $get('update_password'))
+                    ->visibleOn('create')
+                    ->visible(function(Get $get, string $operation):bool{
+                        if($operation === 'create'){
+                            return true;
+                        }
+                        if($get('update_password')){
+                            return true;
+                        }
+                        return false;
+                    })
+                    ->maxLength(191),
+                Placeholder::make('created')
+                    ->label('Created')
+                    ->hidden(fn(Get $get) => !$get('id'))
+                    ->content(fn (User $record): string => $record->created_at->toFormattedDateString()),
+                Placeholder::make('email_verified_at')
+                    ->label('Email Verified At')
+                    ->hidden(fn(Get $get) => !$get('id'))
+                    ->content(fn (User $record): string => $record->email_verified_at ? $record->email_verified_at->toFormattedDateString() : 'Not Verified'),
+                TextInput::make('banned_reason')
+                    ->label('Banned Reason')
+                    ->live(onBlur: true)
+                    ->hidden(fn(Get $get) => !$get('banned'))
+                    ->required(fn(Get $get) => $get('banned'))
+                    ->maxLength(500),
                 Forms\Components\Section::make('Status')
                     ->schema([
                         Toggle::make('approved')
@@ -59,30 +89,24 @@ class UserResource extends Resource
                             ->required(),
                         Toggle::make('taxable')
                             ->label('Taxable')
+                            ->default(true)
                             ->required(),
                         Toggle::make('banned')
                             ->label('Banned')
                             ->live(onBlur: true)
+                            ->hidden(fn(Get $get) => !$get('id'))
                             ->required(),
                         Toggle::make('update_password')
                             ->label('Update Password')
                             ->dehydrated(false)
                             ->live(onBlur: true)
-                            ->hidden(fn(Get $get) => !$get('id'))
-                            ->required(fn(Get $get) => $get('update_password')),
-                    ])->columns(4),
-                TextInput::make('password')
-                    ->label('Password')
-                    ->live(onBlur: true)
-                    ->hidden(fn(Get $get) => !$get('update_password'))
-                    ->required(fn(Get $get) => $get('update_password'))
-                    ->maxLength(191),
-                TextInput::make('banned_reason')
-                    ->label('Banned Reason')
-                    ->live(onBlur: true)
-                    ->hidden(fn(Get $get) => !$get('banned'))
-                    ->required(fn(Get $get) => $get('banned'))
-                    ->maxLength(500),
+                            ->hidden(fn(Get $get) => !$get('id')),
+                        Toggle::make('email_verified_at')
+                            ->label('Email Verified')
+                            ->default(false)
+                            ->dehydrated(false)
+                            ->required(),
+                    ])->columns(3),
             ])->columns(3);
     }
 

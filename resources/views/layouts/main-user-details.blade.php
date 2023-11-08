@@ -58,7 +58,7 @@
             </div>
         </div>
     </section>
-    @include('includes.requirements')
+    <livewire:requirement />
     @include('includes.footer')
 </main>
 <script src="{{ asset('user/js/slick-slider.js')}}></script>

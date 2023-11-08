@@ -24,7 +24,7 @@ class User extends Authenticatable implements FilamentUser
         }
         if ($panel->getId() === 'user') {
             if ($this->approved && !$this->banned) {
-                return $this->type === 'user';
+                return $this->type === 'User';
             }
         }
         return false;
@@ -126,6 +126,14 @@ class User extends Authenticatable implements FilamentUser
     public function forumReplies() : BelongsTo
     {
         return $this->belongsTo(ForumReply::class, 'user_id', 'id');
+    }
+
+    public function save(array $options = []): bool
+    {
+        if($this->email_verified_at){
+            $this->email_verified_at = now();
+        }
+        return parent::save($options);
     }
 
     public function delete() : bool

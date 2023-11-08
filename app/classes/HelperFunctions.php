@@ -43,6 +43,33 @@ class HelperFunctions
         }
     }
 
+    // Function to Store Base64 Image return File Name
+    public static function storeBase64Image($base64Image, $path, $fileName) : string {
+        try{
+            // Extract the image data from the base64 string.
+            list($type, $data) = explode(';', $base64Image);
+            list(, $data) = explode(',', $data);
 
+            // Decode the base64 data into binary image data.
+            $imageData = base64_decode($data);
 
+            // Get File Extension
+            $extension = explode('/', $type)[1];
+
+            // Generate a unique name for the image file.
+            $rand = rand(111111, 999999);
+            $fileName = str_replace(' ', '-', $fileName);
+            $name = "$fileName-$rand.$extension";
+            // Define the path where you want to store the image.
+            $path = public_path('storage/requirements/' . $name); // Adjust the path as needed.
+
+            // Store the image in the specified path.
+            file_put_contents($path, $imageData);
+
+            // Return the path of the stored image.
+            return "requirements/$name";
+        }catch (\Exception $e){
+            return '';
+        }
+    }
 }

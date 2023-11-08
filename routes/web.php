@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Models\Product;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,3 +91,31 @@ Route::prefix('forum')->group(function () {
     Route::get('/{id}/{title}', [UserForumController::class, 'viewForumDetails'])->name('view.forum');
     Route::post('/answer-forum', [UserForumController::class, 'answerForum'])->name('forum.reply');
 });
+
+Route::post('/requirements/submit', function (Request $request){
+    // upload images to server and get the path
+    $images = [];
+
+    if ($request->has('b64_img_1')) {
+        $images[] = \App\classes\HelperFunctions::storeBase64Image($request->input('b64_img_1'), 'requirements', time());
+    }
+    if ($request->has('b64_img_2')) {
+        $images[] = \App\classes\HelperFunctions::storeBase64Image($request->input('b64_img_2'), 'requirements', time());
+    }
+    if ($request->has('b64_img_3')) {
+        $images[] = \App\classes\HelperFunctions::storeBase64Image($request->input('b64_img_3'), 'requirements', time());
+    }
+    $requirement = new \App\Models\Requirement();
+    $requirement->subject = $request->subject;
+    $requirement->country = $request->country;
+    $requirement->customer_name = $request->customer_name;
+    $requirement->email = $request->email;
+    $requirement->phone = $request->phone;
+    $requirement->description = $request->description;
+    $requirement->images = json_encode($images);
+    $requirement->status = 'Pending';
+    $requirement->save();
+    return redirect()->back()->with('success', 'Requirement submitted successfully');
+})->name('requirements.submit');
+
+

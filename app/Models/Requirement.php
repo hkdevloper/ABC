@@ -11,12 +11,21 @@ class Requirement extends Model
     protected $table = 'requirements';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'name',
-        'description',
-        'mobile',
+        'subject',
+        'country',
+        'customer_name',
         'email',
+        'phone',
+        'description',
+        'images',
         'status',
         'created_at',
         'updated_at'
+    ];
+    public static array $statusList = [
+        'Pending' => 'Pending',
+        'Accepted' => 'Accepted',
+        'Rejected' => 'Rejected',
+        'Completed' => 'Completed',
     ];
 }

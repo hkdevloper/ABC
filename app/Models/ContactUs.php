@@ -17,7 +17,13 @@ class ContactUs extends Model
         'mobile',
         'subject',
         'message',
+        'status',
         'created_at',
         'updated_at'
+    ];
+
+    public static array $status = [
+        'pending' => 'Pending',
+        'completed' => 'Completed',
     ];
 }
