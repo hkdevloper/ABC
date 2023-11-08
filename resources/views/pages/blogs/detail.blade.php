@@ -2,14 +2,20 @@
 
 @section('content')
     <div class="w-full mb-10 lg:mb-0 overflow-hidden px-2">
-        <div class="container mx-auto">
-            <h1 class="text-3xl font-semibold mb-4">{{$blog->title}}</h1>
-            <p class="text-gray-500 mb-4">Published on September 22, 2023</p>
-            <img src="{{url('storage/' . $blog->thumbnail)}}" alt="Blog Thumbnail" style="width: 100%; height: 400px;"
-                 class="mb-6 rounded-lg shadow-lg">
-            <div class="prose mx-auto">
-                <p>{!! $blog->content !!}</p>
+        <div class="container my-2 mx-auto md:px-6">
+            <img src="{{url('storage/' . $blog->thumbnail)}}"
+                 class="mb-6 w-full rounded-lg shadow-lg dark:shadow-black/20" alt="image" />
+
+            <div class="mb-6 flex items-center">
+                <img src="https://ui-avatars.com/api/?name={{$blog->user->name}}" class="mr-2 h-8 rounded-full" alt="avatar"
+                     loading="lazy" />
+                <div>
+                    <span> Published <u>{{$blog->created_at}}</u> by </span>
+                    <a href="#" class="font-medium">{{$blog->user->name}}</a>
+                </div>
             </div>
+            <h1 class="mb-6 text-3xl font-bold">{{$blog->title}}</h1>
+            <p>{!! $blog->content !!}</p>
         </div>
         <!-- Related Products Section -->
         <section class="mt-8 p-1 bg-white">
