@@ -47,18 +47,3 @@
         googletag.enableServices();
     });
 </script>
-<style>
-    .ad-container {
-        border: solid;
-        width: 100%;
-    }
-
-    .ad-slot {
-        border-style: dashed;
-        display: inline-block;
-    }
-
-    .native-slot {
-        width: 50%;
-    }
-</style>

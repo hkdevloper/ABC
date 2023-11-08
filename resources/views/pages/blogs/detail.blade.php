@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="w-full mb-10 lg:mb-0 overflow-hidden px-2">
-        <div class="container my-2 mx-auto md:px-6">
+        <div class="my-2 mx-auto md:px-6">
             <img src="{{url('storage/' . $blog->thumbnail)}}"
                  class="mb-6 w-full rounded-lg shadow-lg dark:shadow-black/20" alt="image" />
 
@@ -17,6 +17,47 @@
             <h1 class="mb-6 text-3xl font-bold">{{$blog->title}}</h1>
             <p>{!! $blog->content !!}</p>
         </div>
+        <!-- Comment Section -->
+        <section class="my-8">
+            <h5 class="mb-10 text-xl font-semibold md:mb-6">
+                Comments: 3
+            </h5>
+
+            <!-- Comment -->
+            <div class="mb-12 flex flex-wrap md:mb-0">
+                <div class="w-full md:w-2/12 shrink-0 grow-0 basis-auto">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(24).jpg"
+                         class="mb-6 w-full rounded-lg shadow-lg dark:shadow-black/20" alt="Avatar" />
+                </div>
+
+                <div class="w-full md:w-10/12 shrink-0 grow-0 basis-auto md:pl-6">
+                    <p class="mb-3 font-semibold">Marta Dolores</p>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Distinctio est ab iure inventore dolorum consectetur? Molestiae
+                        aperiam atque quasi consequatur aut? Repellendus alias dolor ad
+                        nam, soluta distinctio quis accusantium!
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- Leave Reply -->
+        <section class="my-8">
+            <h5 class="mb-10 text-center text-xl font-semibold">Leave a reply</h5>
+            <form>
+                <div class="relative mb-6" data-te-input-wrapper-init>
+                    <x-bladewind::input type="text" name="name" placeholder="Name" />
+                </div>
+                <div class="relative mb-6" data-te-input-wrapper-init>
+                    <x-bladewind::input type="email" name="email" placeholder="Email" />
+                </div>
+                <div class="relative mb-6" data-te-input-wrapper-init>
+                    <x-bladewind::textarea type="text" id="message" placeholder="Message" name="message"/>
+                </div>
+
+                <x-bladewind::button class="w-full bg-purple-500 text-white" type="submit">Submit</x-bladewind::button>
+            </form>
+        </section>
         <!-- Related Products Section -->
         <section class="mt-8 p-1 bg-white">
             <h2 class="text-2xl font-semibold">Related Blogs</h2>

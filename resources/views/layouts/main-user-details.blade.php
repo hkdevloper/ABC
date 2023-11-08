@@ -39,30 +39,21 @@
 
 <body>
 <!-- Page Content -->
-<main>
+<main class="container">
     @include('includes.header')
-    <section class="homepage">
-        <div class="widget-placeholder">
-            <div class="hkdevs-wdgt-section">
-                <!-- Content Section -->
-                <section class="container lg:px-24 md:px-12 py-6 mx-auto">
-                    <div class="px-2 py-6 mx-auto flex flex-wrap">
-                        <!-- Product List BLock -->
-                        <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
-                            @yield('content')
-                        </div>
-                        <!-- Side Block -->
-                        @include('includes.sidebar')
-                    </div>
-                </section>
-            </div>
+    <div class="px-2 py-6 mx-auto flex flex-wrap">
+        <!-- Product List BLock -->
+        <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
+            @yield('content')
         </div>
-    </section>
+        <!-- Side Block -->
+        @include('includes.sidebar')
+    </div>
     <livewire:requirement />
     @include('includes.footer')
 </main>
-<script src="{{ asset('user/js/slick-slider.js')}}></script>
-<script src="{{ asset('user/js/owl-carousel.js')}}></script>
+<script src="{{ asset('user/js/slick-slider.js')}}"></script>
+<script src="{{ asset('user/js/owl-carousel.js')}}"></script>
 <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 <script src="{{ asset('user/js/alpine.js')}}"></script>
 <script src="{{ asset('user/js/main.js')}}"></script>

@@ -1,7 +1,3 @@
-<div class="flex justify-between items-center py-2 bg-purple-600">
-    <div class="container lg:px-24 md:px-12 sm:px-6 mx-auto flex items-center justify-between">
-        <h1 class="text-white text-2xl md:text-3xl lg:text-4xl uppercase ml-2">{{$title}}</h1>
-        <x-user.bread-crumb :data="$breadcrumb"/>
-    </div>
-</div>
-
+<nav class="w-full rounded-md bg-neutral-100 px-5 py-3 dark:bg-neutral-600">
+    <x-user.bread-crumb :data="$breadcrumb"/>
+</nav>

@@ -1,6 +1,6 @@
 <!-- Navbar Section -->
-<header class="bg-white shadow-md py-2">
-    <div class="container lg:px-24 md:px-12 mx-auto flex flex-wrap items-center justify-between px-4">
+<header class="bg-white py-2">
+    <div class="mx-auto flex flex-wrap items-center justify-between px-4">
         <a alt="company Logo" href="{{url('/')}}" class="flex items-center">
             <img alt="company Logo" src="https://via.placeholder.com/100x100" width="50" height="50" class="object-cover overflow-hidden">
         </a>
