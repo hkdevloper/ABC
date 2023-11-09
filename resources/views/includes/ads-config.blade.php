@@ -10,11 +10,16 @@
             .addService(googletag.pubads());
         // [END fixed_size_ad]
 
+        googletag
+            .defineSlot('/6355419/Travel/Europe/France/Paris',
+                [300, 50], 'fixed-size-banner')
+            .addService(googletag.pubads());
+
         // Define a multi-size ad slot.
         // [START multi_size_ad]
         googletag
             .defineSlot('/6355419/Travel/Europe',
-                [[300, 250], [728, 90], [750, 200]], 'multi-size-ad')
+                [[300, 250], [728, 90], [750, 200],[300, 50]], 'multi-size-ad')
             .addService(googletag.pubads());
         // [END multi_size_ad]
 
@@ -36,6 +41,7 @@
             googletag.sizeMapping()
                 .addSize([1024, 768], [[750, 200], [728, 90]])
                 .addSize([640, 480], [300, 250])
+                .addSize([300, 50])
                 .addSize([0, 0], [])
                 .build();
 

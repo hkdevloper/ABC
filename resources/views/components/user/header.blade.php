@@ -56,6 +56,16 @@
                     </div>
                 </div>
                 <div>
+                    <div class="ad-container">
+                        <div id="fixed-size-banner" class="ad-slot"></div>
+                    </div>
+                    <script>
+                        googletag.cmd.push(function() {
+                            googletag.display('fixed-size-banner');
+                        });
+                    </script>
+                </div>
+                <div>
                     <h1 class="text-xl font-medium">Sort By</h1>
                     <div class="flex flex-col gap-2">
                         <label class="flex items-center text-gray-600">
