@@ -19,7 +19,7 @@
         // [START multi_size_ad]
         googletag
             .defineSlot('/6355419/Travel/Europe',
-                [[300, 250], [728, 90], [750, 200],[300, 50]], 'multi-size-ad')
+                [[728, 90],[300, 50]], 'multi-size-ad')
             .addService(googletag.pubads());
         // [END multi_size_ad]
 
