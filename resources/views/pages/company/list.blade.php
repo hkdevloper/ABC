@@ -95,7 +95,7 @@
                             </li>
                             <li>
                                 <p class="text-gray-500 text-sm"><span class="font-bold">Deals In</span>:
-                                    @forelse($company->extra_things as $index => $item)
+                                    @forelse($company->extra_things as $item)
                                         @php
                                             $limitedText = Str::limit($item, 80, '...');
                                         @endphp
