@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="col-span-4" style="width: 90%; margin: 0 auto;">
+        <div class="col-span-4 flex flex-col items-center justify-around" style="width: 90%; margin: 0 auto;">
             @if(session()->get('menu') == 'product' || session()->get('menu') == 'jobs')
                 <p class="text-base font-medium">
                     Not finding what you are looking for? <br>
@@ -38,7 +38,7 @@
                 </form>
 
             @else
-                <div class="ad-container">
+                <div class="ad-container hidden md:block">
                     <div id="multi-size-ad" class="ad-slot"></div>
                 </div>
                 <script>
