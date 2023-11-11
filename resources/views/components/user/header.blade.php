@@ -47,8 +47,8 @@
                 </script>
             @endif
 
-            <div class="flex flex-wrap justify-between items-center" style="margin-top: 10px">
-                <div>
+            <div class="flex flex-nowrap justify-between items-center" style="margin-top: 10px">
+                <div class="">
                     <h1 class="text-lg font-medium">Show By</h1>
                     <div class="flex flex-col gap-2">
                         <label class="flex items-center text-gray-600">
@@ -67,7 +67,7 @@
                         </label>
                     </div>
                 </div>
-                <div>
+                <div class="hidden sm:hidden md:block lg:block mx-6">
                     <div class="ad-container">
                         <div id="fixed-size-banner" class="ad-slot"></div>
                     </div>
