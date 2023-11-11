@@ -27,7 +27,7 @@
             <div class="w-full flex flex-nowrap justify-between items-center">
                 <p class="text-base text-gray-500">Search Results for <br> <span class="text-xl text-purple-500">Companies</span>
                 </p>
-                <p class="text-base text-gray-500">About 432 Result</p>
+                <p class="text-base text-gray-500">About {{count($companies)}} Result</p>
             </div>
             <div class="">
                 <!-- Company list Item -->
