@@ -504,6 +504,7 @@
             font-size: 16px;
             line-height: 20px;
         }
+
         .typ-14Bold {
             font-weight: 700;
         }
@@ -600,7 +601,8 @@
                 <div class="company-info-container">
                     <div class="company-photo">
                         <div class="company-photo-wrapper">
-                            <img class="photo" src="{{url('storage/' . $company->logo)}}" alt="media" height="160" width="160">
+                            <img class="photo" src="{{url('storage/' . $company->logo)}}" alt="media" height="160"
+                                 width="160">
                         </div>
                     </div>
                     <div class="company-info">
@@ -687,7 +689,8 @@
                         </div>
                         <div class="rightContainer Overview">
                             <!-- Side Block -->
-                            <div class="flex flex-col lg:py-6 lg:pl-3 -mb-10 lg:w-1/4 lg:text-left text-center card h-full">
+                            <div
+                                class="flex flex-col lg:py-6 lg:pl-3 -mb-10 lg:w-1/4 lg:text-left text-center card h-full">
 
                             </div>
                         </div>
