@@ -12,14 +12,14 @@
         'big' => 14,
     ],
 ])
-@php
-    $name = str_replace(' ', '-', $name);
+@php 
+    $name = str_replace(' ', '-', $name); 
     $size_adjustment = ($size == 'big') ? 2 : 1;
     $clickable = filter_var($clickable, FILTER_VALIDATE_BOOLEAN);
 @endphp
-@if($clickable)<input type="hidden" css="rating-value-{{$name}}" selected_value="{{$rating}}" />@endif
-<div class="h-{{$sizing[$size]+$size_adjustment}} overflow-hidden inline-block mr-3">
-@for ($x = 1; $x < 6; $x++)
+@if($clickable)<x-bladewind::input type="hidden" css="rating-value-{{$name}}" selected_value="{{$rating}}" />@endif
+<div class="h-{{$sizing[$size]+$size_adjustment}} overflow-hidden inline-block">
+@for ($x = 1; $x < 6; $x++) 
     <div data-rating="{{$x}}" class="inline bw-rating-{{$x}} {{$name}}@if($rating!= 0 && $x <= $rating*1) rated @endif"
          @if($clickable) onmouseover="flipStars('{{$name}}', {{$rating}}, {{$x}}, 'on')" onmouseout="flipStars('{{$name}}', {{$rating}}, {{$x}}, 'off')" onclick="setRating('{{$name}}', {{$x}});{!!$onclick!!}" @endif>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-{{$sizing[$size]+$size_adjustment}} w-{{$sizing[$size]+$size_adjustment}} filled @if($rating==0 || $x > $rating*1) hidden @endif inline text-{{$color}}-500 @if($clickable) cursor-pointer @else cursor-default @endif @if($size=='big') mx-[-3px] @else mr-[-2px] @endif mt-[-1px]" viewBox="0 0 20 20" fill="currentColor">
@@ -32,7 +32,7 @@
         @endif
         </svg>
 
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 empty @if($x <= $rating*1) hidden @endif inline text-{{$color}}-500 @if($clickable) cursor-pointer @else cursor-default @endif !ml-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-{{$sizing[$size]}} w-{{$sizing[$size]}} empty @if($x <= $rating*1) hidden @endif inline text-{{$color}}-500 @if($clickable) cursor-pointer @else cursor-default @endif !ml-[2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         @if($type == 'heart')
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
         @elseif($type=='thumbsup')
@@ -68,7 +68,7 @@
             for(x=rate; x<=6; x++){
                 unhide(`.bw-rating-${x}.${name} .empty`);
                 hide(`.bw-rating-${x}.${name} .filled`);
-            }
+            }    
         }
         for(x=1; x<=rate; x++){
             unhide(`.bw-rating-${x}.${name} .filled`);
