@@ -19,7 +19,7 @@
 @endsection
 
 @section('content')
-    <x-user.header :title="'Company'" :breadcrumb="['Home', 'Company', 'List']"/>
+    <x-user.header :title="'Company'" :breadcrumb="['Home', 'Company', 'List']" category="company"/>
     <div class="py-6 mx-auto flex flex-wrap">
         <!-- Companies List -->
         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
@@ -31,7 +31,7 @@
             </div>
             <div class="">
                 <!-- Company list Item -->
-                @foreach($companies as $company)
+                @forelse($companies as $company)
                     <hr>
                     <div class="flex flex-wrap sm:flex-nowrap items-center mb-2 p-2">
                         <div class="w-full md:w-[20%] mr-0 md:mr-10">
@@ -151,7 +151,9 @@
                             </li>
                         </ul>
                     </div>
-                @endforeach
+                @empty
+                    <h1 class="text-gray-500 text-4xl text-center mt-10">No Company Found</h1>
+                @endforelse
                 <!-- Pagination -->
                 {{ $companies->links() }}
             </div>
