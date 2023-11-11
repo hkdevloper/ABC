@@ -33,7 +33,7 @@
                 <!-- Company list Item -->
                 @foreach($companies as $company)
                     <hr>
-                    <div class="flex sm:flex-wrap md:flex-nowrap lg:flex-nowrap items-center mb-2 p-2">
+                    <div class="flex flex-wrap sm:flex-nowrap items-center mb-2 p-2">
                         <div class="w-full md:w-[20%] mr-0 md:mr-10">
                             <div class="responsive-image-container">
                                 <img class="responsive-image object-cover" src="{{url('storage/' . $company->logo)}}" alt="">
