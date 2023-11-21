@@ -29,8 +29,9 @@ return new class extends Migration
 
         // Create new admin user
         DB::table('users')->insert([
-            'name' => 'Admin',
+            'name' => 'HkDevelopers',
             'email' => 'admin@mail.com',
+            'email_verified_at' => now(),
             'password' => Hash::make('admin'),
             'type' => 'Admin',
             'approved' => true,

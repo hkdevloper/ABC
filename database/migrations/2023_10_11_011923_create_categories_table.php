@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
+            $table->boolean('is_deleted')->default(false);
             $table->foreignId('parent_id')->nullable()->constrained('categories')->cascadeOnDelete();
             $table->foreignId('seo_id')->nullable()->constrained('seo')->cascadeOnDelete();
             $table->timestamps();
