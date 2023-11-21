@@ -42,7 +42,7 @@ class UserPanelProvider extends PanelProvider
             ->login()
             ->registration()
             ->passwordReset()
-            ->emailVerification()
+            ->emailVerification(EmailVerificationPrompt::class)
             ->profile()
             ->colors([
                 'primary' => Color::Purple,
