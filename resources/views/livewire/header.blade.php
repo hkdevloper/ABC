@@ -5,7 +5,9 @@
 
             <div class="flex flex-col gap-2">
                 @forelse($category as $index => $item)
-                    <h5 class="text-gray-600">{{$item->name}}</h5>
+                    <a href="{{route('company', ['category'=>$item->name])}}">
+                        <h5 class="text-gray-600">{{$item->name}}</h5>
+                    </a>
                     <hr>
                     @if($index == 3)
                         @break
@@ -52,18 +54,18 @@
                     <h1 class="text-lg font-medium">Show By</h1>
                     <div class="flex flex-col gap-2">
                         <label class="flex items-center text-gray-600">
-                            <input type="checkbox" name="show-all" id="show-all" value="show-all" class="mr-2">
+                            <input type="checkbox" name="show-all" @if(request('show') == 'all') checked @endif id="show-all" value="show-all" class="mr-2">
                             Show All
                         </label>
 
                         <label class="flex items-center text-gray-600">
-                            <input type="checkbox" name="show-active" id="show-active" value="show-active" class="mr-2">
+                            <input type="checkbox" name="show-active" @if(request('filter') == 'active') checked @endif id="filter-active" value="show-active" class="mr-2">
                             Show Active
                         </label>
 
                         <label class="flex items-center text-gray-600">
-                            <input type="checkbox" name="show-latest" id="show-latest" value="show-latest" class="mr-2">
-                            Show Latest
+                            <input type="checkbox" name="show-in-active" @if(request('filter') == 'in-active') checked @endif id="filter-in-active" value="show-latest" class="mr-2">
+                            Show In Active
                         </label>
                     </div>
                 </div>
@@ -81,13 +83,13 @@
                     <h1 class="text-xl font-medium">Sort By</h1>
                     <div class="flex flex-col gap-2">
                         <label class="flex items-center text-gray-600">
-                            <input type="checkbox" name="sort-by-name" id="sort-by-name" value="sort-by-name"
+                            <input type="checkbox" @if(request('sort') == 'name') checked @endif  name="sort-by-name" id="sort-by-name" value="sort-by-name"
                                    class="mr-2">
                             Sort By Name
                         </label>
 
                         <label class="flex items-center text-gray-600">
-                            <input type="checkbox" name="sort-by-date" id="sort-by-date" value="sort-by-date"
+                            <input type="checkbox" @if(request('sort') == 'date') checked @endif  name="sort-by-date" id="sort-by-date" value="sort-by-date"
                                    class="mr-2">
                             Sort By Date
                         </label>
@@ -110,3 +112,44 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('show-all').addEventListener('change', function () {
+        if (this.checked) {
+            window.location.href = "{{route('company', ['show'=>'all'])}}";
+        } else {
+            window.location.href = "{{route('company')}}";
+        }
+    });
+
+    document.getElementById('filter-active').addEventListener('change', function () {
+        if (this.checked) {
+            window.location.href = "{{route('company', ['filter'=>'active'])}}";
+        } else {
+            window.location.href = "{{route('company')}}";
+        }
+    });
+
+    document.getElementById('filter-in-active').addEventListener('change', function () {
+        if (this.checked) {
+            window.location.href = "{{route('company', ['filter'=>'in-active'])}}";
+        } else {
+            window.location.href = "{{route('company')}}";
+        }
+    });
+
+    document.getElementById('sort-by-name').addEventListener('change', function () {
+        if (this.checked) {
+            window.location.href = "{{route('company', ['sort'=>'name'])}}";
+        } else {
+            window.location.href = "{{route('company')}}";
+        }
+    });
+
+    document.getElementById('sort-by-date').addEventListener('change', function () {
+        if (this.checked) {
+            window.location.href = "{{route('company', ['sort'=>'date'])}}";
+        } else {
+            window.location.href = "{{route('company')}}";
+        }
+    });
+</script>

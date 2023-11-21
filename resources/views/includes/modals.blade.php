@@ -129,11 +129,9 @@
     @foreach($category as $item)
         <x-bladewind.list-view>
             <x-bladewind.list-item>
-                <div class="ml-3">
-                    <a href="{{route('company', ['category'=>$item->name])}}" class="text-sm font-medium text-slate-900">
-                        {{$item->name}}
-                    </a>
-                </div>
+                <a href="{{route('company', ['category'=>$item->name])}}" class="text-sm font-medium text-slate-900">
+                    {{$item->name}}
+                </a>
             </x-bladewind.list-item>
         </x-bladewind.list-view>
     @endforeach
