@@ -17,11 +17,11 @@ class UserCompanyController extends Controller
         // Store Session for Home Menu Active
         Session::put('menu', 'company');
         if($request->has('category')){
-            // Get Category Id from Category Name
+            // Get Category I'd from Category Name
             $cat_id = Category::where('name', $request->category)->first();
-            $companies = Company::where('is_approved', 1)->where('is_active', 1)->where('category_id', $cat_id)->paginate(10);
+            $companies = Company::where('is_approved', 1)->where('category_id', $cat_id)->paginate(10);
         }else{
-            $companies = Company::where('is_approved', 1)->where('is_active', 1)->paginate(10);
+            $companies = Company::where('is_approved', 1)->paginate(10);
         }
         $data = compact('companies');
         return view('pages.company.list')->with($data);
