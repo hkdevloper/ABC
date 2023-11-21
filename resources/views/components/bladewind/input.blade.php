@@ -3,7 +3,7 @@
     'name' => 'input-'.uniqid(),
     // what type of input box are you displaying
     // available options are text, password, email, search, tel
-    'type' => 'text', 
+    'type' => 'text',
     // label to display on the input box
     'label' => '',
     // should the input accept numbers only. Default is false
@@ -16,7 +16,7 @@
     // placeholder text
     'placeholder' => '',
     // value to set when in edit mode or if you want to load the input with default text
-    'selected_value' => '', 
+    'selected_value' => '',
     'selectedValue' => '',
     // should the placeholder always be visible even if a label is set
     // by default the label overwrites the placeholder
@@ -137,7 +137,7 @@
     }
 @endphp
 
-<div class="relative w-full dv-{{$name}} @if($add_clearing) mb-3 @endif">
+<div class="relative dv-{{$name}} @if($add_clearing) mb-3 @endif">
     <input
             {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color"]) }}
             type="{{ $type }}"
