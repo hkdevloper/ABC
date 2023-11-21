@@ -24,7 +24,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             return $this->type === 'Admin';
         }
         if ($panel->getId() === 'user') {
-            if ($this->approved && !$this->banned) {
+            if (!$this->banned) {
                 return $this->type === 'user';
             }
         }
