@@ -15,14 +15,12 @@ return new class extends Migration
             $table->id();
             $table->boolean('is_featured')->default(false);
             $table->string('address_line_1');
-            $table->string('address_line_2');
             $table->foreignId('country_id')->constrained()->onDelete('cascade');
             $table->foreignId('state_id')->constrained()->onDelete('cascade');
             $table->foreignId('city_id')->constrained()->onDelete('cascade');
             $table->string('zip_code');
-            $table->string('longitude');
-            $table->string('latitude');
-            $table->integer('map_zoom_level');
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
             $table->string('summary', 300)->nullable();
             $table->text('description')->nullable();
             $table->foreignId('seo_id')->nullable()->constrained('seo')->cascadeOnDelete();

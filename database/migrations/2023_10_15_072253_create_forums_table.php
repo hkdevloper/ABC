@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('forums', function (Blueprint $table) {
             $table->id();
+            $table->boolean('is_approved')->default(0);
+            $table->boolean('is_featured')->default(0);
             $table->string('title');
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->longText('body');
             $table->boolean('is_active')->default(true);
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();

@@ -27,7 +27,6 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->dateTime('start')->default(now());
             $table->dateTime('end')->default(now());
-            $table->string('website')->nullable();
             $table->foreignId('address_id')->nullable()->constrained('addresses')->cascadeOnDelete();
             $table->timestamps();
         });

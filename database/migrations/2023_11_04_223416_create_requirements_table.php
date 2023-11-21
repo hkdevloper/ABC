@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::dropIfExists('requirements');
         Schema::create('requirements', function (Blueprint $table) {
             $table->id();
-            $table->string('service_name');
+            $table->string('subject')->nullable();
+            $table->string('country')->nullable();
+            $table->json('images')->nullable();
             $table->string('customer_name');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('quantity')->default(0);
             $table->longText('description')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

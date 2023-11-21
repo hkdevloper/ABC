@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code');
-            $table->string('phone_code');
-            $table->string('currency');
             $table->boolean('featured')->default(false);
+            $table->string('code')->nullable();
+            $table->string('phonecode')->nullable();
+            $table->string('currency')->nullable();
             $table->timestamps();
         });
     }

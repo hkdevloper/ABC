@@ -19,10 +19,12 @@ return new class extends Migration
             $table->boolean('is_featured')->default(true);
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('category_id')->nullable()->constrained('categories');
+            $table->string('business_type')->nullable();
             $table->string('name');
             $table->string('slug');
             $table->longText('description')->nullable();
             $table->json('extra_things');
+            $table->string('banner')->nullable();
             $table->string('logo')->nullable();
             $table->json('gallery')->nullable();
             $table->string('phone')->nullable();
@@ -34,6 +36,7 @@ return new class extends Migration
             $table->string('linkdin')->nullable();
             $table->string('youtube')->nullable();
             $table->foreignId('address_id')->nullable()->constrained('addresses')->cascadeOnDelete();
+            $table->foreignId('seo_id')->nullable()->constrained('seo')->onDelete('cascade');
             $table->timestamps();
         });
     }

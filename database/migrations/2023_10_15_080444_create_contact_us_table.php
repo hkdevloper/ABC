@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('mobile');
             $table->string('subject');
             $table->longText('message');
+            $table->string('status')->default('pending');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

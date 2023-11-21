@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('type'); // ['product', 'deals', 'job', 'event', 'company', 'blogs']
             $table->string('slug')->nullable();
-            $table->string('summary')->nullable();
             $table->text('description')->nullable();
+            $table->string('image')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
             $table->foreignId('parent_id')->nullable()->constrained('categories')->cascadeOnDelete();
