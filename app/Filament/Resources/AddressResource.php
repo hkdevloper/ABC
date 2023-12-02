@@ -49,10 +49,8 @@ class AddressResource extends Resource
                     ->relationship('state', 'name')
                     ->searchable()
                     ->required(),
-                Select::make('city_id')
-                    ->label('Select City')
-                    ->relationship('city', 'name')
-                    ->searchable()
+                TextInput::make('city_id')
+                    ->label('City')
                     ->required(),
                 TextInput::make('zip_code')
                     ->label('Zip Code')

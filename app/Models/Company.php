@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Mews\Purifier\Casts\CleanHtml;
 
 class Company extends Model
 {
@@ -44,8 +45,8 @@ class Company extends Model
         'is_claimed' => 'boolean',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
+        'description'    => CleanHtml::class, // cleans when setting the value
     ];
-
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);

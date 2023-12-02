@@ -6,13 +6,8 @@
     <title>{{ config()->get('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
-        rel="stylesheet"/>
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css"/>
-    <script src="https://cdn.tailwindcss.com/3.3.0"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/style/boxicons-2.1.4/css/main.css') }}" rel="stylesheet">
@@ -21,7 +16,6 @@
     <script src="{{ asset('user/js/fw.js')}}"></script>
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
-
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -43,7 +37,7 @@
 
 <body>
     @include('includes.header')
-<main class="container">
+<main class="mx-auto">
     @yield('content')
     <livewire:requirement/>
     @include('includes.modals')

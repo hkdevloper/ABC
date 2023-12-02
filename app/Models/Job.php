@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Mews\Purifier\Casts\CleanHtml;
 
 class Job extends Model
 {
@@ -36,6 +37,11 @@ class Job extends Model
         'is_approved' => 'boolean',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
+        'description' => CleanHtml::class,
+        'summary' => CleanHtml::class,
+        'education' => CleanHtml::class,
+        'experience' => CleanHtml::class,
+        'organization' => CleanHtml::class,
     ];
 
     public function user() : BelongsTo

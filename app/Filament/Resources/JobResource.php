@@ -42,14 +42,18 @@ class JobResource extends Resource
     {
         return $form
             ->schema([
-
-                Toggle::make('is_active')
-                    ->label('Active')
-                    ->required(),
-                Toggle::make('is_featured')
-                    ->label('Featured')
-                    ->required(),
+                Section::make()
+                    ->columns(2)
+                    ->schema([
+                        Toggle::make('is_active')
+                            ->label('Active')
+                            ->required(),
+                        Toggle::make('is_featured')
+                            ->label('Featured')
+                            ->required(),
+                    ]),
                 Select::make('user_id')
+                    ->native(false)
                     ->label('Select User')
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
@@ -57,7 +61,7 @@ class JobResource extends Resource
                     ->enableBranchNode()
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
+                    ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'job');
                     }),
                 TextInput::make('title')
@@ -65,27 +69,14 @@ class JobResource extends Resource
                     ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
                     ->label('Slug')
                     ->required()
                     ->maxLength(191),
-                Textarea::make('description')
+                MarkdownEditor::make('description')
                     ->label('Enter Description')
                     ->maxLength(65535)
-                    ->columnSpanFull(),
-                DateTimePicker::make('valid_until')
-                    ->label('Valid Until')
-                    ->before(today()->addYear())
-                    ->required(),
-                TextInput::make('employment_type')
-                    ->label('Enter Employment Type')
-                    ->maxLength(191),
-                TextInput::make('salary')
-                    ->label('Enter Salary')
-                    ->maxLength(191),
-                MarkdownEditor::make('organization')
-                    ->label('Enter Organization')
                     ->toolbarButtons([
                         'blockquote',
                         'bold',
@@ -100,6 +91,29 @@ class JobResource extends Resource
                         'table',
                         'undo',
                     ])
+                    ->columnSpanFull(),
+                Forms\Components\DatePicker::make('valid_until')
+                    ->label('Valid Until')
+                    ->before(today()->addYear())
+                    ->required(),
+                Select::make('employment_type')
+                    ->label('Enter Employment Type')
+                    ->native(false)
+                    ->options([
+                        'full_time' => 'Full Time',
+                        'part_time' => 'Part Time',
+                        'contract' => 'Contract',
+                        'temporary' => 'Temporary',
+                        'internship' => 'Internship',
+                        'volunteer' => 'Volunteer',
+                        'other' => 'Other',
+                    ]),
+                TextInput::make('salary')
+                    ->prefix('$')
+                    ->label('Enter Salary')
+                    ->maxLength(191),
+                TextInput::make('organization')
+                    ->label('Enter Organization')
                     ->maxLength(191),
                 MarkdownEditor::make('education')
                     ->label('Enter Education')
@@ -163,12 +177,8 @@ class JobResource extends Resource
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                        Select::make('city_id')
+                        TextInput::make('city_id')
                             ->label('City')
-                            ->options(fn(Get $get): Collection => City::query()
-                                ->where('state_id', $get('state_id'))
-                                ->pluck('name', 'id'))
-                            ->searchable()
                             ->required(),
                         TextInput::make('zip_code')
                             ->label('Zip Code')

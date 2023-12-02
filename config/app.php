@@ -170,6 +170,7 @@ return [
         App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\Filament\UserPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Mews\Purifier\PurifierServiceProvider::class
     ])->toArray(),
 
     /*
@@ -185,6 +186,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class
     ])->toArray(),
 
 ];

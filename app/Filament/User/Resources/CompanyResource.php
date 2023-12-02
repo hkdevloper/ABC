@@ -142,12 +142,8 @@ class CompanyResource extends Resource
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                        Select::make('city_id')
+                        TextInput::make('city_id')
                             ->label('City')
-                            ->options(fn(Get $get): Collection => City::query()
-                                ->where('state_id', $get('state_id'))
-                                ->pluck('name', 'id'))
-                            ->searchable()
                             ->required(),
                         TextInput::make('zip_code')
                             ->label('Zip Code')

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Mews\Purifier\Casts\CleanHtml;
 
 class Event extends Model
 {
@@ -34,6 +35,7 @@ class Event extends Model
         'is_claimed' => 'boolean',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
+        'description' => CleanHtml::class
     ];
 
     public function user() : BelongsTo

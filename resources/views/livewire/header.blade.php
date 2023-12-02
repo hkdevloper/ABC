@@ -1,5 +1,5 @@
-<div class="container bg-neutral-100 mx-auto p-4">
-    <div class="sm:flex sm:flex-wrap lg:grid lg:grid-cols-6 justify-between items-center">
+<div class="w-100 bg-neutral-100 mx-auto p-4">
+    <div class="container sm:flex sm:flex-wrap lg:grid lg:grid-cols-6 justify-between items-center">
         <div class="cols-span-1">
             <h1 class="text-xl font-medium mb-2">Category</h1>
 

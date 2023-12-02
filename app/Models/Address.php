@@ -33,11 +33,6 @@ class Address extends Model
         'map_zoom_level' => 'integer',
     ];
 
-    public function city() : BelongsTo
-    {
-        return $this->belongsTo(City::class);
-    }
-
     public function state(): BelongsTo
     {
         return $this->belongsTo(State::class);
