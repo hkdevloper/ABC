@@ -152,7 +152,7 @@
                             </li>
                             <li class="text-base text-gray-500">
                                 {{$company->address->address_line_1}} {{$company->address->address_line_2}}
-                                {{$company->address->city->name}} {{$company->address->state->name}} {{$company->address->country->name}}
+                                {{$company->address->city}} {{$company->address->state->name}} {{$company->address->country->name}}
                                 {{$company->address->zip_code}}
                             </li>
                             <li>
