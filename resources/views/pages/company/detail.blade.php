@@ -1,9 +1,28 @@
 @extends('layouts.main-user-list')
 
+@section('head')
+    <style>
+        .company-banner {
+            background-size: cover;
+            background-position: center;
+            background-image: url('{{url('storage/', $company->banner)}}')
+        }
+
+        .company-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: inherit;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+@endsection
+
 @section('content')
     <!-- Company Header Section -->
-    <section class="bg-[url('{{url('storage/', $company->banner)}}')]] text-white p-4" style="background-image: url('{{url('storage/', $company->banner)}}')">
-
+    <section class="company-banner text-white p-4">
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold">
                 {{ $company->name }}
