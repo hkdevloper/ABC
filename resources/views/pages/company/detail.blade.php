@@ -23,7 +23,7 @@
 
         </div>
 
-        <img alt="" src="{{ asset($company->logo) }}" class="w-32 h-32 object-cover rounded-full mx-auto my-4">
+        <img alt="" src="{{url('storage/', $company->logo)}}" class="w-32 h-32 object-cover rounded-full mx-auto my-4">
 
         <p v-if="description" class="text-gray-300 hidden">
             description
