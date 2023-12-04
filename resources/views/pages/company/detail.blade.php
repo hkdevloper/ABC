@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Company Header Section -->
-    <section class="bg-[url('{{url('storage/', $company->banner)}}')]] text-white p-4">
+    <section class="bg-[url('{{url('storage/', $company->banner)}}')]] text-white p-4" style="background-image: url('{{url('storage/', $company->banner)}}')">
 
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold">
