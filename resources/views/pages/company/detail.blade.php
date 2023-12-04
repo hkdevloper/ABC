@@ -17,6 +17,12 @@
             height: inherit;
             background-color: rgba(0, 0, 0, 0.5);
         }
+        .company-logo {
+            border: 2px solid #fff;
+            shape-image-threshold: 0.5;
+            shape-outside: circle();
+            clip-path: circle();
+        }
     </style>
 @endsection
 
@@ -42,7 +48,7 @@
 
         </div>
 
-        <img alt="" src="{{url('storage/', $company->logo)}}" class="w-32 h-32 object-cover rounded-full mx-auto my-4">
+        <img alt="" src="{{url('storage/', $company->logo)}}" class="company-logo w-32 h-32 object-cover rounded-full mx-auto my-4">
 
         <p v-if="description" class="text-gray-300 hidden">
             description
@@ -106,17 +112,23 @@
                         <li class="my-4">
                             <h2 class="text-xl font-bold mb-4">Social Media</h2>
                             <ul class="flex space-x-4">
-                                <li><a href="{{ $company->facebook }}" class="text-purple-600" target="_blank"><i class="fab fa-facebook"></i></a></li>
-                                <li><a href="{{ $company->twitter }}" class="text-purple-600" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="{{ $company->instagram }}" class="text-purple-600" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="{{ $company->linkedin }}" class="text-purple-600" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                                <li><a href="{{ $company->youtube }}" class="text-purple-600" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="{{ $company->facebook }}" class="text-purple-600" target="_blank"><i
+                                            class="fab fa-facebook"></i></a></li>
+                                <li><a href="{{ $company->twitter }}" class="text-purple-600" target="_blank"><i
+                                            class="fab fa-twitter"></i></a></li>
+                                <li><a href="{{ $company->instagram }}" class="text-purple-600" target="_blank"><i
+                                            class="fab fa-instagram"></i></a></li>
+                                <li><a href="{{ $company->linkedin }}" class="text-purple-600" target="_blank"><i
+                                            class="fab fa-linkedin"></i></a></li>
+                                <li><a href="{{ $company->youtube }}" class="text-purple-600" target="_blank"><i
+                                            class="fab fa-youtube"></i></a></li>
                                 <!-- Add other social media links -->
                             </ul>
                         </li>
                         <li>
                             <h2 class="text-xl font-bold mb-4">Address</h2>
-                            <p>{{ $company->address->address_line_1 }}, {{ $company->address->city }}, {{ $company->address->state->name }}, {{ $company->address->country->name }}
+                            <p>{{ $company->address->address_line_1 }}, {{ $company->address->city }}
+                                , {{ $company->address->state->name }}, {{ $company->address->country->name }}
                                 @if($company->address->address_line_2)
                                     , {{ $company->address->address_line_2 }}
                                 @endif
