@@ -10,6 +10,7 @@
                 <p class="text-base text-gray-500">Search Results for <br> <span class="text-xl text-purple-500">Products</span></p>
                 <p class="text-base text-gray-500">About {{count($products)}} Result</p>
             </div>
+            <hr class="my-5">
             <!-- Product List -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @forelse($products as $product)
@@ -56,14 +57,13 @@
                         </div>
                     </div>
                 @empty
-                    <div class="card dark:bg-neutral-700">
-                        <div class="p-4">
-                            <h2 class="text-gray-900 text-base font-semibold mb-1">No Product Found</h2>
-                        </div>
+                    <div class="w-full text-center">
+                        <p class="text-gray-500 text-center">No Products Found</p>
                     </div>
                 @endforelse
             </div>
             <!-- Pagination -->
+            <hr class="my-5">
             {{ $products->links() }}
         </div>
         <!-- Side Block -->
