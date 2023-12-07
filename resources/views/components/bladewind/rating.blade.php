@@ -7,9 +7,9 @@
     'type' => 'star',
     'clickable' => true,
     'sizing' => [
-        'small' => 4,
-        'medium' => 6,
-        'big' => 10,
+        'small' => 6,
+        'medium' => 10,
+        'big' => 14,
     ],
 ])
 @php
@@ -17,8 +17,8 @@
     $size_adjustment = ($size == 'big') ? 2 : 1;
     $clickable = filter_var($clickable, FILTER_VALIDATE_BOOLEAN);
 @endphp
-@if($clickable)<x-bladewind.input type="hidden" class="rating-value-{{$name}}" selected_value="{{$rating}}" />@endif
-<div class="h-{{$sizing[$size]+$size_adjustment}} overflow-hidden inline-block mr-2">
+@if($clickable)<x-bladewind::input type="hidden" class="rating-value-{{$name}}" selected_value="{{$rating}}" />@endif
+<div class="h-{{$sizing[$size]+$size_adjustment}} overflow-hidden inline-block">
 @for ($x = 1; $x < 6; $x++)
     <div data-rating="{{$x}}" class="inline bw-rating-{{$x}} {{$name}}@if($rating!= 0 && $x <= $rating*1) rated @endif"
          @if($clickable) onmouseover="flipStars('{{$name}}', {{$rating}}, {{$x}}, 'on')" onmouseout="flipStars('{{$name}}', {{$rating}}, {{$x}}, 'off')" onclick="setRating('{{$name}}', {{$x}});{!!$onclick!!}" @endif>
