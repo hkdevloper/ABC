@@ -112,11 +112,8 @@ class JobResource extends Resource
                 TextInput::make('organization')
                     ->label('Enter Organization')
                     ->maxLength(191),
-                TinyEditor::make('education')
-                    ->fileAttachmentsDisk('public')
-                    ->fileAttachmentsVisibility('public')
-                    ->fileAttachmentsDirectory('editor/uploads')
-                    ->profile('custom')
+                Textarea::make('education')
+                    ->id('education')
                     ->columnSpan('full')
                     ->required(),
                 TextInput::make('experience')

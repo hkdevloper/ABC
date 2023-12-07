@@ -37,9 +37,7 @@ class Job extends Model
         'is_approved' => 'boolean',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
-        'description' => CleanHtml::class,
         'summary' => CleanHtml::class,
-        'education' => CleanHtml::class,
     ];
 
     public function user() : BelongsTo
