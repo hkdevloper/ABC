@@ -33,7 +33,7 @@ Route::get('/', function () {
     $p = Product::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
     $c = Company::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
     $e = Event::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
-    $category = \App\Models\Category::where('is_active', 1)->get();
+    $category = \App\Models\Category::where('is_active', 1)->orderBy('created_at', 'desc')->take(5)->get();
     // get the 10-random records from the database if is less than 10 then it will return all
     if(count($p) > 10){
         $products = $p->random(10);
