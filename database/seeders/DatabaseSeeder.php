@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
 //            UsersTableSeeder::class,
             CountrySeeder::class,
             StateSeeder::class,
-            CitySeeder::class,
-            SeoTableSeeder::class,
-            AddressesTableSeeder::class,
-            CategoryTableSeeder::class,
-            CompanyTableSeeder::class
+//            CitySeeder::class,
+//            SeoTableSeeder::class,
+//            AddressesTableSeeder::class,
+//            CategoryTableSeeder::class,
+//            CompanyTableSeeder::class
         ]);
     }
 }

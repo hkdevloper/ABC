@@ -14,6 +14,7 @@ class Event extends Model
     protected $primaryKey = "id";
     protected $fillable = [
         'user_id',
+        'claimed_by', // 'claimed_by' is the id of the user who claimed the event
         'category_id',
         'seo_id',
         'thumbnail',
@@ -42,7 +43,10 @@ class Event extends Model
     {
         return $this->belongsTo(User::class);
     }
-
+    public function claimedBy() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'claimed_by');
+    }
     public function category() : BelongsTo
     {
         return $this->belongsTo(Category::class);

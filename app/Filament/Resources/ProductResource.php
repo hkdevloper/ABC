@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
+use App\Models\User;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -15,12 +16,14 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 use Str;
 
 class ProductResource extends Resource
@@ -37,20 +40,30 @@ class ProductResource extends Resource
             ->schema([
                 Toggle::make('is_active')
                     ->label('Active')
+                    ->default(true)
                     ->required(),
                 Toggle::make('is_featured')
-                    ->label('Featured')
-                    ->required(),
+                    ->label('Featured'),
                 Toggle::make('is_claimed')
                     ->label('Claimed')
-                    ->required(),
+                    ->live(),
                 Toggle::make('is_approved')
                     ->label('Approved')
+                    ->default(true)
                     ->required(),
-                Select::make('user_id')
-                    ->label('Select User')
+                Forms\Components\Hidden::make('user_id')
+                    ->default(auth()->id()),
+                Select::make('claimed_by')
+                    ->label('Claimed By User')
+                    ->default(1)
+                    ->disabled(fn(Get $get) => !$get('is_claimed'))
+                    ->options(fn(Get $get): Collection => User::query()
+                        ->where('is_approved', 1)
+                        ->where('is_banned', 0)
+                        ->pluck('name', 'id'))
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
+                    ->required()
                     ->enableBranchNode()
                     ->label('Select Category')
                     ->withCount()
@@ -75,10 +88,12 @@ class ProductResource extends Resource
                     ->columnSpanFull(),
                 TextInput::make('price')
                     ->label('Price')
+                    ->required()
                     ->numeric()
                     ->prefix('$'),
                 Select::make('condition')
                     ->label('Condition')
+                    ->native(false)
                     ->options([
                         'new' => 'New',
                         'used' => 'Used',
@@ -86,6 +101,7 @@ class ProductResource extends Resource
                     ])
                     ->required(),
                 TextInput::make('brand')
+                    ->required()
                     ->label('Brand')
                     ->maxLength(191),
                 Section::make('Images')

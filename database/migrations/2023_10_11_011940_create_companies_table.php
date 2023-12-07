@@ -18,6 +18,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(true);
             $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->foreignId('claimed_by')->nullable()->constrained('users');
             $table->foreignId('category_id')->nullable()->constrained('categories');
             $table->string('business_type')->nullable();
             $table->string('name');

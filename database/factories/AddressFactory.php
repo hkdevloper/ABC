@@ -21,7 +21,7 @@ class AddressFactory extends Factory
             'address_line_1' => $this->faker->streetAddress,
             'country_id' => \App\Models\Country::pluck('id')->random(),
             'state_id' => \App\Models\State::pluck('id')->random(),
-            'city_id' => \App\Models\City::pluck('id')->random(),
+            'city' => $this->faker->city,
             'zip_code' => $this->faker->postcode,
             'longitude' => $this->faker->longitude,
             'latitude' => $this->faker->latitude,

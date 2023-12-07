@@ -7,6 +7,7 @@ use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\City;
 use App\Models\Event;
 use App\Models\State;
+use App\Models\User;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
@@ -41,6 +42,7 @@ class EventResource extends Resource
         return $form
             ->schema([
                 Toggle::make('is_active')
+                    ->default(true)
                     ->label('Active')
                     ->required(),
                 Toggle::make('is_featured')
@@ -48,12 +50,22 @@ class EventResource extends Resource
                     ->required(),
                 Toggle::make('is_claimed')
                     ->label('Claimed')
+                    ->live()
                     ->required(),
                 Toggle::make('is_approved')
+                    ->default(true)
                     ->label('Approved')
                     ->required(),
-                Select::make('user_id')
-                    ->label('Select User')
+                Forms\Components\Hidden::make('user_id')
+                    ->default(auth()->id()),
+                Select::make('claimed_by')
+                    ->label('Claimed By User')
+                    ->default(1)
+                    ->disabled(fn(Get $get) => !$get('is_claimed'))
+                    ->options(fn(Get $get): Collection => User::query()
+                        ->where('is_approved', 1)
+                        ->where('is_banned', 0)
+                        ->pluck('name', 'id'))
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
@@ -95,9 +107,11 @@ class EventResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\DatePicker::make('start')
                     ->label('Start Date')
+                    ->before('end')
                     ->required(),
                 Forms\Components\DatePicker::make('end')
                     ->label('End Date')
+                    ->after('start')
                     ->required(),
                 Section::make('Images')
                     ->schema([
@@ -108,6 +122,7 @@ class EventResource extends Resource
                             ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
+                            ->multiple()
                             ->label('Gallery')
                             ->maxFiles(4)
                             ->disk('public')
@@ -133,7 +148,7 @@ class EventResource extends Resource
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                        TextInput::make('city_id')
+                        TextInput::make('city')
                             ->label('City')
                             ->required(),
                         TextInput::make('zip_code')

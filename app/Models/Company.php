@@ -18,6 +18,7 @@ class Company extends Model
         'is_active',
         'is_featured',
         'user_id',
+        'claimed_by',
         'category_id',
         'seo_id',
         'name',
@@ -50,6 +51,11 @@ class Company extends Model
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function claimedBy() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'claimed_by', 'id');
     }
 
     public function category() : BelongsTo

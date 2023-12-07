@@ -31,7 +31,7 @@
                                     <div class="flex justify-between items-center">
                                         <div>
                                             <span class="text-gray-600 text-sm">{{$forum->countAnswers()}} Answers</span>
-                                            <span class="ml-4 text-gray-600 text-sm">{{rand(0, 999)}} Views</span>
+                                            <span class="ml-4 text-gray-600 text-sm">{{$viewCount}} Views</span>
                                         </div>
                                         <div>
                                             <a href="#answer-block"
@@ -64,7 +64,7 @@
                                                         <h3 class="text-lg font-semibold text-gray-800">{{$ans->user->name}}</h3>
                                                         <p class="text-gray-500 text-sm">Answered on {{date_format($ans->created_at, 'd M y')}}</p>
                                                         <!-- Answer Text -->
-                                                        <p class="text-gray-700">{{$ans->body}}</p>
+                                                        <p class="text-gray-700">{!! $ans->body !!}</p>
                                                     </div>
                                                 </div>
                                             </div>

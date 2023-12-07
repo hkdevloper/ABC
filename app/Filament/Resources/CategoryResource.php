@@ -35,6 +35,7 @@ class CategoryResource extends Resource
             ->schema([
                 Section::make()->schema([
                     Toggle::make('is_active')
+                        ->default(1)
                         ->label('Active')
                         ->required(),
                     Toggle::make('is_featured')
@@ -52,6 +53,7 @@ class CategoryResource extends Resource
                     ->maxLength(191),
                 Select::make('type')
                     ->label('Select Type')
+                    ->native(false)
                     ->required()
                     ->options([
                         "company" => "Company",
@@ -63,8 +65,9 @@ class CategoryResource extends Resource
                         "forum" => "Forum",
                     ]),
                 SelectTree::make('parent_id')
-                    ->label('Select Category')
+                    ->label('Select Parent Category')
                     ->withCount()
+                    ->enableBranchNode()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('parent', 'name', 'parent_id', function ($query){
                         return $query;
@@ -97,10 +100,6 @@ class CategoryResource extends Resource
                 $query->where('is_deleted', 0);
             })
             ->columns([
-                Tables\Columns\ImageColumn::make('image')
-                    ->label('Image')
-                    ->disk('public')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')

@@ -46,6 +46,7 @@ class UserResource extends Resource
                     ->default(0),
                 Select::make('type')
                     ->label('Select Type')
+                    ->disabled(fn(Get $get) => auth()->user()->type === 'Admin')
                     ->options([
                         'User' => 'User',
                         'Admin' => 'Admin',
@@ -86,14 +87,17 @@ class UserResource extends Resource
                     ->schema([
                         Toggle::make('approved')
                             ->label('Approved')
+                            ->disabled(fn(Get $get) => auth()->user()->type === 'Admin')
                             ->required(),
                         Toggle::make('taxable')
                             ->label('Taxable')
                             ->default(true)
+                            ->disabled(fn(Get $get) => auth()->user()->type === 'Admin')
                             ->required(),
                         Toggle::make('banned')
                             ->label('Banned')
                             ->live(onBlur: true)
+                            ->disabled(fn(Get $get) => auth()->user()->type === 'Admin')
                             ->hidden(fn(Get $get) => !$get('id'))
                             ->required(),
                         Toggle::make('update_password')
@@ -103,6 +107,7 @@ class UserResource extends Resource
                             ->hidden(fn(Get $get) => !$get('id')),
                         Toggle::make('email_verified_at')
                             ->label('Email Verified')
+                            ->disabled(fn(Get $get) => auth()->user()->type === 'Admin')
                             ->default(false)
                             ->dehydrated(false)
                             ->required(),

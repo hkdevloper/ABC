@@ -35,7 +35,7 @@ class CountryResource extends Resource
                     ->label('Enter Country Code')
                     ->required()
                     ->maxLength(191),
-                TextInput::make('phone_code')
+                TextInput::make('phonecode')
                     ->label('Enter Phone Code')
                     ->tel()
                     ->required()
@@ -59,7 +59,7 @@ class CountryResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('code')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone_code')
+                Tables\Columns\TextColumn::make('phonecode')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('currency')
                     ->searchable(),

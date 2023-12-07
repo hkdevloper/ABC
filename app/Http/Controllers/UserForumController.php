@@ -55,7 +55,8 @@ class UserForumController extends Controller
 
         // Update Stat Counter
         HelperFunctions::updateStat('view', 'forum', $forum->id);
-        $data = compact('forum');
+        $viewCount = HelperFunctions::getStat('view', 'forum', $forum->id);
+        $data = compact('forum', 'viewCount');
         return view('pages.forum.detail')->with($data);
     }
 

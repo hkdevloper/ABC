@@ -7,6 +7,7 @@ use App\Forms\Components\LeafletMap;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\State;
+use App\Models\User;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -41,24 +42,36 @@ class CompanyResource extends Resource
             ->schema([
                 Toggle::make('is_approved')
                     ->label('Approved')
+                    ->default(true)
                     ->required(),
                 Toggle::make('is_claimed')
+                    ->default(false)
                     ->label('Claimed')
-                    ->required(),
+                    ->live(onBlur: true),
                 Toggle::make('is_active')
                     ->label('Active')
+                    ->default(true)
                     ->required(),
                 Toggle::make('is_featured')
                     ->label('Featured')
                     ->required(),
-                Select::make('user_id')
-                    ->label('Select User')
+                Forms\Components\Hidden::make('user_id')
+                    ->default(auth()->id()),
+                Select::make('claimed_by')
+                    ->default(1)
+                    ->disabled(fn(Get $get) => !$get('is_claimed'))
+                    ->label('Claimed By')
+                    ->options(fn(Get $get): Collection => User::query()
+                        ->where('is_approved', 1)
+                        ->where('is_banned', 0)
+                        ->pluck('name', 'id'))
                     ->relationship('user', 'name'),
                 Select::make('business_type')->options([
                     'manufacturer' => 'Manufacturer',
                     'distributor' => 'Distributor',
                     'retailer' => 'Retailer',
                 ])
+                    ->native(false)
                     ->label('Select Business Type')
                     ->required(),
                 SelectTree::make('category_id')
@@ -66,7 +79,7 @@ class CompanyResource extends Resource
                     ->enableBranchNode()
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
+                    ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'company');
                     }),
                 TextInput::make('name')
@@ -75,7 +88,7 @@ class CompanyResource extends Resource
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->maxLength(191)
-                    ->afterStateUpdated(function (Set $set, ?string $state){
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
                         $set('seo.title', $state);
                     }),
@@ -159,7 +172,7 @@ class CompanyResource extends Resource
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                        TextInput::make('city_id')
+                        TextInput::make('city')
                             ->label('City')
                             ->required(),
                         TextInput::make('zip_code')

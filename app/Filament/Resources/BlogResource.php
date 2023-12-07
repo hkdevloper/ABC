@@ -36,6 +36,7 @@ class BlogResource extends Resource
         return $form
             ->schema([
                 Select::make('user_id')
+                    ->default(auth()->id())
                     ->label('Select User')
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
@@ -48,6 +49,7 @@ class BlogResource extends Resource
                     }),
                 Toggle::make('is_active')
                     ->label('Is Active')
+                    ->default(true)
                     ->required(),
                 Toggle::make('is_featured')
                     ->label('Is Featured')

@@ -12,6 +12,7 @@ class Product extends Model
     protected $table='products';
     protected $fillable = [
         'user_id',
+        'claimed_by', // 'claimed_by' is the id of the user who claimed the product
         'category_id',
         'seo_id',
         'is_active',
@@ -39,6 +40,11 @@ class Product extends Model
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function claimedBy() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'claimed_by');
     }
 
     public function category() : BelongsTo

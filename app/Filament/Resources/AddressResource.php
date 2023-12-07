@@ -41,15 +41,19 @@ class AddressResource extends Resource
                     ->maxLength(191),
                 Select::make('country_id')
                     ->label('Select Country')
+                    ->preload()
+                    ->default(1)
                     ->relationship('country', 'name')
                     ->searchable()
                     ->required(),
                 Select::make('state_id')
                     ->label('Select State')
+                    ->preload()
+                    ->default(1)
                     ->relationship('state', 'name')
                     ->searchable()
                     ->required(),
-                TextInput::make('city_id')
+                TextInput::make('city')
                     ->label('City')
                     ->required(),
                 TextInput::make('zip_code')
@@ -73,7 +77,7 @@ class AddressResource extends Resource
                 Tables\Columns\TextColumn::make('state.name')
                     ->label('State')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('city.name')
+                Tables\Columns\TextColumn::make('city')
                     ->label('City')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('zip_code')

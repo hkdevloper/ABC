@@ -34,13 +34,17 @@
     <!-- Search Section -->
     <section class="bg-white py-4 md:h-[60vh] flex flex-col items-center justify-center">
         <div class="mx-auto w-full md:w-[90%] text-center">
-            <h1 class="text-3xl md:text-5xl font-semibold text-blue-900">Get the best deal from Best Company</h1>
-            <div class="text-gray-600 text-base md:text-3xl my-4">5 lakh+ Companies & Products for you to explore</div>
+            <h1 class="text-3xl md:text-5xl font-semibold text-blue-900">Discover Top Companies and Products</h1>
+            <div class="text-gray-600 text-base md:text-3xl my-4">Explore a vast network of 5 lakh+ businesses and products for your needs</div>
             <div class="mt-2 md:mt-4 flex items-center justify-center">
                 <div class="relative ml-2">
                     <input list="searchList"
-                           class="rounded-full p-2 md:p-4 w-full md:w-[40vw] focus:outline-none card-hovered"
-                           placeholder="Enter Company/Products Name..." type="text">
+                           class="rounded-full p-2 md:p-4 w-full md:w-[50vw] focus:outline-none card-hovered"
+                           placeholder="Search for Companies or Products..." type="text">
+                    <!-- Add datalist for autocomplete if needed -->
+                    <!-- <datalist id="searchList"> -->
+                        <!-- Populate with search options -->
+                    <!-- </datalist> -->
                 </div>
                 <button
                     class="bg-blue-500 text-white p-2 md:p-4 rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out w-[40px] md:w-[60px]">
@@ -50,335 +54,215 @@
         </div>
     </section>
 
-    <!-- Main Content  -->
-    <section class="lg:px-24 md:px-12 py-6 mx-auto homepage">
-        <div class="widget-placeholder">
-            <div class="hkdevs-wdgt-section">
-                <!-- Categories section -->
-                <section>
-                    <div class="bg-white p-4">
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            <!-- Chip 1 -->
-                            <div class="w-full px-2 mb-4 card">
-                                <a href="{{ route('company') }}"
-                                   class="flex items-center justify-center bg-white rounded-lg p-2 sm:p-4 transition duration-300 ease-in-out">
-                                    <img src="https://bit.ly/45Xemqb" alt="Remote-img"
-                                         class="xs:w-10 md:w-12 lg:w-10 xs:h-10 md:h-12 lg:h-10 object-contain">
-                                    <span class="ml-2 text-blue-900 font-semibold text-sm sm:text-base">Company</span>
-                                    <img src="https://bit.ly/3ZkHndD" alt="arrow-icon"
-                                         class="w-3 sm:w-4 h-3 sm:h-4 ml-2 xs:hidden">
-                                </a>
-                            </div>
-
-                            <!-- Chip 2 -->
-                            <div class="w-full px-2 mb-4 card">
-                                <a href="{{ route('products') }}"
-                                   class="flex items-center justify-center bg-white rounded-lg p-2 sm:p-4 transition duration-300 ease-in-out">
-                                    <img src="https://bit.ly/45Xemqb" alt="Remote-img"
-                                         class="w-10 sm-w-12 md:w-12 h-10 sm-h-12 md-h-12 object-contain">
-                                    <span class="ml-2 text-blue-900 font-semibold text-sm sm:text-base">Products</span>
-                                    <img src="https://bit.ly/3ZkHndD" alt="arrow-icon"
-                                         class="w-3 sm:w-4 h-3 sm:h-4 ml-2">
-                                </a>
-                            </div>
-
-                            <!-- Chip 3 -->
-                            <div class="w-full px-2 mb-4 card">
-                                <a href="{{ route('events') }}"
-                                   class="flex items-center justify-center bg-white rounded-lg p-2 sm:p-4 transition duration-300 ease-in-out">
-                                    <img src="https://bit.ly/45Xemqb" alt="Remote-img"
-                                         class="w-10 sm-w-12 md:w-12 h-10 sm-h-12 md-h-12 object-contain">
-                                    <span class="ml-2 text-blue-900 font-semibold text-sm sm:text-base">Events</span>
-                                    <img src="https://bit.ly/3ZkHndD" alt="arrow-icon"
-                                         class="w-3 sm:w-4 h-3 sm:h-4 ml-2">
-                                </a>
-                            </div>
-
-                            <!-- Chip 4 -->
-                            <div class="w-full px-2 mb-4 card">
-                                <a href="{{ route('jobs') }}"
-                                   class="flex items-center justify-center bg-white rounded-lg p-2 sm:p-4 transition duration-300 ease-in-out">
-                                    <img src="https://bit.ly/45Xemqb" alt="Remote-img"
-                                         class="w-10 sm-w-12 md:w-12 h-10 sm-h-12 md-h-12 object-contain">
-                                    <span class="ml-2 text-blue-900 font-semibold text-sm sm:text-base">Jobs</span>
-                                    <img src="https://bit.ly/3ZkHndD" alt="arrow-icon"
-                                         class="w-3 sm:w-4 h-3 sm:h-4 ml-2">
-                                </a>
-                            </div>
-
-                            <!-- Chip 5 -->
-                            <div class="w-full px-2 mb-4 card">
-                                <a href="{{ route('deals') }}"
-                                   class="flex items-center justify-center bg-white rounded-lg p-2 sm:p-4 transition duration-300 ease-in-out">
-                                    <img src="https://bit.ly/45Xemqb" alt="Remote-img"
-                                         class="w-10 sm-w-12 md:w-12 h-10 sm-h-12 md-h-12 object-contain">
-                                    <span class="ml-2 text-blue-900 font-semibold text-sm sm:text-base">Deals</span>
-                                    <img src="https://bit.ly/3ZkHndD" alt="arrow-icon"
-                                         class="w-3 sm:w-4 h-3 sm:h-4 ml-2">
-                                </a>
-                            </div>
-
-                            <!-- Chip 6 -->
-                            <div class="w-full px-2 mb-4 card">
-                                <a href="{{ route('blogs') }}"
-                                   class="flex items-center justify-center bg-white rounded-lg p-2 sm:p-4 transition duration-300 ease-in-out">
-                                    <img src="https://bit.ly/45Xemqb" alt="Remote-img"
-                                         class="w-10 sm-w-12 md:w-12 h-10 sm-h-12 md-h-12 object-contain">
-                                    <span class="ml-2 text-blue-900 font-semibold text-sm sm:text-base">Blogs</span>
-                                    <img src="https://bit.ly/3ZkHndD" alt="arrow-icon"
-                                         class="w-3 sm:w-4 h-3 sm:h-4 ml-2">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Top Products -->
-                <section>
-                    <div class="bg-white p-4">
-                        <div class="mx-auto">
-                            <h2 class="text-2xl font-semibold text-blue-900"></h2>
-                            <div class="flex justify-between items-center">
-                                <span class="text-xl md:text-2xl font-semibold inline-block text-purple-500">Top Products</span>
-                                <a href="{{route('products')}}"
-                                   class="md:bg-purple-500 md:text-white text-purple-500 underline md:no-underline cursor-pointer p-1 rounded-full m-1 hover:bg-purple-600 transition duration-300 ease-in-out">
-                                    <span class="hidden md:inline">View Products</span>
-                                    {{-- Icon --}}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none"
-                                         viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                              d="M9 5l7 7-7 7"/>
-                                    </svg>
-                                </a>
-                            </div>
-                            <hr>
-                            <div class="mt-4">
-                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
-                                    @foreach($products as $product)
-                                        <a href="{{route('view.product', [$product->slug])}}" class="bg-white rounded-lg p-4 card">
-                                            <div class="flex items-center justify-between mb-2">
-                                                <span class="text-blue-900 font-semibold">{{$product->name}}</span>
-                                                <img src="{{url('storage/' . $product->thumbnail)}}" alt="arrow-icon"
-                                                     class="w-[25px] h-[25px] md:w-[40px] md:h-[40px] rounded">
-                                            </div>
-                                            <span class="text-gray-600">1.4K+ Sold</span>
-                                            <div class="flex mt-2">
-                                                @foreach($product->gallery as $item)
-                                                    <div class="w-1/3 mr-2">
-                                                        <img src="{{url('storage/'. $item)}}" alt=""
-                                                             class="w-[25px] h-[25px] md:w-[40px] md:h-[40px] rounded-lg">
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </a>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Featured Companies -->
-                <section class="bg-white">
-                    <div class="mx-auto">
-                        <div class="p-4">
-                            <div class="flex justify-between items-center">
-                                <span class="text-xl md:text-2xl font-semibold inline-block text-purple-500">Featured companies</span>
-                                <a href="{{route('company')}}"
-                                   class="md:bg-purple-500 md:text-white text-purple-500 underline md:no-underline cursor-pointer p-1 rounded-full m-1 hover:bg-purple-600 transition duration-300 ease-in-out">
-                                    <span class="hidden md:inline">View companies</span>
-                                    {{-- Icon --}}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none"
-                                         viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                              d="M9 5l7 7-7 7"/>
-                                    </svg>
-                                </a>
-                            </div>
-                            <hr>
-                            <div class="mt-4 relative">
-                                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
-                                    @foreach($companies as $company)
-                                        <div class="bg-white m-2 p-3 card flex flex-col lg:flex-row items-center">
-                                            <div class="w-32 h-32 lg:w-1/3 lg:h-auto lg:mr-4">
-                                                <img src="{{url('storage/' . $company->logo)}}" alt="Company Logo"
-                                                     class="w-full h-full object-cover rounded-lg">
-                                            </div>
-                                            <div class="flex-grow">
-                                                <h3 class="text-xl font-semibold text-purple-900 hover:underline">
-                                                    <a href="{{route('view.company', ['cognizant'])}}"
-                                                       class="text-purple-900 hover:underline">{{$company->name}}</a>
-                                                </h3>
-                                                <div class="flex items-center mt-2">
-                                            <span class="text-yellow-500">
-                                                <i class="fa-regular fa-star"></i>
-                                            </span>
-                                                    <span class="text-gray-600 ml-1">3.9</span>
-                                                    <span class="text-gray-600 ml-2">36.5K+ reviews</span>
-                                                </div>
-                                                <p class="text-gray-700 mt-2">{{$company->summary}}</p>
-                                                <a href="{{route('view.company', [$company->slug])}}"
-                                                    class="border border-purple-500 text-purple-500 py-2 px-4 mt-3 rounded-full hover:bg-purple-500 hover:text-white transition duration-300 ease-in-out">
-                                                    View Company
-                                                </a>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
-
-                <!-- Featured Event -->
-                <section class="bg-white">
-                    <div class="mx-auto">
-                        <div class="p-4">
-                            <div class="flex justify-between items-center text-purple-500">
-                                <span class="text-xl md:text-2xl font-semibold inline-block">Featured Events</span>
-                                <a href="{{route('events')}}"
-                                   class="md:bg-purple-500 md:text-white text-purple-500 underline md:no-underline cursor-pointer p-1 rounded-full m-1 hover:bg-purple-600 transition duration-300 ease-in-out">
-                                    <span class="hidden md:inline">View Events</span>
-                                    {{-- Icon --}}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none"
-                                         viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                              d="M9 5l7 7-7 7"/>
-                                    </svg>
-                                </a>
-                            </div>
-                            <hr>
-                            <div class="mt-4 relative">
-                                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-                                    @foreach($events as $event)
-                                        <div class="card desktop-homepage-events-wdgt overflow-hidden m-2">
-                                            <img class="w-full h-40 object-cover"
-                                                 src="{{url('storage/'.$event->thumbnail)}}"
-                                                 alt="Event Thumbnail">
-                                            <div class="card-body">
-                                                <div class="organizer-container flex items-start">
-                                                    <div class="organizer-description-container ml-3">
-                                                        <p class="feature-card-heading">{{ $event->title }}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="chips-container mt-2">
-                                                    <div class="chip">
-                                                        <p class="chip-label">{{ $event->website }}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="feature-card-stats-container mt-2 flex items-center">
-                                                    <div class="feature-card-date-container flex items-center">
-                                                        <img alt="User icon" class="naukicon-calendar"
-                                                             height="16" width="16"
-                                                             src="https://static.naukimg.com/s/0/0/i/Events/icons/calendar-ot.svg">
-                                                        <p class="feature-card-date-label ml-1">{{ date('d M Y', (int)$event->start) }}</p>
-                                                    </div>
-                                                    <div class="registered-user-container ml-4 flex items-center">
-                                                        <img alt="User icon" class="naukicon-user"
-                                                             height="16" width="16"
-                                                             src="https://static.naukimg.com/s/0/0/i/Events/icons/user-ot.svg">
-                                                        <p class="registered-count-label ml-1">{{rand(1,99) / 10}}K
-                                                            Enrolled</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="footer-separator"></div>
-                                                <div
-                                                    class="semi-circle-container flex items-center justify-between">
-                                                    <div class="left semi-circle"></div>
-                                                    <div class="right semi-circle"></div>
-                                                </div>
-                                                <div class="card-footer-container flex items-center justify-between">
-                                                    <div class="feature-card-type-tag-container">
-                                                        <p class="feature-card-type-label">RS. {{$event->price}}</p>
-                                                    </div>
-                                                    <div class="cta-container w-full">
-                                                        <a href="{{route('view.event', [$event->slug])}}"
-                                                           class="block text-center text-purple-500 hover:text-white rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-100"
-                                                           style="border: 1px solid;">View Details
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Why Choose Us Section -->
-                <section class="text-gray-600 body-font mt-3">
-                    <div class="px-5 py-4 mx-auto">
-                        <div class="text-center mb-10">
-                            <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">
-                                Why Choose Us
-                            </h1>
-                            <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500">Blue bottle
-                                crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice
-                                poutine, ramps microdosing banh mi pug.</p>
-                            <div class="flex mt-6 justify-center">
-                                <div class="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div class="p-4 flex flex-col text-center items-center card">
-                                <div
-                                    class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                                    <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                         stroke-linejoin="round" stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">
-                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                                    </svg>
-                                </div>
-                                <div class="flex-grow">
-                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Promote your business
-                                        worldwide</h2>
-                                    <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four
-                                        dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing
-                                        banh mi pug VHS try-hard.</p>
-                                </div>
-                            </div>
-                            <div class="p-4 flex flex-col text-center items-center card">
-                                <div
-                                    class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                                    <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                         stroke-linejoin="round" stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">
-                                        <circle cx="6" cy="6" r="3"></circle>
-                                        <circle cx="6" cy="18" r="3"></circle>
-                                        <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-                                    </svg>
-                                </div>
-                                <div class="flex-grow">
-                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Direct Chat with business lister</h2>
-                                    <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four
-                                        dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing
-                                        banh mi pug VHS try-hard.</p>
-                                </div>
-                            </div>
-                            <div class="p-4 flex flex-col text-center items-center card">
-                                <div
-                                    class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                                    <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                         stroke-linejoin="round" stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">
-                                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                </div>
-                                <div class="flex-grow">
-                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Find Millions of
-                                        buyers</h2>
-                                    <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four
-                                        dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing
-                                        banh mi pug VHS try-hard.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+    <!-- Main Content -->
+    <section class="container mx-auto">
+        <!-- Top Categories -->
+        <section class="bg-neutral-100 p-2">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl md:text-3xl font-semibold inline-block text-blue-900">Discover Top Categories</h1>
+                <a href="{{ url('/') }}" class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
+                    <span class="hidden md:inline">Explore All</span>
+                    {{-- Icon --}}
+                    <i class="mdi mdi-arrow-right-bold-circle-outline text-2xl ml-2"></i>
+                </a>
             </div>
-        </div>
+            <hr class="my-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <!-- Category Card 1 -->
+                @forelse($category as $item)
+                    <div class="bg-white p-6 rounded-md shadow-md transition-transform transform hover:scale-105">
+                        <h2 class="text-xl font-semibold mb-2">{{$item->name}}</h2>
+                        <a href="#" class="flex items-center text-center text-blue-500">
+                            <span>Explore <i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                @empty
+                    <p class="text-gray-700">No categories available.</p>
+                @endforelse
+            </div>
+        </section>
+
+        <!-- Top Products -->
+        <section class="mt-6">
+            <div class="p-4 bg-white rounded-lg shadow-md">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl md:text-3xl font-semibold inline-block text-blue-900">Explore Top Products</h1>
+                    <a href="{{ url('/') }}" class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
+                        <span class="hidden md:inline">Explore All</span>
+                        {{-- Icon --}}
+                        <i class="mdi mdi-arrow-right-bold-circle-outline text-2xl ml-2"></i>
+                    </a>
+                </div>
+                <hr class="mt-4">
+                <div class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                    @forelse($products as $product)
+                        <a href="{{ route('view.product', [$product->slug]) }}" class="bg-white rounded-lg p-4 card">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-blue-900 font-semibold">{{ $product->name }}</span>
+                                <img src="{{ url('storage/' . $product->thumbnail) }}" alt="Product Thumbnail" class="w-[40px] h-[40px] rounded">
+                            </div>
+                            <span class="text-gray-600">1.4K+ Sold</span>
+                            <div class="flex mt-2">
+                                @forelse($product->gallery as $item)
+                                    <div class="w-1/3 mr-2">
+                                        <img src="{{ url('storage/' . $item) }}" alt="Product Image" class="w-[40px] h-[40px] rounded-lg">
+                                    </div>
+                                @empty
+                                    <p>No images available</p>
+                                @endforelse
+                            </div>
+                        </a>
+                    @empty
+                        <p class="text-gray-700">No products available.</p>
+                    @endforelse
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Companies -->
+        <section class="mt-6">
+            <div class="p-4 bg-white rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl md:text-3xl font-semibold text-blue-900">Discover Featured Companies</h1>
+                    <a href="{{ url('company') }}" class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
+                        <span class="hidden md:inline">Explore All</span>
+                        {{-- Icon --}}
+                        <i class="mdi mdi-arrow-right-bold-circle-outline text-2xl ml-2"></i>
+                    </a>
+                </div>
+                <hr class="mb-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @forelse($companies as $company)
+                        <div class="bg-white p-4 card rounded-lg overflow-hidden shadow-md">
+                            <div class="mb-4">
+                                <img src="{{ url('storage/' . $company->logo) }}" alt="Company Logo" class="w-full h-32 object-cover rounded-lg">
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-purple-900 hover:underline">
+                                    <a href="{{ route('view.company', [$company->slug]) }}" class="text-purple-900 hover:underline">{{ $company->name }}</a>
+                                </h3>
+                                <div class="flex items-center mt-2 text-gray-600">
+                                <span class="text-yellow-500">
+                                    <i class="mdi mdi-star"></i>
+                                </span>
+                                    <span class="ml-1">{{ $company->rating }}</span>
+                                    <span class="ml-2">{{ $company->reviews }} reviews</span>
+                                </div>
+                                <p class="text-gray-700 mt-2">{{ $company->summary }}</p>
+                                <a href="{{ route('view.company', [$company->slug]) }}" class="border border-purple-700 text-purple-700 py-2 px-4 mt-3 rounded-full hover:bg-purple-700 hover:text-white transition duration-300 ease-in-out">
+                                    View Company
+                                </a>
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-gray-700">No featured companies available.</p>
+                    @endforelse
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Events -->
+        <section class="mt-6">
+            <div class="p-4 bg-white rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-6 text-blue-900">
+                    <h1 class="text-2xl md:text-3xl font-semibold inline-block">Explore Featured Events</h1>
+                    <a href="{{ url('/') }}" class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
+                        <span class="hidden md:inline">Explore All</span>
+                        {{-- Icon --}}
+                        <i class="mdi mdi-arrow-right-bold-circle-outline text-2xl ml-2"></i>
+                    </a>
+                </div>
+                <hr class="mb-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    @forelse($events as $event)
+                        <div class="bg-white overflow-hidden rounded-lg shadow-md m-2">
+                            <img class="w-full h-40 object-cover" src="{{ url('storage/'.$event->thumbnail) }}" alt="Event Thumbnail">
+                            <div class="p-4">
+                                <div class="mb-2">
+                                    <h3 class="text-xl font-semibold text-purple-900 hover:underline">
+                                        <a href="{{ route('view.event', [$event->slug]) }}" class="text-purple-900 hover:underline">{{ $event->title }}</a>
+                                    </h3>
+                                </div>
+                                <div class="flex items-start mb-2">
+                                    <div class="ml-3">
+                                        <p class="text-gray-700">{{ $event->website }}</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-gray-600 mb-2">
+                                    <img alt="Calendar icon" class="h-4 w-4" src="{{ asset('images/calendar-icon.svg') }}">
+                                    <p class="ml-1">{{ date('d M Y', (int)$event->start) }}</p>
+                                </div>
+                                <div class="flex items-center text-gray-600 mb-2">
+                                    <img alt="User icon" class="h-4 w-4" src="{{ asset('images/user-icon.svg') }}">
+                                    <p class="ml-1">{{ rand(1, 99) / 10 }}K Enrolled</p>
+                                </div>
+                                <div class="border-t-2 border-gray-200 mt-3 pt-3 flex items-center justify-between">
+                                    <div>
+                                        <p class="text-purple-700 font-semibold">RS. {{ $event->price }}</p>
+                                    </div>
+                                    <div class="w-3/5">
+                                        <a href="{{ route('view.event', [$event->slug]) }}" class="block text-center text-purple-500 hover:text-white rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-full" style="border: 1px solid;">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-gray-700">No featured events available.</p>
+                    @endforelse
+                </div>
+            </div>
+        </section>
+        <!-- Why Choose Us -->
+        <section class="text-gray-600 body-font mt-3">
+            <div class="px-5 py-4 mx-auto">
+                <div class="text-center mb-10">
+                    <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">
+                        Why Choose Us
+                    </h1>
+                    <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500">
+                        In the picturesque village of Jam Kalyanpur, we take pride in our commitment to excellence. Explore why choosing us is a decision you won't regret.
+                    </p>
+                    <div class="flex mt-6 justify-center">
+                        <div class="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="p-4 flex flex-col text-center items-center card">
+                        <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
+                            <i class="mdi mdi-earth"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Promote your business worldwide</h2>
+                            <p class="leading-relaxed text-base">
+                                As a full-stack apprentice intern in the heart of Kathiyawad, specializing in Angular and .NET Core, I bring the world to your business.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 flex flex-col text-center items-center card">
+                        <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
+                            <i class="mdi mdi-chat-processing"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Direct Chat with business lister</h2>
+                            <p class="leading-relaxed text-base">
+                                Engage in direct conversations with me, your dedicated full-stack developer, ensuring your requirements are met efficiently.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 flex flex-col text-center items-center card">
+                        <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
+                            <i class="mdi mdi-account-group"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Find Millions of buyers</h2>
+                            <p class="leading-relaxed text-base">
+                                With a dream to become the best game developer and full-stack developer globally, my skills attract millions of potential buyers to your projects.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </section>
+
 @endsection

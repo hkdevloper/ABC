@@ -111,7 +111,7 @@ class EventResource extends Resource
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->required(),
-                        TextInput::make('city_id')
+                        TextInput::make('city')
                             ->label('City')
                             ->required(),
                         TextInput::make('zip_code')
