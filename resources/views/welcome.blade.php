@@ -2,13 +2,94 @@
 
 @section('head')
     <style>
-        .gradient-border {
-            background: linear-gradient(to right, #8a2be2, #9932CC, #8a2be2); /* Purple Gradient Colors */
-            height: 4px; /* Adjust the height as needed */
-            border: none;
+        /* Additional custom styles go here */
+        .search-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .search-input {
+            width: 300px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1;
+        }
+
+        .search-results a {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.3s;
+            text-align: start;
+        }
+
+        .search-results a:hover {
+            background-color: #f0f0f0;
         }
     </style>
+@endsection
 
+@section('page-scripts')
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', async function () {
+            const inputValue = this.value.trim().toLowerCase();
+
+            // Check if inputValue is at least 3 characters
+            if (inputValue.length >= 3) {
+                const searchURL = "{{ route('api.search', ['search' => '__input__']) }}".replace('__input__', inputValue);
+
+                try {
+                    // Fetch data from the search endpoint
+                    const response = await fetch(searchURL);
+                    const searchData = await response.json();
+                    const data = searchData.data;
+                    console.log(data)
+
+                    // Clear previous results
+                    searchResults.innerHTML = '';
+
+                    // Filter and display results
+                    data.forEach(result => {
+                        const [name, slug, type] = result;
+                        const resultElement = document.createElement('a');
+                        resultElement.textContent = name;
+
+                        // Generate link based on the type of item
+                        if (type === 'company') {
+                            resultElement.href = "{{ route('view.company', ['slug' => '__slug__']) }}".replace('__slug__', slug);
+                        } else if (type === 'product') {
+                            resultElement.href = "{{ route('view.product', ['slug' => '__slug__']) }}".replace('__slug__', slug);
+                        }
+                        console.log(resultElement.href)
+
+                        searchResults.appendChild(resultElement);
+                        // Show or hide the results container based on the input length
+                        searchResults.style.display = inputValue.length >= 3 ? 'block' : 'none';
+                    });
+                } catch (error) {
+                    console.error('Error fetching search results:', error);
+                }
+            }
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -19,13 +100,11 @@
             <div class="text-gray-600 text-base md:text-3xl my-4">Explore a vast network of 5 lakh+ businesses and products for your needs</div>
             <div class="mt-2 md:mt-4 flex items-center justify-center">
                 <div class="relative ml-2">
-                    <input list="searchList"
-                           class="rounded-full p-2 md:p-4 w-full md:w-[50vw] focus:outline-none card-hovered"
-                           placeholder="Search for Companies or Products..." type="text">
-                    <!-- Add datalist for autocomplete if needed -->
-                    <!-- <datalist id="searchList"> -->
-                        <!-- Populate with search options -->
-                    <!-- </datalist> -->
+                    <label for="searchInput"></label>
+                    <div class="search-dropdown">
+                        <input id="searchInput" class="search-input rounded-full p-2 md:p-4 w-full md:w-[50vw] focus:outline-none card-hovered" type="text" placeholder="Type at least 3 characters">
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
                 </div>
                 <button
                     class="bg-blue-500 text-white p-2 md:p-4 rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out w-[40px] md:w-[60px]">

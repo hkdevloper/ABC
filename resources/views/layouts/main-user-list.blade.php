@@ -11,7 +11,8 @@
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/style/boxicons-2.1.4/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('user/style/output.css')}}" rel="stylesheet">
-    <script src="{{ asset('user/js/jquery.js')}}"></script>
+{{--    <script src="{{ asset('user/js/jquery.js')}}"></script>--}}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="{{ asset('user/js/fw.js')}}"></script>
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
