@@ -136,4 +136,29 @@ Route::get('search', function (Request $request){
     return view('pages.search')->with($data);
 })->name('search');
 
+Route::post('subscribe', function (Request $request){
+    $email = $request->email;
+    $subscribe = new \App\Models\Subscribe();
+    $subscribe->email = $email;
+    $subscribe->save();
+    return redirect()->back()->with('success', 'Subscribed successfully');
+})->name('subscribe');
+
+Route::post('comment', function (Request $request){
+    $request->validate([
+        'comment' => 'required',
+        'name' => 'required',
+        'user_id' => 'required',
+        'blog_id' => 'required',
+    ]);
+    $comment = new \App\Models\BlogComments();
+    $comment->comment = $request->comment;
+    $comment->name = $request->name;
+    $comment->email = "";
+    $comment->user_id = $request->user_id;
+    $comment->blog_id = $request->blog_id;
+    $comment->save();
+    return redirect()->back()->with('success', 'Commented successfully');
+})->name('blog.comment.submit');
+
 

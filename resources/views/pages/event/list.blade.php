@@ -17,61 +17,66 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2">
                     <!-- Event Items-->
                     @forelse($events as $event)
-                        <div class="card desktop-homepage-events-wdgt overflow-hidden">
-                            <img class="w-full h-40 object-cover"
-                                 src="{{url('storage/'.$event->thumbnail)}}"
-                                 alt="Event Thumbnail">
-                            <div class="card-body">
-                                <div class="organizer-container flex items-start">
-                                    <div class="organizer-description-container ml-3">
-                                        <p class="feature-card-heading">{{ $event->title }}</p>
-                                    </div>
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="each relative">
+                                <img src="{{ url('storage/'.$event->thumbnail) }}" class="w-full h-48 object-contain" alt="Event">
+                                <div class="badge absolute top-0 right-0 bg-purple-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">
+                                    @php
+                                        $date = \Carbon\Carbon::parse($event->start);
+                                    @endphp
+                                    {{$date->diffForHumans()}}
                                 </div>
-                                <div class="chips-container mt-2">
-                                    <div class="chip">
-                                        <p class="chip-label">{{ $event->website }}</p>
-                                    </div>
+                                <div class="info-box text-xs flex p-1 font-semibold text-gray-500 bg-gray-300">
+                                    <span class="mr-1 p-1 px-2 font-bold">105 Watching</span>
+                                    <span class="mr-1 p-1 px-2 font-bold border-0 border-solid border-l border-gray-400">105 Likes</span>
+                                    <span class="mr-1 p-1 px-2 font-bold border-0 border-solid border-l border-gray-400">105 Views</span>
                                 </div>
-                                <div class="feature-card-stats-container mt-2 flex items-center">
-                                    <div class="feature-card-date-container flex items-center">
-                                        <img alt="User icon" class="naukicon-calendar"
-                                             height="16" width="16"
-                                             src="https://static.naukimg.com/s/0/0/i/Events/icons/calendar-ot.svg">
-                                        <p class="feature-card-date-label ml-1">{{ date('d M Y', (int)$event->start) }}</p>
+                                <div class="desc p-4 text-gray-800">
+                                    <div class="flex items-center mt-2">
+                                        <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
+                                        <div class="pl-3">
+                                            <div class="font-medium">
+                                                {{$event->user->name}}
+                                            </div>
+                                            <div class="text-gray-600 text-sm">
+                                                {{$event->created_at->diffForHumans()}}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="registered-user-container ml-4 flex items-center">
-                                        <img alt="User icon" class="naukicon-user"
-                                             height="16" width="16"
-                                             src="https://static.naukimg.com/s/0/0/i/Events/icons/user-ot.svg">
-                                        <p class="registered-count-label ml-1">{{rand(1,99) / 10}}K
-                                            Enrolled</p>
-                                    </div>
+                                    <a href="{{route('view.event', [$event->slug])}}" target="_new" class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
+                                    <span class="description text-sm block py-2 border-gray-400 mb-2">
+                                        @php
+                                            $description = strip_tags($event->description);
+                                            $description = strlen($description) > 100 ? substr($description, 0, 100) . "..." : $description;
+                                        @endphp
+                                        {!! $description !!}
+                                    </span>
                                 </div>
                             </div>
-                            <div class="card-footer">
-                                <div class="footer-separator"></div>
-                                <div
-                                    class="semi-circle-container flex items-center justify-between">
-                                    <div class="left semi-circle"></div>
-                                    <div class="right semi-circle"></div>
-                                </div>
-                                <div class="card-footer-container flex items-center justify-between">
-                                    {{--                                                    <div class="feature-card-type-tag-container">--}}
-                                    {{--                                                        <p class="feature-card-type-label">RS. {{$event->price}}</p>--}}
-                                    {{--                                                    </div>--}}
-                                    <div class="cta-container w-full">
-                                        <a href="{{route('view.event', [$event->slug])}}"
-                                           class="block text-center text-purple-500 hover:text-white rounded-full px-2 py-2 hover:bg-purple-600 transition duration-300 ease-in-out text-xs w-100"
-                                           style="border: 1px solid;">View Details
-                                        </a>
-                                    </div>
+                            <div class="border border-solid border-t border-b-0 border-r-0 border-l-0 border-gray-900">
+                                <div class="flex items-stretch w-full">
+                                    <button type="button"
+                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
+                                        <i class="fas fa-eye mr-3"></i>
+                                        View
+                                    </button>
+
+                                    <button type="button"
+                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
+                                        <i class="fas fa-bookmark mr-3"></i>
+                                        Save
+                                    </button>
+
+                                    <button type="button"
+                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white">
+                                        <i class="fas fa-heart mr-3"></i>
+                                        Like
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     @empty
-                        <div class="w-full text-center">
-                            <p class="text-gray-500 text-center">No Events Found</p>
-                        </div>
+                        <p class="text-gray-700">No featured events available.</p>
                     @endforelse
                 </div>
             </div>

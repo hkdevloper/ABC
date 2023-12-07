@@ -16,6 +16,7 @@
     <script src="{{ asset('user/js/fw.js')}}"></script>
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         tailwind.config = {
             darkMode: "class",

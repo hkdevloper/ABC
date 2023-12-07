@@ -15,62 +15,49 @@
             <!-- Blog List -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
                 <!-- Blog list Item -->
-                @forelse($blogs as $blog)
-                    <div class="bg-white card overflow-hidden w-full mb-4">
-                        <div class="relative">
-                            <img class="w-full h-60 object-cover"
-                                 src="{{url('storage/'.$blog->thumbnail)}}" alt="Blog Thumbnail">
-                        </div>
-                        <div class="px-4 py-3">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-2">{{$blog->title}}</h2>
-                            <p class="text-gray-700 text-sm mb-4">
-                                @php
-                                    $content = $blog->content;
-                                    $limit = 75; // You can adjust the character limit
-                                @endphp
-
-                                @if(strlen($content) > $limit)
-                                    {!!  substr($content, 0, $limit) !!}...
-                                @else
-                                    {!! $content !!}
-                                @endif
-                            </p>
-                            <div class="flex flex-wrap mb-4">
-                                @php
-                                    $color = [
-                                    'bg-purple-100 text-purple-600',
-                                    'bg-blue-100 text-blue-600',
-                                    'bg-green-100 text-green-600',
-                                    'bg-yellow-100 text-yellow-600',
-                                    'bg-red-100 text-red-600',
-                                    'bg-indigo-100 text-indigo-600',
-                                    'bg-pink-100 text-pink-600',
-                                    'bg-gray-100 text-gray-600',
-                                    ]
-                                @endphp
-                                @foreach($blog->tags as $tag)
-                                    <span class="{{$color[rand(0,7)]}} px-2 py-1 rounded-full text-xs font-semibold mr-2 mb-2">{{$tag}}</span>
-                                @endforeach
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <div class="flex space-x-4">
-                                    <button
-                                        class="border border-purple-200 p-1 rounded-full hover:bg-purple-500 text-purple-500 hover:text-white transition duration-300 ease-in-out text-xs">
-                                        <i class="fas fa-thumbs-up"></i> Like
-                                    </button>
-                                    <button
-                                        class="text-blue-500 hover:text-blue-700 transition duration-300 ease-in-out text-xs">
-                                        <i class="fas fa-share"></i> Share
-                                    </button>
+                @forelse($blogs as $item)
+                    <card class="bg-white border border-solid border-gray-900 transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
+                        <img class="w-full h-60 object-cover" src="{{url('storage/'.$item->thumbnail)}}" alt="Blog Thumbnail">
+                        <div class="p-3">
+                            <div class="flex items-center mt-2">
+                                <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$item->user->name}}'/>
+                                <div class="pl-3">
+                                    <div class="font-medium">
+                                        {{$item->user->name}}
+                                    </div>
+                                    <div class="text-gray-600 text-sm">
+                                        {{$item->created_at->diffForHumans()}}
+                                    </div>
                                 </div>
-                                <a href="{{route('view.blog', [$blog->slug])}}"
-                                   class="text-purple-500 hover:text-white rounded-full px-2 py-1 hover:bg-purple-600 transition duration-300 ease-in-out text-xs"
-                                   style="border: 1px solid;">
-                                    Read More
-                                </a>
                             </div>
+                            <!-- Title -->
+                            <h2 class="font-bold text-base sm:text-sm md:text-xl lg:text-xl mt-2">
+                                <a href="{{route('view.blog', $item->slug)}}">{{$item->title}}</a>
+                            </h2>
+                            <!-- Tags -->
+                            <p class="mt-5"> By: <a href="#" class="text-red-600"> {{$item->user->name}} </a></p>
+                            <p> Tags:
+                                @forelse($item->tags as $tag)
+                                    <a href="#" class="text-red-600"> {{$tag}} </a>,
+                                @empty
+                                    <span class="text-red-600">No Tags</span>
+                                @endforelse
+                            </p>
+                            <header class="flex font-light text-base mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-90 -ml-2"  viewBox="0 0 24 24" stroke="#b91c1c">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                </svg>
+                                <span class="ml-2">{{$item->created_at->format('d M Y')}}</span>
+                            </header>
+                            <!-- Button -->
+                            <a href="{{route('view.blog', [$item->slug])}}" class="bg-purple-500 text-white font-semibold py-2 px-5 text-sm mt-6 inline-flex items-center group">
+                                <p> READ MORE </p>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-2 delay-100 duration-200 ease-in-out" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
                         </div>
-                    </div>
+                    </card>
                 @empty
                     <div class="w-full text-center">
                         <p class="text-gray-500 text-center">No Blogs Found</p>

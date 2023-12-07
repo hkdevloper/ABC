@@ -13,7 +13,7 @@
                         <img src="https://ui-avatars.com/api/?name={{$blog->user->name}}" class="mr-2 h-8 rounded-full" alt="avatar"
                              loading="lazy" />
                         <div>
-                            <span> Published <u>{{$blog->created_at}}</u> by </span>
+                            <span> Published <u>{{$blog->created_at->diffForHumans()}}</u> by </span>
                             <a href="#" class="font-medium">{{$blog->user->name}}</a>
                         </div>
                     </div>
@@ -23,42 +23,66 @@
                 <!-- Comment Section -->
                 <section class="my-8">
                     <h5 class="mb-10 text-xl font-semibold md:mb-6">
-                        Comments: 3
+                        Comments: <span class="text-gray-500 text-base">({{$blog->comments->count()}})</span>
                     </h5>
 
                     <!-- Comment -->
-                    <div class="mb-12 flex flex-wrap md:mb-0">
-                        <div class="w-full md:w-2/12 shrink-0 grow-0 basis-auto">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(24).jpg"
-                                 class="mb-6 w-full rounded-lg shadow-lg dark:shadow-black/20" alt="Avatar" />
-                        </div>
+                    @forelse($blog->comments as $comment)
+                        <div class="mb-12 flex flex-wrap md:mb-0">
+                            <div class="w-full md:w-2/12 shrink-0 grow-0 basis-auto">
+                                <img src="https://ui-avatars.com/api/?name={{$comment->user->name}}"
+                                     class="mb-6 w-full rounded-lg shadow-lg dark:shadow-black/20" alt="Avatar" />
+                            </div>
 
-                        <div class="w-full md:w-10/12 shrink-0 grow-0 basis-auto md:pl-6">
-                            <p class="mb-3 font-semibold">Marta Dolores</p>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Distinctio est ab iure inventore dolorum consectetur? Molestiae
-                                aperiam atque quasi consequatur aut? Repellendus alias dolor ad
-                                nam, soluta distinctio quis accusantium!
-                            </p>
+                            <div class="w-full md:w-10/12 shrink-0 grow-0 basis-auto md:pl-6">
+                                <p class="mb-3 font-semibold">{{$comment->user->name}}</p>
+                                <p class="mb-3 text-gray-500 text-sm">{{$comment->created_at->diffForHumans()}}</p>
+                                <p>{!! $comment->comment !!}</p>
+
+                            </div>
                         </div>
-                    </div>
+                    @empty
+                        <p class="text-gray-500 text-center mt-10">No comments found.</p>
+                    @endforelse
                 </section>
                 <!-- Leave Reply -->
                 <section class="my-8">
                     <h5 class="mb-10 text-center text-xl font-semibold">Leave a reply</h5>
-                    <form>
+                    <form method="post" action="{{route('blog.comment.submit')}}">
+                        @csrf
                         <div class="relative mb-6" data-te-input-wrapper-init>
-                            <x-bladewind::input type="text" name="name" placeholder="Name" />
+                            <x-bladewind::input type="text" name="name" placeholder="Name" :required="true"/>
                         </div>
                         <div class="relative mb-6" data-te-input-wrapper-init>
-                            <x-bladewind::input type="email" name="email" placeholder="Email" />
+                            <x-bladewind::textarea type="text" id="message" placeholder="Message" :required="true" name="comment"/>
                         </div>
-                        <div class="relative mb-6" data-te-input-wrapper-init>
-                            <x-bladewind::textarea type="text" id="message" placeholder="Message" name="message"/>
-                        </div>
-
-                        <x-bladewind::button class="w-full bg-purple-500 text-white" type="submit">Submit</x-bladewind::button>
+                        @auth
+                            <input type="hidden" name="blog_id" value="{{$blog->id}}">
+                            <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                            <x-bladewind::button class="w-full bg-purple-500 text-white" can_submit="true">Submit</x-bladewind::button>
+                        @else
+                            <span id="login-to-continue">
+                                <x-bladewind::button class="w-full bg-purple-500 text-white" type="button">Login to Comment</x-bladewind::button>
+                            </span>
+                            <script>
+                                document.getElementById('login-to-continue').addEventListener('click', function () {
+                                    Swal.fire({
+                                        title: 'Login to continue',
+                                        text: "You need to login to comment on this blog.",
+                                        icon: 'info',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Login',
+                                        cancelButtonText: 'Cancel'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = '{{url('user/dashboard')}}';
+                                        }
+                                    })
+                                })
+                            </script>
+                        @endauth
                     </form>
                 </section>
                 <!-- Related Products Section -->
