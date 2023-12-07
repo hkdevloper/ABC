@@ -3,7 +3,7 @@
         <div class="flex flex-wrap items-center">
             <div class="block w-full shrink-0 grow-0 basis-auto lg:flex lg:w-6/12 xl:w-4/12">
                 <div class="h-[500px] w-full">
-                    <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    <iframe src="https://maps.google.com/maps?q=model+scholl+jam+kalyanpur&t=&z=13&ie=UTF8&iwloc=&output=embed"
                             class="left-0 top-0 h-full w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg"
                             frameborder="0"
                             allowfullscreen></iframe>
