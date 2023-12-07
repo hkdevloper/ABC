@@ -41,6 +41,8 @@
 <main class="mx-auto">
     @yield('content')
     <livewire:requirement/>
+    <x-user.logo-cloud/>
+    <x-news-latter/>
     @include('includes.modals')
     @include('includes.footer')
 </main>
