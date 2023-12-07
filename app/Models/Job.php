@@ -40,8 +40,6 @@ class Job extends Model
         'description' => CleanHtml::class,
         'summary' => CleanHtml::class,
         'education' => CleanHtml::class,
-        'experience' => CleanHtml::class,
-        'organization' => CleanHtml::class,
     ];
 
     public function user() : BelongsTo
@@ -66,6 +64,6 @@ class Job extends Model
 
     public function getJobAddressAttribute(): string
     {
-        return "{$this->address->address_line_1}, {$this->address->country->name}, {$this->address->state->name}, {$this->address->city->name}, {$this->address->zip_code}";
+        return "{$this->address->address_line_1}, {$this->address->country->name}, {$this->address->state->name}, {$this->address->city}, {$this->address->zip_code}";
     }
 }

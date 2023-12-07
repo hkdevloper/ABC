@@ -2,6 +2,7 @@
 
 namespace App\Filament\User\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\User\Resources\JobResource\Pages;
 use App\Filament\User\Resources\JobResource\RelationManagers;
 use App\Models\City;
@@ -67,23 +68,13 @@ class JobResource extends Resource
                     ->label('Organization')
                     ->placeholder('Enter organization')
                     ->maxLength(191),
-                MarkdownEditor::make('description')
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'heading',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'table',
-                        'undo',
-                    ])
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
+                TinyEditor::make('description')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('editor/uploads')
+                    ->profile('custom')
+                    ->columnSpan('full')
+                    ->required(),
                 Section::make()->schema([
                     DatePicker::make('valid_until')
                         ->label('Valid Until')
@@ -100,42 +91,20 @@ class JobResource extends Resource
                 ])->columns(3),
                 Section::make()
                     ->schema([
-                        MarkdownEditor::make('education')
-                            ->label('Education/Qualification')
-                            ->toolbarButtons([
-                                'blockquote',
-                                'bold',
-                                'bulletList',
-                                'codeBlock',
-                                'heading',
-                                'italic',
-                                'link',
-                                'orderedList',
-                                'redo',
-                                'strike',
-                                'table',
-                                'undo',
-                            ])
-                            ->required()
-                            ->maxLength(65535),
-                        MarkdownEditor::make('experience')
-                            ->toolbarButtons([
-                                'blockquote',
-                                'bold',
-                                'bulletList',
-                                'codeBlock',
-                                'heading',
-                                'italic',
-                                'link',
-                                'orderedList',
-                                'redo',
-                                'strike',
-                                'table',
-                                'undo',
-                            ])
-                            ->label('Experience')
-                            ->required()
-                            ->maxLength(65535),
+                        TinyEditor::make('education')
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsVisibility('public')
+                            ->fileAttachmentsDirectory('editor/uploads')
+                            ->profile('custom')
+                            ->columnSpan('full')
+                            ->required(),
+                        TinyEditor::make('experience')
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsVisibility('public')
+                            ->fileAttachmentsDirectory('editor/uploads')
+                            ->profile('custom')
+                            ->columnSpan('full')
+                            ->required(),
                     ])->columns(2),
                 Section::make('Images')
                     ->schema([

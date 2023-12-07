@@ -15,28 +15,34 @@
             <!-- Job List -->
             <div class="flex flex-col mb-10 lg:items-center items-center justify-center">
                 @forelse($jobs as  $job)
-                    <div class="m-2 card desktop-homepage-events-wdgt dark:bg-neutral-700 w-full">
-                        <!-- Logo and Details Div -->
-                        <div class="flex items-center justify-between pr-2">
-                            <div class="flex flex-wrap">
-                                <img src="{{url('storage/' . $job->thumbnail)}}" alt="Job Thumbnail"
-                                     class="w-[150px] h-[120px] object-cover rounded-l-lg mr-3">
-                                <div class="block">
-                                    <h2 class="text-gray-900 text-lg font-semibold mb-1">{{$job->title}}</h2>
-                                    <p class="text-gray-400"><i
-                                            class='bx bx-current-location'></i>{{$job->getJobAddressAttribute()}}</p>
-                                    <p class="text-purple-600">{{$job->employement_type}}</p>
-                                    <p class="text-gray-400"><i class='bx bx-time-five'></i>
-                                        Posted {{$job->created_at->diffForHumans()}} by {{$job->user->name}}
-                                    </p>
+                    <div class="group mx-2 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto">
+                        <a href="{{route('view.job', [$job->slug])}}" class="order-2 col-span-1 mt-4 -ml-14 text-left text-gray-600 hover:text-gray-700 sm:-order-1 sm:ml-4">
+                            <div class="group relative h-16 w-16 overflow-hidden rounded-lg">
+                                <img src="{{url('storage/' . $job->thumbnail)}}" alt="" class="h-full w-full object-contain text-gray-700" />
+                            </div>
+                        </a>
+                        <div class="col-span-11 flex flex-col pr-8 text-left sm:pl-4">
+                            <h3 class="text-sm text-gray-600">{{$job->category->name}}</h3>
+                            <div class="flex items-center my-2">
+                                <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$job->user->name}}'/>
+                                <div class="pl-3">
+                                    <div class="font-medium">
+                                        {{$job->user->name}}
+                                    </div>
+                                    <div class="text-gray-600 text-sm">
+                                        {{$job->created_at->diffForHumans()}}
+                                    </div>
                                 </div>
                             </div>
+                            <a href="{{route('view.job', [$job->slug])}}" class="mb-3 overflow-hidden pr-7 text-lg font-semibold sm:text-xl"> {{$job->title}} </a>
 
-                            <a href="{{route('view.job', [$job->slug])}}"
-                               class="text-purple-500 hover:text-white hover:bg-purple-500 rounded-full px-2 py-2 transition duration-300 ease-in-out text-xs"
-                               style="border: 1px solid;">
-                                View Details
-                            </a>
+                            <p class="overflow-hidden pr-7 text-sm">{{$job->summary}}</p>
+
+                            <div class="mt-5 flex flex-col space-y-3 text-sm font-medium text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
+                                <div class="">Experience:<span class="ml-2 mr-3 rounded-full bg-green-100 px-2 py-0.5 text-green-900">{{$job->experience}}</span></div>
+                                <div class="">Salary:<span class="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">Rs. {{$job->salary}}K</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @empty

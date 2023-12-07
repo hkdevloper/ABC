@@ -2,6 +2,7 @@
 
 namespace App\Filament\User\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\User\Resources\ProductResource\Pages;
 use App\Filament\User\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
@@ -57,22 +58,13 @@ class ProductResource extends Resource
                             ->placeholder('Enter slug')
                             ->required()
                             ->maxLength(191),
-                        MarkdownEditor::make('description')
-                            ->toolbarButtons([
-                                'blockquote',
-                                'bold',
-                                'bulletList',
-                                'codeBlock',
-                                'heading',
-                                'italic',
-                                'link',
-                                'orderedList',
-                                'redo',
-                                'strike',
-                                'table',
-                                'undo',
-                            ])
-                            ->columnSpanFull(),
+                        TinyEditor::make('description')
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsVisibility('public')
+                            ->fileAttachmentsDirectory('editor/uploads')
+                            ->profile('custom')
+                            ->columnSpan('full')
+                            ->required(),
                     ])
                     ->columnSpanFull(),
                 Section::make()

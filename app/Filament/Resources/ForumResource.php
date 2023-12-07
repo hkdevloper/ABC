@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\ForumResource\Pages;
 use App\Filament\Resources\ForumResource\RelationManagers;
 use App\Models\Forum;
@@ -29,24 +30,13 @@ class ForumResource extends Resource
                     ->label('Enter Title')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\MarkdownEditor::make('body')
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'heading',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'table',
-                        'undo',
-                    ])
-                    ->label('Enter Description')
-                    ->required()
-                    ->columnSpanFull(),
+                TinyEditor::make('body')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('editor/uploads')
+                    ->profile('custom')
+                    ->columnSpan('full')
+                    ->required(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()

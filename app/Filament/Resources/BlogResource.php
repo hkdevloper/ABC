@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
@@ -79,22 +80,13 @@ class BlogResource extends Resource
                 TagsInput::make('tags')
                     ->splitKeys(['Tab', ' ', ','])
                     ->required(),
-                Forms\Components\MarkdownEditor::make('content')
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'heading',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'table',
-                        'undo',
-                    ])
-                    ->columnSpanFull(),
+                TinyEditor::make('content')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('editor/uploads')
+                    ->profile('custom')
+                    ->columnSpan('full')
+                    ->required(),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\CompanyResource\Pages;
 use App\Forms\Components\LeafletMap;
 use App\Models\City;
@@ -103,23 +104,13 @@ class CompanyResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->live(onBlur: true)
                     ->maxLength(191),
-                Forms\Components\MarkdownEditor::make('description')
-                    ->default('')
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'heading',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'table',
-                        'undo',
-                    ])
-                    ->columnSpanFull(),
+                TinyEditor::make('description')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('editor/uploads')
+                    ->profile('custom')
+                    ->columnSpan('full')
+                    ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('logo')

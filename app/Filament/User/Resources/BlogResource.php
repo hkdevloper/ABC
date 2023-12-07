@@ -2,6 +2,7 @@
 
 namespace App\Filament\User\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\User\Resources\BlogResource\Pages;
 use App\Models\Blog;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
@@ -82,23 +83,13 @@ class BlogResource extends Resource
                             ->splitKeys(['Tab', ' ', ','])
                             ->placeholder('Enter tags')
                             ->required(),
-                        MarkdownEditor::make('content')
-                            ->label('Content')
-                            ->toolbarButtons([
-                                'blockquote',
-                                'bold',
-                                'bulletList',
-                                'codeBlock',
-                                'heading',
-                                'italic',
-                                'link',
-                                'orderedList',
-                                'redo',
-                                'strike',
-                                'table',
-                                'undo',
-                            ])
-                            ->columnSpanFull(),
+                        TinyEditor::make('content')
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsVisibility('public')
+                            ->fileAttachmentsDirectory('editor/uploads')
+                            ->profile('custom')
+                            ->columnSpan('full')
+                            ->required(),
                     ])->columnSpanFull(),
                 Section::make('SEO Details')
                     ->relationship('seo')

@@ -2,6 +2,7 @@
 
 namespace App\Filament\User\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\User\Resources\CompanyResource\Pages;
 use App\Filament\User\Resources\CompanyResource\RelationManagers;
 use App\Forms\Components\LeafletMap;
@@ -69,23 +70,13 @@ class CompanyResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(191),
-                Forms\Components\MarkdownEditor::make('description')
-                    ->default('')
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'heading',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'table',
-                        'undo',
-                    ])
-                    ->columnSpanFull(),
+                TinyEditor::make('description')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('editor/uploads')
+                    ->profile('custom')
+                    ->columnSpan('full')
+                    ->required(),
                 TextInput::make('extra_things')
                     ->label('Products Name')
                     ->helperText('List your products name with comma separated')

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\City;
@@ -88,23 +89,13 @@ class EventResource extends Resource
                     ->label('Slug')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\MarkdownEditor::make('description')
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'heading',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'table',
-                        'undo',
-                    ])
-                    ->label('Description')
-                    ->columnSpanFull(),
+                TinyEditor::make('description')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('editor/uploads')
+                    ->profile('custom')
+                    ->columnSpan('full')
+                    ->required(),
                 Forms\Components\DatePicker::make('start')
                     ->label('Start Date')
                     ->before('end')

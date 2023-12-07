@@ -2,6 +2,7 @@
 
 namespace App\Filament\User\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\User\Resources\ForumResource\Pages;
 use App\Filament\User\Resources\ForumResource\RelationManagers;
 use App\Models\Forum;
@@ -34,24 +35,13 @@ class ForumResource extends Resource
                     ->label('Title')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\MarkdownEditor::make('body')
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'heading',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'table',
-                        'undo',
-                    ])
-                    ->label('Description')
-                    ->required()
-                    ->columnSpanFull(),
+                TinyEditor::make('body')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('editor/uploads')
+                    ->profile('custom')
+                    ->columnSpan('full')
+                    ->required(),
                 Forms\Components\Hidden::make('user_id')
                     ->default(fn() => auth()->user()->id)
                     ->required(),

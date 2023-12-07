@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\RequirementResource\Pages;
 use App\Filament\Resources\RequirementResource\RelationManagers;
 use App\Models\Requirement;
@@ -57,8 +58,13 @@ class RequirementResource extends Resource
                     ->directory('requirements')
                     ->maxFiles(3)
                     ->multiple(),
-                Forms\Components\MarkdownEditor::make('description')
-                    ->columnSpanFull(),
+                TinyEditor::make('description')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('editor/uploads')
+                    ->profile('custom')
+                    ->columnSpan('full')
+                    ->required(),
             ]);
     }
 

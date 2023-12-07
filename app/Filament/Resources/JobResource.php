@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\JobResource\Pages;
 use App\Filament\Resources\JobResource\RelationManagers;
 use App\Models\City;
@@ -46,14 +47,20 @@ class JobResource extends Resource
                     ->columns(2)
                     ->schema([
                         Toggle::make('is_active')
+                            ->default(true)
                             ->label('Active')
+                            ->required(),
+                        Toggle::make('is_approved')
+                            ->default(true)
+                            ->label('Approved')
                             ->required(),
                         Toggle::make('is_featured')
                             ->label('Featured')
                             ->required(),
-                    ]),
+                    ])->columns(3),
                 Select::make('user_id')
                     ->native(false)
+                    ->default(1)
                     ->label('Select User')
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
@@ -74,24 +81,13 @@ class JobResource extends Resource
                     ->label('Slug')
                     ->required()
                     ->maxLength(191),
-                MarkdownEditor::make('description')
-                    ->label('Enter Description')
-                    ->maxLength(65535)
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'heading',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'table',
-                        'undo',
-                    ])
-                    ->columnSpanFull(),
+                TinyEditor::make('description')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('editor/uploads')
+                    ->profile('custom')
+                    ->columnSpan('full')
+                    ->required(),
                 Forms\Components\DatePicker::make('valid_until')
                     ->label('Valid Until')
                     ->before(today()->addYear())
@@ -109,47 +105,25 @@ class JobResource extends Resource
                         'other' => 'Other',
                     ]),
                 TextInput::make('salary')
-                    ->prefix('$')
+                    ->prefix('RS.')
+                    ->suffix('INR')
                     ->label('Enter Salary')
                     ->maxLength(191),
                 TextInput::make('organization')
                     ->label('Enter Organization')
                     ->maxLength(191),
-                MarkdownEditor::make('education')
-                    ->label('Enter Education')
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'heading',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'table',
-                        'undo',
-                    ])
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
-                MarkdownEditor::make('experience')
-                    ->label('Enter Experience')
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'heading',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'table',
-                        'undo',
-                    ])
-                    ->maxLength(65535)
+                TinyEditor::make('education')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('editor/uploads')
+                    ->profile('custom')
+                    ->columnSpan('full')
+                    ->required(),
+                TextInput::make('experience')
+                    ->label('Enter Experience Details')
+                    ->prefix('Years')
+                    ->numeric()
+                    ->helperText('Enter experience in years')
                     ->columnSpanFull(),
                 Section::make('Images')
                     ->schema([
