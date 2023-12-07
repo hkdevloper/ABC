@@ -137,7 +137,7 @@
     }
 @endphp
 
-<div class="relative w-full dv-{{$name}} @if($add_clearing) mb-3 @endif">
+<div class="relative dv-{{$name}} @if($add_clearing) mb-3 @endif">
     <input
             {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color"]) }}
             type="{{ $type }}"
