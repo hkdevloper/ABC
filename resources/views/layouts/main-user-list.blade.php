@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css"/>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/style/boxicons-2.1.4/css/main.css') }}" rel="stylesheet">
@@ -40,6 +39,10 @@
 <main class="mx-auto">
     @yield('content')
     <livewire:requirement/>
+    <x-user.state-section/>
+    <x-user.contact-card/>
+    <x-user.logo-cloud/>
+    <x-news-latter/>
     @include('includes.modals')
     @include('includes.footer')
 </main>

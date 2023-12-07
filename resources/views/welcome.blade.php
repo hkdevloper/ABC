@@ -85,7 +85,7 @@
                     </a>
                 </div>
                 <hr class="mt-4">
-                <div class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                     @forelse($products as $product)
                         <a href="{{ route('view.product', [$product->slug]) }}" class="bg-white rounded-lg p-4 card">
                             <div class="flex items-center justify-between mb-2">
@@ -114,12 +114,12 @@
         <section class="bg-gray-100 p-8 mb-4 rounded-lg">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-3xl font-bold text-gray-800">Featured Companies</h2>
+                    <h2 class="text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Companies</h2>
                     <a href="#" class="bg-indigo-500 text-white py-2 px-4 rounded-full hover:bg-indigo-600">
                         Explore All
                     </a>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     @forelse($companies as $company)
                         <div class="bg-white rounded-lg shadow-md overflow-hidden">
                             <img src="{{ url('storage/' . $company->logo) }}" class="w-full h-48 object-contain" alt="Company Name">
@@ -134,9 +134,23 @@
                                     <span class="text-gray-600 text-sm">12 reviews</span>
                                 </div>
                             </div>
+                            <div class="border border-solid border-t border-b-0 border-r-0 border-l-0 border-gray-900">
+                                <div class="flex items-stretch w-full">
+                                    <button type="button" class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
+                                        <i class="fas fa-eye mr-3"></i>
+                                        View
+                                    </button>
 
-                            <div class="bg-indigo-500 text-white text-center py-4 px-6 rounded-b-lg">
-                                <a href="#" class="hover:underline">View Company</a>
+                                    <button type="button" class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
+                                        <i class="fas fa-bookmark mr-3"></i>
+                                        Save
+                                    </button>
+
+                                    <button type="button" class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white">
+                                        <i class="fas fa-heart mr-3"></i>
+                                        Like
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     @empty
@@ -149,9 +163,9 @@
         <section class="bg-gray-100 p-8 mb-4 rounded-lg">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-3xl font-bold text-gray-800">Featured Events</h2>
-                    <a href="#" class="bg-indigo-500 text-white py-2 px-4 rounded-full hover:bg-indigo-600">
-                        Explore All
+                    <h2 class="text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Events</h2>
+                    <a href="#" class="lg:hidden block bg-indigo-500 text-white w-full rounded-full hover:bg-indigo-600">
+                        <span class="py-2 px-3 text-xs">Explore All</span>
                     </a>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -174,16 +188,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="p-3 pt-4 text-center bg-purple-400">
-                            <button class="bg-indigo-500 text-white px-2 py-2 rounded-full hover:bg-indigo-600 mr-2">
-                                <i class="fas fa-share"></i> Share
-                            </button>
-                            <a href="{{ route('view.event', [$event->slug]) }}" class="bg-indigo-500 text-white px-2 py-2 rounded-full hover:bg-indigo-600 mr-2">
-                                <i class="fas fa-eye"></i> View
-                            </a>
-                            <button class="bg-indigo-500 text-white px-2 py-2 rounded-full hover:bg-indigo-600">
-                                <i class="fas fa-heart"></i> Like
-                            </button>
+                        <div class="border border-solid border-t border-b-0 border-r-0 border-l-0 border-gray-900">
+                            <div class="flex items-stretch w-full">
+                                <button type="button" class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
+                                    <i class="fas fa-eye mr-3"></i>
+                                    View
+                                </button>
+
+                                <button type="button" class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
+                                    <i class="fas fa-bookmark mr-3"></i>
+                                    Save
+                                </button>
+
+                                <button type="button" class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white">
+                                    <i class="fas fa-heart mr-3"></i>
+                                    Like
+                                </button>
+                            </div>
                         </div>
                     </div>
                     @empty
