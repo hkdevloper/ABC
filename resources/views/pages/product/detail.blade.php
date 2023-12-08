@@ -128,15 +128,29 @@
                                     <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Customer Reviews</h2>
 
                                     <div class="mb-0.5 flex items-center gap-2">
-                                        <x-bladewind.rating name="star-rating" size="medium"/>
-                                        <span class="text-sm font-semibold">4/5</span>
+                                        @php
+                                            // Count Average Rating
+                                            $total_rating = 0;
+                                            foreach($product->getReviews() as $item){
+                                                $total_rating += $item->rating;
+                                            }
+                                            $average_rating = $total_rating / $product->getReviews()->count();
+                                        @endphp
+                                        <x-bladewind.rating name="star-rating" size="medium" clickable="false" rating="{{$average_rating}}"/>
+                                        <span class="text-sm font-semibold">{{$average_rating}}/5</span>
                                     </div>
 
                                     <span class="block text-sm text-gray-500">Bases on {{$product->getReviews()->count()}} reviews</span>
 
-                                    <a href="#" onclick="showModal('rate')"
-                                       class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
-                                        a review</a>
+                                    <hr class="my-4 border-t-2 border-gray-200">
+
+                                    @auth
+                                        <a href="#" onclick="showModal('rate')"
+                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write a review</a>
+                                    @else
+                                        <a href="{{route('login')}}"
+                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login to write a review</a>
+                                    @endauth
                                 </div>
                             </div>
                             <div class="lg:col-span-2">
@@ -151,9 +165,10 @@
                                             <div class="flex justify-between items-center">
                                                 <div>
                                                     <span class="block text-sm font-bold">{{$item->user->name}}</span>
-                                                    <span class="block text-sm text-gray-500">{{$item->created_at}}</span>
+                                                    <span
+                                                        class="block text-sm text-gray-500">{{$item->created_at}}</span>
                                                 </div>
-                                                <x-bladewind.rating name="star-rating" size="small" rating="{{$item->rating}}"/>
+                                                <x-bladewind.rating name="star-rating" size="small" clickable="false" rating="{{$item->rating}}"/>
                                             </div>
                                             <p class="text-gray-600">{{$item->review}}</p>
                                         </div>
@@ -163,6 +178,8 @@
                                         </div>
                                     @endforelse
                                 </div>
+                                <!-- Pagination -->
+                                {{ $product->getReviews()->links() }}
                             </div>
                         </div>
                     </x-bladewind.tab-content>
@@ -247,14 +264,14 @@
         </form>
         <x-bladewind::processing
             name="rate-processing"
-            message="Submitting your rating..." />
+            message="Submitting your rating..."/>
 
         <x-bladewind::process-complete
             name="rate-complete"
             process_completed_as="passed"
             button_label="Done"
             button_action="hideModal('rate')"
-            message="Your rating has been submitted successfully." />
+            message="Your rating has been submitted successfully."/>
     </x-bladewind::modal>
     <!-- Add this script at the end of your HTML file -->
     <script>
@@ -270,33 +287,36 @@
             });
         });
 
-        saveRating = function () {
+        saveRating = async function () {
             let form = document.getElementById('rate-form');
             let item_id = form.querySelector('input[name="item_id"]').value;
             let rating = 1;
             let review = form.querySelector('textarea[name="review"]').value;
             let url = '{{route('api.product.rate', ['type'=>'product'])}}';
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify({
-                    item_id: item_id,
-                    rating: rating,
-                    review: review,
-                    user_id: {{auth()->user()->id}}
-                }),
-            }).then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        hideModal('rate');
-                        showModal('rate-complete');
-                    } else {
-                        hideModal('rate');
-                        showModal('rate-complete');
-                    }
-                })
-                .catch((error) => {
-                    console.log('Error:', error);
-                });
+            let headersList = {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+
+            let bodyContent = JSON.stringify({
+                "item_id": item_id,
+                "rating": rating,
+                "review": review,
+                "user_id": "{{auth()->user()->id}}"
+            });
+
+            let response = await fetch(url, {
+                method: "POST",
+                body: bodyContent,
+                headers: headersList
+            });
+
+            let data = await response.json();
+            if (data.status === 'success') {
+                hideModal('rate');
+                showModal('rate-complete');
+                window.location.reload();
+            }
         }
     </script>
 @endsection

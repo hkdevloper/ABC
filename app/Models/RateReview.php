@@ -11,51 +11,54 @@ class RateReview extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
+    protected $table = 'rate_reviews';
     protected $fillable = [
         'user_id',
         'type',
         'item_id',
         'rating',
         'review',
-        'is_approved',
-        'parent_id',
     ];
 
     protected $casts = [
-        'is_approved' => 'boolean',
-        'rating' => 'integer',
-        'parent_id' => 'integer',
-        'user_id' => 'integer',
+        'is_approved' => 'boolean'
     ];
+
+    protected $hidden = [
+        'user',
+        'company',
+        'product',
+        'event',
+    ];
+
 
     public function user() : BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function parent() : BelongsTo
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(RateReview::class, 'parent_id');
+        // Use a closure to specify additional conditions
+        return $this->belongsTo(Company::class, 'item_id')->where(function ($query) {
+            $query->where('type', 'company');
+        });
     }
 
-    public function children() : HasMany
+    public function product(): BelongsTo
     {
-        return $this->hasMany(RateReview::class, 'parent_id');
+        // Use a closure to specify additional conditions
+        return $this->belongsTo(Product::class, 'item_id')->where(function ($query) {
+            $query->where('type', 'product');
+        });
     }
 
-    public function company() : BelongsTo
+    public function event(): BelongsTo
     {
-        return $this->belongsTo(Company::class, 'item_id')->where('type', 'company');
-    }
-
-    public function product() : BelongsTo
-    {
-        return $this->belongsTo(Product::class, 'item_id')->where('type', 'product');
-    }
-
-    public function event() : BelongsTo
-    {
-        return $this->belongsTo(Event::class, 'item_id')->where('type', 'event');
+        // Use a closure to specify additional conditions
+        return $this->belongsTo(Event::class, 'item_id')->where(function ($query) {
+            $query->where('type', 'event');
+        });
     }
 
 }

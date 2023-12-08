@@ -24,6 +24,13 @@ use Illuminate\Http\Request;
 |
 */
 
+// Login Route
+Route::redirect('/login', '/user/dashboard/login')->name('login');
+Route::get('/test', function(){
+    $item = Product::find(1);
+    return $item->getReviews();
+});
+
 
 Route::get('/', function () {
     // Forgot session

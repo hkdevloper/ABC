@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -57,8 +58,8 @@ class Product extends Model
         return $this->belongsTo(Seo::class);
     }
 
-    public function getReviews() : BelongsTo
+    public function getReviews() : array | object
     {
-        return $this->belongsTo(RateReview::class, 'id', 'item_id')->where('type', 'product');
+        return RateReview::where('type', 'product')->where('item_id', $this->id)->paginate(3);
     }
 }

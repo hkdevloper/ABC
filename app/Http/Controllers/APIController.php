@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\Event;
+use App\Models\Product;
 use App\Models\RateReview;
+use Exception;
 use Illuminate\Http\Request;
 
 class APIController extends Controller
@@ -14,8 +18,8 @@ class APIController extends Controller
             'search' => 'required',
         ]);
         $search = $request->search;
-        $products = \App\Models\Product::where('name', 'LIKE', "%{$search}%")->where('is_approved', 1)->where('is_active', 1)->get();
-        $companies = \App\Models\Company::where('name', 'LIKE', "%{$search}%")->where('is_approved', 1)->where('is_active', 1)->get();
+        $products = Product::where('name', 'LIKE', "%{$search}%")->where('is_approved', 1)->where('is_active', 1)->get();
+        $companies = Company::where('name', 'LIKE', "%{$search}%")->where('is_approved', 1)->where('is_active', 1)->get();
         $searchList = [];
         foreach ($products as $item) {
             $searchList[] = [$item->name, $item->slug, 'product'];
@@ -27,41 +31,56 @@ class APIController extends Controller
         return response()->json(['data' => $searchList]);
     }
 
-    public function productRate($type, Request $request,)
+    public function productRate($type, Request $request)
     {
-        $request->validate([
-            'item_id' => 'required',
-            'rating' => 'required',
-            'review' => 'required|string',
-            'user_id' => 'required',
-        ]);
-        $item_id = $request->item_id;
-        $rating = $request->rating;
-        $review = $request->review;
-        $user_id = $request->user_id;
-        if($type == 'product'){
-            $product = \App\Models\Product::where('id', $item_id)->first();
-            if(!$product){
-                return response()->json(['message' => 'Product not found'], 404);
+        try {
+            $request->validate([
+                'item_id' => 'required',
+                'rating' => 'required',
+                'review' => 'required|string',
+                'user_id' => 'required'
+            ]);
+
+            $item_id = $request->item_id;
+            $rating = $request->rating;
+            $reviewText = $request->review; // Use a distinct variable name
+            $user_id = $request->user_id;
+            if ($rating > 5 || $rating < 1) {
+                return response()->json(['message' => 'Rating must be between 1 to 5'], 400);
             }
-        }else if ($type == 'company'){
-            $company = \App\Models\Company::where('id', $item_id)->first();
-            if(!$company){
-                return response()->json(['message' => 'Company not found'], 404);
+
+            if (strlen($reviewText) > 500) {
+                return response()->json(['message' => 'Review must be less than 500 characters'], 400);
             }
-        }else if ($type == 'event'){
-            $event = \App\Models\Event::where('id', $item_id)->first();
-            if(!$event){
-                return response()->json(['message' => 'Event not found'], 404);
+
+            // Check the item type
+            if ($type == 'product') {
+                $item = Product::find($item_id);
+            } elseif ($type == 'company') {
+                $item = Company::find($item_id);
+            } elseif ($type == 'event') {
+                $item = Event::find($item_id);
+            } else {
+                return response()->json(['message' => 'Invalid item type'], 400);
             }
+
+            // Check if the item exists
+            if (!$item) {
+                return response()->json(['message' => ucfirst($type) . ' not found'], 404);
+            }
+
+            // Create a new RateReview instance
+            $review = new RateReview();
+            $review->user_id = $user_id;
+            $review->type = $type;
+            $review->item_id = $item_id;
+            $review->rating = $rating;
+            $review->review = $reviewText; // Use a distinct variable name
+            $review->save();
+        } catch (Exception $ex) {
+            return response()->json(['message' => $ex->getMessage()], 500);
         }
-        $review = new RateReview();
-        $review->user_id = $user_id;
-        $review->type = $type;
-        $review->item_id = $item_id;
-        $review->rating = $rating;
-        $review->review = $review;
-        $review->save();
-        return response()->json(['message' => 'Review submitted successfully']);
+        return response()->json(['message' => 'Review submitted successfully', 'status' => 'success']);
     }
+
 }
