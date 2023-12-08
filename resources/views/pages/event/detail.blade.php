@@ -22,10 +22,8 @@
                 </div>
                 <x-bladewind.tab-group name="product-info">
                     <x-slot name="headings">
-                        <x-bladewind.tab-heading
-                            name="desc" label="Description"/>
-                        <x-bladewind.tab-heading
-                            name="rate" label="Rate & Reviews"/>
+                        <x-bladewind.tab-heading name="desc" label="Description" active="true"/>
+                        <x-bladewind.tab-heading name="rate" label="Rate & Reviews"/>
                     </x-slot>
 
                     <x-bladewind.tab-body>
