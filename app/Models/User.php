@@ -129,6 +129,15 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return $this->belongsTo(ForumReply::class, 'id', 'user_id');
     }
 
+    public function hasRated($type, $item_id) : bool
+    {
+        $rateReview = RateReview::where('type', $type)->where('item_id', $item_id)->where('user_id', $this->id)->first();
+        if($rateReview){
+            return true;
+        }
+        return false;
+    }
+
     public function save(array $options = []): bool
     {
         if($this->email_verified_at){

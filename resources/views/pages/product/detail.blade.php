@@ -131,11 +131,16 @@
                                         @php
                                             // Count Average Rating
                                             $total_rating = 0;
-                                            foreach($product->getReviews() as $item){
-                                                $total_rating += $item->rating;
+                                            $average_rating = 1;
+                                            try{
+                                                foreach($product->getReviews() as $item){
+                                                    $total_rating += $item->rating;
+                                                }
+                                                $count = $product->getReviewsCount() ? $product->getReviewsCount() : 1;
+                                                $average_rating = $total_rating / $count;
+                                            }catch (Exception $e){
+                                                $average_rating = 1;
                                             }
-                                            $count = $product->getReviews()->count() ? $product->getReviews()->count() : 1;
-                                            $average_rating = $total_rating / $count;
                                         @endphp
                                         <x-bladewind.rating name="star-rating" size="medium" clickable="false"
                                                             rating="{{$average_rating}}"/>
@@ -147,9 +152,13 @@
                                     <hr class="my-4 border-t-2 border-gray-200">
 
                                     @auth
-                                        <a href="#" onclick="showModal('rate')"
-                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
-                                            a review</a>
+                                        @if(auth()->user()->hasRated("product", $company->id))
+                                            <p class="text-sm text-gray-500">You have already rated this company.</p>
+                                        @else
+                                            <a href="#" onclick="showModal('rate')"
+                                               class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
+                                                a review</a>
+                                        @endif
                                     @else
                                         <a href="{{route('login')}}"
                                            class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login
@@ -256,14 +265,14 @@
     <x-bladewind::modal
         backdrop_can_close="false"
         name="rate"
-        ok_button_action="saveRating()"
+        ok_button_action="saveRating('rate-product')"
         ok_button_label="Submit"
         close_after_action="false"
         center_action_buttons="true">
         <form method="post" action="" id="rate-form">
             @csrf
             <b class="mt-0">Add your review</b>
-            <x-bladewind.rating name="rate" rating="1"/>
+            <x-bladewind.rating name="rate-product" rating="1"/>
             <x-bladewind.textarea name="review" label="Review" rows="3"/>
             <input type="hidden" name="item_id" value="{{$product->id}}">
         </form>
@@ -293,10 +302,10 @@
         });
 
         @auth
-            saveRating = async function () {
+            saveRating = async function (element) {
             let form = document.getElementById('rate-form');
             let item_id = form.querySelector('input[name="item_id"]').value;
-            let rating = 1;
+            let rating = dom_el(`.rating-value-${element}`).value;
             let review = form.querySelector('textarea[name="review"]').value;
             let url = '{{route('api.product.rate', ['type'=>'product'])}}';
             let headersList = {

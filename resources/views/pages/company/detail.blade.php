@@ -17,6 +17,7 @@
             height: inherit;
             background-color: rgba(0, 0, 0, 0.5);
         }
+
         .company-logo {
             border: 2px solid #fff;
             shape-image-threshold: 0.5;
@@ -48,7 +49,8 @@
 
         </div>
 
-        <img alt="" src="{{url('storage/', $company->logo)}}" class="company-logo w-32 h-32 object-cover rounded-full mx-auto my-4">
+        <img alt="" src="{{url('storage/', $company->logo)}}"
+             class="company-logo w-32 h-32 object-cover rounded-full mx-auto my-4">
 
         <p v-if="description" class="text-gray-300 hidden">
             description
@@ -88,10 +90,84 @@
         <div class="flex flex-row flex-wrap py-4">
             <main role="main" class="w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
                 <!-- Company Details Section -->
-                <section class="mt-8 bg-neutral-100 p-8 rounded shadow">
+                <section class="my-8 bg-neutral-100 p-8 rounded shadow">
                     <h2 class="text-xl font-bold mb-4">About {{ $company->name }}</h2>
                     <p class="w-2/4 text-sm">{!! $company->description !!}</p>
                 </section>
+                <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+                    <div>
+                        <div class="rounded-lg border p-4">
+                            <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Customer Reviews</h2>
+
+                            <div class="mb-0.5 flex items-center gap-2">
+                                @php
+                                    // Count Average Rating
+                                    $total_rating = 0;
+                                    $average_rating = 1;
+                                    try{
+                                        foreach($company->getReviews() as $item){
+                                            $total_rating += $item->rating;
+                                        }
+                                        $count = $company->getReviewsCount() ? $company->getReviewsCount() : 1;
+                                        $average_rating = $total_rating / $count;
+                                    }catch (Exception $e){
+                                        $average_rating = 1;
+                                    }
+                                @endphp
+                                <x-bladewind.rating name="star-rating" size="medium" clickable="false"
+                                                    rating="{{$average_rating}}"/>
+                                <span class="text-sm font-semibold">{{$average_rating}}/5</span>
+                            </div>
+
+                            <span class="block text-sm text-gray-500">Bases on {{$company->getReviews()->count()}} reviews</span>
+
+                            <hr class="my-4 border-t-2 border-gray-200">
+
+                            @auth
+                                @if(auth()->user()->hasRated("company", $company->id))
+                                    <p class="text-sm text-gray-500">You have already rated this company.</p>
+                                @else
+                                    <a href="#" onclick="showModal('rate')"
+                                       class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
+                                        a review</a>
+                                @endif
+                            @else
+                                <a href="{{route('login')}}"
+                                   class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login
+                                    to write a review</a>
+                            @endauth
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <div class="border-b pb-4 md:pb-6">
+                            <h2 class="text-lg font-bold text-gray-800 lg:text-xl">Top Reviews</h2>
+                        </div>
+                        <hr>
+                        <br>
+                        <div class="divide-y">
+                            @forelse($company->getReviews() as $item)
+                                <div class="flex flex-col gap-3 p-4 mb-2 bg-gray-100">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <span class="block text-sm font-bold">{{$item->user->name}}</span>
+                                            <span
+                                                class="block text-sm text-gray-500">{{$item->created_at}}</span>
+                                        </div>
+                                        <x-bladewind.rating name="star-rating" size="small" clickable="false"
+                                                            rating="{{$item->rating}}"/>
+                                    </div>
+                                    <p class="text-gray-600">{{$item->review}}</p>
+                                </div>
+                            @empty
+                                <div class="flex flex-col gap-3 p-4 mb-2 bg-gray-100">
+                                    <p class="text-gray-600">No reviews yet.</p>
+                                </div>
+                            @endforelse
+                        </div>
+                        <!-- Pagination -->
+                        {{ $company->getReviews()->links() }}
+                    </div>
+                </div>
             </main>
             <aside class="w-full sm:w-1/3 md:w-1/4 px-2">
                 <div class="sticky top-0 p-4 w-full">
@@ -139,4 +215,77 @@
             </aside>
         </div>
     </div>
+    <x-bladewind::modal
+        backdrop_can_close="false"
+        name="rate"
+        ok_button_action="saveRating('rate-company')"
+        ok_button_label="Submit"
+        close_after_action="false"
+        center_action_buttons="true">
+        <form method="post" action="" id="rate-form">
+            @csrf
+            <b class="mt-0">Add your review</b>
+            <x-bladewind.rating name="rate-company" rating="1"/>
+            <x-bladewind.textarea name="review" label="Review" rows="3"/>
+            <input type="hidden" name="item_id" value="{{$company->id}}">
+        </form>
+        <x-bladewind::processing
+            name="rate-processing"
+            message="Submitting your rating..."/>
+
+        <x-bladewind::process-complete
+            name="rate-complete"
+            process_completed_as="passed"
+            button_label="Done"
+            button_action="hideModal('rate')"
+            message="Your rating has been submitted successfully."/>
+    </x-bladewind::modal>
+    <!-- Add this script at the end of your HTML file -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Gallery View
+            const thumbnailButtons = document.querySelectorAll(".thumbnail-button");
+            const mainImage = document.getElementById("main-image");
+
+            thumbnailButtons.forEach((button) => {
+                button.addEventListener("click", function () {
+                    mainImage.src = button.getAttribute("data-image");
+                });
+            });
+        });
+
+        @auth
+            saveRating = async function (element) {
+            let form = document.getElementById('rate-form');
+            let item_id = form.querySelector('input[name="item_id"]').value;
+            let rating = dom_el(`.rating-value-${element}`).value;
+            let review = form.querySelector('textarea[name="review"]').value;
+            let url = '{{route('api.product.rate', ['type'=>'company'])}}';
+            let headersList = {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+
+            let bodyContent = JSON.stringify({
+                "item_id": item_id,
+                "rating": rating,
+                "review": review,
+                "user_id": "{{auth()->user()->id}}"
+            });
+
+            let response = await fetch(url, {
+                method: "POST",
+                body: bodyContent,
+                headers: headersList
+            });
+
+            let data = await response.json();
+            if (data.status === 'success') {
+                hideModal('rate');
+                showModal('rate-complete');
+                window.location.reload();
+            }
+        }
+        @endauth
+    </script>
 @endsection

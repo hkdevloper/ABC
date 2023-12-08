@@ -62,4 +62,9 @@ class Product extends Model
     {
         return RateReview::where('type', 'product')->where('item_id', $this->id)->paginate(3);
     }
+
+    public function getReviewsCount() : int
+    {
+        return RateReview::where('type', 'product')->where('item_id', $this->id)->count();
+    }
 }

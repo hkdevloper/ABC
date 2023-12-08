@@ -72,4 +72,14 @@ class Company extends Model
     {
         return $this->belongsTo(Address::class);
     }
+
+    public function getReviews() : array | object
+    {
+        return RateReview::where('type', 'company')->where('item_id', $this->id)->paginate(3);
+    }
+
+    public function getReviewsCount() : int
+    {
+        return RateReview::where('type', 'company')->where('item_id', $this->id)->count();
+    }
 }
