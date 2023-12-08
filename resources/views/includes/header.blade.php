@@ -4,7 +4,25 @@
         <a alt="company Logo" href="{{url('/')}}" class="flex items-center">
             <img alt="company Logo" src="https://via.placeholder.com/100x100" width="50" height="50" class="object-cover overflow-hidden">
         </a>
-        <div class="lg:hidden">
+        <div class="lg:hidden flex ">
+            @if(auth()->user() && auth()->user()->name != "")
+                <div class="lg:flex md:flex items-center">
+                    <div class="relative">
+                        <a href="{{auth()->user()->type == 'Admin' ? url('admin') : url('user/dashboard')}}"
+                           class="flex items-center">
+                            <span class="text-gray-700">{{ auth()->user()->name }}</span>
+                            <img src="https://ui-avatars.com/api/?name={{auth()->user()->name}}" alt="User Avatar"
+                                 class="w-10 h-10 rounded-full mx-2">
+                        </a>
+                    </div>
+                </div>
+            @else
+                <div class="hidden lg:flex space-x-4 items-center">
+                    <a href="{{url('user/dashboard/login')}}" class="text-gray-700 hover:text-purple-600">Login</a>
+                    <a href="{{url('user/dashboard/register')}}"
+                       class="text-white bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-white">Register</a>
+                </div>
+            @endif
             <button id="menu-toggle" class="text-gray-700 hover:text-purple-600 focus:outline-none">
                 <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path
@@ -48,13 +66,7 @@
             <div class="hidden lg:flex md:flex items-center">
                 <div class="relative" data-te-dropdown-ref>
                     <a href="{{auth()->user()->type == 'Admin' ? url('admin') : url('user/dashboard')}}"
-                       class="flex items-center"
-                       type="button"
-                       id="dropdownMenuButton1"
-                       data-te-dropdown-toggle-ref
-                       aria-expanded="false"
-                       data-te-ripple-init
-                       data-te-ripple-color="light">
+                       class="flex items-center">
                         <span class="text-gray-700">{{ auth()->user()->name }}</span>
                         <img src="https://ui-avatars.com/api/?name={{auth()->user()->name}}" alt="User Avatar"
                              class="w-10 h-10 rounded-full mx-2">
@@ -101,7 +113,7 @@
 <script>
     // JavaScript for toggling the mobile menu
     document.getElementById('menu-toggle').addEventListener('click', function () {
-        var mobileMenu = document.getElementById('mobile-menu');
+        let mobileMenu = document.getElementById('mobile-menu');
         mobileMenu.classList.toggle('hidden');
     });
 </script>
