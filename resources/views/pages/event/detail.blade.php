@@ -27,7 +27,7 @@
                     </x-slot>
 
                     <x-bladewind.tab-body>
-                        <x-bladewind.tab-content name="desc">
+                        <x-bladewind.tab-content name="desc" active="true">
                             {!! $event->description !!}
                         </x-bladewind.tab-content>
                         <x-bladewind.tab-content name="rate">

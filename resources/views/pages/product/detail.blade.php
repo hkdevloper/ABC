@@ -111,12 +111,12 @@
             </div>
             <x-bladewind.tab-group name="product-info">
                 <x-slot name="headings">
-                    <x-bladewind.tab-heading active="true"name="desc" label="Description"/>
+                    <x-bladewind.tab-heading active="true" name="desc" label="Description"/>
                     <x-bladewind.tab-heading name="rate" label="Rate & Reviews"/>
                 </x-slot>
 
                 <x-bladewind.tab-body>
-                    <x-bladewind.tab-content name="desc">
+                    <x-bladewind.tab-content name="desc" active="true">
                         {!! $product->description !!}
                     </x-bladewind.tab-content>
                     <x-bladewind.tab-content name="rate">
@@ -150,7 +150,7 @@
                                     <hr class="my-4 border-t-2 border-gray-200">
 
                                     @auth
-                                        @if(auth()->user()->hasRated("product", $company->id))
+                                        @if(auth()->user()->hasRated("product", $product->id))
                                             <p class="text-sm text-gray-500">You have already rated this company.</p>
                                         @else
                                             <a href="#" onclick="showModal('rate')"
