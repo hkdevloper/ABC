@@ -134,7 +134,8 @@
                                             foreach($product->getReviews() as $item){
                                                 $total_rating += $item->rating;
                                             }
-                                            $average_rating = $total_rating / $product->getReviews()->count();
+                                            $count = $product->getReviews()->count() ? $product->getReviews()->count() : 1;
+                                            $average_rating = $total_rating / $count;
                                         @endphp
                                         <x-bladewind.rating name="star-rating" size="medium" clickable="false" rating="{{$average_rating}}"/>
                                         <span class="text-sm font-semibold">{{$average_rating}}/5</span>
