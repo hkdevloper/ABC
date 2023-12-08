@@ -282,6 +282,7 @@
                     item_id: item_id,
                     rating: rating,
                     review: review,
+                    user_id: {{auth()->user()->id}}
                 }),
             }).then(response => response.json())
                 .then(data => {

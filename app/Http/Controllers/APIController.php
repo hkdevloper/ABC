@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RateReview;
 use Illuminate\Http\Request;
 
 class APIController extends Controller
@@ -26,17 +27,18 @@ class APIController extends Controller
         return response()->json(['data' => $searchList]);
     }
 
-    public function productRate(Request $request, $type)
+    public function productRate($type, Request $request,)
     {
         $request->validate([
-            'item_id' => 'required|integer',
-            'rating' => 'required|integer',
+            'item_id' => 'required',
+            'rating' => 'required',
             'review' => 'required|string',
+            'user_id' => 'required',
         ]);
         $item_id = $request->item_id;
         $rating = $request->rating;
         $review = $request->review;
-        $user_id = auth()->user()->id;
+        $user_id = $request->user_id;
         if($type == 'product'){
             $product = \App\Models\Product::where('id', $item_id)->first();
             if(!$product){
@@ -53,14 +55,13 @@ class APIController extends Controller
                 return response()->json(['message' => 'Event not found'], 404);
             }
         }
-        $review = \App\Models\RateReview::create([
-            'user_id' => $user_id,
-            'type' => $type,
-            'item_id' => $item_id,
-            'rating' => $rating,
-            'review' => $review,
-            'is_approved' => 1,
-        ]);
+        $review = new RateReview();
+        $review->user_id = $user_id;
+        $review->type = $type;
+        $review->item_id = $item_id;
+        $review->rating = $rating;
+        $review->review = $review;
+        $review->save();
         return response()->json(['message' => 'Review submitted successfully']);
     }
 }
