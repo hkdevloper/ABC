@@ -46,7 +46,16 @@ class CompanyResource extends Resource
                     ->default(true)
                     ->required(),
                 Toggle::make('is_claimed')
-                    ->default(false)
+                    ->default(function (Get $get, $action){
+                        if ($action == 'edit') {
+                            if ($get('claimed_by') == null) {
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                        return false;
+                    })
                     ->label('Claimed')
                     ->live(onBlur: true),
                 Toggle::make('is_active')

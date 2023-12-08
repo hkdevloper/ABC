@@ -38,7 +38,7 @@
                                         <div class="flex justify-end">
                                         </div>
                                     </div>
-                                    <p class="text-indigo-500 text-2xl font-medium mt-2">{{ $item->name }}</p>
+                                    <p class="text-indigo-500 text-base sm:text-md md:text-lg lg:text-xl font-medium mt-2">{{ $item->name }}</p>
                                     <div class="py-4 border-t border-b text-xs text-gray-700">
                                         <div class="grid grid-cols-6 gap-1">
                                             <div class="col-span-2">

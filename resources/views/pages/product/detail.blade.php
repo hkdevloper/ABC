@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-                    <h1 class="sm: text-2xl font-bold text-gray-900 sm:text-3xl">{{$product->name}}
+                    <h1 class="text-base sm:text-md md:text-lg lg:text-xl font-bold text-gray-900">{{$product->name}}
                         @if($product->is_featured)
                             <span>
                                 <button
