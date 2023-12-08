@@ -177,7 +177,7 @@
                                                 <div>
                                                     <span class="block text-sm font-bold">{{$item->user->name}}</span>
                                                     <span
-                                                        class="block text-sm text-gray-500">{{$item->created_at}}</span>
+                                                        class="block text-sm text-gray-500">{{$item->created_at->diffForHumans()}}</span>
                                                 </div>
                                                 <x-bladewind.rating name="star-rating" size="small" clickable="false"
                                                                     rating="{{$item->rating}}"/>
