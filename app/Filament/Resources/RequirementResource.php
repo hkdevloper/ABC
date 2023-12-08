@@ -26,7 +26,7 @@ class RequirementResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('subject')
-                    ->label('Enter Service Name')
+                    ->label('Enter Subject')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('customer_name')
@@ -44,7 +44,7 @@ class RequirementResource extends Resource
                     ->tel()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('country')
-                    ->label('Enter Quantity')
+                    ->label('Country')
                     ->required()
                     ->maxLength(191)
                     ->default(0),
@@ -72,7 +72,9 @@ class RequirementResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('service_name')
+                Tables\Columns\TextColumn::make('subject')
+                    ->wrap()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('customer_name')
                     ->searchable(),
@@ -80,7 +82,7 @@ class RequirementResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('quantity')
+                Tables\Columns\TextColumn::make('country')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->label('Status')

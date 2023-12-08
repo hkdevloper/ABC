@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ForumResource\RelationManagers;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -23,8 +24,25 @@ class ForumReplyRelationManager extends RelationManager
                     ->default(auth()->user()->id),
                 Forms\Components\Hidden::make('forum_id')
                     ->default(request()->route('record')),
-                Forms\Components\Textarea::make('body')
-                    ->label('Answer')
+                Forms\Components\RichEditor::make('body')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDirectory('forumReplies')
+                    ->fileAttachmentsVisibility('public')
                     ->required(),
             ])->columns(1);
     }
@@ -34,13 +52,16 @@ class ForumReplyRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('ForumReply')
             ->columns([
-                Tables\Columns\TextColumn::make('body'),
+                Tables\Columns\TextColumn::make('body')
+                    ->wrap()
+                    ->html(),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->createAnother(false),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -52,7 +73,7 @@ class ForumReplyRelationManager extends RelationManager
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->createAnother(false),
             ]);
     }
 }

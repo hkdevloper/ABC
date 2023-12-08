@@ -18,11 +18,13 @@
                                                  class="w-10 h-10 rounded-full mr-4">
                                             <div>
                                                 <h2 class="text-lg font-semibold text-gray-800">{{$forum->user->name}}</h2>
-                                                <p class="text-gray-500 text-sm">Posted on {{date_format($forum->created_at, 'd M y')}}</p>
+                                                <p class="text-gray-500 text-sm">Posted
+                                                    on {{date_format($forum->created_at, 'd M y')}}</p>
                                             </div>
                                         </div>
                                         <div>
-                                            <span class="text-gray-600 text-sm">Category: {{$forum->category->name}}</span>
+                                            <span
+                                                class="text-gray-600 text-sm">Category: {{$forum->category->name}}</span>
                                         </div>
                                     </div>
                                     <h1 class="text-xl font-semibold text-gray-900 mb-4">{{$forum->title}}</h1>
@@ -30,7 +32,8 @@
                                     <hr class="my-4 border-t-2 border-gray-200">
                                     <div class="flex justify-between items-center">
                                         <div>
-                                            <span class="text-gray-600 text-sm">{{$forum->countAnswers()}} Answers</span>
+                                            <span
+                                                class="text-gray-600 text-sm">{{$forum->countAnswers()}} Answers</span>
                                             <span class="ml-4 text-gray-600 text-sm">{{$viewCount}} Views</span>
                                         </div>
                                         <div>
@@ -44,34 +47,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="bg-white card p-6 mt-4">
+                                <div class="bg-white p-6 mt-4">
                                     <h2 class="text-xl font-semibold text-gray-900 mb-4">Answers</h2>
-
-                                    @if($forum->forumReplies == null)
-                                        <div class="p-6 card bg-white mb-5">
-                                            <h2 class="text-xl font-semibold text-gray-800 mb-4">No Answers Yet</h2>
-                                            <p class="text-gray-700">There are currently no answers to this question. Be the
-                                                first to provide an answer!</p>
-                                        </div>
-                                    @else
-                                        @foreach($forum->forumReplies as $ans)
-                                            <div class="mb-6 p-4 card card-hovered bg-white relative">
-                                                <!-- User Details (Left) -->
-                                                <div class="flex items-start mb-2">
-                                                    <img src="https://via.placeholder.com/100x100" alt="User Avatar"
-                                                         class="w-10 h-10 rounded-full mr-4">
-                                                    <div>
-                                                        <h3 class="text-lg font-semibold text-gray-800">{{$ans->user->name}}</h3>
-                                                        <p class="text-gray-500 text-sm">Answered on {{date_format($ans->created_at, 'd M y')}}</p>
-                                                        <!-- Answer Text -->
-                                                        <p class="text-gray-700">{!! $ans->body !!}</p>
-                                                    </div>
+                                    @forelse($forum->forumReplies as $ans)
+                                        <div class="mb-6 p-4 card card-hovered bg-white relative">
+                                            <!-- User Details (Left) -->
+                                            <div class="flex items-start mb-2">
+                                                <img src="https://via.placeholder.com/100x100" alt="User Avatar"
+                                                     class="w-10 h-10 rounded-full mr-4">
+                                                <div>
+                                                    <h3 class="text-lg font-semibold text-gray-800">{{$ans->user->name}}</h3>
+                                                    <p class="text-gray-500 text-sm">Answered
+                                                        on {{date_format($ans->created_at, 'd M y')}}</p>
+                                                    <!-- Answer Text -->
+                                                    <p class="text-gray-700">{!! $ans->body !!}</p>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    @endif
+                                        </div>
+                                    @empty
+                                        <div class="p-6 card bg-white mb-5">
+                                            <h2 class="text-xl font-semibold text-gray-800 mb-4">No Answers Yet</h2>
+                                            <p class="text-gray-700">There are currently no answers to this question. Be
+                                                the
+                                                first to provide an answer!</p>
+                                        </div>
+                                    @endforelse
                                     <!-- Reply Form -->
-                                    <div id="answer-block" class="mb-6 card p-2">
+                                    <div id="answer-block" class="mb-6 p-2">
                                         <h3 class="text-lg font-semibold text-gray-900 mb-2">Submit your Answer</h3>
                                         <form action="{{route('forum.reply')}}" method="post">
                                             @csrf
