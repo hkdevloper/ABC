@@ -56,4 +56,9 @@ class Product extends Model
     {
         return $this->belongsTo(Seo::class);
     }
+
+    public function getReviews() : BelongsTo
+    {
+        return $this->belongsTo(RateReview::class, 'id', 'item_id')->where('type', 'product');
+    }
 }

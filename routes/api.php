@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // search api
 Route::get('/search', [APIController::class, 'searchCompanyProduct'])->name('api.search');
+
+// Product Rate API
+Route::post('/{type}/rate', [APIController::class, 'productRate'])->name('api.product.rate');
