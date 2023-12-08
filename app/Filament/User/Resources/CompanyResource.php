@@ -77,9 +77,10 @@ class CompanyResource extends Resource
                     ->profile('custom')
                     ->columnSpan('full')
                     ->required(),
-                TextInput::make('extra_things')
+                TagsInput::make('extra_things')
                     ->label('Products Name')
-                    ->helperText('List your products name with comma separated')
+                    ->splitKeys(['Tab', ' ', ','])
+                    ->helperText('List your products name separated by comma')
                     ->required(),
                 Section::make('Images')
                     ->schema([
