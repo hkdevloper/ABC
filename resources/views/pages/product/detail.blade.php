@@ -137,7 +137,8 @@
                                             $count = $product->getReviews()->count() ? $product->getReviews()->count() : 1;
                                             $average_rating = $total_rating / $count;
                                         @endphp
-                                        <x-bladewind.rating name="star-rating" size="medium" clickable="false" rating="{{$average_rating}}"/>
+                                        <x-bladewind.rating name="star-rating" size="medium" clickable="false"
+                                                            rating="{{$average_rating}}"/>
                                         <span class="text-sm font-semibold">{{$average_rating}}/5</span>
                                     </div>
 
@@ -147,10 +148,12 @@
 
                                     @auth
                                         <a href="#" onclick="showModal('rate')"
-                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write a review</a>
+                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
+                                            a review</a>
                                     @else
                                         <a href="{{route('login')}}"
-                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login to write a review</a>
+                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login
+                                            to write a review</a>
                                     @endauth
                                 </div>
                             </div>
@@ -169,7 +172,8 @@
                                                     <span
                                                         class="block text-sm text-gray-500">{{$item->created_at}}</span>
                                                 </div>
-                                                <x-bladewind.rating name="star-rating" size="small" clickable="false" rating="{{$item->rating}}"/>
+                                                <x-bladewind.rating name="star-rating" size="small" clickable="false"
+                                                                    rating="{{$item->rating}}"/>
                                             </div>
                                             <p class="text-gray-600">{{$item->review}}</p>
                                         </div>
@@ -288,7 +292,8 @@
             });
         });
 
-        saveRating = async function () {
+        @auth
+            saveRating = async function () {
             let form = document.getElementById('rate-form');
             let item_id = form.querySelector('input[name="item_id"]').value;
             let rating = 1;
@@ -319,5 +324,6 @@
                 window.location.reload();
             }
         }
+        @endauth
     </script>
 @endsection
