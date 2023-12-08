@@ -86,47 +86,47 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function company() : BelongsTo
     {
-        return $this->belongsTo(Company::class, 'user_id', 'id');
+        return $this->belongsTo(Company::class, 'id', 'user_id');
     }
 
     public function profile() : HasOne
     {
-        return $this->hasOne(Profile::class, 'user_id', 'id');
+        return $this->hasOne(Profile::class, 'id', 'user_id');
     }
 
     public function blogs() : BelongsTo
     {
-        return $this->belongsTo(Blog::class, 'user_id', 'id');
+        return $this->belongsTo(Blog::class, 'id', 'user_id');
     }
 
     public function deals() : BelongsTo
     {
-        return $this->belongsTo(Deal::class, 'user_id', 'id');
+        return $this->belongsTo(Deal::class, 'id', 'user_id');
     }
 
     public function events() : BelongsTo
     {
-        return $this->belongsTo(Event::class, 'user_id', 'id');
+        return $this->belongsTo(Event::class, 'id', 'user_id');
     }
 
     public function forums() : BelongsTo
     {
-        return $this->belongsTo(Forum::class, 'user_id', 'id');
+        return $this->belongsTo(Forum::class, 'id', 'user_id');
     }
 
     public function jobs() : BelongsTo
     {
-        return $this->belongsTo(Job::class, 'user_id', 'id');
+        return $this->belongsTo(Job::class, 'id', 'user_id');
     }
 
     public function products() : BelongsTo
     {
-        return $this->belongsTo(Product::class, 'user_id', 'id');
+        return $this->belongsTo(Product::class, 'id', 'user_id');
     }
 
     public function forumReplies() : BelongsTo
     {
-        return $this->belongsTo(ForumReply::class, 'user_id', 'id');
+        return $this->belongsTo(ForumReply::class, 'id', 'user_id');
     }
 
     public function save(array $options = []): bool

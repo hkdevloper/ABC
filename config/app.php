@@ -189,4 +189,6 @@ return [
         'Purifier' => Mews\Purifier\Facades\Purifier::class
     ])->toArray(),
 
+    'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
+
 ];

@@ -12,14 +12,14 @@
         'big' => 14,
     ],
 ])
-@php
-    $name = str_replace(' ', '-', $name);
+@php 
+    $name = str_replace(' ', '-', $name); 
     $size_adjustment = ($size == 'big') ? 2 : 1;
     $clickable = filter_var($clickable, FILTER_VALIDATE_BOOLEAN);
 @endphp
-@if($clickable)<x-bladewind.input type="hidden" class="rating-value-{{$name}}" selected_value="{{$rating}}" />@endif
-<div class="h-{{$sizing[$size]+$size_adjustment}} overflow-hidden inline-block mr-2">
-@for ($x = 1; $x < 6; $x++)
+@if($clickable)<x-bladewind::input type="hidden" class="rating-value-{{$name}}" selected_value="{{$rating}}" />@endif
+<div class="h-{{$sizing[$size]+$size_adjustment}} overflow-hidden inline-block">
+@for ($x = 1; $x < 6; $x++) 
     <div data-rating="{{$x}}" class="inline bw-rating-{{$x}} {{$name}}@if($rating!= 0 && $x <= $rating*1) rated @endif"
          @if($clickable) onmouseover="flipStars('{{$name}}', {{$rating}}, {{$x}}, 'on')" onmouseout="flipStars('{{$name}}', {{$rating}}, {{$x}}, 'off')" onclick="setRating('{{$name}}', {{$x}});{!!$onclick!!}" @endif>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-{{$sizing[$size]+$size_adjustment}} w-{{$sizing[$size]+$size_adjustment}} filled @if($rating==0 || $x > $rating*1) hidden @endif inline text-{{$color}}-500 @if($clickable) cursor-pointer @else cursor-default @endif @if($size=='big') mx-[-3px] @else mr-[-2px] @endif mt-[-1px]" viewBox="0 0 20 20" fill="currentColor">
@@ -68,7 +68,7 @@
             for(x=rate; x<=6; x++){
                 unhide(`.bw-rating-${x}.${name} .empty`);
                 hide(`.bw-rating-${x}.${name} .filled`);
-            }
+            }    
         }
         for(x=1; x<=rate; x++){
             unhide(`.bw-rating-${x}.${name} .filled`);
