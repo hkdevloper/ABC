@@ -2,7 +2,7 @@
 @extends('layouts.main-user-list')
 
 @section('content')
-    <x-user.header :title="'Forums'" :breadcrumb="['Home', 'Forum', 'List']"/>
+    <x-user.header :title="'Forums'" :breadcrumb="['Home', 'Forum', 'List']" type="forum"/>
     <div class="container py-6 mx-auto flex flex-wrap">
         <!-- Forum List BLock -->
         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">

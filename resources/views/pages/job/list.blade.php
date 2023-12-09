@@ -1,7 +1,7 @@
 @extends('layouts.main-user-list')
 
 @section('content')
-    <x-user.header :title="'Jobs'" :breadcrumb="['Home', 'Job', 'List']" category="job"/>
+    <x-user.header :title="'Jobs'" :breadcrumb="['Home', 'Job', 'List']" type="job"/>
     <div class="container py-6 mx-auto flex flex-wrap">
         <!-- Job List BLock -->
         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">

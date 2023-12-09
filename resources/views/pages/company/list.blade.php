@@ -19,7 +19,7 @@
 @endsection
 
 @section('content')
-    <x-user.header :title="'Company'" :breadcrumb="['Home', 'Company', 'List']" category="company"/>
+    <x-user.header :title="'Company'" :breadcrumb="['Home', 'Company', 'List']" type="company"/>
     <div class="container py-6 mx-auto flex flex-wrap">
         <!-- Companies List -->
         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
