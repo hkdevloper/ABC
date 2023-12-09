@@ -63,7 +63,7 @@ class HelperFunctions
             // Define the path where you want to store the image.
             $path = public_path('storage/requirements/' . $name); // Adjust the path as needed.
 
-            // check if directory exists
+            // check if the directory exists
             if(!is_dir(public_path('storage/requirements'))){
                 mkdir(public_path('storage/requirements'));
             }
