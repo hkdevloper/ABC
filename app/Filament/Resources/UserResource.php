@@ -91,11 +91,6 @@ class UserResource extends Resource
                             ->label('Approved')
                             ->disabled(fn(Get $get) => $get('type') === 'Admin')
                             ->required(),
-                        Toggle::make('taxable')
-                            ->label('Taxable')
-                            ->default(true)
-                            ->disabled(fn(Get $get) => $get('type') === 'Admin')
-                            ->required(),
                         Toggle::make('banned')
                             ->label('Banned')
                             ->live(onBlur: true)
@@ -130,7 +125,6 @@ class UserResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\ToggleColumn::make('approved')->label('Approved'),
-                Tables\Columns\ToggleColumn::make('taxable')->label('Taxable'),
                 Tables\Columns\ToggleColumn::make('banned')->label('Banned'),
                 Tables\Columns\TextColumn::make('banned_reason')
                     ->searchable()
