@@ -6,6 +6,7 @@ use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\User\Resources\ForumResource\Pages;
 use App\Filament\User\Resources\ForumResource\RelationManagers;
 use App\Models\Forum;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Form;
@@ -35,6 +36,14 @@ class ForumResource extends Resource
                     ->label('Title')
                     ->required()
                     ->maxLength(191),
+                SelectTree::make('category_id')
+                    ->label('Select Category')
+                    ->enableBranchNode()
+                    ->withCount()
+                    ->emptyLabel('Oops! No Category Found')
+                    ->relationship('category', 'name', 'parent_id', function ($query){
+                        return $query->where('type', 'forum');
+                    }),
                 TinyEditor::make('body')
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsVisibility('public')
