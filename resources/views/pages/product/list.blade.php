@@ -70,7 +70,7 @@
                             </a>
                             <div class="border border-solid border-t border-b-0 border-r-0 border-l-0 border-gray-900">
                                 <div class="flex items-stretch w-full">
-                                    <button type="button"
+                                    <button type="button" onclick="window.location.href='{{route('view.product', [$item->slug])}}'"
                                             class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
                                         <i class="fas fa-eye mr-3"></i>
                                         View

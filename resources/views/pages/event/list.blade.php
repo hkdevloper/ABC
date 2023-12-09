@@ -43,7 +43,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="{{route('view.event', [$event->slug])}}" target="_new" class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
+                                    <a href="{{route('view.event', [$event->slug])}}" class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
                                     <span class="description text-sm block py-2 border-gray-400 mb-2">
                                         @php
                                             $description = strip_tags($event->description);
@@ -55,7 +55,7 @@
                             </div>
                             <div class="border border-solid border-t border-b-0 border-r-0 border-l-0 border-gray-900">
                                 <div class="flex items-stretch w-full">
-                                    <button type="button"
+                                    <button type="button" onclick="window.open('{{route('view.event', [$event->slug])}}')"
                                             class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
                                         <i class="fas fa-eye mr-3"></i>
                                         View
