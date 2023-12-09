@@ -148,6 +148,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function delete() : bool
     {
+        // Don't Delete Admin
+        if($this->type === 'Admin'){
+            return false;
+        }
         $this->company()->delete();
         $this->blogs()->delete();
         $this->deals()->delete();
