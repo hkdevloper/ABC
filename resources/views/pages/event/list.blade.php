@@ -1,7 +1,7 @@
 @extends('layouts.main-user-list')
 
 @section('content')
-    <x-user.header :title="'Event'" :breadcrumb="['Home', 'Event', 'List']"/>
+    <x-user.header :title="'Event'" :breadcrumb="['Home', 'Event', 'List']" category="event"/>
     <div class="container py-6 mx-auto flex flex-wrap">
         <!-- Event List Block -->
         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
