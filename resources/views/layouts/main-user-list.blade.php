@@ -41,7 +41,6 @@
     @yield('content')
     <livewire:requirement/>
     <x-user.state-section/>
-    <x-user.contact-card/>
     <x-user.logo-cloud/>
     <x-news-latter/>
     @include('includes.modals')

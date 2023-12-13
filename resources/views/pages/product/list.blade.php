@@ -12,11 +12,17 @@
             </div>
             <hr class="my-5">
             <!-- Product List -->
+            @php
+                $slug = null;
+            @endphp
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @forelse($products as $item)
+                    @php
+                        $slug = $item->slug;
+                    @endphp
                     <div class="flex flex-wrap place-items-center">
                         <div class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
-                            <a href="{{route('view.product', [$item->slug])}}" class="w-full block h-full object-contain">
+                            <a href="{{route('view.product', [$slug])}}" class="w-full block h-full object-contain">
                                 <img alt="blog photo" src="{{ url('storage/' . $item->thumbnail) }}" class="max-h-[500px] w-full object-contain"/>
                                 <div class="bg-white w-full p-4">
                                     <header class="flex font-light text-sm">
@@ -70,11 +76,11 @@
                             </a>
                             <div class="border border-solid border-t border-b-0 border-r-0 border-l-0 border-gray-900">
                                 <div class="flex items-stretch w-full">
-                                    <button type="button" onclick="window.location.href='{{route('view.product', [$item->slug])}}'"
+                                    <a href="{{route('view.product', [$slug])}}"
                                             class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
                                         <i class="fas fa-eye mr-3"></i>
                                         View
-                                    </button>
+                                    </a>
 
                                     <button type="button"
                                             class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">

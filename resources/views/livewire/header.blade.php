@@ -113,43 +113,60 @@
     </div>
 </div>
 <script>
+    @php
+        $menu = Session::get('menu');
+        // company, products, jobs, events, forum, blogs
+        if ($menu == 'product') {
+            $menu = 'products';
+        }else if($menu == 'job'){
+            $menu = 'jobs';
+        }
+        else if($menu == 'event')
+        {
+            $menu = 'events';
+        }
+        else if($menu == 'blog')
+        {
+            $menu = 'blogs';
+        }
+    @endphp
     document.getElementById('show-all').addEventListener('change', function () {
         if (this.checked) {
-            window.location.href = "{{route('company', ['show'=>'all'])}}";
+            window.location.href = "{{route($menu, ['show'=>'all'])}}";
         } else {
-            window.location.href = "{{route('company')}}";
+            window.location.href = "{{route($menu)}}";
         }
     });
 
     document.getElementById('filter-active').addEventListener('change', function () {
         if (this.checked) {
-            window.location.href = "{{route('company', ['filter'=>'active'])}}";
+            window.location.href = "{{route($menu, ['filter'=>'active'])}}";
         } else {
-            window.location.href = "{{route('company')}}";
+            window.location.href = "{{route($menu)}}";
         }
     });
 
     document.getElementById('filter-in-active').addEventListener('change', function () {
         if (this.checked) {
-            window.location.href = "{{route('company', ['filter'=>'in-active'])}}";
+            window.location.href = "{{route($menu, ['filter'=>'in-active'])}}";
         } else {
-            window.location.href = "{{route('company')}}";
+            window.location.href = "{{route($menu)}}";
         }
     });
 
     document.getElementById('sort-by-name').addEventListener('change', function () {
         if (this.checked) {
-            window.location.href = "{{route('company', ['sort'=>'name'])}}";
+            window.location.href = "{{route($menu, ['sort'=>'name'])}}";
         } else {
-            window.location.href = "{{route('company')}}";
+            window.location.href = "{{route($menu)}}";
         }
     });
 
     document.getElementById('sort-by-date').addEventListener('change', function () {
         if (this.checked) {
-            window.location.href = "{{route('company', ['sort'=>'date'])}}";
+            window.location.href = "{{route($menu, ['sort'=>'date'])}}";
         } else {
-            window.location.href = "{{route('company')}}";
+            window.location.href = "{{route($menu)}}";
         }
     });
 </script>
