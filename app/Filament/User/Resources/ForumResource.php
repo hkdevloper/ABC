@@ -44,12 +44,25 @@ class ForumResource extends Resource
                     ->relationship('category', 'name', 'parent_id', function ($query){
                         return $query->where('type', 'forum');
                     }),
-                TinyEditor::make('body')
+                Forms\Components\RichEditor::make('body')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
                     ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
-                    ->fileAttachmentsDirectory('editor/uploads')
-                    ->profile('custom')
-                    ->columnSpan('full')
                     ->required(),
                 Forms\Components\Hidden::make('user_id')
                     ->default(fn() => auth()->user()->id)

@@ -24,22 +24,8 @@ class ForumReplyRelationManager extends RelationManager
                     ->default(auth()->user()->id),
                 Forms\Components\Hidden::make('forum_id')
                     ->default(request()->route('record')),
-                Forms\Components\RichEditor::make('body')
-                    ->toolbarButtons([
-                        'attachFiles',
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'h2',
-                        'h3',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'underline',
-                        'undo',
-                    ])
+                TinyEditor::make('body')
+                    ->profile('minimal')
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')

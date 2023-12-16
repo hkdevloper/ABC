@@ -30,12 +30,25 @@ class ForumResource extends Resource
                     ->label('Enter Title')
                     ->required()
                     ->maxLength(191),
-                TinyEditor::make('body')
+                Forms\Components\RichEditor::make('body')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
                     ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
-                    ->fileAttachmentsDirectory('editor/uploads')
-                    ->profile('custom')
-                    ->columnSpan('full')
                     ->required(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
