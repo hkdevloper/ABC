@@ -52,9 +52,14 @@ class ForumReplyRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('ForumReply')
             ->columns([
+                Tables\Columns\TextColumn::make('user.name')->label('Answered By User'),
                 Tables\Columns\TextColumn::make('body')
                     ->wrap()
                     ->html(),
+                // posted at
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Posted At')
+                    ->date('d M Y h:i A')
             ])
             ->filters([
                 //

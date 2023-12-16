@@ -124,8 +124,7 @@
         <!-- Top Categories -->
         <section class="bg-neutral-100 p-2">
             <div class="flex justify-between items-center">
-                <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Discover Top
-                    Categories</h1>
+                <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Discover Top Categories</h1>
                 <a href="{{ url('/') }}"
                    class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
                     <span class="hidden md:inline">Explore All</span>
@@ -137,10 +136,10 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 <!-- Category Card 1 -->
                 @forelse($category as $item)
-                    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <div class="bg-white shadow-lg rounded-lg overflow-hidden bg-cover bg-center bg-contain" style="background-image: url({{ url('storage/' . $item->image) }})">
                         <div class="px-6 py-4">
-                            <div class="font-bold text-xl mb-2">{{$item->name}}</div>
-                            <p class="text-gray-700 text-base">
+                            <div class="font-bold text-white text-xl mb-2">{{$item->name}}</div>
+                            <p class="text-white text-base">
                                 {{ $item->products->count() }}+ Items
                             </p>
                         </div>

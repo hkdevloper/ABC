@@ -16,6 +16,7 @@
     <script src="{{ asset('user/js/fw.js')}}"></script>
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -61,6 +62,16 @@
     @elseif(session()->has('warning'))
     showNotification('Warning', '{{session()->get('warning')}}', 'warning');
     @endif
+    ScrollReveal().reveal('.flex');
+    ScrollReveal().reveal('.grid');
+    ScrollReveal().reveal('.container');
+    ScrollReveal().reveal('.text-base');
+    ScrollReveal().reveal('.text-sm');
+    ScrollReveal().reveal('.text-md');
+    ScrollReveal().reveal('.text-xl');
+    ScrollReveal().reveal('.bg-white');
+    ScrollReveal().reveal('.bg-gray-100');
+    ScrollReveal().reveal('.bg-purple-300');
 </script>
 @yield('page-scripts')
 @yield('components-scripts')

@@ -7,6 +7,7 @@ use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -42,6 +43,11 @@ class CategoryResource extends Resource
                         ->label('Featured')
                         ->required(),
                 ])->columns(),
+                FileUpload::make('image')
+                    ->label('category image')
+                    ->directory('category')
+                    ->visibility('public')
+                    ->required(),
                 TextInput::make('name')
                     ->label('Enter Category Name')
                     ->live(onBlur: true)
@@ -100,6 +106,7 @@ class CategoryResource extends Resource
                 $query->where('is_deleted', 0);
             })
             ->columns([
+                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')

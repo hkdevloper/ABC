@@ -61,7 +61,6 @@ class BlogResource extends Resource
                             ->label('Thumbnail Image')
                             ->directory('blog/thumbnail')
                             ->visibility('public')
-                            ->optimize('webp')
                             ->required(),
                     ]),
                 TextInput::make('title')
