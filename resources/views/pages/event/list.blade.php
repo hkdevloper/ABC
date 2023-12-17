@@ -26,11 +26,6 @@
                                     @endphp
                                     {{$date->diffForHumans()}}
                                 </div>
-                                <div class="info-box text-xs flex p-1 font-semibold text-gray-500 bg-gray-300">
-                                    <span class="mr-1 p-1 px-2 font-bold">105 Watching</span>
-                                    <span class="mr-1 p-1 px-2 font-bold border-0 border-solid border-l border-gray-400">105 Likes</span>
-                                    <span class="mr-1 p-1 px-2 font-bold border-0 border-solid border-l border-gray-400">105 Views</span>
-                                </div>
                                 <div class="desc p-4 text-gray-800">
                                     <div class="flex items-center mt-2">
                                         <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
@@ -51,27 +46,6 @@
                                         @endphp
                                         {!! $description !!}
                                     </span>
-                                </div>
-                            </div>
-                            <div class="border border-solid border-t border-b-0 border-r-0 border-l-0 border-gray-900">
-                                <div class="flex items-stretch w-full">
-                                    <button type="button" onclick="window.open('{{route('view.event', [$event->slug])}}')"
-                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
-                                        <i class="fas fa-eye mr-3"></i>
-                                        View
-                                    </button>
-
-                                    <button type="button"
-                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
-                                        <i class="fas fa-bookmark mr-3"></i>
-                                        Save
-                                    </button>
-
-                                    <button type="button"
-                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white">
-                                        <i class="fas fa-heart mr-3"></i>
-                                        Like
-                                    </button>
                                 </div>
                             </div>
                         </div>

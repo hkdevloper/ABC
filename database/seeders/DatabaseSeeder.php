@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             CompanyTableSeeder::class,
             ProductSeeder::class,
             EventsSeeder::class,
-            //BlogsSeeder::class
+            BlogsSeeder::class
         ]);
     }
 }

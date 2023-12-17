@@ -34,13 +34,13 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 0, 1000),
             'condition' => $this->faker->word,
             'brand' => $this->faker->word,
-            'thumbnail' => 'products/thumbnail/prod- (' . rand(1, 99) . ').jpg',
-            'gallery' => json_encode([
-                'products/gallery/product-gallery- (' . rand(1, 100) . ').jpg',
-                'products/gallery/product-gallery- (' . rand(1, 100) . ').jpg',
-                'products/gallery/product-gallery- (' . rand(1, 100) . ').jpg',
-                'products/gallery/product-gallery- (' . rand(1, 100) . ').jpg',
-            ]),
+            'thumbnail' => 'product/thumbnail/prod- (' . rand(1, 99) . ').jpg',
+            'gallery' => [
+                'product/gallery/product-gallery- (' . rand(1, 100) . ').jpg',
+                'product/gallery/product-gallery- (' . rand(1, 100) . ').jpg',
+                'product/gallery/product-gallery- (' . rand(1, 100) . ').jpg',
+                'product/gallery/product-gallery- (' . rand(1, 100) . ').jpg',
+            ],
             'created_at' => $this->faker->dateTime,
             'updated_at' => $this->faker->dateTime,
         ];

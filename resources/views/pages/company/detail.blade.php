@@ -3,20 +3,25 @@
 @section('head')
     <style>
         .company-banner {
+            position: relative;
             background-size: cover;
             background-position: center;
-            background-image: url('{{url('storage/', $company->banner)}}')
+            color: black;
         }
 
         .company-banner::before {
             content: "";
             position: absolute;
+            background: url('{{url('storage/', $company->banner)}}') no-repeat center center/cover;
             top: 0;
             left: 0;
             width: 100%;
-            height: inherit;
-            background-color: rgba(0, 0, 0, 0.5);
+            height: 100%;
+            z-index: -1;
+            color: white;
+            opacity: 0.5;
         }
+
 
         .company-logo {
             border: 2px solid #fff;
@@ -29,21 +34,21 @@
 
 @section('content')
     <!-- Company Header Section -->
-    <section class="company-banner text-white p-4">
+    <section class="company-banner p-4">
         <div class="flex justify-between items-center">
-            <h1 class="text-2xl font-bold">
+            <h1 class="text-2xl font-bold text-purple-500 underline">
                 {{ $company->name }}
             </h1>
 
             <div class="flex space-x-4">
                 <div>
-                    <i class="fas fa-check-circle"></i>
-                    <span v-if="is_approved">Approved</span>
+                    <i class="fas fa-check-circle text-green-400"></i>
+                    <span v-if="is_approved text-purple-300">Approved</span>
                 </div>
 
                 <div>
-                    <i class="fas fa-star"></i>
-                    <span v-if="is_featured">Featured</span>
+                    <i class="fas fa-star text-orange-300"></i>
+                    <span v-if="is_featured text-purple-300">Featured</span>
                 </div>
             </div>
 
@@ -58,30 +63,24 @@
 
         <div class="flex justify-center space-x-4 text-lg my-4">
             <a href="#">
-                <i class="fab fa-facebook"></i>
+                <i class="fab fa-facebook text-blue-600 hover:text-white hover:bg-blue-600 rounded-full"></i>
             </a>
             <a href="#">
-                <i class="fab fa-twitter"></i>
+                <i class="fab fa-twitter text-blue-400 hover:text-white hover:bg-blue-400 rounded-full"></i>
             </a>
             <a href="#">
-                <i class="fab fa-instagram"></i>
+                <i class="fab fa-instagram text-pink-600 hover:text-white hover:bg-pink-600 rounded-full"></i>
             </a>
         </div>
 
         <div class="flex justify-between text-gray-300 text-sm">
-            <div>
-                <i class="fas fa-map-marker-alt mr-2"></i>
+            <div class="text-black font-bold">
+                <i class="fas fa-map-marker-alt mr-2 text-red-500"></i>
                 {{ $company->address->country->name }}
             </div>
-
             <div>
-                <i class="fas fa-phone mr-2"></i>
-                {{ $company->phone }}
-            </div>
-
-            <div>
-                <i class="fas fa-globe mr-2"></i>
-                <a href="{{$company->website}}">website</a>
+                <i class="fas fa-globe mr-2 text-purple-500"></i>
+                <a href="{{$company->website}}" class="text-black underline hover:no-underline">website</a>
             </div>
         </div>
 

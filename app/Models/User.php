@@ -155,6 +155,23 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         $this->company()->delete();
         $this->blogs()->delete();
         $this->deals()->delete();
+        // Remove Claimed Events
+        foreach (Event::all() as $item){
+            $item->claimed_by = null;
+            try {
+                $item->saveOrFail();
+            } catch (\Throwable $e) {
+            }
+        }
+
+        // Remove Claimed Products
+        foreach (Product::all() as $item){
+            $item->claimed_by = null;
+            try {
+                $item->saveOrFail();
+            } catch (\Throwable $e) {
+            }
+        }
         $this->events()->delete();
         $this->forums()->delete();
         $this->jobs()->delete();

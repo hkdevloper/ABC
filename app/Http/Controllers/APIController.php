@@ -76,7 +76,10 @@ class APIController extends Controller
             $review->item_id = $item_id;
             $review->rating = $rating;
             $review->review = $reviewText; // Use a distinct variable name
-            $review->save();
+            try {
+                $review->saveOrFail();
+            } catch (\Throwable $e) {
+            }
         } catch (Exception $ex) {
             return response()->json(['message' => $ex->getMessage()], 500);
         }

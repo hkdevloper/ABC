@@ -23,7 +23,7 @@
                     <div class="flex flex-wrap place-items-center">
                         <div class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
                             <a href="{{route('view.product', [$slug])}}" class="w-full block h-full object-contain">
-                                <img alt="blog photo" src="{{ url('storage/' . $item->thumbnail) }}" class="max-h-[500px] w-full object-contain"/>
+                                <img alt="Product photo" src="{{ url('storage/' . $item->thumbnail) }}" class="max-h-[500px] w-full object-contain"/>
                                 <div class="bg-white w-full p-4">
                                     <header class="flex font-light text-sm">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-90 -ml-2"  viewBox="0 0 24 24" stroke="#b91c1c">

@@ -16,7 +16,7 @@
                 <h3 class="mb-4 text-2xl font-bold text-primary dark:text-primary-400">
                     {{
                         \App\Models\User::where('type', 'user')->count()
-                    }}
+                    }}+
                 </h3>
                 <h5 class="text-lg font-medium text-neutral-500 dark:text-neutral-300">
                     Happy customers
@@ -49,7 +49,7 @@
                     </svg>
                 </div>
                 <h3 class="mb-4 text-2xl font-bold text-primary dark:text-primary-400">
-                    {{\App\Models\Company::count()}} +
+                    {{\App\Models\Company::count()}}+
                 </h3>
                 <h5 class="text-lg font-medium text-neutral-500 dark:text-neutral-300">
                     Companies Registered

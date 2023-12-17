@@ -56,7 +56,7 @@ class UserBlogController extends Controller
         // Forgot session
         Session::forget('menu');
 
-        $blog = Blog::where('slug', $slug)->where('is_approved', 1)->where('is_active', 1)->first();
+        $blog = Blog::where('slug', $slug)->where('is_approved', 1)->where('is_active', 1)->firstOrFail();
         $related_blogs = Blog::where('category_id', $blog->category_id)->where('is_approved', 1)->where('is_active', 1)->where('id', '!=', $blog->id)->get();
         $data = compact('blog', 'related_blogs');
         return view('pages.blogs.detail')->with($data);

@@ -48,7 +48,7 @@ class UserForumController extends Controller
     {
         // Forgot session
         Session::forget('menu');
-        $forum = Forum::find($id);
+        $forum = Forum::findOrFail($id);
         if(!$forum){
             return redirect()->back()->with('error', 'Forum not found');
         }
@@ -78,7 +78,10 @@ class UserForumController extends Controller
         $data->body = $request->body;
         $data->user_id = auth()->user()->id;
         $data->forum_id = $request->forum_id;
-        $data->save();
+        try {
+            $data->saveOrFail();
+        } catch (\Throwable $e) {
+        }
         return redirect()->back()->with('success', 'Forum answered successfully');
     }
 }

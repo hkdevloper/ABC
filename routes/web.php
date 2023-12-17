@@ -129,7 +129,7 @@ Route::post('/requirements/submit', function (Request $request){
     $requirement->description = $request->description;
     $requirement->images = json_encode($images);
     $requirement->status = 'Pending';
-    $requirement->save();
+    $requirement->saveOrFail();
     return redirect()->back()->with('success', 'Requirement submitted successfully');
 })->name('requirements.submit');
 
@@ -147,7 +147,7 @@ Route::post('subscribe', function (Request $request){
     $email = $request->email;
     $subscribe = new \App\Models\Subscribe();
     $subscribe->email = $email;
-    $subscribe->save();
+    $subscribe->saveOrFail();
     return redirect()->back()->with('success', 'Subscribed successfully');
 })->name('subscribe');
 
@@ -164,7 +164,7 @@ Route::post('comment', function (Request $request){
     $comment->email = "";
     $comment->user_id = $request->user_id;
     $comment->blog_id = $request->blog_id;
-    $comment->save();
+    $comment->saveOrFail();
     return redirect()->back()->with('success', 'Commented successfully');
 })->name('blog.comment.submit');
 

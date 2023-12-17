@@ -26,13 +26,13 @@ class EventFactory extends Factory
             'category_id' => Category::pluck('id')->random(),
             'seo_id' => Seo::factory()->create()->id,
             'thumbnail' => 'events/thumbnail/event- (' . rand(1, 33) . ').jpg',
-            'gallery' => json_encode([
+            'gallery' => [
                 'events/gallery/event- (' . rand(1, 25) . ').jpg',
                 'events/gallery/event- (' . rand(1, 25) . ').jpg',
                 'events/gallery/event- (' . rand(1, 25) . ').jpg',
                 'events/gallery/event- (' . rand(1, 25) . ').jpg',
                 'events/gallery/event- (' . rand(1, 25) . ').jpg',
-            ]),
+            ],
             'is_active' => $this->faker->boolean,
             'is_featured' => $this->faker->boolean,
             'is_claimed' => $this->faker->boolean,
