@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,9 +22,7 @@ class CompanyFactory extends Factory
             'is_claimed' => $this->faker->boolean,
             'is_active' => $this->faker->boolean,
             'is_featured' => $this->faker->boolean,
-            'user_id' => function () {
-                return \App\Models\User::factory()->create()->id;
-            },
+            'user_id' => \App\Models\User::pluck('id')->random(),
             'category_id' => \App\Models\Category::pluck('id')->random(),
             'business_type' => $this->faker->word,
             'name' => $this->faker->company,
@@ -34,12 +33,14 @@ class CompanyFactory extends Factory
                 $this->faker->word,
                 $this->faker->word,
             ],
-            'banner' => $this->faker->imageUrl(),
-            'logo' => $this->faker->imageUrl(),
+            'banner' => "companies/banner/1 (".rand(1,13).").jpg",
+            'logo' => "companies/logo/".rand(1,50).".webp",
             'gallery' => json_encode([
-                $this->faker->imageUrl(),
-                $this->faker->imageUrl(),
-                $this->faker->imageUrl(),
+                "companies/gallery/1.jpg",
+                "companies/gallery/2.jpg",
+                "companies/gallery/3.jpg",
+                "companies/gallery/4.jpg",
+                "companies/gallery/5.jpg",
             ]),
             'phone' => $this->faker->unique()->phoneNumber,
             'email' => $this->faker->unique()->safeEmail,
@@ -49,8 +50,8 @@ class CompanyFactory extends Factory
             'instagram' => $this->faker->url,
             'linkdin' => $this->faker->url,
             'youtube' => $this->faker->url,
-            'address_id' => \App\Models\Address::pluck('id')->random(),
-            'seo_id' => \App\Models\Seo::pluck('id')->random(),
+            'address_id' => Address::factory()->create()->id,
+            'seo_id' => \App\Models\Seo::factory()->create()->id,
             'created_at' => now(),
             'updated_at' => now(),
         ];

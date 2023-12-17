@@ -82,12 +82,12 @@ class EventResource extends Resource
                     ->schema([
                         FileUpload::make('thumbnail')
                             ->label('Thumbnail Image')
-                            ->directory('event/thumbnail')
+                            ->directory('events/thumbnail')
                             ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
                             ->label('Event gallery')
-                            ->directory('event/gallery')
+                            ->directory('events/gallery')
                             ->multiple()
                             ->maxFiles(4)
                             ->visibility('public')

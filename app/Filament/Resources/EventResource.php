@@ -109,7 +109,7 @@ class EventResource extends Resource
                         FileUpload::make('thumbnail')
                             ->label('Thumbnail Image')
                             ->disk('public')
-                            ->directory('event/thumbnail')
+                            ->directory('events/thumbnail')
                             ->visibility('public')
                             ->required(),
                         FileUpload::make('gallery')
@@ -117,7 +117,7 @@ class EventResource extends Resource
                             ->label('Gallery')
                             ->maxFiles(4)
                             ->disk('public')
-                            ->directory('event/gallery')
+                            ->directory('events/gallery')
                             ->visibility('public'),
                     ])->columns(2),
 

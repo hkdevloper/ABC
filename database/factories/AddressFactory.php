@@ -27,7 +27,7 @@ class AddressFactory extends Factory
             'latitude' => $this->faker->latitude,
             'summary' => $this->faker->text(300),
             'description' => $this->faker->text,
-            'seo_id' => \App\Models\Seo::pluck('id')->random(),
+            'seo_id' => \App\Models\Seo::factory()->create()->id,
             'created_at' => now(),
             'updated_at' => now(),
         ];
