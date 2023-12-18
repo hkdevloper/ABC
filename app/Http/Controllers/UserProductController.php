@@ -28,22 +28,22 @@ class UserProductController extends Controller
         }
         // Show Active Companies
         else if($request->has('filter') && $request->filter == 'active'){
-            $products = Product::where('is_approved', 1)->where('is_active', 1)->paginate(10);
+            $products = Product::where('is_approved', 1)->where('is_active', 1)->paginate(12);
         }
         // Show the Latest Companies
         else if ($request->has('filter') && $request->filter == 'in-active') {
-            $products = Product::where('is_approved', 1)->where('is_active', 0)->paginate(10);
+            $products = Product::where('is_approved', 1)->where('is_active', 0)->paginate(12);
         }
         // Sort by name
         else if ($request->has('sort') && $request->sort == 'name') {
-            $products = Product::where('is_approved', 1)->orderBy('name', 'asc')->paginate(10);
+            $products = Product::where('is_approved', 1)->orderBy('name', 'asc')->paginate(12);
         }
         // Sort by Date
         else if ($request->has('sort') && $request->sort == 'date') {
-            $products = Product::where('is_approved', 1)->orderBy('created_at', 'desc')->paginate(10);
+            $products = Product::where('is_approved', 1)->orderBy('created_at', 'desc')->paginate(12);
         }
         else {
-            $products = Product::where('is_approved', 1)->where('is_active', 1)->paginate(10);
+            $products = Product::where('is_approved', 1)->where('is_active', 1)->paginate(12);
         }
         $categories = Category::where('type', 'product')->where('is_active', 1)->get();
         $data = compact('products', 'categories');
