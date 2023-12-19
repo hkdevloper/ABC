@@ -214,27 +214,6 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div class="border border-solid border-t border-b-0 border-r-0 border-l-0 border-gray-900">
-                                    <div class="flex items-stretch w-full">
-                                        <button type="button"
-                                                class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
-                                            <i class="fas fa-eye mr-3"></i>
-                                            View
-                                        </button>
-
-                                        <button type="button"
-                                                class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
-                                            <i class="fas fa-bookmark mr-3"></i>
-                                            Save
-                                        </button>
-
-                                        <button type="button"
-                                                class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white">
-                                            <i class="fas fa-heart mr-3"></i>
-                                            Like
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     @empty
@@ -274,27 +253,6 @@
                                     <span class="text-gray-600 text-sm">12 reviews</span>
                                 </div>
                             </div>
-                            <div class="border border-solid border-t border-b-0 border-r-0 border-l-0 border-gray-900">
-                                <div class="flex items-stretch w-full">
-                                    <button type="button"
-                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
-                                        <i class="fas fa-eye mr-3"></i>
-                                        View
-                                    </button>
-
-                                    <button type="button"
-                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
-                                        <i class="fas fa-bookmark mr-3"></i>
-                                        Save
-                                    </button>
-
-                                    <button type="button"
-                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white">
-                                        <i class="fas fa-heart mr-3"></i>
-                                        Like
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     @empty
                         <p class="text-gray-700">No featured companies available.</p>
@@ -306,8 +264,7 @@
         <section class="bg-gray-100 p-8 mb-4 rounded-lg">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
-                        Events</h1>
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Events</h1>
                     <a href="{{ url('/') }}"
                        class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
                         <span class="hidden md:inline">Explore All</span>
@@ -352,27 +309,6 @@
                                         @endphp
                                         {!! $description !!}
                                     </span>
-                                </div>
-                            </div>
-                            <div class="border border-solid border-t border-b-0 border-r-0 border-l-0 border-gray-900">
-                                <div class="flex items-stretch w-full">
-                                    <button type="button"
-                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
-                                        <i class="fas fa-eye mr-3"></i>
-                                        View
-                                    </button>
-
-                                    <button type="button"
-                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white border border-solid border-r border-b-0 border-l-0 border-t-0 border-gray-900">
-                                        <i class="fas fa-bookmark mr-3"></i>
-                                        Save
-                                    </button>
-
-                                    <button type="button"
-                                            class="flex-1 inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white focus:ring-gray-500 focus:bg-gray-900 focus:text-white">
-                                        <i class="fas fa-heart mr-3"></i>
-                                        Like
-                                    </button>
                                 </div>
                             </div>
                         </div>
