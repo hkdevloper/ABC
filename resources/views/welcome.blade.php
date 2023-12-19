@@ -1,4 +1,4 @@
-@extends('layouts.main-user-list')
+@extends('layouts.user')
 
 @section('head')
     <style>
@@ -40,6 +40,69 @@
 
         .search-results a:hover {
             background-color: #f0f0f0;
+        }
+
+        /* Category Card */
+        .card {
+            width: 210px;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            background: #f1f1f3;
+            box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 3%);
+            position: relative;
+        }
+
+        .card > * + * {
+            margin-top: 1.1em;
+        }
+
+        .card .card__content {
+            color: var(--secondary-color);
+            font-size: 0.86rem;
+        }
+
+        .card .card__title {
+            padding: 0;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .card .card__date {
+            color: #6e6b80;
+            font-size: 0.8rem;
+        }
+
+        .card .card__arrow {
+            position: absolute;
+            background: var(--primary-color);
+            padding: 0.4rem;
+            border-top-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+            bottom: 0;
+            right: 0;
+            transition: 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card svg {
+            transition: 0.2s;
+        }
+
+        /* hover */
+        .card:hover .card__title {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .card:hover .card__arrow {
+            background: #111;
+        }
+
+        .card:hover .card__arrow svg {
+            transform: translateX(3px);
         }
     </style>
 @endsection
@@ -118,39 +181,26 @@
             </div>
         </div>
     </section>
-
     <!-- Main Content -->
     <section class="container mx-auto">
         <!-- Top Categories -->
-        <section class="bg-neutral-100 p-2">
-            <div class="flex justify-between items-center">
-                <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Discover Top Categories</h1>
-                <a href="{{ url('/') }}"
-                   class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
-                    <span class="hidden md:inline">Explore All</span>
-                    {{-- Icon --}}
-                    <i class="mdi mdi-arrow-right-bold-circle-outline text-2xl ml-2"></i>
-                </a>
-            </div>
-            <hr class="my-5">
+        <section class="p-2">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 <!-- Category Card 1 -->
                 @forelse($category as $item)
-                    <div class="bg-white shadow-lg rounded-lg overflow-hidden bg-cover bg-center bg-contain" style="background-image: url({{ url('storage/' . $item->image) }})">
-                        <div class="px-6 py-4">
-                            <div class="font-bold text-white text-xl mb-2">{{$item->name}}</div>
-                            <p class="text-white text-base">
-                                {{ $item->products->count() }}+ Items
-                            </p>
+                    <div class="card">
+                        <h3 class="card__title">{{$item->name}}</h3>
+                        <p class="card__content">{!! $item->description !!}</p>
+                        <div class="card__date">
+                            {{ $item->products->count() }}+ Items
                         </div>
-                        <div class="px-6 py-4">
-                            <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                Explore
-                                <i class="fas fa-arrow-alt-circle-right ml-2"></i>
-                            </a>
+                        <div class="card__arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15"
+                                 width="15">
+                                <path fill="#fff"
+                                      d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
+                            </svg>
                         </div>
-                        <hr class="border-b-4 border-purple-500 w-full mt-4 gradient-border">
-
                     </div>
                 @empty
                     <p class="text-gray-700">No categories available.</p>
@@ -174,19 +224,26 @@
                 <hr class="my-5">
                 <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
                     @forelse($products as $item)
-                        <div class="flex flex-wrap place-items-center transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
-                            <div class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
-                                <a href="{{route('view.product', [$item->slug])}}" class="w-full block h-full object-contain">
-                                    <img alt="product photo" src="{{ url('storage/' . $item->thumbnail) }}" class="max-h-40 w-full object-cover"/>
+                        <div
+                            class="flex flex-wrap place-items-center transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
+                            <div
+                                class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
+                                <a href="{{route('view.product', [$item->slug])}}"
+                                   class="w-full block h-full object-contain">
+                                    <img alt="product photo" src="{{ url('storage/' . $item->thumbnail) }}"
+                                         class="max-h-40 w-full object-cover"/>
                                     <div class="bg-white w-full p-4">
                                         <header class="flex font-light text-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-90 -ml-2"  viewBox="0 0 24 24" stroke="#b91c1c">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-90 -ml-2"
+                                                 viewBox="0 0 24 24" stroke="#b91c1c">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M20 12H4"/>
                                             </svg>
                                             <p>{{$item->category->name}}</p>
                                         </header>
                                         <div class="flex items-center mt-2">
-                                            <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$item->user->name}}'/>
+                                            <img class='w-10 h-10 object-cover rounded-full' alt='User avatar'
+                                                 src='https://ui-avatars.com/api/?name={{$item->user->name}}'/>
                                             <div class="pl-3">
                                                 <div class="font-medium">
                                                     {{$item->user->name}}
@@ -227,7 +284,8 @@
         <section class="bg-gray-100 p-8 mb-4 rounded-lg">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Companies</h1>
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
+                        Companies</h1>
                     <a href="{{ url('/') }}"
                        class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
                         <span class="hidden md:inline">Explore All</span>
@@ -238,7 +296,8 @@
                 <hr class="my-5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     @forelse($companies as $company)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
                             <img src="{{ url('storage/' . $company->logo) }}" class="w-full h-48 object-contain"
                                  alt="Company Name">
 
@@ -264,7 +323,8 @@
         <section class="bg-gray-100 p-8 mb-4 rounded-lg">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Events</h1>
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
+                        Events</h1>
                     <a href="{{ url('/') }}"
                        class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
                         <span class="hidden md:inline">Explore All</span>
@@ -275,10 +335,13 @@
                 <hr class="my-5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     @forelse($events as $event)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
                             <div class="each relative">
-                                <img src="{{ url('storage/'.$event->thumbnail) }}" class="w-full h-48 object-contain" alt="Event">
-                                <div class="badge absolute top-0 right-0 bg-purple-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">
+                                <img src="{{ url('storage/'.$event->thumbnail) }}" class="w-full h-48 object-contain"
+                                     alt="Event">
+                                <div
+                                    class="badge absolute top-0 right-0 bg-purple-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">
                                     @php
                                         $date = \Carbon\Carbon::parse($event->start);
                                     @endphp
@@ -286,12 +349,15 @@
                                 </div>
                                 <div class="info-box text-xs flex p-1 font-semibold text-gray-500 bg-gray-300">
                                     <span class="mr-1 p-1 px-2 font-bold">105 Watching</span>
-                                    <span class="mr-1 p-1 px-2 font-bold border-0 border-solid border-l border-gray-400">105 Likes</span>
-                                    <span class="mr-1 p-1 px-2 font-bold border-0 border-solid border-l border-gray-400">105 Views</span>
+                                    <span
+                                        class="mr-1 p-1 px-2 font-bold border-0 border-solid border-l border-gray-400">105 Likes</span>
+                                    <span
+                                        class="mr-1 p-1 px-2 font-bold border-0 border-solid border-l border-gray-400">105 Views</span>
                                 </div>
                                 <div class="desc p-4 text-gray-800">
                                     <div class="flex items-center mt-2">
-                                        <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
+                                        <img class='w-10 h-10 object-cover rounded-full' alt='User avatar'
+                                             src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
                                         <div class="pl-3">
                                             <div class="font-medium">
                                                 {{$event->user->name}}
@@ -301,11 +367,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="{{route('view.event', [$event->slug])}}" target="_new" class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
+                                    <a href="{{route('view.event', [$event->slug])}}" target="_new"
+                                       class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
                                     <span class="description text-sm block py-2 border-gray-400 mb-2">
                                         @php
-                                        $description = strip_tags($event->description);
-                                        $description = strlen($description) > 100 ? substr($description, 0, 100) . "..." : $description;
+                                            $description = strip_tags($event->description);
+                                            $description = strlen($description) > 100 ? substr($description, 0, 100) . "..." : $description;
                                         @endphp
                                         {!! $description !!}
                                     </span>

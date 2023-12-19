@@ -1,4 +1,4 @@
-@extends('layouts.main-user-list')
+@extends('layouts.user')
 
 @section('head')
     <style>
@@ -150,7 +150,7 @@
                                         <div>
                                             <span class="block text-sm font-bold">{{$item->user->name}}</span>
                                             <span
-                                                class="block text-sm text-gray-500">{{$item->created_at->diffForHumans()}}</span>
+                                                    class="block text-sm text-gray-500">{{$item->created_at->diffForHumans()}}</span>
                                         </div>
                                         <x-bladewind.rating name="star-rating" size="small" clickable="false"
                                                             rating="{{$item->rating}}"/>
@@ -188,15 +188,15 @@
                             <h2 class="text-xl font-bold mb-4">Social Media</h2>
                             <ul class="flex space-x-4">
                                 <li><a href="{{ $company->facebook }}" class="text-purple-600" target="_blank"><i
-                                            class="fab fa-facebook"></i></a></li>
+                                                class="fab fa-facebook"></i></a></li>
                                 <li><a href="{{ $company->twitter }}" class="text-purple-600" target="_blank"><i
-                                            class="fab fa-twitter"></i></a></li>
+                                                class="fab fa-twitter"></i></a></li>
                                 <li><a href="{{ $company->instagram }}" class="text-purple-600" target="_blank"><i
-                                            class="fab fa-instagram"></i></a></li>
+                                                class="fab fa-instagram"></i></a></li>
                                 <li><a href="{{ $company->linkedin }}" class="text-purple-600" target="_blank"><i
-                                            class="fab fa-linkedin"></i></a></li>
+                                                class="fab fa-linkedin"></i></a></li>
                                 <li><a href="{{ $company->youtube }}" class="text-purple-600" target="_blank"><i
-                                            class="fab fa-youtube"></i></a></li>
+                                                class="fab fa-youtube"></i></a></li>
                                 <!-- Add other social media links -->
                             </ul>
                         </li>
@@ -215,12 +215,12 @@
         </div>
     </div>
     <x-bladewind::modal
-        backdrop_can_close="false"
-        name="rate"
-        ok_button_action="saveRating('rate-company')"
-        ok_button_label="Submit"
-        close_after_action="false"
-        center_action_buttons="true">
+            backdrop_can_close="false"
+            name="rate"
+            ok_button_action="saveRating('rate-company')"
+            ok_button_label="Submit"
+            close_after_action="false"
+            center_action_buttons="true">
         <form method="post" action="" id="rate-form">
             @csrf
             <b class="mt-0">Add your review</b>
@@ -229,15 +229,15 @@
             <input type="hidden" name="item_id" value="{{$company->id}}">
         </form>
         <x-bladewind::processing
-            name="rate-processing"
-            message="Submitting your rating..."/>
+                name="rate-processing"
+                message="Submitting your rating..."/>
 
         <x-bladewind::process-complete
-            name="rate-complete"
-            process_completed_as="passed"
-            button_label="Done"
-            button_action="hideModal('rate')"
-            message="Your rating has been submitted successfully."/>
+                name="rate-complete"
+                process_completed_as="passed"
+                button_label="Done"
+                button_action="hideModal('rate')"
+                message="Your rating has been submitted successfully."/>
     </x-bladewind::modal>
     <!-- Add this script at the end of your HTML file -->
     <script>

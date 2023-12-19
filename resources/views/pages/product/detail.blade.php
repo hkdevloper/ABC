@@ -1,4 +1,4 @@
-@extends('layouts.main-user-details')
+@extends('layouts.user')
 
 @section('content')
     <div class="container py-6 mx-auto flex flex-wrap">

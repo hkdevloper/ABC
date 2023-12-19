@@ -1,7 +1,7 @@
-@extends('layouts.main-user-list')
+@extends('layouts.user')
 
 @section('content')
-{{--    <x-user.header :title="'Products'" :breadcrumb="['Home', 'Product', 'List']" type="product"/>--}}
+    {{--    <x-user.header :title="'Products'" :breadcrumb="['Home', 'Product', 'List']" type="product"/>--}}
     <div class="container py-6 mx-auto flex flex-wrap">
         <!-- Product List Block -->
         <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
@@ -37,7 +37,8 @@
                                   fill="white"/>
                         </svg>
                         <div class="relative flex items-center justify-center">
-                            <img class="relative w-100 h-60 bg-contain" src="{{ url('storage/' . $item->thumbnail) }}" alt="">
+                            <img class="relative w-100 h-60 bg-contain" src="{{ url('storage/' . $item->thumbnail) }}"
+                                 alt="">
                         </div>
                         <div class="relative text-white px-3 pb-6 mt-3">
                             <span class="block opacity-75 -mb-1">{{$item->category->name}}</span>
@@ -96,7 +97,8 @@
             <!-- Sorting -->
             <div>
                 <h3 class="text-xl font-semibold text-gray-700 mb-2">Sort By</h3>
-                <select class="w-full border rounded py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline-blue">
+                <select
+                    class="w-full border rounded py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline-blue">
                     <option value="latest">Latest</option>
                     <option value="price-low-high">Price: Low to High</option>
                     <option value="price-high-low">Price: High to Low</option>

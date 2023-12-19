@@ -1,5 +1,5 @@
 @php use App\classes\HelperFunctions; @endphp
-@extends('layouts.main-user-list')
+@extends('layouts.user')
 
 @section('content')
     <x-user.header :title="'Forums'" :breadcrumb="['Home', 'Forum', 'List']" type="forum"/>
@@ -60,8 +60,8 @@
                             </div>
                             <div>
                                 <button
-                                    onclick="window.location.href = '{{route('view.forum', [$forum->id, \Illuminate\Support\Str::slug($forum->title)])}}'"
-                                    class="text-white bg-purple-500 hover:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded-full focus:outline-none">
+                                        onclick="window.location.href = '{{route('view.forum', [$forum->id, \Illuminate\Support\Str::slug($forum->title)])}}'"
+                                        class="text-white bg-purple-500 hover:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded-full focus:outline-none">
                                     Answer
                                 </button>
                                 <button class="text-purple-500 hover:underline ml-2">

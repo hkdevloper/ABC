@@ -1,4 +1,4 @@
-@extends('layouts.main-user-list')
+@extends('layouts.user')
 
 @section('content')
     <div class="container py-6 mx-auto flex flex-wrap">
@@ -18,7 +18,7 @@
                         </div>
                         <div>
                                             <span
-                                                class="text-gray-600 text-sm">Category: {{$forum->category->name}}</span>
+                                                    class="text-gray-600 text-sm">Category: {{$forum->category->name}}</span>
                         </div>
                     </div>
                     <h1 class="text-xl font-semibold text-gray-900 mb-4">{{$forum->title}}</h1>
@@ -27,7 +27,7 @@
                     <div class="flex justify-between items-center">
                         <div>
                                             <span
-                                                class="text-gray-600 text-sm">{{$forum->countAnswers()}} Answers</span>
+                                                    class="text-gray-600 text-sm">{{$forum->countAnswers()}} Answers</span>
                             <span class="ml-4 text-gray-600 text-sm">{{$viewCount}} Views</span>
                         </div>
                         <div>
