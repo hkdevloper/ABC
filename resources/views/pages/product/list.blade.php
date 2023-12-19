@@ -16,7 +16,7 @@
             @php
                 $slug = null;
             @endphp
-            <div class="flex flex-wrap items-center justify-center">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
                 @forelse($products as $key => $item)
                     @php
                         $slug = $item->slug;
@@ -28,8 +28,7 @@
                         $currentColor = $color[$key % count($color)]; // Cycle through colors in order
                         $btnColor = $color[$key % count($color)]; // Cycle through colors in order
                     @endphp
-                    <div
-                        class="flex-shrink-0 m-2 relative overflow-hidden {{$currentColor}} rounded-lg max-w-xs shadow-lg">
+                    <div class="flex-shrink-0 relative overflow-hidden {{$currentColor}} rounded-lg max-w-xs shadow-lg">
                         <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
                              style="transform: scale(1.5); opacity: 0.1;">
                             <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)"
@@ -37,8 +36,8 @@
                             <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)"
                                   fill="white"/>
                         </svg>
-                        <div class="relative pt-5 px-5 flex items-center justify-center">
-                            <img class="relative w-40" src="{{ url('storage/' . $item->thumbnail) }}" alt="">
+                        <div class="relative flex items-center justify-center">
+                            <img class="relative w-100 h-60 bg-contain" src="{{ url('storage/' . $item->thumbnail) }}" alt="">
                         </div>
                         <div class="relative text-white px-3 pb-6 mt-3">
                             <span class="block opacity-75 -mb-1">{{$item->category->name}}</span>
@@ -53,9 +52,9 @@
                         <div class="m-2 text-center">
                             <a href="{{ route('view.product', [$slug]) }}"
                                class="bg-white text-orange-500 hover:{{$btnColor}} hover:text-white rounded-full px-4 py-2 transition duration-300 ease-in-out flex items-center transform hover:-translate-y-1 hover:scale-110 text-center">
-                                <span class="mr-1 text-center">
-                                    Enquire Now
-                                </span>
+                    <span class="mr-1 text-center">
+                        Enquire Now
+                    </span>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-3 h-3">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -70,6 +69,7 @@
                     </div>
                 @endforelse
             </div>
+
             <!-- Pagination -->
             <hr class="my-5">
             {{ $products->links() }}
