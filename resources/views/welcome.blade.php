@@ -97,10 +97,9 @@
             <form action="{{ route('search') }}" class="mt-2 md:mt-4 flex items-center justify-center rounded-full p-4 pl-2 relative bg-white w-100">
                 <div class="relative flex items-center justify-between w-full s-form">
                     <label for="searchInput" class="sr-only">Search</label>
-                    <i class='bx bx-search-alt-2 text-base md:text-xl text-gray-500 mr-3'></i>
                     <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters" class="search-input focus:outline-none px-6 py-2 rounded-full border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full">
-                    <button type="submit" class="bg-blue-500 text-white p-3 rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out">
-                        Search
+                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 w-auto rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse">
+                        <span class="inline">Search</span>
                     </button>
                 </div>
                 <div id="searchResults" class="search-results mt-2"></div>

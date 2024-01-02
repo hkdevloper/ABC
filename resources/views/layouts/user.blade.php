@@ -6,15 +6,14 @@
     <title>{{ config()->get('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="{{asset('js/tailwind.js')}}"></script>
-    <link href="{{ asset('style/boxicons-2.1.4/css/main.css') }}" rel="stylesheet">
-    <link href="{{ asset('style/output.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/boxicons/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css')}}" rel="stylesheet">
     <script src="{{ asset('js/jquery.js')}}"></script>
     <script src="{{ asset('js/alpine.js')}}" defer></script>
     <script src="{{ asset('js/fw.js')}}" crossorigin="anonymous"></script>
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css"/>
-    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{{ asset('js/scroll-reveal.js')}}"></script>
     @include('includes.ads-config')
     @yield('head')
     <script>
@@ -45,7 +44,6 @@
 </main>
 <x-bladewind.notification/>
 <script src="{{ asset('js/tw-element-min.js') }}"></script>
-<script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 <script src="{{ asset('js/alpine.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
 <script>

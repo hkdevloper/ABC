@@ -5,14 +5,12 @@
 * License: 	Not for commercial use
 * Link:     www.hkdevs.tech
 */
-
-/* Tailwind CSS */
-@import 'base.css';
-@import 'components.css';
-@import 'utilities.css';
-
 /* HkDevs custom styles*/
 @import url('globals.css');
-@import url('search-bar.css');
 @import url('owl-carousel.css');
-@import url('modified.css');
+@import url('tw-elements.min.css');
+
+.owl-item{
+    width: auto !important;
+    margin-right: 10px !important;
+}
