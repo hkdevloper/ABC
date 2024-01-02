@@ -38,7 +38,7 @@ class UserPanelProvider extends PanelProvider
         $showNavigation = false;
         return $panel
             ->id('user')
-            ->path('user/dashboard')
+            ->path('user')
             ->login()
             ->registration()
             ->passwordReset()

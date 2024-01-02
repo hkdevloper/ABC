@@ -158,4 +158,20 @@ Route::post('comment', function (Request $request){
     return redirect()->back()->with('success', 'Commented successfully');
 })->name('blog.comment.submit');
 
-
+Route::get('/search', function (Request $request){
+    $search = $request->q;
+    $searchList = [];
+    $products = Product::where('is_approved', 1)->where('is_active', 1)->paginate(12);
+    foreach($products as $item){
+        $seo = $item->seo;
+        foreach ($seo->meta_keywords as $keyword){
+            if (str_contains(strtolower($keyword), strtolower($search))){
+                $searchList[] = $item;
+            }
+        }
+    }
+    // Unique the array
+    $products = array_unique($searchList);
+    $data = compact('products');
+    return view('search')->with($data);
+})->name('search');

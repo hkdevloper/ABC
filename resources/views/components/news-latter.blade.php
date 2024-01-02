@@ -1,5 +1,5 @@
 <div
-    class="relative overflow-hidden bg-cover bg-no-repeat bg-[50%] bg-[url('https://mdbcdn.b-cdn.net/img/new/textures/full/1.jpg')] h-[300px]"></div>
+    class="relative overflow-hidden bg-cover bg-no-repeat bg-[50%] bg-[url('https://plus.unsplash.com/premium_photo-1671308539073-ebf8985a6a11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGFic3RyYWN0JTIwYmFja2dyb3VuZHxlbnwwfDB8MHx8fDA%3D')] h-[300px]"></div>
 <div class="container px-6 md:px-12">
     <div
         class="block rounded-lg bg-[hsla(0,0%,100%,0.7)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,5%,0.7)] dark:shadow-black/20 md:py-16 md:px-12 mt-[-100px] backdrop-blur-[30px]">

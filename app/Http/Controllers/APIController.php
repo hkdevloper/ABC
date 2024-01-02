@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Event;
 use App\Models\Product;
 use App\Models\RateReview;
+use App\Models\Seo;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -18,16 +19,18 @@ class APIController extends Controller
             'search' => 'required',
         ]);
         $search = $request->search;
-        $products = Product::where('name', 'LIKE', "%{$search}%")->where('is_approved', 1)->where('is_active', 1)->get();
-        $companies = Company::where('name', 'LIKE', "%{$search}%")->where('is_approved', 1)->where('is_active', 1)->get();
         $searchList = [];
-        foreach ($products as $item) {
-            $searchList[] = [$item->name, $item->slug, 'product'];
-
+        $products = Product::where('is_approved', 1)->where('is_active', 1)->paginate(12);
+        foreach($products as $item){
+            $seo = $item->seo;
+            foreach ($seo->meta_keywords as $keyword){
+                if (str_contains(strtolower($keyword), strtolower($search))){
+                    $searchList[] = $keyword;
+                }
+            }
         }
-        foreach ($companies as $item) {
-            $searchList[] = [$item->name, $item->slug, 'company'];
-        }
+        // Unique the array
+        $searchList = array_unique($searchList);
         return response()->json(['data' => $searchList]);
     }
 

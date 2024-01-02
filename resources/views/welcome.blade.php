@@ -1,21 +1,15 @@
+@php use App\classes\HelperFunctions; @endphp
+@php use Carbon\Carbon; @endphp
 @extends('layouts.user')
 
 @section('head')
     <style>
-        /* Additional custom styles go here */
-        .search-dropdown {
-            position: relative;
-            display: inline-block;
+        .s-form > [type="text"]:focus {
+            outline: none;
+            border: none;
+            --tw-ring-color: #fff;
         }
-
-        .search-input {
-            width: 300px;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .search-results {
+       .search-results {
             position: absolute;
             top: 100%;
             left: 0;
@@ -40,69 +34,6 @@
 
         .search-results a:hover {
             background-color: #f0f0f0;
-        }
-
-        /* Category Card */
-        .card {
-            width: 210px;
-            padding: 1rem;
-            cursor: pointer;
-            border-radius: var(--border-radius);
-            background: #f1f1f3;
-            box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 3%);
-            position: relative;
-        }
-
-        .card > * + * {
-            margin-top: 1.1em;
-        }
-
-        .card .card__content {
-            color: var(--secondary-color);
-            font-size: 0.86rem;
-        }
-
-        .card .card__title {
-            padding: 0;
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        .card .card__date {
-            color: #6e6b80;
-            font-size: 0.8rem;
-        }
-
-        .card .card__arrow {
-            position: absolute;
-            background: var(--primary-color);
-            padding: 0.4rem;
-            border-top-left-radius: var(--border-radius);
-            border-bottom-right-radius: var(--border-radius);
-            bottom: 0;
-            right: 0;
-            transition: 0.2s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .card svg {
-            transition: 0.2s;
-        }
-
-        /* hover */
-        .card:hover .card__title {
-            color: var(--primary-color);
-            text-decoration: underline;
-        }
-
-        .card:hover .card__arrow {
-            background: #111;
-        }
-
-        .card:hover .card__arrow svg {
-            transform: translateX(3px);
         }
     </style>
 @endsection
@@ -135,7 +66,7 @@
                         const resultElement = document.createElement('a');
                         resultElement.textContent = name;
 
-                        // Generate link based on the type of item
+                        // Generate a link based on the type of item
                         if (type === 'company') {
                             resultElement.href = "{{ route('view.company', ['slug' => '__slug__']) }}".replace('__slug__', slug);
                         } else if (type === 'product') {
@@ -144,7 +75,7 @@
                         console.log(resultElement.href)
 
                         searchResults.appendChild(resultElement);
-                        // Show or hide the results container based on the input length
+                        // Show or hide the result container based on the input length
                         searchResults.style.display = inputValue.length >= 3 ? 'block' : 'none';
                     });
                 } catch (error) {
@@ -152,35 +83,32 @@
                 }
             }
         });
+        const card = document.getElementById('categoryCard');
     </script>
 @endsection
 
 @section('content')
     <!-- Search Section -->
-    <section class="bg-white py-4 md:h-[60vh] flex flex-col items-center justify-center">
-        <div class="mx-auto w-full md:w-[90%] text-center">
-            <h1 class="text-lg sm:text-xl md:text-5xl font-semibold text-blue-900">Discover Top Companies and
-                Products</h1>
-            <div class="text-gray-600 text-sm sm:text-base md:text-3xl my-4">Explore a vast network of 5 lakh+
-                businesses and products for your needs
-            </div>
-            <div class="mt-2 md:mt-4 flex items-center justify-center">
-                <div class="relative ml-2">
-                    <label for="searchInput"></label>
-                    <div class="search-dropdown">
-                        <input id="searchInput"
-                               class="search-input rounded-full p-2 md:p-4 w-full md:w-[50vw] focus:outline-none card-hovered"
-                               type="text" placeholder="Type at least 3 characters">
-                        <div id="searchResults" class="search-results"></div>
-                    </div>
+    <section class="relative py-8 md:h-[60vh] flex flex-col items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-tr from-purple-500 via-green-300 to-purple-500 opacity-25 rounded-tr-full rounded-bl-full"></div>
+        <div class="mx-auto text-center relative z-10">
+            <h1 class="text-3xl md:text-5xl font-semibold text-dark mb-2">Discover Top Companies and Products</h1>
+            <p class="text-dark text-base md:text-lg mb-4">Explore a vast network of five lakh+ businesses and products for your needs</p>
+            <form action="{{ route('search') }}" class="mt-2 md:mt-4 flex items-center justify-center rounded-full p-4 pl-2 relative bg-white w-100">
+                <div class="relative flex items-center justify-between w-full s-form">
+                    <label for="searchInput" class="sr-only">Search</label>
+                    <i class='bx bx-search-alt-2 text-base md:text-xl text-gray-500 mr-3'></i>
+                    <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters" class="search-input focus:outline-none px-6 py-2 rounded-full border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full">
+                    <button type="submit" class="bg-blue-500 text-white p-3 rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out">
+                        Search
+                    </button>
                 </div>
-                <button
-                    class="bg-blue-500 text-white p-2 md:p-4 rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out w-[40px] md:w-[60px]">
-                    <i class='bx bx-search-alt-2 text-base md:text-lg'></i>
-                </button>
-            </div>
+                <div id="searchResults" class="search-results mt-2"></div>
+            </form>
         </div>
     </section>
+
+
     <!-- Main Content -->
     <section class="container mx-auto">
         <!-- Top Categories -->
@@ -189,8 +117,8 @@
                 <!-- Category Card 1 -->
                 @forelse($category as $item)
                     <div class="card">
+                        <img src="{{ url('storage/' . $item->image) }}" alt="{{$item->name}}"/>
                         <h3 class="card__title">{{$item->name}}</h3>
-                        <p class="card__content">{!! $item->description !!}</p>
                         <div class="card__date">
                             {{ $item->products->count() }}+ Items
                         </div>
@@ -262,10 +190,10 @@
                                                     Rating:
                                                 </div>
                                                 <div class="col-span-2">
-                                                    Views: {{\App\classes\HelperFunctions::getStat('view', 'product', $item->id)}}
+                                                    Views: {{HelperFunctions::getStat('view', 'product', $item->id)}}
                                                 </div>
                                                 <div class="col-span-2">
-                                                    Likes: {{\App\classes\HelperFunctions::getStat('like', 'product', $item->id)}}
+                                                    Likes: {{HelperFunctions::getStat('like', 'product', $item->id)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -343,7 +271,7 @@
                                 <div
                                     class="badge absolute top-0 right-0 bg-purple-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">
                                     @php
-                                        $date = \Carbon\Carbon::parse($event->start);
+                                        $date = Carbon::parse($event->start);
                                     @endphp
                                     {{$date->diffForHumans()}}
                                 </div>
