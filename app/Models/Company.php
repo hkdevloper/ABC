@@ -73,6 +73,36 @@ class Company extends Model
         return $this->belongsTo(Address::class);
     }
 
+    public function fullAddress() : string
+    {
+        $address = $this->address;
+        $addressString = "";
+        if ($address->city) {
+            $addressString .= $address->city . ", ";
+        }
+        if ($address->state) {
+            $addressString .= $address->state->name . ", ";
+        }
+        if ($address->country) {
+            $addressString .= $address->country->name . ", ";
+        }
+        if ($address->zip_code) {
+            $addressString .= $address->zip_code;
+        }
+        return $addressString;
+    }
+
+    public function dealsIn() : string
+    {
+        $dealsIn = "";
+        if ($this->extra_things) {
+            foreach ($this->extra_things as $item) {
+                $dealsIn .= $item . ", ";
+            }
+        }
+        return $dealsIn;
+    }
+
     public function getReviews() : array | object
     {
         return RateReview::where('type', 'company')->where('item_id', $this->id)->paginate(3);

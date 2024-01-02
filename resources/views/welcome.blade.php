@@ -91,8 +91,7 @@
 @section('content')
     <!-- Search Section -->
     <section class="relative py-8 md:h-[60vh] flex flex-col items-center justify-center overflow-hidden">
-        <div
-            class="absolute inset-0 bg-gradient-to-tr from-purple-500 via-green-300 to-purple-500 opacity-25 rounded-tr-full rounded-bl-full reveal"></div>
+        <div class="absolute inset-0 bg-gradient-to-tr from-purple-500 via-green-300 to-purple-500 opacity-25 rounded-full reveal"></div>
         <div class="mx-auto text-center relative z-10">
             <h1 class="text-3xl md:text-5xl font-semibold text-dark mb-2">Discover Top Companies and Products</h1>
             <p class="text-dark text-base md:text-lg mb-4">Explore a vast network of five lakh+ businesses and products
@@ -116,12 +115,13 @@
     <section class="container mx-auto">
         <!-- Top Categories -->
         <section class="p-2">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
                 <!-- Category Card 1 -->
                 @forelse($category as $item)
-                    <x-bladewind.card class="cursor-pointer hover:shadow-gray-300 flex flex-col items-center justify-center">
-                        <img src="{{ url('storage/' . $item->image) }}" alt="{{$item->name}}" class="w-full h-20 object-contain rounded-full"/>
+                    <x-bladewind.card class="cursor-pointer shadow-gray-300 hover:shadow-gray-400 flex flex-col items-center justify-center">
+                        <img src="{{ url('storage/' . $item->image) }}" alt="{{$item->name}}" class="w-[80px] h-[80px] object-contain rounded-full"/>
                         <p class="text-center text-xl bold italic mt-2">{{$item->name}}</p>
+                        <p class="text-center text-xl bold mt-2">({{$item->countItem()}})</p>
                     </x-bladewind.card>
                 @empty
                     <p class="text-gray-700">No categories available.</p>
@@ -129,80 +129,8 @@
             </div>
         </section>
 
-        <!-- Top Products -->
-        <section class="mt-6">
-            <div class="p-4 bg-white rounded-lg shadow-md">
-                <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Explore Top
-                        Products</h1>
-                    <a href="{{ url('/') }}"
-                       class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
-                        <span class="hidden md:inline">Explore All</span>
-                        {{-- Icon --}}
-                        <i class="mdi mdi-arrow-right-bold-circle-outline text-2xl ml-2"></i>
-                    </a>
-                </div>
-                <hr class="my-5">
-                <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
-                    @forelse($products as $item)
-                        <div
-                            class="flex flex-wrap place-items-center transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
-                            <div
-                                class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
-                                <a href="{{route('view.product', [$item->slug])}}"
-                                   class="w-full block h-full object-contain">
-                                    <img alt="product photo" src="{{ url('storage/' . $item->thumbnail) }}"
-                                         class="w-full h-48 object-contain"/>
-                                    <div class="bg-white w-full p-4">
-                                        <header class="flex font-light text-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-90 -ml-2"
-                                                 viewBox="0 0 24 24" stroke="#b91c1c">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                      d="M20 12H4"/>
-                                            </svg>
-                                            <p>{{$item->category->name}}</p>
-                                        </header>
-                                        <div class="flex items-center mt-2">
-                                            <img class='w-10 h-10 object-cover rounded-full' alt='User avatar'
-                                                 src='https://ui-avatars.com/api/?name={{$item->user->name}}'/>
-                                            <div class="pl-3">
-                                                <div class="font-medium">
-                                                    {{$item->user->name}}
-                                                </div>
-                                                <div class="text-gray-600 text-sm">
-                                                    {{$item->created_at->diffForHumans()}}
-                                                </div>
-                                            </div>
-                                            <div class="flex justify-end">
-                                            </div>
-                                        </div>
-                                        <p class="text-indigo-500 text-2xl font-medium mt-2">{{ $item->name }}</p>
-                                        <div class="py-4 border-t border-b text-xs text-gray-700">
-                                            <div class="grid grid-cols-6 gap-1">
-                                                <div class="col-span-2">
-                                                    Rating:
-                                                </div>
-                                                <div class="col-span-2">
-                                                    Views: {{HelperFunctions::getStat('view', 'product', $item->id)}}
-                                                </div>
-                                                <div class="col-span-2">
-                                                    Likes: {{HelperFunctions::getStat('like', 'product', $item->id)}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    @empty
-                        <p class="text-gray-700 text-center col-span-full">No listings found.</p>
-                    @endforelse
-                </div>
-            </div>
-        </section>
-
         <!-- Featured Companies -->
-        <section class="bg-gray-100 p-8 mb-4 rounded-lg">
+        <section class="p-8 mb-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
                     <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
@@ -217,15 +145,23 @@
                 <hr class="my-5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     @forelse($companies as $company)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
-                            <img src="{{ url('storage/' . $company->logo) }}" class="w-full h-48 object-contain" alt="Company Name">
-                            <div class="p-6">
-                                <h3 class="text-2xl font-bold text-indigo-900 mb-2">{{$company->name}}</h3>
-                                <p class="text-gray-700">{{$company->summary}}</p>
-                                <div class="mt-4">
-                                    <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">4.5 Rating</span>
-                                    <span class="text-gray-600 text-sm">12 reviews</span>
-                                </div>
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex flex-col items-stretch justify-between">
+                            <img src="{{ url('storage/' . $company->logo) }}" class="w-full h-40 object-contain rounded-t-lg" alt="Company Name">
+                            <div class="p-3 flex flex-col items-center justify-center">
+                                <h3 class="text-xl font-bold text-center text-indigo-900 mb-2">{{$company->name}}</h3>
+                                <p class="text-gray-700 text-center text-sm">{{$company->fullAddress()}}</p>
+                                <h2 class="text-base bold italic underline text-indigo-700 mt-2">Deals In</h2>
+                                <p class="text-gray-700 text-center text-sm">{{$company->dealsIn()}}</p>
+                            </div>
+                            <div class="flex justify-between items-center m-3">
+                                <a href="{{route('view.company', [$company->slug])}}" class="text-purple-500 flex items-center transition duration-300 ease-in-out">
+                                    <i class='bx bx-link-external text-2xl mr-2'></i>
+                                    <span class="hidden md:inline">View</span>
+                                </a>
+                                <a href="{{route('view.company', [$company->slug])}}" class="text-purple-500 flex items-center transition duration-300 ease-in-out">
+                                    <i class="bx bx-bookmark text-2xl mr-2"></i>
+                                    <span class="hidden md:inline">Bookmark</span>
+                                </a>
                             </div>
                         </div>
                     @empty
@@ -234,8 +170,60 @@
                 </div>
             </div>
         </section>
+
+        <!-- Top Products -->
+        <section class="p-8 my-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Explore Top
+                    Products</h1>
+                <a href="{{ url('/') }}"
+                   class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
+                    <span class="hidden md:inline">Explore All</span>
+                    {{-- Icon --}}
+                    <i class="mdi mdi-arrow-right-bold-circle-outline text-2xl ml-2"></i>
+                </a>
+            </div>
+            <hr class="my-5">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+                @forelse($products as $item)
+                    <div class="flex bg-white flex-wrap place-items-center transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
+                        <div class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
+                            <a href="{{route('view.product', [$item->slug])}}" class="w-full block h-full object-contain">
+                                <img alt="product photo" src="{{ url('storage/' . $item->thumbnail) }}" class="w-full h-48 object-contain" />
+                                <div class="w-full p-4">
+                                    <header class="flex font-light text-sm items-center">
+                                        <i class="bx bx-category text-indigo-500 mr-1"></i>
+                                        <p>{{$item->category->name}}</p>
+                                    </header>
+                                    <div class="py-4 text-xs text-gray-700">
+                                        <div class="grid grid-cols-6 gap-1">
+                                            <div class="col-span-2 flex items-center">
+                                                <i class="bx bx-star text-yellow-500 mr-1"></i>
+                                                <span class="font-bold">4.5</span>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <i class="bx bx-show text-gray-500 mr-1"></i>
+                                                <span>Views: {{HelperFunctions::getStat('view', 'product', $item->id)}}</span>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <i class="bx bx-heart text-red-500 mr-1"></i>
+                                                <span>Likes: {{HelperFunctions::getStat('like', 'product', $item->id)}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-indigo-500 text-2xl font-medium mt-2">{{ $item->name }}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                @empty
+                    <p class="text-gray-700 text-center col-span-full">No listings found.</p>
+                @endforelse
+            </div>
+        </section>
+
         <!-- Featured Events -->
-        <section class="bg-gray-100 p-8 mb-4 rounded-lg">
+        <section class="p-8 mb-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
                     <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
@@ -248,31 +236,20 @@
                     </a>
                 </div>
                 <hr class="my-5">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="owl-carousel grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     @forelse($events as $event)
-                        <div
-                            class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
                             <div class="each relative">
-                                <img src="{{ url('storage/'.$event->thumbnail) }}" class="w-full h-48 object-contain"
-                                     alt="Event">
-                                <div
-                                    class="badge absolute top-0 right-0 bg-purple-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">
+                                <img src="{{ url('storage/'.$event->thumbnail) }}" class="w-full h-48 object-cover rounded-t-lg" alt="Event">
+                                <div class="badge absolute top-0 right-0 bg-purple-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">
                                     @php
                                         $date = Carbon::parse($event->start);
                                     @endphp
                                     {{$date->diffForHumans()}}
                                 </div>
-                                <div class="info-box text-xs flex p-1 font-semibold text-gray-500 bg-gray-300">
-                                    <span class="mr-1 p-1 px-2 font-bold">105 Watching</span>
-                                    <span
-                                        class="mr-1 p-1 px-2 font-bold border-0 border-solid border-l border-gray-400">105 Likes</span>
-                                    <span
-                                        class="mr-1 p-1 px-2 font-bold border-0 border-solid border-l border-gray-400">105 Views</span>
-                                </div>
                                 <div class="desc p-4 text-gray-800">
                                     <div class="flex items-center mt-2">
-                                        <img class='w-10 h-10 object-cover rounded-full' alt='User avatar'
-                                             src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
+                                        <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
                                         <div class="pl-3">
                                             <div class="font-medium">
                                                 {{$event->user->name}}
@@ -282,15 +259,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="{{route('view.event', [$event->slug])}}" target="_new"
-                                       class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
+                                    <a href="{{route('view.event', [$event->slug])}}" target="_new" class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
                                     <span class="description text-sm block py-2 border-gray-400 mb-2">
-                                        @php
-                                            $description = strip_tags($event->description);
-                                            $description = strlen($description) > 100 ? substr($description, 0, 100) . "..." : $description;
-                                        @endphp
+                @php
+                    $description = strip_tags($event->description);
+                    $description = strlen($description) > 100 ? substr($description, 0, 100) . "..." : $description;
+                @endphp
                                         {!! $description !!}
-                                    </span>
+            </span>
                                 </div>
                             </div>
                         </div>
@@ -300,6 +276,7 @@
                 </div>
             </div>
         </section>
+
         <!-- Why Choose Us -->
         <section class="text-gray-600 body-font mt-3">
             <div class="px-5 py-4 mx-auto">

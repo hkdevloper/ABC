@@ -10,8 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
     use HasFactory;
-    protected $table='categories';
-    protected $primaryKey='id';
+
+    protected $table = 'categories';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'type',
@@ -28,52 +29,53 @@ class Category extends Model
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
     ];
-    public function parent() : BelongsTo
+
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'parent_id');
     }
 
-    public function children() : HasMany
+    public function children(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
 
-    public function seo() : BelongsTo
+    public function seo(): BelongsTo
     {
         return $this->belongsTo(Seo::class, 'seo_id');
     }
 
-    public function products() : HasMany
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'category_id');
     }
 
-    public function blogs() : HasMany
+    public function blogs(): HasMany
     {
         return $this->hasMany(Blog::class, 'category_id');
     }
 
-    public function companies() : HasMany
+    public function companies(): HasMany
     {
         return $this->hasMany(Company::class, 'category_id');
     }
 
-    public function deals() : HasMany
+    public function deals(): HasMany
     {
         return $this->hasMany(Deal::class, 'category_id');
     }
 
-    public function jobs() : HasMany
+    public function jobs(): HasMany
     {
         return $this->hasMany(Job::class, 'category_id');
     }
 
-    public function events() : HasMany
+    public function events(): HasMany
     {
         return $this->hasMany(Event::class, 'category_id');
     }
 
-    public function forums() : HasMany
+    public function forums(): HasMany
     {
         return $this->hasMany(Forum::class, 'category_id');
     }
@@ -86,6 +88,12 @@ class Category extends Model
     public function scopeFeatured($query)
     {
         return $query->where('is_featured', 1);
+    }
+
+    // Count Item
+    public function countItem(): int
+    {
+        return $this->products->count();
     }
 
 }
