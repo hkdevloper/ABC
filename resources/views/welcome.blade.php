@@ -9,7 +9,8 @@
             border: none;
             --tw-ring-color: #fff;
         }
-       .search-results {
+
+        .search-results {
             position: absolute;
             top: 100%;
             left: 0;
@@ -90,15 +91,20 @@
 @section('content')
     <!-- Search Section -->
     <section class="relative py-8 md:h-[60vh] flex flex-col items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-tr from-purple-500 via-green-300 to-purple-500 opacity-25 rounded-tr-full rounded-bl-full"></div>
+        <div
+            class="absolute inset-0 bg-gradient-to-tr from-purple-500 via-green-300 to-purple-500 opacity-25 rounded-tr-full rounded-bl-full reveal"></div>
         <div class="mx-auto text-center relative z-10">
             <h1 class="text-3xl md:text-5xl font-semibold text-dark mb-2">Discover Top Companies and Products</h1>
-            <p class="text-dark text-base md:text-lg mb-4">Explore a vast network of five lakh+ businesses and products for your needs</p>
-            <form action="{{ route('search') }}" class="mt-2 md:mt-4 flex items-center justify-center rounded-full p-4 pl-2 relative bg-white w-100">
+            <p class="text-dark text-base md:text-lg mb-4">Explore a vast network of five lakh+ businesses and products
+                for your needs</p>
+            <form action="{{ route('search') }}"
+                  class="mt-2 md:mt-4 flex items-center justify-center rounded-full p-4 pl-2 relative bg-white w-100">
                 <div class="relative flex items-center justify-between w-full s-form">
                     <label for="searchInput" class="sr-only">Search</label>
-                    <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters" class="search-input focus:outline-none px-6 py-2 rounded-full border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full">
-                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 w-auto rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse">
+                    <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters"
+                           class="search-input focus:outline-none px-6 py-2 rounded-full border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full">
+                    <button type="submit"
+                            class="bg-blue-500 text-white py-2 px-4 w-auto rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse">
                         <span class="inline">Search</span>
                     </button>
                 </div>
@@ -106,8 +112,6 @@
             </form>
         </div>
     </section>
-
-
     <!-- Main Content -->
     <section class="container mx-auto">
         <!-- Top Categories -->
@@ -115,20 +119,10 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 <!-- Category Card 1 -->
                 @forelse($category as $item)
-                    <div class="card">
-                        <img src="{{ url('storage/' . $item->image) }}" alt="{{$item->name}}"/>
-                        <h3 class="card__title">{{$item->name}}</h3>
-                        <div class="card__date">
-                            {{ $item->products->count() }}+ Items
-                        </div>
-                        <div class="card__arrow">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15"
-                                 width="15">
-                                <path fill="#fff"
-                                      d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-                            </svg>
-                        </div>
-                    </div>
+                    <x-bladewind.card class="cursor-pointer hover:shadow-gray-300 flex flex-col items-center justify-center">
+                        <img src="{{ url('storage/' . $item->image) }}" alt="{{$item->name}}" class="w-full h-20 object-contain rounded-full"/>
+                        <p class="text-center text-xl bold italic mt-2">{{$item->name}}</p>
+                    </x-bladewind.card>
                 @empty
                     <p class="text-gray-700">No categories available.</p>
                 @endforelse
@@ -158,7 +152,7 @@
                                 <a href="{{route('view.product', [$item->slug])}}"
                                    class="w-full block h-full object-contain">
                                     <img alt="product photo" src="{{ url('storage/' . $item->thumbnail) }}"
-                                         class="max-h-40 w-full object-cover"/>
+                                         class="w-full h-48 object-contain"/>
                                     <div class="bg-white w-full p-4">
                                         <header class="flex font-light text-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-90 -ml-2"
@@ -223,19 +217,13 @@
                 <hr class="my-5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     @forelse($companies as $company)
-                        <div
-                            class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
-                            <img src="{{ url('storage/' . $company->logo) }}" class="w-full h-48 object-contain"
-                                 alt="Company Name">
-
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
+                            <img src="{{ url('storage/' . $company->logo) }}" class="w-full h-48 object-contain" alt="Company Name">
                             <div class="p-6">
                                 <h3 class="text-2xl font-bold text-indigo-900 mb-2">{{$company->name}}</h3>
-
                                 <p class="text-gray-700">{{$company->summary}}</p>
-
                                 <div class="mt-4">
-                                    <span
-                                        class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">4.5 Rating</span>
+                                    <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">4.5 Rating</span>
                                     <span class="text-gray-600 text-sm">12 reviews</span>
                                 </div>
                             </div>
@@ -328,7 +316,7 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="p-4 flex flex-col text-center items-center card">
+                    <div hp-4 flex flex-col text-center items-center card">
                         <div
                             class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
                             <i class="mdi mdi-earth"></i>
