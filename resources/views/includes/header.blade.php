@@ -33,31 +33,31 @@
             <ul class="hidden lg:flex space-x-10 items-center">
                 <li>
                     <a href="{{ url('/') }}"
-                       class="text-gray-700 hover:text-purple-600 rounded-full {{ session()->get('menu') == 'home' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Home</a>
+                       class="text-gray-700 hover:text-purple-600 rounded-full {{ session()->get('menu') == 'home' ? 'text-purple-500 p-2 underline font-bold text-xl' : '' }}">Home</a>
                 </li>
                 <li>
                     <a href="{{ route('company') }}"
-                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'company' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Companies</a>
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'company' ? 'text-purple-500 p-2 underline font-bold text-xl' : '' }}">Companies</a>
                 </li>
                 <li>
                     <a href="{{ route('products') }}"
-                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'product' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Products</a>
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'product' ? 'text-purple-500 p-2 underline font-bold text-xl' : '' }}">Products</a>
                 </li>
                 <li>
                     <a href="{{ route('events') }}"
-                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'event' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Events</a>
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'event' ? 'text-purple-500 p-2 underline font-bold text-xl' : '' }}">Events</a>
                 </li>
                 <li>
                     <a href="{{ route('jobs') }}"
-                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'job' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Jobs</a>
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'job' ? 'text-purple-500 p-2 underline font-bold text-xl' : '' }}">Jobs</a>
                 </li>
                 <li>
                     <a href="{{ route('blogs') }}"
-                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'blog' ? 'text-purple-500 p-2 underline bold-bold' : '' }}">Blogs</a>
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'blog' ? 'text-purple-500 p-2 underline bold-bold text-xl' : '' }}">Blogs</a>
                 </li>
                 <li>
                     <a href="{{ route('forum') }}"
-                       class="text-gray-700 hover:text-purple-600  border-purple-500 rounded-full {{ session()->get('menu') == 'forum' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Forum</a>
+                       class="text-gray-700 hover:text-purple-600  border-purple-500 rounded-full {{ session()->get('menu') == 'forum' ? 'text-purple-500 p-2 underline font-bold text-xl' : '' }}">Forum</a>
                 </li>
             </ul>
         </nav>
