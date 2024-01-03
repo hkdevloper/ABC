@@ -22,6 +22,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Joshembling\ImageOptimizer\Components\SpatieMediaLibraryFileUpload;
 use Str;
 
 class CategoryResource extends Resource
@@ -46,8 +47,11 @@ class CategoryResource extends Resource
                 FileUpload::make('image')
                     ->label('category image')
                     ->directory('category')
-                    ->visibility('public')
                     ->required(),
+//                SpatieMediaLibraryFileUpload::make('image')
+//                    ->label('Category Image')
+//                    ->directory('category')
+//                    ->required(),
                 TextInput::make('name')
                     ->label('Enter Category Name')
                     ->live(onBlur: true)
@@ -107,6 +111,7 @@ class CategoryResource extends Resource
             })
             ->columns([
                 Tables\Columns\ImageColumn::make('image'),
+                //Tables\Columns\SpatieMediaLibraryImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
