@@ -23,3 +23,8 @@ body{
     line-height: 1.5;
     color: #212529;
 }
+
+.navbar-ul li{
+    text-align: right;
+    margin: 0 30px;
+}

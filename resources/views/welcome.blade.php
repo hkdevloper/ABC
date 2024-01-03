@@ -117,7 +117,8 @@
         <section class="p-8 my-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Categories</h1>
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">
+                        Categories</h1>
                     <a href="{{ url('/') }}"
                        class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
                         <span class="hidden md:inline">Explore All</span>
@@ -130,7 +131,7 @@
                     <!-- Category Card 1 -->
                     @forelse($category as $item)
                         <x-bladewind.card
-                            class="cursor-pointer bg-blue-50 shadow-gray-300 hover:shadow-gray-400 flex flex-col items-center justify-center">
+                            class="cursor-pointer bg-indigo-100 hover:shadow-gray-400 flex flex-col items-center justify-center">
                             <img src="{{ url('storage/' . $item->image) }}" alt="{{$item->name}}"
                                  class="w-[80px] h-[80px] object-contain rounded-full"/>
                             <p class="text-center text-xl bold italic mt-2">{{$item->name}}</p>
@@ -163,22 +164,17 @@
                             class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex flex-col items-stretch justify-between">
                             <img src="{{ url('storage/' . $company->logo) }}"
                                  class="w-full h-40 object-contain rounded-t-lg" alt="Company Name">
-                            <div class="p-3 flex flex-col items-center justify-center">
+                            <div class="p-2 flex flex-col items-center justify-center">
                                 <h3 class="text-xl font-bold text-center text-indigo-900 mb-2">{{$company->name}}</h3>
-                                <p class="text-gray-700 text-center text-sm">{{$company->fullAddress()}}</p>
+                                <p class="text-red-700 text-center text-sm">{{$company->address->country->name}}</p>
                                 <h2 class="text-base bold italic underline text-indigo-700 mt-2">Deals In</h2>
                                 <p class="text-gray-700 text-center text-sm">{{$company->dealsIn()}}</p>
                             </div>
-                            <div class="flex justify-between items-center m-3">
-                                <a href="{{route('view.company', [$company->slug])}}"
-                                   class="text-purple-500 flex items-center transition duration-300 ease-in-out">
+                            <div class="m-2 w-100">
+                                <a href="{{ route('view.company', [$company->slug]) }}"
+                                   class="text-purple-500 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
+                                            View Profile
                                     <i class='bx bx-link-external text-2xl mr-2'></i>
-                                    <span class="hidden md:inline">View</span>
-                                </a>
-                                <a href="{{route('view.company', [$company->slug])}}"
-                                   class="text-purple-500 flex items-center transition duration-300 ease-in-out">
-                                    <i class="bx bx-bookmark text-2xl mr-2"></i>
-                                    <span class="hidden md:inline">Bookmark</span>
                                 </a>
                             </div>
                         </div>
@@ -202,12 +198,10 @@
                 </a>
             </div>
             <hr class="my-5">
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+            <div class="owl-carousel grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @forelse($products as $item)
-                    <div
-                        class="flex bg-white flex-wrap place-items-center transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
-                        <div
-                            class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
+                    <div class="flex flex-wrap place-items-center transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
+                        <div class="overflow-hidden bg-white shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer">
                             <a href="{{route('view.product', [$item->slug])}}"
                                class="w-full block h-full object-contain">
                                 <img alt="product photo" src="{{ url('storage/' . $item->thumbnail) }}"
@@ -218,7 +212,8 @@
                                         <p>{{$item->category->name}}</p>
                                     </header>
                                     <p class="text-xl font-medium my-2">{{ $item->name }}</p>
-                                    <div class="py-4 text-base text-gray-700 flex items-center text-center justify-between">
+                                    <div
+                                        class="py-4 text-base text-gray-700 flex items-center text-center justify-between">
                                         <div class="col-span-2 flex items-center">
                                             <i class="bx bx-star text-yellow-500 mr-1 text-lg"></i>
                                             <span class="font-bold">4.5</span>
@@ -234,15 +229,9 @@
                                     </div>
                                 </div>
                                 <a href="{{ route('view.product', [$item->slug]) }}"
-                                   class="bg-white text-orange-500 hover:bg-purple-500 hover:text-white rounded-full px-4 py-2 transition duration-300 ease-in-out flex items-center transform hover:-translate-y-1 hover:scale-110 text-center">
-                                            <span class="mr-1 text-center">
-                                                Enquire Now
-                                            </span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                         stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-3 h-3">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                              d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/>
-                                    </svg>
+                                   class="text-purple-500 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
+                                    Enquire Now
+                                    <i class='bx bx-link-external text-2xl mr-2'></i>
                                 </a>
                             </a>
                         </div>
@@ -329,47 +318,47 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div hp-4 flex flex-col text-center items-center card
-                    ">
-                    <div
-                        class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                        <i class="mdi mdi-earth"></i>
+                    <div class="hp-4 flex flex-col text-center items-center card">
+                        <div
+                            class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
+                            <i class="mdi mdi-earth"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Promote your business
+                                worldwide</h2>
+                            <p class="leading-relaxed text-base">
+                                As a full-stack apprentice intern in the heart of Kathiawar,
+                                specializing in Angular and .NET Core,
+                                I bring the world to your business.
+                            </p>
+                        </div>
                     </div>
-                    <div class="flex-grow">
-                        <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Promote your business
-                            worldwide</h2>
-                        <p class="leading-relaxed text-base">
-                            As a full-stack apprentice intern in the heart of Kathiawar,
-                            specializing in Angular and .NET Core,
-                            I bring the world to your business.
-                        </p>
+                    <div class="p-4 flex flex-col text-center items-center card">
+                        <div
+                            class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
+                            <i class="mdi mdi-chat-processing"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Direct Chat with business
+                                lister</h2>
+                            <p class="leading-relaxed text-base">
+                                Engage in direct conversations with me, your dedicated full-stack developer, ensuring
+                                your requirements are met efficiently.
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="p-4 flex flex-col text-center items-center card">
-                    <div
-                        class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                        <i class="mdi mdi-chat-processing"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Direct Chat with business
-                            lister</h2>
-                        <p class="leading-relaxed text-base">
-                            Engage in direct conversations with me, your dedicated full-stack developer, ensuring
-                            your requirements are met efficiently.
-                        </p>
-                    </div>
-                </div>
-                <div class="p-4 flex flex-col text-center items-center card">
-                    <div
-                        class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                        <i class="mdi mdi-account-group"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Find Millions of buyers</h2>
-                        <p class="leading-relaxed text-base">
-                            With a dream to become the best game developer and full-stack developer globally, my
-                            skills attract millions of potential buyers to your projects.
-                        </p>
+                    <div class="p-4 flex flex-col text-center items-center card">
+                        <div
+                            class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
+                            <i class="mdi mdi-account-group"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Find Millions of buyers</h2>
+                            <p class="leading-relaxed text-base">
+                                With a dream to become the best game developer and full-stack developer globally, my
+                                skills attract millions of potential buyers to your projects.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

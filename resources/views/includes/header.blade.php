@@ -25,40 +25,39 @@
             @endif
             <button id="menu-toggle" class="text-gray-700 hover:text-purple-600 focus:outline-none">
                 <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path
-                        d="M3 18h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2zm0-5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2zm0-5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2z"/>
+                    <path d="M3 18h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2zm0-5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2zm0-5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2z"/>
                 </svg>
             </button>
         </div>
         <nav class="hidden lg:flex md:flex space-x-4 items-center">
-            <ul class="hidden lg:flex md:flex space-x-4 items-center">
+            <ul class="hidden lg:flex space-x-10 items-center">
                 <li>
                     <a href="{{ url('/') }}"
-                       class="text-gray-700 hover:text-purple-600 rounded-full {{ session()->get('menu') == 'home' ? 'text-purple-500 p-2 border border-1 border-solid border-purple-500' : '' }}">Home</a>
+                       class="text-gray-700 hover:text-purple-600 rounded-full {{ session()->get('menu') == 'home' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Home</a>
                 </li>
                 <li>
                     <a href="{{ route('company') }}"
-                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'company' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Companies</a>
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'company' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Companies</a>
                 </li>
                 <li>
                     <a href="{{ route('products') }}"
-                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'product' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Products</a>
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'product' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Products</a>
                 </li>
                 <li>
                     <a href="{{ route('events') }}"
-                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'event' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Events</a>
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'event' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Events</a>
                 </li>
                 <li>
                     <a href="{{ route('jobs') }}"
-                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'job' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Jobs</a>
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'job' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Jobs</a>
                 </li>
                 <li>
                     <a href="{{ route('blogs') }}"
-                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'blog' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Blogs</a>
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'blog' ? 'text-purple-500 p-2 underline bold-bold' : '' }}">Blogs</a>
                 </li>
                 <li>
                     <a href="{{ route('forum') }}"
-                       class="text-gray-700 hover:text-purple-600  border-purple-500 rounded-full {{ session()->get('menu') == 'forum' ? 'text-purple-500 p-2 border border-1 border-solid' : '' }}">Forum</a>
+                       class="text-gray-700 hover:text-purple-600  border-purple-500 rounded-full {{ session()->get('menu') == 'forum' ? 'text-purple-500 p-2 underline font-bold' : '' }}">Forum</a>
                 </li>
             </ul>
         </nav>
