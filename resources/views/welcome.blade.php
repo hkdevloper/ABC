@@ -160,8 +160,7 @@
                 <hr class="my-5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     @forelse($companies as $company)
-                        <div
-                            class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex flex-col items-stretch justify-between">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex flex-col items-center justify-center">
                             <img src="{{ url('storage/' . $company->logo) }}"
                                  class="w-full h-40 object-contain rounded-t-lg" alt="Company Name">
                             <div class="p-2 flex flex-col items-center justify-center">
@@ -170,10 +169,10 @@
                                 <h2 class="text-base bold italic underline text-indigo-700 mt-2">Deals In</h2>
                                 <p class="text-gray-700 text-center text-sm">{{$company->dealsIn()}}</p>
                             </div>
-                            <div class="m-2 w-100">
+                            <div class="mb-2 w-[calc(80%-1rem)]">
                                 <a href="{{ route('view.company', [$company->slug]) }}"
-                                   class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
-                                            View Profile
+                                   class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mr-5 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
+                                    View Profile &nbsp;
                                     <i class='bx bx-link-external text-2xl mr-2'></i>
                                 </a>
                             </div>
@@ -198,26 +197,24 @@
                 </a>
             </div>
             <hr class="my-5">
-            <div class="owl-carousel grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 @forelse($products as $item)
-                    <div class="flex flex-wrap place-items-center transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
-                        <div class="overflow-hidden bg-white shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer">
-                            <a href="{{route('view.product', [$item->slug])}}"
-                               class="w-full block h-full object-contain">
-                                <img alt="product photo" src="{{ url('storage/' . $item->thumbnail) }}"
-                                     class="w-full h-48 object-contain"/>
-                                <div class="w-full p-2">
-                                    <header class="flex font-light text-base items-center">
-                                        <i class="bx bx-category text-indigo-500 mr-1"></i>
-                                        <p>{{$item->category->name}}</p>
-                                    </header>
-                                    <p class="text-xl font-medium my-2">{{ $item->name }}</p>
-                                </div>
-                                <a href="{{ route('view.product', [$item->slug]) }}"
-                                   class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
-                                    Enquire Now
-                                    <i class='bx bx-link-external text-2xl mr-2'></i>
-                                </a>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex flex-col items-center justify-center">
+                        <a href="{{route('view.product', [$item->slug])}}"
+                           class="w-full block h-full object-contain">
+                            <img alt="product photo" src="{{ url('storage/' . $item->thumbnail) }}"
+                                 class="w-full h-48 object-contain"/>
+                        </a>
+                        <header class="flex my-2 font-light text-base items-center">
+                            <i class="bx bx-category text-indigo-500 mr-1"></i>
+                            <p>{{$item->category->name}}</p>
+                        </header>
+                        <p class="text-xl font-medium mb-2">{{ $item->name }}</p>
+                        <div class="mb-2 w-[calc(80%-1rem)]">
+                            <a href="{{ route('view.product', [$item->slug]) }}"
+                               class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mr-5 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
+                                Enquire Now &nbsp;
+                                <i class='bx bx-link-external text-2xl mr-2'></i>
                             </a>
                         </div>
                     </div>
