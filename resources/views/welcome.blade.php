@@ -172,7 +172,7 @@
                             </div>
                             <div class="m-2 w-100">
                                 <a href="{{ route('view.company', [$company->slug]) }}"
-                                   class="text-purple-500 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
+                                   class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
                                             View Profile
                                     <i class='bx bx-link-external text-2xl mr-2'></i>
                                 </a>
@@ -229,7 +229,7 @@
                                     </div>
                                 </div>
                                 <a href="{{ route('view.product', [$item->slug]) }}"
-                                   class="text-purple-500 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
+                                   class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
                                     Enquire Now
                                     <i class='bx bx-link-external text-2xl mr-2'></i>
                                 </a>
