@@ -212,21 +212,6 @@
                                         <p>{{$item->category->name}}</p>
                                     </header>
                                     <p class="text-xl font-medium my-2">{{ $item->name }}</p>
-                                    <div
-                                        class="py-4 text-base text-gray-700 flex items-center text-center justify-between">
-                                        <div class="col-span-2 flex items-center">
-                                            <i class="bx bx-star text-yellow-500 mr-1 text-lg"></i>
-                                            <span class="font-bold">4.5</span>
-                                        </div>
-                                        <div class="col-span-2">
-                                            <i class="bx bx-show text-gray-500 mr-1 text-lg"></i>
-                                            <span>{{HelperFunctions::getStat('view', 'product', $item->id)}}</span>
-                                        </div>
-                                        <div class="col-span-2">
-                                            <i class="bx bx-heart text-red-500 mr-1 text-lg"></i>
-                                            <span>{{HelperFunctions::getStat('like', 'product', $item->id)}}</span>
-                                        </div>
-                                    </div>
                                 </div>
                                 <a href="{{ route('view.product', [$item->slug]) }}"
                                    class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
