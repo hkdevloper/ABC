@@ -212,7 +212,7 @@
                         <p class="text-xl font-medium mb-2">{{ $item->name }}</p>
                         <div class="mb-2 w-[calc(80%-1rem)]">
                             <a href="{{ route('view.product', [$item->slug]) }}"
-                               class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mr-5 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
+                               class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 m-4 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
                                 Enquire Now &nbsp;
                                 <i class='bx bx-link-external text-2xl mr-2'></i>
                             </a>
