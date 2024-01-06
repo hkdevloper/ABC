@@ -117,9 +117,8 @@
         <section class="p-8 my-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">
-                        Categories</h1>
-                    <a href="{{ url('/') }}"
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Categories</h1>
+                    <a href="{{ route('company')}}"
                        class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
                         <span class="hidden md:inline">Explore All</span>
                         {{-- Icon --}}
@@ -148,9 +147,8 @@
         <section class="p-8 mb-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
-                        Companies</h1>
-                    <a href="{{ url('/') }}"
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Companies</h1>
+                    <a href="{{ route('company') }}"
                        class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
                         <span class="hidden md:inline">Explore All</span>
                         {{-- Icon --}}
@@ -161,10 +159,11 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     @forelse($companies as $company)
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex flex-col items-center justify-center">
-                            <img src="{{ url('storage/' . $company->logo) }}"
-                                 class="w-full h-40 object-contain rounded-t-lg" alt="Company Name">
+                            <a href="{{route('view.company', [$company->slug])}}" class="w-full p-4 m-auto block h-full object-contain">
+                                <img alt="company photo" src="{{ url('storage/' . $company->logo) }}" class="w-full h-48 object-contain"/>
+                            </a>
                             <div class="p-2 flex flex-col items-center justify-center">
-                                <h3 class="text-xl font-bold text-center text-indigo-900 mb-2">{{$company->name}}</h3>
+                                <h3 class="text-lg font-bold text-center text-indigo-900 mb-2">{{$company->name}}</h3>
                                 <p class="text-red-700 text-center text-sm">{{$company->address->country->name}}</p>
                                 <h2 class="text-base bold italic underline text-indigo-700 mt-2">Deals In</h2>
                                 <p class="text-gray-700 text-center text-sm">{{$company->dealsIn()}}</p>
@@ -187,9 +186,8 @@
         <!-- Top Products -->
         <section class="p-8 my-4">
             <div class="flex justify-between items-center">
-                <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Explore Top
-                    Products</h1>
-                <a href="{{ url('/') }}"
+                <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Explore Top Products</h1>
+                <a href="{{ route('products') }}"
                    class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
                     <span class="hidden md:inline">Explore All</span>
                     {{-- Icon --}}
@@ -228,9 +226,8 @@
         <section class="p-8 mb-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
-                        Events</h1>
-                    <a href="{{ url('/') }}"
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Events</h1>
+                    <a href="{{ route('events') }}"
                        class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
                         <span class="hidden md:inline">Explore All</span>
                         {{-- Icon --}}

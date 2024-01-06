@@ -7,6 +7,7 @@ use App\Filament\Resources\EventResource;
 use App\Filament\Resources\ForumResource;
 use App\Filament\Resources\JobResource;
 use App\Filament\Resources\ProductResource;
+use App\Filament\User\Pages\LoginPage;
 use App\Filament\User\Resources\BlogResource;
 use App\Filament\User\Resources\CompanyResource;
 use App\Filament\Widgets\StatsOverview;
@@ -37,7 +38,7 @@ class UserPanelProvider extends PanelProvider
     {
         $showNavigation = false;
         return $panel
-            ->id('user')
+            ->id('dashboard')
             ->path('user')
             ->login()
             ->registration()
@@ -54,7 +55,7 @@ class UserPanelProvider extends PanelProvider
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.pages.dashboard'))
                         ->url(fn (): string => Dashboard::getUrl())
                         ->visible(function (){
-                            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
                                 if($company->is_approved){
                                     return true;
@@ -66,7 +67,7 @@ class UserPanelProvider extends PanelProvider
                         ->icon('heroicon-o-building-office-2')
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.company'))
                         ->url(function (){
-                            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
                                 if($company->is_approved){
                                     return CompanyResource::getUrl('view', [$company->id]);
@@ -82,7 +83,7 @@ class UserPanelProvider extends PanelProvider
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.product'))
                         ->url(fn (): string => ProductResource::getUrl())
                         ->visible(function (){
-                            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
                                 if($company->is_approved){
                                     return true;
@@ -95,7 +96,7 @@ class UserPanelProvider extends PanelProvider
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.blog'))
                         ->url(fn (): string => BlogResource::getUrl())
                         ->visible(function (){
-                            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
                                 if($company->is_approved){
                                     return true;
@@ -108,7 +109,7 @@ class UserPanelProvider extends PanelProvider
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.event'))
                         ->url(fn (): string => EventResource::getUrl())
                         ->visible(function (){
-                            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
                                 if($company->is_approved){
                                     return true;
@@ -121,7 +122,7 @@ class UserPanelProvider extends PanelProvider
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.job'))
                         ->url(fn (): string => JobResource::getUrl())
                         ->visible(function (){
-                            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
                                 if($company->is_approved){
                                     return true;
@@ -135,7 +136,7 @@ class UserPanelProvider extends PanelProvider
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.forum'))
                         ->url(fn (): string => ForumResource::getUrl())
                         ->visible(function (){
-                            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
                                 if($company->is_approved){
                                     return true;
