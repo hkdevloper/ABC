@@ -40,7 +40,7 @@ class UserPanelProvider extends PanelProvider
         return $panel
             ->id('dashboard')
             ->path('user')
-            ->login()
+            ->login(LoginPage::class)
             ->registration()
             ->passwordReset()
             ->emailVerification(EmailVerificationPrompt::class)

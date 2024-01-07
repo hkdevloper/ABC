@@ -24,12 +24,26 @@ use Illuminate\Http\Request;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Login Route
-Route::redirect('/login', '/user/dashboard/login')->name('login');
-Route::get('/test', function(){
-    $item = Product::find(1);
-    return $item->getReviews();
+Route::prefix('test')->group(function (){
+    Route::get('/', function(){
+        $item = Product::find(1);
+        return $item->getReviews();
+    });
+    Route::post('/login', function (Request $request){
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect('user');
+        }
+        return redirect()->back()->with('error', 'Invalid credentials');
+    })->name('test.login');
+    Route::get('logout', function(){
+        Auth::logout();
+        return redirect()->back();
+    });
 });
 
 
