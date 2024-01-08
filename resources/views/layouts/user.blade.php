@@ -34,7 +34,7 @@
 </head>
 
 <body>
-    @include('includes.header')
+@include('includes.header')
 <main class="mx-auto">
     @yield('content')
     <livewire:requirement/>
@@ -44,6 +44,7 @@
 </main>
 <x-bladewind.notification/>
 <script src="{{ asset('js/tw-element-min.js') }}"></script>
+<script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 <script src="{{ asset('js/alpine.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
 <script>
@@ -57,9 +58,9 @@
     showNotification('Warning', '{{session()->get('warning')}}', 'warning');
     @endif
     @if($errors->any())
-        @foreach ($errors->all() as $error)
-            showNotification('Error', '{{$error}}', 'error');
-        @endforeach
+    @foreach ($errors->all() as $error)
+    showNotification('Error', '{{$error}}', 'error');
+    @endforeach
     @endif
 </script>
 @yield('page-scripts')

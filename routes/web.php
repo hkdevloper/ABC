@@ -1,5 +1,6 @@
 <?php
 
+use App\classes\HelperFunctions;
 use App\Http\Controllers\UserBlogController;
 use App\Http\Controllers\UserCompanyController;
 use App\Http\Controllers\UserDealController;
@@ -7,10 +8,14 @@ use App\Http\Controllers\UserEventController;
 use App\Http\Controllers\UserForumController;
 use App\Http\Controllers\UserJobController;
 use App\Http\Controllers\UserProductController;
+use App\Models\BlogComments;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Product;
 use App\Models\Event;
+use App\Models\Requirement;
+use App\Models\Subscribe;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -24,25 +29,10 @@ use Illuminate\Http\Request;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::prefix('test')->group(function (){
-    Route::get('/', function(){
+Route::prefix('test')->group(function () {
+    Route::get('/', function () {
         $item = Product::find(1);
         return $item->getReviews();
-    });
-    Route::post('/login', function (Request $request){
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect('user');
-        }
-        return redirect()->back()->with('error', 'Invalid credentials');
-    })->name('test.login');
-    Route::get('logout', function(){
-        Auth::logout();
-        return redirect()->back();
     });
 });
 
@@ -57,34 +47,67 @@ Route::get('/', function () {
     $e = Event::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
     $category = Category::where('is_active', 1)->orderBy('created_at', 'desc')->take(5)->get();
     $searchList = [];
-    foreach ($p as $item){
+    foreach ($p as $item) {
         $searchList[] = $item->name;
     }
-    foreach ($c as $item){
+    foreach ($c as $item) {
         $searchList[] = $item->name;
     }
 
     // get the 10-random records from the database if is less than 10 then it will return all
-    if(count($p) > 8){
+    if (count($p) > 8) {
         $products = $p->random(8);
-    }else{
+    } else {
         $products = $p;
     }
 
-    if(count($c) > 8){
+    if (count($c) > 8) {
         $companies = $c->random(8);
-    }else{
+    } else {
         $companies = $c;
     }
 
-    if(count($e) > 4){
+    if (count($e) > 4) {
         $events = $e->random(4);
-    }else{
+    } else {
         $events = $e;
     }
-    $data  = compact('products', 'companies', 'events', 'category', 'searchList');
+    $data = compact('products', 'companies', 'events', 'category', 'searchList');
     return view('welcome')->with($data);
 })->name('home');
+
+Route::prefix('auth')->group(function () {
+    Route::post('login', function (Request $request) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect('/user');
+        }
+        return redirect()->back()->with('error', 'Invalid credentials');
+    })->name('auth.login');
+    Route::post('logout', function () {
+        Auth::logout();
+        return redirect()->back();
+    });
+    Route::post('register', function (Request $request) {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password',
+        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->saveOrFail();
+        Auth::login($user);
+        return redirect()->back()->with('success', 'Registered successfully');
+    })->name('auth.register');
+});
 
 Route::prefix('company')->group(function () {
     Route::get('/', [UserCompanyController::class, 'viewCompanyList'])->name('company');
@@ -122,20 +145,20 @@ Route::prefix('forum')->group(function () {
     Route::post('/answer-forum', [UserForumController::class, 'answerForum'])->name('forum.reply');
 });
 
-Route::post('/requirements/submit', function (Request $request){
+Route::post('/requirements/submit', function (Request $request) {
     // upload images to server and get the path
     $images = [];
 
     if ($request->has('b64_img_1')) {
-        $images[] = \App\classes\HelperFunctions::storeBase64Image($request->input('b64_img_1'), 'requirements', time());
+        $images[] = HelperFunctions::storeBase64Image($request->input('b64_img_1'), 'requirements', time());
     }
     if ($request->has('b64_img_2')) {
-        $images[] = \App\classes\HelperFunctions::storeBase64Image($request->input('b64_img_2'), 'requirements', time());
+        $images[] = HelperFunctions::storeBase64Image($request->input('b64_img_2'), 'requirements', time());
     }
     if ($request->has('b64_img_3')) {
-        $images[] = \App\classes\HelperFunctions::storeBase64Image($request->input('b64_img_3'), 'requirements', time());
+        $images[] = HelperFunctions::storeBase64Image($request->input('b64_img_3'), 'requirements', time());
     }
-    $requirement = new \App\Models\Requirement();
+    $requirement = new Requirement();
     $requirement->subject = $request->subject;
     $requirement->country = $request->country;
     $requirement->customer_name = $request->customer_name;
@@ -148,22 +171,22 @@ Route::post('/requirements/submit', function (Request $request){
     return redirect()->back()->with('success', 'Requirement submitted successfully');
 })->name('requirements.submit');
 
-Route::post('subscribe', function (Request $request){
+Route::post('subscribe', function (Request $request) {
     $email = $request->email;
-    $subscribe = new \App\Models\Subscribe();
+    $subscribe = new Subscribe();
     $subscribe->email = $email;
     $subscribe->saveOrFail();
     return redirect()->back()->with('success', 'Subscribed successfully');
 })->name('subscribe');
 
-Route::post('comment', function (Request $request){
+Route::post('comment', function (Request $request) {
     $request->validate([
         'comment' => 'required',
         'name' => 'required',
         'user_id' => 'required',
         'blog_id' => 'required',
     ]);
-    $comment = new \App\Models\BlogComments();
+    $comment = new BlogComments();
     $comment->comment = $request->comment;
     $comment->name = $request->name;
     $comment->email = "";
@@ -173,14 +196,14 @@ Route::post('comment', function (Request $request){
     return redirect()->back()->with('success', 'Commented successfully');
 })->name('blog.comment.submit');
 
-Route::get('/search', function (Request $request){
+Route::get('/search', function (Request $request) {
     $search = $request->q;
     $searchList = [];
     $products = Product::where('is_approved', 1)->where('is_active', 1)->paginate(12);
-    foreach($products as $item){
+    foreach ($products as $item) {
         $seo = $item->seo;
-        foreach ($seo->meta_keywords as $keyword){
-            if (str_contains(strtolower($keyword), strtolower($search))){
+        foreach ($seo->meta_keywords as $keyword) {
+            if (str_contains(strtolower($keyword), strtolower($search))) {
                 $searchList[] = $item;
             }
         }

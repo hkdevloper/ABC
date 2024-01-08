@@ -9,6 +9,8 @@
     <link href="{{ asset('css/boxicons/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css')}}" rel="stylesheet">
     <script src="{{ asset('js/jquery.js')}}"></script>
+    <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
+    <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <style>
         body {
             font-family: "Roboto", sans-serif;
@@ -18,15 +20,18 @@
             background-color: #f5f5f5;
             margin: 0;
         }
+
         .body {
             display: flex;
             flex-direction: column-reverse;
             min-height: 100vh;
         }
+
         a {
             text-decoration: none;
             color: #6a6a6a;
         }
+
         a:hover, a:focus {
             text-decoration: underline;
         }
@@ -34,6 +39,7 @@
         :focus {
             outline: 0.125rem solid #6a6a6a;
         }
+
         .form {
             display: flex;
             flex-direction: column;
@@ -73,6 +79,7 @@
         .form__field {
             margin-bottom: 2rem;
         }
+
         .form__field:last-child {
             margin-bottom: 0;
         }
@@ -83,6 +90,7 @@
             font-weight: 700;
             color: #6a6a6a;
         }
+
         .form__label[for] {
             cursor: pointer;
         }
@@ -115,6 +123,7 @@
             letter-spacing: inherit;
             margin-bottom: 0.5rem;
         }
+
         .btn:hover, .btn:focus {
             background-color: #6a6a6a;
         }
@@ -153,6 +162,7 @@
                 margin: auto;
             }
         }
+
         @media (min-width: 72rem) {
             .form__content {
                 width: 32rem;
@@ -180,40 +190,15 @@
 <body>
 @include('includes.header')
 <main class="mx-auto">
+    <x-bladewind.notification />
     <div class="body">
-        <div class="cta">
-            <div class="cta__content">
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, aspernatur itaque ratione repellendus molestiae quibusdam cum nobis! Placeat atque eos aliquam quis voluptatibus excepturi blanditiis sapiente doloremque maxime modi. Natus?</p>
-            </div>
-        </div>
-        <div class="form">
-            <form action="{{route('test.login')}}" method="post" class="form__content">
-                @csrf
-                <div class="form__content__header">
-                    <h1 class="form__content__heading">Log In to Acme Inc.</h1>
-                    <div class="form__content__description">
-                        If you don’t have an account, <a href="{{url('user/register')}}" class="text-purple-500 underline hover:no-underline">you can create one</a>.
-                    </div>
-                </div>
-                <div class="form__field">
-                    <label class="form__label" for="email">Email address</label>
-                    <input class="form__input" type="email" name="email" id="email" required>
-                </div>
-                <div class="form__field">
-                    <label class="form__label" for="pwd">Password</label>
-                    <input class="form__input" type="password" name="pwd" id="pwd" required>
-                </div>
-                <div class="form__field form__submit">
-                    <input class="btn bg-purple-400 hover:bg-purple-800" type="submit" value="Log In">
-                    <a href="#!">Forgot password?</a>
-                </div>
-            </form>
-        </div>
+        @yield('content')
     </div>
     @include('includes.footer')
 </main>
 <x-bladewind.notification/>
 <script src="{{ asset('js/main.js')}}"></script>
+<script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 <script>
     @if(session()->has('success'))
     showNotification('Success', '{{session()->get('success')}}', 'success');

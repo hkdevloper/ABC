@@ -1,5 +1,5 @@
 function showToast(type = 'info', text) {
-    var toastConfig = {
+    let toastConfig = {
         position: 'top-right',
         hideAfter: 3000,
         stack: 6

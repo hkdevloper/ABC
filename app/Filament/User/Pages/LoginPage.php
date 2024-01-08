@@ -9,14 +9,5 @@ use Illuminate\Contracts\View\View;
 
 class LoginPage extends BaseAuth
 {
-    protected static string $view = 'test.login';
-    protected static string $layout = 'layouts.user';
-    public function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                $this->getEmailFormComponent(),
-                $this->getPasswordFormComponent(),
-            ]);
-    }
+    protected static string $layout = 'auth.login';
 }

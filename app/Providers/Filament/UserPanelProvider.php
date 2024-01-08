@@ -8,6 +8,7 @@ use App\Filament\Resources\ForumResource;
 use App\Filament\Resources\JobResource;
 use App\Filament\Resources\ProductResource;
 use App\Filament\User\Pages\LoginPage;
+use App\Filament\User\Pages\RegisterPage;
 use App\Filament\User\Resources\BlogResource;
 use App\Filament\User\Resources\CompanyResource;
 use App\Filament\Widgets\StatsOverview;
@@ -38,10 +39,10 @@ class UserPanelProvider extends PanelProvider
     {
         $showNavigation = false;
         return $panel
-            ->id('dashboard')
+            ->id('panel')
             ->path('user')
             ->login(LoginPage::class)
-            ->registration()
+            ->registration(RegisterPage::class)
             ->passwordReset()
             ->emailVerification(EmailVerificationPrompt::class)
             ->profile()
