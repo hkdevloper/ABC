@@ -264,16 +264,16 @@
         },
         {
             "name": "blade-ui-kit/blade-heroicons",
-            "version": "2.1.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/blade-ui-kit/blade-heroicons.git",
-                "reference": "f756c807b0d04afd2caf7079bac26492da9cc6d4"
+                "reference": "bcf4be8f6bbde0bb4c23f2e3fb189b88dec1580a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blade-ui-kit/blade-heroicons/zipball/f756c807b0d04afd2caf7079bac26492da9cc6d4",
-                "reference": "f756c807b0d04afd2caf7079bac26492da9cc6d4",
+                "url": "https://api.github.com/repos/blade-ui-kit/blade-heroicons/zipball/bcf4be8f6bbde0bb4c23f2e3fb189b88dec1580a",
+                "reference": "bcf4be8f6bbde0bb4c23f2e3fb189b88dec1580a",
                 "shasum": ""
             },
             "require": {
@@ -317,19 +317,19 @@
             ],
             "support": {
                 "issues": "https://github.com/blade-ui-kit/blade-heroicons/issues",
-                "source": "https://github.com/blade-ui-kit/blade-heroicons/tree/2.1.0"
+                "source": "https://github.com/blade-ui-kit/blade-heroicons/tree/2.2.1"
             },
             "funding": [
                 {
-                    "url": "https://github.com/caneco",
+                    "url": "https://github.com/sponsors/driesvints",
                     "type": "github"
                 },
                 {
-                    "url": "https://github.com/driesvints",
-                    "type": "github"
+                    "url": "https://www.paypal.com/paypalme/driesvints",
+                    "type": "paypal"
                 }
             ],
-            "time": "2023-01-11T08:38:22+00:00"
+            "time": "2023-12-18T20:44:03+00:00"
         },
         {
             "name": "blade-ui-kit/blade-icons",
@@ -538,16 +538,16 @@
         },
         {
             "name": "codewithdennis/filament-select-tree",
-            "version": "v3.1.17",
+            "version": "v3.1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CodeWithDennis/filament-select-tree.git",
-                "reference": "eed2f0876cff3cfac428ac8ae0532d70c745bed3"
+                "reference": "0a6ff511ccd174db3ec36afb65234afe6a57a4a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CodeWithDennis/filament-select-tree/zipball/eed2f0876cff3cfac428ac8ae0532d70c745bed3",
-                "reference": "eed2f0876cff3cfac428ac8ae0532d70c745bed3",
+                "url": "https://api.github.com/repos/CodeWithDennis/filament-select-tree/zipball/0a6ff511ccd174db3ec36afb65234afe6a57a4a6",
+                "reference": "0a6ff511ccd174db3ec36afb65234afe6a57a4a6",
                 "shasum": ""
             },
             "require": {
@@ -605,7 +605,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-15T13:02:21+00:00"
+            "time": "2023-12-17T15:42:51+00:00"
         },
         {
             "name": "danharrin/date-format-converter",
@@ -2983,16 +2983,16 @@
         },
         {
             "name": "laravel/sanctum",
-            "version": "v3.3.2",
+            "version": "v3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sanctum.git",
-                "reference": "e1a272893bec13cf135627f7e156030b3afe1e60"
+                "reference": "8c104366459739f3ada0e994bcd3e6fd681ce3d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sanctum/zipball/e1a272893bec13cf135627f7e156030b3afe1e60",
-                "reference": "e1a272893bec13cf135627f7e156030b3afe1e60",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/8c104366459739f3ada0e994bcd3e6fd681ce3d5",
+                "reference": "8c104366459739f3ada0e994bcd3e6fd681ce3d5",
                 "shasum": ""
             },
             "require": {
@@ -3045,7 +3045,7 @@
                 "issues": "https://github.com/laravel/sanctum/issues",
                 "source": "https://github.com/laravel/sanctum"
             },
-            "time": "2023-11-03T13:42:14+00:00"
+            "time": "2023-12-19T18:44:48+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -3811,35 +3811,35 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.3.0",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "7c1f609515e74ef1197c08e56a5606571b3ec1d9"
+                "reference": "1ef880fbcdc7b6e5e405cc9135a62cd5fdbcd06a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/7c1f609515e74ef1197c08e56a5606571b3ec1d9",
-                "reference": "7c1f609515e74ef1197c08e56a5606571b3ec1d9",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/1ef880fbcdc7b6e5e405cc9135a62cd5fdbcd06a",
+                "reference": "1ef880fbcdc7b6e5e405cc9135a62cd5fdbcd06a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^10.0",
-                "illuminate/support": "^10.0",
-                "illuminate/validation": "^10.0",
+                "illuminate/database": "^10.0|^11.0",
+                "illuminate/support": "^10.0|^11.0",
+                "illuminate/validation": "^10.0|^11.0",
                 "league/mime-type-detection": "^1.9",
                 "php": "^8.1",
-                "symfony/http-kernel": "^6.2"
+                "symfony/http-kernel": "^6.2|^7.0"
             },
             "require-dev": {
                 "calebporzio/sushi": "^2.1",
-                "laravel/framework": "^10.0",
+                "laravel/framework": "^10.0|^11.0",
                 "laravel/prompts": "^0.1.6",
                 "mockery/mockery": "^1.3.1",
-                "orchestra/testbench": "^8.0",
-                "orchestra/testbench-dusk": "^8.0",
-                "phpunit/phpunit": "^9.0",
-                "psy/psysh": "@stable"
+                "orchestra/testbench": "^8.0|^9.0",
+                "orchestra/testbench-dusk": "^8.0|^9.0",
+                "phpunit/phpunit": "^10.4",
+                "psy/psysh": "^0.11.22|^0.12"
             },
             "type": "library",
             "extra": {
@@ -3873,7 +3873,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.3.0"
+                "source": "https://github.com/livewire/livewire/tree/v3.3.5"
             },
             "funding": [
                 {
@@ -3881,7 +3881,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-11T18:04:00+00:00"
+            "time": "2024-01-02T14:29:17+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -4111,16 +4111,16 @@
         },
         {
             "name": "mkocansey/bladewind",
-            "version": "v2.4.3",
+            "version": "v2.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mkocansey/bladewind.git",
-                "reference": "286ebec2864558d7510f01cc532d912422d1d1fd"
+                "reference": "8d9d4d52bc9363d6db6716f356f8b3526502bec9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mkocansey/bladewind/zipball/286ebec2864558d7510f01cc532d912422d1d1fd",
-                "reference": "286ebec2864558d7510f01cc532d912422d1d1fd",
+                "url": "https://api.github.com/repos/mkocansey/bladewind/zipball/8d9d4d52bc9363d6db6716f356f8b3526502bec9",
+                "reference": "8d9d4d52bc9363d6db6716f356f8b3526502bec9",
                 "shasum": ""
             },
             "require": {
@@ -4158,9 +4158,9 @@
             ],
             "support": {
                 "issues": "https://github.com/mkocansey/bladewind/issues",
-                "source": "https://github.com/mkocansey/bladewind/tree/v2.4.3"
+                "source": "https://github.com/mkocansey/bladewind/tree/v2.4.4"
             },
-            "time": "2023-12-01T12:25:51+00:00"
+            "time": "2023-12-22T16:00:49+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -11149,16 +11149,16 @@
         },
         {
             "name": "spatie/ignition",
-            "version": "1.11.3",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "3d886de644ff7a5b42e4d27c1e1f67c8b5f00044"
+                "reference": "5b6f801c605a593106b623e45ca41496a6e7d56d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/3d886de644ff7a5b42e4d27c1e1f67c8b5f00044",
-                "reference": "3d886de644ff7a5b42e4d27c1e1f67c8b5f00044",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/5b6f801c605a593106b623e45ca41496a6e7d56d",
+                "reference": "5b6f801c605a593106b623e45ca41496a6e7d56d",
                 "shasum": ""
             },
             "require": {
@@ -11228,39 +11228,39 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-18T14:09:40+00:00"
+            "time": "2024-01-03T15:49:39+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "2.3.2",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "4800661a195e15783477d99f7f8f669a49793996"
+                "reference": "b9395ba48d3f30d42092cf6ceff75ed7256cd604"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/4800661a195e15783477d99f7f8f669a49793996",
-                "reference": "4800661a195e15783477d99f7f8f669a49793996",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/b9395ba48d3f30d42092cf6ceff75ed7256cd604",
+                "reference": "b9395ba48d3f30d42092cf6ceff75ed7256cd604",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "illuminate/support": "^10.0",
+                "illuminate/support": "^10.0|^11.0",
                 "php": "^8.1",
                 "spatie/flare-client-php": "^1.3.5",
                 "spatie/ignition": "^1.9",
-                "symfony/console": "^6.2.3",
-                "symfony/var-dumper": "^6.2.3"
+                "symfony/console": "^6.2.3|^7.0",
+                "symfony/var-dumper": "^6.2.3|^7.0"
             },
             "require-dev": {
-                "livewire/livewire": "^2.11",
+                "livewire/livewire": "^2.11|^3.3.5",
                 "mockery/mockery": "^1.5.1",
-                "openai-php/client": "^0.3.4",
-                "orchestra/testbench": "^8.0",
-                "pestphp/pest": "^1.22.3",
+                "openai-php/client": "^0.8.1",
+                "orchestra/testbench": "^8.0|^9.0",
+                "pestphp/pest": "^2.30",
                 "phpstan/extension-installer": "^1.2",
                 "phpstan/phpstan-deprecation-rules": "^1.1.1",
                 "phpstan/phpstan-phpunit": "^1.3.3",
@@ -11320,7 +11320,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-15T13:44:49+00:00"
+            "time": "2024-01-04T14:51:24+00:00"
         },
         {
             "name": "symfony/yaml",
