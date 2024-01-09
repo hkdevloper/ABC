@@ -75,7 +75,7 @@
                     <img class="w-full h-40 object-contain overflow-hidden" src="{{ url('storage/' . $company->logo) }}"
                          alt="">
                 </div>
-                <ul class="w-full">
+                <ul class="w-full mx-3">
                     <li class="flex flex-nowrap items-center">
                         <span class="text-2xl mr-3">{{$company->name}}</span>
                         @if($company->is_featured)
@@ -108,7 +108,7 @@
                         @endif
                     </li>
                     <li class="text-base text-gray-500">
-                        <i class='bx bx-been-here text-red-500'></i> {{$company->address->country->name}}
+                        <i class='bx bx-been-here text-red-500'></i> {{$company->address->state->name}}, {{$company->address->country->name}}
                     </li>
                     <li class="w-full flex items-center">
                         <button class="inline-flex items-center mr-1 text-gray-500">
