@@ -99,6 +99,13 @@ Route::prefix('auth')->group(function () {
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password',
         ]);
+        // Spam Email Check
+        $spamEmails = \App\Models\BlockedDomain::where('status', 1)->pluck('domain')->toArray();
+        foreach ($spamEmails as $spamEmail) {
+            if (str_contains(strtolower($request->email), strtolower($spamEmail))) {
+                return redirect()->back()->with('error', 'Invalid email');
+            }
+        }
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
