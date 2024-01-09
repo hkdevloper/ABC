@@ -41,6 +41,7 @@ class UserPanelProvider extends PanelProvider
         return $panel
             ->id('panel')
             ->path('user')
+            ->homeUrl('/')
             ->login(LoginPage::class)
             ->registration(RegisterPage::class)
             ->passwordReset()

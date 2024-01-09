@@ -70,8 +70,7 @@
     <div class="container py-6 mx-auto">
         <!-- Existing content remains unchanged -->
         @forelse($companies as $company)
-            <div
-                class="company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex items-center justify-center">
+            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex items-center justify-center p-2">
                 <div class="mb-4 p-2">
                     <img class="w-full h-40 object-contain overflow-hidden" src="{{ url('storage/' . $company->logo) }}"
                          alt="">
@@ -147,36 +146,14 @@
                             </script>
                         </p>
                     </li>
-                    <li>
-                        <div class="flex overflow-x-auto space-x-2">
-                            @forelse($company->seo->meta_keywords as $item)
-                                @php
-                                    $limitedText = Str::limit($item, 80, '...');
-                                @endphp
-                                <div class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-500 rounded-full">
-                                    <span class="text-gray-500 text-sm">
-                                        {{ $limitedText }}
-                                        @if (strlen($item) > 80)
-                                            <a href="#" class="text-blue-500" onclick="showFullText(this)">...More</a>
-                                            <span class="full-text" style="display: none;">{{ $item }}</span>
-                                        @endif
-                                    </span>
-                                </div>
-                            @empty
-                            @endforelse
-                        </div>
-
-                    </li>
-                    <li>
-                        <div class="w-[calc(20%-1rem)]">
-                            <a href="{{ route('view.company', [$company->slug]) }}"
-                               class="text-purple-500 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mt-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
-                                View Profile &nbsp;
-                                <i class='bx bx-link-external text-2xl mr-2'></i>
-                            </a>
-                        </div>
-                    </li>
                 </ul>
+                <div class="w-[calc(20%-1rem)]">
+                    <a href="{{ route('view.company', [$company->slug]) }}"
+                       class="text-purple-500 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mt-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
+                        View Profile &nbsp;
+                        <i class='bx bx-link-external text-2xl mr-2'></i>
+                    </a>
+                </div>
             </div>
         @empty
             <h1 class="text-gray-500 text-4xl text-center mt-10">No Company Found</h1>
