@@ -92,19 +92,20 @@
     <!-- Search Section -->
     <section class="relative py-8 md:h-[60vh] flex flex-col items-center justify-center overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-purple-500 via-green-300 to-purple-500 opacity-25"></div>
-        <div class="mx-auto text-center relative z-10">
-            <h1 class="text-3xl md:text-5xl font-semibold text-dark mb-2">Discover Top Companies and Products</h1>
-            <p class="text-dark text-base md:text-lg mb-4">Explore a vast network of five lakh+ businesses and products
+        <div class="mx-auto text-center relative z-10 ">
+            <h1 class="md:text-3xl text-xl lg:text-5xl font-semibold text-dark mb-2">Discover Top Companies and Products</h1>
+            <p class="text-dark text-xs md:text-lg mb-4">Explore a vast network of five lakh+ businesses and products
                 for your needs</p>
             <form action="{{ route('search') }}"
-                  class="mt-2 md:mt-4 flex items-center justify-center rounded-full p-4 pl-2 relative bg-white w-100">
+                  class="mt-2 md:mt-4 flex items-center justify-center rounded-full p-2 pl-1 relative bg-white w-[80vw] md:w-full m-auto md:p-4 md:pl-2">
                 <div class="relative flex items-center justify-between w-full s-form">
                     <label for="searchInput" class="sr-only">Search</label>
                     <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters"
-                           class="search-input focus:outline-none px-6 py-2 rounded-full border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full">
+                           class="search-input focus:outline-none px-1 py-1 rounded-full border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full placeholder:text-xs md:placeholder:text-base md:px-6 md-py-2">
                     <button type="submit"
                             class="bg-blue-500 text-white py-2 px-4 w-auto rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse">
-                        <span class="inline">Search</span>
+                        <i class='bx bx-search-alt-2 md:hidden'></i>
+                        <span class="hidden sm:block md:block lg:block">Search</span>
                     </button>
                 </div>
                 <div id="searchResults" class="search-results mt-2"></div>
