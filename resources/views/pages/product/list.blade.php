@@ -21,9 +21,13 @@
         <div class="">
             <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
             <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doFilter()">
-                <option value="" selected>All</option>
+                <option value="all" selected>All</option>
                 @foreach($categories as $category)
-                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @if(request()->get('category') == $category->name)
+                        <option selected value="{{ $category->name }}">{{ $category->name }}</option>
+                    @else
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @endif
                 @endforeach
             </select>
         </div>
@@ -37,9 +41,9 @@
         <div class="">
             <label for="product-sort-by" class="text-gray-500">Sort By</label>
             <select name="sort" id="product-sort-by" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doSort()">
-                <option value="name">Name</option>
-                <option value="price-low-to-high">Price low to high</option>
-                <option value="price-high-to-low">Price high to low</option>
+                <option value="name" @if(request()->get('sort') == 'name') selected @endif>Name</option>
+                <option value="price-low-to-high" @if(request()->get('sort') == 'price-low-to-high') selected @endif>Price low to high</option>
+                <option value="price-high-to-low" @if(request()->get('sort') == 'price-high-to-low') selected @endif>Price high to low</option>
             </select>
         </div>
     </div>
@@ -49,7 +53,12 @@
         }
 
         function doFilter() {
-            window.location.href = '{{route('products')}}?category=' + document.getElementById('product-category-filter').value;
+            let value = document.getElementById('product-category-filter').value;
+            if (value !== 'all'){
+                window.location.href = '{{route('products')}}?category=' + document.getElementById('product-category-filter').value;
+            }else{
+                window.location.href = '{{route('products')}}'
+            }
         }
     </script>
     <div class="container">
