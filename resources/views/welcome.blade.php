@@ -115,27 +115,27 @@
     <!-- Main Content -->
     <section class="container mx-auto">
         <!-- Top Categories -->
-        <section class="p-8 my-4">
+        <section class="p-2 my-1 md:p-8 md:my-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
                     <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Categories</h1>
                     <a href="{{ route('company')}}"
-                       class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
-                        <span class="hidden md:inline">Explore All</span>
+                       class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
+                        <span class="text-purple-500 md:text-white">Explore All</span>
                         {{-- Icon --}}
-                        <i class="mdi mdi-arrow-right-bold-circle-outline text-2xl ml-2"></i>
+                        <i class='bx bx-link-external p-1 text-purple-500 md:hidden'></i>
                     </a>
                 </div>
-                <hr class="my-5">
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                <hr class="my-2 md:my-5">
+                <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-1 md:gap-3">
                     <!-- Category Card 1 -->
                     @forelse($category as $item)
                         <x-bladewind.card
-                            class="cursor-pointer bg-indigo-100 hover:shadow-gray-400 flex flex-col items-center justify-center">
+                            class="cursor-pointer bg-indigo-100 hover:shadow-gray-400 flex flex-col items-center justify-center" :reducePadding="true">
                             <img src="{{ url('storage/' . $item->image) }}" alt="{{$item->name}}"
-                                 class="w-[80px] h-[80px] object-contain rounded-full"/>
-                            <p class="text-center text-xl bold italic mt-2">{{$item->name}}</p>
-                            <p class="text-center text-xl bold mt-2">({{$item->countItem()}})</p>
+                                 class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-full"/>
+                            <p class="text-center text-xs md:text-base md:text-xl bold italic mt-2">{{$item->name}}</p>
+                            <p class="hidden md:block text-center text-base md:text-xl bold mt-2">({{$item->countItem()}})</p>
                         </x-bladewind.card>
                     @empty
                         <p class="text-gray-700">No categories available.</p>
@@ -150,10 +150,10 @@
                 <div class="flex justify-between items-center">
                     <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Companies</h1>
                     <a href="{{ route('company') }}"
-                       class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
-                        <span class="hidden md:inline">Explore All</span>
+                       class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
+                        <span class="text-purple-500 md:text-white">Explore All</span>
                         {{-- Icon --}}
-                        <i class="mdi mdi-arrow-right-bold-circle-outline text-2xl ml-2"></i>
+                        <i class='bx bx-link-external p-1 text-purple-500 md:hidden'></i>
                     </a>
                 </div>
                 <hr class="my-5">
@@ -189,10 +189,10 @@
             <div class="flex justify-between items-center">
                 <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Explore Top Products</h1>
                 <a href="{{ route('products') }}"
-                   class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
-                    <span class="hidden md:inline">Explore All</span>
+                   class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
+                    <span class="text-purple-500 md:text-white">Explore All</span>
                     {{-- Icon --}}
-                    <i class="mdi mdi-arrow-right-bold-circle-outline text-2xl ml-2"></i>
+                    <i class='bx bx-link-external p-1 text-purple-500 md:hidden'></i>
                 </a>
             </div>
             <hr class="my-5">
@@ -229,10 +229,10 @@
                 <div class="flex justify-between items-center">
                     <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Events</h1>
                     <a href="{{ route('events') }}"
-                       class="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out">
-                        <span class="hidden md:inline">Explore All</span>
+                       class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
+                        <span class="text-purple-500 md:text-white">Explore All</span>
                         {{-- Icon --}}
-                        <i class="mdi mdi-arrow-right-bold-circle-outline text-2xl ml-2"></i>
+                        <i class='bx bx-link-external p-1 text-purple-500 md:hidden'></i>
                     </a>
                 </div>
                 <hr class="my-5">
