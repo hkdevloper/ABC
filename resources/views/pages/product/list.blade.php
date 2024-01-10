@@ -1,133 +1,83 @@
 @extends('layouts.user')
 
 @section('content')
-    {{--    <x-user.header :title="'Products'" :breadcrumb="['Home', 'Product', 'List']" type="product"/>--}}
-    <div class="container py-6 mx-auto flex flex-wrap">
-        <!-- Product List Block -->
-        <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
-            <!-- Product List Filter -->
-            <div class="w-full flex flex-nowrap justify-between items-center">
-                <p class="text-base text-gray-500">Search Results for <br> <span class="text-xl text-purple-500">Products</span>
-                </p>
-                <p class="text-base text-gray-500">About {{$products->total()}} Result</p>
+    <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
+        <h1 class="block text-4xl w-full text-center font-bold">Search for thousands of products</h1>
+        <br>
+        <form action="{{ route('search') }}" class="mt-2 md:mt-4 flex items-center justify-center p-4 pl-2 relative bg-white w-2/3">
+            <div class="relative flex items-center justify-between w-full s-form">
+                <label for="searchInput" class="sr-only">Search</label>
+                <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters"
+                       class="search-input focus:outline-none px-6 py-2 border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full">
+                <button type="submit" class="bg-green-400 text-white py-2 px-4 w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
+                    <span class="inline">Find Product</span>
+                </button>
             </div>
-            <hr class="my-5">
-            <!-- Product List -->
-            @php
-                $slug = null;
-            @endphp
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
-                @forelse($products as $key => $item)
-                    @php
-                        $slug = $item->slug;
-                        $color = [
-                            'bg-orange-500',
-                            'bg-teal-500',
-                            'bg-purple-500',
-                        ];
-                        $currentColor = $color[$key % count($color)]; // Cycle through colors in order
-                        $btnColor = $color[$key % count($color)]; // Cycle through colors in order
-                    @endphp
-                    <div class="flex-shrink-0 relative overflow-hidden {{$currentColor}} rounded-lg max-w-xs shadow-lg">
-                        <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
-                             style="transform: scale(1.5); opacity: 0.1;">
-                            <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)"
-                                  fill="white"/>
-                            <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)"
-                                  fill="white"/>
-                        </svg>
-                        <div class="relative flex items-center justify-center">
-                            <img class="relative w-100 h-60 bg-contain" src="{{ url('storage/' . $item->thumbnail) }}"
-                                 alt="">
-                        </div>
-                        <div class="relative text-white px-3 pb-6 mt-3">
-                            <span class="block opacity-75 -mb-1">{{$item->category->name}}</span>
-                            <div class="flex justify-between mt-2">
-                                <a href="{{ route('view.product', [$slug]) }}"
-                                   class="block font-semibold text-xl">{{ $item->name }}</a>
-                                <span
-                                    class="block bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 leading-none flex items-center">₹ {{$item->price}}</span>
-                            </div>
-                        </div>
-                        <!-- Product List Action -->
-                        <div class="m-2 text-center">
-                            <a href="{{ route('view.product', [$slug]) }}"
-                               class="bg-white text-orange-500 hover:{{$btnColor}} hover:text-white rounded-full px-4 py-2 transition duration-300 ease-in-out flex items-center transform hover:-translate-y-1 hover:scale-110 text-center">
+            <div id="searchResults" class="search-results mt-2"></div>
+        </form>
+    </div>
+    <div class="container flex items-center justify-between my-8">
+        {{-- Category Filter--}}
+        <div class="">
+            <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
+            <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]">
+                @foreach($categories as $category)
+                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        {{-- Total Products --}}
+        <div class="">
+            <p>
+                Showing {{ $products->firstItem() }} - {{ $products->lastItem() }} of {{ $products->total() }} results
+            </p>
+        </div>
+        {{-- Sort By --}}
+        <div class="">
+            <label for="product-sort-by" class="text-gray-500">Sort By</label>
+            <select name="sort" id="product-sort-by" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]">
+                <option value="price">Price</option>
+                <option value="name">Name</option>
+            </select>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Product List -->
+        @forelse($products as $key => $item)
+            <div class="card p-4 my-4 mx-3 shadow border border-b border-solid border-gray-100 flex items-center justify-between">
+                <div class="flex items-center justify-center">
+                    <img class="w-full h-40 object-cover rounded-lg sm:block sm:col-span-2 md:col-span-1 bg-contain" src="{{ url('storage/' . $item->thumbnail) }}" alt="">
+                    <div class="flex items-start justify-start flex-col w-full ml-6">
+                        <span class="text-base text-gray-500 -mb-1">{{$item->category->name}}</span>
+                        <a href="{{ route('view.product', [$item->slug]) }}" class="font-semibold text-4xl">{{ $item->name }}</a>
+                        <span class="text-base text-gray-500 -mb-1">Condition: {{$item->condition}}</span>
+                        <span class="text-base text-gray-500 -mb-1">Brand: {{$item->brand}}</span>
+                        <span class="bg-white rounded-full text-orange-500 text-base font-bold px-3 py-2 leading-none flex items-center">₹ {{$item->price}}</span>
+                    </div>
+                </div>
+                <!-- Product List Action -->
+                <div class="text-center">
+                    <a href="{{ route('view.product', [$item->slug]) }}"
+                       class="text-white bg-green-400 hover:bg-purple-500 hover:text-white rounded-full px-4 py-2 transition duration-300 ease-in-out flex items-center transform hover:-translate-y-1 hover:scale-110 text-center">
                     <span class="mr-1 text-center">
                         Enquire Now
                     </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                     stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-3 h-3">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                          d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                @empty
-                    <div class="w-full text-center">
-                        <p class="text-gray-500 text-center">No Products Found</p>
-                    </div>
-                @endforelse
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                             stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-3 h-3">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
+        @empty
+            <div class="w-full text-center">
+                <p class="text-gray-500 text-center">No Products Found</p>
+            </div>
+        @endforelse
 
-            <!-- Pagination -->
-            <hr class="my-5">
-            {{ $products->links() }}
-        </div>
-        <!-- Side Block -->
-        <div class="lg:w-1/4 lg:text-left bg-gray-100 p-4">
-            <!-- Search Box -->
-            <div class="mt-4">
-                <label for="category-search" class="text-gray-600 block mb-2">Search Products</label>
-                <input type="text" id="category-search" placeholder="Type to search"
-                       class="w-full border rounded py-2 px-3 focus:outline-none focus:shadow-outline-blue">
-            </div>
-            <!-- Filters -->
-            <div class="mb-4">
-                <h3 class="text-xl font-semibold text-gray-700 mb-2">Filters</h3>
-                <!-- Add your specific filter options here -->
-                <label class="flex items-center">
-                    <input type="checkbox" class="form-checkbox text-blue-500">
-                    <span class="ml-2 text-gray-700">Filter Option 1</span>
-                </label>
-                <!-- Add more filters as needed -->
-            </div>
-
-            <!-- Sorting -->
-            <div>
-                <h3 class="text-xl font-semibold text-gray-700 mb-2">Sort By</h3>
-                <select
-                    class="w-full border rounded py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline-blue">
-                    <option value="latest">Latest</option>
-                    <option value="price-low-high">Price: Low to High</option>
-                    <option value="price-high-low">Price: High to Low</option>
-                    <!-- Add more sorting options as needed -->
-                </select>
-            </div>
-            <!-- Categories -->
-            <div class="my-4">
-                <h3 class="text-xl font-semibold text-gray-700 mb-2">Categories</h3>
-                <!-- Category List -->
-                <ul class="leading-loose">
-                    @foreach($categories as $index => $category)
-                        @if($index > 5)
-                            @break
-                        @endif
-                        <li class="mb-4">
-                            <a href="{{ route('products', ['category' => $category->slug]) }}"
-                               class="block bg-white hover:bg-gray-100 border border-gray-200 rounded-lg p-4 transition duration-300 ease-in-out">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-blue-500 hover:text-blue-700">{{ $category->name }}</span>
-                                    <span class="bg-blue-500 text-white rounded-full py-1 px-2 text-xs">{{ $category->products->count()}} Products</span>
-                                </div>
-                                <p class="text-gray-600">{!! $category->description !!}</p>
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-
+        <!-- Pagination -->
+        <hr class="my-5">
+        {{ $products->links() }}
     </div>
 @endsection
