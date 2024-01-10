@@ -169,7 +169,7 @@
                                 <h2 class="text-sm md:text-base bold italic underline text-indigo-700 mt-2">Deals In</h2>
                                 <p class="text-gray-700 text-center text-xs md:text-sm">{{ $company->dealsIn() }}</p>
                             </div>
-                            <div class="absolute bottom-0 right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
+                            <div class="absolute bottom-0 md:static right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
                                 <a href="{{ route('view.company', [$company->slug]) }}"
                                    class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
                                     <span class="ml-1">View Profile &nbsp;</span>
