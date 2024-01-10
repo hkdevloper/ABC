@@ -20,7 +20,8 @@
         {{-- Category Filter--}}
         <div class="">
             <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
-            <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]">
+            <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doFilter()">
+                <option value="" selected>All</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->name }}">{{ $category->name }}</option>
                 @endforeach
@@ -35,12 +36,22 @@
         {{-- Sort By --}}
         <div class="">
             <label for="product-sort-by" class="text-gray-500">Sort By</label>
-            <select name="sort" id="product-sort-by" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]">
-                <option value="price">Price</option>
+            <select name="sort" id="product-sort-by" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doSort()">
                 <option value="name">Name</option>
+                <option value="price-low-to-high">Price low to high</option>
+                <option value="price-high-to-low">Price high to low</option>
             </select>
         </div>
     </div>
+    <script>
+        function doSort() {
+            window.location.href = '{{route('products')}}?sort=' + document.getElementById('product-sort-by').value;
+        }
+
+        function doFilter() {
+            window.location.href = '{{route('products')}}?category=' + document.getElementById('product-category-filter').value;
+        }
+    </script>
     <div class="container">
         <!-- Product List -->
         @forelse($products as $key => $item)
