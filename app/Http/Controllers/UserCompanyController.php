@@ -45,7 +45,8 @@ class UserCompanyController extends Controller
             $companies = Company::where('is_approved', 1)->paginate(10);
         }
         // get The Unique Data Only
-        $data = compact('companies');
+        $categories = Category::where('type', 'company')->where('is_active', 1)->get();
+        $data = compact('companies', 'categories');
         return view('pages.company.list')->with($data);
     }
 

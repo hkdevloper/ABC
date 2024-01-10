@@ -42,31 +42,51 @@
 
 @section('content')
     <x-user.bread-crumb :data="['Home', 'Company', 'List']"/>
-    <div class="header bg-green-50">
-        <div class="filter-options">
-            <div class="flex items-center">
-                <label for="sort" class="mr-2">Sort By:</label>
-                <select name="sort" id="sort" class="border border-gray-300 rounded-md p-1">
-                    <option value="featured">Featured</option>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                </select>
-            </div>
-            <div class="flex items-center">
-                <span class="text-base">All </span> &nbsp;
-                <span class="text-base font-bold">{{$companies->count()}}</span> &nbsp;
-                <span class="text-base">Companies Found</span>
-            </div>
-            <div class="flex items-center">
-                <label for="sort" class="mr-2">Filter By:</label>
-                <select name="sort" id="sort" class="border border-gray-300 rounded-md p-1">
-                    <option value="featured">Featured</option>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                </select>
-            </div>
+    <div class="container flex items-center justify-between my-8">
+        {{-- Category Filter--}}
+        <div class="">
+            <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
+            <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doFilter()">
+                <option value="all" selected>All</option>
+                @foreach($categories as $category)
+                    @if(request()->get('category') == $category->name)
+                        <option selected value="{{ $category->name }}">{{ $category->name }}</option>
+                    @else
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+        {{-- Total Products --}}
+        <div class="">
+            <p>
+                Showing {{ $companies->firstItem() }} - {{ $companies->lastItem() }} of {{ $companies->total() }} results
+            </p>
+        </div>
+        {{-- Sort By --}}
+        <div class="">
+            <label for="product-sort-by" class="text-gray-500">Sort By</label>
+            <select name="sort" id="product-sort-by" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doSort()">
+                <option value="name" @if(request()->get('sort') == 'name') selected @endif>Name</option>
+                <option value="price-low-to-high" @if(request()->get('sort') == 'price-low-to-high') selected @endif>Price low to high</option>
+                <option value="price-high-to-low" @if(request()->get('sort') == 'price-high-to-low') selected @endif>Price high to low</option>
+            </select>
         </div>
     </div>
+    <script>
+        function doSort() {
+            window.location.href = '{{route('products')}}?sort=' + document.getElementById('product-sort-by').value;
+        }
+
+        function doFilter() {
+            let value = document.getElementById('product-category-filter').value;
+            if (value !== 'all'){
+                window.location.href = '{{route('products')}}?category=' + document.getElementById('product-category-filter').value;
+            }else{
+                window.location.href = '{{route('products')}}'
+            }
+        }
+    </script>
     <div class="container py-6 mx-auto">
         <!-- Existing content remains unchanged -->
         @forelse($companies as $company)
