@@ -67,4 +67,9 @@ class Product extends Model
     {
         return RateReview::where('type', 'product')->where('item_id', $this->id)->count();
     }
+
+    public function company() : BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'user_id');
+    }
 }

@@ -82,4 +82,9 @@ class HelperFunctions
             return $e->getMessage();
         }
     }
+
+    // Function to Format Currency
+    public static function formatCurrency($amount) : string {
+        return number_format($amount, 2, '.', ',');
+    }
 }

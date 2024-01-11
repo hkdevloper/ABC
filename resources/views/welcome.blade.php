@@ -160,6 +160,11 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-8">
                     @forelse($companies as $company)
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                            @if($company->is_featured)
+                                <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
+                                    Featured
+                                </div>
+                            @endif
                             <a href="{{ route('view.company', [$company->slug]) }}" class="w-[150px] h-[150px] md:w-full md:p-4 md:m-auto md:block md:h-full object-contain">
                                 <img alt="company photo" src="{{ url('storage/' . $company->logo) }}" class="w-[150px] h-[150px] md:w-full md:h-48 object-contain"/>
                             </a>
@@ -198,22 +203,30 @@
             <hr class="my-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 @forelse($products as $item)
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex flex-col items-center justify-center">
-                        <a href="{{route('view.product', [$item->slug])}}"
-                           class="w-full block h-full object-contain">
-                            <img alt="product photo" src="{{ url('storage/' . $item->thumbnail) }}"
-                                 class="w-full h-48 object-contain"/>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                        @if($item->is_featured)
+                            <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
+                                Featured
+                            </div>
+                        @endif
+                        <a href="{{ route('view.product', [$item->slug]) }}" class="w-[150px] h-[150px] md:w-full md:p-4 md:m-auto md:block md:h-full object-contain">
+                            <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}" class="w-[150px] h-[150px] md:w-full md:h-48 object-contain"/>
                         </a>
-                        <header class="flex my-2 font-light text-base items-center">
-                            <i class="bx bx-category text-indigo-500 mr-1"></i>
-                            <p>{{$item->category->name}}</p>
-                        </header>
-                        <p class="text-xl font-medium mb-2">{{ $item->name }}</p>
-                        <div class="mb-2 w-[calc(80%-1rem)]">
+                        <div class="p-1 md:p-2 flex flex-col items-start md:items-center justify-center">
+                            <header class="flex my-2 font-light text-base items-center">
+                                <i class="bx bx-category text-indigo-500 mr-1"></i>
+                                <p>{{ $item->category->name }}</p>
+                            </header>
+                            <p class="text-xl font-medium mb-2">{{ $item->name }}</p>
+                            <p class="text-red-700 text-center text-xs md:text-sm">{{ $item->company->name }}</p>
+                            <p class="text-gray-700 text-center text-xs md:text-sm">{{ $item->company->address->country->name }}</p>
+                            <p class="text-gray-700 text-center text-xs md:text-sm">Price: ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
+                        </div>
+                        <div class="absolute bottom-0 md:static right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
                             <a href="{{ route('view.product', [$item->slug]) }}"
-                               class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mb-4 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
-                                Enquire Now &nbsp;
-                                <i class='bx bx-link-external text-2xl mr-2'></i>
+                               class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                <span class="ml-1">Enquire Now &nbsp;</span>
+                                <i class='bx bx-link-external mr-2'></i>
                             </a>
                         </div>
                     </div>

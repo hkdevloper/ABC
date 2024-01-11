@@ -47,18 +47,20 @@ Route::get('/', function () {
     $e = Event::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
     $category = Category::where('is_active', 1)->orderBy('created_at', 'desc')->take(6)->get();
     $searchList = [];
+
     foreach ($p as $item) {
         $searchList[] = $item->name;
     }
     foreach ($c as $item) {
         $searchList[] = $item->name;
     }
-
+    // Get only products which have a company
+    $products = $p->filter(function ($value, $key) {
+        return $value->company != null;
+    });
     // get the 10-random records from the database if is less than 10 then it will return all
     if (count($p) > 8) {
-        $products = $p->random(8);
-    } else {
-        $products = $p;
+        $products = $products->random(8);
     }
 
     if (count($c) > 8) {
@@ -72,6 +74,7 @@ Route::get('/', function () {
     } else {
         $events = $e;
     }
+
     $data = compact('products', 'companies', 'events', 'category', 'searchList');
     return view('welcome')->with($data);
 })->name('home');
