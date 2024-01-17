@@ -91,11 +91,11 @@
         <!-- Existing content remains unchanged -->
         @forelse($companies as $company)
             <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex items-center justify-center p-2">
-                <div class="mb-4 p-2">
+                <div class="mb-4 p-2 pr-3" style="border-right: 1px solid lightgray">
                     <img class="w-full h-40 object-contain overflow-hidden" src="{{ url('storage/' . $company->logo) }}"
                          alt="">
                 </div>
-                <ul class="w-full mx-3">
+                <ul class="w-full mx-3 ml-5">
                     <li class="flex flex-nowrap items-center">
                         <span class="text-2xl mr-3">{{$company->name}}</span>
                         @if($company->is_featured)
@@ -166,14 +166,16 @@
                             </script>
                         </p>
                     </li>
+                    <li>
+                        <div class="w-[calc(20%-1rem)] mt-5">
+                            <a href="{{ route('view.company', [$company->slug]) }}"
+                               class="text-purple-500 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mt-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
+                                View Profile &nbsp;
+                                <i class='bx bx-link-external text-2xl mr-2'></i>
+                            </a>
+                        </div>
+                    </li>
                 </ul>
-                <div class="w-[calc(20%-1rem)]">
-                    <a href="{{ route('view.company', [$company->slug]) }}"
-                       class="text-purple-500 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mt-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
-                        View Profile &nbsp;
-                        <i class='bx bx-link-external text-2xl mr-2'></i>
-                    </a>
-                </div>
             </div>
         @empty
             <h1 class="text-gray-500 text-4xl text-center mt-10">No Company Found</h1>

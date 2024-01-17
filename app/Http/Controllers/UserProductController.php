@@ -38,6 +38,7 @@ class UserProductController extends Controller
             $products = Product::where('is_approved', 1)->where('is_active', 1)->paginate(12);
         }
         $categories = Category::where('type', 'product')->where('is_active', 1)->get();
+
         $data = compact('products', 'categories');
         return view('pages.product.list')->with($data);
     }
@@ -49,7 +50,21 @@ class UserProductController extends Controller
         Session::forget('menu');
 
         $product = Product::where('slug', $slug)->firstOrFail();
+        //  check if product has a company
+        if ($product->company == null) {
+            // Store Session for Home Menu Active
+            Session::put('menu', 'product');
+            return redirect()->back();
+        }
         $related_products = Product::where('category_id', $product->category_id)->where('id', '!=', $product->id)->where('is_approved', 1)->where('is_active', 1)->get();
+        // Get only products which have a company
+        $related_products = $related_products->filter(function ($value, $key) {
+            return $value->company != null;
+        });
+        // get the 3-random records from the database if is less than 10 then it will return all
+        if (count($related_products) > 3) {
+            $related_products = $related_products->random(3);
+        }
         $data = compact('product', 'related_products');
         return view('pages.product.detail')->with($data);
     }

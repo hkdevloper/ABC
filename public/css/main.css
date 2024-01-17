@@ -44,6 +44,7 @@ img{
     aspect-ratio: 1/1;
     width: 100%;
     height: auto;
+    mix-blend-mode: multiply;
 }
 
 .container{

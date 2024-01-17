@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Mews\Purifier\Casts\CleanHtml;
 
 class Company extends Model
@@ -51,6 +52,11 @@ class Company extends Model
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'user_id', 'user_id');
     }
 
     public function claimedBy() : BelongsTo
@@ -111,5 +117,18 @@ class Company extends Model
     public function getReviewsCount() : int
     {
         return RateReview::where('type', 'company')->where('item_id', $this->id)->count();
+    }
+
+    public function getAverageRating() : float
+    {
+        $reviews = RateReview::where('type', 'company')->where('item_id', $this->id)->get();
+        $totalRating = 0;
+        foreach ($reviews as $review) {
+            $totalRating += $review->rating;
+        }
+        if ($totalRating > 0) {
+            return $totalRating / $reviews->count();
+        }
+        return 0;
     }
 }
