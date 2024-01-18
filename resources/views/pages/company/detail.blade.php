@@ -34,7 +34,7 @@
                         </span>
                         @endif
                     </div>
-                    <h1 class="text-2xl font-bold text-center text-blue-950">{{ $company->name }}</h1>
+                    <h1 class="text-2xl font-bold text-start text-blue-950">{{ $company->name }}</h1>
                     <p>
                         <span class="text-sm text-gray-500">
                             <i class="fas fa-map-marker-alt text-purple-500 mr-2"></i>
