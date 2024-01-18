@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class UserCompanyController extends Controller
@@ -16,34 +17,32 @@ class UserCompanyController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'company');
+        $query = Company::select('companies.*', DB::raw('AVG(rate_reviews.rating) as avg_rating'))
+            ->leftJoin('rate_reviews', function ($join) {
+                $join->on('companies.id', '=', 'rate_reviews.item_id')
+                    ->where('rate_reviews.type', '=', 'company');
+            })
+            ->where('companies.is_approved', 1)
+            ->groupBy('companies.id');
+
         if ($request->has('category')) {
             // Get Category I'd from Category Name
             $cat_id = Category::where('name', $request->category)->first();
-            $companies = Company::where('is_approved', 1)->where('category_id', $cat_id->id)->paginate(10);
+            $query->where('companies.category_id', $cat_id->id);
         }
-        // Show All Companies
-        else if($request->has('show') && $request->show == 'all'){
-            $companies = Company::where('is_approved', 1)->paginate(100);
+
+        if ($request->has('sort')) {
+            if ($request->sort == 'name') {
+                $query->orderBy('companies.name', 'asc');
+            } elseif ($request->sort == 'desc') {
+                $query->orderBy('avg_rating', 'desc');
+            } elseif ($request->sort == 'asc') {
+                $query->orderBy('avg_rating', 'asc');
+            }
         }
-        // Show Active Companies
-        else if($request->has('filter') && $request->filter == 'active'){
-            $companies = Company::where('is_approved', 1)->where('is_active', 1)->paginate(10);
-        }
-        // Show the Latest Companies
-        else if ($request->has('filter') && $request->filter == 'in-active') {
-            $companies = Company::where('is_approved', 1)->where('is_active', 0)->paginate(10);
-        }
-        // Sort by name
-        else if ($request->has('sort') && $request->sort == 'name') {
-            $companies = Company::where('is_approved', 1)->orderBy('name', 'asc')->paginate(10);
-        }
-        // Sort by Date
-        else if ($request->has('sort') && $request->sort == 'date') {
-            $companies = Company::where('is_approved', 1)->orderBy('created_at', 'desc')->paginate(10);
-        }
-        else {
-            $companies = Company::where('is_approved', 1)->paginate(10);
-        }
+
+        $companies = $query->paginate(10);
+
         // get The Unique Data Only
         $categories = Category::where('type', 'company')->where('is_active', 1)->get();
         $data = compact('companies', 'categories');

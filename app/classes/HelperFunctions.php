@@ -2,22 +2,26 @@
 
 namespace App\classes;
 
+use App\Models\RateReview;
 use App\Models\StatCounter;
+use Exception;
+use Throwable;
 
 class HelperFunctions
 {
     // Function to Update Stat Counter
-    public static function updateStat($type, $category, $id) : bool {
+    public static function updateStat($type, $category, $id): bool
+    {
 
-        try{
+        try {
             $stat = StatCounter::where('type', $type)->where('category', $category)->where('field_id', $id)->first();
-            if($stat){
+            if ($stat) {
                 $stat->count = $stat->count + 1;
                 try {
                     $stat->saveOrFail();
-                } catch (\Throwable $e) {
+                } catch (Throwable $e) {
                 }
-            }else{
+            } else {
                 $stat = new StatCounter();
                 $stat->type = $type;
                 $stat->category = $category;
@@ -25,33 +29,35 @@ class HelperFunctions
                 $stat->count = 1;
                 try {
                     $stat->saveOrFail();
-                } catch (\Throwable $e) {
+                } catch (Throwable $e) {
                 }
             }
             return true;
 
-        }catch (\Exception $e){
+        } catch (Exception $e) {
             return false;
         }
     }
 
     // Function to get Counter state
-    public static function getStat($type, $category, $id) : int {
-        try{
+    public static function getStat($type, $category, $id): int
+    {
+        try {
             $stat = StatCounter::where('type', $type)->where('category', $category)->where('field_id', $id)->first();
-            if($stat){
+            if ($stat) {
                 return $stat->count;
-            }else{
+            } else {
                 return 0;
             }
-        }catch (\Exception $e){
+        } catch (Exception $e) {
             return 0;
         }
     }
 
     // Function to Store Base64 Image return File Name
-    public static function storeBase64Image($base64Image, $path, $fileName) : string {
-        try{
+    public static function storeBase64Image($base64Image, $path, $fileName): string
+    {
+        try {
             // Extract the image data from the base64 string.
             list($type, $data) = explode(';', $base64Image);
             list(, $data) = explode(',', $data);
@@ -70,7 +76,7 @@ class HelperFunctions
             $path = public_path('storage/requirements/' . $name); // Adjust the path as needed.
 
             // check if the directory exists
-            if(!is_dir(public_path('storage/requirements'))){
+            if (!is_dir(public_path('storage/requirements'))) {
                 mkdir(public_path('storage/requirements'));
             }
             // Store the image in the specified path.
@@ -78,13 +84,48 @@ class HelperFunctions
 
             // Return the path of the stored image.
             return "requirements/$name";
-        }catch (\Exception $e){
+        } catch (Exception $e) {
             return $e->getMessage();
         }
     }
 
     // Function to Format Currency
-    public static function formatCurrency($amount) : string {
+    public static function formatCurrency($amount): string
+    {
         return number_format($amount, 2, '.', ',');
+    }
+
+    // Function to get Rating Count
+    public static function getRatingCount($type, $id): int
+    {
+        try {
+            $rating = RateReview::where('type', $type)->where('item_id', $id)->get();
+            if ($rating) {
+                return count($rating);
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
+            return 0;
+        }
+    }
+
+    // Function to get Rating Average
+    public static function getRatingAverage($type, $id): float
+    {
+        try {
+            $rating = RateReview::where('type', $type)->where('item_id', $id)->get();
+            if ($rating->count() > 0) {
+                $total = 0;
+                foreach ($rating as $item) {
+                    $total += $item->rating;
+                }
+                return $total / $rating->count();
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
+            return 0;
+        }
     }
 }

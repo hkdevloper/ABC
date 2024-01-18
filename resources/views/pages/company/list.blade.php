@@ -68,23 +68,41 @@
             <label for="product-sort-by" class="text-gray-500">Sort By</label>
             <select name="sort" id="product-sort-by" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doSort()">
                 <option value="name" @if(request()->get('sort') == 'name') selected @endif>Name</option>
-                <option value="price-low-to-high" @if(request()->get('sort') == 'price-low-to-high') selected @endif>Price low to high</option>
-                <option value="price-high-to-low" @if(request()->get('sort') == 'price-high-to-low') selected @endif>Price high to low</option>
+                <option value="asc" @if(request()->get('sort') == 'asc') selected @endif>Rating low to high</option>
+                <option value="desc" @if(request()->get('sort') == 'desc') selected @endif>Rating high to low</option>
             </select>
         </div>
     </div>
     <script>
         function doSort() {
-            window.location.href = '{{route('products')}}?sort=' + document.getElementById('product-sort-by').value;
+            let sortValue = document.getElementById('product-sort-by').value;
+            let categoryValue = document.getElementById('product-category-filter').value;
+            applyFilters(categoryValue, sortValue);
         }
 
         function doFilter() {
-            let value = document.getElementById('product-category-filter').value;
-            if (value !== 'all'){
-                window.location.href = '{{route('products')}}?category=' + document.getElementById('product-category-filter').value;
-            }else{
-                window.location.href = '{{route('products')}}'
+            let categoryValue = document.getElementById('product-category-filter').value;
+            let sortValue = document.getElementById('product-sort-by').value;
+            applyFilters(categoryValue, sortValue);
+        }
+
+        function applyFilters(category, sort) {
+            let url = '{{ route('company') }}';
+            let params = [];
+
+            if (category !== 'all') {
+                params.push('category=' + category);
             }
+
+            if (sort !== 'default') {
+                params.push('sort=' + sort);
+            }
+
+            if (params.length > 0) {
+                url += '?' + params.join('&');
+            }
+
+            window.location.href = url;
         }
     </script>
     <div class="container py-6 mx-auto">
@@ -133,8 +151,8 @@
                     <li class="w-full flex items-center">
                         <button class="inline-flex items-center mr-1 text-gray-500">
                             <i class='bx bxs-star text-green-400 text-sm'></i>
-                            <span class="mx-1 text-gray-500 text-sm">4.5</span>
-                            <span class="mx-1 text-gray-500 text-sm">(1 Review)</span>
+                            <span class="mx-1 text-gray-500 text-sm">{{\App\classes\HelperFunctions::getRatingAverage('company', $company->id)}}</span>
+                            <span class="mx-1 text-gray-500 text-sm">({{\App\classes\HelperFunctions::getRatingCount('company', $company->id)}} Review)</span>
                         </button>
                     </li>
                     <li>
