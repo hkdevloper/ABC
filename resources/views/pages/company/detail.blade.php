@@ -23,13 +23,14 @@
                 <div class="flex items-start justify-start flex-col w-full">
                     <div class="flex items-center justify-center">
                         @if($company->is_featured)
-                            <span class="p-1 bg-green-200 text-green-500 rounded px-2">Featured
-                            <i class="fas fa-check text-green-500 ml-2"></i>
+                            <span class="px-1 bg-green-200 text-green-700 rounded text-sm flex items-center justify-center">
+                                <i class='bx bx-star text-green-700 mr-2'></i>
+                            Featured
                         </span>
                         @endif
                         @if($company->is_approved)
-                            <span class="p-1 bg-blue-200 text-blue-500 rounded px-2 m-1">Verified
-                            <i class="fas fa-check text-blue-500 ml-2"></i>
+                            <span class="px-1 bg-blue-200 text-blue-500 rounded m-1 text-sm flex items-center justify-center">
+                            <i class='bx bx-badge-check text-blue-500 mr-2'></i>Verified
                         </span>
                         @endif
                     </div>
@@ -51,7 +52,7 @@
                         </p>
                         <p class="mx-5">
                             <span class="text-sm text-gray-500">
-                                <i class="fas fa-tag text-purple-500 mr-1"></i>
+                                <i class='bx bx-box text-purple-500 mr-1'></i>
                             </span>
                             <span class="text-sm text-gray-500 font-semibold">{{ $company->category->name }}</span>
                         </p>
@@ -75,15 +76,15 @@
             </div>
             <div class="w-1/4">
                 <div class="flex items-center justify-self-end">
-                    <button class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded"
+                    <button class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white"
                             style="min-width: max-content">
                         <i class="fas fa-share text-purple-500"></i>&nbsp; Share
                     </button>
-                    <button class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded"
+                    <button class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white"
                             style="min-width: max-content">
                         <i class="fas fa-heart text-purple-500"></i>&nbsp; Add to favourite
                     </button>
-                    <button class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded"
+                    <button class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white"
                             style="min-width: max-content">
                         <i class="fas fa-bookmark text-purple-500"></i>&nbsp; Add to Bookmark
                     </button>
@@ -480,7 +481,7 @@
                                         <div class="flex justify-between items-center">
                                             <div>
                                                         <span
-                                                            class="block text-sm font-bold">{{$item->user->name}}</span>
+                                                            class="block text-sm font-bold">{{$item->user->company->name}}</span>
                                                 <span
                                                     class="block text-sm text-gray-500">{{$item->created_at->diffForHumans()}}</span>
                                             </div>
