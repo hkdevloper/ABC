@@ -20,3 +20,8 @@ Route::get('/search', [APIController::class, 'searchCompanyProduct'])->name('api
 
 // Product Rate API
 Route::post('/{type}/rate', [APIController::class, 'productRate'])->name('api.product.rate');
+
+// Test Routes
+Route::get('/test', function (Request $request){
+
+});

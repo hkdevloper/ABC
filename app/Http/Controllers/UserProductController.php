@@ -17,26 +17,26 @@ class UserProductController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'product');
+
+        $query = Product::where('is_approved', 1);
+
         if ($request->has('category')) {
             // Get Category I'd from Category Name
             $cat_id = Category::where('name', $request->category)->first();
-            $products = Product::where('is_approved', 1)->where('category_id', $cat_id->id)->paginate(10);
+            $query->where('category_id', $cat_id->id);
         }
-        // sort by Name
-        else if ($request->has('sort') && $request->sort == 'name') {
-            $products = Product::where('is_approved', 1)->orderBy('name', 'asc')->paginate(12);
+
+        if ($request->has('sort')) {
+            if ($request->sort == 'name') {
+                $query->orderBy('name', 'asc');
+            } elseif ($request->sort == 'price-low-to-high') {
+                $query->orderBy('price', 'asc');
+            } elseif ($request->sort == 'price-high-to-low') {
+                $query->orderBy('price', 'desc');
+            }
         }
-        // Sort by price low to high
-        else if ($request->has('sort') && $request->sort == 'price-low-to-high') {
-            $products = Product::where('is_approved', 1)->orderBy('price', 'asc')->paginate(12);
-        }
-        // Sort by price high to low
-        else if ($request->has('sort') && $request->sort == 'price-high-to-low') {
-            $products = Product::where('is_approved', 1)->orderBy('price', 'desc')->paginate(12);
-        }
-        else {
-            $products = Product::where('is_approved', 1)->where('is_active', 1)->paginate(12);
-        }
+
+        $products = $query->paginate(12);
         $categories = Category::where('type', 'product')->where('is_active', 1)->get();
 
         $data = compact('products', 'categories');
