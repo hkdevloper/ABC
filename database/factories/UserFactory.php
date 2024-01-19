@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
-            'password' => bcrypt('password'), // You may want to change this default password
+            'password' => bcrypt('123'), // You may want to change this default password
             'approved' => true,
             'taxable' => true,
             'banned' => false,

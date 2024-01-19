@@ -16,14 +16,18 @@ class SeoFactory extends Factory
      */
     public function definition(): array
     {
+        $keywords = [
+            'Tech', 'Green', 'Innovators', 'HealthCare', 'Smart',
+            'Gadget', 'Eco-Friendly', 'Innovative', 'Health & Wellness', 'Fashion',
+            'Tech Summit', 'Green Living', 'Innovation', 'Health and Wellness', 'Fashion Forward',
+            'Tech Insights', 'Eco Living', 'Innovation Spotlight', 'Wellness Wisdom', 'Fashion Trends',
+            'Software Engineer', 'Environmental Analyst', 'Product Designer', 'HealthCare Specialist', 'Fashion Designer',
+            'Tech Enthusiasts', 'Green Living Community', 'Innovation Discussion', 'Health & Wellness Exchange', 'Fashion Enthusiasts',
+        ];
         return [
             'title' => $this->faker->sentence,
-            'meta_description' => $this->faker->text(300),
-            'meta_keywords' => [
-                $this->faker->word,
-                $this->faker->word,
-                $this->faker->word,
-            ],
+            'meta_description' => $this->faker->text(56),
+            'meta_keywords' => $this->faker->randomElements($keywords, rand(1, 5)),
             'created_at' => now(),
             'updated_at' => now(),
         ];

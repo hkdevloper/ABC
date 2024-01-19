@@ -3,10 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Seo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends Factory<Category>
  */
 class CategoryFactory extends Factory
 {
@@ -18,15 +19,15 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word,
-            'type' => 'company',
+            'name' => $this->faker->name,
+            'type' => $this->faker->randomElement(['company', 'product', 'event', 'blog', 'job', 'forum']),
             'slug' => $this->faker->slug,
             'description' => $this->faker->text,
             'image' => $this->faker->imageUrl(),
             'is_active' => 1,
             'is_featured' => $this->faker->boolean,
-            'parent_id' => $this->faker->randomElement(Category::pluck('id')->toArray()),
-            'seo_id' => \App\Models\Seo::pluck('id')->random(),
+            'parent_id' => null,
+            'seo_id' => Seo::factory()->create()->id,
             'created_at' => now(),
             'updated_at' => now(),
         ];

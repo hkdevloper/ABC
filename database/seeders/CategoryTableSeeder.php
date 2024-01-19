@@ -12,6 +12,22 @@ class CategoryTableSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Category::factory()->count(10)->create();
+        $categories = [
+            'company' => ['Tech Solutions Inc.', 'Green Earth Industries', 'Global Innovators Co.', 'HealthCare Providers Ltd.', 'Smart Solutions Group'],
+            'product' => ['GadgetMaster Pro', 'Eco-Friendly Home', 'Innovative Tools', 'Health & Wellness Essentials', 'Fashion Trends Outlet'],
+            'event' => ['Tech Summit 2022', 'Green Living Expo', 'Innovation Showcase', 'Health and Wellness Conference', 'Fashion Forward Gala'],
+            'blog' => ['Tech Insights Today', 'Eco Living Chronicles', 'Innovation Spotlight', 'Wellness Wisdom', 'Fashion Trends Blog'],
+            'job' => ['Software Engineer at Tech Solutions Inc.', 'Environmental Analyst at Green Earth Industries', 'Product Designer at Global Innovators Co.', 'HealthCare Specialist at HealthCare Providers Ltd.', 'Fashion Designer at Smart Solutions Group'],
+            'forum' => ['Tech Enthusiasts Hub', 'Green Living Community', 'Innovation Discussion Forum', 'Health & Wellness Exchange', 'Fashion Enthusiasts Club'],
+        ];
+        // \App\Models\Category::factory()->count(10)->create();
+        foreach ($categories as $type => $names) {
+            foreach ($names as $name) {
+                \App\Models\Category::factory()->create([
+                    'name' => $name,
+                    'type' => $type,
+                ]);
+            }
+        }
     }
 }

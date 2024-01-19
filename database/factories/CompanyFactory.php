@@ -3,6 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Address;
+use App\Models\Category;
+use App\Models\Seo;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,22 +20,35 @@ class CompanyFactory extends Factory
      */
     public function definition(): array
     {
+        $companies = [
+            'Tech Solutions Inc.', 'Green Earth Industries', 'Global Innovators Co.', 'HealthCare Providers Ltd.', 'Smart Solutions Group',
+            'GadgetMaster Pro', 'Eco-Friendly Home', 'Innovative Tools', 'Health & Wellness Essentials', 'Fashion Trends Outlet',
+            'Tech Summit 2022', 'Green Living Expo', 'Innovation Showcase', 'Health and Wellness Conference', 'Fashion Forward Gala',
+            'Tech Insights Today', 'Eco Living Chronicles', 'Innovation Spotlight', 'Wellness Wisdom', 'Fashion Trends Blog',
+            'Software Engineer at Tech Solutions Inc.', 'Environmental Analyst at Green Earth Industries', 'Product Designer at Global Innovators Co.', 'HealthCare Specialist at HealthCare Providers Ltd.', 'Fashion Designer at Smart Solutions Group',
+            'Tech Enthusiasts Hub', 'Green Living Community', 'Innovation Discussion Forum', 'Health & Wellness Exchange', 'Fashion Enthusiasts Club',
+        ];
+        $products = [
+            'GadgetMaster Pro', 'Eco-Friendly Home', 'Innovative Tools', 'Health & Wellness Essentials', 'Fashion Trends Outlet',
+            'Tech Summit 2022', 'Green Living Expo', 'Innovation Showcase', 'Health and Wellness Conference', 'Fashion Forward Gala',
+            'Tech Insights Today', 'Eco Living Chronicles', 'Innovation Spotlight', 'Wellness Wisdom', 'Fashion Trends Blog',
+            'Software Engineer at Tech Solutions Inc.', 'Environmental Analyst at Green Earth Industries', 'Product Designer at Global Innovators Co.', 'HealthCare Specialist at HealthCare Providers Ltd.', 'Fashion Designer at Smart Solutions Group',
+            'Tech Enthusiasts Hub', 'Green Living Community', 'Innovation Discussion Forum', 'Health & Wellness Exchange', 'Fashion Enthusiasts Club',
+        ];
+        $category = Category::where('type', 'blog')->get();
+        $category = $category->pluck('id')->toArray();
         return [
             'is_approved' => $this->faker->boolean,
-            'is_claimed' => $this->faker->boolean,
+            'is_claimed' => false,
             'is_active' => $this->faker->boolean,
             'is_featured' => $this->faker->boolean,
-            'user_id' => \App\Models\User::pluck('id')->random(),
-            'category_id' => \App\Models\Category::pluck('id')->random(),
-            'business_type' => $this->faker->word,
-            'name' => $this->faker->company,
+            'user_id' => User::pluck('id')->random(),
+            'category_id' => $this->faker->randomElement($category),
+            'business_type' => $this->faker->randomElement(['private', 'public',  'partnership', 'sole proprietorship', 'limited liability company', 'cooperative']),
+            'name' => $this->faker->randomElement($companies),
             'slug' => $this->faker->unique()->slug,
-            'description' => $this->faker->randomHtml,
-            'extra_things' => [
-                $this->faker->word,
-                $this->faker->word,
-                $this->faker->word,
-            ],
+            'description' => $this->faker->realText(1000),
+            'extra_things' => $this->faker->randomElements($products, rand(1,5)),
             'banner' => "companies/banner/1 (".rand(1,13).").jpg",
             'logo' => "companies/logo/".rand(1,50).".webp",
             'gallery' => json_encode([
@@ -51,7 +67,7 @@ class CompanyFactory extends Factory
             'linkdin' => $this->faker->url,
             'youtube' => $this->faker->url,
             'address_id' => Address::factory()->create()->id,
-            'seo_id' => \App\Models\Seo::factory()->create()->id,
+            'seo_id' => Seo::factory()->create()->id,
             'created_at' => now(),
             'updated_at' => now(),
         ];
