@@ -126,14 +126,14 @@
                     <!-- Category Card 1 -->
                     @if(is_iterable($category))
                         @forelse($category as $item)
-                            <x-bladewind.card id="parentContainer"
-                                              class="cursor-pointer bg-indigo-100 hover:shadow-gray-400 flex flex-col items-center justify-center"
-                                              :reducePadding="true">
-                                <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}"
-                                     class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-full"/>
-                                <p class="text-center text-xs md:text-base lg:text-base bold italic mt-2">{{ $item->name }}</p>
-                                <p class="hidden md:block text-center text-base md:text-xl bold mt-2">
-                                    ({{ $item->countItem() }})</p>
+                            <x-bladewind.card class="cursor-pointer bg-indigo-100 hover:shadow-gray-400" :reducePadding="true">
+                               <div class="flex flex-col items-center justify-center">
+                                   <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}"
+                                        class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-full"/>
+                                   <p class="text-center text-xs md:text-base lg:text-base bold italic mt-2">{{ $item->name }}</p>
+                                   <p class="hidden md:block text-center text-base md:text-xl bold mt-2">
+                                       ({{ $item->countItem() }})</p>
+                               </div>
                             </x-bladewind.card>
 
                         @empty
