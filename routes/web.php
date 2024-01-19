@@ -8,6 +8,7 @@ use App\Http\Controllers\UserEventController;
 use App\Http\Controllers\UserForumController;
 use App\Http\Controllers\UserJobController;
 use App\Http\Controllers\UserProductController;
+use App\Models\BlockedDomain;
 use App\Models\BlogComments;
 use App\Models\Category;
 use App\Models\Company;
@@ -46,13 +47,35 @@ Route::get('/', function () {
     $p = Product::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
     $c = Company::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
     $e = Event::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
-    $category = [];
-    $category[] = Category::where('is_active', 1)->where('type', 'company')->first();
-    $category[] = Category::where('is_active', 1)->where('type', 'product')->first();
-    $category[] = Category::where('is_active', 1)->where('type', 'event')->first();
-    $category[] = Category::where('is_active', 1)->where('type', 'blog')->first();
-    $category[] = Category::where('is_active', 1)->where('type', 'job')->first();
-    $category[] = Category::where('is_active', 1)->where('type', 'forum')->first();
+    $categories = Category::where('is_active', 1)
+        ->whereIn('type', ['company', 'product', 'event', 'blog', 'job', 'forum'])
+        ->orderByDesc('is_featured') // Prioritize featured categories
+        ->orderByDesc(function ($query) {
+            $query->selectRaw('COUNT(*)')
+                ->from('products')
+                ->whereColumn('categories.id', 'products.category_id');
+        })
+        ->take(6) // Retrieve at least six categories
+        ->get();
+
+// If the retrieved categories are less than six, fetch additional categories as needed.
+    $remainingCategoriesCount = 6 - $categories->count();
+    if ($remainingCategoriesCount > 0) {
+        $remainingCategories = Category::where('is_active', 1)
+            ->whereIn('type', ['company', 'product', 'event', 'blog', 'job', 'forum'])
+            ->orderByDesc('is_featured')
+            ->orderByDesc(function ($query) {
+                $query->selectRaw('COUNT(*)')
+                    ->from('products')
+                    ->whereColumn('categories.id', 'products.category_id');
+            })
+            ->take($remainingCategoriesCount)
+            ->get();
+
+        $categories = $categories->merge($remainingCategories);
+    }
+
+    $category = $categories;
     $searchList = [];
 
     foreach ($p as $item) {
@@ -110,7 +133,7 @@ Route::prefix('auth')->group(function () {
             'confirm_password' => 'required|same:password',
         ]);
         // Spam Email Check
-        $spamEmails = \App\Models\BlockedDomain::where('status', 1)->pluck('domain')->toArray();
+        $spamEmails = BlockedDomain::where('status', 1)->pluck('domain')->toArray();
         foreach ($spamEmails as $spamEmail) {
             if (str_contains(strtolower($request->email), strtolower($spamEmail))) {
                 return redirect()->back()->with('error', 'Invalid email');
@@ -221,7 +244,7 @@ Route::get('/search', function (Request $request) {
         ->select('p.*', 'c.name as category_name')
         ->where('p.is_approved', 1)
         ->where('p.is_active', 1)
-        ->where('s.meta_keywords', 'LIKE', '%'.$search.'%')
+        ->where('s.meta_keywords', 'LIKE', '%' . $search . '%')
         ->paginate(10);
 
     $data = compact('products');

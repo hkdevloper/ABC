@@ -122,17 +122,19 @@
                 <hr class="my-2 md:my-5">
                 <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-1 md:gap-3">
                     <!-- Category Card 1 -->
-                    @forelse($category as $item)
-                        <x-bladewind.card
-                            class="cursor-pointer bg-indigo-100 hover:shadow-gray-400 flex flex-col items-center justify-center" :reducePadding="true">
-                            <img src="{{ url('storage/' . $item->image) }}" alt="{{$item->name}}"
-                                 class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-full"/>
-                            <p class="text-center text-xs md:text-base lg:text-xl bold italic mt-2">{{$item->name}}</p>
-                            <p class="hidden md:block text-center text-base md:text-xl bold mt-2">({{$item->countItem()}})</p>
-                        </x-bladewind.card>
-                    @empty
-                        <p class="text-gray-700">No categories available.</p>
-                    @endforelse
+                    @if(is_iterable($category))
+                        @forelse($category as $item)
+                            <x-bladewind.card class="cursor-pointer bg-indigo-100 hover:shadow-gray-400 flex flex-col items-center justify-center" :reducePadding="true">
+                                <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}" class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-full"/>
+                                <p class="text-center text-xs md:text-base lg:text-xl bold italic mt-2">{{ $item->name }}</p>
+                                <p class="hidden md:block text-center text-base md:text-xl bold mt-2">({{ $item->countItem() }})</p>
+                            </x-bladewind.card>
+                        @empty
+                            <p class="text-gray-700">No categories available.</p>
+                        @endforelse
+                    @else
+                        <p class="text-gray-700">Invalid category data.</p>
+                    @endif
                 </div>
             </div>
         </section>
