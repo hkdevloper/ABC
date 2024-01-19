@@ -16,6 +16,7 @@ use App\Models\Event;
 use App\Models\Requirement;
 use App\Models\Subscribe;
 use App\Models\User;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -208,18 +209,15 @@ Route::post('comment', function (Request $request) {
 
 Route::get('/search', function (Request $request) {
     $search = $request->q;
-    $searchList = [];
-    $products = Product::where('is_approved', 1)->where('is_active', 1)->paginate(12);
-    foreach ($products as $item) {
-        $seo = $item->seo;
-        foreach ($seo->meta_keywords as $keyword) {
-            if (str_contains(strtolower($keyword), strtolower($search))) {
-                $searchList[] = $item;
-            }
-        }
-    }
-    // Unique the array
-    $products = array_unique($searchList);
+    $products = DB::table('products as p')
+        ->join('seo as s', 'p.id', '=', 's.id')
+        ->join('categories as c', 'p.category_id', '=', 'c.id')
+        ->select('p.*', 'c.name as category_name')
+        ->where('p.is_approved', 1)
+        ->where('p.is_active', 1)
+        ->where('s.meta_keywords', 'LIKE', '%'.$search.'%')
+        ->paginate(10);
+
     $data = compact('products');
     return view('search')->with($data);
 })->name('search');

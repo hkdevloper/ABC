@@ -30,7 +30,7 @@ class JobPolicy
     public function view(User $user, Job $job): bool
     {
         // Authorization logic...
-        if ($user->id === $job->user_id) {
+        if ($user->id === $job->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -50,7 +50,7 @@ class JobPolicy
     public function update(User $user, Job $job): bool
     {
         // Authorization logic...
-        if ($user->id === $job->user_id) {
+        if ($user->id === $job->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -62,7 +62,7 @@ class JobPolicy
     public function delete(User $user, Job $job): bool
     {
         // Authorization logic...
-        if ($user->id === $job->user_id) {
+        if ($user->id === $job->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -74,7 +74,7 @@ class JobPolicy
     public function restore(User $user, Job $job): bool
     {
         // Authorization logic...
-        if ($user->id === $job->user_id) {
+        if ($user->id === $job->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -86,7 +86,7 @@ class JobPolicy
     public function forceDelete(User $user, Job $job): bool
     {
         // Authorization logic...
-        if ($user->id === $job->user_id) {
+        if ($user->id === $job->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;

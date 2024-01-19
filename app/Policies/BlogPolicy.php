@@ -30,10 +30,7 @@ class BlogPolicy
     public function view(User $user, Blog $blog): bool
     {
         // Authorization logic...
-        if($user->type == 'Admin'){
-            return true;
-        }
-        if ($user->id === $blog->user_id) {
+        if ($user->id === $blog->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -52,11 +49,7 @@ class BlogPolicy
      */
     public function update(User $user, Blog $blog): bool
     {
-        // Authorization logic...
-        if($user->type == 'Admin'){
-            return true;
-        }
-        if ($user->id === $blog->user_id) {
+        if ($user->id === $blog->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -67,11 +60,7 @@ class BlogPolicy
      */
     public function delete(User $user, Blog $blog): bool
     {
-        // Authorization logic...
-        if($user->type == 'Admin'){
-            return true;
-        }
-        if ($user->id === $blog->user_id) {
+        if ($user->id === $blog->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -82,11 +71,7 @@ class BlogPolicy
      */
     public function restore(User $user, Blog $blog): bool
     {
-        // Authorization logic...
-        if($user->type == 'Admin'){
-            return true;
-        }
-        if ($user->id === $blog->user_id) {
+        if ($user->id === $blog->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -97,11 +82,7 @@ class BlogPolicy
      */
     public function forceDelete(User $user, Blog $blog): bool
     {
-        // Authorization logic...
-        if($user->type == 'Admin'){
-            return true;
-        }
-        if ($user->id === $blog->user_id) {
+        if ($user->id === $blog->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;

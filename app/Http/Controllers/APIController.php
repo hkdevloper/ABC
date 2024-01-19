@@ -20,7 +20,7 @@ class APIController extends Controller
         ]);
         $search = $request->search;
         $searchList = [];
-        $products = Product::where('is_approved', 1)->where('is_active', 1)->paginate(12);
+        $products = Product::where('is_approved', 1)->where('is_active', 1)->get();
         foreach($products as $item){
             $seo = $item->seo;
             foreach ($seo->meta_keywords as $keyword){

@@ -53,42 +53,34 @@
             const inputValue = this.value.trim().toLowerCase();
 
             // Check if inputValue is at least 3 characters
-            if (inputValue.length >= 3) {
-                const searchURL = "{{ route('api.search', ['search' => '__input__']) }}".replace('__input__', inputValue);
+            const searchURL = "{{ route('api.search', ['search' => '__input__']) }}".replace('__input__', inputValue);
 
-                try {
-                    // Fetch data from the search endpoint
-                    const response = await fetch(searchURL);
-                    const searchData = await response.json();
-                    const data = searchData.data;
-                    console.log(data)
+            try {
+                // Fetch data from the search endpoint
+                const response = await fetch(searchURL);
+                const searchData = await response.json();
+                const data = searchData.data;
+                console.log(data)
 
-                    // Clear previous results
-                    searchResults.innerHTML = '';
+                // Clear previous results
+                searchResults.innerHTML = '';
 
-                    // Filter and display results
-                    data.forEach(result => {
-                        const [name, slug, type] = result;
-                        const resultElement = document.createElement('a');
-                        resultElement.textContent = name;
+                // Filter and display results
+                data.forEach(result => {
+                    const resultElement = document.createElement('a');
+                    resultElement.textContent = result;
+                    resultElement.href = "{{ route('search', ['q' => '__slug__']) }}".replace('__slug__', result);
+                    console.log(resultElement.href)
 
-                        // Generate a link based on the type of item
-                        if (type === 'company') {
-                            resultElement.href = "{{ route('view.company', ['slug' => '__slug__']) }}".replace('__slug__', slug);
-                        } else if (type === 'product') {
-                            resultElement.href = "{{ route('view.product', ['slug' => '__slug__']) }}".replace('__slug__', slug);
-                        }
-                        console.log(resultElement.href)
-
-                        searchResults.appendChild(resultElement);
-                        // Show or hide the result container based on the input length
-                        searchResults.style.display = inputValue.length >= 3 ? 'block' : 'none';
-                    });
-                } catch (error) {
-                    console.error('Error fetching search results:', error);
-                }
+                    searchResults.appendChild(resultElement);
+                    // Show or hide the result container based on the input length
+                    searchResults.style.display = inputValue.length >= 3 ? 'block' : 'none';
+                });
+            } catch (error) {
+                console.error('Error fetching search results:', error);
             }
         });
+        const card = document.getElementById('categoryCard');
     </script>
 @endsection
 
@@ -119,11 +111,11 @@
     <div class="container py-6 mx-auto flex flex-wrap">
         <!-- Product List -->
         @forelse($products as $key => $item)
-            <div class="card p-4 my-4 mx-3 shadow border border-b border-solid border-gray-100 flex items-center justify-between">
+            <div class="card p-4 my-4 mx-3 shadow border border-b border-solid border-gray-100 flex items-center justify-between w-full">
                 <div class="flex items-center justify-center">
                     <img class="w-full h-40 object-cover rounded-lg sm:block sm:col-span-2 md:col-span-1 bg-contain" src="{{ url('storage/' . $item->thumbnail) }}" alt="">
                     <div class="flex items-start justify-start flex-col w-full ml-6">
-                        <span class="text-base text-gray-500 -mb-1">{{$item->category->name}}</span>
+                        <span class="text-base text-gray-500 -mb-1">{{$item->category_name}}</span>
                         <a href="{{ route('view.product', [$item->slug]) }}" class="font-semibold text-4xl">{{ $item->name }}</a>
                         <span class="text-base text-gray-500 -mb-1">Condition: {{$item->condition}}</span>
                         <span class="text-base text-gray-500 -mb-1">Brand: {{$item->brand}}</span>
@@ -150,5 +142,8 @@
                 <p class="text-gray-500 text-center">No Products Found</p>
             </div>
         @endforelse
+        <!-- Pagination -->
+        <hr class="my-5">
+        {{ $products->links() }}
     </div>
 @endsection

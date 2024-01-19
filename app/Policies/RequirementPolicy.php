@@ -35,10 +35,7 @@ class RequirementPolicy
      */
     public function create(User $user): bool
     {
-        if($user->type == 'Admin'){
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**

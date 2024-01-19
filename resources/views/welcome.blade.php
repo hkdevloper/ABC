@@ -63,16 +63,9 @@
 
                     // Filter and display results
                     data.forEach(result => {
-                        const [name, slug, type] = result;
                         const resultElement = document.createElement('a');
-                        resultElement.textContent = name;
-
-                        // Generate a link based on the type of item
-                        if (type === 'company') {
-                            resultElement.href = "{{ route('view.company', ['slug' => '__slug__']) }}".replace('__slug__', slug);
-                        } else if (type === 'product') {
-                            resultElement.href = "{{ route('view.product', ['slug' => '__slug__']) }}".replace('__slug__', slug);
-                        }
+                        resultElement.textContent = result;
+                        resultElement.href = "{{ route('search', ['q' => '__slug__']) }}".replace('__slug__', result);
                         console.log(resultElement.href)
 
                         searchResults.appendChild(resultElement);

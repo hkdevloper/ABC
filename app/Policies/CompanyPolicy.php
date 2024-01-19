@@ -21,7 +21,11 @@ class CompanyPolicy
      */
     public function view(User $user, Company $company): bool
     {
-        return true;
+        // Authorization logic...
+        if ($user->id === $company->user_id || $user->type == 'Admin') {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -37,7 +41,11 @@ class CompanyPolicy
      */
     public function update(User $user, Company $company): bool
     {
-        return true;
+        // Authorization logic...
+        if ($user->id === $company->user_id || $user->type == 'Admin') {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -45,7 +53,11 @@ class CompanyPolicy
      */
     public function delete(User $user, Company $company): bool
     {
-        return true;
+        // Authorization logic...
+        if ($user->id === $company->user_id || $user->type == 'Admin') {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -53,7 +65,11 @@ class CompanyPolicy
      */
     public function restore(User $user, Company $company): bool
     {
-        return true;
+        // Authorization logic...
+        if ($user->id === $company->user_id || $user->type == 'Admin') {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -61,6 +77,10 @@ class CompanyPolicy
      */
     public function forceDelete(User $user, Company $company): bool
     {
-        return true;
+        // Authorization logic...
+        if ($user->id === $company->user_id || $user->type == 'Admin') {
+            return true;
+        }
+        return false;
     }
 }
