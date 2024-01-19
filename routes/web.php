@@ -46,7 +46,13 @@ Route::get('/', function () {
     $p = Product::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
     $c = Company::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
     $e = Event::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
-    $category = Category::where('is_active', 1)->orderBy('created_at', 'desc')->take(6)->get();
+    $category = [];
+    $category[] = Category::where('is_active', 1)->where('type', 'company')->first();
+    $category[] = Category::where('is_active', 1)->where('type', 'product')->first();
+    $category[] = Category::where('is_active', 1)->where('type', 'event')->first();
+    $category[] = Category::where('is_active', 1)->where('type', 'blog')->first();
+    $category[] = Category::where('is_active', 1)->where('type', 'job')->first();
+    $category[] = Category::where('is_active', 1)->where('type', 'forum')->first();
     $searchList = [];
 
     foreach ($p as $item) {
