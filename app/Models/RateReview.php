@@ -14,8 +14,8 @@ class RateReview extends Model
     protected $table = 'rate_reviews';
     protected $fillable = [
         'user_id',
-        'type',
-        'item_id',
+        'type', // company, product, event
+        'item_id', // company_id, product_id, event_id
         'rating',
         'review',
     ];

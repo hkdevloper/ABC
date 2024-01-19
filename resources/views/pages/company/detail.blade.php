@@ -60,11 +60,11 @@
                     <div class="flex items-center justify-center">
                         <div class="flex flex-col items-center justify-center">
                             <h1 class="text-sm text-gray-500">Reviews</h1>
-                            <span class="text-xl font-semibold">{{ $company->getReviewsCount() }}</span>
+                            <span class="text-xl font-semibold">{{\App\classes\HelperFunctions::getRatingCount('company', $company->id)}}</span>
                         </div>
                         <div class="flex flex-col items-center justify-center mx-5">
                             <h1 class="text-sm text-gray-500">Rating</h1>
-                            <span class="text-xl font-semibold">{{ $company->getAverageRating() }}</span>
+                            <span class="text-xl font-semibold">{{\App\classes\HelperFunctions::getRatingAverage('company', $company->id)}}</span>
                         </div>
                         <div class="flex flex-col items-center justify-center">
                             <h1 class="text-sm text-gray-500">Products</h1>
@@ -222,23 +222,9 @@
                                             Reviews</h2>
 
                                         <div class="mb-0.5 flex items-center gap-2">
-                                            @php
-                                                // Count Average Rating
-                                                $total_rating = 0;
-                                                $average_rating = 1;
-                                                try{
-                                                    foreach($company->getReviews() as $item){
-                                                        $total_rating += $item->rating;
-                                                    }
-                                                    $count = $company->getReviewsCount() ? $company->getReviewsCount() : 1;
-                                                    $average_rating = $total_rating / $count;
-                                                }catch (Exception $e){
-                                                    $average_rating = 1;
-                                                }
-                                            @endphp
                                             <x-bladewind.rating name="star-rating" size="medium" clickable="false"
-                                                                rating="{{$average_rating}}"/>
-                                            <span class="text-sm font-semibold">{{$average_rating}}/5</span>
+                                                                rating="{{\App\classes\HelperFunctions::getRatingAverage('company', $company->id)}}"/>
+                                            <span class="text-sm font-semibold">{{\App\classes\HelperFunctions::getRatingAverage('company', $company->id)}}/5</span>
                                         </div>
 
                                         <span class="block text-sm text-gray-500">Bases on {{$company->getReviews()->count()}} reviews</span>
@@ -430,23 +416,9 @@
                                     Reviews</h2>
 
                                 <div class="mb-0.5 flex items-center gap-2">
-                                    @php
-                                        // Count Average Rating
-                                        $total_rating = 0;
-                                        $average_rating = 1;
-                                        try{
-                                            foreach($company->getReviews() as $item){
-                                                $total_rating += $item->rating;
-                                            }
-                                            $count = $company->getReviewsCount() ? $company->getReviewsCount() : 1;
-                                            $average_rating = $total_rating / $count;
-                                        }catch (Exception $e){
-                                            $average_rating = 1;
-                                        }
-                                    @endphp
                                     <x-bladewind.rating name="star-rating" size="medium" clickable="false"
-                                                        rating="{{$average_rating}}"/>
-                                    <span class="text-sm font-semibold">{{$average_rating}}/5</span>
+                                                        rating="{{\App\classes\HelperFunctions::getRatingAverage('company', $company->id)}}"/>
+                                    <span class="text-sm font-semibold">{{\App\classes\HelperFunctions::getRatingAverage('company', $company->id)}}/5</span>
                                 </div>
 
                                 <span class="block text-sm text-gray-500">Bases on {{$company->getReviews()->count()}} reviews</span>

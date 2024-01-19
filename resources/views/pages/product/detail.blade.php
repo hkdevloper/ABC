@@ -57,10 +57,10 @@
                     <span class="text-sm text-gray-500">Published on {{ $product->created_at->format('d M Y') }} ({{ $product->updated_at->diffForHumans() }})</span>
                 </div>
             </div>
-            <button class="bg-purple-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue">
+            <a href="{{route('view.company', [$product->company->slug])}}" class="bg-purple-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue">
                 View Profile
                 <i class='bx bx-link-external ml-2'></i>
-            </button>
+            </a>
         </div>
         <x-bladewind.tab-group name="product-info">
             <x-slot name="headings">
@@ -123,23 +123,9 @@
                                 <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Customer Reviews</h2>
 
                                 <div class="mb-0.5 flex items-center gap-2">
-                                    @php
-                                        // Count Average Rating
-                                        $total_rating = 0;
-                                        $average_rating = 1;
-                                        try{
-                                            foreach($product->getReviews() as $item){
-                                                $total_rating += $item->rating;
-                                            }
-                                            $count = $product->getReviewsCount() ? $product->getReviewsCount() : 1;
-                                            $average_rating = $total_rating / $count;
-                                        }catch (Exception $e){
-                                            $average_rating = 1;
-                                        }
-                                    @endphp
                                     <x-bladewind.rating name="star-rating" size="medium" clickable="false"
-                                                        rating="{{$average_rating}}"/>
-                                    <span class="text-sm font-semibold">{{$average_rating}}/5</span>
+                                                        rating="{{\App\classes\HelperFunctions::getRatingAverage('product', $product->id)}}"/>
+                                    <span class="text-sm font-semibold">{{\App\classes\HelperFunctions::getRatingAverage('product', $product->id)}}/5</span>
                                 </div>
 
                                 <span class="block text-sm text-gray-500">Bases on {{$product->getReviews()->count()}} reviews</span>

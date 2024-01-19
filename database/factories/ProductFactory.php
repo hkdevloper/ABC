@@ -32,12 +32,10 @@ class ProductFactory extends Factory
         $brands = [
             'Apple', 'Samsung', 'Microsoft', 'Sony', 'LG', 'Lenovo', 'Asus', 'HP', 'Dell', 'Acer', 'Huawei', 'Xiaomi', 'Oppo', 'Vivo', 'Realme', 'OnePlus', 'Google', 'Motorola', 'Nokia', 'Blackberry', 'HTC', 'ZTE', 'Alcatel', 'TCL', 'Amazon', 'Razer', 'Panasonic', 'Toshiba', 'Fujitsu', 'Sharp', 'Infinix', 'Tecno', 'Meizu', 'Coolpad', 'Gionee', 'Micromax', 'Lava', 'Intex', 'Karbonn', 'YU', 'Xolo', 'LeEco', 'BLU', 'InFocus', 'Itel', 'Spice', 'QMobile', 'Vodafone', 'Airtel', 'BSNL', 'Idea', 'Reliance Jio', 'T-Mobile', 'Verizon', 'AT&T', 'Sprint', 'Virgin Mobile', 'US Cellular', 'Boost Mobile', 'Cricket Wireless', 'TracFone', 'MetroPCS', 'Xfinity Mobile', 'Google Fi', 'Consumer Cellular', 'Straight Talk', 'Simple Mobile', 'H2O Wireless', 'Mint Mobile', 'Ting', 'Republic Wireless', 'Net10', 'SpeedTalk Mobile', 'FreedomPop', 'Walmart Family Mobile', 'Total Wireless', 'Red Pocket Mobile', 'Project Fi', 'Telcel', 'Tracfone', 'SafeLink Wireless', 'Page Plus Cellular', 'GoSmart Mobile', 'Airvoice Wireless', 'Pix Wireless', 'Puppy Wireless', 'Net10 Wireless', 'US Mobile', 'Ultra Mobile', 'Tello', 'Good2Go Mobile', 'Black Wireless', 'Red Pocket Mobile', 'EcoMobile', 'Ting', 'ROK Mobile', 'TPO Mobile', 'Unreal Mobile', 'Republic Wireless', 'CREDO Mobile', 'TextNow'
         ];
-        $category = Category::where('type', 'blog')->get();
-        $category = $category->pluck('id')->toArray();
         return [
             'user_id' => User::all()->random()->id,
             'claimed_by' => rand(0, 1) ? User::all()->random()->id : null,
-            'category_id' => $this->faker->randomElement($category),
+            'category_id' => Category::where('type', 'product')->pluck('id')->random(),
             'seo_id' => Seo::factory()->create()->id,
             'is_active' => $this->faker->boolean,
             'is_featured' => $this->faker->boolean,

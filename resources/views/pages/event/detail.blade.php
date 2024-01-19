@@ -37,23 +37,9 @@
                                         <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Customer Reviews</h2>
 
                                         <div class="mb-0.5 flex items-center gap-2">
-                                            @php
-                                                // Count Average Rating
-                                                $total_rating = 0;
-                                                $average_rating = 1;
-                                                try{
-                                                    foreach($event->getReviews() as $item){
-                                                        $total_rating += $item->rating;
-                                                    }
-                                                    $count = $event->getReviewsCount() ? $event->getReviewsCount() : 1;
-                                                    $average_rating = $total_rating / $count;
-                                                }catch (Exception $e){
-                                                    $average_rating = 1;
-                                                }
-                                            @endphp
                                             <x-bladewind.rating name="star-rating" size="medium" clickable="false"
-                                                                rating="{{$average_rating}}"/>
-                                            <span class="text-sm font-semibold">{{$average_rating}}/5</span>
+                                                                rating="{{\App\classes\HelperFunctions::getRatingAverage('event', $event->id)}}"/>
+                                            <span class="text-sm font-semibold">{{\App\classes\HelperFunctions::getRatingAverage('event', $event->id)}}/5</span>
                                         </div>
 
                                         <span class="block text-sm text-gray-500">Bases on {{$event->getReviews()->count()}} reviews</span>

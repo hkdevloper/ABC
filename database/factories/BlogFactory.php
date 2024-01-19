@@ -77,21 +77,17 @@ class BlogFactory extends Factory
             'software engineer', 'environmental analyst', 'product designer', 'healthcare specialist', 'fashion designer',
             'tech enthusiasts', 'green living community', 'innovation discussion', 'health & wellness exchange', 'fashion enthusiasts',
         ];
-
-        $category = Category::where('type', 'blog')->get();
-        $category = $category->pluck('id')->toArray();
-
         return [
             'user_id' => User::pluck('id')->random(),
             'seo_id' => Seo::factory()->create()->id,
-            'category_id' => $this->faker->randomElement($category),
+            'category_id' => Category::where('type', 'blog')->pluck('id')->random(),
             'is_active' => $this->faker->boolean,
             'is_featured' => $this->faker->boolean,
             'is_approved' => $this->faker->boolean,
             'thumbnail' => 'blog/thumbnail/blog- ('. rand(1, 60) .').jpg',
             'title' => $this->faker->randomElement($blogTitles),
             'slug' => $this->faker->slug,
-            'tags' => json_encode($this->faker->randomElements($tags, rand(1,5))),
+            'tags' => $this->faker->randomElements($tags, rand(1,5)),
             'content' => $this->faker->realText(2500),
         ];
     }

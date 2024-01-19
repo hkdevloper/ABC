@@ -35,15 +35,13 @@ class CompanyFactory extends Factory
             'Software Engineer at Tech Solutions Inc.', 'Environmental Analyst at Green Earth Industries', 'Product Designer at Global Innovators Co.', 'HealthCare Specialist at HealthCare Providers Ltd.', 'Fashion Designer at Smart Solutions Group',
             'Tech Enthusiasts Hub', 'Green Living Community', 'Innovation Discussion Forum', 'Health & Wellness Exchange', 'Fashion Enthusiasts Club',
         ];
-        $category = Category::where('type', 'blog')->get();
-        $category = $category->pluck('id')->toArray();
         return [
             'is_approved' => $this->faker->boolean,
             'is_claimed' => false,
             'is_active' => $this->faker->boolean,
             'is_featured' => $this->faker->boolean,
             'user_id' => User::pluck('id')->random(),
-            'category_id' => $this->faker->randomElement($category),
+            'category_id' => Category::where('type', 'company')->pluck('id')->random(),
             'business_type' => $this->faker->randomElement(['private', 'public',  'partnership', 'sole proprietorship', 'limited liability company', 'cooperative']),
             'name' => $this->faker->randomElement($companies),
             'slug' => $this->faker->unique()->slug,

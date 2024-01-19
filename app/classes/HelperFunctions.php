@@ -120,7 +120,8 @@ class HelperFunctions
                 foreach ($rating as $item) {
                     $total += $item->rating;
                 }
-                return $total / $rating->count();
+                $average_rating = $total / $rating->count();
+                return number_format((float)$average_rating, 2, '.', '');
             } else {
                 return 0;
             }
