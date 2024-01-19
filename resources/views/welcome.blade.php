@@ -86,7 +86,8 @@
     <section class="relative py-8 md:h-[60vh] flex flex-col items-center justify-center overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-purple-500 via-green-300 to-purple-500 opacity-25"></div>
         <div class="mx-auto text-center relative z-10 ">
-            <h1 class="md:text-3xl text-xl lg:text-5xl font-semibold text-dark mb-2">Discover Top Companies and Products</h1>
+            <h1 class="md:text-3xl text-xl lg:text-5xl font-semibold text-dark mb-2">Discover Top Companies and
+                Products</h1>
             <p class="text-dark text-xs md:text-lg mb-4">Explore a vast network of five lakh+ businesses and products
                 for your needs</p>
             <form action="{{ route('search') }}"
@@ -111,7 +112,8 @@
         <section class="p-2 my-1 md:p-8 md:my-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Categories</h1>
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">
+                        Categories</h1>
                     <a href="{{ route('company')}}"
                        class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
                         <span class="text-purple-500 md:text-white">Explore All</span>
@@ -124,11 +126,16 @@
                     <!-- Category Card 1 -->
                     @if(is_iterable($category))
                         @forelse($category as $item)
-                            <x-bladewind.card class="cursor-pointer bg-indigo-100 hover:shadow-gray-400 flex flex-col items-center justify-center" :reducePadding="true">
-                                <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}" class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-full"/>
-                                <p class="text-center text-xs md:text-base lg:text-xl bold italic mt-2">{{ $item->name }}</p>
-                                <p class="hidden md:block text-center text-base md:text-xl bold mt-2">({{ $item->countItem() }})</p>
+                            <x-bladewind.card id="parentContainer"
+                                              class="cursor-pointer bg-indigo-100 hover:shadow-gray-400 flex flex-col items-center justify-center"
+                                              :reducePadding="true">
+                                <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}"
+                                     class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-full"/>
+                                <p class="text-center text-xs md:text-base lg:text-base bold italic mt-2">{{ $item->name }}</p>
+                                <p class="hidden md:block text-center text-base md:text-xl bold mt-2">
+                                    ({{ $item->countItem() }})</p>
                             </x-bladewind.card>
+
                         @empty
                             <p class="text-gray-700">No categories available.</p>
                         @endforelse
@@ -143,7 +150,8 @@
         <section class="p-2 my-1 md:p-8 md:my-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Companies</h1>
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
+                        Companies</h1>
                     <a href="{{ route('company') }}"
                        class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
                         <span class="text-purple-500 md:text-white">Explore All</span>
@@ -154,19 +162,24 @@
                 <hr class="my-5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-8">
                     @forelse($companies as $company)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
                             @if($company->is_featured)
-                                <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
+                                <div
+                                    class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
                                     Featured
                                 </div>
                             @endif
-                            <a href="{{ route('view.company', [$company->slug]) }}" class="w-[150px] h-[150px] md:w-full md:p-4 md:m-auto md:block md:h-full object-contain">
-                                <img alt="company photo" src="{{ url('storage/' . $company->logo) }}" class="w-[150px] h-[150px] md:w-full md:h-48 object-contain"/>
+                            <a href="{{ route('view.company', [$company->slug]) }}"
+                               class="w-[150px] h-[150px] md:w-full md:p-4 md:m-auto md:block md:h-full object-contain">
+                                <img alt="company photo" src="{{ url('storage/' . $company->logo) }}"
+                                     class="w-[150px] h-[150px] md:w-full md:h-48 object-contain"/>
                             </a>
                             <div class="p-1 md:p-2 flex flex-col items-start md:items-center justify-center">
                                 <h3 class="text-base md:text-lg font-bold md:text-center text-indigo-900 mb-2">{{ $company->name }}</h3>
                                 <p class="text-red-700 text-center text-xs md:text-sm">{{ $company->address->country->name }}</p>
-                                <h2 class="text-sm md:text-base bold italic underline text-indigo-700 mt-2">Deals In</h2>
+                                <h2 class="text-sm md:text-base bold italic underline text-indigo-700 mt-2">Deals
+                                    In</h2>
                                 <p class="text-gray-700 text-center text-xs md:text-sm">{{ $company->dealsIn() }}</p>
                             </div>
                             <div class="absolute bottom-0 md:static right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
@@ -187,7 +200,8 @@
         <!-- Top Products -->
         <section class="p-2 my-1 md:p-8 md:my-4">
             <div class="flex justify-between items-center">
-                <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Explore Top Products</h1>
+                <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Explore Top
+                    Products</h1>
                 <a href="{{ route('products') }}"
                    class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
                     <span class="text-purple-500 md:text-white">Explore All</span>
@@ -198,14 +212,17 @@
             <hr class="my-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 @forelse($products as $item)
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                    <div
+                        class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
                         @if($item->is_featured)
                             <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
                                 Featured
                             </div>
                         @endif
-                        <a href="{{ route('view.product', [$item->slug]) }}" class="w-[150px] h-[150px] md:w-full md:p-4 md:m-auto md:block md:h-full object-contain">
-                            <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}" class="w-[150px] h-[150px] md:w-full md:h-48 object-contain"/>
+                        <a href="{{ route('view.product', [$item->slug]) }}"
+                           class="w-[150px] h-[150px] md:w-full md:p-4 md:m-auto md:block md:h-full object-contain">
+                            <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}"
+                                 class="w-[150px] h-[150px] md:w-full md:h-48 object-contain"/>
                         </a>
                         <div class="p-1 md:p-2 flex flex-col items-start md:items-center justify-center">
                             <header class="flex my-2 font-light text-base items-center">
@@ -215,7 +232,8 @@
                             <p class="text-xl font-medium mb-2">{{ $item->name }}</p>
                             <p class="text-red-700 text-center text-xs md:text-sm">{{ $item->company->name }}</p>
                             <p class="text-gray-700 text-center text-xs md:text-sm">{{ $item->company->address->country->name }}</p>
-                            <p class="text-gray-700 text-center text-xs md:text-sm">Price: ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
+                            <p class="text-gray-700 text-center text-xs md:text-sm">Price:
+                                ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
                         </div>
                         <div class="absolute bottom-0 md:static right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
                             <a href="{{ route('view.product', [$item->slug]) }}"
@@ -235,7 +253,8 @@
         <section class="p-2 my-1 md:p-8 md:my-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Events</h1>
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
+                        Events</h1>
                     <a href="{{ route('events') }}"
                        class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
                         <span class="text-purple-500 md:text-white">Explore All</span>
