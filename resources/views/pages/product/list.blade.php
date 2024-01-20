@@ -5,7 +5,7 @@
         <h1 class="block text-4xl w-full text-center font-bold">Search for thousands of products</h1>
         <br>
         <form action="{{ route('search') }}"
-              class="mt-2 md:mt-4 flex items-center justify-center p-4 pl-2 relative bg-white w-2/3">
+              class="mt-2 md:mt-4 flex items-center justify-center p-4 pl-2 relative bg-white w-2/3 shadow">
             <div class="relative flex items-center justify-between w-full s-form">
                 <label for="searchInput" class="sr-only">Search</label>
                 <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters"
