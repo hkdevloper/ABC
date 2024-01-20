@@ -29,6 +29,8 @@ class UserJobController extends Controller
         Session::forget('menu');
         $job = Job::where('slug', $slug)->firstOrFail();
         $related_jobs = Job::where('category_id', $job->category_id)->where('is_approved', 1)->where('is_active', 1)->where('id', '!=', $job->id)->get();
+        // Take only 3 related jobs
+        $related_jobs = $related_jobs->take(3);
         $data = compact('job', 'related_jobs');
         return view('pages.job.detail')->with($data);
     }

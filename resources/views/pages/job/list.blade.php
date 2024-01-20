@@ -1,68 +1,92 @@
 @extends('layouts.user')
 
 @section('content')
-    <x-user.header :title="'Jobs'" :breadcrumb="['Home', 'Job', 'List']" type="job"/>
-    <div class="container py-6 mx-auto flex flex-wrap">
-        <!-- Job List BLock -->
-        <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
-            <!-- Job List Filter -->
-            <div class="w-full flex flex-nowrap justify-between items-center">
-                <p class="text-base text-gray-500">Search Results for <br> <span
-                            class="text-xl text-purple-500">Jobs</span></p>
-                <p class="text-base text-gray-500">About {{count($jobs)}} Result</p>
-            </div>
-            <hr class="my-5">
-            <!-- Job List -->
-            <div class="flex flex-col mb-10 lg:items-center items-center justify-center">
-                @forelse($jobs as  $job)
-                    <div class="group mx-2 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto">
-                        <a href="{{route('view.job', [$job->slug])}}"
-                           class="order-2 col-span-1 mt-4 -ml-14 text-left text-gray-600 hover:text-gray-700 sm:-order-1 sm:ml-4">
-                            <div class="group relative h-16 w-16 overflow-hidden rounded-lg">
-                                <img src="{{url('storage/' . $job->thumbnail)}}" alt=""
-                                     class="h-full w-full object-contain text-gray-700"/>
-                            </div>
-                        </a>
-                        <div class="col-span-11 flex flex-col pr-8 text-left sm:pl-4">
-                            <h3 class="text-sm text-gray-600">{{$job->category->name}}</h3>
-                            <div class="flex items-center my-2">
-                                <img class='w-10 h-10 object-cover rounded-full' alt='User avatar'
-                                     src='https://ui-avatars.com/api/?name={{$job->user->name}}'/>
-                                <div class="pl-3">
-                                    <div class="font-medium">
-                                        {{$job->user->name}}
-                                    </div>
-                                    <div class="text-gray-600 text-sm">
-                                        {{$job->created_at->diffForHumans()}}
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="{{route('view.job', [$job->slug])}}"
-                               class="mb-3 overflow-hidden pr-7 text-lg font-semibold sm:text-xl"> {{$job->title}} </a>
-
-                            <p class="overflow-hidden pr-7 text-sm">{{$job->summary}}</p>
-
-                            <div class="mt-5 flex flex-col space-y-3 text-sm font-medium text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
-                                <div class="">Experience:<span
-                                            class="ml-2 mr-3 rounded-full bg-green-100 px-2 py-0.5 text-green-900">{{$job->experience}}</span>
-                                </div>
-                                <div class="">Salary:<span
-                                            class="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">Rs. {{$job->salary}}K</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="w-full text-center">
-                        <p class="text-gray-500 text-center">No Jobs Found</p>
-                    </div>
-                @endforelse
-            </div>
-            <!-- Pagination -->
-            <hr class="my-5">
-            {{$jobs->links()}}
+    <x-user.bread-crumb :data="['Home', 'Job', 'List']"/>
+    <div class="container flex items-center justify-between my-8">
+        {{-- Category Filter--}}
+        <div class="">
+            <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
+            <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doFilter()">
+                <option value="all" selected>All</option>
+                @foreach($categories as $category)
+                    @if(request()->get('category') == $category->name)
+                        <option selected value="{{ $category->name }}">{{ $category->name }}</option>
+                    @else
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
-        <!-- Side Block -->
-        @include('includes.sidebar')
+        {{-- Total Products --}}
+        <div class="">
+            <p>
+                Showing {{ $jobs->firstItem() }} - {{ $jobs->lastItem() }} of {{ $jobs->total() }} results
+            </p>
+        </div>
+    </div>
+    <script>
+        function doSort() {
+            let sortValue = document.getElementById('product-sort-by').value;
+            let categoryValue = document.getElementById('product-category-filter').value;
+            applyFilters(categoryValue, sortValue);
+        }
+
+        function doFilter() {
+            let categoryValue = document.getElementById('product-category-filter').value;
+            let sortValue = document.getElementById('product-sort-by').value;
+            applyFilters(categoryValue, sortValue);
+        }
+
+        function applyFilters(category, sort) {
+            let url = '{{ route('jobs') }}';
+            let params = [];
+
+            if (category !== 'all') {
+                params.push('category=' + category);
+            }
+
+            if (sort !== 'default') {
+                params.push('sort=' + sort);
+            }
+
+            if (params.length > 0) {
+                url += '?' + params.join('&');
+            }
+
+            window.location.href = url;
+        }
+    </script>
+    <div class="container py-6 mx-auto">
+        <!-- Existing content remains unchanged -->
+        @forelse($jobs as $job)
+            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex items-center justify-center p-2 mb-5">
+                <div class="mb-4 p-2 pr-3">
+                    <img class="w-full h-20 object-contain overflow-hidden" src="{{ url('storage/' . $job->thumbnail) }}"
+                         alt="">
+                </div>
+                <div class="w-full mx-3 ml-5 flex flex-col items-start justify-stretch" style="border-right: 1px solid lightgray">
+                    <a href="{{ route('view.job', [$job->slug]) }}" class="flex flex-nowrap items-center mb-3">
+                        <span class="text-2xl mr-3">{{$job->title}}</span>
+                    </a>
+                    <div class="text-base text-gray-500 mb-3">
+                        <i class='bx bx-been-here text-red-500'></i> {{$job->address->state->name}}, {{$job->address->country->name}}
+                    </div>
+                    <div class="text-purple-600">
+                        {{$job->organization}}
+                    </div>
+                </div>
+                <div class="w-[calc(20%-1rem)]">
+                    <a href="{{ route('view.job', [$job->slug]) }}"
+                       class="text-purple-500 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mt-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
+                        {{$job->employment_type}} &nbsp;
+                    </a>
+                </div>
+            </div>
+        @empty
+            <h1 class="text-gray-500 text-4xl text-center mt-10">No Jobs Found</h1>
+        @endforelse
+        <!-- Pagination -->
+        <hr class="my-5">
+        {{ $jobs->links() }}
     </div>
 @endsection
