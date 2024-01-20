@@ -42,7 +42,7 @@
 
 @section('content')
     <x-user.bread-crumb :data="['Home', 'Company', 'List']"/>
-    <div class="container flex items-center justify-between my-8">
+    <div class="container flex items-center justify-between my-8 mx-2 md:mx-0">
         {{-- Category Filter--}}
         <div class="">
             <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
@@ -58,7 +58,7 @@
             </select>
         </div>
         {{-- Total Products --}}
-        <div class="">
+        <div class="hidden md:block">
             <p>
                 Showing {{ $companies->firstItem() }} - {{ $companies->lastItem() }} of {{ $companies->total() }} results
             </p>
@@ -72,6 +72,11 @@
                 <option value="desc" @if(request()->get('sort') == 'desc') selected @endif>Rating high to low</option>
             </select>
         </div>
+    </div>
+    <div class="block md:hidden">
+        <p class="text-center">
+            Showing {{ $companies->firstItem() }} - {{ $companies->lastItem() }} of {{ $companies->total() }} results
+        </p>
     </div>
     <script>
         function doSort() {
@@ -108,14 +113,14 @@
     <div class="container py-6 mx-auto">
         <!-- Existing content remains unchanged -->
         @forelse($companies as $company)
-            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex items-center justify-center p-2">
-                <div class="mb-4 p-2 pr-3" style="border-right: 1px solid lightgray">
+            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex items-center justify-center p-2 mx-4 md:mx-0">
+                <div class="overflow-hidden mb-4 p-2 md:border-r border-r-1 border-solid border-gray-300">
                     <img class="w-full h-40 object-contain overflow-hidden" src="{{ url('storage/' . $company->logo) }}"
                          alt="">
                 </div>
                 <ul class="w-full mx-3 ml-5">
                     <li class="flex flex-nowrap items-center">
-                        <span class="text-2xl mr-3">{{$company->name}}</span>
+                        <span class="text-lg md:text-2xl mr-3">{{$company->name}}</span>
                         @if($company->is_featured)
                             <span>
                                         <button
@@ -130,22 +135,8 @@
                                         </button>
                                     </span>
                         @endif
-                        @if(!$company->is_active)
-                            <span>
-                                        <button
-                                            class="inline-flex items-center bg-neutral-100 mr-1 text-white border border-solid-400 rounded">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor"
-                                                 class="w-4 h-4 text-white bg-red-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
-                                            </svg>
-                                            <span class="mx-1 text-gray-500 text-xs">In Active</span>
-                                        </button>
-                                    </span>
-                        @endif
                     </li>
-                    <li class="text-base text-gray-500">
+                    <li class="text-sm md:text-base text-gray-500">
                         <i class='bx bx-been-here text-red-500'></i> {{$company->address->state->name}}, {{$company->address->country->name}}
                     </li>
                     <li class="w-full flex items-center">
@@ -185,7 +176,7 @@
                         </p>
                     </li>
                     <li>
-                        <div class="w-[calc(20%-1rem)] mt-5">
+                        <div class="md:w-[calc(20%-1rem)] mt-5">
                             <a href="{{ route('view.company', [$company->slug]) }}"
                                class="text-purple-500 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mt-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
                                 View Profile &nbsp;

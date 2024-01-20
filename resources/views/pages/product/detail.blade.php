@@ -9,18 +9,15 @@
         </div>
 
         <div class="mt-2 w-full lg:order-1 flex items-center justify-center">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                <button type="button"
-                        class="thumbnail-button flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center"
+            <div class="grid grid-cols-3 md:grid-cols-5 gap-4">
+                <button type="button" class="thumbnail-button flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center"
                         data-image="{{ url('storage/'.$product->thumbnail) }}">
                     <img src="{{ url('storage/'.$product->thumbnail) }}" alt="Product Image"
                          class="h-full w-full max-w-full object-contain bg-transparent img-remove-bg">
                 </button>
 
                 @forelse($product->gallery as $image)
-                    <button type="button"
-                            class="thumbnail-button flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center"
-                            data-image="{{ url('storage/'.$image) }}">
+                    <button type="button" class="thumbnail-button flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center" data-image="{{ url('storage/'.$image) }}">
                         <img src="{{ url('storage/'.$image) }}" alt="Product Image"
                              class="h-full w-full max-w-full object-contain bg-transparent img-remove-bg">
                     </button>
@@ -30,14 +27,13 @@
             </div>
         </div>
 
-        <div
-            class="lg:col-span-2 lg:row-span-2 lg:row-end-2 flex items-center justify-between p-4">
+        <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2 flex md:flex-row flex-col md:items-center justify-between p-4">
             <div class="flex flex-auto">
                 <img src="{{ url('storage/'.$product->company->logo) }}" alt="Company Logo"
                      class="h-16 w-16 rounded-full object-contain mr-4">
                 <!-- Published Details  -->
                 <div class="flex flex-col">
-                    <span class="text-xl font-bold">{{ $product->name }}
+                    <span class="text-base md:text-xl sm:text-base font-bold">{{ $product->name }}
                         @if($product->is_featured)
                             <span>
                                 <button
@@ -53,11 +49,15 @@
                             </span>
                         @endif
                     </span>
-                    <span class="text-sm text-gray-500">Published by {{ $product->company->name }}</span>
-                    <span class="text-sm text-gray-500">Published on {{ $product->created_at->format('d M Y') }} ({{ $product->updated_at->diffForHumans() }})</span>
+                    <span class="text-xs md:text-sm text-gray-500">Published by {{ $product->company->name }}</span>
+                    <span class="text-xs md:text-sm text-gray-500">Published on {{ $product->created_at->format('d M Y') }} ({{ $product->updated_at->diffForHumans() }})</span>
+                    <a href="{{route('view.company', [$product->company->slug])}}" class="mt-1 block md:hidden text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue text-xs">
+                        View Profile
+                        <i class='bx bx-link-external ml-2'></i>
+                    </a>
                 </div>
             </div>
-            <a href="{{route('view.company', [$product->company->slug])}}" class="bg-purple-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue">
+            <a href="{{route('view.company', [$product->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue">
                 View Profile
                 <i class='bx bx-link-external ml-2'></i>
             </a>
@@ -79,13 +79,12 @@
                                     <i class='bx bx-category'></i>
                                 </span>
                                     <div>
-                                        <span class="text-base font-semibold text-gray-500">Category</span>
-
+                                        <span class="text-sm md:text-base font-semibold text-gray-500">Category</span>
                                     </div>
                                 </div>
                             </td>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span class="text-base text-purple-500">{{ $product->category->name }}</span>
+                                <span class="text-sm md:text-base text-justify text-purple-500">{{ $product->category->name }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -96,18 +95,18 @@
                                     <i class='bx bx-map'></i>
                                 </span>
                                     <div>
-                                        <span class="text-base font-semibold text-gray-500">Location</span>
+                                        <span class="text-sm md:text-base font-semibold text-gray-500">Location</span>
                                     </div>
                                 </div>
                             </td>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span class="text-base text-gray-500">{{ $product->company->address->country->name }}</span>
+                                <span class="text-sm: md:text-base text-gray-500">{{ $product->company->address->country->name }}</span>
                             </td>
                         </tr>
                     </table>
                     <hr class="my-4">
                     <p class="text-sm text-gray-500">{!! $product->description !!}</p>
-                    <div class="absolute bottom-0 md:static right-1 mb-2 md:w-[calc(80%-1rem)] mt-4"
+                    <div class="relative bottom-0 md:static right-1 mb-2 md:w-[calc(80%-1rem)] mt-4"
                          style="width: max-content;">
                         <a href="{{ route('view.product', [$product->slug]) }}"
                            class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-2 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
@@ -186,30 +185,36 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-4">
                 <!-- Related Product 1 -->
                 @forelse($related_products as $item)
-                    <div
-                        class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
                         @if($item->is_featured)
-                            <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
+                            <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded" style="z-index: 99">
                                 Featured
                             </div>
                         @endif
                         <a href="{{ route('view.product', [$item->slug]) }}"
-                           class="w-[150px] h-[150px] md:w-full md:p-4 md:m-auto md:block md:h-full object-contain">
+                           class="w-[80px] h-[80px] md:w-full md:p-4 md:m-auto md:block md:h-full object-contain">
                             <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}"
                                  class="w-[150px] h-[150px] md:w-full md:h-48 object-contain img-remove-bg"/>
                         </a>
-                        <div class="p-1 md:p-2 flex flex-col items-start md:items-center justify-center">
-                            <header class="flex my-2 font-light text-base items-center">
+                        <div class="p-1 ml-2 md:p-2 flex flex-col items-start md:items-center md:justify-center">
+                            <header class="flex my-2 font-light text-xs md:text-base items-center">
                                 <i class="bx bx-category text-indigo-500 mr-1"></i>
                                 <p>{{ $item->category->name }}</p>
                             </header>
-                            <p class="text-xl font-medium mb-2">{{ $item->name }}</p>
-                            <p class="text-red-700 text-center text-xs md:text-sm">{{ $item->company ? $item->company->name: '' }}</p>
-                            <p class="text-gray-700 text-center text-xs md:text-sm">{{ $item->company? $item->company->address->country->name : '' }}</p>
-                            <p class="text-gray-700 text-center text-xs md:text-sm">Price:
+                            <p class="text-sm md:text-xl font-medium mb-2">{{ $item->name }}</p>
+                            <p class="text-red-700 text-xs md:text-sm">{{ $item->company ? $item->company->name: '' }}</p>
+                            <p class="text-gray-700 text-xs md:text-sm">{{ $item->company? $item->company->address->country->name : '' }}</p>
+                            <p class="text-gray-700 text-xs md:text-sm">Price:
                                 ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
+                            <div class="block md:hidden md:static mb-2 w-auto">
+                                <a href="{{ route('view.product', [$item->slug]) }}"
+                                   class="text-purple-500 mb-1 rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                    <span class="ml-1">Enquire Now &nbsp;</span>
+                                    <i class='bx bx-link-external mr-2'></i>
+                                </a>
+                            </div>
                         </div>
-                        <div class="absolute bottom-0 md:static right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
+                        <div class="hidden md:block absolute bottom-0 md:static right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
                             <a href="{{ route('view.product', [$item->slug]) }}"
                                class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
                                 <span class="ml-1">Enquire Now &nbsp;</span>
