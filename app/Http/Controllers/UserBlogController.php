@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Blog;
 use App\Models\Blogs;
 use App\Models\Category;
@@ -17,38 +18,32 @@ class UserBlogController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'blog');
-        if ($request->has('category')) {
-            // Get Category I'd from Category Name
-            $cat_id = Category::where('name', $request->category)->first();
-            $blogs = Blog::where('is_approved', 1)->where('category_id', $cat_id->id)->paginate(10);
+
+        $query = $request->input('q');
+        $categoryFilter = $request->input('category');
+
+        $blogsQuery = Blog::where('is_approved', 1)->where('is_active', 1);
+
+        if (!empty($categoryFilter)) {
+            // Get Category Id from Category Name
+            $catId = Category::where('name', $categoryFilter)->first();
+            $blogsQuery->where('category_id', $catId->id);
         }
-        // Show All Companies
-        else if($request->has('show') && $request->show == 'all'){
-            $blogs = Blog::where('is_approved', 1)->paginate(100);
+
+        if (!empty($query)) {
+            $blogsQuery->where(function ($innerQuery) use ($query) {
+                $innerQuery->where('title', 'like', '%' . $query . '%')
+                    ->orWhere('content', 'like', '%' . $query . '%');
+            });
         }
-        // Show Active Companies
-        else if($request->has('filter') && $request->filter == 'active'){
-            $blogs = Blog::where('is_approved', 1)->where('is_active', 1)->paginate(10);
-        }
-        // Show the Latest Companies
-        else if ($request->has('filter') && $request->filter == 'in-active') {
-            $blogs = Blog::where('is_approved', 1)->where('is_active', 0)->paginate(10);
-        }
-        // Sort by name
-        else if ($request->has('sort') && $request->sort == 'name') {
-            $blogs = Blog::where('is_approved', 1)->orderBy('name', 'asc')->paginate(10);
-        }
-        // Sort by Date
-        else if ($request->has('sort') && $request->sort == 'date') {
-            $blogs = Blog::where('is_approved', 1)->orderBy('created_at', 'desc')->paginate(10);
-        }
-        else {
-            $blogs = Blog::where('is_approved', 1)->where('is_active', 1)->paginate(10);
-        }
+
+        $blogs = $blogsQuery->paginate(12);
         $categories = Category::where('type', 'blog')->where('is_active', 1)->get();
-        $data = compact('blogs', 'categories');
+        $data = compact('blogs', 'categories', 'query', 'categoryFilter');
+
         return view('pages.blogs.list')->with($data);
     }
+
 
     //Function to view Blog Details
     public function viewBlogDetails($slug)

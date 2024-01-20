@@ -25,28 +25,17 @@
         </div>
     </div>
     <script>
-        function doSort() {
-            let sortValue = document.getElementById('product-sort-by').value;
-            let categoryValue = document.getElementById('product-category-filter').value;
-            applyFilters(categoryValue, sortValue);
-        }
-
         function doFilter() {
             let categoryValue = document.getElementById('product-category-filter').value;
-            let sortValue = document.getElementById('product-sort-by').value;
-            applyFilters(categoryValue, sortValue);
+            applyFilters(categoryValue);
         }
 
-        function applyFilters(category, sort) {
+        function applyFilters(category) {
             let url = '{{ route('jobs') }}';
             let params = [];
 
             if (category !== 'all') {
                 params.push('category=' + category);
-            }
-
-            if (sort !== 'default') {
-                params.push('sort=' + sort);
             }
 
             if (params.length > 0) {

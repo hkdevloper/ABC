@@ -22,12 +22,6 @@
                             <div class="each relative">
                                 <img src="{{ url('storage/'.$event->thumbnail) }}" class="w-full h-48 object-contain"
                                      alt="Event">
-                                <div class="badge absolute top-0 right-0 bg-purple-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">
-                                    @php
-                                        $date = \Carbon\Carbon::parse($event->start);
-                                    @endphp
-                                    {{$date->diffForHumans()}}
-                                </div>
                                 <div class="desc p-4 text-gray-800">
                                     <div class="flex items-center mt-2">
                                         <img class='w-10 h-10 object-cover rounded-full' alt='User avatar'

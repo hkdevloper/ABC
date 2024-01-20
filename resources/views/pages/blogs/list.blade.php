@@ -1,81 +1,85 @@
 @extends('layouts.user')
 
 @section('content')
-    <x-user.header :title="'Blogs'" :breadcrumb="['Home', 'Blog', 'List']" type="blog"/>
-    <div class="container py-6 mx-auto flex flex-wrap">
-        <!-- Blog List Block -->
-        <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
-            <!-- Blog List Filter -->
-            <div class="w-full flex flex-nowrap justify-between items-center">
-                <p class="text-base text-gray-500">Search Results for <br> <span
-                            class="text-xl text-purple-500">Blogs</span></p>
-                <p class="text-base text-gray-500">About {{count($blogs)}} Result</p>
+    <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
+        <h1 class="block text-2xl w-full text-center font-bold">Explore the Depths: Find Your Next Fascinating Read!</h1>
+        <br>
+        <form action="" class="mt-2 md:mt-4 flex items-center justify-center p-4 pl-2 relative bg-white w-2/3 shadow">
+            <div class="relative flex items-center justify-between w-full s-form">
+                <label for="searchInput" class="sr-only">Search</label>
+                <input id="searchInput" name="q" type="text" placeholder="Unleash your creativity and start typing your masterpiece here! 🚀✨"
+                       class="typing-placeholder search-input focus:outline-none px-6 py-2 border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full">
+                <button type="submit" class="bg-green-400 text-white py-2 px-4 w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
+                    <span class="inline">Search</span>
+                </button>
             </div>
-            <hr class="my-5">
-            <!-- Blog List -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
-                <!-- Blog list Item -->
-                @forelse($blogs as $item)
-                    <card class="bg-white border border-solid border-gray-900 transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
-                        <img class="w-full h-60 object-cover" src="{{url('storage/'.$item->thumbnail)}}"
-                             alt="Blog Thumbnail">
-                        <div class="p-3">
-                            <div class="flex items-center mt-2">
-                                <img class='w-10 h-10 object-cover rounded-full' alt='User avatar'
-                                     src='https://ui-avatars.com/api/?name={{$item->user->name}}'/>
-                                <div class="pl-3">
-                                    <div class="font-medium">
-                                        {{$item->user->name}}
-                                    </div>
-                                    <div class="text-gray-600 text-sm">
-                                        {{$item->created_at->diffForHumans()}}
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Title -->
-                            <h2 class="font-bold text-base sm:text-sm md:text-xl lg:text-xl mt-2">
-                                <a href="{{route('view.blog', $item->slug)}}">{{$item->title}}</a>
-                            </h2>
-                            <!-- Tags -->
-                            <p class="mt-5"> By: <a href="#" class="text-red-600"> {{$item->user->name}} </a></p>
-                            <p> Tags:
-                                @forelse($item->tags as $tag)
-                                    <a href="#" class="text-red-600"> {{$tag}} </a>,
-                                @empty
-                                    <span class="text-red-600">No Tags</span>
-                                @endforelse
-                            </p>
-                            <header class="flex font-light text-base mt-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-90 -ml-2"
-                                     viewBox="0 0 24 24" stroke="#b91c1c">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                                </svg>
-                                <span class="ml-2">{{$item->created_at->format('d M Y')}}</span>
-                            </header>
-                            <!-- Button -->
-                            <a href="{{route('view.blog', [$item->slug])}}"
-                               class="bg-purple-500 text-white font-semibold py-2 px-5 text-sm mt-6 inline-flex items-center group">
-                                <p> READ MORE </p>
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     class="h-4 w-4 ml-1 group-hover:translate-x-2 delay-100 duration-200 ease-in-out"
-                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M9 5l7 7-7 7"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </card>
-                @empty
-                    <div class="w-full text-center">
-                        <p class="text-gray-500 text-center">No Blogs Found</p>
-                    </div>
-                @endforelse
-            </div>
-            <!-- Pagination -->
-            <hr class="my-5">
-            {{$blogs->links()}}
+            <div id="searchResults" class="search-results mt-2"></div>
+        </form>
+    </div>
+    <div class="container flex items-center justify-between my-8">
+        {{-- Category Filter--}}
+        <div class="">
+            <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
+            <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doFilter()">
+                <option value="all" selected>All</option>
+                @foreach($categories as $category)
+                    @if(request()->get('category') == $category->name)
+                        <option selected value="{{ $category->name }}">{{ $category->name }}</option>
+                    @else
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
-        <!-- Side Block -->
-        @include('includes.sidebar')
+        {{-- Total Products --}}
+        <div class="">
+            <p>
+                Showing {{ $blogs->firstItem() }} - {{ $blogs->lastItem() }} of {{ $blogs->total() }} results
+            </p>
+        </div>
+    </div>
+    <script>
+        function doFilter() {
+            let categoryValue = document.getElementById('product-category-filter').value;
+            applyFilters(categoryValue);
+        }
+
+        function applyFilters(category) {
+            let url = '{{ route('blogs') }}';
+            let params = [];
+
+            if (category !== 'all') {
+                params.push('category=' + category);
+            }
+
+            if (params.length > 0) {
+                url += '?' + params.join('&');
+            }
+
+            window.location.href = url;
+        }
+    </script>
+    <div class="container">
+        <!-- Blog List -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+            @forelse($blogs as $item)
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-between">
+                    <img src="{{url('storage/'.$item->thumbnail)}}" alt="Blog Thumbnail" class="w-full h-40 object-cover mb-4 rounded-md">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-2">{{$item->title}}</h2>
+                    <p class="text-gray-600 mb-4">
+                        {{Str::limit($item->description, 80)}}
+                    </p>
+                    <hr>
+                    <a href="{{route('view.blog', $item->slug)}}" class="text-blue-500 hover:underline text-center accent-auto">Read More</a>
+                </div>
+            @empty
+                <div class="w-full text-center">
+                    <p class="text-gray-500 text-center">No Blogs Found</p>
+                </div>
+            @endforelse
+        </div>
+        <!-- Pagination -->
+        <hr class="my-5">
+        {{$blogs->links()}}
     </div>
 @endsection
