@@ -2,7 +2,7 @@
 
 @section('content')
     <x-user.bread-crumb :data="['Home', 'Job', 'List']"/>
-    <div class="container flex items-center justify-between my-8">
+    <div class="container mx-2 md:mx-0 flex items-center justify-between my-8">
         {{-- Category Filter--}}
         <div class="">
             <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
@@ -45,7 +45,7 @@
             window.location.href = url;
         }
     </script>
-    <div class="container py-6 mx-auto">
+    <div class="container mx-2 md:md-auto py-6">
         <!-- Existing content remains unchanged -->
         @forelse($jobs as $job)
             <div class="hidden md:flex company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 items-center justify-center p-2 mb-5">
