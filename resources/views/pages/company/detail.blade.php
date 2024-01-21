@@ -159,35 +159,33 @@
                         <x-bladewind.tab-content name="product">
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-4">
                                 @forelse($company->products as $item)
-                                    <div
-                                        class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
                                         @if($item->is_featured)
-                                            <div
-                                                class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
+                                            <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded" style="z-index: 99">
                                                 Featured
                                             </div>
                                         @endif
-                                        <a href="{{ route('view.product', [$item->slug]) }}"
-                                           class="w-[150px] h-[150px] md:w-full md:p-4 md:m-auto md:block md:h-full object-contain">
-                                            <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}"
-                                                 class="w-[150px] h-[150px] md:w-full md:h-48 object-contain img-remove-bg"/>
+                                        <a href="{{ route('view.product', [$item->slug]) }}" class="w-[100px] md:w-full h-[80px] md:p-4 md:m-auto md:block md:h-full object-contain">
+                                            <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}" class="w-full h-full object-cover img-remove-bg"/>
                                         </a>
-                                        <div
-                                            class="p-1 md:p-2 flex flex-col items-start md:items-center justify-center">
-                                            <header class="flex my-2 font-light text-base items-center">
+                                        <div class="p-1 ml-2 md:p-2 flex flex-col items-start md:items-center md:justify-center w-full">
+                                            <header class="flex my-2 font-light text-xs md:text-base items-center">
                                                 <i class="bx bx-category text-indigo-500 mr-1"></i>
                                                 <p>{{ $item->category->name }}</p>
                                             </header>
-                                            <p class="text-xl font-medium mb-2">{{ $item->name }}</p>
-                                            <p class="text-red-700 text-center text-xs md:text-sm">{{ $item->company ? $item->company->name: '' }}</p>
-                                            <p class="text-gray-700 text-center text-xs md:text-sm">{{ $item->company? $item->company->address->country->name : '' }}</p>
-                                            <p class="text-gray-700 text-center text-xs md:text-sm">Price:
-                                                ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
+                                            <p class="text-sm md:text-xl font-medium mb-2">{{ $item->name }}</p>
+                                            <p class="text-red-700 text-xs md:text-sm">{{ $item->company ? $item->company->name: '' }}</p>
+                                            <p class="text-gray-700 text-xs md:text-sm">{{ $item->company? $item->company->address->country->name : '' }}</p>
+                                            <p class="text-gray-700 text-xs md:text-sm">Price: ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
+                                            <div class="block md:hidden md:static mb-2 w-full">
+                                                <a href="{{ route('view.product', [$item->slug]) }}" class="text-purple-500 mb-1 rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                                    <span class="ml-1">Enquire Now &nbsp;</span>
+                                                    <i class='bx bx-link-external mr-2'></i>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div
-                                            class="absolute bottom-0 md:static right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
-                                            <a href="{{ route('view.product', [$item->slug]) }}"
-                                               class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                        <div class="hidden md:block absolute bottom-0 md:static right-1 mb-2 w-full md:w-[calc(80%-1rem)]">
+                                            <a href="{{ route('view.product', [$item->slug]) }}" class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
                                                 <span class="ml-1">Enquire Now &nbsp;</span>
                                                 <i class='bx bx-link-external mr-2'></i>
                                             </a>
