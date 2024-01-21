@@ -32,3 +32,20 @@ function showToast(type = 'info', text) {
 
     $.toast(Object.assign(toastConfig, { text: text }));
 }
+
+// Share Button Click Event
+function shareButtonClicked() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Share',
+            text: 'Check out this awesome website!',
+            url: window.location.href
+        }).then(() => {
+            showToast('success', 'Successfully shared!');
+        }).catch(() => {
+            showToast('error', 'Failed to share!');
+        });
+    } else {
+        showToast('error', 'Your browser does not support this feature!');
+    }
+}

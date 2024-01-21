@@ -12,6 +12,40 @@
 @endsection
 
 @section('content')
+    <!-- Share Buttons -->
+    <div class="fixed bottom-5 right-5">
+        <div class="relative">
+            <button id="fab" class="bg-blue-500 text-white rounded-full p-4 shadow-lg focus:outline-none">
+                <i class="fas fa-share"></i>
+            </button>
+            <div id="fabMenu" class="hidden origin-top-right relative right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div class="py-1">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://your-website.com" target="_blank" title="Share on Facebook" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Facebook</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://your-website.com&text=Your%20share%20text" target="_blank" title="Share on Twitter" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Twitter</a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://your-website.com" target="_blank" title="Share on LinkedIn" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">LinkedIn</a>
+                    <!-- Add more social media platforms as needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Share Button FAB
+        const fab = document.getElementById('fab');
+        const fabMenu = document.getElementById('fabMenu');
+
+        fab.addEventListener('click', (e) => {
+            e.stopPropagation(); // Stop the event from reaching the window
+            fabMenu.classList.toggle('hidden');
+        });
+
+        // Close the menu when clicking outside
+        document.body.addEventListener('click', (e) => {
+            if (!fab.contains(e.target) && !fabMenu.contains(e.target)) {
+                fabMenu.classList.add('hidden');
+            }
+        });
+    </script>
+
     <!-- Company Header Section -->
     <section class="bg-blue-50 p-4 py-12">
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-center">
@@ -19,7 +53,7 @@
                 <img alt="" src="{{url('storage/', $company->logo)}}"
                      class="company-logo w-32 h-32 object-contain rounded-full mx-auto md:mx-0 my-4">
                 <div class="w-full md:w-2/3 mx-2 md:mx-10">
-                    <div class="flex items-center justify-start md:justify-between mb-2">
+                    <div class="flex items-center justify-start mb-2">
                         @if($company->is_featured)
                             <span
                                 class="px-1 bg-green-200 text-green-700 rounded text-sm flex items-center justify-center">
@@ -76,12 +110,7 @@
                 </div>
             </div>
             <div class="w-full md:w-1/2 mt-4 md:mt-0 flex flex-col items-center justify-center md:items-end">
-                <div
-                    class="flex items-center justify-center md:justify-end mb-4 overflow-x-auto md:overflow-x-visible md:mx-2">
-                    <button
-                        class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white flex-shrink-0">
-                        <i class="fas fa-share text-purple-500"></i>&nbsp; Share
-                    </button>
+                <div class="flex items-center justify-center md:justify-end mb-4 overflow-x-auto md:overflow-x-visible md:mx-2">
                     <button
                         class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white flex-shrink-0">
                         <i class="fas fa-heart text-purple-500"></i>&nbsp; favourite
