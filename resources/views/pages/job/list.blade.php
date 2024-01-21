@@ -53,7 +53,7 @@
                     <img class="w-full h-20 object-contain overflow-hidden" src="{{ url('storage/' . $job->thumbnail) }}"
                          alt="">
                 </div>
-                <div class="w-full mx-3 ml-5 flex flex-col items-start justify-stretch" style="border-right: 1px solid lightgray">
+                <div class="w-full mx-3 ml-5 pl-3 flex flex-col items-start justify-stretch" style="border-left: 1px solid lightgray">
                     <a href="{{ route('view.job', [$job->slug]) }}" class="flex flex-nowrap items-center mb-3">
                         <span class="text-2xl mr-3">{{$job->title}}</span>
                     </a>
@@ -78,7 +78,7 @@
                          alt="">
                 </div>
                 <div class="flex justify-center items-center flex-col">
-                    <div class="w-full mx-3 ml-5 flex flex-col items-start justify-center" style="border-right: 1px solid lightgray">
+                    <div class="w-full mx-3 ml-5 flex flex-col items-start justify-center" style="border-left: 1px solid lightgray">
                         <a href="{{ route('view.job', [$job->slug]) }}" class="flex flex-nowrap items-center mb-3">
                             <span class="text-base mr-3">{{$job->title}}</span>
                         </a>
