@@ -62,12 +62,11 @@
                 <h2 class="text-2xl font-semibold">Related Jobs</h2>
                 <div class="mt-5">
                     @forelse($related_jobs as $job)
-                        <div class="hidden md:flex company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 items-center justify-center p-2 mb-5">
-                            <div class="mb-4 p-2 pr-3">
-                                <img class="w-full h-20 object-contain overflow-hidden" src="{{ url('storage/' . $job->thumbnail) }}"
-                                     alt="">
+                        <div class="flex flex-col md:flex-row company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 items-center justify-center p-4 md:p-2 mb-5">
+                            <div class="mb-4 p-2 md:pr-3">
+                                <img class="w-full h-40 md:h-20 object-contain overflow-hidden" src="{{ url('storage/' . $job->thumbnail) }}" alt="">
                             </div>
-                            <div class="w-full mx-3 ml-5 flex flex-col items-start justify-stretch" style="border-right: 1px solid lightgray">
+                            <div class="w-full mx-1 ml-5 pl-3 flex flex-col items-start justify-stretch md:flex-grow"> <!-- Adjusted width to grow on medium screens and above -->
                                 <a href="{{ route('view.job', [$job->slug]) }}" class="flex flex-nowrap items-center mb-3">
                                     <span class="text-2xl mr-3">{{$job->title}}</span>
                                 </a>
@@ -78,37 +77,10 @@
                                     {{$job->organization}}
                                 </div>
                             </div>
-                            <div class="w-[calc(20%-1rem)]">
-                                <a href="{{ route('view.job', [$job->slug]) }}"
-                                   class="text-purple-500 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mt-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
+                            <div class="w-full mx-auto md:w-[calc(20%-1rem)]">
+                                <a href="{{ route('view.job', [$job->slug]) }}" class="text-purple-500 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mt-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
                                     {{$job->employment_type}} &nbsp;
                                 </a>
-                            </div>
-                        </div>
-                        <div class="flex md:hidden company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 p-2 mb-5">
-                            <div class="overflow-hidden mb-4 p-2 md:border-r border-r-1 border-solid border-gray-300" style="width: 80px; height: 80px">
-                                <div class="flex items-center justify-center h-full">
-                                    <img class="object-cover w-full h-full" src="{{ url('storage/' . $job->thumbnail) }}" alt="{{ $job->title }}">
-                                </div>
-                            </div>
-                            <div class="flex justify-center items-center flex-col">
-                                <div class="w-full mx-auto flex flex-col items-start justify-start">
-                                    <a href="{{ route('view.job', [$job->slug]) }}" class="flex flex-nowrap items-center mb-3">
-                                        <span class="text-base mr-3">{{ $job->title }}</span>
-                                    </a>
-                                    <div class="text-sm text-gray-500 mb-3">
-                                        <i class='bx bx-been-here text-red-500'></i> {{ $job->address->state->name }}, {{ $job->address->country->name }}
-                                    </div>
-                                    <div class="text-purple-600 text-base">
-                                        {{ $job->organization }}
-                                    </div>
-                                </div>
-                                <div class="w-full">
-                                    <a href="{{ route('view.job', [$job->slug]) }}"
-                                       class="text-purple-500 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 mt-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center">
-                                        {{ $job->employment_type }} &nbsp;
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     @empty
