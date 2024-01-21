@@ -9,18 +9,14 @@
                 <label for="searchInput" class="sr-only">Search</label>
                 <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters"
                        class="search-input focus:outline-none md:px-6 md:py-2 border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full placeholder:text-xs md:placeholder:text-base">
-                <button type="submit" class="mx-2 md:mx-0 bg-green-400 text-white md:py-2 md:px-4 md:w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
-                    <span class="inline">
+                <button type="submit" class="mx-2 md:mx-0 bg-green-400 text-white md:py-2 md:px-4 w-auto md:w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
+                    <span class="flex items-center justify-center">
                         <span class="hidden md:block">Find Product</span>
                         <!--search icon svg-->
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-4 h-4 md:hidden p-1">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M21 21l-4.35-4.35"/>
-                            <circle cx="11" cy="11" r="8"/>
-                        </svg>
+                        <i class='bx bx-search-alt-2 md:hidden p-1'></i>
                     </span>
                 </button>
+
             </div>
             <div id="searchResults" class="search-results mt-2"></div>
         </form>
