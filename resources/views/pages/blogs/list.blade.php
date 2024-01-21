@@ -2,25 +2,30 @@
 
 @section('content')
     <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
-        <h1 class="block text-2xl w-full text-center font-bold">Explore the Depths: Find Your Next Fascinating Read!</h1>
+        <h1 class="block text-lg md:text-2xl w-full text-center font-bold">Explore the Depths: Find Your Next Fascinating Read!</h1>
         <br>
-        <form action="" class="mt-2 md:mt-4 flex items-center justify-center p-4 pl-2 relative bg-white w-2/3 shadow">
-            <div class="relative flex items-center justify-between w-full s-form">
+        <form action="{{ route('search') }}" class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
+            <div class="relative flex items-center justify-between md:w-full s-form">
                 <label for="searchInput" class="sr-only">Search</label>
                 <input id="searchInput" name="q" type="text" placeholder="Unleash your creativity and start typing your masterpiece here! 🚀✨"
-                       class="typing-placeholder search-input focus:outline-none px-6 py-2 border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full">
-                <button type="submit" class="bg-green-400 text-white py-2 px-4 w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
-                    <span class="inline">Search</span>
+                       class="search-input focus:outline-none md:px-6 md:py-2 border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full placeholder:text-xs md:placeholder:text-base">
+                <button type="submit" class="mx-2 md:mx-0 bg-green-400 text-white md:py-2 md:px-4 w-auto md:w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
+                    <span class="flex items-center justify-center">
+                        <span class="hidden md:block">Find Product</span>
+                        <!--search icon svg-->
+                        <i class='bx bx-search-alt-2 md:hidden p-1'></i>
+                    </span>
                 </button>
             </div>
-            <div id="searchResults" class="search-results mt-2"></div>
         </form>
     </div>
-    <div class="container flex items-center justify-between my-8">
+    <div class="container flex items-center justify-between my-4 md:my-8 mx-2 md:mx-auto">
         {{-- Category Filter--}}
-        <div class="">
+        <div class="overflow-hidden">
             <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
-            <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doFilter()">
+            <select name="category" id="product-category-filter"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+                    onchange="doFilter()">
                 <option value="all" selected>All</option>
                 @foreach($categories as $category)
                     @if(request()->get('category') == $category->name)
@@ -31,12 +36,17 @@
                 @endforeach
             </select>
         </div>
-        {{-- Total Products --}}
-        <div class="">
+        {{-- Total blogs --}}
+        <div class="hidden md:block">
             <p>
                 Showing {{ $blogs->firstItem() }} - {{ $blogs->lastItem() }} of {{ $blogs->total() }} results
             </p>
         </div>
+    </div>
+    <div class="block w-full my-2 md:hidden">
+        <p class="text-center">
+            Showing {{ $blogs->firstItem() }} - {{ $blogs->lastItem() }} of {{ $blogs->total() }} results
+        </p>
     </div>
     <script>
         function doFilter() {
