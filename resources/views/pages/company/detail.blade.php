@@ -14,87 +14,93 @@
 @section('content')
     <!-- Company Header Section -->
     <section class="bg-blue-50 p-4 py-12">
-        <div class="container flex items-center justify-self-center">
-            <div class="w-100">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-center">
+            <div class="w-full md:w-1/2 md:pr-4 mb-4 md:mb-0 flex items-center justify-center">
                 <img alt="" src="{{url('storage/', $company->logo)}}"
-                     class="company-logo w-32 h-32 object-contain rounded-full mx-auto my-4">
-            </div>
-            <div class="flex items-center w-2/4 mx-10">
-                <div class="flex items-start justify-start flex-col w-full">
-                    <div class="flex items-center justify-center">
+                     class="company-logo w-32 h-32 object-contain rounded-full mx-auto md:mx-0 my-4">
+                <div class="w-full md:w-2/3 mx-2 md:mx-10">
+                    <div class="flex items-center justify-start md:justify-between mb-2">
                         @if($company->is_featured)
-                            <span class="px-1 bg-green-200 text-green-700 rounded text-sm flex items-center justify-center">
-                                <i class='bx bx-star text-green-700 mr-2'></i>
+                            <span
+                                class="px-1 bg-green-200 text-green-700 rounded text-sm flex items-center justify-center">
+                            <i class='bx bx-star text-green-700 mr-2'></i>
                             Featured
                         </span>
                         @endif
                         @if($company->is_approved)
-                            <span class="px-1 bg-blue-200 text-blue-500 rounded m-1 text-sm flex items-center justify-center">
+                            <span
+                                class="px-1 bg-blue-200 text-blue-500 rounded m-1 text-sm flex items-center justify-center">
                             <i class='bx bx-badge-check text-blue-500 mr-2'></i>Verified
                         </span>
                         @endif
                     </div>
-                    <h1 class="text-2xl font-bold text-start text-blue-950">{{ $company->name }}</h1>
-                    <p>
-                        <span class="text-sm text-gray-500">
-                            <i class="fas fa-map-marker-alt text-purple-500 mr-2"></i>
-                        </span>
+                    <h1 class="text-lg md:text-2xl font-bold md:text-start text-blue-950">{{ $company->name }}</h1>
+                    <p class="text-center md:text-start">
+                    <span class="text-sm text-gray-500">
+                        <i class="fas fa-map-marker-alt text-purple-500 mr-2"></i>
+                    </span>
                         <span class="text-sm text-gray-500 font-semibold">{{ $company->address->country->name }},
                         {{ $company->address->zip_code}}
-                        </span>
+                    </span>
                     </p>
-                    <div class="text-sm text-gray-500 flex items-center justify-between">
+                    <div class="text-sm text-gray-500 flex flex-col md:flex-row items-center justify-between">
                         <p class="">
-                            <span class="text-sm text-gray-500">
-                                Business Type:
-                            </span>
+                        <span class="text-sm text-gray-500">
+                            Business Type:
+                        </span>
                             <span class="text-sm text-gray-500 font-semibold">{{ $company->business_type }}</span>
                         </p>
-                        <p class="mx-5">
-                            <span class="text-sm text-gray-500">
-                                <i class='bx bx-box text-purple-500 mr-1'></i>
-                            </span>
+                        <p class="mx-2 md:mx-5">
+                        <span class="text-sm text-gray-500">
+                            <i class='bx bx-box text-purple-500 mr-1'></i>
+                        </span>
                             <span class="text-sm text-gray-500 font-semibold">{{ $company->category->name }}</span>
                         </p>
                     </div>
-                    <div class="flex items-center justify-center">
-                        <div class="flex flex-col items-center justify-center">
+                    <div class="flex items-center justify-center md:hidden">
+                        <div class="flex flex-col items-center justify-center mx-2">
                             <h1 class="text-sm text-gray-500">Reviews</h1>
-                            <span class="text-xl font-semibold">{{\App\classes\HelperFunctions::getRatingCount('company', $company->id)}}</span>
+                            <span
+                                class="text-xl font-semibold">{{HelperFunctions::getRatingCount('company', $company->id)}}</span>
                         </div>
-                        <div class="flex flex-col items-center justify-center mx-5">
+                        <div class="flex flex-col items-center justify-center mx-2">
                             <h1 class="text-sm text-gray-500">Rating</h1>
-                            <span class="text-xl font-semibold">{{\App\classes\HelperFunctions::getRatingAverage('company', $company->id)}}</span>
+                            <span
+                                class="text-xl font-semibold">{{HelperFunctions::getRatingAverage('company', $company->id)}}</span>
                         </div>
-                        <div class="flex flex-col items-center justify-center">
+                        <div class="flex flex-col items-center justify-center mx-2">
                             <h1 class="text-sm text-gray-500">Products</h1>
                             <span class="text-xl font-semibold">{{ $company->products->count() }}</span>
                         </div>
                     </div>
-
                 </div>
             </div>
-            <div class="w-1/4">
-                <div class="flex items-center justify-self-end">
-                    <button class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white"
-                            style="min-width: max-content">
+            <div class="w-full md:w-1/2 mt-4 md:mt-0 flex flex-col items-center justify-center md:items-end">
+                <div
+                    class="flex items-center justify-center md:justify-end mb-4 overflow-x-auto md:overflow-x-visible md:mx-2">
+                    <button
+                        class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white flex-shrink-0">
                         <i class="fas fa-share text-purple-500"></i>&nbsp; Share
                     </button>
-                    <button class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white"
-                            style="min-width: max-content">
-                        <i class="fas fa-heart text-purple-500"></i>&nbsp; Add to favourite
+                    <button
+                        class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white flex-shrink-0">
+                        <i class="fas fa-heart text-purple-500"></i>&nbsp; favourite
                     </button>
-                    <button class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white"
-                            style="min-width: max-content">
-                        <i class="fas fa-bookmark text-purple-500"></i>&nbsp; Add to Bookmark
+                    <button
+                        class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white flex-shrink-0">
+                        <i class="fas fa-bookmark text-purple-500"></i>&nbsp; Bookmark
                     </button>
                 </div>
-                <button class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded">
+                <button
+                    class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded w-full md:w-auto">
                     Direct message
                 </button>
             </div>
+
+
         </div>
     </section>
+
     <div class="container mx-auto">
         <div class="flex flex-row flex-wrap py-4">
             <main role="main" class="w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
@@ -209,7 +215,8 @@
                                     </div>
                                 </div>
                                 <!-- direct message button -->
-                                <button class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded">
+                                <button
+                                    class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded">
                                     Direct message
                                 </button>
                             </section>
@@ -223,8 +230,8 @@
 
                                         <div class="mb-0.5 flex items-center gap-2">
                                             <x-bladewind.rating name="star-rating" size="medium" clickable="false"
-                                                                rating="{{\App\classes\HelperFunctions::getRatingAverage('company', $company->id)}}"/>
-                                            <span class="text-sm font-semibold">{{\App\classes\HelperFunctions::getRatingAverage('company', $company->id)}}/5</span>
+                                                                rating="{{HelperFunctions::getRatingAverage('company', $company->id)}}"/>
+                                            <span class="text-sm font-semibold">{{HelperFunctions::getRatingAverage('company', $company->id)}}/5</span>
                                         </div>
 
                                         <span class="block text-sm text-gray-500">Bases on {{$company->getReviews()->count()}} reviews</span>
@@ -311,39 +318,38 @@
                     </div>
                 </section>
                 <!-- Our Products Section -->
-                <section class="card p-4 mb-4">
-                    <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Our Products</h2>
+                <section class="mx-auto mt-8 p-4 bg-white">
+                    <h2 class="text-2xl font-semibold">Our Products</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-4">
+                        <!-- Related Product 1 -->
                         @forelse($company->products as $item)
-                            <div
-                                class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
                                 @if($item->is_featured)
-                                    <div
-                                        class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
+                                    <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded" style="z-index: 99">
                                         Featured
                                     </div>
                                 @endif
-                                <a href="{{ route('view.product', [$item->slug]) }}"
-                                   class="w-[150px] h-[150px] md:w-full md:p-4 md:m-auto md:block md:h-full object-contain">
-                                    <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}"
-                                         class="w-[150px] h-[150px] md:w-full md:h-48 object-contain img-remove-bg"/>
+                                <a href="{{ route('view.product', [$item->slug]) }}" class="w-[100px] md:w-full h-[80px] md:p-4 md:m-auto md:block md:h-full object-contain">
+                                    <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}" class="w-full h-full object-cover img-remove-bg"/>
                                 </a>
-                                <div
-                                    class="p-1 md:p-2 flex flex-col items-start md:items-center justify-center">
-                                    <header class="flex my-2 font-light text-base items-center">
+                                <div class="p-1 ml-2 md:p-2 flex flex-col items-start md:items-center md:justify-center w-full">
+                                    <header class="flex my-2 font-light text-xs md:text-base items-center">
                                         <i class="bx bx-category text-indigo-500 mr-1"></i>
                                         <p>{{ $item->category->name }}</p>
                                     </header>
-                                    <p class="text-xl font-medium mb-2">{{ $item->name }}</p>
-                                    <p class="text-red-700 text-center text-xs md:text-sm">{{ $item->company ? $item->company->name: '' }}</p>
-                                    <p class="text-gray-700 text-center text-xs md:text-sm">{{ $item->company? $item->company->address->country->name : '' }}</p>
-                                    <p class="text-gray-700 text-center text-xs md:text-sm">Price:
-                                        ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
+                                    <p class="text-sm md:text-xl font-medium mb-2">{{ $item->name }}</p>
+                                    <p class="text-red-700 text-xs md:text-sm">{{ $item->company ? $item->company->name: '' }}</p>
+                                    <p class="text-gray-700 text-xs md:text-sm">{{ $item->company? $item->company->address->country->name : '' }}</p>
+                                    <p class="text-gray-700 text-xs md:text-sm">Price: ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
+                                    <div class="block md:hidden md:static mb-2 w-full">
+                                        <a href="{{ route('view.product', [$item->slug]) }}" class="text-purple-500 mb-1 rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                            <span class="ml-1">Enquire Now &nbsp;</span>
+                                            <i class='bx bx-link-external mr-2'></i>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div
-                                    class="absolute bottom-0 md:static right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
-                                    <a href="{{ route('view.product', [$item->slug]) }}"
-                                       class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                <div class="hidden md:block absolute bottom-0 md:static right-1 mb-2 w-full md:w-[calc(80%-1rem)]">
+                                    <a href="{{ route('view.product', [$item->slug]) }}" class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
                                         <span class="ml-1">Enquire Now &nbsp;</span>
                                         <i class='bx bx-link-external mr-2'></i>
                                     </a>
@@ -417,8 +423,8 @@
 
                                 <div class="mb-0.5 flex items-center gap-2">
                                     <x-bladewind.rating name="star-rating" size="medium" clickable="false"
-                                                        rating="{{\App\classes\HelperFunctions::getRatingAverage('company', $company->id)}}"/>
-                                    <span class="text-sm font-semibold">{{\App\classes\HelperFunctions::getRatingAverage('company', $company->id)}}/5</span>
+                                                        rating="{{HelperFunctions::getRatingAverage('company', $company->id)}}"/>
+                                    <span class="text-sm font-semibold">{{HelperFunctions::getRatingAverage('company', $company->id)}}/5</span>
                                 </div>
 
                                 <span class="block text-sm text-gray-500">Bases on {{$company->getReviews()->count()}} reviews</span>
@@ -498,7 +504,8 @@
                             </li>
                         </ul>
                     </div>
-                    <button class="m-4 bg-purple-500 hover:bg-purple-700 px-4 py-2 text-base text-white rounded-full focus:outline-none focus:shadow-outline-purple">
+                    <button
+                        class="m-4 bg-purple-500 hover:bg-purple-700 px-4 py-2 text-base text-white rounded-full focus:outline-none focus:shadow-outline-purple">
                         Claim Now
                     </button>
                 </section>

@@ -1,12 +1,11 @@
-<div
-    class="relative overflow-hidden bg-cover bg-no-repeat bg-[50%] bg-[url('https://plus.unsplash.com/premium_photo-1671308539073-ebf8985a6a11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGFic3RyYWN0JTIwYmFja2dyb3VuZHxlbnwwfDB8MHx8fDA%3D')] h-[300px]"></div>
+<div class="relative overflow-hidden bg-cover bg-no-repeat bg-[50%] bg-[url('https://plus.unsplash.com/premium_photo-1671308539073-ebf8985a6a11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGFic3RyYWN0JTIwYmFja2dyb3VuZHxlbnwwfDB8MHx8fDA%3D')] h-[300px]"></div>
 <div class="container px-6 md:px-12">
     <div class="block rounded-lg bg-[hsla(0,0%,100%,0.7)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,5%,0.7)] dark:shadow-black/20 md:py-16 md:px-12 mt-[-100px] backdrop-blur-[30px]">
         <div class="flex flex-wrap justify-center text-center lg:text-left">
             <div class="w-full shrink-0 grow-0 basis-auto md:px-6">
                 <div class="grid items-center gap-x-6 lg:grid-cols-2">
                     <div class="mb-10 lg:mb-0">
-                        <h2 class="text-3xl font-bold">
+                        <h2 class="text-lg md:text-3xl font-bold">
                             Do not miss any updates.
                             <br/>
                             <span class="text-primary dark:text-primary-400">Subscribe to the newsletter</span>
