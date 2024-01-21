@@ -95,9 +95,12 @@
                     class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded w-full md:w-auto">
                     Direct message
                 </button>
+                <button id="slot-btn1" class="text-blue-950 px-2 text-xs text-right block md:hidden"
+                        style="height: 30px;">
+                    Your Company?
+                    <span class="text-sm text-blue-950 font-semibold hover:underline">Claim Now</span>
+                </button>
             </div>
-
-
         </div>
     </section>
 
@@ -107,11 +110,11 @@
                 <!-- Company Details Section -->
                 <x-bladewind.tab-group name="company-info">
                     <x-slot name="headings">
-                        <x-bladewind.tab-heading active="true" name="desc" label="About"/>
-                        <x-bladewind.tab-heading name="product" label="Products"/>
-                        <x-bladewind.tab-heading name="contact" label="Contact"/>
-                        <x-bladewind.tab-heading name="rate" label="Rate & Reviews"/>
-                        <button id="slot-btn" class="bg-blue-100 text-blue-950 px-2 text-xs text-right"
+                        <x-custom-tab-heading active="true" name="desc" label="About"/>
+                        <x-custom-tab-heading name="product" label="Products"/>
+                        <x-custom-tab-heading name="contact" label="Contact"/>
+                        <x-custom-tab-heading name="rate" label="Rate & Reviews" hidden="true" class="hidden md:block"/>
+                        <button id="slot-btn" class="bg-blue-100 text-blue-950 px-2 text-xs text-right hidden md:block"
                                 style="height: 30px;">
                             Your Company?
                             <span class="text-sm text-blue-950 font-semibold">Claim Now</span>

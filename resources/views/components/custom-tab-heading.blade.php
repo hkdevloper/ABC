@@ -14,6 +14,7 @@
     // to enable switching, the tab content div needs to have the same name as the tab
     // the alternative action is to pass a url. clicking on the tab will open the url
     'url' => 'default',
+    'class' => ''
 ])
 @aware(['color' => 'blue'])
 @php
@@ -22,7 +23,7 @@
     $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
 @endphp
 
-<li class="mr-2 cursor-pointer atab atab-{{ $name }}"
+<li class="mr-2 cursor-pointer atab atab-{{ $name }} @if($class) {{$class}} @endif"
     onclick="@if(!$disabled) @if($url == 'default')goToTab('{{$name}}', '{{$color}}', this.parentElement.getAttribute('data-name')) @else location.href='{{ $url }}' @endif @else javascript:void(0)@endif">
     <span class="inline-block py-4 px-4 text-sm font-medium text-center border-b-2 @if($disabled) text-gray-300 hover:!text-gray-300 cursor-not-allowed
     @else @if(!$active && !$disabled) text-gray-500  border-transparent hover:text-gray-600 hover:border-gray-300
