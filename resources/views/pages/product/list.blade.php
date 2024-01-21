@@ -25,7 +25,7 @@
             <div id="searchResults" class="search-results mt-2"></div>
         </form>
     </div>
-    <div class="container flex items-center justify-between my-4 md:my-8 mx-2 md:mx-0">
+    <div class="container flex items-center justify-between my-4 md:my-8 mx-2 md:mx-auto">
         {{-- Category Filter--}}
         <div class="overflow-hidden">
             <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
