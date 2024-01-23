@@ -4,14 +4,14 @@
     <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
         <h1 class="block text-lg md:text-2xl w-full text-center font-bold">Explore the Depths: Find Your Next Fascinating Read!</h1>
         <br>
-        <form action="{{ route('search') }}" class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
+        <form action="" class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
             <div class="relative flex items-center justify-between md:w-full s-form">
                 <label for="searchInput" class="sr-only">Search</label>
                 <input id="searchInput" name="q" type="text" placeholder="Unleash your creativity and start typing your masterpiece here! 🚀✨"
                        class="search-input focus:outline-none md:px-6 md:py-2 border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full placeholder:text-xs md:placeholder:text-base">
                 <button type="submit" class="mx-2 md:mx-0 bg-green-400 text-white md:py-2 md:px-4 w-auto md:w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
                     <span class="flex items-center justify-center">
-                        <span class="hidden md:block">Find Product</span>
+                        <span class="hidden md:block">Search</span>
                         <!--search icon svg-->
                         <i class='bx bx-search-alt-2 md:hidden p-1'></i>
                     </span>

@@ -126,14 +126,15 @@
                     <!-- Category Card 1 -->
                     @if(is_iterable($category))
                         @forelse($category as $item)
-                            <x-bladewind.card class="cursor-pointer bg-indigo-100 hover:shadow-gray-400" :reducePadding="true">
-                               <div class="flex flex-col items-center justify-center">
-                                   <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}"
-                                        class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-full"/>
-                                   <p class="text-center text-xs md:text-base lg:text-base bold italic mt-2">{{ $item->name }}</p>
-                                   <p class="hidden md:block text-center text-base md:text-xl bold mt-2">
-                                       ({{ $item->countItem() }})</p>
-                               </div>
+                            <x-bladewind.card class="cursor-pointer bg-indigo-100 hover:shadow-gray-400"
+                                              :reducePadding="true">
+                                <div class="flex flex-col items-center justify-center">
+                                    <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}"
+                                         class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-full"/>
+                                    <p class="text-center text-xs md:text-base lg:text-base bold italic mt-2">{{ $item->name }}</p>
+                                    <p class="hidden md:block text-center text-base md:text-xl bold mt-2">
+                                        ({{ $item->countItem() }})</p>
+                                </div>
                             </x-bladewind.card>
 
                         @empty
@@ -163,7 +164,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-8">
                     @forelse($companies as $company)
                         <div
-                            class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                            class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 m-auto w-[90vw] md:w-full h-full">
                             @if($company->is_featured)
                                 <div
                                     class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
@@ -171,18 +172,20 @@
                                 </div>
                             @endif
                             <a href="{{ route('view.company', [$company->slug]) }}"
-                               class="w-[150px] h-[150px] md:w-full md:p-4 md:m-auto md:block md:h-full object-contain">
+                               class="w-[150px] h-[150px] md:w-full md:h-48 md:p-4 md:m-auto md:block object-contain">
                                 <img alt="company photo" src="{{ url('storage/' . $company->logo) }}"
-                                     class="w-[150px] h-[150px] md:w-full md:h-48 object-contain"/>
+                                     class="w-[150px] h-[150px] object-contain md:w-full md:h-full"/>
                             </a>
-                            <div class="p-1 md:p-2 flex flex-col items-start md:items-center justify-center">
-                                <h3 class="text-base md:text-lg font-bold md:text-center text-indigo-900 mb-2">{{ $company->name }}</h3>
-                                <p class="text-red-700 text-center text-xs md:text-sm">{{ $company->address->country->name }}</p>
-                                <h2 class="text-sm md:text-base bold italic underline text-indigo-700 mt-2">Deals
-                                    In</h2>
-                                <p class="text-gray-700 text-center text-xs md:text-sm">{{ $company->dealsIn() }}</p>
+                            <div class="flex flex-col items-center justify-center h-auto">
+                                <div class="p-2 flex flex-col items-center justify-center m-auto">
+                                    <h3 class="text-base md:text-lg font-bold text-center text-indigo-900 mb-2">{{ $company->name }}</h3>
+                                    <p class="text-red-700 text-center text-xs md:text-sm">{{ $company->address->country->name }}</p>
+                                    <h2 class="text-sm md:text-base bold italic underline text-indigo-700 mt-2">Deals
+                                        In</h2>
+                                    <p class="text-gray-700 text-center text-xs md:text-sm">{{ $company->dealsIn() }}</p>
+                                </div>
                             </div>
-                            <div class="absolute bottom-0 md:static right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
+                            <div class="relative bottom-0 right-1 mb-2 w-auto md:w-[calc(80%-1rem)] my-5 m-auto">
                                 <a href="{{ route('view.company', [$company->slug]) }}"
                                    class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
                                     <span class="ml-1">View Profile &nbsp;</span>
@@ -213,7 +216,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 @forelse($products as $item)
                     <div
-                        class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                        class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex flex-col items-center justify-center w-[90vw] md:w-full">
                         @if($item->is_featured)
                             <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
                                 Featured
@@ -224,18 +227,18 @@
                             <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}"
                                  class="w-[150px] h-[150px] md:w-full md:h-48 object-contain"/>
                         </a>
-                        <div class="p-1 md:p-2 flex flex-col items-start md:items-center justify-center">
+                        <div class="p-2 flex flex-col items-center justify-center">
                             <header class="flex my-2 font-light text-base items-center">
                                 <i class="bx bx-category text-indigo-500 mr-1"></i>
                                 <p>{{ $item->category->name }}</p>
                             </header>
-                            <p class="text-xl font-medium mb-2">{{ $item->name }}</p>
+                            <p class="text-xl font-medium mb-2 text-center">{{ $item->name }}</p>
                             <p class="text-red-700 text-center text-xs md:text-sm">{{ $item->company->name }}</p>
                             <p class="text-gray-700 text-center text-xs md:text-sm">{{ $item->company->address->country->name }}</p>
                             <p class="text-gray-700 text-center text-xs md:text-sm">Price:
                                 ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
                         </div>
-                        <div class="absolute bottom-0 md:static right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
+                        <div class="relative bottom-0 md:static right-1 mb-2 w-auto md:w-[calc(80%-1rem)]">
                             <a href="{{ route('view.product', [$item->slug]) }}"
                                class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
                                 <span class="ml-1">Enquire Now &nbsp;</span>
