@@ -45,7 +45,9 @@ class CompanyResource extends Resource
                     'manufacturer' => 'Manufacturer',
                     'distributor' => 'Distributor',
                     'retailer' => 'Retailer',
-                ])->required(),
+                ])
+                    ->native(false)
+                    ->required(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
