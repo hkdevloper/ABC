@@ -163,7 +163,7 @@
                 <hr class="my-5">
                 <div class="md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-8 mx-auto">
                     @forelse($companies as $company)
-                        <div class="hidden md:block bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 m-auto w-[90vw] md:w-full h-full">
+                        <div class="hidden md:flex items-center justify-stretch flex-col bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 m-auto w-[90vw] md:w-full h-full">
                             @if($company->is_featured)
                                 <div
                                     class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
@@ -171,27 +171,31 @@
                                 </div>
                             @endif
                             <a href="{{ route('view.company', [$company->slug]) }}"
-                               class="w-[150px] h-[150px] md:w-full md:h-48 md:p-4 md:m-auto md:block object-contain">
+                               class="w-[150px] h-[150px] md:w-full md:h-48 md:p-4 md:block object-contain">
                                 <img alt="company photo" src="{{ url('storage/' . $company->logo) }}"
                                      class="w-[150px] h-[150px] object-contain md:w-full md:h-full"/>
                             </a>
-                            <div class="flex flex-col items-center justify-center h-auto">
-                                <div class="p-2 flex flex-col items-center justify-center m-auto">
-                                    <h3 class="text-base md:text-lg font-bold text-center text-indigo-900 mb-2">{{ $company->name }}</h3>
-                                    <p class="text-red-700 text-center text-xs md:text-sm">{{ $company->address->country->name }}</p>
-                                    <h2 class="text-sm md:text-base bold italic underline text-indigo-700 mt-2">Deals
-                                        In</h2>
-                                    <p class="text-gray-700 text-center text-xs md:text-sm">{{ $company->dealsIn() }}</p>
+                                <div class="flex flex-col items-center justify-center h-auto my-auto">
+                                    <div class="p-2 flex flex-col items-center justify-center m-auto">
+                                        <h3 class="text-base md:text-lg font-bold text-justify text-indigo-900 mb-2">{{ $company->name }}</h3>
+                                        <p class="text-red-700 text-center text-xs md:text-sm">{{ $company->address->country->name }}</p>
+                                        <h2 class="text-sm md:text-base bold italic underline text-indigo-700 mt-2">Deals In</h2>
+                                        @php
+                                            $limitedText = Str::limit($company->dealsIn(), 30, '...');
+                                        @endphp
+                                        <p class="text-gray-700 text-center text-xs md:text-sm">{{ $limitedText }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="relative bottom-0 right-1 mb-2 w-auto md:w-[calc(80%-1rem)] my-5 m-auto">
-                                <a href="{{ route('view.company', [$company->slug]) }}"
-                                   class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
-                                    <span class="ml-1">View Profile &nbsp;</span>
-                                    <i class='bx bx-link-external mr-2'></i>
-                                </a>
-                            </div>
+                                <div class="w-[calc(80%-1rem)] m-auto">
+                                    <a href="{{ route('view.company', [$company->slug]) }}"
+                                       class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                        <span class="ml-1">View Profile &nbsp;</span>
+                                        <i class='bx bx-link-external mr-2'></i>
+                                    </a>
+                                </div>
+
                         </div>
+                        <!-- Mobile Version Card -->
                         <div class="md:hidden company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex flex-col items-center justify-center p-2 mx-2 my-5">
                             <div class="overflow-hidden mb-4 p-2 md:border-r border-r-1 border-solid border-gray-300">
                                 <img class="w-full h-40 object-contain overflow-hidden" src="{{ url('storage/' . $company->logo) }}"
