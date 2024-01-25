@@ -24,6 +24,7 @@ class Blog extends Model
         'slug',
         'tags',
         'content',
+        'summary',
     ];
     protected $casts = [
         'tags' => 'array',

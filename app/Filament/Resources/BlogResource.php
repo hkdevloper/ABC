@@ -86,6 +86,11 @@ class BlogResource extends Resource
                     ->profile('custom')
                     ->columnSpan('full')
                     ->required(),
+                Textarea::make('summary')
+                    ->label('Enter Summary')
+                    ->columnSpan('full')
+                    ->required()
+                    ->maxLength(191),
                 Section::make('SEO Details')
                     ->relationship('seo')
                     ->schema([

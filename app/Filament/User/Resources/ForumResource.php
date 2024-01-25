@@ -9,6 +9,7 @@ use App\Models\Forum;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\Actions;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Panel;
 use Filament\Resources\Resource;
@@ -40,10 +41,15 @@ class ForumResource extends Resource
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
+                    ->required()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query){
                         return $query->where('type', 'forum');
-                    }),
+                    })->placeholder('Select Category'),
+                Textarea::make('summary')
+                    ->label('Enter Summary')
+                    ->required()
+                    ->maxLength(191),
                 Forms\Components\RichEditor::make('body')
                     ->toolbarButtons([
                         'attachFiles',

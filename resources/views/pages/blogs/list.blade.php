@@ -71,16 +71,20 @@
     </script>
     <div class="container">
         <!-- Blog List -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             @forelse($blogs as $item)
-                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-between mx-4">
-                    <img src="{{url('storage/'.$item->thumbnail)}}" alt="Blog Thumbnail" class="w-full h-40 object-cover mb-4 rounded-md">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-2">{{$item->title}}</h2>
-                    <p class="text-gray-600 mb-4">
-                        {{Str::limit($item->description, 80)}}
-                    </p>
-                    <hr>
-                    <a href="{{route('view.blog', $item->slug)}}" class="text-blue-500 hover:underline text-center accent-auto">Read More</a>
+                <div class="bg-white rounded-lg shadow-md flex flex-col items-center justify-between mx-4">
+                    <div class="p-6  flex flex-col items-center justify-between">
+                        <img src="{{url('storage/'.$item->thumbnail)}}" alt="Blog Thumbnail" class="w-full h-40 object-cover mb-4 rounded-md">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-2">{{$item->title}}</h2>
+                        <p class="text-gray-600 mb-4">
+                            {!! Str::limit($item->summary, 80) !!}
+                        </p>
+                    </div>
+
+                    <a href="{{route('view.blog', $item->slug)}}" class="text-blue-500 hover:underline text-center accent-auto mx-auto my-4 pt-2 w-full" style="border-top: 1px solid lightgray;">
+                        Continue Reading
+                    </a>
                 </div>
             @empty
                 <div class="w-full text-center">

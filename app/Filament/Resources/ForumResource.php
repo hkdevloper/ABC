@@ -9,6 +9,7 @@ use App\Models\Forum;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\Actions;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,6 +29,10 @@ class ForumResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->label('Enter Title')
+                    ->required()
+                    ->maxLength(191),
+                Textarea::make('summary')
+                    ->label('Enter Summary')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('body')
