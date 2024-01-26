@@ -25,6 +25,8 @@
             display: flex;
             flex-direction: column-reverse;
             min-height: 100vh;
+            margin: 0 auto;
+            max-width: 60rem;
         }
 
         a {
@@ -196,22 +198,20 @@
     </div>
     @include('includes.footer')
 </main>
-<x-bladewind.notification/>
 <script src="{{ asset('js/main.js')}}"></script>
-<script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 <script>
     @if(session()->has('success'))
-    showNotification('Success', '{{session()->get('success')}}', 'success');
+    showNotification('Success', '{{session()->get('success')}}', 'success', 2);
     @elseif(session()->has('info'))
-    showNotification('Info', '{{session()->get('info')}}', 'info');
+    showNotification('Info', '{{session()->get('info')}}', 'info', 2);
     @elseif(session()->has('error'))
-    showNotification('Error', '{{session()->get('error')}}', 'error');
+    showNotification('Error', '{{session()->get('error')}}', 'error', 2);
     @elseif(session()->has('warning'))
-    showNotification('Warning', '{{session()->get('warning')}}', 'warning');
+    showNotification('Warning', '{{session()->get('warning')}}', 'warning', 2);
     @endif
     @if($errors->any())
     @foreach ($errors->all() as $error)
-    showNotification('Error', '{{$error}}', 'error');
+    showNotification('Error', '{{$error}}', 'error', 2);
     @endforeach
     @endif
 </script>

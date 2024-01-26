@@ -3,7 +3,7 @@
 @section('content')
     <div class="cta">
         <div class="cta__content">
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, aspernatur itaque ratione repellendus molestiae quibusdam cum nobis! Placeat atque eos aliquam quis voluptatibus excepturi blanditiis sapiente doloremque maxime modi. Natus?</p>
+            <img src="{{asset('storage/image/auth.svg')}}" alt="Authentication" class="cta__image">
         </div>
     </div>
     <div class="form">
