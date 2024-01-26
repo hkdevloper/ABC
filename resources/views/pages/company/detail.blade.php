@@ -255,8 +255,7 @@
                             <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
                                 <div>
                                     <div class="rounded-lg border p-4">
-                                        <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Customer
-                                            Reviews</h2>
+                                        <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Customer Reviews</h2>
 
                                         <div class="mb-0.5 flex items-center gap-2">
                                             <x-bladewind.rating name="star-rating" size="medium" clickable="false"
@@ -270,17 +269,14 @@
 
                                         @auth
                                             @if(auth()->user()->hasRated("company", $company->id))
-                                                <p class="text-sm text-gray-500">You have already rated this
-                                                    company.</p>
+                                                <p class="text-sm text-gray-500">You have already rated this company.</p>
                                             @else
                                                 <a href="#" onclick="showModal('rate')"
-                                                   class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
-                                                    a review</a>
+                                                   class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write a review</a>
                                             @endif
                                         @else
                                             <a href="{{route('auth.login')}}"
-                                               class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login
-                                                to write a review</a>
+                                               class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login to write a review</a>
                                         @endauth
                                     </div>
                                 </div>

@@ -110,6 +110,12 @@ Route::get('/', function () {
 })->name('home');
 
 Route::prefix('auth')->group(function () {
+    Route::get('login', function () {
+        return view('auth.login');
+    })->name('auth.login');
+    Route::get('register', function () {
+        return view('auth.register');
+    })->name('auth.register');
     Route::post('login', function (Request $request) {
         $request->validate([
             'email' => 'required|email',
