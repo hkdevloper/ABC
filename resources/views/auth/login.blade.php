@@ -7,6 +7,15 @@
         </div>
     </div>
     <div class="form">
+        @if($errors->any())
+            @foreach ($errors->all() as $error)
+                <x-bladewind.alert
+                    type="warning">
+                    {{ $error }}
+                </x-bladewind.alert>
+                <div class="my-1"></div>
+            @endforeach
+        @endif
         <form action="{{route('auth.login')}}" method="post" class="form__content">
             @csrf
             <div class="form__content__header">
@@ -23,6 +32,13 @@
                 <label class="form__label" for="pwd">Password</label>
                 <input class="form__input" type="password" name="password" id="pwd" required>
             </div>
+            @if(session()->has('error'))
+                <x-bladewind.alert
+                    type="error">
+                    {{session()->get('error')}}
+                </x-bladewind.alert>
+                <div class="my-1"></div>
+            @endif
             <div class="form__field form__submit">
                 <input class="btn bg-purple-400 hover:bg-purple-800" type="submit" value="Log In">
                 <a href="{{url('user/password-reset/request')}}">Forgot password?</a>

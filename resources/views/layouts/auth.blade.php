@@ -11,6 +11,7 @@
     <script src="{{ asset('js/jquery.js')}}"></script>
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
     <style>
         body {
             font-family: "Roboto", sans-serif;
@@ -192,28 +193,11 @@
 <body>
 @include('includes.header')
 <main class="mx-auto">
-    <x-bladewind.notification />
     <div class="body">
         @yield('content')
     </div>
     @include('includes.footer')
 </main>
 <script src="{{ asset('js/main.js')}}"></script>
-<script>
-    @if(session()->has('success'))
-    showNotification('Success', '{{session()->get('success')}}', 'success', 2);
-    @elseif(session()->has('info'))
-    showNotification('Info', '{{session()->get('info')}}', 'info', 2);
-    @elseif(session()->has('error'))
-    showNotification('Error', '{{session()->get('error')}}', 'error', 2);
-    @elseif(session()->has('warning'))
-    showNotification('Warning', '{{session()->get('warning')}}', 'warning', 2);
-    @endif
-    @if($errors->any())
-    @foreach ($errors->all() as $error)
-    showNotification('Error', '{{$error}}', 'error', 2);
-    @endforeach
-    @endif
-</script>
 </body>
 </html>
