@@ -5,7 +5,9 @@
     <div class="container mx-2 md:mx-auto flex items-center justify-between my-8">
         {{-- Category Filter--}}
         <div class="">
-            <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
+            <label for="product-category-filter" class="text-gray-500 text-lg">
+                <i class='bx bx-filter-alt w-5 h-5'></i>
+            </label>
             <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doFilter()">
                 <option value="all" selected>All</option>
                 @foreach($categories as $category)

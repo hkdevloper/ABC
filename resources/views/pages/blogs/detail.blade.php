@@ -83,23 +83,29 @@
                     </form>
                 </section>
                 <!-- Related Products Section -->
-                <section class="mt-8 p-1 bg-white">
-                    <h2 class="text-2xl font-semibold">Related Blogs</h2>
+                <section class="mt-8 p-1">
+                    <h2 class="text-2xl font-semibold mb-5">Related Blogs</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     @forelse($related_blogs as $item)
-                        <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-between">
-                            <img src="{{url('storage/'.$item->thumbnail)}}" alt="Blog Thumbnail" class="w-full h-40 object-cover mb-4 rounded-md">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-2">{{$item->title}}</h2>
-                            <p class="text-gray-600 mb-4">
-                                {{Str::limit($item->description, 80)}}
-                            </p>
-                            <hr>
-                            <a href="{{route('view.blog', $item->slug)}}" class="text-blue-500 hover:underline text-center accent-auto">Read More</a>
-                        </div>
+                            <div class="bg-white rounded-lg shadow-md flex flex-col items-center justify-between">
+                                <div class="p-6  flex flex-col items-center justify-between">
+                                    <img src="{{url('storage/'.$item->thumbnail)}}" alt="Blog Thumbnail" class="w-full h-40 object-cover mb-4 rounded-md">
+                                    <h2 class="text-lg font-semibold text-gray-800 mb-2">{{$item->title}}</h2>
+                                    <p class="text-gray-600 mb-4">
+                                        {!! Str::limit($item->summary, 80) !!}
+                                    </p>
+                                </div>
+
+                                <a href="{{route('view.blog', $item->slug)}}" class="text-blue-500 hover:underline text-center accent-auto mx-auto my-4 pt-2 w-full" style="border-top: 1px solid lightgray;">
+                                    Continue Reading
+                                </a>
+                            </div>
                     @empty
                         <div class="w-full text-center">
                             <p class="text-gray-500 text-center">No Blogs Found</p>
                         </div>
                     @endforelse
+                    </div>
                 </section>
             </div>
         </div>

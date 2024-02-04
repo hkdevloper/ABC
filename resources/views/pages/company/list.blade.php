@@ -45,7 +45,9 @@
     <div class="container flex items-center justify-between my-8 mx-2 md:mx-auto">
         {{-- Category Filter--}}
         <div class="">
-            <label for="product-category-filter" class="text-gray-500">Filter by Category</label>
+            <label for="product-category-filter" class="text-gray-500 text-lg">
+                <i class='bx bx-filter-alt w-5 h-5'></i>
+            </label>
             <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doFilter()">
                 <option value="all" selected>All</option>
                 @foreach($categories as $category)
@@ -65,7 +67,9 @@
         </div>
         {{-- Sort By --}}
         <div class="">
-            <label for="product-sort-by" class="text-gray-500">Sort By</label>
+            <label for="product-sort-by" class="text-gray-500 text-lg">
+                <i class='bx bx-filter w-5 h-5 text-lg'></i>
+            </label>
             <select name="sort" id="product-sort-by" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doSort()">
                 <option value="name" @if(request()->get('sort') == 'name') selected @endif>Name</option>
                 <option value="asc" @if(request()->get('sort') == 'asc') selected @endif>Rating low to high</option>
