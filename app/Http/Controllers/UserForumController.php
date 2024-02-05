@@ -17,29 +17,8 @@ class UserForumController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'forum');
-        $forums = [];
-        $tab = null;
-        // Filtered Tab
-        if ($request->has('tab')) {
-            // Most Answered
-            if ($request->tab == 'most_answered') {
-                $forums = Forum::where('is_approved', 1)->where('is_active', 1)->withCount('forumReplies')->orderBy('forum_replies_count', 'desc')->paginate(10);
-                $tab = 'most_answered';
-            }
-            // Un-Answered
-            if ($request->tab == 'un_answered') {
-                $forums = Forum::where('is_approved', 1)->where('is_active', 1)->doesntHave('forumReplies')->paginate(10);
-                $tab = 'un_answered';
-            }
-            // Featured
-            if ($request->tab == 'featured') {
-                $forums = Forum::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->paginate(10);
-                $tab = 'featured';
-            }
-        } else {
-            $forums = Forum::where('is_approved', 1)->where('is_active', 1)->paginate(10);
-        }
-        $data = compact('forums', 'tab');
+        $forums = Forum::where('is_approved', 1)->where('is_active', 1)->paginate(10);
+        $data = compact('forums');
         return view('pages.forum.list')->with($data);
     }
 

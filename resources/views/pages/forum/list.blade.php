@@ -20,16 +20,6 @@
                 Showing {{ $forums->firstItem() }} - {{ $forums->lastItem() }} of {{ $forums->total() }} results
             </p>
         </div>
-        {{-- Sort By --}}
-        <div class="overflow-hidden">
-            <label for="product-sort-by" class="text-gray-500 text-lg">
-                <i class='bx bx-filter w-5 h-5 text-lg'></i>
-            </label>
-            <select name="sort" id="product-sort-by"
-                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
-                    onchange="doSort()">
-            </select>
-        </div>
     </div>
     <div class="container py-6 mx-auto">
         <div class="w-full">
