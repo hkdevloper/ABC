@@ -17,25 +17,23 @@ class UserJobController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'job');
-        $query = Job::where('is_approved', 1);
+        $query = $request->input('q');
+        $categoryFilter = $request->input('category');
 
-        if ($request->has('category')) {
+        $jobsQuery = Job::where('is_approved', 1)->where('is_active', 1);
+
+        if (!empty($categoryFilter)) {
             // Get Category I'd from Category Name
-            $cat_id = Category::where('name', $request->category)->first();
-            $query->where('category_id', $cat_id->id);
+            $catId = Category::where('name', $categoryFilter)->first();
+            $jobsQuery->where('category_id', $catId->id);
         }
 
-        if ($request->has('sort')) {
-            if ($request->sort == 'name') {
-                $query->orderBy('name', 'asc');
-            } elseif ($request->sort == 'price-low-to-high') {
-                $query->orderBy('price', 'asc');
-            } elseif ($request->sort == 'price-high-to-low') {
-                $query->orderBy('price', 'desc');
-            }
+        if (!empty($query)) {
+            $jobsQuery->where(function ($innerQuery) use ($query) {
+                $innerQuery->where('title', 'like', '%' . $query . '%');
+            });
         }
-
-        $jobs = $query->paginate(12);
+        $jobs = $jobsQuery->paginate(12);
         $categories = Category::where('type', 'job')->where('is_active', 1)->get();
 
         $data = compact('jobs', 'categories');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\classes\HelperFunctions;
+use App\Models\Category;
 use App\Models\Forum;
 use App\Models\ForumReply;
 use Illuminate\Http\Request;
@@ -17,8 +18,26 @@ class UserForumController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'forum');
-        $forums = Forum::where('is_approved', 1)->where('is_active', 1)->paginate(10);
-        $data = compact('forums');
+        //$forums = Forum::where('is_approved', 1)->where('is_active', 1)->paginate(12);
+        $query = $request->input('q');
+        $categoryFilter = $request->input('category');
+
+        $forumQuery = Forum::where('is_approved', 1)->where('is_active', 1);
+
+        if (!empty($categoryFilter)) {
+            // Get Category I'd from Category Name
+            $catId = Category::where('name', $categoryFilter)->first();
+            $forumQuery->where('category_id', $catId->id);
+        }
+
+        if (!empty($query)) {
+            $forumQuery->where(function ($innerQuery) use ($query) {
+                $innerQuery->where('title', 'like', '%' . $query . '%');
+            });
+        }
+        $forums = $forumQuery->paginate(12);
+        $categories = Category::where('type', 'forum')->where('is_active', 1)->get();
+        $data = compact('forums', 'categories');
         return view('pages.forum.list')->with($data);
     }
 

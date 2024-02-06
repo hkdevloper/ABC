@@ -2,6 +2,24 @@
 @extends('layouts.user')
 
 @section('content')
+    <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
+        <h1 class="block text-lg md:text-2xl w-full text-center font-bold">🔍 Dive into Forum Treasures!</h1>
+        <br>
+        <form action="" class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
+            <div class="relative flex items-center justify-between md:w-full s-form">
+                <label for="searchInput" class="sr-only">Search</label>
+                <input id="searchInput" name="q" type="text" placeholder="Unearth knowledge and discussions! 🚀✨"
+                       class="search-input focus:outline-none md:px-6 md:py-2 border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full placeholder:text-xs md:placeholder:text-base">
+                <button type="submit" class="mx-2 md:mx-0 bg-green-400 text-white md:py-2 md:px-4 w-auto md:w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
+                    <span class="flex items-center justify-center">
+                        <span class="hidden md:block">Search</span>
+                        <!--search icon svg-->
+                        <i class='bx bx-search-alt-2 md:hidden p-1'></i>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </div>
     <div class="container flex items-center justify-between my-4 md:my-8 mx-2 md:mx-auto">
         {{-- Category Filter--}}
         <div class="overflow-hidden">
@@ -12,6 +30,13 @@
                     class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
                     onchange="doFilter()">
                 <option value="all" selected>All</option>
+                @foreach($categories as $category)
+                    @if(request()->get('category') == $category->name)
+                        <option selected value="{{ $category->name }}">{{ $category->name }}</option>
+                    @else
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @endif
+                @endforeach
             </select>
         </div>
         {{-- Total Products --}}
@@ -21,6 +46,27 @@
             </p>
         </div>
     </div>
+    <script>
+        function doFilter() {
+            let categoryValue = document.getElementById('product-category-filter').value;
+            applyFilters(categoryValue);
+        }
+
+        function applyFilters(category) {
+            let url = "{{ route('forum') }}";
+            let params = [];
+
+            if (category !== 'all') {
+                params.push('category=' + category);
+            }
+
+            if (params.length > 0) {
+                url += '?' + params.join('&');
+            }
+
+            window.location.href = url;
+        }
+    </script>
     <div class="container py-6 mx-auto">
         <div class="w-full">
             <!-- Forum list Item -->
