@@ -65,7 +65,7 @@ class UserForumController extends Controller
             'forum_id' => 'required'
         ]);
         if (!auth()->user()) {
-            return redirect()->route('user/dashboard')->with('error', 'You must login to answer this forum');
+            return redirect()->route('auth.login')->with('error', 'You must login to answer this forum');
         }
         $forum = Forum::find($request->forum_id);
         if (!$forum) {
