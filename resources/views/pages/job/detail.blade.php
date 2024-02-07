@@ -15,7 +15,7 @@
                         <span class="text-xs text-gray-600">{{$job->created_at->format('d M Y')}}</span>
                     </p>
                     <div class="mt-4">
-                        <button
+                        <button onclick="showModal('apply-job-on-email')"
                             class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-2 px-4 rounded-full hover:rounded-full transition-all duration-300 ease-in-out">
                             Apply for job
                         </button>
@@ -54,7 +54,7 @@
             </section>
             <hr class="my-4">
             <div class="mt-4">
-                <button class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-2 px-4 rounded-full hover:rounded-full transition-all duration-300 ease-in-out">
+                <button  onclick="showModal('apply-job-on-email')" class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-2 px-4 rounded-full hover:rounded-full transition-all duration-300 ease-in-out">
                     Apply for job
                 </button>
             </div>
@@ -89,6 +89,24 @@
                 </div>
             </section>
         </div>
+        <x-bladewind.modal
+            name="apply-job-on-email"
+            title="Apply for Job">
+            You can apply for this job
+            by sending your résumé to the email address
+            provided by the employer.
+            <br>
+            <span class="text-gray-600 text-sm">
+                <i class='bx bx-envelope text-gray-600'></i>
+                {{$job->user->company->email}}
+            </span>
+            <div class="mt-4">
+                <a href="mailto:{{$job->user->company->email}}"
+                   class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-2 px-4 rounded-full hover:rounded-full transition-all duration-300 ease-in-out">
+                    Send Email
+                </a>
+            </div>
+        </x-bladewind.modal>
         @include('includes.sidebar')
     </div>
 @endsection

@@ -5,6 +5,9 @@
         <div class="cta__content">
             <img src="{{asset('storage/image/auth.svg')}}" alt="Authentication" class="cta__image">
         </div>
+        <p  class="text-center">
+            lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
     </div>
     <div class="form">
         @if($errors->any())

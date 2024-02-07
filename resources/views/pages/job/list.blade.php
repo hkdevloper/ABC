@@ -43,19 +43,50 @@
                 Showing {{ $jobs->firstItem() }} - {{ $jobs->lastItem() }} of {{ $jobs->total() }} results
             </p>
         </div>
+        {{-- Sort By --}}
+        <div class="overflow-hidden">
+            <label for="job-country" class="text-gray-500 text-lg">
+                <i class='bx bx-filter w-5 h-5 text-lg'></i>
+            </label>
+            <select name="sort" id="job-country"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+                    onchange="doSort()">
+                <option value="" @if(!request()->get('country')) selected @endif>By Country</option>
+                @forelse($countries as $country)
+                    @if(request()->get('country') == $country->id)
+                        <option selected value="{{ $country->id }}">{{ $country->name }}</option>
+                    @else
+                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                    @endif
+                @empty
+                    <option value="all" selected>All</option>
+                @endforelse
+            </select>
+        </div>
     </div>
     <script>
         function doFilter() {
             let categoryValue = document.getElementById('product-category-filter').value;
-            applyFilters(categoryValue);
+            let sortValue = document.getElementById('job-country').value;
+            applyFilters(categoryValue, sortValue);
         }
 
-        function applyFilters(category) {
+        function doSort() {
+            let sortValue = document.getElementById('job-country').value;
+            let categoryValue = document.getElementById('product-category-filter').value;
+            applyFilters(categoryValue, sortValue);
+        }
+
+        function applyFilters(category, sort) {
             let url = "{{ route('jobs') }}";
             let params = [];
 
             if (category !== 'all') {
                 params.push('category=' + category);
+            }
+
+            if (sort !== 'all') {
+                params.push('country=' + sort);
             }
 
             if (params.length > 0) {

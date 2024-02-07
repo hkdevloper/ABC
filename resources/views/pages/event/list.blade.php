@@ -88,13 +88,23 @@
                             </div>
                             <a href="{{route('view.event', [$event->slug])}}"
                                class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
-                            <span class="description text-sm block py-2 border-gray-400 mb-2">
-                                        @php
-                                            $description = strip_tags($event->description);
-                                            $description = strlen($description) > 100 ? substr($description, 0, 100) . "..." : $description;
-                                        @endphp
-                                {!! $description !!}
-                                    </span>
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="flex items-center">
+                                    <i class='bx bx-calendar text-gray-600'></i>
+                                    @php
+                                        $date = \Carbon\Carbon::parse($event->start);
+                                        $time = \Carbon\Carbon::parse($event->start);
+
+                                        $date = $date->format('M d, Y');
+                                        $time = $time->format('h:i A');
+                                    @endphp
+                                    <span class="text-gray-600 text-sm ml-1">{{$date}}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class='bx bx-time text-gray-600'></i>
+                                    <span class="text-gray-600 text-sm ml-1">{{$time}}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

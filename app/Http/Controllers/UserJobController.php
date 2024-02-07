@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\Job;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
@@ -19,6 +20,7 @@ class UserJobController extends Controller
         Session::put('menu', 'job');
         $query = $request->input('q');
         $categoryFilter = $request->input('category');
+        $countryFilter = $request->input('country');
 
         $jobsQuery = Job::where('is_approved', 1)->where('is_active', 1);
 
@@ -26,6 +28,17 @@ class UserJobController extends Controller
             // Get Category I'd from Category Name
             $catId = Category::where('name', $categoryFilter)->first();
             $jobsQuery->where('category_id', $catId->id);
+        }
+        /** Get Jobs Country
+         * Job->address->country
+         * Job has address_id
+         * Address has country_id
+         * Country has id
+        */
+        if (!empty($countryFilter)) {
+            $jobsQuery->whereHas('address', function ($query) use ($countryFilter) {
+                $query->where('country_id', $countryFilter);
+            });
         }
 
         if (!empty($query)) {
@@ -35,8 +48,9 @@ class UserJobController extends Controller
         }
         $jobs = $jobsQuery->paginate(12);
         $categories = Category::where('type', 'job')->where('is_active', 1)->get();
+        $countries = Country::all();
 
-        $data = compact('jobs', 'categories');
+        $data = compact('jobs', 'categories', 'countries');
         return view('pages.job.list')->with($data);
     }
 
