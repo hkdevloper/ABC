@@ -55,7 +55,7 @@ Route::get('/', function () {
                 ->from('products')
                 ->whereColumn('categories.id', 'products.category_id');
         })
-        ->take(6) // Retrieve at least six categories
+        ->take(5) // Retrieve at least six categories
         ->get();
 
 // If the retrieved categories are less than six, fetch additional categories as needed.
@@ -256,3 +256,10 @@ Route::get('/search', function (Request $request) {
     $data = compact('products');
     return view('search')->with($data);
 })->name('search');
+
+Route::get('/categories', function (Request $request){
+    // Clear session
+    Session::forget('menu');
+    $type = Category::pluck('type')->unique();
+    return view('category', compact('type'));
+})->name('categories');

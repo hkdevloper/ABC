@@ -112,9 +112,8 @@
         <section class="p-2 my-1 md:p-8 md:my-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">
-                        Categories</h1>
-                    <a href="{{ route('company')}}"
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Categories</h1>
+                    <a href="{{ route('categories')}}"
                        class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
                         <span class="text-purple-500 md:text-white">Explore All</span>
                         {{-- Icon --}}
@@ -122,7 +121,7 @@
                     </a>
                 </div>
                 <hr class="my-2 md:my-5">
-                <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-1 md:gap-3">
+                <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-1 md:gap-3">
                     <!-- Category Card 1 -->
                     @if(is_iterable($category))
                         @forelse($category as $item)
@@ -131,7 +130,9 @@
                                 <div class="flex flex-col items-center justify-center">
                                     <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}"
                                          class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-full"/>
-                                    <p class="text-center text-xs md:text-base lg:text-base bold italic mt-2">{{ $item->name }}</p>
+                                    <p class="text-center text-xs md:text-sm lg:text-base bold italic mt-2">
+                                        {{ Str::limit($item->name, 15) }}
+                                    </p>
                                     <p class="hidden md:block text-center text-base md:text-xl bold mt-2">
                                         ({{ $item->countItem() }})</p>
                                 </div>
@@ -161,7 +162,7 @@
                     </a>
                 </div>
                 <hr class="my-5">
-                <div class="md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-8 mx-auto">
+                <div class="md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mx-auto">
                     @forelse($companies as $company)
                         <div class="hidden md:flex items-center justify-stretch flex-col bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 m-auto w-[90vw] md:w-full h-full">
                             @if($company->is_featured)
@@ -289,7 +290,7 @@
                 </a>
             </div>
             <hr class="my-5">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 @forelse($products as $item)
                     <div class="hidden md:flex bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex-col items-center justify-center w-[90vw] md:w-full">
                         @if($item->is_featured)
@@ -377,15 +378,15 @@
                     @forelse($events as $event)
                         <div
                             class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
-                            <div class="each relative">
+                            <div class="each relative flex flex-col items-stretch justify-center">
                                 <img src="{{ url('storage/'.$event->thumbnail) }}"
                                      class="w-full h-48 object-cover rounded-t-lg" alt="Event">
                                 <div class="desc p-4 text-gray-800">
                                     <div class="flex items-center mt-2">
-                                        <img class='w-10 h-10 object-cover rounded-full' alt='User avatar'
+                                        <img class='w-8 h-8 object-cover rounded-full' alt='User avatar'
                                              src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
                                         <div class="pl-3">
-                                            <div class="font-medium">
+                                            <div class="font-medium text-sm">
                                                 {{$event->user->name}}
                                             </div>
                                             <div class="text-gray-600 text-sm">
@@ -395,13 +396,23 @@
                                     </div>
                                     <a href="{{route('view.event', [$event->slug])}}" target="_new"
                                        class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
-                                    <span class="description text-sm block py-2 border-gray-400 mb-2">
+                                    <div class="flex items-center justify-between mt-4">
+                                        <div class="flex items-center">
+                                            <i class='bx bx-calendar text-gray-600'></i>
                                             @php
-                                                $description = strip_tags($event->description);
-                                                $description = strlen($description) > 100 ? substr($description, 0, 100) . "..." : $description;
+                                                $date = \Carbon\Carbon::parse($event->start);
+                                                $time = \Carbon\Carbon::parse($event->start);
+
+                                                $date = $date->format('M d, Y');
+                                                $time = $time->format('h:i A');
                                             @endphp
-                                        {!! $description !!}
-                                    </span>
+                                            <span class="text-gray-600 text-sm ml-1">{{$date}}</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class='bx bx-time text-gray-600'></i>
+                                            <span class="text-gray-600 text-sm ml-1">{{$time}}</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -414,7 +425,7 @@
 
         <!-- Why Choose Us -->
         <section class="text-gray-600 body-font mt-3">
-            <div class="px-5 py-4 mx-auto">
+            <div class="container px-5 py-4 mx-auto">
                 <div class="text-center mb-10">
                     <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">
                         Why Choose Us
@@ -428,50 +439,49 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="hp-4 flex flex-col text-center items-center card">
-                        <div
-                            class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                            <i class="mdi mdi-earth"></i>
+                    <div class="p-4 flex flex-col text-center items-center card">
+                        <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 14V21h1a1 1 0 001-1v-4a3 3 0 00-3-3h-1zm0 0V10M12 7V3m0 4h3m-3 0H9m3 4h3m-3 0H9" />
+                            </svg>
                         </div>
                         <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Promote your business
-                                worldwide</h2>
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Promote your business worldwide</h2>
                             <p class="leading-relaxed text-base">
-                                As a full-stack apprentice intern in the heart of Kathiawar,
-                                specializing in Angular and .NET Core,
+                                As a full-stack apprentice intern in the heart of Kathiawar, specializing in Angular and .NET Core,
                                 I bring the world to your business.
                             </p>
                         </div>
                     </div>
                     <div class="p-4 flex flex-col text-center items-center card">
-                        <div
-                            class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                            <i class="mdi mdi-chat-processing"></i>
+                        <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 14V21h1a1 1 0 001-1v-4a3 3 0 00-3-3h-1zm0 0V10M12 7V3m0 4h3m-3 0H9m3 4h3m-3 0H9" />
+                            </svg>
                         </div>
                         <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Direct Chat with business
-                                lister</h2>
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Direct Chat with business lister</h2>
                             <p class="leading-relaxed text-base">
-                                Engage in direct conversations with me, your dedicated full-stack developer, ensuring
-                                your requirements are met efficiently.
+                                Engage in direct conversations with me, your dedicated full-stack developer, ensuring your requirements are met efficiently.
                             </p>
                         </div>
                     </div>
                     <div class="p-4 flex flex-col text-center items-center card">
-                        <div
-                            class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                            <i class="mdi mdi-account-group"></i>
+                        <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 14V21h1a1 1 0 001-1v-4a3 3 0 00-3-3h-1zm0 0V10M12 7V3m0 4h3m-3 0H9m3 4h3m-3 0H9" />
+                            </svg>
                         </div>
                         <div class="flex-grow">
                             <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Find Millions of buyers</h2>
                             <p class="leading-relaxed text-base">
-                                With a dream to become the best game developer and full-stack developer globally, my
-                                skills attract millions of potential buyers to your projects.
+                                With a dream to become the best game developer and full-stack developer globally, my skills attract millions of potential buyers to your projects.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
     </section>
 @endsection
