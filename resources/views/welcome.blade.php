@@ -125,7 +125,7 @@
                     <!-- Category Card 1 -->
                     @if(is_iterable($category))
                         @forelse($category as $item)
-                            <x-bladewind.card class="cursor-pointer bg-indigo-100 hover:shadow-gray-400"
+                            <x-bladewind.card class="reveal cursor-pointer bg-indigo-100 hover:shadow-gray-400"
                                               :reducePadding="true">
                                 <div class="flex flex-col items-center justify-center">
                                     <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}"
@@ -164,7 +164,7 @@
                 <hr class="my-5">
                 <div class="md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mx-auto">
                     @forelse($companies as $company)
-                        <div class="hidden md:flex items-center justify-stretch flex-col bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 m-auto w-[90vw] md:w-full h-full">
+                        <div class="reveal hidden md:flex items-center justify-stretch flex-col bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 m-auto w-[90vw] md:w-full h-full">
                             @if($company->is_featured)
                                 <div
                                     class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
@@ -292,7 +292,7 @@
             <hr class="my-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 @forelse($products as $item)
-                    <div class="hidden md:flex bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex-col items-center justify-center w-[90vw] md:w-full">
+                    <div class="reveal hidden md:flex bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex-col items-center justify-center w-[90vw] md:w-full">
                         @if($item->is_featured)
                             <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
                                 Featured
@@ -322,7 +322,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                    <div class="reveal bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
                         @if($item->is_featured)
                             <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded" style="z-index: 99">
                                 Featured
@@ -376,8 +376,7 @@
                 <hr class="my-5">
                 <div class="owl-carousel grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     @forelse($events as $event)
-                        <div
-                            class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
+                        <div class="reveal bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
                             <div class="each relative flex flex-col items-stretch justify-center">
                                 <img src="{{ url('storage/'.$event->thumbnail) }}"
                                      class="w-full h-48 object-cover rounded-t-lg" alt="Event">
@@ -439,7 +438,7 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="p-4 flex flex-col text-center items-center card">
+                    <div class="p-4 flex flex-col text-center items-center card reveal">
                         <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 14V21h1a1 1 0 001-1v-4a3 3 0 00-3-3h-1zm0 0V10M12 7V3m0 4h3m-3 0H9m3 4h3m-3 0H9" />
@@ -453,7 +452,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="p-4 flex flex-col text-center items-center card">
+                    <div class="p-4 flex flex-col text-center items-center card reveal">
                         <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 14V21h1a1 1 0 001-1v-4a3 3 0 00-3-3h-1zm0 0V10M12 7V3m0 4h3m-3 0H9m3 4h3m-3 0H9" />
@@ -466,7 +465,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="p-4 flex flex-col text-center items-center card">
+                    <div class="p-4 flex flex-col text-center items-center card reveal">
                         <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 14V21h1a1 1 0 001-1v-4a3 3 0 00-3-3h-1zm0 0V10M12 7V3m0 4h3m-3 0H9m3 4h3m-3 0H9" />

@@ -63,6 +63,17 @@
     @endforeach
     @endif
 </script>
+<script>
+    ScrollReveal().reveal('.reveal', {
+        delay: 100,    // Delay in milliseconds
+        distance: '30px',  // Animation distance
+        origin: 'bottom',  // Animation origin (top, right, bottom, left)
+        easing: 'ease-in-out', // Animation easing
+        duration: 500,  // Animation duration in milliseconds
+        reset: true    // Reset animation on scroll up
+    });
+</script>
+
 @yield('page-scripts')
 @yield('components-scripts')
 </body>

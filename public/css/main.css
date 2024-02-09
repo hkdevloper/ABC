@@ -81,3 +81,7 @@ img{
 .btn:active{
     background-color: #000;
 }
+
+html.sr .reveal {
+    visibility: hidden;
+}

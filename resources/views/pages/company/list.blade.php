@@ -117,7 +117,7 @@
     <div class="container py-6 mx-auto">
         <!-- Existing content remains unchanged -->
         @forelse($companies as $company)
-            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex items-center justify-center p-2 mx-4 md:mx-0">
+            <div class="reveal company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex items-center justify-center p-2 mx-4 md:mx-0">
                 <div class="overflow-hidden mb-4 p-2 md:border-r border-r-1 border-solid border-gray-300">
                     <img class="w-full h-40 object-contain overflow-hidden" src="{{ url('storage/' . $company->logo) }}"
                          alt="">

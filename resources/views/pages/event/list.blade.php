@@ -69,7 +69,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
             <!-- Event Items-->
             @forelse($events as $event)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="reveal bg-white rounded-lg shadow-md overflow-hidden">
                     <div class="each relative">
                         <img src="{{ url('storage/'.$event->thumbnail) }}" class="w-full h-48 object-contain"
                              alt="Event">

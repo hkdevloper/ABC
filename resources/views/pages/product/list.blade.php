@@ -101,7 +101,7 @@
     <div class="container">
         <!-- Product List -->
         @forelse($products as $key => $item)
-            <div class="card p-4 my-4 mx-3 shadow border border-b border-solid border-gray-100 flex flex-col md:flex-row items-center">
+            <div class="reveal card p-4 my-4 mx-3 shadow border border-b border-solid border-gray-100 flex flex-col md:flex-row items-center">
                 <div class="w-full flex flex-col md:flex-row items-center justify-center">
                     <div class="overflow-hidden mb-4 p-2 md:border-r border-r-1 border-solid border-gray-300">
                         <img class="w-full h-40 object-contain overflow-hidden"

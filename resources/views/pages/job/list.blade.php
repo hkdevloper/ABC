@@ -99,7 +99,7 @@
     <div class="container mx-auto py-6 w-[90vw] md:w-full">
         <!-- Existing content remains unchanged -->
         @forelse($jobs as $job)
-            <div class="flex flex-col md:flex-row company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 items-center justify-center p-4 md:p-2 mb-5">
+            <div class="reveal flex flex-col md:flex-row company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 items-center justify-center p-4 md:p-2 mb-5">
                 <div class="mb-4 p-2 md:pr-3">
                     <img class="w-full h-40 md:h-20 object-contain overflow-hidden" src="{{ url('storage/' . $job->thumbnail) }}" alt="">
                 </div>

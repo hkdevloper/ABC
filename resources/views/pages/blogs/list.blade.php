@@ -75,7 +75,7 @@
         <!-- Blog List -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             @forelse($blogs as $item)
-                <div class="bg-white rounded-lg shadow-md flex flex-col items-center justify-between mx-4">
+                <div class="reveal bg-white rounded-lg shadow-md flex flex-col items-center justify-between mx-4">
                     <div class="p-6  flex flex-col items-center justify-between">
                         <img src="{{url('storage/'.$item->thumbnail)}}" alt="Blog Thumbnail" class="w-full h-40 object-cover mb-4 rounded-md">
                         <h2 class="text-lg font-semibold text-gray-800 mb-2">{{$item->title}}</h2>
