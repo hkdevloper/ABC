@@ -42,6 +42,9 @@
 
 @section('content')
     <x-user.bread-crumb :data="['Home', 'Company', 'List']"/>
+    <div class="container p-4">
+        <h1 class="text-2xl bold font-bold md:text-4xl">Discover the Best Places to Work!</h1>
+    </div>
     <div class="container flex items-center justify-between my-8 mx-2 md:mx-auto">
         {{-- Category Filter--}}
         <div class="">
