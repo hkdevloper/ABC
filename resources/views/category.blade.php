@@ -51,8 +51,8 @@
         <h1 class="block text-lg md:text-4xl w-full text-center font-bold">Browse Categories!!</h1>
     </div>
     <!-- Main Content -->
-    <div class="container py-6 mx-auto flex flex-wrap">
-        <section class="p-2 my-1 md:p-8 md:my-4">
+    <div class="container py-3 mx-auto flex flex-wrap">
+        <section class="p-2 my-1 ">
             <div class="container mx-auto">
                 @forelse($type as $itemType)
                     <div class="flex justify-start items- my-5">
