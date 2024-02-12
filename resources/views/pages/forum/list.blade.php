@@ -87,7 +87,9 @@
                             </div>
                         </div>
                         <h1 class="text-lg font-semibold text-gray-900 mb-4">{{$forum->title}}</h1>
-                        <p class="text-gray-700 text-sm"></p>
+                        <p class="text-gray-700 text-sm">
+                            {!! \Illuminate\Support\Str::limit($forum->body, 200) !!}
+                        </p>
                         <hr class="my-4 border-t-2 border-gray-200">
                         <div class="flex justify-between items-center">
                             <div>
