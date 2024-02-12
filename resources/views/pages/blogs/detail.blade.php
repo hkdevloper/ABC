@@ -17,31 +17,6 @@
                     <h1 class="mb-6 text-3xl font-bold">{{$blog->title}}</h1>
                     <p>{!! $blog->content !!}</p>
                 </div>
-                <!-- Comment Section -->
-                <section class="my-8">
-                    <h5 class="mb-10 text-xl font-semibold md:mb-6">
-                        Comments: <span class="text-gray-500 text-base">({{$blog->comments->count()}})</span>
-                    </h5>
-
-                    <!-- Comment -->
-                    @forelse($blog->comments as $comment)
-                        <div class="mb-12 flex flex-wrap md:mb-0">
-                            <div class="w-full md:w-2/12 shrink-0 grow-0 basis-auto">
-                                <img src="https://ui-avatars.com/api/?name={{$comment->user->name}}"
-                                     class="mb-6 w-full rounded-lg shadow-lg dark:shadow-black/20" alt="Avatar" />
-                            </div>
-
-                            <div class="w-full md:w-10/12 shrink-0 grow-0 basis-auto md:pl-6">
-                                <p class="mb-3 font-semibold">{{$comment->user->name}}</p>
-                                <p class="mb-3 text-gray-500 text-sm">{{$comment->created_at->diffForHumans()}}</p>
-                                <p>{!! $comment->comment !!}</p>
-
-                            </div>
-                        </div>
-                    @empty
-                        <p class="text-gray-500 text-center mt-10">No comments found.</p>
-                    @endforelse
-                </section>
                 <!-- Leave Reply -->
                 <section class="my-8">
                     <h5 class="mb-10 text-center text-xl font-semibold">Leave a reply</h5>
@@ -81,6 +56,31 @@
                             </script>
                         @endauth
                     </form>
+                </section>
+                <!-- Comment Section -->
+                <section class="my-8">
+                    <h5 class="mb-10 text-xl font-semibold md:mb-6">
+                        Comments: <span class="text-gray-500 text-base">({{$blog->comments->count()}})</span>
+                    </h5>
+
+                    <!-- Comment -->
+                    @forelse($blog->comments as $comment)
+                        <div class="mb-12 flex flex-wrap md:mb-0">
+                            <div class="w-full md:w-2/12 shrink-0 grow-0 basis-auto">
+                                <img src="https://ui-avatars.com/api/?name={{$comment->user->name}}"
+                                     class="mb-6 w-full rounded-lg shadow-lg dark:shadow-black/20" alt="Avatar" />
+                            </div>
+
+                            <div class="w-full md:w-10/12 shrink-0 grow-0 basis-auto md:pl-6">
+                                <p class="mb-3 font-semibold">{{$comment->user->name}}</p>
+                                <p class="mb-3 text-gray-500 text-sm">{{$comment->created_at->diffForHumans()}}</p>
+                                <p>{!! $comment->comment !!}</p>
+
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-gray-500 text-center mt-10">No comments found.</p>
+                    @endforelse
                 </section>
                 <!-- Related Products Section -->
                 <section class="mt-8 p-1">
