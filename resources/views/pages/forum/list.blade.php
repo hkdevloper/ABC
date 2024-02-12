@@ -71,7 +71,7 @@
         <div class="w-full">
             <!-- Forum list Item -->
             @forelse($forums as $forum)
-                <div class="reveal bg-white card p-6 flex items-start w-full">
+                <div class="reveal bg-white card p-6 flex items-start w-full mb-5">
                     <img src="https://via.placeholder.com/100x100" alt="User Avatar"
                          class="w-10 h-10 rounded-full mr-4">
                     <div class="w-full">
