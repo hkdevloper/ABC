@@ -43,7 +43,7 @@
 @section('content')
     <x-user.bread-crumb :data="['Home', 'Company', 'List']"/>
     <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
-        <h1 class="block text-lg md:text-4xl w-full text-center font-bold">Search for thousands of products</h1>
+        <h1 class="block text-lg md:text-4xl w-full text-center font-bold">Search for thousands of Companies!!</h1>
         <br>
         <form action="{{ route('search') }}" class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
             <div class="relative flex items-center justify-between md:w-full s-form">
