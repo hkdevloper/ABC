@@ -1,6 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
+    <x-user.bread-crumb :data="['Home', 'Jobs', 'List']"/>
     <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
         <h1 class="block text-lg md:text-2xl w-full text-center font-bold">Explore the Depths: Find Your Next Fascinating JOB!</h1>
         <br>

@@ -1,6 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
+    <x-user.bread-crumb :data="['Home', 'Product', 'List']"/>
     <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
         <h1 class="block text-lg md:text-4xl w-full text-center font-bold">Search for thousands of products</h1>
         <br>

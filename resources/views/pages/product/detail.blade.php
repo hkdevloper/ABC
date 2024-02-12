@@ -52,13 +52,13 @@
                     <span class="text-xs md:text-sm text-gray-500">Published by {{ $product->company->name }}</span>
                     <span class="text-xs md:text-sm text-gray-500">Published on {{ $product->created_at->format('d M Y') }} ({{ $product->updated_at->diffForHumans() }})</span>
                     <a href="{{route('view.company', [$product->company->slug])}}" class="mt-1 block md:hidden text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue text-xs">
-                        View Profile
+                        Contact Now
                         <i class='bx bx-link-external ml-2'></i>
                     </a>
                 </div>
             </div>
             <a href="{{route('view.company', [$product->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue">
-                View Profile
+                Contact Now
                 <i class='bx bx-link-external ml-2'></i>
             </a>
         </div>
