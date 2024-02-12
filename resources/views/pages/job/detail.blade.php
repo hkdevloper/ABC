@@ -98,10 +98,10 @@
             <br>
             <span class="text-gray-600 text-sm">
                 <i class='bx bx-envelope text-gray-600'></i>
-                {{$job->user->company->email}}
+                {{$job->user->email}}
             </span>
             <div class="mt-4">
-                <a href="mailto:{{$job->user->company->email}}"
+                <a href="mailto:{{$job->user->email}}"
                    class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-2 px-4 rounded-full hover:rounded-full transition-all duration-300 ease-in-out">
                     Send Email
                 </a>
