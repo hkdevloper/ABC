@@ -31,11 +31,11 @@
             </div>
             <div class="form__field">
                 <label class="form__label" for="name">Company Name</label>
-                <input class="form__input" type="text" name="name" id="name" required>
+                <input class="form__input" type="text" name="name" id="name" required value="{{old('name')}}">
             </div>
             <div class="form__field">
                 <label class="form__label" for="email">Email address</label>
-                <input class="form__input" type="email" name="email" id="email" required>
+                <input class="form__input" type="email" name="email" id="email" required value="{{old('email')}}">
             </div>
             <div class="form__field">
                 <label class="form__label" for="pwd">Password</label>

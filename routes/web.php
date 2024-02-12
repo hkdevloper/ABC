@@ -123,9 +123,14 @@ Route::prefix('auth')->group(function () {
         ]);
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            // If user is admin then logout and redirect with error
+            if (Auth::user()->type == 'Admin') {
+                Auth::logout();
+                return redirect()->back()->withInput()->with('error', 'Invalid credentials');
+            }
             return redirect('/user');
         }
-        return redirect()->back()->with('error', 'Invalid credentials');
+        return redirect()->back()->withInput()->with('error', 'Invalid credentials');
     })->name('auth.login');
     Route::post('logout', function () {
         Auth::logout();
@@ -142,7 +147,7 @@ Route::prefix('auth')->group(function () {
         $spamEmails = BlockedDomain::where('status', 1)->pluck('domain')->toArray();
         foreach ($spamEmails as $spamEmail) {
             if (str_contains(strtolower($request->email), strtolower($spamEmail))) {
-                return redirect()->back()->with('error', 'Invalid email');
+                return redirect()->back()->with('error', 'Invalid email')->withInput();
             }
         }
         $user = new User();
