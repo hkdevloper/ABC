@@ -46,6 +46,7 @@
 @endsection
 
 @section('content')
+    <x-user.bread-crumb :data="['Home', 'Category', 'List']"/>
     <!-- Main Content -->
     <div class="container py-6 mx-auto flex flex-wrap">
         <!-- Product List -->

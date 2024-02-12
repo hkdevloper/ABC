@@ -400,16 +400,15 @@
                                             <i class='bx bx-calendar text-gray-600'></i>
                                             @php
                                                 $date = \Carbon\Carbon::parse($event->start);
-                                                $time = \Carbon\Carbon::parse($event->start);
-
                                                 $date = $date->format('M d, Y');
-                                                $time = $time->format('h:i A');
                                             @endphp
                                             <span class="text-gray-600 text-sm ml-1">{{$date}}</span>
                                         </div>
+                                    </div>
+                                    <div class="flex items-center justify-between mt-4">
                                         <div class="flex items-center">
-                                            <i class='bx bx-time text-gray-600'></i>
-                                            <span class="text-gray-600 text-sm ml-1">{{$time}}</span>
+                                            <i class='bx bx-current-location text-gray-600'></i>
+                                            <span class="text-gray-600 text-sm ml-1">{{$event->address->country->name}}</span>
                                         </div>
                                     </div>
                                 </div>
