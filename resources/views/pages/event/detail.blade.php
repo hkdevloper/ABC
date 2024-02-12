@@ -2,146 +2,143 @@
 
 @section('content')
     <div class="container py-6 mx-auto flex flex-wrap">
-        <div class="lg:w-3/4 w-full mb-10 lg:mb-0 overflow-hidden px-2">
-            <x-user.bread-crumb :data="['Home', 'Events', $event->title]"/>
-            <div class="">
-                <img src="{{url('storage/' . $event->thumbnail)}}" alt="Event Thumbnail" style="width: 100%; height: 400px;" class="mb-6 rounded-lg shadow-lg object-contain">
-                <h1 class="text-3xl font-semibold mb-4">{{$event->title}}</h1>
-                <p class="text-gray-500 mb-4">on {{ date('d M Y h:i a', (int)$event->start) }} Onwards</p>
-                <p class="text-gray-500 mb-4">Organized by {{$event->user->name}}</p>
-                <div class="flex items-center mb-4">
-                    <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
-                    <div class="pl-3">
-                        <div class="font-medium">
-                            {{$event->user->name}}
-                        </div>
-                        <div class="text-gray-600 text-sm">
-                            {{$event->created_at->diffForHumans()}}
-                        </div>
+        <x-user.bread-crumb :data="['Home', 'Events', $event->title]"/>
+        <div class="">
+            <img src="{{url('storage/' . $event->thumbnail)}}" alt="Event Thumbnail" style="width: 100%; height: 400px;" class="mb-6 rounded-lg shadow-lg object-contain">
+            <h1 class="text-3xl font-semibold mb-4">{{$event->title}}</h1>
+            <p class="text-gray-500 mb-4">on {{ date('d M Y h:i a', (int)$event->start) }} Onwards</p>
+            <p class="text-gray-500 mb-4">Organized by {{$event->user->name}}</p>
+            <div class="flex items-center mb-4">
+                <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
+                <div class="pl-3">
+                    <div class="font-medium">
+                        {{$event->user->name}}
+                    </div>
+                    <div class="text-gray-600 text-sm">
+                        {{$event->created_at->diffForHumans()}}
                     </div>
                 </div>
-                <x-bladewind.tab-group name="product-info">
-                    <x-slot name="headings">
-                        <x-bladewind.tab-heading name="desc" label="Description" active="true"/>
-                        <x-bladewind.tab-heading name="rate" label="Rate & Reviews"/>
-                    </x-slot>
+            </div>
+            <x-bladewind.tab-group name="product-info">
+                <x-slot name="headings">
+                    <x-bladewind.tab-heading name="desc" label="Description" active="true"/>
+                    <x-bladewind.tab-heading name="rate" label="Rate & Reviews"/>
+                </x-slot>
 
-                    <x-bladewind.tab-body>
-                        <x-bladewind.tab-content name="desc" active="true">
-                            {!! $event->description !!}
-                        </x-bladewind.tab-content>
-                        <x-bladewind.tab-content name="rate">
-                            <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
-                                <div>
-                                    <div class="rounded-lg border p-4">
-                                        <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Customer Reviews</h2>
+                <x-bladewind.tab-body>
+                    <x-bladewind.tab-content name="desc" active="true">
+                        {!! $event->description !!}
+                    </x-bladewind.tab-content>
+                    <x-bladewind.tab-content name="rate">
+                        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+                            <div>
+                                <div class="rounded-lg border p-4">
+                                    <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Customer Reviews</h2>
 
-                                        <div class="mb-0.5 flex items-center gap-2">
-                                            <x-bladewind.rating name="star-rating" size="medium" clickable="false"
-                                                                rating="{{\App\classes\HelperFunctions::getRatingAverage('event', $event->id)}}"/>
-                                            <span class="text-sm font-semibold">{{\App\classes\HelperFunctions::getRatingAverage('event', $event->id)}}/5</span>
-                                        </div>
+                                    <div class="mb-0.5 flex items-center gap-2">
+                                        <x-bladewind.rating name="star-rating" size="medium" clickable="false"
+                                                            rating="{{\App\classes\HelperFunctions::getRatingAverage('event', $event->id)}}"/>
+                                        <span class="text-sm font-semibold">{{\App\classes\HelperFunctions::getRatingAverage('event', $event->id)}}/5</span>
+                                    </div>
 
-                                        <span class="block text-sm text-gray-500">Bases on {{$event->getReviews()->count()}} reviews</span>
+                                    <span class="block text-sm text-gray-500">Bases on {{$event->getReviews()->count()}} reviews</span>
 
-                                        <hr class="my-4 border-t-2 border-gray-200">
+                                    <hr class="my-4 border-t-2 border-gray-200">
 
-                                        @auth
-                                            @if(auth()->user()->hasRated("product", $event->id))
-                                                <p class="text-sm text-gray-500">You have already rated this company.</p>
-                                            @else
-                                                <a href="#" onclick="showModal('rate')"
-                                                   class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
-                                                    a review</a>
-                                            @endif
+                                    @auth
+                                        @if(auth()->user()->hasRated("product", $event->id))
+                                            <p class="text-sm text-gray-500">You have already rated this company.</p>
                                         @else
-                                            <a href="{{route('auth.login')}}"
-                                               class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login
-                                                to write a review</a>
-                                        @endauth
-                                    </div>
-                                </div>
-                                <div class="lg:col-span-2">
-                                    <div class="border-b pb-4 md:pb-6">
-                                        <h2 class="text-lg font-bold text-gray-800 lg:text-xl">Top Reviews</h2>
-                                    </div>
-                                    <hr>
-                                    <br>
-                                    <div class="divide-y">
-                                        @forelse($event->getReviews() as $item)
-                                            <div class="flex flex-col gap-3 p-4 mb-2 bg-gray-100">
-                                                <div class="flex justify-between items-center">
-                                                    <div>
-                                                        <span class="block text-sm font-bold">{{$item->user->name}}</span>
-                                                        <span
-                                                            class="block text-sm text-gray-500">{{$item->created_at->diffForHumans()}}</span>
-                                                    </div>
-                                                    <x-bladewind.rating name="star-rating" size="small" clickable="false"
-                                                                        rating="{{$item->rating}}"/>
-                                                </div>
-                                                <p class="text-gray-600">{{$item->review}}</p>
-                                            </div>
-                                        @empty
-                                            <div class="flex flex-col gap-3 p-4 mb-2 bg-gray-100">
-                                                <p class="text-gray-600">No reviews yet.</p>
-                                            </div>
-                                        @endforelse
-                                    </div>
-                                    <!-- Pagination -->
-                                    {{ $event->getReviews()->links() }}
+                                            <a href="#" onclick="showModal('rate')"
+                                               class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
+                                                a review</a>
+                                        @endif
+                                    @else
+                                        <a href="{{route('auth.login')}}"
+                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login
+                                            to write a review</a>
+                                    @endauth
                                 </div>
                             </div>
-                        </x-bladewind.tab-content>
-                    </x-bladewind.tab-body>
-                </x-bladewind.tab-group>
-            </div>
-            <!-- Related Events Section -->
-            <section class="mt-8 p-4 bg-white">
-                <h2 class="text-2xl font-semibold text-center underline mb-5">Related Events</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2">
-                    <!-- Event Items-->
-                    @forelse($related_events as $event)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                            <div class="each relative">
-                                <img src="{{ url('storage/'.$event->thumbnail) }}" class="w-full h-48 object-contain" alt="Event">
-                                <div class="badge absolute top-0 right-0 bg-purple-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">
-                                    @php
-                                        $date = \Carbon\Carbon::parse($event->start);
-                                    @endphp
-                                    {{$date->diffForHumans()}}
+                            <div class="lg:col-span-2">
+                                <div class="border-b pb-4 md:pb-6">
+                                    <h2 class="text-lg font-bold text-gray-800 lg:text-xl">Top Reviews</h2>
                                 </div>
-                                <div class="desc p-4 text-gray-800">
-                                    <div class="flex items-center mt-2">
-                                        <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
-                                        <div class="pl-3">
-                                            <div class="font-medium">
-                                                {{$event->user->name}}
+                                <hr>
+                                <br>
+                                <div class="divide-y">
+                                    @forelse($event->getReviews() as $item)
+                                        <div class="flex flex-col gap-3 p-4 mb-2 bg-gray-100">
+                                            <div class="flex justify-between items-center">
+                                                <div>
+                                                    <span class="block text-sm font-bold">{{$item->user->name}}</span>
+                                                    <span
+                                                        class="block text-sm text-gray-500">{{$item->created_at->diffForHumans()}}</span>
+                                                </div>
+                                                <x-bladewind.rating name="star-rating" size="small" clickable="false"
+                                                                    rating="{{$item->rating}}"/>
                                             </div>
-                                            <div class="text-gray-600 text-sm">
-                                                {{$event->created_at->diffForHumans()}}
-                                            </div>
+                                            <p class="text-gray-600">{{$item->review}}</p>
+                                        </div>
+                                    @empty
+                                        <div class="flex flex-col gap-3 p-4 mb-2 bg-gray-100">
+                                            <p class="text-gray-600">No reviews yet.</p>
+                                        </div>
+                                    @endforelse
+                                </div>
+                                <!-- Pagination -->
+                                {{ $event->getReviews()->links() }}
+                            </div>
+                        </div>
+                    </x-bladewind.tab-content>
+                </x-bladewind.tab-body>
+            </x-bladewind.tab-group>
+        </div>
+        <!-- Related Events Section -->
+        <section class="mt-8 p-4 bg-white">
+            <h2 class="text-2xl font-semibold text-center underline mb-5">Related Events</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2">
+                <!-- Event Items-->
+                @forelse($related_events as $event)
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="each relative">
+                            <img src="{{ url('storage/'.$event->thumbnail) }}" class="w-full h-48 object-contain" alt="Event">
+                            <div class="badge absolute top-0 right-0 bg-purple-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">
+                                @php
+                                    $date = \Carbon\Carbon::parse($event->start);
+                                @endphp
+                                {{$date->diffForHumans()}}
+                            </div>
+                            <div class="desc p-4 text-gray-800">
+                                <div class="flex items-center mt-2">
+                                    <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
+                                    <div class="pl-3">
+                                        <div class="font-medium">
+                                            {{$event->user->name}}
+                                        </div>
+                                        <div class="text-gray-600 text-sm">
+                                            {{$event->created_at->diffForHumans()}}
                                         </div>
                                     </div>
-                                    <a href="{{route('view.event', [$event->slug])}}" target="_new" class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
-                                    <span class="description text-sm block py-2 border-gray-400 mb-2">
+                                </div>
+                                <a href="{{route('view.event', [$event->slug])}}" target="_new" class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
+                                <span class="description text-sm block py-2 border-gray-400 mb-2">
                                         @php
                                             $description = strip_tags($event->description);
                                             $description = strlen($description) > 100 ? substr($description, 0, 100) . "..." : $description;
                                         @endphp
-                                        {!! $description !!}
+                                    {!! $description !!}
                                     </span>
-                                </div>
                             </div>
                         </div>
-                    @empty
-                        <div class="w-full text-center">
-                            <p class="text-gray-500 text-center w-full">No Events Found</p>
-                        </div>
-                    @endforelse
-                </div>
-            </section>
-        </div>
-        @include('includes.sidebar')
+                    </div>
+                @empty
+                    <div class="w-full text-center">
+                        <p class="text-gray-500 text-center w-full">No Events Found</p>
+                    </div>
+                @endforelse
+            </div>
+        </section>
     </div>
     <x-bladewind::modal
         backdrop_can_close="false"
