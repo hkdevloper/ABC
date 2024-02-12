@@ -107,7 +107,7 @@
         </div>
     </section>
     <!-- Main Content -->
-    <section class="container mx-auto">
+    <section class="container-home mx-auto">
         <!-- Top Categories -->
         <section class="p-2 my-1 md:p-8 md:my-4">
             <div class="container mx-auto">
