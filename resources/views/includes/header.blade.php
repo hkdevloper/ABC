@@ -1,5 +1,5 @@
 <!-- Navbar Section -->
-<header class="bg-neutral-100 py-2" style="border-bottom: 1px solid gray">
+<header class="bg-neutral-100 py-2 shadow">
     <div class="mx-auto flex flex-wrap items-center justify-between px-4">
         <a alt="company Logo" href="{{url('/')}}" class="flex items-center">
             <img alt="company Logo" src="https://via.placeholder.com/50x50" width="50" height="50" class="object-cover overflow-hidden">
