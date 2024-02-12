@@ -47,9 +47,11 @@
 
 @section('content')
     <x-user.bread-crumb :data="['Home', 'Category', 'List']"/>
+    <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
+        <h1 class="block text-lg md:text-4xl w-full text-center font-bold">Browse Categories!!</h1>
+    </div>
     <!-- Main Content -->
     <div class="container py-6 mx-auto flex flex-wrap">
-        <!-- Product List -->
         <section class="p-2 my-1 md:p-8 md:my-4">
             <div class="container mx-auto">
                 @forelse($type as $itemType)
