@@ -70,7 +70,7 @@
             <!-- Event Items-->
             @forelse($events as $event)
                 <div class="reveal bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="each relative">
+                    <a href="{{route('view.event', [$event->slug])}}" class="each relative">
                         <img src="{{ url('storage/'.$event->thumbnail) }}" class="w-full h-48 object-contain"
                              alt="Event">
                         <div class="desc p-4 text-gray-800">
@@ -93,20 +93,19 @@
                                     <i class='bx bx-calendar text-gray-600'></i>
                                     @php
                                         $date = \Carbon\Carbon::parse($event->start);
-                                        $time = \Carbon\Carbon::parse($event->start);
-
                                         $date = $date->format('M d, Y');
-                                        $time = $time->format('h:i A');
                                     @endphp
                                     <span class="text-gray-600 text-sm ml-1">{{$date}}</span>
                                 </div>
+                            </div>
+                            <div class="flex items-center justify-between mt-4">
                                 <div class="flex items-center">
-                                    <i class='bx bx-time text-gray-600'></i>
-                                    <span class="text-gray-600 text-sm ml-1">{{$time}}</span>
+                                    <i class='bx bx-current-location text-gray-600'></i>
+                                    <span class="text-gray-600 text-sm ml-1">{{$event->address->country->name}}</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @empty
                 <p class="text-gray-700">No featured events available.</p>
