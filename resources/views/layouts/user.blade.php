@@ -13,6 +13,7 @@
     <script src="{{ asset('js/fw.js')}}" crossorigin="anonymous"></script>
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="{{ asset('js/scroll-reveal.js')}}"></script>
     @include('includes.ads-config')
     @yield('head')
@@ -42,24 +43,24 @@
     @include('includes.modals')
     @include('includes.footer')
 </main>
-<x-bladewind.notification/>
 <script src="{{ asset('js/tw-element-min.js') }}"></script>
 <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="{{ asset('js/alpine.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
 <script>
     @if(session()->has('success'))
-    showNotification('Success', '{{session()->get('success')}}', 'success');
+    showToast('success', '{{session()->get('success')}}');
     @elseif(session()->has('info'))
-    showNotification('Info', '{{session()->get('info')}}', 'info');
+    showToast('info', '{{session()->get('info')}}');
     @elseif(session()->has('error'))
-    showNotification('Error', '{{session()->get('error')}}', 'error');
+    showToast('error', '{{session()->get('error')}}');
     @elseif(session()->has('warning'))
-    showNotification('Warning', '{{session()->get('warning')}}', 'warning');
+    showToast('warning', '{{session()->get('warning')}}');
     @endif
     @if($errors->any())
     @foreach ($errors->all() as $error)
-    showNotification('Error', '{{$error}}', 'error');
+    showToast('error', '{{$error}}');
     @endforeach
     @endif
 </script>

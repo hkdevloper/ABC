@@ -1,36 +1,68 @@
-function showToast(type = 'info', text) {
-    let toastConfig = {
-        position: 'top-right',
-        hideAfter: 3000,
-        stack: 6
-    };
-
+function showToast(type = 'info', message = 'This is a toast message!') {
     switch (type) {
         case 'success':
-            toastConfig.heading = 'Success';
-            toastConfig.bgColor = '#67e198';
-            toastConfig.icon = 'success';
+            Toastify({
+                text: message,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                onClick: function(){}, // Callback after click,
+                style: {
+                    background: "linear-gradient(to right, #67e198, #4fbfff)"
+                }
+            }).showToast();
             break;
         case 'error':
-            toastConfig.heading = 'Error';
-            toastConfig.bgColor = '#e66767';
-            toastConfig.icon = 'error';
+            Toastify({
+                text: message,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                onClick: function(){}, // Callback after click,
+                style: {
+                    background: "linear-gradient(to right, #e66767, #e6c667)"
+                }
+            }).showToast();
             break;
         case 'warning':
-            toastConfig.heading = 'Warning';
-            toastConfig.bgColor = '#e6c667';
-            toastConfig.icon = 'warning';
+            Toastify({
+                text: message,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                onClick: function(){}, // Callback after click,
+                style: {
+                    background: "linear-gradient(to right, #e6c667, #4fbfff)"
+                }
+            }).showToast();
             break;
         case 'info':
-            toastConfig.heading = 'Info';
-            toastConfig.bgColor = '#4fbfff';
-            toastConfig.icon = 'info';
+            Toastify({
+                text: message,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                onClick: function(){}, // Callback after click,
+                style: {
+                    background: "linear-gradient(to right, #4fbfff, #67e198)"
+                }
+            }).showToast();
             break;
         default:
             return; // Return early if invalid types are provided
     }
-
-    $.toast(Object.assign(toastConfig, { text: text }));
 }
 
 // Share Button Click Event

@@ -8,6 +8,7 @@ use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -180,5 +181,24 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return parent::delete();
     }
 
+    public function favoriteCompanies(): BelongsToMany
+    {
+        return $this->belongsToMany(Company::class, FavoriteCompanies::class, 'user_id', 'company_id');
+    }
+
+    public function bookmarkCompanies(): BelongsToMany
+    {
+        return $this->belongsToMany(Company::class, BookmarkCompanies::class, 'user_id', 'company_id');
+    }
+
+    public function isCompanyFavorite(Company $company): bool
+    {
+        return $this->favoriteCompanies()->where('company_id', $company->id)->exists();
+    }
+
+    public function isCompanyBookmarked(Company $company): bool
+    {
+        return $this->bookmarkCompanies()->where('company_id', $company->id)->exists();
+    }
 
 }

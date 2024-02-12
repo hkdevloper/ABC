@@ -103,7 +103,7 @@
                 <div class="mb-4 p-2 md:pr-3">
                     <img class="w-full h-40 md:h-20 object-contain overflow-hidden" src="{{ url('storage/' . $job->thumbnail) }}" alt="">
                 </div>
-                <div class="w-full mx-1 ml-5 pl-3 flex flex-col items-start justify-stretch md:flex-grow"> <!-- Adjusted width to grow on medium screens and above -->
+                <div class="w-full mx-2 ml-5 pl-3 flex flex-col items-start justify-stretch md:flex-grow border-r border-solid border-r-gray-300">
                     <a href="{{ route('view.job', [$job->slug]) }}" class="flex flex-nowrap items-center mb-3">
                         <span class="text-2xl mr-3">{{$job->title}}</span>
                     </a>

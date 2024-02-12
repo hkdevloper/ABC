@@ -55,7 +55,8 @@ class UserCompanyController extends Controller
         // Forgot session
         Session::forget('menu');
         $company = Company::where('slug', $slug)->firstOrFail();
-        $data = compact('company');
+        $user = auth()->user();
+        $data = compact('company', 'user');
         return view('pages.company.detail')->with($data);
     }
 }
