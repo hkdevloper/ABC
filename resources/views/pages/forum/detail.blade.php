@@ -6,10 +6,12 @@
         #container {
             margin: 0 auto;
         }
+
         .ck-editor__editable[role="textbox"] {
             /* Editing area */
             min-height: 200px;
         }
+
         .ck-content .image {
             /* Block images */
             max-width: 100%;
@@ -18,8 +20,8 @@
     </style>
 @endsection
 @section('content')
+    <x-user.bread-crumb :data="['Home', 'Events', $forum->title]"/>
     <div class="container py-6 mx-auto flex flex-wrap">
-        <x-user.bread-crumb :data="['Home', 'Events', $forum->title]"/>
         <div class="w-full">
             <div class="bg-white card p-6">
                 <div class="flex items-center justify-between mb-4">
@@ -54,7 +56,7 @@
         </div>
         <div class="w-full my-5 p-2">
             <button onclick="showAnswerForm()"
-               class="block text-white bg-purple-500 hover:bg-purple-800 font-bold uppercase text-xs px-4 py-2 rounded-full focus:outline-none w-full text-center p-2">
+                    class="block text-white bg-purple-500 hover:bg-purple-800 font-bold uppercase text-xs px-4 py-2 rounded-full focus:outline-none w-full text-center p-2">
                 Leave an Answer
             </button>
         </div>
@@ -72,7 +74,8 @@
                     </div>
                 </div>
                 <div class="flex justify-end">
-                    <button type="submit" id="submitReply" class="text-white bg-purple-500 hover:bg-purple-600 font-bold uppercase text-sm px-4 py-2 rounded-full focus:outline-none">
+                    <button type="submit" id="submitReply"
+                            class="text-white bg-purple-500 hover:bg-purple-600 font-bold uppercase text-sm px-4 py-2 rounded-full focus:outline-none">
                         Submit Reply
                     </button>
                 </div>

@@ -12,11 +12,12 @@
 @endsection
 
 @section('content')
-     <!-- Company Header Section -->
+    <!-- Company Header Section -->
     <section class="bg-blue-50 p-4 py-12">
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-center">
             <div class="w-full md:w-1/2 md:pr-4 mb-4 md:mb-0 flex items-center justify-center">
-                <img alt="" src="{{url('storage/', $company->logo)}}" class="company-logo w-32 h-32 object-contain rounded-full mx-auto md:mx-0 my-4">
+                <img alt="" src="{{url('storage/', $company->logo)}}"
+                     class="company-logo w-32 h-32 object-contain rounded-full mx-auto md:mx-0 my-4">
                 <div class="w-full md:w-2/3 mx-2 md:mx-10">
                     <div class="flex items-center justify-start mb-2">
                         @if($company->is_featured)
@@ -75,7 +76,8 @@
                 </div>
             </div>
             <div class="w-full md:w-1/2 mt-4 md:mt-0 flex flex-col items-center justify-center md:items-end">
-                <div class="flex items-center justify-center md:justify-end mb-4 overflow-x-auto md:overflow-x-visible md:mx-2">
+                <div
+                    class="flex items-center justify-center md:justify-end mb-4 overflow-x-auto md:overflow-x-visible md:mx-2">
                     @if($user->isCompanyBookmarked($company))
                         <a href="{{ route('remove.from.bookmark', ['company_id' => $company->id]) }}"
                            class="m-1 bg-purple-400 hover:bg-purple-500 px-2 py-1 text-sm rounded text-white flex-shrink-0">
@@ -88,10 +90,12 @@
                         </a>
                     @endif
                 </div>
-                <button class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded w-full md:w-auto">
+                <button
+                    class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded w-full md:w-auto">
                     Direct message
                 </button>
-                <button id="slot-btn1" class="text-blue-950 px-2 text-xs text-right block md:hidden" style="height: 30px;">
+                <button id="slot-btn1" class="text-blue-950 px-2 text-xs text-right block md:hidden"
+                        style="height: 30px;">
                     Your Company?
                     <span class="text-sm text-blue-950 font-semibold hover:underline">Claim Now</span>
                 </button>
@@ -123,16 +127,22 @@
                 <x-bladewind.tab-content name="product">
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-4">
                         @forelse($company->products as $item)
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                            <div
+                                class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
                                 @if($item->is_featured)
-                                    <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded" style="z-index: 99">
+                                    <div
+                                        class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded"
+                                        style="z-index: 99">
                                         Featured
                                     </div>
                                 @endif
-                                <a href="{{ route('view.product', [$item->slug]) }}" class="w-[100px] md:w-full h-[80px] md:p-4 md:m-auto md:block md:h-full object-contain">
-                                    <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}" class="w-full h-full object-cover img-remove-bg"/>
+                                <a href="{{ route('view.product', [$item->slug]) }}"
+                                   class="w-[100px] md:w-full h-[80px] md:p-4 md:m-auto md:block md:h-full object-contain">
+                                    <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}"
+                                         class="w-full h-full object-cover img-remove-bg"/>
                                 </a>
-                                <div class="p-1 ml-2 md:p-2 flex flex-col items-start md:items-center md:justify-center w-full">
+                                <div
+                                    class="p-1 ml-2 md:p-2 flex flex-col items-start md:items-center md:justify-center w-full">
                                     <header class="flex my-2 font-light text-xs md:text-base items-center">
                                         <i class="bx bx-category text-indigo-500 mr-1"></i>
                                         <p>{{ $item->category->name }}</p>
@@ -140,16 +150,20 @@
                                     <p class="text-sm md:text-xl font-medium mb-2">{{ $item->name }}</p>
                                     <p class="text-red-700 text-xs md:text-sm">{{ $item->company ? $item->company->name: '' }}</p>
                                     <p class="text-gray-700 text-xs md:text-sm">{{ $item->company? $item->company->address->country->name : '' }}</p>
-                                    <p class="text-gray-700 text-xs md:text-sm">Price: ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
+                                    <p class="text-gray-700 text-xs md:text-sm">Price:
+                                        ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
                                     <div class="block md:hidden md:static mb-2 w-full">
-                                        <a href="{{ route('view.product', [$item->slug]) }}" class="text-purple-500 mb-1 rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                        <a href="{{ route('view.product', [$item->slug]) }}"
+                                           class="text-purple-500 mb-1 rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
                                             <span class="ml-1">Enquire Now &nbsp;</span>
                                             <i class='bx bx-link-external mr-2'></i>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="hidden md:block absolute bottom-0 md:static right-1 mb-2 w-full md:w-[calc(80%-1rem)]">
-                                    <a href="{{ route('view.product', [$item->slug]) }}" class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                <div
+                                    class="hidden md:block absolute bottom-0 md:static right-1 mb-2 w-full md:w-[calc(80%-1rem)]">
+                                    <a href="{{ route('view.product', [$item->slug]) }}"
+                                       class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
                                         <span class="ml-1">Enquire Now &nbsp;</span>
                                         <i class='bx bx-link-external mr-2'></i>
                                     </a>
@@ -236,11 +250,13 @@
                                         <p class="text-sm text-gray-500">You have already rated this company.</p>
                                     @else
                                         <a href="#" onclick="showModal('rate')"
-                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write a review</a>
+                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
+                                            a review</a>
                                     @endif
                                 @else
                                     <a href="{{route('auth.login')}}"
-                                       class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login to write a review</a>
+                                       class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login
+                                        to write a review</a>
                                 @endauth
                             </div>
                         </div>
@@ -313,14 +329,18 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-4">
                 <!-- Related Product 1 -->
                 @forelse($company->products as $item)
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
+                    <div
+                        class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex md:flex-col items-start md:items-center md:justify-center">
                         @if($item->is_featured)
-                            <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded" style="z-index: 99">
+                            <div class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded"
+                                 style="z-index: 99">
                                 Featured
                             </div>
                         @endif
-                        <a href="{{ route('view.product', [$item->slug]) }}" class="w-[100px] md:w-full h-[80px] md:p-4 md:m-auto md:block md:h-full object-contain">
-                            <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}" class="w-full h-full object-cover img-remove-bg"/>
+                        <a href="{{ route('view.product', [$item->slug]) }}"
+                           class="w-[100px] md:w-full h-[80px] md:p-4 md:m-auto md:block md:h-full object-contain">
+                            <img alt="company photo" src="{{ url('storage/' . $item->thumbnail) }}"
+                                 class="w-full h-full object-cover img-remove-bg"/>
                         </a>
                         <div class="p-1 ml-2 md:p-2 flex flex-col items-start md:items-center md:justify-center w-full">
                             <header class="flex my-2 font-light text-xs md:text-base items-center">
@@ -330,16 +350,20 @@
                             <p class="text-sm md:text-xl font-medium mb-2">{{ $item->name }}</p>
                             <p class="text-red-700 text-xs md:text-sm">{{ $item->company ? $item->company->name: '' }}</p>
                             <p class="text-gray-700 text-xs md:text-sm">{{ $item->company? $item->company->address->country->name : '' }}</p>
-                            <p class="text-gray-700 text-xs md:text-sm">Price: ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
+                            <p class="text-gray-700 text-xs md:text-sm">Price:
+                                ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
                             <div class="block md:hidden md:static mb-2 w-full">
-                                <a href="{{ route('view.product', [$item->slug]) }}" class="text-purple-500 mb-1 rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                <a href="{{ route('view.product', [$item->slug]) }}"
+                                   class="text-purple-500 mb-1 rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
                                     <span class="ml-1">Enquire Now &nbsp;</span>
                                     <i class='bx bx-link-external mr-2'></i>
                                 </a>
                             </div>
                         </div>
-                        <div class="hidden md:block absolute bottom-0 md:static right-1 mb-2 w-full md:w-[calc(80%-1rem)]">
-                            <a href="{{ route('view.product', [$item->slug]) }}" class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                        <div
+                            class="hidden md:block absolute bottom-0 md:static right-1 mb-2 w-full md:w-[calc(80%-1rem)]">
+                            <a href="{{ route('view.product', [$item->slug]) }}"
+                               class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
                                 <span class="ml-1">Enquire Now &nbsp;</span>
                                 <i class='bx bx-link-external mr-2'></i>
                             </a>
@@ -417,7 +441,8 @@
                             <span class="text-sm font-semibold">{{HelperFunctions::getRatingAverage('company', $company->id)}}/5</span>
                         </div>
 
-                        <span class="block text-sm text-gray-500">Bases on {{$company->getReviews()->count()}} reviews</span>
+                        <span
+                            class="block text-sm text-gray-500">Bases on {{$company->getReviews()->count()}} reviews</span>
 
                         <hr class="my-4 border-t-2 border-gray-200">
 
