@@ -90,10 +90,10 @@
                         </a>
                     @endif
                 </div>
-                <button
+                <a href="{{route('direct-message', ['company_id' => $company->id])}}"
                     class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded w-full md:w-auto">
                     Direct message
-                </button>
+                </a>
                 <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn1" class="text-blue-950 px-2 text-xs text-right block md:hidden"
                         style="height: 30px;">
                     Your Company?

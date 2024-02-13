@@ -13,6 +13,7 @@ use App\Models\BlogComments;
 use App\Models\Category;
 use App\Models\Claims;
 use App\Models\Company;
+use App\Models\DirectMessage;
 use App\Models\Product;
 use App\Models\Event;
 use App\Models\Requirement;
@@ -348,3 +349,33 @@ Route::prefix('protected')->middleware(['auth'])->group(function () {
     })->name('view.claim.company');
 
 });
+
+Route::get('direct-message', function (Request $request){
+    $request->validate([
+        'company_id' => 'required',
+    ]);
+    $company = Company::findOrFail($request->company_id);
+    $data = compact('company');
+    return view('dm')->with($data);
+})->name('direct-message');
+
+Route::post('direct-message', function (Request $request){
+    $request->validate([
+        'email' => 'required|email',
+        'phone' => 'required',
+        'company_name' => 'required',
+        'name' => 'required',
+        'message' => 'required',
+        'company_id' => 'required',
+    ]);
+
+    $dm = new DirectMessage();
+    $dm->company_id = $request->company_id;
+    $dm->email = $request->email;
+    $dm->phone = $request->phone;
+    $dm->company_name = $request->company_name;
+    $dm->name = $request->name;
+    $dm->message = $request->message;
+    $dm->saveOrFail();
+    return redirect()->back()->with('success', 'Message sent successfully');
+})->name('direct-message');

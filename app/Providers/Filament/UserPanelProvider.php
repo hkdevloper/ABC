@@ -11,6 +11,7 @@ use App\Filament\User\Pages\LoginPage;
 use App\Filament\User\Pages\RegisterPage;
 use App\Filament\User\Resources\BlogResource;
 use App\Filament\User\Resources\CompanyResource;
+use App\Filament\User\Resources\DirectMessageResource;
 use App\Filament\Widgets\StatsOverview;
 use App\Http\Middleware\HkEmailVerification;
 use Filament\Http\Controllers\Auth\EmailVerificationController;
@@ -137,6 +138,19 @@ class UserPanelProvider extends PanelProvider
                         ->icon('heroicon-o-chat-bubble-left-ellipsis')
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.forum'))
                         ->url(fn (): string => ForumResource::getUrl())
+                        ->visible(function (){
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
+                            if($company){
+                                if($company->is_approved){
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }),
+                    NavigationItem::make('Direct Messages')
+                        ->icon('heroicon-o-chat-bubble-left-right')
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.forum'))
+                        ->url(fn (): string => DirectMessageResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){

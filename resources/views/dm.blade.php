@@ -6,17 +6,17 @@
 @endsection
 
 @section('content')
-    <x-user.bread-crumb :data="['Home', 'Claim']"/>
+    <x-user.bread-crumb :data="['Home', 'Direct Message to company']"/>
     <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
         <h1 class="block text-lg md:text-4xl w-full text-center font-bold">
-            Claim your Business
+            DM to <span class="text-purple-500">{{ $company->name }}</span>
         </h1>
         <p class="text-center mt-2">
             <a href="{{ route('view.company', $company->slug) }}" class="text-blue-500 hover:text-blue-700">Back to Company</a>
         </p>
     </div>
     <div class="container mx-auto py-8">
-        <form action="{{ route('view.claim.company') }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form action="{{ route('direct-message') }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             @csrf
 
             <div class="mb-4">
@@ -30,21 +30,21 @@
             </div>
 
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="website">
-                    Website
-                </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('website') border-red-500 @enderror" id="website" type="text" placeholder="Website" name="website" value="{{ old('website') }}" required>
-                @error('website')
-                <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
                     Phone
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('phone') border-red-500 @enderror" id="phone" type="text" placeholder="Phone" name="phone" value="{{ old('phone') }}" required>
                 @error('phone')
+                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                    Your Name
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('name') border-red-500 @enderror" id="name" type="text" placeholder="Enter Your Name" name="name" value="{{ old('name') }}" required>
+                @error('name')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
             </div>
@@ -69,7 +69,6 @@
                 @enderror
             </div>
 
-            <input type="hidden" name="user_id" value="{{ $user->id }}">
             <input type="hidden" name="company_id" value="{{ $company->id }}">
 
             <div class="flex items-center justify-between w-full">
