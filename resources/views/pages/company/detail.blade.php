@@ -94,11 +94,11 @@
                     class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded w-full md:w-auto">
                     Direct message
                 </button>
-                <button id="slot-btn1" class="text-blue-950 px-2 text-xs text-right block md:hidden"
+                <a href="{{route('view.claim.company')}}" id="slot-btn1" class="text-blue-950 px-2 text-xs text-right block md:hidden"
                         style="height: 30px;">
                     Your Company?
                     <span class="text-sm text-blue-950 font-semibold hover:underline">Claim Now</span>
-                </button>
+                </a>
             </div>
         </div>
     </section>
@@ -111,11 +111,11 @@
                 <x-custom-tab-heading name="product" label="Products"/>
                 <x-custom-tab-heading name="contact" label="Contact"/>
                 <x-custom-tab-heading name="rate" label="Rate & Reviews" hidden="true" class="hidden md:block"/>
-                <button id="slot-btn" class="bg-blue-100 text-blue-950 px-2 text-xs text-right hidden md:block"
+                <a href="{{route('view.claim.company')}}" id="slot-btn" class="bg-blue-100 text-blue-950 px-2 text-xs text-right hidden md:block"
                         style="height: 30px;">
                     Your Company?
                     <span class="text-sm text-blue-950 font-semibold">Claim Now</span>
-                </button>
+                </a>
             </x-slot>
 
             <x-bladewind.tab-body>
@@ -519,10 +519,10 @@
                     </li>
                 </ul>
             </div>
-            <button
+            <a href="{{route('view.claim.company')}}"
                 class="m-4 bg-purple-500 hover:bg-purple-700 px-4 py-2 text-base text-white rounded-full focus:outline-none focus:shadow-outline-purple">
                 Claim Now
-            </button>
+            </a>
         </section>
     </div>
     <x-bladewind::modal

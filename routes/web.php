@@ -11,6 +11,7 @@ use App\Http\Controllers\UserProductController;
 use App\Models\BlockedDomain;
 use App\Models\BlogComments;
 use App\Models\Category;
+use App\Models\Claims;
 use App\Models\Company;
 use App\Models\Product;
 use App\Models\Event;
@@ -38,6 +39,12 @@ Route::prefix('test')->group(function () {
     });
 });
 
+Route::get('logout', function () {
+    if (Auth::check()){
+        Auth::logout();
+    }
+    return redirect()->back();
+})->name('logout');
 
 Route::get('/', function () {
     // Forgot session
@@ -279,11 +286,36 @@ Route::prefix('protected')->middleware(['auth'])->group(function () {
         return redirect()->back()->with('success', 'Company added to bookmarks');
     })->name('add.to.bookmark');
 
-// route to remove a company list from bookmarks
+    // route to remove a company list from bookmarks
     Route::get('/remove-from-bookmark', function (Request $request) {
         $user = Auth::user() ? Auth::user() : redirect()->route('auth.login')->with('error', 'You need to login first');
         $company = Company::findOrFail($request->company_id);
         $user->bookmarkCompanies()->detach($company);
         return redirect()->back()->with('success', 'Company removed from bookmarks');
     })->name('remove.from.bookmark');
+
+    // View Claim Page
+    Route::get('/claim-company', function (Request $request) {
+        return view('claims');
+    })->name('view.claim.company');
+    // route to claim company listing by user
+    Route::post('/claim-company', function (Request $request) {
+        $request->validate([
+            'email' => 'required|email',
+            'phone' => 'required',
+            'website' => 'required|unique:companies,email',
+            'company_name' => 'required',
+            'message' => 'required',
+        ]);
+        $claim = new Claims();
+        $claim->user_id = Auth::user()->id;
+        $claim->email = $request->email;
+        $claim->phone = $request->phone;
+        $claim->website = $request->website;
+        $claim->company_name = $request->company_name;
+        $claim->message = $request->message;
+        $claim->saveOrFail();
+        return redirect()->back()->with('success', 'Claim submitted successfully');
+    })->name('view.claim.company');
+
 });
