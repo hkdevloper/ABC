@@ -44,9 +44,16 @@ class UserCompanyController extends Controller
 
         $companies = $query->paginate(10);
 
+        // Get Seo Keywords
+        $seo = [];
+        $randomCompanies = Company::where('is_approved', 1)->inRandomOrder()->limit(6)->get();
+        foreach ($randomCompanies as $company) {
+            $seo[] = $company->seo;
+        }
+
         // get The Unique Data Only
         $categories = Category::where('type', 'company')->where('is_active', 1)->get();
-        $data = compact('companies', 'categories');
+        $data = compact('companies', 'categories', 'seo');
         return view('pages.company.list')->with($data);
     }
 

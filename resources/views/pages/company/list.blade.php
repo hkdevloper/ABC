@@ -63,7 +63,7 @@
     <div class="container flex items-center justify-between my-8 mx-2 md:mx-auto">
         {{-- Category Filter--}}
         <div class="">
-            <label for="product-category-filter" class="text-gray-500 text-lg">
+            <label for="product-category-filter" class="text-gray-500 text-lg hidden md:inline">
                 <i class='bx bx-filter-alt w-5 h-5'></i>
             </label>
             <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doFilter()">
@@ -85,7 +85,7 @@
         </div>
         {{-- Sort By --}}
         <div class="">
-            <label for="product-sort-by" class="text-gray-500 text-lg">
+            <label for="product-sort-by" class="text-gray-500 text-lg hidden md:inline">
                 <i class='bx bx-filter w-5 h-5 text-lg'></i>
             </label>
             <select name="sort" id="product-sort-by" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doSort()">
@@ -94,11 +94,6 @@
                 <option value="desc" @if(request()->get('sort') == 'desc') selected @endif>Rating high to low</option>
             </select>
         </div>
-    </div>
-    <div class="block md:hidden">
-        <p class="text-center">
-            Showing {{ $companies->firstItem() }} - {{ $companies->lastItem() }} of {{ $companies->total() }} results
-        </p>
     </div>
     <script>
         function doSort() {
@@ -214,4 +209,20 @@
         <!-- Pagination -->
         {{ $companies->links() }}
     </div>
+    <div class="container bg-white shadow-md rounded-lg py-4">
+        <div class=" mx-auto px-4">
+            <h2 class="text-lg font-semibold mb-2">Related Keywords:</h2>
+            <div class="flex flex-wrap">
+                @forelse($seo as $item)
+                    <a href="{{route('search', ['q' => $item->title])}}" class="bg-purple-500 hover:bg-blue-600 text-white text-base py-1 px-2 rounded-full mr-2 mb-2">
+                        {{ $item->title }}
+                    </a>
+                @empty
+                    <p>No Related Keywords</p>
+                @endforelse
+            </div>
+        </div>
+    </div>
+
+
 @endsection
