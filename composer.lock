@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31723d6509938d58802114a0e0dfed55",
+    "content-hash": "98b27ed606c07d646d6f09923bff0d66",
     "packages": [
         {
             "name": "amidesfahani/filament-tinyeditor",
@@ -538,16 +538,16 @@
         },
         {
             "name": "codewithdennis/filament-select-tree",
-            "version": "v3.1.27",
+            "version": "v3.1.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CodeWithDennis/filament-select-tree.git",
-                "reference": "5a1b15dd27fff191e10db5b0c28c0a1104fef9c5"
+                "reference": "db9ef2f5387b13b2b72fdf35a55118f4b5abc513"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CodeWithDennis/filament-select-tree/zipball/5a1b15dd27fff191e10db5b0c28c0a1104fef9c5",
-                "reference": "5a1b15dd27fff191e10db5b0c28c0a1104fef9c5",
+                "url": "https://api.github.com/repos/CodeWithDennis/filament-select-tree/zipball/db9ef2f5387b13b2b72fdf35a55118f4b5abc513",
+                "reference": "db9ef2f5387b13b2b72fdf35a55118f4b5abc513",
                 "shasum": ""
             },
             "require": {
@@ -605,7 +605,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-12T18:46:51+00:00"
+            "time": "2024-02-13T13:34:33+00:00"
         },
         {
             "name": "danharrin/date-format-converter",
@@ -2580,82 +2580,6 @@
                 }
             ],
             "time": "2022-05-21T17:30:32+00:00"
-        },
-        {
-            "name": "joshembling/image-optimizer",
-            "version": "v1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/joshembling/image-optimizer.git",
-                "reference": "e35401519de2b765894ba109fea78ffa7f2b469d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/joshembling/image-optimizer/zipball/e35401519de2b765894ba109fea78ffa7f2b469d",
-                "reference": "e35401519de2b765894ba109fea78ffa7f2b469d",
-                "shasum": ""
-            },
-            "require": {
-                "filament/forms": "^3.0",
-                "illuminate/contracts": "^10.0",
-                "intervention/image": "^2.7",
-                "php": "^8.1",
-                "spatie/laravel-package-tools": "^1.15.0"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.0",
-                "nunomaduro/collision": "^7.9",
-                "orchestra/testbench": "^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Joshembling\\ImageOptimizer\\ImageOptimizerServiceProvider"
-                    ],
-                    "aliases": {
-                        "ImageOptimizer": "Joshembling\\ImageOptimizer\\Facades\\ImageOptimizer"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Joshembling\\ImageOptimizer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Josh Embling",
-                    "email": "joshembling@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Optimize your Filament images before they reach your database.",
-            "homepage": "https://github.com/joshembling/image-optimizer",
-            "keywords": [
-                "filament",
-                "filamentphp",
-                "image",
-                "image-optimizer",
-                "joshembling",
-                "laravel",
-                "optimization"
-            ],
-            "support": {
-                "issues": "https://github.com/joshembling/image-optimizer/issues",
-                "source": "https://github.com/joshembling/image-optimizer"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/joshembling",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-02-03T12:19:35+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
@@ -8837,16 +8761,16 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v3.10.1",
+            "version": "v3.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "665069c452c30f64c07b6e7ede68c338b96678c7"
+                "reference": "60d3f5d6298a8b23028927302318856e50cbe59b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/665069c452c30f64c07b6e7ede68c338b96678c7",
-                "reference": "665069c452c30f64c07b6e7ede68c338b96678c7",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/60d3f5d6298a8b23028927302318856e50cbe59b",
+                "reference": "60d3f5d6298a8b23028927302318856e50cbe59b",
                 "shasum": ""
             },
             "require": {
@@ -8905,7 +8829,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-debugbar/issues",
-                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.10.1"
+                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.10.2"
             },
             "funding": [
                 {
@@ -8917,7 +8841,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-12T14:22:59+00:00"
+            "time": "2024-02-13T09:14:41+00:00"
         },
         {
             "name": "fakerphp/faker",

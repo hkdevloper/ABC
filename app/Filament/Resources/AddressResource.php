@@ -60,7 +60,7 @@ class AddressResource extends Resource
                     ->label('Zip Code')
                     ->required()
                     ->maxLength(191),
-            ])->columns(4);
+            ])->columns(2);
     }
 
     public static function table(Table $table): Table

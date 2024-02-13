@@ -11,7 +11,9 @@ use App\Http\Controllers\UserProductController;
 use App\Models\BlockedDomain;
 use App\Models\BlogComments;
 use App\Models\Category;
+use App\Models\Claims;
 use App\Models\Company;
+use App\Models\DirectMessage;
 use App\Models\Product;
 use App\Models\Event;
 use App\Models\Requirement;
@@ -38,6 +40,16 @@ Route::prefix('test')->group(function () {
     });
 });
 
+Route::get('login', function(){
+    return redirect()->route('auth.login');
+})->name('login');
+
+Route::get('logout', function () {
+    if (Auth::check()){
+        Auth::logout();
+    }
+    return redirect()->back();
+})->name('logout');
 
 Route::get('/', function () {
     // Forgot session
@@ -279,11 +291,91 @@ Route::prefix('protected')->middleware(['auth'])->group(function () {
         return redirect()->back()->with('success', 'Company added to bookmarks');
     })->name('add.to.bookmark');
 
-// route to remove a company list from bookmarks
+    // route to remove a company list from bookmarks
     Route::get('/remove-from-bookmark', function (Request $request) {
         $user = Auth::user() ? Auth::user() : redirect()->route('auth.login')->with('error', 'You need to login first');
         $company = Company::findOrFail($request->company_id);
         $user->bookmarkCompanies()->detach($company);
         return redirect()->back()->with('success', 'Company removed from bookmarks');
     })->name('remove.from.bookmark');
+
+    // View Claim Page
+    Route::get('/claim-company', function (Request $request) {
+        $request->validate([
+            'company_id' => 'required',
+        ]);
+        $user = auth()->user();
+        $company = Company::findOrFail($request->company_id);
+        $data = compact('user', 'company');
+        return view('claims')->with($data);
+    })->name('view.claim.company');
+    // route to claim company listing by user
+    Route::post('/claim-company', function (Request $request) {
+        $request->validate([
+            'email' => 'required|email|unique:companies,email',
+            'phone' => 'required',
+            'website' => 'required|unique:companies,website',
+            'company_name' => 'required',
+            'message' => 'required',
+            'company_id' => 'required',
+        ]);
+        // Check If user already claimed this company
+        $claim = Claims::where('company_id', $request->company_id)->where('user_id', Auth::user()->id)->first();
+        if ($claim) {
+            return redirect()->back()->with('error', 'You already claimed this company');
+        }
+
+        // Check If a company already claimed by another user
+        $claim = Claims::where('company_id', $request->company_id)->where('email', $request->email)->first();
+        if ($claim) {
+            return redirect()->back()->with('error', 'This company is already claimed by another user');
+        }
+
+        // If a user has a company registered, then they can't claim another company
+        $company = Company::where('user_id', Auth::user()->id)->first();
+        if ($company) {
+            return redirect()->back()->with('error', 'You already have a company registered, Can\'t claim another company');
+        }
+        $claim = new Claims();
+        $claim->user_id = Auth::user()->id;
+        $claim->company_id = $request->company_id;
+        $claim->email = $request->email;
+        $claim->phone = $request->phone;
+        $claim->website = $request->website;
+        $claim->company_name = $request->company_name;
+        $claim->message = $request->message;
+        $claim->saveOrFail();
+        return redirect()->back()->with('success', 'Claim submitted successfully');
+    })->name('view.claim.company');
+
 });
+
+Route::get('direct-message', function (Request $request){
+    $request->validate([
+        'company_id' => 'required',
+    ]);
+    $company = Company::findOrFail($request->company_id);
+    $data = compact('company');
+    return view('dm')->with($data);
+})->name('direct-message');
+
+Route::post('direct-message', function (Request $request){
+    $request->validate([
+        'email' => 'required|email',
+        'phone' => 'required',
+        'company_name' => 'required',
+        'name' => 'required',
+        'message' => 'required',
+        'company_id' => 'required',
+    ]);
+
+    $dm = new DirectMessage();
+    $dm->company_id = $request->company_id;
+    $dm->email = $request->email;
+    $dm->phone = $request->phone;
+    $dm->company_name = $request->company_name;
+    $dm->name = $request->name;
+    $dm->message = $request->message;
+    $dm->saveOrFail();
+    return redirect()->back()->with('success', 'Message sent successfully');
+})->name('direct-message');
