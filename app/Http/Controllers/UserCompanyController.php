@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -55,7 +56,7 @@ class UserCompanyController extends Controller
         // Forgot session
         Session::forget('menu');
         $company = Company::where('slug', $slug)->firstOrFail();
-        $user = auth()->user();
+        $user = auth()->user() ? auth()->user() : new User();
         $data = compact('company', 'user');
         return view('pages.company.detail')->with($data);
     }

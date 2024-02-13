@@ -269,34 +269,21 @@ Route::get('/categories', function (Request $request){
     return view('category', compact('type'));
 })->name('categories');
 
-// route to add a company list into favorites
-Route::get('/add-to-favorite', function (Request $request) {
-    $user = Auth::user();
-    $company = Company::findOrFail($request->company_id);
-    $user->favoriteCompanies()->attach($company);
-    return redirect()->back()->with('success', 'Company added to favorites');
-})->name('add.to.favorite');
 
-// route to remove a company list from favorites
-Route::get('/remove-from-favorite', function (Request $request) {
-    $user = Auth::user();
-    $company = Company::findOrFail($request->company_id);
-    $user->favoriteCompanies()->detach($company);
-    return redirect()->back()->with('success', 'Company removed from favorites');
-})->name('remove.from.favorite');
-
-// route to add a company list into bookmarks
-Route::get('/add-to-bookmark', function (Request $request) {
-    $user = Auth::user();
-    $company = Company::findOrFail($request->company_id);
-    $user->bookmarkCompanies()->attach($company);
-    return redirect()->back()->with('success', 'Company added to bookmarks');
-})->name('add.to.bookmark');
+Route::prefix('protected')->middleware(['auth'])->group(function () {
+    // route to add a company list into bookmarks
+    Route::get('/add-to-bookmark', function (Request $request) {
+        $user = Auth::user();
+        $company = Company::findOrFail($request->company_id);
+        $user->bookmarkCompanies()->attach($company);
+        return redirect()->back()->with('success', 'Company added to bookmarks');
+    })->name('add.to.bookmark');
 
 // route to remove a company list from bookmarks
-Route::get('/remove-from-bookmark', function (Request $request) {
-    $user = Auth::user();
-    $company = Company::findOrFail($request->company_id);
-    $user->bookmarkCompanies()->detach($company);
-    return redirect()->back()->with('success', 'Company removed from bookmarks');
-})->name('remove.from.bookmark');
+    Route::get('/remove-from-bookmark', function (Request $request) {
+        $user = Auth::user() ? Auth::user() : redirect()->route('auth.login')->with('error', 'You need to login first');
+        $company = Company::findOrFail($request->company_id);
+        $user->bookmarkCompanies()->detach($company);
+        return redirect()->back()->with('success', 'Company removed from bookmarks');
+    })->name('remove.from.bookmark');
+});

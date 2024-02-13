@@ -44,7 +44,6 @@
     @include('includes.footer')
 </main>
 <script src="{{ asset('js/tw-element-min.js') }}"></script>
-<script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="{{ asset('js/alpine.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>

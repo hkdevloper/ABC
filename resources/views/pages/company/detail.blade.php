@@ -76,18 +76,6 @@
             </div>
             <div class="w-full md:w-1/2 mt-4 md:mt-0 flex flex-col items-center justify-center md:items-end">
                 <div class="flex items-center justify-center md:justify-end mb-4 overflow-x-auto md:overflow-x-visible md:mx-2">
-                    @if($user->isCompanyFavorite($company))
-                        <a href="{{ route('remove.from.favorite', ['company_id' => $company->id]) }}"
-                           class="m-1 bg-purple-400 hover:bg-purple-500 px-2 py-1 text-sm rounded text-white flex-shrink-0">
-                            <i class="fas fa-heart text-white"></i>&nbsp; Favorites
-                        </a>
-                    @else
-                        <a href="{{ route('add.to.favorite', ['company_id' => $company->id]) }}"
-                           class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white flex-shrink-0">
-                            <i class="fas fa-heart text-purple-500"></i>&nbsp; Favorites
-                        </a>
-                    @endif
-
                     @if($user->isCompanyBookmarked($company))
                         <a href="{{ route('remove.from.bookmark', ['company_id' => $company->id]) }}"
                            class="m-1 bg-purple-400 hover:bg-purple-500 px-2 py-1 text-sm rounded text-white flex-shrink-0">

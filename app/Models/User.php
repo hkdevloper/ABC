@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -181,19 +180,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return parent::delete();
     }
 
-    public function favoriteCompanies(): BelongsToMany
-    {
-        return $this->belongsToMany(Company::class, FavoriteCompanies::class, 'user_id', 'company_id');
-    }
 
     public function bookmarkCompanies(): BelongsToMany
     {
         return $this->belongsToMany(Company::class, BookmarkCompanies::class, 'user_id', 'company_id');
-    }
-
-    public function isCompanyFavorite(Company $company): bool
-    {
-        return $this->favoriteCompanies()->where('company_id', $company->id)->exists();
     }
 
     public function isCompanyBookmarked(Company $company): bool
