@@ -11,12 +11,15 @@ class Claims extends Model
     use HasFactory;
     protected $table = 'claims';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id', 'email', 'phone', 'website', 'company_name', 'message', 'status'];
-    protected $casts = [
-        'status' => 'boolean',
-    ];
+    protected $fillable = ['user_id', 'company_id', 'email', 'phone', 'website', 'company_name', 'message', 'status'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 }

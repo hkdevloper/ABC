@@ -133,7 +133,7 @@ class ProductResource extends Resource
                             ->label('Enter SEO Meta Description')
                             ->maxLength(70),
                     ])->columns(1),
-            ])->columns(4);
+            ])->columns(2);
     }
 
     public static function table(Table $table): Table

@@ -47,7 +47,7 @@ class CountryResource extends Resource
                 Toggle::make('featured')
                     ->label('Featured')
                     ->required(),
-            ])->columns(4);
+            ])->columns(2);
     }
 
     public static function table(Table $table): Table

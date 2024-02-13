@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('claims', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('company_id')->constrained();
             $table->string('email');
             $table->string('phone');
             $table->string('website');
             $table->string('company_name');
             $table->text('message');
-            $table->boolean('status')->default(false);
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }

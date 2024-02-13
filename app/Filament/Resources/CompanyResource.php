@@ -42,30 +42,32 @@ class CompanyResource extends Resource
     {
         return $form
             ->schema([
-                Toggle::make('is_approved')
-                    ->label('Approved')
-                    ->default(true)
-                    ->required(),
-                Toggle::make('is_claimed')
-                    ->default(function (Get $get, $action){
-                        if ($action == 'edit') {
-                            if ($get('claimed_by') == null) {
-                                return false;
-                            } else {
-                                return true;
+                Section::make('')->schema([
+                    Toggle::make('is_approved')
+                        ->label('Approved')
+                        ->default(true)
+                        ->required(),
+                    Toggle::make('is_claimed')
+                        ->default(function (Get $get, $action){
+                            if ($action == 'edit') {
+                                if ($get('claimed_by') == null) {
+                                    return false;
+                                } else {
+                                    return true;
+                                }
                             }
-                        }
-                        return false;
-                    })
-                    ->label('Claimed')
-                    ->live(onBlur: true),
-                Toggle::make('is_active')
-                    ->label('Active')
-                    ->default(true)
-                    ->required(),
-                Toggle::make('is_featured')
-                    ->label('Featured')
-                    ->required(),
+                            return false;
+                        })
+                        ->label('Claimed')
+                        ->live(onBlur: true),
+                    Toggle::make('is_active')
+                        ->label('Active')
+                        ->default(true)
+                        ->required(),
+                    Toggle::make('is_featured')
+                        ->label('Featured')
+                        ->required(),
+                ])->columns(4),
                 Forms\Components\Hidden::make('user_id')
                     ->default(auth()->id()),
                 Select::make('claimed_by')
@@ -214,7 +216,7 @@ class CompanyResource extends Resource
                             ->label('Enter SEO Meta Description')
                             ->maxLength(70),
                     ])->columns(1),
-            ])->columns(4);
+            ])->columns(2);
     }
 
     public static function table(Table $table): Table

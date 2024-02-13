@@ -39,6 +39,10 @@ Route::prefix('test')->group(function () {
     });
 });
 
+Route::get('login', function(){
+    return redirect()->route('auth.login');
+})->name('login');
+
 Route::get('logout', function () {
     if (Auth::check()){
         Auth::logout();
@@ -296,19 +300,44 @@ Route::prefix('protected')->middleware(['auth'])->group(function () {
 
     // View Claim Page
     Route::get('/claim-company', function (Request $request) {
-        return view('claims');
+        $request->validate([
+            'company_id' => 'required',
+        ]);
+        $user = auth()->user();
+        $company = Company::findOrFail($request->company_id);
+        $data = compact('user', 'company');
+        return view('claims')->with($data);
     })->name('view.claim.company');
     // route to claim company listing by user
     Route::post('/claim-company', function (Request $request) {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|unique:companies,email',
             'phone' => 'required',
-            'website' => 'required|unique:companies,email',
+            'website' => 'required|unique:companies,website',
             'company_name' => 'required',
             'message' => 'required',
+            'company_id' => 'required',
         ]);
+        // Check If user already claimed this company
+        $claim = Claims::where('company_id', $request->company_id)->where('user_id', Auth::user()->id)->first();
+        if ($claim) {
+            return redirect()->back()->with('error', 'You already claimed this company');
+        }
+
+        // Check If a company already claimed by another user
+        $claim = Claims::where('company_id', $request->company_id)->where('email', $request->email)->first();
+        if ($claim) {
+            return redirect()->back()->with('error', 'This company is already claimed by another user');
+        }
+
+        // If a user has a company registered, then they can't claim another company
+        $company = Company::where('user_id', Auth::user()->id)->first();
+        if ($company) {
+            return redirect()->back()->with('error', 'You already have a company registered, Can\'t claim another company');
+        }
         $claim = new Claims();
         $claim->user_id = Auth::user()->id;
+        $claim->company_id = $request->company_id;
         $claim->email = $request->email;
         $claim->phone = $request->phone;
         $claim->website = $request->website;

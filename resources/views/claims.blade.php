@@ -60,7 +60,7 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="message">
                     Message
                 </label>
-                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('message') border-red-500 @enderror" id="message" placeholder="Message" name="message" required>{{ old('message') }}</textarea>
+                <textarea rows="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('message') border-red-500 @enderror" id="message" placeholder="Message" name="message" required>{{ old('message') }}</textarea>
                 @error('message')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -69,8 +69,8 @@
             <input type="hidden" name="user_id" value="{{ $user->id }}">
             <input type="hidden" name="company_id" value="{{ $company->id }}">
 
-            <div class="flex items-center justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            <div class="flex items-center justify-between w-full">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-80 mx-auto" type="submit">
                     Submit
                 </button>
             </div>
