@@ -53,13 +53,13 @@
             </div>
         </div>
         <div class="w-full my-5 p-2">
-            <a href="#answer-block"
+            <button onclick="showAnswerForm()"
                class="block text-white bg-purple-500 hover:bg-purple-800 font-bold uppercase text-xs px-4 py-2 rounded-full focus:outline-none w-full text-center p-2">
                 Leave an Answer
-            </a>
+            </button>
         </div>
         <!-- Reply Form -->
-        <div id="answer-block" class="mb-6 p-2">
+        <div id="answer-block" class="mb-6 p-2 w-full hidden">
             <h3 class="text-lg font-semibold text-gray-900 mb-2">Submit your Answer</h3>
             <form id="replyForm" action="{{ route('forum.reply') }}" method="post">
                 @csrf
@@ -110,6 +110,17 @@
 
 @section('page-scripts')
     <script>
+        function showAnswerForm() {
+            let checkAuth = '{{auth()->id()}}';
+            if (checkAuth === '' || checkAuth === 'null') {
+                window.location.href = '{{route('auth.login')}}';
+                return;
+            }
+            // Toggle visibility of an answer form
+            let answerBlock = document.getElementById('answer-block');
+            answerBlock.classList.toggle('hidden');
+        }
+
         document.addEventListener("DOMContentLoaded", function () {
             // Get CKEditor instance
             ClassicEditor

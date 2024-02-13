@@ -6,12 +6,14 @@
     <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
         <h1 class="block text-lg md:text-2xl w-full text-center font-bold">🔍 Dive into Forum Treasures!</h1>
         <br>
-        <form action="" class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
+        <form action=""
+              class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
             <div class="relative flex items-center justify-between md:w-full s-form">
                 <label for="searchInput" class="sr-only">Search</label>
                 <input id="searchInput" name="q" type="text" placeholder="Unearth knowledge and discussions! 🚀✨"
                        class="search-input focus:outline-none md:px-6 md:py-2 border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full placeholder:text-xs md:placeholder:text-base">
-                <button type="submit" class="mx-2 md:mx-0 bg-green-400 text-white md:py-2 md:px-4 w-auto md:w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
+                <button type="submit"
+                        class="mx-2 md:mx-0 bg-green-400 text-white md:py-2 md:px-4 w-auto md:w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
                     <span class="flex items-center justify-center">
                         <span class="hidden md:block">Search</span>
                         <!--search icon svg-->
@@ -80,16 +82,18 @@
                             <div class="flex items-center">
                                 <div>
                                     <h2 class="text-base font-semibold text-gray-800">{{$forum->user->name}}</h2>
-                                    <p class="text-gray-500 text-sm">Posted on {{date_format($forum->created_at, 'd M y')}}</p>
+                                    <p class="text-gray-500 text-sm">Posted
+                                        on {{date_format($forum->created_at, 'd M y')}}</p>
                                 </div>
                             </div>
                             <div>
-                                <span class="text-gray-600 text-sm">Category: <span class="text-purple-500">{{$forum->category->name}}</span></span>
+                                <span class="text-gray-600 text-sm">Category: <span
+                                        class="text-purple-500">{{$forum->category->name}}</span></span>
                             </div>
                         </div>
                         <h1 class="text-lg font-semibold text-gray-900 mb-4">{{$forum->title}}</h1>
-                        <p class="text-gray-700 text-sm">
-                            {!! \Illuminate\Support\Str::limit($forum->body, 200) !!}
+                        <p class="text-gray-700 text-sm w-100       ">
+                            {!! \Illuminate\Support\Str::limit($forum->body, 300) !!}
                         </p>
                         <hr class="my-4 border-t-2 border-gray-200">
                         <div class="flex justify-between items-center">
@@ -98,8 +102,9 @@
                                 <span class="ml-4 text-gray-600 text-sm">{{HelperFunctions::getStat('view', 'forum', $forum->id)}} Views</span>
                             </div>
                             <div>
-                                <button onclick="window.location.href = '{{route('view.forum', [$forum->id, \Illuminate\Support\Str::slug($forum->title)])}}'"
-                                        class="text-white bg-purple-500 hover:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded-full focus:outline-none">
+                                <button
+                                    onclick="window.location.href = '{{route('view.forum', [$forum->id, \Illuminate\Support\Str::slug($forum->title)])}}'"
+                                    class="text-white bg-purple-500 hover:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded-full focus:outline-none">
                                     Leave an Answer
                                 </button>
                                 <button class="text-purple-500 hover:underline ml-2">
