@@ -384,7 +384,7 @@
                     </a>
                 </div>
                 <hr class="my-5">
-                <div class="owl-carousel grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="owl-carousel grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     @forelse($events as $event)
                         <div class="reveal bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
                             <div class="each relative flex flex-col items-stretch justify-center">

@@ -69,36 +69,6 @@
             Showing {{ $products->firstItem() }} - {{ $products->lastItem() }} of {{ $products->total() }} results
         </p>
     </div>
-    <script>
-        function doSort() {
-            let sortValue = document.getElementById('product-sort-by').value;
-            let categoryValue = document.getElementById('product-category-filter').value;
-            applyFilters(categoryValue, sortValue);
-        }
-
-        function doFilter() {
-            let categoryValue = document.getElementById('product-category-filter').value;
-            let sortValue = document.getElementById('product-sort-by').value;
-            applyFilters(categoryValue, sortValue);
-        }
-
-        function applyFilters(category, sort) {
-            let url = '{{ route('products') }}';
-            let params = [];
-            if (category !== 'all') {
-                params.push('category=' + category);
-            }
-
-            if (sort !== 'default') {
-                params.push('sort=' + sort);
-            }
-
-            if (params.length > 0) {
-                url += '?' + params.join('&');
-            }
-            window.location.href = url;
-        }
-    </script>
     <div class="container">
         <!-- Product List -->
         @forelse($products as $key => $item)
@@ -144,4 +114,37 @@
         <hr class="my-5">
         {{ $products->links() }}
     </div>
+@endsection
+
+@section('page-scripts')
+    <script>
+        function doSort() {
+            let sortValue = document.getElementById('product-sort-by').value;
+            let categoryValue = document.getElementById('product-category-filter').value;
+            applyFilters(categoryValue, sortValue);
+        }
+
+        function doFilter() {
+            let categoryValue = document.getElementById('product-category-filter').value;
+            let sortValue = document.getElementById('product-sort-by').value;
+            applyFilters(categoryValue, sortValue);
+        }
+
+        function applyFilters(category, sort) {
+            let url = '{{ route('products') }}';
+            let params = [];
+            if (category !== 'all') {
+                params.push('category=' + category);
+            }
+
+            if (sort !== 'default') {
+                params.push('sort=' + sort);
+            }
+
+            if (params.length > 0) {
+                url += '?' + params.join('&');
+            }
+            window.location.href = url;
+        }
+    </script>
 @endsection

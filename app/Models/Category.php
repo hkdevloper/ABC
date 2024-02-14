@@ -9,10 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use LaravelIdea\Helper\App\Models\_IH_Category_C;
 use Spatie\MediaLibrary\HasMedia;
 
-class Category extends Model implements HasMedia
+class Category extends Model
 {
     use HasFactory;
-    use \Spatie\MediaLibrary\InteractsWithMedia;
 
     protected $table = 'categories';
     protected $primaryKey = 'id';

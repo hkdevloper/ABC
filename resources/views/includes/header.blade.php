@@ -44,6 +44,10 @@
                        class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'product' ? 'text-purple-500 p-2 underline font-bold text-xl' : '' }}">Products</a>
                 </li>
                 <li>
+                    <a href="{{ route('deals') }}"
+                       class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'deal' ? 'text-purple-500 p-2 underline font-bold text-xl' : '' }}">Deals</a>
+                </li>
+                <li>
                     <a href="{{ route('events') }}"
                        class="text-gray-700 hover:text-purple-600 border-purple-500 rounded-full {{ session()->get('menu') == 'event' ? 'text-purple-500 p-2 underline font-bold text-xl' : '' }}">Events</a>
                 </li>
@@ -91,6 +95,9 @@
             </li>
             <li>
                 <a href="{{ route('products') }}" class="block text-gray-700 hover:text-purple-600 py-2 px-4 border-b border-gray-300">Products</a>
+            </li>
+            <li>
+                <a href="{{ route('deals') }}" class="block text-gray-700 hover:text-purple-600 py-2 px-4 border-b border-gray-300">Deals</a>
             </li>
             <li>
                 <a href="{{ route('events') }}" class="block text-gray-700 hover:text-purple-600 py-2 px-4 border-b border-gray-300">Events</a>

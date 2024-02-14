@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="{{asset('js/tailwind.js')}}"></script>
     <link href="{{ asset('css/boxicons/css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/toastify.min.css')}}">
     <link href="{{ asset('css/main.css')}}" rel="stylesheet">
     <script src="{{ asset('js/jquery.js')}}"></script>
     <script src="{{ asset('js/alpine.js')}}" defer></script>
     <script src="{{ asset('js/fw.js')}}" crossorigin="anonymous"></script>
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="{{ asset('js/scroll-reveal.js')}}"></script>
     @include('includes.ads-config')
     @yield('head')
@@ -44,7 +44,7 @@
     @include('includes.footer')
 </main>
 <script src="{{ asset('js/tw-element-min.js') }}"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="text/javascript" src="{{asset('js/toastify.js')}}"></script>
 <script src="{{ asset('js/alpine.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
 <script>
