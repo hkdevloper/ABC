@@ -62,6 +62,17 @@
                         .then(data => {
                             // Clear previous results
                             searchResults.innerHTML = '';
+                            // Handle no results
+                            if (data.length === 0) {
+                                const noResults = document.createElement('p');
+                                noResults.textContent = 'No results found';
+                                searchResults.appendChild(noResults);
+                                // styling padding and margin
+                                noResults.style.padding = '8px';
+                                noResults.style.margin = '0';
+                                searchResults.style.display = 'block';
+                                return;
+                            }
 
                             // Filter and display results
                             data.forEach(result => {
