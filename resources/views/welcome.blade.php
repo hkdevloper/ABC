@@ -52,38 +52,35 @@
                 const searchURL = "{{ route('api.search', ['search' => '__input__']) }}".replace('__input__', inputValue);
 
                 try {
-                    // Fetch data from the search endpoint
-                    const response = await fetch(searchURL);
-                    const searchData = await response.json();
-                    const data = searchData.data;
-                    console.log(data)
+                    await fetch(searchURL)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Clear previous results
+                            searchResults.innerHTML = '';
 
-                    // Clear previous results
-                    searchResults.innerHTML = '';
+                            // Filter and display results
+                            data.forEach(result => {
+                                const resultElement = document.createElement('a');
+                                resultElement.textContent = result;
+                                resultElement.href = "{{ route('search', ['q' => '__slug__']) }}".replace('__slug__', result);
+                                console.log(resultElement.href)
 
-                    // Filter and display results
-                    data.forEach(result => {
-                        const resultElement = document.createElement('a');
-                        resultElement.textContent = result;
-                        resultElement.href = "{{ route('search', ['q' => '__slug__']) }}".replace('__slug__', result);
-                        console.log(resultElement.href)
-
-                        searchResults.appendChild(resultElement);
-                        // Show or hide the result container based on the input length
-                        searchResults.style.display = inputValue.length >= 3 ? 'block' : 'none';
-                    });
+                                searchResults.appendChild(resultElement);
+                                // Show or hide the result container based on the input length
+                                searchResults.style.display = inputValue.length >= 3 ? 'block' : 'none';
+                            });
+                        });
                 } catch (error) {
                     console.error('Error fetching search results:', error);
                 }
             }
         });
-        const card = document.getElementById('categoryCard');
     </script>
 @endsection
 
 @section('content')
     <!-- Search Section -->
-    <section class="relative py-8 md:h-[60vh] flex flex-col items-center justify-center overflow-hidden">
+    <section class="relative py-8 md:h-[60vh] flex flex-col items-center justify-center overflow-visible">
         <div class="absolute inset-0 bg-gradient-to-r from-purple-500 via-green-300 to-purple-500 opacity-25"></div>
         <div class="mx-auto text-center relative z-10 ">
             <h1 class="md:text-3xl text-xl lg:text-5xl font-semibold text-dark mb-2">Discover Top Companies and
@@ -91,10 +88,10 @@
             <p class="text-dark text-xs md:text-lg mb-4">Explore a vast network of five lakh+ businesses and products
                 for your needs</p>
             <form action="{{ route('search') }}"
-                  class="mt-2 md:mt-4 flex items-center justify-center rounded-full p-2 pl-1 relative bg-white w-[80vw] md:w-full m-auto md:p-4 md:pl-2">
+                  class="mt-2 md:mt-4 flex items-center justify-center rounded-full p-2 pl-1 relative bg-white w-[80vw] md:w-full m-auto md:p-4 md:pl-2" style="z-index: 99;">
                 <div class="relative flex items-center justify-between w-full s-form">
                     <label for="searchInput" class="sr-only">Search</label>
-                    <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters"
+                    <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters" autocomplete="off"
                            class="search-input focus:outline-none px-1 py-1 rounded-full border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full placeholder:text-xs md:placeholder:text-base md:px-6 md-py-2">
                     <button type="submit"
                             class="bg-blue-500 text-white py-2 px-4 w-auto rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse">
@@ -102,7 +99,7 @@
                         <span class="hidden sm:block md:block lg:block">Search</span>
                     </button>
                 </div>
-                <div id="searchResults" class="search-results mt-2"></div>
+                <div id="searchResults" class="search-results mt-2 overflow-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh]"></div>
             </form>
         </div>
     </section>

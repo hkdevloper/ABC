@@ -31,7 +31,12 @@ class APIController extends Controller
         }
         // Unique the array
         $searchList = array_unique($searchList);
-        return response()->json(['data' => $searchList]);
+
+        $data = [];
+        foreach ($searchList as $item){
+            $data[] = $item;
+        }
+        return $data;
     }
 
     public function productRate($type, Request $request)

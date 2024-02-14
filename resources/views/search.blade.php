@@ -53,40 +53,38 @@
             const inputValue = this.value.trim().toLowerCase();
 
             // Check if inputValue is at least 3 characters
-            const searchURL = "{{ route('api.search', ['search' => '__input__']) }}".replace('__input__', inputValue);
+            if (inputValue.length >= 3) {
+                const searchURL = "{{ route('api.search', ['search' => '__input__']) }}".replace('__input__', inputValue);
 
-            try {
-                // Fetch data from the search endpoint
-                const response = await fetch(searchURL);
-                const searchData = await response.json();
-                const data = searchData.data;
-                console.log(data)
+                try {
+                    await fetch(searchURL)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Clear previous results
+                            searchResults.innerHTML = '';
 
-                // Clear previous results
-                searchResults.innerHTML = '';
+                            // Filter and display results
+                            data.forEach(result => {
+                                const resultElement = document.createElement('a');
+                                resultElement.textContent = result;
+                                resultElement.href = "{{ route('search', ['q' => '__slug__']) }}".replace('__slug__', result);
+                                console.log(resultElement.href)
 
-                // Filter and display results
-                data.forEach(result => {
-                    const resultElement = document.createElement('a');
-                    resultElement.textContent = result;
-                    resultElement.href = "{{ route('search', ['q' => '__slug__']) }}".replace('__slug__', result);
-                    console.log(resultElement.href)
-
-                    searchResults.appendChild(resultElement);
-                    // Show or hide the result container based on the input length
-                    searchResults.style.display = inputValue.length >= 3 ? 'block' : 'none';
-                });
-            } catch (error) {
-                console.error('Error fetching search results:', error);
+                                searchResults.appendChild(resultElement);
+                                // Show or hide the result container based on the input length
+                                searchResults.style.display = inputValue.length >= 3 ? 'block' : 'none';
+                            });
+                        });
+                } catch (error) {
+                    console.error('Error fetching search results:', error);
+                }
             }
         });
-        const card = document.getElementById('categoryCard');
     </script>
 @endsection
-
 @section('content')
     <!-- Search Section -->
-    <section class="relative py-8 md:h-[60vh] flex flex-col items-center justify-center overflow-hidden">
+    <section class="relative py-8 md:h-[60vh] flex flex-col items-center justify-center overflow-visible">
         <div class="absolute inset-0 bg-gradient-to-r from-purple-500 via-green-300 to-purple-500 opacity-25"></div>
         <div class="mx-auto text-center relative z-10">
             <h1 class="text-3xl md:text-5xl font-semibold text-dark mb-2">Discover Top Companies and Products</h1>
@@ -96,7 +94,7 @@
                   class="mt-2 md:mt-4 flex items-center justify-center rounded-full p-4 pl-2 relative bg-white w-100">
                 <div class="relative flex items-center justify-between w-full s-form">
                     <label for="searchInput" class="sr-only">Search</label>
-                    <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters"
+                    <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters" autocomplete="off"
                            class="search-input focus:outline-none px-6 py-2 rounded-full border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full">
                     <button type="submit"
                             class="bg-blue-500 text-white py-2 px-4 w-auto rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse">
@@ -111,21 +109,26 @@
     <div class="container py-6 mx-auto flex flex-wrap">
         <!-- Product List -->
         @forelse($products as $key => $item)
-            <div class="card p-4 my-4 mx-3 shadow border border-b border-solid border-gray-100 flex items-center justify-between w-full">
-                <div class="flex items-center justify-center">
-                    <img class="w-full h-40 object-cover rounded-lg sm:block sm:col-span-2 md:col-span-1 bg-contain" src="{{ url('storage/' . $item->thumbnail) }}" alt="">
+            <div class="reveal card p-4 my-4 mx-3 shadow border border-b border-solid border-gray-100 flex flex-col md:flex-row items-center w-full">
+                <div class="w-full flex flex-col md:flex-row items-center justify-center">
+                    <div class="overflow-hidden mb-4 p-2 md:border-r border-r-1 border-solid border-gray-300">
+                        <img class="w-full h-40 object-contain overflow-hidden"
+                             src="{{ url('storage/' . $item->thumbnail) }}" width="250"
+                             alt="">
+                    </div>
                     <div class="flex items-start justify-start flex-col w-full ml-6">
-                        <span class="text-base text-gray-500 -mb-1">{{$item->category_name}}</span>
-                        <a href="{{ route('view.product', [$item->slug]) }}" class="font-semibold text-4xl">{{ $item->name }}</a>
+                        <a href="{{ route('view.product', [$item->slug]) }}"
+                           class="font-semibold text-2xl">{{ $item->name }}</a>
                         <span class="text-base text-gray-500 -mb-1">Condition: {{$item->condition}}</span>
                         <span class="text-base text-gray-500 -mb-1">Brand: {{$item->brand}}</span>
-                        <span class="bg-white rounded-full text-orange-500 text-base font-bold px-3 py-2 leading-none flex items-center">₹ {{$item->price}}</span>
+                        <span
+                            class="bg-white rounded-full text-orange-500 text-base font-bold px-3 py-2 leading-none flex items-center">₹ {{$item->price}}</span>
                     </div>
                 </div>
                 <!-- Product List Action -->
-                <div class="text-center">
+                <div class="text-center md:w-[calc(20%-1rem)] text-base flex justify-center items-center my-5 md:my-0">
                     <a href="{{ route('view.product', [$item->slug]) }}"
-                       class="text-white bg-green-400 hover:bg-purple-500 hover:text-white rounded-full px-4 py-2 transition duration-300 ease-in-out flex items-center transform hover:-translate-y-1 hover:scale-110 text-center">
+                       class="text-white bg-green-400 hover:bg-purple-500 hover:text-white rounded-full px-3 py-2 transition duration-300 ease-in-out flex items-center transform hover:-translate-y-1 hover:scale-110">
                     <span class="mr-1 text-center">
                         Enquire Now
                     </span>
@@ -145,5 +148,19 @@
         <!-- Pagination -->
         <hr class="my-5">
         {{ $products->links() }}
+    </div>
+    <div class="container bg-white shadow-md rounded-lg py-4">
+        <div class=" mx-auto px-4">
+            <h2 class="text-lg font-semibold mb-2">Related Keywords:</h2>
+            <div class="flex flex-wrap">
+                @forelse($seo as $item)
+                    <a href="{{route('search', ['q' => $item])}}" class="bg-purple-500 hover:bg-blue-600 text-white text-base py-1 px-2 rounded-full mr-2 mb-2">
+                        {{ $item }}
+                    </a>
+                @empty
+                    <p>No Related Keywords</p>
+                @endforelse
+            </div>
+        </div>
     </div>
 @endsection
