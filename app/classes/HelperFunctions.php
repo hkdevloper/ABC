@@ -17,20 +17,16 @@ class HelperFunctions
             $stat = StatCounter::where('type', $type)->where('category', $category)->where('field_id', $id)->first();
             if ($stat) {
                 $stat->count = $stat->count + 1;
-                try {
-                    $stat->saveOrFail();
-                } catch (Throwable $e) {
-                }
             } else {
                 $stat = new StatCounter();
                 $stat->type = $type;
                 $stat->category = $category;
                 $stat->field_id = $id;
                 $stat->count = 1;
-                try {
-                    $stat->saveOrFail();
-                } catch (Throwable $e) {
-                }
+            }
+            try {
+                $stat->saveOrFail();
+            } catch (Throwable $e) {
             }
             return true;
 
@@ -127,6 +123,16 @@ class HelperFunctions
             }
         } catch (Exception $e) {
             return 0;
+        }
+    }
+
+    // Function to get Discounted Price
+    public static function getDiscountedPrice($price, $discount_type, $discount_value): float
+    {
+        if ($discount_type === 'percentage') {
+            return $price - ($price * $discount_value / 100);
+        } else {
+            return $price - $discount_value;
         }
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Deal;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -15,6 +16,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -34,12 +36,15 @@ class DealResource extends Resource
     {
         return $form
             ->schema([
-                Toggle::make('is_active')
-                    ->label('Is Active')
-                    ->required(),
-                Toggle::make('is_featured')
-                    ->label('Is Featured')
-                    ->required(),
+                Section::make('')->schema([
+                    Toggle::make('is_active')
+                        ->label('Active')
+                        ->default(true)
+                        ->required(),
+                    Toggle::make('is_featured')
+                        ->label('Featured')
+                        ->required(),
+                ])->columns(),
                 Select::make('user_id')
                     ->native(false)
                     ->label('Select User')
@@ -71,7 +76,18 @@ class DealResource extends Resource
                     ->prefix('$'),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
-
+                Section::make('Images')
+                    ->schema([
+                        FileUpload::make('thumbnail')
+                            ->label('Thumbnail')
+                            ->directory('deals/thumbnail')
+                            ->required(),
+                        FileUpload::make('gallery')
+                            ->label('Gallery')
+                            ->directory('deals/gallery')
+                            ->maxFiles(4)
+                            ->multiple(),
+                    ])->columns(1),
                 Section::make('Discount Details')
                 ->schema([
                     Select::make('discount_type')
@@ -111,25 +127,31 @@ class DealResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('User')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('category.name')
-                    ->label('Category')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->label('Thumbnail')
+                    ->disk('public')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('title')
                     ->label('Title')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Category')
+                    ->numeric()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('category.name'),
                 Tables\Columns\TextColumn::make('discount_type')
+                    ->description(function ($record){
+                        return $record->discount_type == 'percentage' ? $record->discount_value.'%' : '₹'.$record->discount_value;
+                    })
                     ->label('Type')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('discount_value')
-                    ->label('Value')
-                    ->searchable(),
-                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
-                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
+                Tables\Columns\ToggleColumn::make('is_active')
+                    ->label('Active'),
+                Tables\Columns\ToggleColumn::make('is_featured')
+                    ->label('Featured'),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
