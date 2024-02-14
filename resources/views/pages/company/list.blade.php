@@ -42,13 +42,13 @@
 
 @section('content')
     <x-user.bread-crumb :data="['Home', 'Company', 'List']"/>
-    <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
+    <div class="flex flex-col justify-center items-center bg-green-50 h-[200px] overflow-visible">
         <h1 class="block text-lg md:text-4xl w-full text-center font-bold">Search for thousands of Companies!!</h1>
         <br>
-        <form action="{{ route('search') }}" class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
+        <form action="" class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
             <div class="relative flex items-center justify-between md:w-full s-form">
                 <label for="searchInput" class="sr-only">Search</label>
-                <input id="searchInput" name="q" type="text" placeholder="Search for Company here! 🚀✨"
+                <input id="searchInput" name="q" type="text" placeholder="Search for Company here! 🚀✨" autocomplete="off"
                        class="search-input focus:outline-none md:px-6 md:py-2 border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full placeholder:text-xs md:placeholder:text-base">
                 <button type="submit" class="mx-2 md:mx-0 bg-green-400 text-white md:py-2 md:px-4 w-auto md:w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
                     <span class="flex items-center justify-center">
@@ -58,6 +58,7 @@
                     </span>
                 </button>
             </div>
+            <div id="searchResults" class="search-results mt-2 overflow-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh]"></div>
         </form>
     </div>
     <div class="container flex items-center justify-between my-8 mx-2 md:mx-auto">
@@ -127,7 +128,7 @@
             window.location.href = url;
         }
     </script>
-    <div class="container py-6 mx-auto">
+    <div class="container py-2 mx-auto">
         <!-- Existing content remains unchanged -->
         @forelse($companies as $company)
             <div class="reveal company-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex items-center justify-center p-2 mx-4 md:mx-0">
@@ -209,20 +210,57 @@
         <!-- Pagination -->
         {{ $companies->links() }}
     </div>
-    <div class="container bg-white shadow-md rounded-lg py-4">
-        <div class=" mx-auto px-4">
-            <h2 class="text-lg font-semibold mb-2">Related Keywords:</h2>
-            <div class="flex flex-wrap">
-                @forelse($seo as $item)
-                    <a href="{{route('search', ['q' => $item->title])}}" class="bg-purple-500 hover:bg-blue-600 text-white text-base py-1 px-2 rounded-full mr-2 mb-2">
-                        {{ $item->title }}
-                    </a>
-                @empty
-                    <p>No Related Keywords</p>
-                @endforelse
-            </div>
-        </div>
-    </div>
+    <x-related-keywords :seo="$seo" :route="'company'"/>
+@endsection
 
+@section('page-scripts')
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
 
+        searchInput.addEventListener('input', async function () {
+            const inputValue = this.value.trim().toLowerCase();
+
+            // Check if inputValue is at least 3 characters
+            if (inputValue.length >= 3) {
+                const searchURL = "{{ route('api.search.company', ['search' => '__input__']) }}".replace('__input__', inputValue);
+
+                try {
+                    await fetch(searchURL)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Clear previous results
+                            searchResults.innerHTML = '';
+                            // Handle no results
+                            if (data.length === 0) {
+                                const noResults = document.createElement('p');
+                                noResults.textContent = 'No results found';
+                                searchResults.appendChild(noResults);
+                                // styling padding and margin
+                                noResults.style.padding = '8px';
+                                noResults.style.margin = '0';
+                                searchResults.style.display = 'block';
+                                return;
+                            }
+
+                            // Filter and display results
+                            data.forEach(result => {
+                                const resultElement = document.createElement('a');
+                                resultElement.textContent = result;
+                                resultElement.href = "{{ route('company', ['q' => '__slug__']) }}".replace('__slug__', result);
+                                console.log(resultElement.href)
+
+                                searchResults.appendChild(resultElement);
+                                // Show or hide the result container based on the input length
+                                searchResults.style.display = inputValue.length >= 3 ? 'block' : 'none';
+                            });
+                        });
+                } catch (error) {
+                    console.error('Error fetching search results:', error);
+                }
+            }else{
+                searchResults.style.display = 'none';
+            }
+        });
+    </script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Seo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,45 +15,57 @@ class UserCompanyController extends Controller
     // Function to View Company List
     public function viewCompanyList(Request $request)
     {
-        // Forgot session
-        Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'company');
+
+        // Initialize the base query to retrieve companies with average rating
         $query = Company::select('companies.*', DB::raw('AVG(rate_reviews.rating) as avg_rating'))
             ->leftJoin('rate_reviews', function ($join) {
                 $join->on('companies.id', '=', 'rate_reviews.item_id')
                     ->where('rate_reviews.type', '=', 'company');
             })
+            ->join('seo', 'companies.seo_id', '=', 'seo.id')
             ->where('companies.is_approved', 1)
             ->groupBy('companies.id');
 
-        if ($request->has('category')) {
-            // Get Category I'd from Category Name
-            $cat_id = Category::where('name', $request->category)->first();
-            $query->where('companies.category_id', $cat_id->id);
+        // Search Query
+        if ($request->has('q')) {
+            $search = $request->q;
+            $query->whereHas('seo', function ($seoQuery) use ($search) {
+                $seoQuery->whereJsonContains('meta_keywords', $search);
+            });
         }
 
+        // Filter by Category
+        if ($request->has('category')) {
+            // Get Category ID from Category Name
+            $category = Category::where('name', $request->category)->where('type', 'company')->first();
+            if ($category) {
+                $query->where('companies.category_id', $category->id);
+            }
+        }
+
+        // Sorting
         if ($request->has('sort')) {
-            if ($request->sort == 'name') {
+            $sortField = $request->sort;
+            if ($sortField === 'name') {
                 $query->orderBy('companies.name', 'asc');
-            } elseif ($request->sort == 'desc') {
+            } elseif ($sortField === 'desc') {
                 $query->orderBy('avg_rating', 'desc');
-            } elseif ($request->sort == 'asc') {
+            } elseif ($sortField === 'asc') {
                 $query->orderBy('avg_rating', 'asc');
             }
         }
 
+        // Paginate the results
         $companies = $query->paginate(10);
 
-        // Get Seo Keywords
-        $seo = [];
-        $randomCompanies = Company::where('is_approved', 1)->inRandomOrder()->limit(6)->get();
-        foreach ($randomCompanies as $company) {
-            $seo[] = $company->seo;
-        }
+        // Get Random Companies for SEO
+        $seo = Company::where('is_approved', 1)->inRandomOrder()->limit(6)->get()->pluck('seo');
 
-        // get The Unique Data Only
+        // Fetch categories
         $categories = Category::where('type', 'company')->where('is_active', 1)->get();
+
         $data = compact('companies', 'categories', 'seo');
         return view('pages.company.list')->with($data);
     }

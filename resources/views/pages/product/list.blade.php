@@ -8,7 +8,7 @@
         <form action="{{ route('search') }}" class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
             <div class="relative flex items-center justify-between md:w-full s-form">
                 <label for="searchInput" class="sr-only">Search</label>
-                <input id="searchInput" name="q" type="text" placeholder="Search for products here! 🚀✨"
+                <input id="searchInput" name="q" type="text" placeholder="Search for products here! 🚀✨" autocomplete="off"
                        class="search-input focus:outline-none md:px-6 md:py-2 border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full placeholder:text-xs md:placeholder:text-base">
                 <button type="submit" class="mx-2 md:mx-0 bg-green-400 text-white md:py-2 md:px-4 w-auto md:w-[calc(100%-700px)] ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse rounded">
                     <span class="flex items-center justify-center">
@@ -18,6 +18,7 @@
                     </span>
                 </button>
             </div>
+            <div id="searchResults" class="search-results mt-2 overflow-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh]"></div>
         </form>
     </div>
     <div class="container flex items-center justify-between my-4 md:my-8 mx-2 md:mx-auto">
@@ -114,6 +115,7 @@
         <hr class="my-5">
         {{ $products->links() }}
     </div>
+    <x-related-keywords :seo="$seo" :route="'products'"/>
 @endsection
 
 @section('page-scripts')
@@ -147,4 +149,53 @@
             window.location.href = url;
         }
     </script>
+    <script>
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+
+            searchInput.addEventListener('input', async function () {
+                const inputValue = this.value.trim().toLowerCase();
+
+                // Check if inputValue is at least 3 characters
+                if (inputValue.length >= 3) {
+                    const searchURL = "{{ route('api.search.product', ['search' => '__input__']) }}".replace('__input__', inputValue);
+
+                    try {
+                        await fetch(searchURL)
+                            .then(response => response.json())
+                            .then(data => {
+                                // Clear previous results
+                                searchResults.innerHTML = '';
+                                // Handle no results
+                                if (data.length === 0) {
+                                    const noResults = document.createElement('p');
+                                    noResults.textContent = 'No results found';
+                                    searchResults.appendChild(noResults);
+                                    // styling padding and margin
+                                    noResults.style.padding = '8px';
+                                    noResults.style.margin = '0';
+                                    searchResults.style.display = 'block';
+                                    return;
+                                }
+
+                                // Filter and display results
+                                data.forEach(result => {
+                                    const resultElement = document.createElement('a');
+                                    resultElement.textContent = result;
+                                    resultElement.href = "{{ route('search', ['q' => '__slug__']) }}".replace('__slug__', result);
+                                    console.log(resultElement.href)
+
+                                    searchResults.appendChild(resultElement);
+                                    // Show or hide the result container based on the input length
+                                    searchResults.style.display = inputValue.length >= 3 ? 'block' : 'none';
+                                });
+                            });
+                    } catch (error) {
+                        console.error('Error fetching search results:', error);
+                    }
+                }else{
+                    searchResults.style.display = 'none';
+                }
+            });
+        </script>
 @endsection

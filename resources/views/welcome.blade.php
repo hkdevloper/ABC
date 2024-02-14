@@ -9,33 +9,6 @@
             border: none;
             --tw-ring-color: #fff;
         }
-
-        .search-results {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-top: none;
-            border-radius: 0 0 4px 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: none;
-            z-index: 1;
-        }
-
-        .search-results a {
-            display: block;
-            padding: 8px;
-            text-decoration: none;
-            color: #333;
-            transition: background-color 0.3s;
-            text-align: start;
-        }
-
-        .search-results a:hover {
-            background-color: #f0f0f0;
-        }
     </style>
 @endsection
 

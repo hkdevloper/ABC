@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Company;
+use App\Models\Deal;
 use App\Models\Event;
+use App\Models\Forum;
+use App\Models\Job;
 use App\Models\Product;
 use App\Models\RateReview;
 use App\Models\Seo;
@@ -15,16 +19,13 @@ class APIController extends Controller
     // search api for Company and Products
     public function searchCompanyProduct(Request $request)
     {
-        $request->validate([
-            'search' => 'required',
-        ]);
-        $search = $request->search;
+        $search = $this->searchModuleValidation($request);
         $searchList = [];
         $products = Product::where('is_approved', 1)->where('is_active', 1)->get();
-        foreach($products as $item){
+        foreach ($products as $item) {
             $seo = $item->seo;
-            foreach ($seo->meta_keywords as $keyword){
-                if (str_contains(strtolower($keyword), strtolower($search))){
+            foreach ($seo->meta_keywords as $keyword) {
+                if (str_contains(strtolower($keyword), strtolower($search))) {
                     $searchList[] = $keyword;
                 }
             }
@@ -33,8 +34,154 @@ class APIController extends Controller
         $searchList = array_unique($searchList);
 
         $data = [];
-        foreach ($searchList as $item){
+        foreach ($searchList as $item) {
             $data[] = $item;
+        }
+        return $data;
+    }
+
+    // Company Search Function
+    public function searchCompanies(Request $request)
+    {
+        $search = $this->searchModuleValidation($request);
+        $companies = Company::where('is_approved', 1)->where('is_active', 1)->get();
+        $matchedKeywords = [];
+
+        foreach ($companies as $company) {
+            $seo = $company->seo;
+            if ($seo) {
+                // Check if meta_keywords is valid JSON and not null
+                if (is_array($seo->meta_keywords)) {
+                    foreach ($seo->meta_keywords as $keyword) {
+                        // Trim each keyword to remove any leading/trailing spaces
+                        $keyword = trim($keyword);
+
+                        // Case-insensitive search
+                        if (str_contains(strtolower($keyword), strtolower($search))) {
+                            // Add the matched keyword to the list
+                            $matchedKeywords[] = $keyword;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Remove duplicate keywords
+        $searchList = array_unique($matchedKeywords);
+        $data = [];
+        foreach ($searchList as $item) {
+            $data[] = $item;
+        }
+        return $data;
+    }
+
+
+    // Deals Search Function
+    public function searchDeals(Request $request)
+    {
+        $search = $this->searchModuleValidation($request);
+        $deals = Deal::where('is_active', 1)->get();
+        $searchList = [];
+        foreach ($deals as $item) {
+            $seo = $item->seo;
+            foreach ($seo->meta_keywords as $keyword) {
+                if (str_contains(strtolower($keyword), strtolower($search))) {
+                    $searchList[] = $keyword;
+                }
+            }
+        }
+        // Unique the array
+        $searchList = array_unique($searchList);
+
+        $data = [];
+        foreach ($searchList as $item) {
+            $data[] = $item;
+        }
+        return $data;
+    }
+
+    // Events Search Function
+    public function searchEvents(Request $request)
+    {
+        $search = $this->searchModuleValidation($request);
+        $events = Event::where('is_approved', 1)->where('is_active', 1)->get();
+        $searchList = [];
+        foreach ($events as $item) {
+            $seo = $item->seo;
+            foreach ($seo->meta_keywords as $keyword) {
+                if (str_contains(strtolower($keyword), strtolower($search))) {
+                    $searchList[] = $keyword;
+                }
+            }
+        }
+        // Unique the array
+        $searchList = array_unique($searchList);
+
+        $data = [];
+        foreach ($searchList as $item) {
+            $data[] = $item;
+        }
+        return $data;
+    }
+
+    // Jobs Search Function
+    public function searchJobs(Request $request)
+    {
+        $search = $this->searchModuleValidation($request);
+        $jobs = Job::where('is_approved', 1)->where('is_active', 1)->get();
+        $searchList = [];
+        foreach ($jobs as $item) {
+            $seo = $item->seo;
+            foreach ($seo->meta_keywords as $keyword) {
+                if (str_contains(strtolower($keyword), strtolower($search))) {
+                    $searchList[] = $keyword;
+                }
+            }
+        }
+        // Unique the array
+        $searchList = array_unique($searchList);
+
+        $data = [];
+        foreach ($searchList as $item) {
+            $data[] = $item;
+        }
+        return $data;
+    }
+
+    // Blogs Search Function
+    public function searchBlogs(Request $request)
+    {
+        $search = $this->searchModuleValidation($request);
+        $blogs = Blog::where('is_approved', 1)->where('is_active', 1)->get();
+        $searchList = [];
+        foreach ($blogs as $item) {
+            $seo = $item->seo;
+            foreach ($seo->meta_keywords as $keyword) {
+                if (str_contains(strtolower($keyword), strtolower($search))) {
+                    $searchList[] = $keyword;
+                }
+            }
+        }
+        // Unique the array
+        $searchList = array_unique($searchList);
+
+        $data = [];
+        foreach ($searchList as $item) {
+            $data[] = $item;
+        }
+        return $data;
+    }
+
+    // Forums Search Function
+    public function searchForums(Request $request)
+    {
+        $search = $this->searchModuleValidation($request);
+        $forums = Forum::where('is_approved', 1)->where('is_active', 1)->get();
+        $forums->where('title', 'like', '%' . $search . '%');
+        // return only titles of forums
+        $data = [];
+        foreach ($forums as $forum) {
+            $data[] = $forum->title;
         }
         return $data;
     }
@@ -92,6 +239,18 @@ class APIController extends Controller
             return response()->json(['message' => $ex->getMessage()], 500);
         }
         return response()->json(['message' => 'Review submitted successfully', 'status' => 'success']);
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    private function searchModuleValidation(Request $request): string
+    {
+        $request->validate([
+            'search' => 'required',
+        ]);
+        return $request->search;
     }
 
 }

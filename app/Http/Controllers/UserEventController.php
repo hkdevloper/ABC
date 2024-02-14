@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -16,36 +17,40 @@ class UserEventController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'event');
+        $countryFilter = $request->input('country');
+
+        // Initialize the query to retrieve deals
+        $eventQuery = Event::select('events.*')
+            ->join('seo', 'events.seo_id', '=', 'seo.id')
+            ->where('events.is_active', 1)
+            ->where('events.is_approved', 1);
+
+        // Search Query
+        if ($request->has('q')) {
+            $search = $request->q;
+            $eventQuery->whereHas('seo', function ($seoQuery) use ($search) {
+                $seoQuery->whereJsonContains('meta_keywords', $search);
+            });
+        }
+        if (!empty($countryFilter)) {
+            $eventQuery->whereHas('user', function ($query) use ($countryFilter) {
+                $query->whereHas('company', function ($innerQuery) use ($countryFilter) {
+                    $innerQuery->whereHas('address', function ($innerInnerQuery) use ($countryFilter) {
+                        $innerInnerQuery->where('country_id', $countryFilter);
+                    });
+                });
+            });
+        }
         if ($request->has('category')) {
             // Get Category I'd from Category Name
             $cat_id = Category::where('name', $request->category)->first();
-            $events = Event::where('is_approved', 1)->where('category_id', $cat_id->id)->paginate(10);
+            $eventQuery->where('category_id', $cat_id->id);
         }
-        // Show All Companies
-        else if($request->has('show') && $request->show == 'all'){
-            $events = Event::where('is_approved', 1)->paginate(100);
-        }
-        // Show Active Companies
-        else if($request->has('filter') && $request->filter == 'active'){
-            $events = Event::where('is_approved', 1)->where('is_active', 1)->paginate(10);
-        }
-        // Show the Latest Companies
-        else if ($request->has('filter') && $request->filter == 'in-active') {
-            $events = Event::where('is_approved', 1)->where('is_active', 0)->paginate(10);
-        }
-        // Sort by name
-        else if ($request->has('sort') && $request->sort == 'name') {
-            $events = Event::where('is_approved', 1)->orderBy('name', 'asc')->paginate(10);
-        }
-        // Sort by Date
-        else if ($request->has('sort') && $request->sort == 'date') {
-            $events = Event::where('is_approved', 1)->orderBy('created_at', 'desc')->paginate(10);
-        }
-        else {
-            $events = Event::where('is_approved', 1)->where('is_active', 1)->paginate(10);
-        }
+        $events = $eventQuery->paginate(12);
         $categories = Category::where('type', 'event')->where('is_active', 1)->get();
-        $data = compact('events', 'categories');
+        $seo = Event::where('is_approved', 1)->where('is_active', 1)->inRandomOrder()->limit(6)->get()->pluck('seo');
+        $countries = Country::all();
+        $data = compact('events', 'categories', 'seo', 'countries');
         return view('pages.event.list')->with($data);
     }
 

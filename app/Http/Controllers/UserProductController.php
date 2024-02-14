@@ -38,8 +38,9 @@ class UserProductController extends Controller
 
         $products = $query->paginate(12);
         $categories = Category::where('type', 'product')->where('is_active', 1)->get();
-
-        $data = compact('products', 'categories');
+        // Get Random Companies for SEO
+        $seo = Product::where('is_approved', 1)->inRandomOrder()->limit(6)->get()->pluck('seo');
+        $data = compact('products', 'categories', 'seo');
         return view('pages.product.list')->with($data);
     }
 

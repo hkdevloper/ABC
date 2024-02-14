@@ -21,6 +21,17 @@ Route::get('/search', [APIController::class, 'searchCompanyProduct'])->name('api
 // Product Rate API
 Route::post('/{type}/rate', [APIController::class, 'productRate'])->name('api.product.rate');
 
+// Search Api For Module Pages
+Route::prefix('search')->group(function(){
+    Route::get('/company', [APIController::class, 'searchCompanies'])->name('api.search.company');
+    Route::get('/product', [APIController::class, 'searchCompanyProduct'])->name('api.search.product');
+    Route::get('/deals', [APIController::class, 'searchDeals'])->name('api.search.deals');
+    Route::get('/events', [APIController::class, 'searchEvents'])->name('api.search.events');
+    Route::get('/jobs', [APIController::class, 'searchJobs'])->name('api.search.jobs');
+    Route::get('/blogs', [APIController::class, 'searchBlogs'])->name('api.search.blogs');
+    Route::get('/forums', [APIController::class, 'searchForums'])->name('api.search.forums');
+});
+
 // Test Routes
 Route::get('/test', function (Request $request){
 

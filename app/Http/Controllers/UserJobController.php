@@ -22,7 +22,20 @@ class UserJobController extends Controller
         $categoryFilter = $request->input('category');
         $countryFilter = $request->input('country');
 
-        $jobsQuery = Job::where('is_approved', 1)->where('is_active', 1);
+        // Initialize the query to retrieve deals
+        $jobsQuery = Job::select('jobs.*', 'seo.title as seo_title')
+            ->join('seo', 'jobs.seo_id', '=', 'seo.id')
+            ->where('jobs.is_active', 1)
+            ->where('jobs.is_approved', 1);
+
+        // Search Query
+        if ($request->has('q')) {
+            $search = $request->q;
+            $jobsQuery->whereHas('seo', function ($seoQuery) use ($search) {
+                $seoQuery->whereJsonContains('seo.meta_keywords', $search); // Specify table alias 'seo'
+            });
+        }
+
 
         if (!empty($categoryFilter)) {
             // Get Category I'd from Category Name
@@ -41,16 +54,13 @@ class UserJobController extends Controller
             });
         }
 
-        if (!empty($query)) {
-            $jobsQuery->where(function ($innerQuery) use ($query) {
-                $innerQuery->where('title', 'like', '%' . $query . '%');
-            });
-        }
         $jobs = $jobsQuery->paginate(12);
         $categories = Category::where('type', 'job')->where('is_active', 1)->get();
         $countries = Country::all();
+        // Get a Random Job for SEO
+        $seo = Job::where('is_approved', 1)->inRandomOrder()->limit(6)->get()->pluck('seo');
 
-        $data = compact('jobs', 'categories', 'countries');
+        $data = compact('jobs', 'categories', 'countries', 'seo');
         return view('pages.job.list')->with($data);
     }
 

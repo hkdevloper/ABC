@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\classes\HelperFunctions;
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\Forum;
 use App\Models\ForumReply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Throwable;
 
 class UserForumController extends Controller
 {
@@ -21,6 +23,7 @@ class UserForumController extends Controller
         //$forums = Forum::where('is_approved', 1)->where('is_active', 1)->paginate(12);
         $query = $request->input('q');
         $categoryFilter = $request->input('category');
+        $countryFilter = $request->input('country');
 
         $forumQuery = Forum::where('is_approved', 1)->where('is_active', 1);
 
@@ -30,6 +33,16 @@ class UserForumController extends Controller
             $forumQuery->where('category_id', $catId->id);
         }
 
+        if (!empty($countryFilter)) {
+            $forumQuery->whereHas('user', function ($query) use ($countryFilter) {
+                $query->whereHas('company', function ($innerQuery) use ($countryFilter) {
+                    $innerQuery->whereHas('address', function ($innerInnerQuery) use ($countryFilter) {
+                        $innerInnerQuery->where('country_id', $countryFilter);
+                    });
+                });
+            });
+        }
+
         if (!empty($query)) {
             $forumQuery->where(function ($innerQuery) use ($query) {
                 $innerQuery->where('title', 'like', '%' . $query . '%');
@@ -37,7 +50,8 @@ class UserForumController extends Controller
         }
         $forums = $forumQuery->paginate(12);
         $categories = Category::where('type', 'forum')->where('is_active', 1)->get();
-        $data = compact('forums', 'categories');
+        $countries = Country::all();
+        $data = compact('forums', 'categories', 'countries');
         return view('pages.forum.list')->with($data);
     }
 
@@ -47,7 +61,7 @@ class UserForumController extends Controller
         // Forgot session
         Session::forget('menu');
         $forum = Forum::findOrFail($id);
-        if(!$forum){
+        if (!$forum) {
             return redirect()->back()->with('error', 'Forum not found');
         }
 
@@ -78,7 +92,7 @@ class UserForumController extends Controller
         $data->forum_id = $request->forum_id;
         try {
             $data->saveOrFail();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
         }
         return redirect()->back()->with('success', 'Forum answered successfully');
     }

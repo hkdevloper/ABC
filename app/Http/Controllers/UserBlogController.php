@@ -23,23 +23,32 @@ class UserBlogController extends Controller
         $categoryFilter = $request->input('category');
 
         $blogsQuery = Blog::where('is_approved', 1)->where('is_active', 1);
+        // Initialize the query to retrieve deals
+        $blogsQuery = Blog::select('blogs.*', 'seo.title as seo_title')
+            ->join('seo', 'blogs.seo_id', '=', 'seo.id')
+            ->where('blogs.is_active', 1)
+            ->where('blogs.is_approved', 1);
 
         if (!empty($categoryFilter)) {
-            // Get Category Id from Category Name
+            // Get Category I'd from Category Name
             $catId = Category::where('name', $categoryFilter)->first();
             $blogsQuery->where('category_id', $catId->id);
         }
 
-        if (!empty($query)) {
-            $blogsQuery->where(function ($innerQuery) use ($query) {
-                $innerQuery->where('title', 'like', '%' . $query . '%')
-                    ->orWhere('content', 'like', '%' . $query . '%');
+
+        // Search Query
+        if ($request->has('q')) {
+            $search = $request->q;
+            $blogsQuery->whereHas('seo', function ($seoQuery) use ($search) {
+                $seoQuery->whereJsonContains('meta_keywords', $search);
             });
         }
 
         $blogs = $blogsQuery->paginate(12);
         $categories = Category::where('type', 'blog')->where('is_active', 1)->get();
-        $data = compact('blogs', 'categories', 'query', 'categoryFilter');
+        // Get Random Companies for SEO
+        $seo = Blog::where('is_approved', 1)->inRandomOrder()->limit(6)->get()->pluck('seo');
+        $data = compact('blogs', 'categories', 'query', 'categoryFilter', 'seo');
 
         return view('pages.blogs.list')->with($data);
     }
