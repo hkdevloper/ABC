@@ -65,7 +65,7 @@
 </script>
 <script>
     ScrollReveal().reveal('.reveal', {
-        delay: 300,    // Delay in milliseconds
+        delay: 100,    // Delay in milliseconds
         distance: '30px',  // Animation distance
         origin: 'bottom',  // Animation origin (top, right, bottom, left)
         easing: 'ease-in-out', // Animation easing
