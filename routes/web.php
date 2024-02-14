@@ -35,8 +35,12 @@ use Illuminate\Http\Request;
 */
 Route::prefix('test')->group(function () {
     Route::get('/', function () {
-        $item = Product::find(1);
-        return $item->getReviews();
+        $data = Product::with('seo')->where('is_active', 1)->where('is_approved', 1)->get();
+        $seo = [];
+        foreach ($data as $item) {
+            $seo[] = $item->seo;
+        }
+        return $seo;
     });
 });
 
@@ -262,15 +266,26 @@ Route::post('comment', function (Request $request) {
 Route::get('/search', function (Request $request) {
     $search = $request->q;
     $products = DB::table('products as p')
-        ->join('seo as s', 'p.id', '=', 's.id')
+        ->join('seo as s', 'p.seo_id', '=', 's.id')
         ->join('categories as c', 'p.category_id', '=', 'c.id')
-        ->select('p.*', 'c.name as category_name')
+        ->select('p.*', 'c.name as category_name', 's.meta_keywords')
         ->where('p.is_approved', 1)
         ->where('p.is_active', 1)
         ->where('s.meta_keywords', 'LIKE', '%' . $search . '%')
         ->paginate(10);
+    // Get Related SEO Keywords
+    $seo = [];
+    foreach ($products as $product) {
+        foreach (json_decode($product->meta_keywords) as $keyword) {
+            $seo[] = $keyword;
+        }
+    }
 
-    $data = compact('products');
+    // Get Up to 10 Related SEO Keywords
+    $seo = array_unique($seo);
+    $seo = array_slice($seo, 0, 6);
+
+    $data = compact('products', 'seo');
     return view('search')->with($data);
 })->name('search');
 
