@@ -90,6 +90,9 @@
                     console.error('Error fetching search results:', error);
                 }
             }
+            else{
+                searchResults.style.display = 'none';
+            }
         });
     </script>
 @endsection
