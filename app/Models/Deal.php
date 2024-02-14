@@ -13,6 +13,8 @@ class Deal extends Model
     protected $table = 'deals';
     protected $primaryKey = 'id';
     protected $fillable = [
+        'thumbnail',
+        'gallery',
         'user_id',
         'category_id',
         'seo_id',
@@ -21,19 +23,15 @@ class Deal extends Model
         'title',
         'slug',
         'description',
-        'offer_start_date',
-        'offer_end_date',
         'price',
         'discount_type',
         'discount_value',
-        'discount_code',
         'terms_and_conditions',
     ];
     protected $casts = [
-        'offer_start_date' => 'datetime',
-        'offer_end_date' => 'datetime',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
+        'gallery' => 'array',
         'description' => CleanHtml::class
     ];
 

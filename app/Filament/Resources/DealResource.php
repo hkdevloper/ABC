@@ -41,6 +41,7 @@ class DealResource extends Resource
                     ->label('Is Featured')
                     ->required(),
                 Select::make('user_id')
+                    ->native(false)
                     ->label('Select User')
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
@@ -70,14 +71,13 @@ class DealResource extends Resource
                     ->prefix('$'),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
-                DateTimePicker::make('offer_start_date')->label('Offer Start'),
-                DateTimePicker::make('offer_end_date')->label('Offer End'),
 
                 Section::make('Discount Details')
                 ->schema([
                     Select::make('discount_type')
                         ->label('Select Discount Type')
                         ->required()
+                        ->native(false)
                         ->options([
                             'percentage' => 'Percentage',
                             'fixed' => 'Fixed',
@@ -87,11 +87,7 @@ class DealResource extends Resource
                         ->label('Discount Value')
                         ->required()
                         ->maxLength(191),
-                    TextInput::make('discount_code')
-                        ->label('Discount Code')
-                        ->required()
-                        ->maxLength(191),
-                ])->columns(3),
+                ])->columns(),
                 Forms\Components\RichEditor::make('terms_and_conditions')
                     ->columnSpanFull(),
                 Section::make('SEO Details')
@@ -126,28 +122,17 @@ class DealResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->label('Title')
                     ->searchable(),
-                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
-                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('offer_start_date')
-                    ->label('Offer Start')
-                    ->dateTime('M d, Y h:i A')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('offer_end_date')
-                    ->label('Offer End')
-                    ->dateTime('M d, Y h:i A')
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('discount_type')
                     ->label('Type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('discount_value')
                     ->label('Value')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('discount_code')
-                    ->label('Code')
-                    ->searchable(),
+                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
+                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
+                Tables\Columns\TextColumn::make('slug')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
