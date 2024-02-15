@@ -76,6 +76,17 @@
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             @forelse($deals as $item)
                 <div class="reveal flex flex-col items-center justify-center bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 w-[90vw] md:w-full">
+                    <!-- Discount ribbon -->
+                    @if($item->discount_type !== null && $item->discount_value !== null)
+                        <div class="absolute top-0 left-0 bg-red-500 text-white p-1">
+                            @if($item->discount_type == 'fixed')
+                                <p class="text-xs font-bold">{{ $item->discount_value }}₹ off</p>
+                            @endif
+                            @if($item->discount_type == 'percentage')
+                                <p class="text-xs font-bold">{{ $item->discount_value }}% off</p>
+                            @endif
+                        </div>
+                    @endif
                     <a href="{{ route('view.deal', [$item->slug]) }}"
                        class="h-100 mx-auto p-2">
                         <img alt="deal thumbnail" src="{{ url('storage/' . $item->thumbnail) }}"
