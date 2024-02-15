@@ -17,7 +17,7 @@
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-center">
             <div class="w-full md:w-1/2 md:pr-4 mb-4 md:mb-0 flex items-center justify-center">
                 <img alt="" src="{{url('storage/', $company->logo)}}"
-                     class="company-logo w-32 h-32 object-contain rounded-full mx-auto md:mx-0 my-4">
+                     class="company-logo w-16 h-16 md:w-32 md:h-32 object-contain rounded-full mx-auto md:mx-0 my-4">
                 <div class="w-full md:w-2/3 mx-2 md:mx-10">
                     <div class="flex items-center justify-start mb-2">
                         @if($company->is_featured)
@@ -43,20 +43,16 @@
                         {{ $company->address->zip_code}}
                     </span>
                     </p>
-                    <div class="text-sm text-gray-500 flex flex-col md:flex-row items-center justify-between">
-                        <p class="">
-                        <span class="text-sm text-gray-500">
-                            Business Type:
-                        </span>
-                            <span class="text-sm text-gray-500 font-semibold">{{ $company->business_type }}</span>
-                        </p>
-                        <p class="mx-2 md:mx-5">
+                    <p class="text-center md:text-start">
                         <span class="text-sm text-gray-500">
                             <i class='bx bx-box text-purple-500 mr-1'></i>
                         </span>
-                            <span class="text-sm text-gray-500 font-semibold">{{ $company->category->name }}</span>
-                        </p>
-                    </div>
+                        <span class="text-sm text-gray-500 font-semibold">{{ $company->category->name }}</span>
+                    </p>
+                    <p class="text-center md:text-start">
+                        <span class="text-sm text-gray-500">Type:</span>
+                        <span class="text-sm text-gray-500 font-semibold">{{ $company->business_type }}</span>
+                    </p>
                     <div class="flex items-center justify-center md:hidden">
                         <div class="flex flex-col items-center justify-center mx-2">
                             <h1 class="text-sm text-gray-500">Reviews</h1>
@@ -76,26 +72,28 @@
                 </div>
             </div>
             <div class="w-full md:w-1/2 mt-4 md:mt-0 flex flex-col items-center justify-center md:items-end">
-                <div
-                    class="flex items-center justify-center md:justify-end mb-4 overflow-x-auto md:overflow-x-visible md:mx-2">
-                    @if($user->isCompanyBookmarked($company))
-                        <a href="{{ route('remove.from.bookmark', ['company_id' => $company->id]) }}"
-                           class="m-1 bg-purple-400 hover:bg-purple-500 px-2 py-1 text-sm rounded text-white flex-shrink-0">
-                            <i class="fas fa-bookmark text-white"></i>&nbsp; Bookmarks
-                        </a>
-                    @else
-                        <a href="{{ route('add.to.bookmark', ['company_id' => $company->id]) }}"
-                           class="m-1 bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white flex-shrink-0">
-                            <i class="fas fa-bookmark text-purple-500"></i>&nbsp; Bookmarks
-                        </a>
-                    @endif
+                <div class="flex items-center justify-center">
+                    <div class="flex items-center justify-center md:justify-end overflow-x-auto md:overflow-x-visible md:mx-2">
+                        @if($user->isCompanyBookmarked($company))
+                            <a href="{{ route('remove.from.bookmark', ['company_id' => $company->id]) }}"
+                               class="bg-purple-400 hover:bg-purple-500 px-2 py-1 text-sm rounded text-white mr-1">
+                                <i class="fas fa-bookmark text-white"></i>&nbsp; Bookmarks
+                            </a>
+                        @else
+                            <a href="{{ route('add.to.bookmark', ['company_id' => $company->id]) }}"
+                               class="bg-gray-300 hover:bg-purple-400 px-2 py-1 text-sm rounded hover:text-white mr-1">
+                                <i class="fas fa-bookmark text-purple-500"></i>&nbsp; Bookmarks
+                            </a>
+                        @endif
+                    </div>
+                    <a href="{{route('direct-message', ['company_id' => $company->id])}}"
+                       class="bg-purple-500 hover:bg-purple-900 px-2 py-1 text-sm text-white rounded">
+                        Direct message
+                    </a>
                 </div>
-                <a href="{{route('direct-message', ['company_id' => $company->id])}}"
-                    class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded w-full md:w-auto">
-                    Direct message
-                </a>
-                <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn1" class="text-blue-950 px-2 text-xs text-right block md:hidden"
-                        style="height: 30px;">
+                <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn1"
+                   class="text-blue-950 px-2 text-xs text-right block md:hidden mt-3"
+                   style="height: 30px;">
                     Your Company?
                     <span class="text-sm text-blue-950 font-semibold hover:underline">Claim Now</span>
                 </a>
@@ -103,7 +101,7 @@
         </div>
     </section>
 
-    <div class="container mx-auto">
+    <div class="container mx-auto w-[95vw]">
         <!-- Company Details Section -->
         <x-bladewind.tab-group name="company-info">
             <x-slot name="headings">
@@ -111,8 +109,9 @@
                 <x-custom-tab-heading name="product" label="Products"/>
                 <x-custom-tab-heading name="contact" label="Contact"/>
                 <x-custom-tab-heading name="rate" label="Rate & Reviews" hidden="true" class="hidden md:block"/>
-                <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn" class="bg-blue-100 text-blue-950 px-2 text-xs text-right hidden md:block"
-                        style="height: 30px;">
+                <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn"
+                   class="bg-blue-100 text-blue-950 px-2 text-xs text-right hidden md:block"
+                   style="height: 30px;">
                     Your Company?
                     <span class="text-sm text-blue-950 font-semibold">Claim Now</span>
                 </a>
@@ -520,7 +519,7 @@
                 </ul>
             </div>
             <a href="{{route('view.claim.company', ['company_id' => $company->id])}}"
-                class="m-4 bg-purple-500 hover:bg-purple-700 px-4 py-2 text-base text-white rounded-full focus:outline-none focus:shadow-outline-purple">
+               class="m-4 bg-purple-500 hover:bg-purple-700 px-4 py-2 text-base text-white rounded-full focus:outline-none focus:shadow-outline-purple">
                 Claim Now
             </a>
         </section>

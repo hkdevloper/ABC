@@ -17,29 +17,59 @@
             max-width: 100%;
             margin: 0 auto;
         }
+
+        .fixed-img {
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+        }
+
+        pre{
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px auto;
+            text-wrap: pretty;
+        }
+
+        code {
+            background-color: #f5f5f5;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        #content img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #content p{
+            margin: 10px 0;
+            width: 90vw;
+            text-wrap: pretty;
+        }
     </style>
 @endsection
 @section('content')
     <x-user.bread-crumb :data="['Home', 'Events', $forum->title]"/>
-    <div class="container py-6 mx-auto flex flex-wrap">
-        <div class="w-full">
-            <div class="bg-white card p-6">
-                <div class="flex items-center justify-between mb-4">
+    <div class="container py-6 mx-auto flex flex-wrap items-center justify-center">
+        <div class="w-[95vw] md:w-full mx-auto">
+            <div class="bg-white card md:p-6 p-2">
+                <div class="flex md:flex-row flex-col md:items-center md:justify-between mb-4">
                     <div class="flex items-center">
                         <img src="https://via.placeholder.com/100x100" alt="User Avatar"
-                             class="w-10 h-10 rounded-full mr-4">
+                             class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-2 md:mr-4">
                         <div>
-                            <h2 class="text-lg font-semibold text-gray-800">{{$forum->user->name}}</h2>
-                            <p class="text-gray-500 text-sm">Posted
-                                on {{date_format($forum->created_at, 'd M y')}}</p>
+                            <h2 class="text-base md:text-lg font-semibold text-gray-800">{{$forum->user->name}}</h2>
+                            <p class="text-gray-500 text-xs md:text-sm">Posted on {{date_format($forum->created_at, 'd M y')}}</p>
                         </div>
                     </div>
-                    <div>
-                        <span class="text-gray-600 text-sm">Category: {{$forum->category->name}}</span>
+                    <div class="hidden md:block">
+                        <span class="text-gray-600 text-xs md:text-sm">Category: {{$forum->category->name}}</span>
                     </div>
                 </div>
-                <h1 class="text-xl font-semibold text-gray-900 mb-4">{{$forum->title}}</h1>
-                <p class="text-gray-700">{!! $forum->body !!}</p>
+                <h1 class="text-lg md:text-xl font-semibold text-gray-900 mb-4">{{$forum->title}}</h1>
+                <div id="content" class="text-xs md:text-sm text-gray-700">{!! $forum->body !!}</div>
                 <hr class="my-4 border-t-2 border-gray-200">
                 <div class="flex justify-between items-center">
                     <div>
@@ -82,28 +112,25 @@
             </form>
         </div>
         <div class="bg-white mt-4 p-2">
-            <h2 class="text-xl font-semibold text-gray-900 mb-4">Answers</h2>
+            <h2 class="text-lg md:text-xl font-semibold text-gray-900 mb-4">Answers</h2>
             @forelse($forum->forumReplies as $ans)
-                <div class="mb-6 p-4 card card-hovered bg-white relative">
+                <div class="mb-3 md:mb-6 p-2 md:p-4 card card-hovered bg-white relative">
                     <!-- User Details (Left) -->
                     <div class="flex items-start mb-2">
                         <img src="https://via.placeholder.com/100x100" alt="User Avatar"
-                             class="w-10 h-10 rounded-full mr-4">
+                             class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-2 md:mr-4">
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-800">{{$ans->user->name}}</h3>
-                            <p class="text-gray-500 text-sm">Answered
-                                on {{date_format($ans->created_at, 'd M y')}}</p>
+                            <h3 class="text-base md:text-lg font-semibold text-gray-800">{{$ans->user->name}}</h3>
+                            <p class="text-gray-500 text-xs md:text-sm">Answered on {{date_format($ans->created_at, 'd M y')}}</p>
                             <!-- Answer Text -->
-                            <p class="text-gray-700">{!! $ans->body !!}</p>
+                            <div class="text-sm text-gray-700 mt-3">{!! $ans->body !!}</div>
                         </div>
                     </div>
                 </div>
             @empty
-                <div class="p-6 card bg-white mb-5">
+                <div class="md:p-2 p-6 card bg-white mb-5">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">No Answers Yet</h2>
-                    <p class="text-gray-700">There are currently no answers to this question. Be
-                        the
-                        first to provide an answer!</p>
+                    <p class="text-gray-700">There are currently no answers to this question. Be the first to provide an answer!</p>
                 </div>
             @endforelse
 
@@ -112,6 +139,13 @@
 @endsection
 
 @section('page-scripts')
+    <script>
+        let content = document.getElementById('content');
+        let images = content.getElementsByTagName('img');
+        for (let i = 0; i < images.length; i++) {
+            images[i].classList.add('fixed-img');
+        }
+    </script>
     <script>
         function showAnswerForm() {
             let checkAuth = '{{auth()->id()}}';

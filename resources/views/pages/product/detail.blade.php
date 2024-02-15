@@ -51,7 +51,7 @@
                     </span>
                     <span class="text-xs md:text-sm text-gray-500">Published by {{ $product->company->name }}</span>
                     <span class="text-xs md:text-sm text-gray-500">Published on {{ $product->created_at->format('d M Y') }} ({{ $product->updated_at->diffForHumans() }})</span>
-                    <a href="{{route('view.company', [$product->company->slug])}}" class="mt-1 block md:hidden text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue text-xs">
+                    <a href="{{route('view.company', [$product->company->slug])}}" class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-1 px-2 text-center mt-2 rounded-full hover:rounded-full transition-all duration-300 ease-in-out md:w-auto w-full md:hidden">
                         Contact Now
                         <i class='bx bx-link-external ml-2'></i>
                     </a>
@@ -109,7 +109,7 @@
                     <div class="relative bottom-0 md:static right-1 mb-2 md:w-[calc(80%-1rem)] mt-4"
                          style="width: max-content;">
                         <a href="{{ route('view.product', [$product->slug]) }}"
-                           class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-2 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                           class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-2 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base ">
                             <span class="ml-1">Enquire Now &nbsp;</span>
                             <i class='bx bx-link-external mr-2'></i>
                         </a>

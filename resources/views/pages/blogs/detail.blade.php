@@ -5,11 +5,10 @@
     <div class="container py-6 mx-auto flex flex-wrap">
         <div class="w-full mb-10 lg:mb-0 overflow-hidden px-2">
             <div class="my-2 md:px-6">
-                <img src="{{url('storage/' . $blog->thumbnail)}}"
-                     class="mb-6 w-full rounded-lg shadow-lg dark:shadow-black/20" alt="image"/>
+                <img src="{{url('storage/' . $blog->thumbnail)}}" class="mb-6 w-full rounded-lg shadow-lg dark:shadow-black/20" alt="image"/>
                 <div class="mb-6 flex items-center justify-start">
                     <img src="{{ url('storage/' . $blog->user->company->logo) }}"
-                         class="mr-2 w-[80px] h-[80px] rounded-full" alt="avatar" loading="lazy"/>
+                         class="mr-2 w-10 h-10 md:w-[80px] md:h-[80px] rounded" alt="avatar" loading="lazy"/>
                     <div>
                         <span class="text-sm md:text-base"> Published <u>{{$blog->created_at->diffForHumans()}}</u> by </span>
                         <a href="{{ route('view.company', [$blog->user->company->slug]) }}"
@@ -17,7 +16,7 @@
                     </div>
                 </div>
                 <h1 class="mb-6 text-3xl font-bold">{{$blog->title}}</h1>
-                <p>{!! $blog->content !!}</p>
+                <div class="text-sm">{!! $blog->content !!}</div>
             </div>
             <!-- Leave Reply -->
             <section class="my-8">
@@ -86,7 +85,7 @@
                     <p class="text-gray-500 text-center mt-10">No comments found.</p>
                 @endforelse
             </section>
-            <!-- Related Products Section -->
+            <!-- Related Blogs Section -->
             <section class="mt-8 p-1">
                 <h2 class="text-2xl font-semibold mb-5">Related Blogs</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

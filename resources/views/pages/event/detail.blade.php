@@ -5,9 +5,9 @@
 @section('content')
     <x-user.bread-crumb :data="['Home', 'Events', $event->title]"/>
     <div class="container py-6 mx-auto flex flex-wrap">
-        <div class="">
-            <img src="{{url('storage/' . $event->thumbnail)}}" alt="Event Thumbnail" style="width: 100%; height: 400px;"
-                 class="mb-6 rounded-lg shadow-lg object-contain">
+        <div class="w-[95vw] md:w-auto mx-auto">
+            <img src="{{url('storage/' . $event->thumbnail)}}" alt="Event Thumbnail"
+                 class="mb-6 rounded-lg shadow-lg object-contain w-100 h-40 md:h-80">
             <h1 class="text-3xl font-semibold mb-4">{{$event->title}}</h1>
             <p class="text-gray-500 mb-4">on {{ date('d M Y h:i a', (int)$event->start) }} Onwards</p>
             <p class="text-gray-500 mb-4">Organized by {{$event->user->name}}</p>
