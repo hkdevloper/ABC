@@ -2,8 +2,6 @@
 
 @section('head')
     <style>
-        /* Existing styles remain unchanged */
-
         /* New styles for header */
         .header {
             padding: 1rem;
@@ -96,38 +94,6 @@
             </select>
         </div>
     </div>
-    <script>
-        function doSort() {
-            let sortValue = document.getElementById('product-sort-by').value;
-            let categoryValue = document.getElementById('product-category-filter').value;
-            applyFilters(categoryValue, sortValue);
-        }
-
-        function doFilter() {
-            let categoryValue = document.getElementById('product-category-filter').value;
-            let sortValue = document.getElementById('product-sort-by').value;
-            applyFilters(categoryValue, sortValue);
-        }
-
-        function applyFilters(category, sort) {
-            let url = '{{ route('company') }}';
-            let params = [];
-
-            if (category !== 'all') {
-                params.push('category=' + category);
-            }
-
-            if (sort !== 'default') {
-                params.push('sort=' + sort);
-            }
-
-            if (params.length > 0) {
-                url += '?' + params.join('&');
-            }
-
-            window.location.href = url;
-        }
-    </script>
     <div class="container py-2 mx-auto">
         <!-- Existing content remains unchanged -->
         @forelse($companies as $company)
@@ -214,6 +180,38 @@
 @endsection
 
 @section('page-scripts')
+    <script>
+        function doSort() {
+            let sortValue = document.getElementById('product-sort-by').value;
+            let categoryValue = document.getElementById('product-category-filter').value;
+            applyFilters(categoryValue, sortValue);
+        }
+
+        function doFilter() {
+            let categoryValue = document.getElementById('product-category-filter').value;
+            let sortValue = document.getElementById('product-sort-by').value;
+            applyFilters(categoryValue, sortValue);
+        }
+
+        function applyFilters(category, sort) {
+            let url = '{{ route('company') }}';
+            let params = [];
+
+            if (category !== 'all') {
+                params.push('category=' + category);
+            }
+
+            if (sort !== 'default') {
+                params.push('sort=' + sort);
+            }
+
+            if (params.length > 0) {
+                url += '?' + params.join('&');
+            }
+
+            window.location.href = url;
+        }
+    </script>
     <script>
         const searchInput = document.getElementById('searchInput');
         const searchResults = document.getElementById('searchResults');

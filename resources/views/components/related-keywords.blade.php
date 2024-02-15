@@ -1,7 +1,7 @@
 @props(['seo'])
 @props(['route'])
 
-<div class="container bg-white shadow-md rounded-lg py-4 mt-5">
+<div class="container bg-white shadow-md rounded-lg py-4 mt-5 mx-auto w-[90vw]">
     <div class="mx-auto px-4">
         <h2 class="text-lg font-semibold mb-4">Related Keywords:</h2>
         <div class="flex flex-wrap gap-2">

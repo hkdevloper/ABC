@@ -378,20 +378,22 @@
                                     </div>
                                     <a href="{{route('view.event', [$event->slug])}}" target="_new"
                                        class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
-                                    <div class="flex items-center justify-between mt-4">
-                                        <div class="flex items-center">
-                                            <i class='bx bx-calendar text-gray-600'></i>
-                                            @php
-                                                $date = \Carbon\Carbon::parse($event->start);
-                                                $date = $date->format('M d, Y');
-                                            @endphp
-                                            <span class="text-gray-600 text-sm ml-1">{{$date}}</span>
+                                    <div class="md:block flex items-center justify-between">
+                                        <div class="flex items-center justify-between mt-4">
+                                            <div class="flex items-center">
+                                                <i class='bx bx-calendar text-gray-600'></i>
+                                                @php
+                                                    $date = \Carbon\Carbon::parse($event->start);
+                                                    $date = $date->format('M d, Y');
+                                                @endphp
+                                                <span class="text-gray-600 text-sm ml-1">{{$date}}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="flex items-center justify-between mt-4">
-                                        <div class="flex items-center">
-                                            <i class='bx bx-current-location text-gray-600'></i>
-                                            <span class="text-gray-600 text-sm ml-1">{{$event->address->country->name}}</span>
+                                        <div class="flex items-center justify-between mt-4">
+                                            <div class="flex items-center">
+                                                <i class='bx bx-current-location text-gray-600'></i>
+                                                <span class="text-gray-600 text-sm ml-1">{{$event->address->country->name}}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
