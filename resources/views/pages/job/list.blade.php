@@ -21,14 +21,13 @@
             <div id="searchResults" class="search-results mt-2 overflow-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh]"></div>
         </form>
     </div>
-{{--    <x-user.bread-crumb :data="['Home', 'Job', 'List']"/>--}}
-    <div class="container mx-2 md:mx-auto flex items-center justify-between my-8">
+    <div class="container flex items-center justify-between my-4 mx-2 md:mx-auto w-[95vw]">
         {{-- Category Filter--}}
-        <div class="">
-            <label for="product-category-filter" class="text-gray-500 text-lg">
+        <div class="flex items-center justify-between mb-4 md:mb-0 w-[125px]">
+            <label for="job-category-filter" class="text-gray-500 text-lg hidden md:block">
                 <i class='bx bx-filter-alt w-5 h-5'></i>
             </label>
-            <select name="category" id="product-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]" onchange="doFilter()">
+            <select name="category" id="job-category-filter" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[125px]" onchange="doFilter()">
                 <option value="all" selected>All</option>
                 @foreach($categories as $category)
                     @if(request()->get('category') == $category->name)
@@ -39,19 +38,18 @@
                 @endforeach
             </select>
         </div>
-        {{-- Total Products --}}
-        <div class="mx-4 md:mx-0">
+        <div class="hidden sm:block text-center md:text-left mb-4 md:mb-0">
             <p class="text-xs md:text-base">
                 Showing {{ $jobs->firstItem() }} - {{ $jobs->lastItem() }} of {{ $jobs->total() }} results
             </p>
         </div>
         {{-- Sort By --}}
-        <div class="overflow-hidden">
-            <label for="job-country" class="text-gray-500 text-lg">
+        <div class="flex items-center justify-between mb-4 md:mb-0 w-[125px]">
+            <label for="job-country" class="text-gray-500 text-lg hidden md:block">
                 <i class='bx bx-filter w-5 h-5 text-lg'></i>
             </label>
             <select name="sort" id="job-country"
-                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[125px]"
                     onchange="doSort()">
                 <option value="" @if(!request()->get('country')) selected @endif>By Country</option>
                 @forelse($countries as $country)
@@ -102,14 +100,14 @@
 @section('page-scripts')
     <script>
         function doFilter() {
-            let categoryValue = document.getElementById('product-category-filter').value;
+            let categoryValue = document.getElementById('job-category-filter').value;
             let sortValue = document.getElementById('job-country').value;
             applyFilters(categoryValue, sortValue);
         }
 
         function doSort() {
             let sortValue = document.getElementById('job-country').value;
-            let categoryValue = document.getElementById('product-category-filter').value;
+            let categoryValue = document.getElementById('job-category-filter').value;
             applyFilters(categoryValue, sortValue);
         }
 

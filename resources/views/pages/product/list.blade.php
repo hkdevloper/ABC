@@ -21,14 +21,14 @@
             <div id="searchResults" class="search-results mt-2 overflow-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh]"></div>
         </form>
     </div>
-    <div class="container flex items-center justify-between my-4 md:my-8 mx-2 md:mx-auto">
+    <div class="container flex items-center justify-between my-4 mx-2 md:mx-auto w-[95vw]">
         {{-- Category Filter--}}
-        <div class="overflow-hidden">
-            <label for="product-category-filter" class="text-gray-500 text-lg">
+        <div class="flex items-center justify-between mb-4 md:mb-0">
+            <label for="product-category-filter" class="text-gray-500 text-lg hidden md:block">
                 <i class='bx bx-filter-alt w-5 h-5'></i>
             </label>
             <select name="category" id="product-category-filter"
-                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[125px]"
                     onchange="doFilter()">
                 <option value="all" selected>All</option>
                 @foreach($categories as $category)
@@ -41,20 +41,20 @@
             </select>
         </div>
         {{-- Total Products --}}
-        <div class="hidden md:block">
+        <div class="hidden sm:block text-center md:text-left mb-4 md:mb-0">
             <p>
                 Showing {{ $products->firstItem() }} - {{ $products->lastItem() }} of {{ $products->total() }} results
             </p>
         </div>
         {{-- Sort By --}}
-        <div class="overflow-hidden">
-            <label for="product-sort-by" class="text-gray-500 text-lg">
+        <div class="flex items-center justify-between mb-4 md:mb-0">
+            <label for="product-sort-by" class="text-gray-500 text-lg hidden md:block">
                 <i class='bx bx-filter w-5 h-5 text-lg'></i>
             </label>
             <select name="sort" id="product-sort-by"
-                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[125px]"
                     onchange="doSort()">
-                <option value="" @if(!request()->get('sort')) selected @endif>Select sorting</option>
+                <option value="" @if(!request()->get('sort')) selected @endif>Sorting</option>
                 <option value="name" @if(request()->get('sort') == 'name') selected @endif>Name</option>
                 <option value="price-low-to-high" @if(request()->get('sort') == 'price-low-to-high') selected @endif>
                     Price low to high
@@ -64,11 +64,6 @@
                 </option>
             </select>
         </div>
-    </div>
-    <div class="block w-full my-2 md:hidden">
-        <p class="text-center">
-            Showing {{ $products->firstItem() }} - {{ $products->lastItem() }} of {{ $products->total() }} results
-        </p>
     </div>
     <div class="container">
         <!-- Product List -->

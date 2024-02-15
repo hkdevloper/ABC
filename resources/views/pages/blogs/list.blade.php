@@ -23,12 +23,12 @@
     </div>
     <div class="container flex items-center justify-between my-4 md:my-8 mx-2 md:mx-auto">
         {{-- Category Filter--}}
-        <div class="overflow-hidden">
-            <label for="product-category-filter" class="text-gray-500 text-lg">
+        <div class="flex items-center justify-between md:mb-4 md:mb-0">
+            <label for="product-category-filter" class="text-gray-500 text-lg hidden md:block">
                 <i class='bx bx-filter-alt w-5 h-5'></i>
             </label>
             <select name="category" id="product-category-filter"
-                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[125px]"
                     onchange="doFilter()">
                 <option value="all" selected>All</option>
                 @foreach($categories as $category)
@@ -41,38 +41,12 @@
             </select>
         </div>
         {{-- Total blogs --}}
-        <div class="hidden md:block">
-            <p>
+        <div class="flex items-center justify-center">
+            <p class="text-sm md:text-base">
                 Showing {{ $blogs->firstItem() }} - {{ $blogs->lastItem() }} of {{ $blogs->total() }} results
             </p>
         </div>
     </div>
-    <div class="block w-full my-2 md:hidden">
-        <p class="text-center">
-            Showing {{ $blogs->firstItem() }} - {{ $blogs->lastItem() }} of {{ $blogs->total() }} results
-        </p>
-    </div>
-    <script>
-        function doFilter() {
-            let categoryValue = document.getElementById('product-category-filter').value;
-            applyFilters(categoryValue);
-        }
-
-        function applyFilters(category) {
-            let url = '{{ route('blogs') }}';
-            let params = [];
-
-            if (category !== 'all') {
-                params.push('category=' + category);
-            }
-
-            if (params.length > 0) {
-                url += '?' + params.join('&');
-            }
-
-            window.location.href = url;
-        }
-    </script>
     <div class="container">
         <!-- Blog List -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -104,6 +78,27 @@
 @endsection
 
 @section('page-scripts')
+    <script>
+        function doFilter() {
+            let categoryValue = document.getElementById('product-category-filter').value;
+            applyFilters(categoryValue);
+        }
+
+        function applyFilters(category) {
+            let url = '{{ route('blogs') }}';
+            let params = [];
+
+            if (category !== 'all') {
+                params.push('category=' + category);
+            }
+
+            if (params.length > 0) {
+                url += '?' + params.join('&');
+            }
+
+            window.location.href = url;
+        }
+    </script>
     <script>
         const searchInput = document.getElementById('searchInput');
         const searchResults = document.getElementById('searchResults');

@@ -24,14 +24,14 @@
             <div id="searchResults" class="search-results mt-2 overflow-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh]"></div>
         </form>
     </div>
-    <div class="container flex items-center justify-between my-4 md:my-8 mx-2 md:mx-auto">
+    <div class="container flex items-center justify-between my-4 mx-2 md:mx-auto w-[95vw]">
         {{-- Category Filter--}}
-        <div class="overflow-hidden">
-            <label for="product-category-filter" class="text-gray-500 text-lg">
+        <div class="flex items-center justify-between md:mb-0 w-[125px]">
+            <label for="product-category-filter" class="text-gray-500 text-lg hidden md:block">
                 <i class='bx bx-filter-alt w-5 h-5'></i>
             </label>
             <select name="category" id="product-category-filter"
-                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[125px]"
                     onchange="doFilter()">
                 <option value="all" selected>All</option>
                 @foreach($categories as $category)
@@ -44,18 +44,18 @@
             </select>
         </div>
         {{-- Total Products --}}
-        <div class="hidden md:block">
+        <div class="hidden sm:block text-center md:text-left mb-4 md:mb-0">
             <p>
                 Showing {{ $forums->firstItem() }} - {{ $forums->lastItem() }} of {{ $forums->total() }} results
             </p>
         </div>
         {{-- Sort By --}}
-        <div class="overflow-hidden">
-            <label for="job-country" class="text-gray-500 text-lg">
+        <div class="flex items-center justify-between md:mb-0 w-[125px]">
+            <label for="job-country" class="text-gray-500 text-lg hidden md:block">
                 <i class='bx bx-filter w-5 h-5 text-lg'></i>
             </label>
             <select name="sort" id="job-country"
-                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[125px]"
                     onchange="doSort()">
                 <option value="" @if(!request()->get('country')) selected @endif>By Country</option>
                 @forelse($countries as $country)
@@ -70,56 +70,48 @@
             </select>
         </div>
     </div>
-    <div class="container py-6 mx-auto">
-        <div class="w-full">
-            <!-- Forum list Item -->
-            @forelse($forums as $forum)
-                <div class="reveal bg-white card p-6 flex items-start w-full mb-5">
-                    <img src="https://via.placeholder.com/100x100" alt="User Avatar"
-                         class="w-10 h-10 rounded-full mr-4">
-                    <div class="w-full">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center">
-                                <div>
-                                    <h2 class="text-base font-semibold text-gray-800">{{$forum->user->name}}</h2>
-                                    <p class="text-gray-500 text-sm">Posted
-                                        on {{date_format($forum->created_at, 'd M y')}}</p>
-                                </div>
-                            </div>
+    <div class="container py-6 mx-auto w-[95vw]">
+        @forelse($forums as $forum)
+            <div class="reveal bg-white card p-2 md:p-6 flex items-start w-full mb-5">
+                <img src="https://via.placeholder.com/100x100" alt="User Avatar"
+                     class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-2 md:mr-4">
+                <div class="w-full">
+                    <div class="flex md:flex-row flex-col items-start justify-between mb-2 md:mb-4">
+                        <div class="flex items-center">
                             <div>
-                                <span class="text-gray-600 text-sm">Category: <span
-                                        class="text-purple-500">{{$forum->category->name}}</span></span>
+                                <h2 class="text-sm md:text-base font-semibold text-gray-800">{{$forum->user->name}}</h2>
+                                <p class="text-gray-500 text-xs md:text-sm">Posted on {{date_format($forum->created_at, 'd M y')}}</p>
                             </div>
                         </div>
-                        <h1 class="text-lg font-semibold text-gray-900 mb-4">{{$forum->title}}</h1>
-                        <p class="text-gray-700 text-sm w-100       ">
-                            {!! \Illuminate\Support\Str::limit($forum->body, 300) !!}
-                        </p>
-                        <hr class="my-4 border-t-2 border-gray-200">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="text-gray-600 text-sm">{{$forum->countAnswers()}} Answers</span>
-                                <span class="ml-4 text-gray-600 text-sm">{{HelperFunctions::getStat('view', 'forum', $forum->id)}} Views</span>
-                            </div>
-                            <div>
-                                <button
-                                    onclick="window.location.href = '{{route('view.forum', [$forum->id, \Illuminate\Support\Str::slug($forum->title)])}}'"
-                                    class="text-white bg-purple-500 hover:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded-full focus:outline-none">
-                                    Leave an Answer
-                                </button>
-                                <button class="text-purple-500 hover:underline ml-2">
-                                    <i class='bx bx-share-alt'></i>
-                                </button>
-                            </div>
+                        <div>
+                                <span class="text-gray-600 text-xs md:text-sm">Category:
+                                    <span class="text-purple-500">
+                                        {{$forum->category->name}}
+                                    </span>
+                                </span>
                         </div>
                     </div>
+                    <h1 class="text-base md:text-lg font-semibold text-gray-900 mb-4">{{$forum->title}}</h1>
+                    <p class="text-gray-700 text-xs md:text-sm w-100"> {!! \Illuminate\Support\Str::limit($forum->body, 300) !!} </p>
+                    <hr class="my-4 border-t-2 border-gray-200">
+                    <div class="flex justify-center md:justify-between items-center">
+                        <div class="md:block hidden">
+                            <span class="block text-gray-600 text-xs md:text-sm">
+                                Answers: {{$forum->countAnswers()}}
+                            </span>
+                        </div>
+                        <button onclick="window.location.href = '{{route('view.forum', [$forum->id, \Illuminate\Support\Str::slug($forum->title)])}}'"
+                                class="text-white bg-purple-500 hover:bg-purple-600 font-bold uppercase text-xs px-3 py-2 md:px-4 md:py-2 rounded-full focus:outline-none">
+                            Leave an Answer
+                        </button>
+                    </div>
                 </div>
-            @empty
-                <div class="bg-white card p-6">
-                    <h1 class="text-lg font-semibold text-gray-900 mb-4 text-center">No Forum Found</h1>
-                </div>
-            @endforelse
-        </div>
+            </div>
+        @empty
+            <div class="bg-white card p-2 md:p-6">
+                <h1 class="text-lg font-semibold text-gray-900 mb-4 text-center">No Forum Found</h1>
+            </div>
+        @endforelse
         <!-- Pagination -->
         {{$forums->links()}}
     </div>

@@ -26,14 +26,14 @@
             <div id="searchResults" class="search-results mt-2 overflow-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh]"></div>
         </form>
     </div>
-    <div class="container flex items-center justify-between my-4 md:my-8 mx-2 md:mx-auto">
+    <div class="container flex items-center justify-between my-4 mx-2 md:mx-auto w-[95vw]">
         {{-- Category Filter--}}
-        <div class="overflow-hidden">
-            <label for="product-category-filter" class="text-gray-500 text-lg">
+        <div class="flex items-center justify-between mb-4 md:mb-0 w-[125px]">
+            <label for="deals-category-filter" class="text-gray-500 text-lg hidden md:block">
                 <i class='bx bx-filter-alt w-5 h-5'></i>
             </label>
-            <select name="category" id="product-category-filter"
-                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+            <select name="category" id="deals-category-filter"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[125px]"
                     onchange="doFilter()">
                 <option value="all" selected>All</option>
                 @foreach($categories as $category)
@@ -45,19 +45,18 @@
                 @endforeach
             </select>
         </div>
-        {{-- Total Products --}}
-        <div class="hidden md:block">
+        <div class="hidden sm:block text-center md:text-left mb-4 md:mb-0">
             <p>
                 Showing {{ $deals->firstItem() }} - {{ $deals->lastItem() }} of {{ $deals->total() }} results
             </p>
         </div>
         {{-- Sort By --}}
-        <div class="overflow-hidden">
-            <label for="job-country" class="text-gray-500 text-lg">
+        <div class="flex items-center justify-between mb-4 md:mb-0 w-[125px]">
+            <label for="deals-country" class="text-gray-500 text-lg hidden md:block">
                 <i class='bx bx-filter w-5 h-5 text-lg'></i>
             </label>
-            <select name="sort" id="job-country"
-                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+            <select name="sort" id="deals-country"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[125px]"
                     onchange="doSort()">
                 <option value="" @if(!request()->get('country')) selected @endif>By Country</option>
                 @forelse($countries as $country)
@@ -72,18 +71,13 @@
             </select>
         </div>
     </div>
-    <div class="block w-full my-2 md:hidden">
-        <p class="text-center">
-            Showing {{ $deals->firstItem() }} - {{ $deals->lastItem() }} of {{ $deals->total() }} results
-        </p>
-    </div>
-    <div class="container">
+    <div class="container flex flex-col items-center justify-center">
         <!-- Deals List -->
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             @forelse($deals as $item)
-                <div class="reveal flex bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 flex-col w-[90vw] md:w-full">
-                    <a href="{{ route('view.product', [$item->slug]) }}"
-                       class="w-full h-100 mx-auto p-2">
+                <div class="reveal flex flex-col items-center justify-center bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 w-[90vw] md:w-full">
+                    <a href="{{ route('view.deal', [$item->slug]) }}"
+                       class="h-100 mx-auto p-2">
                         <img alt="deal thumbnail" src="{{ url('storage/' . $item->thumbnail) }}"
                              class="w-[150px] h-[150px] md:w-full md:h-48 object-contain"/>
                     </a>
@@ -134,14 +128,14 @@
 @section('page-scripts')
     <script>
         function doFilter() {
-            let categoryValue = document.getElementById('product-category-filter').value;
-            let sortValue = document.getElementById('job-country').value;
+            let categoryValue = document.getElementById('deals-category-filter').value;
+            let sortValue = document.getElementById('deals-country').value;
             applyFilters(categoryValue, sortValue);
         }
 
         function doSort() {
-            let sortValue = document.getElementById('job-country').value;
-            let categoryValue = document.getElementById('product-category-filter').value;
+            let sortValue = document.getElementById('deals-country').value;
+            let categoryValue = document.getElementById('deals-category-filter').value;
             applyFilters(categoryValue, sortValue);
         }
 

@@ -23,14 +23,14 @@
             <div id="searchResults" class="search-results mt-2 overflow-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh]"></div>
         </form>
     </div>
-    <div class="container flex items-center justify-between my-4 md:my-8 mx-2 md:mx-auto">
+    <div class="container flex items-center justify-between my-4 mx-2 md:mx-auto w-[95vw]">
         {{-- Category Filter--}}
-        <div class="overflow-hidden">
-            <label for="product-category-filter" class="text-gray-500 text-lg">
+        <div class="flex items-center justify-between mb-4 md:mb-0">
+            <label for="product-category-filter" class="text-gray-500 text-lg hidden md:block">
                 <i class='bx bx-filter-alt w-5 h-5'></i>
             </label>
             <select name="category" id="product-category-filter"
-                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[125px]"
                     onchange="doFilter()">
                 <option value="all" selected>All</option>
                 @foreach($categories as $category)
@@ -42,19 +42,18 @@
                 @endforeach
             </select>
         </div>
-        {{-- Total Products --}}
-        <div class="hidden md:block">
+        <div class="hidden sm:block text-center md:text-left mb-4 md:mb-0">
             <p>
                 Showing {{ $events->firstItem() }} - {{ $events->lastItem() }} of {{ $events->total() }} results
             </p>
         </div>
         {{-- Sort By --}}
-        <div class="overflow-hidden">
-            <label for="job-country" class="text-gray-500 text-lg">
+        <div class="flex items-center justify-between mb-4 md:mb-0">
+            <label for="job-country" class="text-gray-500 text-lg hidden md:block">
                 <i class='bx bx-filter w-5 h-5 text-lg'></i>
             </label>
             <select name="sort" id="job-country"
-                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[150px]"
+                    class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-500 w-[125px]"
                     onchange="doSort()">
                 <option value="" @if(!request()->get('country')) selected @endif>By Country</option>
                 @forelse($countries as $country)
@@ -73,7 +72,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
             <!-- Event Items-->
             @forelse($events as $event)
-                <div class="reveal bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="reveal bg-white rounded-lg shadow-md overflow-hidden mx-2 my-2">
                     <a href="{{route('view.event', [$event->slug])}}" class="each relative">
                         <img src="{{ url('storage/'.$event->thumbnail) }}" class="w-full h-48 object-contain"
                              alt="Event">
@@ -92,20 +91,22 @@
                             </div>
                             <a href="{{route('view.event', [$event->slug])}}"
                                class="my-3 title font-bold block cursor-pointer hover:underline">{{$event->title}}</a>
-                            <div class="flex items-center justify-between mt-4">
-                                <div class="flex items-center">
-                                    <i class='bx bx-calendar text-gray-600'></i>
-                                    @php
-                                        $date = \Carbon\Carbon::parse($event->start);
-                                        $date = $date->format('M d, Y');
-                                    @endphp
-                                    <span class="text-gray-600 text-sm ml-1">{{$date}}</span>
+                            <div class="md:block flex items-center justify-between">
+                                <div class="flex items-center justify-between mt-4">
+                                    <div class="flex items-center">
+                                        <i class='bx bx-calendar text-gray-600'></i>
+                                        @php
+                                            $date = \Carbon\Carbon::parse($event->start);
+                                            $date = $date->format('M d, Y');
+                                        @endphp
+                                        <span class="text-gray-600 text-sm ml-1">{{$date}}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex items-center justify-between mt-4">
-                                <div class="flex items-center">
-                                    <i class='bx bx-current-location text-gray-600'></i>
-                                    <span class="text-gray-600 text-sm ml-1">{{$event->address->country->name}}</span>
+                                <div class="flex items-center justify-between mt-4">
+                                    <div class="flex items-center">
+                                        <i class='bx bx-current-location text-gray-600'></i>
+                                        <span class="text-gray-600 text-sm ml-1">{{$event->address->country->name}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
