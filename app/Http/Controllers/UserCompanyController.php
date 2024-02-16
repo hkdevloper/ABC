@@ -26,6 +26,7 @@ class UserCompanyController extends Controller
             })
             ->join('seo', 'companies.seo_id', '=', 'seo.id')
             ->where('companies.is_approved', 1)
+            ->where('companies.is_active', 1)
             ->groupBy('companies.id');
 
         // Search Query
