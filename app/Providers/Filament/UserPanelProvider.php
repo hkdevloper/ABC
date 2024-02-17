@@ -10,6 +10,7 @@ use App\Filament\Resources\ProductResource;
 use App\Filament\User\Pages\LoginPage;
 use App\Filament\User\Pages\RegisterPage;
 use App\Filament\User\Resources\BlogResource;
+use App\Filament\User\Resources\BookmarkCompaniesResource;
 use App\Filament\User\Resources\CompanyResource;
 use App\Filament\User\Resources\DirectMessageResource;
 use App\Filament\Widgets\StatsOverview;
@@ -149,7 +150,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('Direct Messages')
                         ->icon('heroicon-o-chat-bubble-left-right')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.forum'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.direct-message'))
                         ->url(fn (): string => DirectMessageResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
@@ -160,6 +161,22 @@ class UserPanelProvider extends PanelProvider
                             }
                             return false;
                         }),
+                    NavigationItem::make('My Bookmarks')
+                        ->icon('heroicon-o-bookmark-square')
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.bookmark-companies'))
+                        ->url(fn (): string => BookmarkCompaniesResource::getUrl())
+                        ->visible(function (){
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
+                            if($company){
+                                if($company->is_approved){
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }),
+                    NavigationItem::make('Log-out')
+                        ->icon('heroicon-o-arrow-right-start-on-rectangle')
+                        ->url(fn (): string => route('logout')),
                 ]);
             })
             ->discoverResources(in: app_path('Filament/User/Resources'), for: 'App\\Filament\\User\\Resources')

@@ -112,7 +112,7 @@
                                               :reducePadding="true">
                                 <div class="flex flex-col items-center justify-center">
                                     <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}"
-                                         class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded-full"/>
+                                         class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded"/>
                                     <p class="text-center text-xs md:text-sm lg:text-base bold italic mt-2">
                                         {{ Str::limit($item->name, 15) }}
                                     </p>

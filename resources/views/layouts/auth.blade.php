@@ -146,30 +146,13 @@
             width: 100%;
         }
 
-        @media (min-width: 48rem) {
-            .body {
-                flex-direction: row;
+        @media only screen and (min-width: 640px){
+            .form__content{
+                padding: 1rem;
             }
 
-            .form {
-                margin: 0;
-                box-shadow: none;
-            }
-
-            .form__content {
-                width: 26rem;
-            }
-
-            .cta__content {
-                max-width: 32rem;
-                margin: auto;
-            }
-        }
-
-        @media (min-width: 72rem) {
-            .form__content {
-                width: 32rem;
-                padding: 4rem;
+            .form{
+                margin: 1rem 1rem 0;
             }
         }
     </style>
