@@ -142,11 +142,11 @@ class Company extends Model
     // override delete method
     public function delete() : bool
     {
+        $this->bookmarkCompanies()->delete();
         $this->products()->delete();
         $this->seo()->delete();
         $this->address()->delete();
         $this->claimedBy()->delete();
-        $this->bookmarkCompanies()->delete();
         return parent::delete();
     }
 }
