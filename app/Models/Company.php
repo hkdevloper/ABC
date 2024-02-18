@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Filament\User\Resources\BookmarkCompaniesResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -132,6 +133,12 @@ class Company extends Model
         return 0;
     }
 
+    // Bookmark
+    public function bookmarkCompanies() : HasMany
+    {
+        return $this->hasMany(BookmarkCompanies::class, 'company_id', 'id');
+    }
+
     // override delete method
     public function delete() : bool
     {
@@ -139,6 +146,7 @@ class Company extends Model
         $this->seo()->delete();
         $this->address()->delete();
         $this->claimedBy()->delete();
+        $this->bookmarkCompanies()->delete();
         return parent::delete();
     }
 }
