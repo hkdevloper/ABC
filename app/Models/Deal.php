@@ -49,4 +49,9 @@ class Deal extends Model
     {
         return $this->belongsTo(Seo::class);
     }
+
+    public function company() : BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'user_id', 'user_id');
+    }
 }

@@ -65,10 +65,14 @@ class UserDealController extends Controller
     }
 
     // Function to view Deal Details
-    public function viewDealDetails()
+    public function viewDealDetails($slug)
     {
         // Forgot session
         Session::forget('menu');
-        return view('pages.deals.detail');
+        $deal = Deal::where('slug', $slug)->firstOrFail();
+        // Get Related deals based on the category
+        $related_deals = Deal::where('category_id', $deal->category_id)->where('is_active', 1)->where('id', '!=', $deal->id)->inRandomOrder()->limit(6)->get();
+        $data = compact('deal', 'related_deals');
+        return view('pages.deals.detail')->with($data);
     }
 }
