@@ -74,8 +74,9 @@ class BlogResource extends Resource
                     }),
                 TextInput::make('slug')
                     ->label('Blog Slug url')
+                    ->unique(ignoreRecord: true)
                     ->required()
-                    ->maxLength(191),
+                    ->maxLength(70),
                 TagsInput::make('tags')
                     ->splitKeys(['Tab', ' ', ','])
                     ->required(),

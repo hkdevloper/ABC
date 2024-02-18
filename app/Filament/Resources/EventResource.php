@@ -87,8 +87,9 @@ class EventResource extends Resource
                     }),
                 TextInput::make('slug')
                     ->label('Slug')
+                    ->unique(ignoreRecord: true)
                     ->required()
-                    ->maxLength(191),
+                    ->maxLength(70),
                 TinyEditor::make('description')
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsVisibility('public')

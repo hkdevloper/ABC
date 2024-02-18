@@ -71,7 +71,7 @@ class CompanyResource extends Resource
                     ->label('Enter Company Slug')
                     ->unique(ignoreRecord: true)
                     ->required()
-                    ->maxLength(191),
+                    ->maxLength(70),
                 TinyEditor::make('description')
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsVisibility('public')

@@ -57,7 +57,8 @@ class ProductResource extends Resource
                             ->label('Slug')
                             ->placeholder('Enter slug')
                             ->required()
-                            ->maxLength(191),
+                            ->unique(ignoreRecord: true)
+                            ->maxLength(70),
                         TinyEditor::make('description')
                             ->fileAttachmentsDisk('public')
                             ->fileAttachmentsVisibility('public')

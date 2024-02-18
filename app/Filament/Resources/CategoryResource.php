@@ -60,7 +60,8 @@ class CategoryResource extends Resource
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
                     ->label('Slug')
-                    ->maxLength(191),
+                    ->unique(ignoreRecord: true)
+                    ->maxLength(70),
                 Select::make('type')
                     ->label('Select Type')
                     ->native(false)

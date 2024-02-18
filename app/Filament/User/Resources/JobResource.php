@@ -62,8 +62,9 @@ class JobResource extends Resource
                 TextInput::make('slug')
                     ->label('Slug')
                     ->placeholder('Enter slug')
+                    ->unique(ignoreRecord: true)
                     ->required()
-                    ->maxLength(191),
+                    ->maxLength(70),
                 TextInput::make('organization')
                     ->label('Organization')
                     ->placeholder('Enter organization')

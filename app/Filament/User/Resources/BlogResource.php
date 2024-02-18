@@ -75,9 +75,10 @@ class BlogResource extends Resource
                             ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')
                             ->label('Slug')
+                            ->unique(ignoreRecord: true)
                             ->placeholder('Enter slug')
                             ->required()
-                            ->maxLength(191),
+                            ->maxLength(70),
                         TagsInput::make('tags')
                             ->label('Tags')
                             ->splitKeys(['Tab', ' ', ','])

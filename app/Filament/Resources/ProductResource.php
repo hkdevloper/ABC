@@ -82,8 +82,9 @@ class ProductResource extends Resource
                     }),
                 TextInput::make('slug')
                     ->label('Slug')
+                    ->unique(ignoreRecord: true)
                     ->required()
-                    ->maxLength(191),
+                    ->maxLength(70),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
                 TextInput::make('price')

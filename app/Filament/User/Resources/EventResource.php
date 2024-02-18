@@ -61,7 +61,8 @@ class EventResource extends Resource
                             ->label('Slug')
                             ->placeholder('Enter slug')
                             ->required()
-                            ->maxLength(191),
+                            ->unique(ignoreRecord: true)
+                            ->maxLength(70),
                         Forms\Components\RichEditor::make('description')
                             ->columnSpanFull(),
                         Section::make()
