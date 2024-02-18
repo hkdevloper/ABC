@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\BlogResource\Pages;
-use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
@@ -98,9 +97,10 @@ class BlogResource extends Resource
                         TextInput::make('title')
                             ->label('Enter SEO Title')
                             ->required()
-                            ->maxLength(191),
+                            ->maxLength(70),
                         TagsInput::make('meta_keywords')
                             ->splitKeys(['Tab', ' ', ','])
+                            ->required()
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')

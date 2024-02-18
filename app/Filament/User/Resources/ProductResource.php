@@ -110,7 +110,7 @@ class ProductResource extends Resource
                         TextInput::make('title')
                             ->label('Enter SEO Title')
                             ->required()
-                            ->maxLength(191),
+                            ->maxLength(70),
                         TagsInput::make('meta_keywords')
                             ->splitKeys(['Tab', ' ', ','])
                             ->label('Enter SEO Meta Keywords'),

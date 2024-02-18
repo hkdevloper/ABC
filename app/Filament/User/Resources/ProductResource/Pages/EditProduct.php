@@ -18,7 +18,7 @@ class EditProduct extends EditRecord
             ->danger()
             ->send();
     }
-    
+
     protected function getHeaderActions(): array
     {
         return [
