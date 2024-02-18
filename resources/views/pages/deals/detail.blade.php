@@ -3,36 +3,42 @@
 @section('content')
     <div class="container mx-auto">
         <x-user.bread-crumb :data="['Home', 'Deals',$deal->name]"/>
-        <div class="w-full overflow-hidden rounded-lg">
-            <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" id="main-image"
-                 class="h-80 w-full max-w-full object-contain img-remove-bg">
-        </div>
+        <div class="flex justify-center items-center">
+            <!--Image Side-->
+            <div class="mx-auto">
+                <div class="w-full overflow-hidden rounded-lg">
+                    <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" id="main-image"
+                         class="h-80 w-full max-w-full object-contain img-remove-bg">
+                </div>
+                <div class="mt-2 w-full lg:order-1 flex items-center justify-center">
+                    <div class="grid grid-cols-3 md:grid-cols-5 gap-4">
+                        <button type="button"
+                                class="thumbnail-button flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center"
+                                data-image="{{ url('storage/'.$deal->thumbnail) }}">
+                            <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image"
+                                 class="h-full w-full max-w-full object-contain bg-transparent img-remove-bg">
+                        </button>
 
-        <div class="mt-2 w-full lg:order-1 flex items-center justify-center">
-            <div class="grid grid-cols-3 md:grid-cols-5 gap-4">
-                <button type="button" class="thumbnail-button flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center"
-                        data-image="{{ url('storage/'.$deal->thumbnail) }}">
-                    <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image"
-                         class="h-full w-full max-w-full object-contain bg-transparent img-remove-bg">
-                </button>
-
-                @forelse($deal->gallery as $image)
-                    <button type="button" class="thumbnail-button flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center" data-image="{{ url('storage/'.$image) }}">
-                        <img src="{{ url('storage/'.$image) }}" alt="Product Image"
-                             class="h-full w-full max-w-full object-contain bg-transparent img-remove-bg">
-                    </button>
-                @empty
-                    <!-- No Gallery Images -->
-                @endforelse
+                        @forelse($deal->gallery as $image)
+                            <button type="button"
+                                    class="thumbnail-button flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center"
+                                    data-image="{{ url('storage/'.$image) }}">
+                                <img src="{{ url('storage/'.$image) }}" alt="Product Image"
+                                     class="h-full w-full max-w-full object-contain bg-transparent img-remove-bg">
+                            </button>
+                        @empty
+                            <!-- No Gallery Images -->
+                        @endforelse
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2 flex md:flex-row flex-col md:items-center justify-between p-4">
-            <div class="flex flex-auto">
-                <img src="{{ url('storage/'.$deal->company->logo) }}" alt="Company Logo"
-                     class="h-16 w-16 rounded-full object-contain mr-4">
-                <!-- Published Details  -->
-                <div class="flex flex-col">
+            <!-- Deals Details -->
+            <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2 flex flex-col md:items-center justify-between p-4">
+                <div class="flex flex-auto">
+                    <img src="{{ url('storage/'.$deal->company->logo) }}" alt="Company Logo"
+                         class="h-16 w-16 rounded-full object-contain mr-4">
+                    <!-- Published Details  -->
+                    <div class="flex flex-col">
                     <span class="text-base md:text-xl sm:text-base font-bold">{{$deal->name }}
                         @if($deal->is_featured)
                             <span>
@@ -49,22 +55,43 @@
                             </span>
                         @endif
                     </span>
-                    <span class="text-xs md:text-sm text-gray-500">Published by {{$deal->company->name }}</span>
-                    <span class="text-xs md:text-sm text-gray-500">Published on {{$deal->created_at->format('d M Y') }} ({{$deal->updated_at->diffForHumans() }})</span>
-                    <a href="{{route('view.company', [$deal->company->slug])}}" class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-1 px-2 text-center mt-2 rounded-full hover:rounded-full transition-all duration-300 ease-in-out md:w-auto w-full md:hidden">
-                        Contact Now
-                        <i class='bx bx-link-external ml-2'></i>
-                    </a>
+                        <span class="text-xs md:text-sm text-gray-500">Published by {{$deal->company->name }}</span>
+                        <span class="text-xs md:text-sm text-gray-500">Published on {{$deal->created_at->format('d M Y') }} ({{$deal->updated_at->diffForHumans() }})</span>
+                        <a href="{{route('view.company', [$deal->company->slug])}}"
+                           class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-1 px-2 text-center mt-2 rounded-full hover:rounded-full transition-all duration-300 ease-in-out md:w-auto w-full md:hidden">
+                            Contact Now
+                            <i class='bx bx-link-external ml-2'></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center justify-center mt-4">
+                    <div class="flex items-center justify-center">
+                        <p class="text-2xl md:text-3xl font-bold text-purple-500">
+                            ₹{{ HelperFunctions::getDiscountedPrice($deal->price, $deal->discount_type, $deal->discount_value) }}</p>
+                        @if($deal->discount_type !== null && $deal->discount_value !== null)
+                            <p class="text-xs md:text-sm text-gray-400 line-through ml-2">
+                                ₹{{ HelperFunctions::formatCurrency($deal->price) }}</p>
+                        @endif
+                    </div>
+                    <div class="flex items-center justify-center mt-2">
+                        <p class="text-xs md:text-sm text-gray-400">Inclusive of all taxes</p>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center">
+                    <div class="flex items-center justify-center mx-1 mt-4">
+                        <a href="{{route('view.company', [$deal->company->slug])}}"
+                           class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue">
+                            Contact Now
+                            <i class='bx bx-link-external ml-2'></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <a href="{{route('view.company', [$deal->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue">
-                Contact Now
-                <i class='bx bx-link-external ml-2'></i>
-            </a>
         </div>
         <x-bladewind.tab-group name="product-info">
             <x-slot name="headings">
                 <x-bladewind.tab-heading active="true" name="desc" label="Description"/>
+                <x-bladewind.tab-heading name="tos" label="Terms & Condition"/>
             </x-slot>
 
             <x-bladewind.tab-body>
@@ -74,7 +101,8 @@
                         <tr>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
                                 <div class="flex items-center justify-start">
-                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                <span
+                                    class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
                                     <i class='bx bx-category'></i>
                                 </span>
                                     <div>
@@ -83,14 +111,16 @@
                                 </div>
                             </td>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span class="text-sm md:text-base text-justify text-purple-500">{{$deal->category->name }}</span>
+                                <span
+                                    class="text-sm md:text-base text-justify text-purple-500">{{$deal->category->name }}</span>
                             </td>
                         </tr>
                         <tr>
                             <!-- Location Section -->
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
                                 <div class="flex items-center justify-start">
-                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                <span
+                                    class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
                                     <i class='bx bx-map'></i>
                                 </span>
                                     <div>
@@ -99,20 +129,34 @@
                                 </div>
                             </td>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span class="text-sm: md:text-base text-gray-500">{{$deal->company->address->country->name }}</span>
+                                <span
+                                    class="text-sm: md:text-base text-gray-500">{{$deal->company->address->country->name }}</span>
                             </td>
                         </tr>
                     </table>
                     <hr class="my-4">
                     <p class="text-sm text-gray-500">{!!$deal->description !!}</p>
-                    <div class="relative bottom-0 md:static right-1 mb-2 md:w-[calc(80%-1rem)] mt-4"
-                         style="width: max-content;">
-                        <a href="{{ route('view.deal', [$deal->slug]) }}"
-                           class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-2 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base ">
-                            <span class="ml-1">Enquire Now &nbsp;</span>
-                            <i class='bx bx-link-external mr-2'></i>
-                        </a>
-                    </div>
+                </x-bladewind.tab-content>
+                <x-bladewind.tab-content name="tos">
+                    <table class="w-full border border-collapse rounded-lg">
+                        <tr>
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <div class="flex items-center justify-start">
+                                <span
+                                    class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                    <i class='bx bx-file-text'></i>
+                                </span>
+                                    <div>
+                                        <span class="text-sm md:text-base font-semibold text-gray-500">Terms & Conditions</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <span
+                                    class="text-sm md:text-base text-justify text-purple-500">{!! $deal->terms_and_conditions !!}</span>
+                            </td>
+                        </tr>
+                    </table>
                 </x-bladewind.tab-content>
             </x-bladewind.tab-body>
         </x-bladewind.tab-group>
@@ -121,7 +165,8 @@
             <h2 class="text-2xl font-semibold">Related Deals</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-4">
                 @forelse($related_deals as $item)
-                    <div class="reveal flex flex-col items-center justify-center bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 w-[90vw] md:w-full">
+                    <div
+                        class="reveal flex flex-col items-center justify-center bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 w-[90vw] md:w-full">
                         <!-- Discount ribbon -->
                         @if($item->discount_type !== null && $item->discount_value !== null)
                             <div class="absolute top-0 left-0 bg-red-500 text-white p-1">
