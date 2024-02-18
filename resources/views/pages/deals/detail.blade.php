@@ -3,15 +3,15 @@
 @section('content')
     <div class="container mx-auto">
         <x-user.bread-crumb :data="['Home', 'Deals',$deal->name]"/>
-        <div class="flex justify-center items-center">
+        <div class="flex items-center justify-stretch w-full shadow-lg">
             <!--Image Side-->
-            <div class="mx-auto">
+            <div class="flex flex-row-reverse justify-center items-center w-[1/3]">
                 <div class="w-full overflow-hidden rounded-lg">
                     <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" id="main-image"
                          class="h-80 w-full max-w-full object-contain img-remove-bg">
                 </div>
-                <div class="mt-2 w-full lg:order-1 flex items-center justify-center">
-                    <div class="grid grid-cols-3 md:grid-cols-5 gap-4">
+                <div class="mt-2 lg:order-1 flex items-center justify-center">
+                    <div class="grid grid-cols-1 gap-4">
                         <button type="button"
                                 class="thumbnail-button flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center"
                                 data-image="{{ url('storage/'.$deal->thumbnail) }}">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <!-- Deals Details -->
-            <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2 flex flex-col md:items-center justify-between p-4">
+            <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2 flex flex-col p-4 w-[2/3]">
                 <div class="flex flex-auto">
                     <img src="{{ url('storage/'.$deal->company->logo) }}" alt="Company Logo"
                          class="h-16 w-16 rounded-full object-contain mr-4">
@@ -77,6 +77,44 @@
                         <p class="text-xs md:text-sm text-gray-400">Inclusive of all taxes</p>
                     </div>
                 </div>
+                <table class="w-full rounded-lg">
+                    <!-- Category Section -->
+                    <tr>
+                        <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                            <div class="flex items-center justify-start">
+                                <span
+                                    class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                    <i class='bx bx-category'></i>
+                                </span>
+                                <div>
+                                    <span class="text-sm md:text-base font-semibold text-gray-500">Category</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <span
+                                    class="text-sm md:text-base text-justify text-purple-500">{{$deal->category->name }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- Location Section -->
+                        <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                            <div class="flex items-center justify-start">
+                                <span
+                                    class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                    <i class='bx bx-map'></i>
+                                </span>
+                                <div>
+                                    <span class="text-sm md:text-base font-semibold text-gray-500">Location</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <span
+                                    class="text-sm: md:text-base text-gray-500">{{$deal->company->address->country->name }}</span>
+                        </td>
+                    </tr>
+                </table>
                 <div class="flex justify-center items-center">
                     <div class="flex items-center justify-center mx-1 mt-4">
                         <a href="{{route('view.company', [$deal->company->slug])}}"
@@ -96,44 +134,7 @@
 
             <x-bladewind.tab-body>
                 <x-bladewind.tab-content name="desc" active="true">
-                    <table class="w-full border border-collapse rounded-lg">
-                        <!-- Category Section -->
-                        <tr>
-                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <div class="flex items-center justify-start">
-                                <span
-                                    class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
-                                    <i class='bx bx-category'></i>
-                                </span>
-                                    <div>
-                                        <span class="text-sm md:text-base font-semibold text-gray-500">Category</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span
-                                    class="text-sm md:text-base text-justify text-purple-500">{{$deal->category->name }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <!-- Location Section -->
-                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <div class="flex items-center justify-start">
-                                <span
-                                    class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
-                                    <i class='bx bx-map'></i>
-                                </span>
-                                    <div>
-                                        <span class="text-sm md:text-base font-semibold text-gray-500">Location</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span
-                                    class="text-sm: md:text-base text-gray-500">{{$deal->company->address->country->name }}</span>
-                            </td>
-                        </tr>
-                    </table>
+
                     <hr class="my-4">
                     <p class="text-sm text-gray-500">{!!$deal->description !!}</p>
                 </x-bladewind.tab-content>
