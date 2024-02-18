@@ -131,4 +131,14 @@ class Company extends Model
         }
         return 0;
     }
+
+    // override delete method
+    public function delete() : bool
+    {
+        $this->products()->delete();
+        $this->seo()->delete();
+        $this->address()->delete();
+        $this->claimedBy()->delete();
+        return parent::delete();
+    }
 }
