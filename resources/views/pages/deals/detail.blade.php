@@ -6,15 +6,29 @@
     <div class="container mx-auto">
         <x-user.bread-crumb :data="['Home', 'Deals', $deal->name]"/>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Image Side -->
-            <div class="shadow">
-                <div class="grid grid-cols-1 lg:flex lg:flex-row-reverse">
-                    <div class="overflow-hidden rounded-lg lg:w-1/3">
-                        <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" id="main-image" class="h-80 w-full object-contain img-remove-bg">
+            <div class="md:flex md:flex-row-reverse items-center justify-between">
+                <div class="overflow-hidden rounded-lg md:w-3/4">
+                    <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" id="main-image" class="h-80 w-full object-contain img-remove-bg">
+                </div>
+                <div class="lg:order-1 lg:mt-2 lg:pl-4">
+                    <div class="hidden lg:block">
+                        <div class="grid grid-cols-1 gap-4">
+                            <button type="button" class="thumbnail-button aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center" data-image="{{ url('storage/'.$deal->thumbnail) }}">
+                                <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" class="h-full w-full object-contain bg-transparent img-remove-bg">
+                            </button>
+                            @forelse($deal->gallery as $image)
+                                <button type="button" class="thumbnail-button aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center" data-image="{{ url('storage/'.$image) }}">
+                                    <img src="{{ url('storage/'.$image) }}" alt="Product Image" class="h-full w-full object-contain bg-transparent img-remove-bg">
+                                </button>
+                            @empty
+                                <!-- No Gallery Images -->
+                            @endforelse
+                        </div>
                     </div>
-                    <div class="lg:order-1 lg:mt-2 flex justify-center items-center">
-                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <div class="lg:hidden mt-2">
+                        <div class="grid grid-cols-1 gap-4">
                             <button type="button" class="thumbnail-button aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center" data-image="{{ url('storage/'.$deal->thumbnail) }}">
                                 <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" class="h-full w-full object-contain bg-transparent img-remove-bg">
                             </button>
@@ -29,6 +43,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Deals Details -->
             <div class="flex flex-col p-4">
                 <div class="flex items-center">
