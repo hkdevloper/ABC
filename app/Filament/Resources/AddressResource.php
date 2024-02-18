@@ -70,6 +70,7 @@ class AddressResource extends Resource
                 Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
                 Tables\Columns\TextColumn::make('address_line_1')
                     ->label('Address')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country.name')
                     ->label('Country')

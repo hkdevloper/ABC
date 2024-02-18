@@ -113,6 +113,7 @@ class CategoryResource extends Resource
                 Tables\Columns\ImageColumn::make('image'),
                 //Tables\Columns\SpatieMediaLibraryImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('name')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->searchable(),
