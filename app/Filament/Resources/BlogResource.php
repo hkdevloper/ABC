@@ -101,6 +101,7 @@ class BlogResource extends Resource
                         TagsInput::make('meta_keywords')
                             ->splitKeys(['Tab', ' ', ','])
                             ->required()
+                            ->getSuggestions()
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')
