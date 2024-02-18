@@ -61,7 +61,6 @@
                         </span>
                         <span class="text-sm text-gray-500">Published by {{ $deal->company->name }}</span>
                         <span class="text-sm text-gray-500">Published on {{ $deal->created_at->format('d M Y') }} ({{ $deal->updated_at->diffForHumans() }})</span>
-                        <a href="{{ route('view.company', [$deal->company->slug]) }}" class="btn-contact-now">Contact Now</a>
                     </div>
                 </div>
                 <div class="flex flex-col items-center justify-center mt-4">
@@ -104,7 +103,10 @@
                     </tr>
                 </table>
                 <div class="flex justify-center items-center mt-4">
-                    <a href="{{ route('view.company', [$deal->company->slug]) }}" class="btn-contact-now hidden md:flex">Contact Now</a>
+                    <a href="{{route('view.company', [$deal->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue">
+                        Contact Now
+                        <i class='bx bx-link-external ml-2'></i>
+                    </a>
                 </div>
             </div>
         </div>
