@@ -4,6 +4,7 @@ namespace App\Filament\Resources\DealResource\Pages;
 
 use App\Filament\Resources\DealResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 
 class EditDeal extends EditRecord
@@ -15,5 +16,12 @@ class EditDeal extends EditRecord
         return [
             Actions\DeleteAction::make(),
         ];
+    }
+    protected function onValidationError(\Illuminate\Validation\ValidationException $exception): void
+    {
+        Notification::make()
+            ->title($exception->getMessage())
+            ->danger()
+            ->send();
     }
 }

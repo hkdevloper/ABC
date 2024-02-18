@@ -4,11 +4,20 @@ namespace App\Filament\Resources\ContactUsResource\Pages;
 
 use App\Filament\Resources\ContactUsResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Validation\ValidationException;
 
 class EditContactUs extends EditRecord
 {
     protected static string $resource = ContactUsResource::class;
+    protected function onValidationError(ValidationException $exception): void
+    {
+        Notification::make()
+            ->title($exception->getMessage())
+            ->danger()
+            ->send();
+    }
 
     protected function getHeaderActions(): array
     {
