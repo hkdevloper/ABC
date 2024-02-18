@@ -35,6 +35,7 @@ class ContactUsResource extends Resource
                 Tables\Columns\TextColumn::make('mobile')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('subject')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->label('Status')

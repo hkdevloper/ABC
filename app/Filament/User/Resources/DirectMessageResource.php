@@ -65,12 +65,15 @@ class DirectMessageResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('company_name')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()

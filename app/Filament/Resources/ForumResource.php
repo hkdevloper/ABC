@@ -82,6 +82,7 @@ class ForumResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->limit(25)
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('body')
                     ->limit(30)

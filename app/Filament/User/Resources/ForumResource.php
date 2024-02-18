@@ -82,6 +82,7 @@ class ForumResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->label('Title')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('body')
                     ->label('Description')

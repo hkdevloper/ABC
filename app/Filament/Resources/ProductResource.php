@@ -146,6 +146,7 @@ class ProductResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Name')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')

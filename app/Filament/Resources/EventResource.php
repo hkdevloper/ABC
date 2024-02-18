@@ -179,6 +179,7 @@ class EventResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
                     ->label('Title')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')
