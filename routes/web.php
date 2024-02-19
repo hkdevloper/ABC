@@ -323,7 +323,7 @@ Route::prefix('protected')->middleware(['auth'])->group(function () {
         $company = Company::findOrFail($request->company_id);
         // If the request is from a company owner, then redirect to company page
         if ($company->user_id == $user->id) {
-            return redirect()->back()->with('error', 'You can\'t claim your own company');
+            return redirect()->back()->with('error', 'You can not claim your own company');
         }
         $data = compact('user', 'company');
         return view('claims')->with($data);
