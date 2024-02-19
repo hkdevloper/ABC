@@ -83,11 +83,10 @@ class ForumResource extends Resource
                     ->label('Title')
                     ->wrap()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('body')
-                    ->label('Description')
-                    ->searchable()
-                    ->limit(50)
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('summary')
+                    ->limit(70)
+                    ->wrap()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

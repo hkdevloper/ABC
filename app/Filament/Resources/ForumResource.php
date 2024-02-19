@@ -83,9 +83,10 @@ class ForumResource extends Resource
                     ->limit(25)
                     ->wrap()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('body')
-                    ->limit(30)
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('summary')
+                    ->limit(70)
+                    ->wrap()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->searchable()
                     ->sortable(),
