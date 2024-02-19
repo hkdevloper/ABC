@@ -123,6 +123,7 @@ class CompanyResource extends Resource
                     ->schema([
                         Select::make('country_id')
                             ->label('Country')
+                            ->preload()
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()

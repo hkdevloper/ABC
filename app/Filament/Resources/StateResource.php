@@ -37,6 +37,7 @@ class StateResource extends Resource
                     ->required(),
                 Select::make('country_id')
                     ->label('Select Country')
+                    ->preload()
                     ->relationship('country', 'name')
                     ->native(false)
                     ->searchable()

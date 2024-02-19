@@ -136,6 +136,8 @@ class JobResource extends Resource
                     ->schema([
                         Select::make('country_id')
                             ->label('Country')
+                            ->preload()
+                            ->preload()
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()

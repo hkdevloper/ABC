@@ -162,6 +162,7 @@ class CompanyResource extends Resource
                     ->relationship('address')
                     ->schema([
                         Select::make('country_id')
+                            ->preload()
                             ->label('Country')
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
