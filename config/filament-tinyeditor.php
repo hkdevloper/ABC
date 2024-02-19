@@ -34,7 +34,7 @@ return [
 
         'custom' => [
             'plugins' => 'accordion autoresize directionality advlist autolink lists charmap preview pagebreak searchreplace wordcount visualchars code fullscreen insertdatetime table',
-            'toolbar' => 'undo redo removeformat | styles | bold italic | rtl ltr | alignjustify alignright aligncenter alignleft | numlist bullist outdent indent accordion | forecolor backcolor | blockquote table toc hr | preview wordcount fullscreen',
+            'toolbar' => 'undo redo removeformat | styles | bold italic | rtl ltr | alignjustify alignright aligncenter alignleft | numlist bullist outdent indent accordion | forecolor backcolor | blockquote table toc hr | preview wordcount fullscreen | codesample emoticons visualblocks',
             'upload_directory' => null,
         ],
 	],
