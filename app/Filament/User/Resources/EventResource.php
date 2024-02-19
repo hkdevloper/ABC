@@ -64,6 +64,20 @@ class EventResource extends Resource
                             ->unique(ignoreRecord: true)
                             ->maxLength(70),
                         Forms\Components\RichEditor::make('description')
+                            ->toolbarButtons([
+                                'blockquote',
+                                'bold',
+                                'bulletList',
+                                'codeBlock',
+                                'h2',
+                                'h3',
+                                'italic',
+                                'orderedList',
+                                'redo',
+                                'strike',
+                                'underline',
+                                'undo',
+                            ])
                             ->columnSpanFull(),
                         Section::make()
                             ->schema([

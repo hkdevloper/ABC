@@ -76,6 +76,20 @@ class DealResource extends Resource
                     ->numeric()
                     ->prefix('$'),
                 Forms\Components\RichEditor::make('description')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
                     ->columnSpanFull(),
                 Section::make('Images')
                     ->schema([
@@ -106,6 +120,20 @@ class DealResource extends Resource
                         ->maxLength(191),
                 ])->columns(),
                 Forms\Components\RichEditor::make('terms_and_conditions')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
                     ->columnSpanFull(),
                 Section::make('SEO Details')
                     ->relationship('seo')

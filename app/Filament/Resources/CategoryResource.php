@@ -84,6 +84,20 @@ class CategoryResource extends Resource
                         return $query;
                     }),
                 Forms\Components\RichEditor::make('description')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
                     ->label('Description')
                     ->maxLength(65535)
                     ->columnSpanFull(),

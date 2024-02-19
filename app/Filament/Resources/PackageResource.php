@@ -62,6 +62,20 @@ class PackageResource extends Resource
                     ])
                     ->required(),
                 Forms\Components\RichEditor::make('description')
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
                     ->required()
                     ->maxLength(65535)
                     ->columnSpanFull(),

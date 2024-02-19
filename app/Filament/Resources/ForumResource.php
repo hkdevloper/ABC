@@ -37,14 +37,12 @@ class ForumResource extends Resource
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('body')
                     ->toolbarButtons([
-                        'attachFiles',
                         'blockquote',
                         'bold',
                         'bulletList',
                         'h2',
                         'h3',
                         'italic',
-                        'link',
                         'orderedList',
                         'redo',
                         'strike',
