@@ -102,7 +102,7 @@ Route::get('/', function () {
     }
     // Get only products which have a company
     $products = $p->filter(function ($value, $key) {
-        return $value->company != null;
+        return $value->user->company != null;
     });
     // get the 10-random records from the database if is less than 10 then it will return all
     if (count($p) > 8) {
