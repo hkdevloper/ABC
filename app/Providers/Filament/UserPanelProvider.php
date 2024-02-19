@@ -12,6 +12,7 @@ use App\Filament\User\Pages\RegisterPage;
 use App\Filament\User\Resources\BlogResource;
 use App\Filament\User\Resources\BookmarkCompaniesResource;
 use App\Filament\User\Resources\CompanyResource;
+use App\Filament\User\Resources\DealResource;
 use App\Filament\User\Resources\DirectMessageResource;
 use App\Filament\Widgets\StatsOverview;
 use App\Http\Middleware\HkEmailVerification;
@@ -86,6 +87,19 @@ class UserPanelProvider extends PanelProvider
                         ->icon('heroicon-o-shopping-cart')
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.product'))
                         ->url(fn (): string => ProductResource::getUrl())
+                        ->visible(function (){
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
+                            if($company){
+                                if($company->is_approved){
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }),
+                    NavigationItem::make('Deals')
+                        ->icon('heroicon-o-shopping-cart')
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.deals'))
+                        ->url(fn (): string => DealResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
