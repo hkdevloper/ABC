@@ -84,7 +84,6 @@ class ForumResource extends Resource
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('summary')
-                    ->limit(70)
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')

@@ -80,11 +80,9 @@ class ForumResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
-                    ->limit(25)
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('summary')
-                    ->limit(70)
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
