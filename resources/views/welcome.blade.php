@@ -287,7 +287,7 @@
                                  class="w-[150px] h-[150px] md:w-full md:h-48 object-contain"/>
                         </a>
                         <div class="p-2 flex flex-col items-center justify-center">
-                            <header class="flex my-2 font-light text-base items-center">
+                            <header class="flex my-2 font-light text-sm items-center">
                                 <i class="bx bx-category text-indigo-500 mr-1"></i>
                                 <p>{{ $item->category->name }}</p>
                             </header>
