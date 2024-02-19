@@ -31,16 +31,6 @@ class StatsOverview extends BaseWidget
         }
         $walletTitle = auth()->user()->type == 'Admin' ? 'Total Balance' : 'Wallet Balance';
         return [
-            Stat::make('Companies', function () {
-                if (auth()->user()->type == 'Admin') {
-                    return Company::count();
-                } else {
-                    return Company::where('user_id', auth()->user()->id)->count();
-                }
-            })
-                ->color('#363062')
-                ->url($companyUrl)
-                ->icon('heroicon-o-building-office-2'),
             // State for Wallet Balance in INR
             Stat::make($walletTitle, function () {
                 if (auth()->user()->type == 'Admin') {
@@ -52,6 +42,16 @@ class StatsOverview extends BaseWidget
                 ->color('#363062')
                 ->url($companyUrl)
                 ->icon('heroicon-o-currency-dollar'),
+            Stat::make('Companies', function () {
+                if (auth()->user()->type == 'Admin') {
+                    return Company::count();
+                } else {
+                    return Company::where('user_id', auth()->user()->id)->count();
+                }
+            })
+                ->color('#363062')
+                ->url($companyUrl)
+                ->icon('heroicon-o-building-office-2'),
             Stat::make('Products', function () {
                 if (auth()->user()->type == 'Admin') {
                     return Product::count();
