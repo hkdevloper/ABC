@@ -13,10 +13,15 @@ class DealPolicy
      */
     public function viewAny(User $user): bool
     {
-        if($user->type == 'Admin'){
-            return true;
+        if(!auth()->user()->canManageSettings()){
+            $company = \App\Models\Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+            if($company){
+                redirect('/user/dashboard/companies/'.$company->id);
+            }else{
+                redirect('/user/dashboard/companies/create');
+            }
         }
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +29,8 @@ class DealPolicy
      */
     public function view(User $user, Deal $deal): bool
     {
-        if($user->type == 'Admin'){
+        // Authorization logic...
+        if ($user->id === $deal->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -35,10 +41,7 @@ class DealPolicy
      */
     public function create(User $user): bool
     {
-        if($user->type == 'Admin'){
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**
@@ -46,7 +49,8 @@ class DealPolicy
      */
     public function update(User $user, Deal $deal): bool
     {
-        if($user->type == 'Admin'){
+        // Authorization logic...
+        if ($user->id === $deal->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -57,7 +61,8 @@ class DealPolicy
      */
     public function delete(User $user, Deal $deal): bool
     {
-        if($user->type == 'Admin'){
+        // Authorization logic...
+        if ($user->id === $deal->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -68,7 +73,8 @@ class DealPolicy
      */
     public function restore(User $user, Deal $deal): bool
     {
-        if($user->type == 'Admin'){
+        // Authorization logic...
+        if ($user->id === $deal->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -79,7 +85,8 @@ class DealPolicy
      */
     public function forceDelete(User $user, Deal $deal): bool
     {
-        if($user->type == 'Admin'){
+        // Authorization logic...
+        if ($user->id === $deal->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;
