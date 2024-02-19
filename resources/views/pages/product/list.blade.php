@@ -78,7 +78,7 @@
                     <div class="flex items-start justify-start flex-col w-full ml-6">
                         <span class="text-base text-gray-500 -mb-1">{{$item->category->name}}</span>
                         <a href="{{ route('view.product', [$item->slug]) }}"
-                           class="font-semibold text-2xl">{{ $item->name }}</a>
+                           class="font-semibold text-xl">{{ $item->name }}</a>
                         <span class="text-base text-gray-500 -mb-1">Condition: {{$item->condition}}</span>
                         <span class="text-base text-gray-500 -mb-1">Brand: {{$item->brand}}</span>
                         <span
