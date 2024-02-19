@@ -9,6 +9,7 @@ use App\Models\Deal;
 use App\Models\Event;
 use App\Models\Job;
 use App\Models\Product;
+use App\Models\User;
 use Faker\Core\Color;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -17,12 +18,12 @@ class StatsOverview extends BaseWidget
 {
     protected function getStats(): array
     {
-        $prefix = '/user/dashboard';
+        $prefix = '/user';
         $companyUrl = '';
         $company = Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
         if ($company) {
 
-            $companyUrl = "dashboard/companies/$company->id";
+            $companyUrl = "user/companies/$company->id";
         }
         if (auth()->user()->type == 'Admin') {
             $companyUrl = "admin/companies";
@@ -39,6 +40,17 @@ class StatsOverview extends BaseWidget
                 ->color('#363062')
                 ->url($companyUrl)
                 ->icon('heroicon-o-building-office-2'),
+            // State for Wallet Balance in INR
+            Stat::make('Wallet Balance', function () {
+                if (auth()->user()->type == 'Admin') {
+                    return '₹' . number_format(User::sum('balance'), 2);
+                } else {
+                    return '₹' . number_format(auth()->user()->balance, 2);
+                }
+            })
+                ->color('#363062')
+                ->url($companyUrl)
+                ->icon('heroicon-o-currency-dollar'),
             Stat::make('Products', function () {
                 if (auth()->user()->type == 'Admin') {
                     return Product::count();
