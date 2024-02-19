@@ -97,7 +97,7 @@ class UserPanelProvider extends PanelProvider
                             return false;
                         }),
                     NavigationItem::make('Deals')
-                        ->icon('heroicon-o-shopping-cart')
+                        ->icon('heroicon-o-gift-top')
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.deals'))
                         ->url(fn (): string => DealResource::getUrl())
                         ->visible(function (){
