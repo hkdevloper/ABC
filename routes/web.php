@@ -61,7 +61,6 @@ Route::get('/', function () {
     // Store Session for Home Menu Active
     Session::put('menu', 'home');
     $p = Product::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
-    return $p;
     $c = Company::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
     $e = Event::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
     $categories = Category::where('is_active', 1)
@@ -105,6 +104,7 @@ Route::get('/', function () {
     $products = $p->filter(function ($value, $key) {
         return $value->company != null;
     });
+    return $products;
     // get the 10-random records from the database if is less than 10 then it will return all
     if (count($p) > 8) {
         $products = $products->random(8);
