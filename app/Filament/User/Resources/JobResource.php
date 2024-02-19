@@ -92,20 +92,16 @@ class JobResource extends Resource
                 ])->columns(3),
                 Section::make()
                     ->schema([
-                        TinyEditor::make('education')
-                            ->fileAttachmentsDisk('public')
-                            ->fileAttachmentsVisibility('public')
-                            ->fileAttachmentsDirectory('editor/uploads')
-                            ->profile('custom')
+                        Textarea::make('education')
+                            ->id('education')
                             ->columnSpan('full')
                             ->required(),
-                        TinyEditor::make('experience')
-                            ->fileAttachmentsDisk('public')
-                            ->fileAttachmentsVisibility('public')
-                            ->fileAttachmentsDirectory('editor/uploads')
-                            ->profile('custom')
-                            ->columnSpan('full')
-                            ->required(),
+                        TextInput::make('experience')
+                            ->label('Enter Experience Details')
+                            ->prefix('Years')
+                            ->numeric()
+                            ->helperText('Enter experience in years')
+                            ->columnSpanFull(),
                     ])->columns(2),
                 Section::make('Images')
                     ->schema([
@@ -122,7 +118,6 @@ class JobResource extends Resource
                             ->label('Country')
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
-                            ->default(101)
                             ->searchable()
                             ->required(),
                         Select::make('state_id')

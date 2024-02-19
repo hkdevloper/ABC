@@ -33,8 +33,8 @@ return [
         ],
 
         'custom' => [
-            'plugins' => 'accordion autoresize directionality advlist autolink link lists charmap preview anchor pagebreak searchreplace wordcount visualchars code fullscreen insertdatetime table',
-            'toolbar' => 'undo redo removeformat | styles | bold italic | rtl ltr | alignjustify alignright aligncenter alignleft | numlist bullist outdent indent accordion | forecolor backcolor | blockquote table toc hr | link anchor | preview wordcount fullscreen',
+            'plugins' => 'accordion autoresize directionality advlist autolink lists charmap preview pagebreak searchreplace wordcount visualchars code fullscreen insertdatetime table',
+            'toolbar' => 'undo redo removeformat | styles | bold italic | rtl ltr | alignjustify alignright aligncenter alignleft | numlist bullist outdent indent accordion | forecolor backcolor | blockquote table toc hr | preview wordcount fullscreen',
             'upload_directory' => null,
         ],
 	],

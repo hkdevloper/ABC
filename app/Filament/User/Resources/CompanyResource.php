@@ -125,7 +125,6 @@ class CompanyResource extends Resource
                             ->label('Country')
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
-                            ->default(101)
                             ->searchable()
                             ->required(),
                         Select::make('state_id')
