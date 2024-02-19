@@ -104,7 +104,6 @@ Route::get('/', function () {
     $products = $p->filter(function ($value, $key) {
         return $value->company != null;
     });
-    return $products;
     // get the 10-random records from the database if is less than 10 then it will return all
     if (count($p) > 8) {
         $products = $products->random(8);
