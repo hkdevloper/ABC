@@ -108,6 +108,7 @@ Route::get('/', function () {
     if (count($p) > 8) {
         $products = $products->random(8);
     }
+    return $products;
 
     if (count($c) > 8) {
         $companies = $c->random(8);
