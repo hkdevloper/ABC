@@ -291,7 +291,7 @@
                                 <i class="bx bx-category text-indigo-500 mr-1"></i>
                                 <p>{{ $item->category->name }}</p>
                             </header>
-                            <p class="text-xl font-medium mb-2 text-center">{{ $item->name }}</p>
+                            <p class="text-base font-medium mb-2 text-center">{{ Str::limit($item->name, 30, '...') }}</p>
                             <p class="text-red-700 text-center text-xs md:text-sm">{{ $item->company->name }}</p>
                             <p class="text-gray-700 text-center text-xs md:text-sm">{{ $item->company->address->country->name }}</p>
                             <p class="text-gray-700 text-center text-xs md:text-sm">Price:
