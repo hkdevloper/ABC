@@ -111,7 +111,7 @@
                 </div>
             </form>
         </div>
-        <div class="bg-white mt-4 p-2">
+        <div class="w-full bg-white mt-4 p-2">
             <h2 class="text-lg md:text-xl font-semibold text-gray-900 mb-4">Answers</h2>
             @forelse($forum->forumReplies as $ans)
                 <div class="mb-3 md:mb-6 p-2 md:p-4 card card-hovered bg-white relative">
@@ -128,7 +128,7 @@
                     </div>
                 </div>
             @empty
-                <div class="md:p-2 p-6 card bg-white mb-5">
+                <div class="w-full md:p-2 p-6 card bg-white mb-5">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">No Answers Yet</h2>
                     <p class="text-gray-700">There are currently no answers to this question. Be the first to provide an answer!</p>
                 </div>
