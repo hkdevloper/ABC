@@ -18,7 +18,7 @@ class BlockedDomainResource extends Resource
     protected static ?string $model = BlockedDomain::class;
 
     protected static ?string $navigationGroup = 'Settings';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-no-symbol';
 
     public static function form(Form $form): Form
     {

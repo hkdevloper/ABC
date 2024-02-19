@@ -21,7 +21,7 @@ class ForumResource extends Resource
 {
     protected static ?string $model = Forum::class;
     protected static ?string $navigationGroup = 'Management';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
 
     public static function form(Form $form): Form
     {
