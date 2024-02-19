@@ -47,6 +47,7 @@ class DealResource extends Resource
                 Select::make('user_id')
                     ->native(false)
                     ->disabled()
+                    ->hidden()
                     ->default(auth()->user()->id)
                     ->label('Select User')
                     ->relationship('user', 'name'),
