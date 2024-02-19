@@ -122,7 +122,6 @@ Route::get('/', function () {
     }
 
     $data = compact('products', 'companies', 'events', 'category', 'searchList');
-    return $data;
     return view('welcome')->with($data);
 })->name('home');
 
