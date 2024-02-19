@@ -46,6 +46,8 @@ class DealResource extends Resource
                 ])->columns(),
                 Select::make('user_id')
                     ->native(false)
+                    ->disabled()
+                    ->default(auth()->user()->id)
                     ->label('Select User')
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
