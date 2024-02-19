@@ -117,13 +117,23 @@ class CompanyResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->live(onBlur: true)
                     ->maxLength(70),
-                TinyEditor::make('description')
-                    ->fileAttachmentsDisk('public')
-                    ->fileAttachmentsVisibility('public')
-                    ->fileAttachmentsDirectory('editor/uploads')
-                    ->profile('custom')
-                    ->columnSpan('full')
-                    ->required(),
+                Forms\Components\RichEditor::make('description')
+                    ->required()
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
+                    ->columnSpanFull(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('logo')

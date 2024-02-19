@@ -90,13 +90,23 @@ class EventResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(70),
-                TinyEditor::make('description')
-                    ->fileAttachmentsDisk('public')
-                    ->fileAttachmentsVisibility('public')
-                    ->fileAttachmentsDirectory('editor/uploads')
-                    ->profile('custom')
-                    ->columnSpan('full')
-                    ->required(),
+                Forms\Components\RichEditor::make('description')
+                    ->required()
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
+                    ->columnSpanFull(),
                 Forms\Components\DatePicker::make('start')
                     ->label('Start Date')
                     ->before('end')
