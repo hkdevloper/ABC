@@ -1,5 +1,4 @@
 @extends('layouts.auth')
-
 @section('content')
     <div class="cta">
         <div class="cta__content">
@@ -19,7 +18,7 @@
                 <div class="my-1"></div>
             @endforeach
         @endif
-        <form action="{{route('auth.login')}}" method="post" class="form__content">
+        <form action="{{route('auth.login')}}" method="post" class="form__content" id="loginForm">
             @csrf
             <div class="form__content__header">
                 <h1 class="form__content__heading">Log In to HkDevelopers.</h1>
@@ -42,8 +41,14 @@
                 </x-bladewind.alert>
                 <div class="my-1"></div>
             @endif
+            <div class="flex items-center justify-center mb-2">
+                <div class="g-recaptcha" data-sitekey="6LcZaXgpAAAAALdqfOoIntb7Wlm5hOKvOQ0jza_b"></div>
+            </div>
             <div class="form__field form__submit">
-                <input class="btn bg-purple-400 hover:bg-purple-800" type="submit" value="Log In">
+                <button class="g-recaptcha btn bg-purple-400 hover:bg-purple-800"
+                        data-sitekey="6LcZaXgpAAAAALdqfOoIntb7Wlm5hOKvOQ0jza_b"
+                        data-callback='onSubmit'
+                        data-action='submit'>Log In</button>
                 <a href="{{url('user/password-reset/request')}}">Forgot password?</a>
             </div>
         </form>
