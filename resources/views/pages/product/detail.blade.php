@@ -252,7 +252,9 @@
             button_action="hideModal('rate')"
             message="Your rating has been submitted successfully."/>
     </x-bladewind::modal>
-    <!-- Add this script at the end of your HTML file -->
+@endsection
+
+@section('page-scripts')
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Gallery View

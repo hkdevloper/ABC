@@ -179,3 +179,52 @@
         </section>
     </div>
 @endsection
+@section('page-scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Gallery View
+            const thumbnailButtons = document.querySelectorAll(".thumbnail-button");
+            const mainImage = document.getElementById("main-image");
+
+            thumbnailButtons.forEach((button) => {
+                button.addEventListener("click", function () {
+                    mainImage.src = button.getAttribute("data-image");
+                });
+            });
+        });
+
+        @auth
+            saveRating = async function (element) {
+            let form = document.getElementById('rate-form');
+            let item_id = form.querySelector('input[name="item_id"]').value;
+            let rating = dom_el(`.rating-value-${element}`).value;
+            let review = form.querySelector('textarea[name="review"]').value;
+            let url = '{{route('api.product.rate', ['type'=>'product'])}}';
+            let headersList = {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+
+            let bodyContent = JSON.stringify({
+                "item_id": item_id,
+                "rating": rating,
+                "review": review,
+                "user_id": "{{auth()->user()->id}}"
+            });
+
+            let response = await fetch(url, {
+                method: "POST",
+                body: bodyContent,
+                headers: headersList
+            });
+
+            let data = await response.json();
+            if (data.status === 'success') {
+                hideModal('rate');
+                showModal('rate-complete');
+                window.location.reload();
+            }
+        }
+        @endauth
+    </script>
+@endsection
