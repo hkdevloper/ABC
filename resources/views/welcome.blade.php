@@ -117,7 +117,7 @@
                                         {{ Str::limit($item->name, 15) }}
                                     </p>
                                     <p class="hidden md:block text-center text-base md:text-xl bold mt-2">
-                                        ({{ $item->countItem() }})</p>
+                                        ({{ $item->countItem($item->type) }})</p>
                                 </div>
                             </x-bladewind.card>
 
