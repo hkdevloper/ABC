@@ -12,8 +12,13 @@
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6Lecz3kpAAAAABBIpK8AnJSNd6MEgfg31w-ssBQi"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
+        let onloadCallback = function() {
+            grecaptcha.render('g-recaptcha', {
+                'sitekey' : '6LcJ1XkpAAAAAH3LBDb_OudLVSMCMZz1pG8psZv0'
+            });
+        };
         function onSubmit(token) {
             document.getElementById("loginForm").submit();
         }
