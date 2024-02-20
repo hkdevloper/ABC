@@ -13,15 +13,14 @@
                 <div class="lg:order-1 lg:mt-2 lg:pl-4">
                     <div class="hidden lg:block">
                         <div class="grid grid-cols-1 gap-4">
-                            <button type="button" class="thumbnail-button aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center" data-image="{{ url('storage/'.$deal->thumbnail) }}">
-                                <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" class="h-full w-full object-contain bg-transparent img-remove-bg">
-                            </button>
                             @forelse($deal->gallery as $image)
                                 <button type="button" class="thumbnail-button aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center" data-image="{{ url('storage/'.$image) }}">
                                     <img src="{{ url('storage/'.$image) }}" alt="Product Image" class="h-full w-full object-contain bg-transparent img-remove-bg">
                                 </button>
                             @empty
-                                <!-- No Gallery Images -->
+                                <button type="button" class="thumbnail-button aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center" data-image="{{ url('storage/'.$deal->thumbnail) }}">
+                                    <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" class="h-full w-full object-contain bg-transparent img-remove-bg">
+                                </button>
                             @endforelse
                         </div>
                     </div>
