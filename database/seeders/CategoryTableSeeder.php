@@ -19,6 +19,7 @@ class CategoryTableSeeder extends Seeder
             'blog' => ['Tech Insights Today', 'Eco Living Chronicles', 'Innovation Spotlight', 'Wellness Wisdom', 'Fashion Trends Blog'],
             'job' => ['Software Engineer at Tech Solutions Inc.', 'Environmental Analyst at Green Earth Industries', 'Product Designer at Global Innovators Co.', 'HealthCare Specialist at HealthCare Providers Ltd.', 'Fashion Designer at Smart Solutions Group'],
             'forum' => ['Tech Enthusiasts Hub', 'Green Living Community', 'Innovation Discussion Forum', 'Health & Wellness Exchange', 'Fashion Enthusiasts Club'],
+            'deal' => ['Tech Solutions Inc. Discount', 'Green Earth Industries Sale', 'Global Innovators Co. Offer', 'HealthCare Providers Ltd. Promo', 'Smart Solutions Group Deal'],
         ];
         // \App\Models\Category::factory()->count(10)->create();
         foreach ($categories as $type => $names) {

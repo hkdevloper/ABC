@@ -28,8 +28,6 @@ class AddressFactory extends Factory
             'summary' => $this->faker->text(51),
             'description' => $this->faker->realText(100),
             'seo_id' => \App\Models\Seo::factory()->create()->id,
-            'created_at' => now(),
-            'updated_at' => now(),
         ];
     }
 }

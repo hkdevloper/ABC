@@ -8,8 +8,7 @@
     <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
         <h1 class="block text-lg md:text-4xl w-full text-center font-bold">Search for thousands of deals & Offers!</h1>
         <br>
-        <form action=""
-              class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
+        <form action="" class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
             <div class="relative flex items-center justify-between md:w-full s-form">
                 <label for="searchInput" class="sr-only">Search</label>
                 <input id="searchInput" name="q" type="text" placeholder="Search for deals here! 🚀✨" autocomplete="off"
@@ -71,7 +70,7 @@
             </select>
         </div>
     </div>
-    <div class="container flex flex-col items-center justify-center">
+    <div class="container flex md:block flex-col justify-center items-center">
         <!-- Deals List -->
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             @forelse($deals as $item)

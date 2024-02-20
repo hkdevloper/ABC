@@ -21,7 +21,7 @@ class JobFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::pluck('id')->random(),
+            'user_id' => User::where('type', 'user')->pluck('id')->random(),
             'category_id' => Category::where('type', 'job')->pluck('id')->random(),
             'seo_id' => Seo::factory()->create()->id,
             'is_active' => true,
@@ -38,8 +38,6 @@ class JobFactory extends Factory
             'experience' => $this->faker->randomElement(['entry level', 'associate', 'mid-senior level', 'director', 'internship', 'executive']),
             'thumbnail' => "companies/logo/".rand(1,50).".webp",
             'address_id' => Address::factory()->create()->id,
-            'created_at' => now(),
-            'updated_at' => now(),
         ];
     }
 }

@@ -78,7 +78,7 @@ class BlogFactory extends Factory
             'tech enthusiasts', 'green living community', 'innovation discussion', 'health & wellness exchange', 'fashion enthusiasts',
         ];
         return [
-            'user_id' => User::pluck('id')->random(),
+            'user_id' => User::where('type', 'user')->pluck('id')->random(),
             'seo_id' => Seo::factory()->create()->id,
             'category_id' => Category::where('type', 'blog')->pluck('id')->random(),
             'is_active' => $this->faker->boolean,

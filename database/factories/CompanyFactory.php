@@ -36,9 +36,9 @@ class CompanyFactory extends Factory
             'Tech Enthusiasts Hub', 'Green Living Community', 'Innovation Discussion Forum', 'Health & Wellness Exchange', 'Fashion Enthusiasts Club',
         ];
         return [
-            'is_approved' => $this->faker->boolean,
+            'is_approved' => true,
             'is_claimed' => false,
-            'is_active' => $this->faker->boolean,
+            'is_active' => true,
             'is_featured' => $this->faker->boolean,
             'user_id' => User::factory()->create()->id,
             'category_id' => Category::where('type', 'company')->pluck('id')->random(),
@@ -66,8 +66,6 @@ class CompanyFactory extends Factory
             'youtube' => $this->faker->url,
             'address_id' => Address::factory()->create()->id,
             'seo_id' => Seo::factory()->create()->id,
-            'created_at' => now(),
-            'updated_at' => now(),
         ];
     }
 }

@@ -10,6 +10,7 @@ use Mews\Purifier\Casts\CleanHtml;
 
 class Forum extends Model
 {
+    use HasFactory;
     protected $table = 'forums';
     protected $primaryKey = 'id';
 

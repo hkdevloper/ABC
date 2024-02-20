@@ -29,8 +29,6 @@ class UserFactory extends Factory
             'balance' => $this->faker->randomNumber(4),
             'type' => 'user', // [user, Admin]
             'remember_token' => null,
-            'created_at' => now(),
-            'updated_at' => now(),
         ];
     }
 

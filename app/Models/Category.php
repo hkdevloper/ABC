@@ -93,8 +93,23 @@ class Category extends Model
     }
 
     // Count Item
-    public function countItem(): int
+    public function countItem($type): int
     {
-        return $this->products->count();
+        if ($type == 'company') {
+            return $this->companies()->count();
+        } elseif ($type == 'product') {
+            return $this->products()->count();
+        } elseif ($type == 'deal') {
+            return $this->deals()->count();
+        } elseif ($type == 'job') {
+            return $this->jobs()->count();
+        } elseif ($type == 'event') {
+            return $this->events()->count();
+        } elseif ($type == 'forum') {
+            return $this->forums()->count();
+        } elseif ($type == 'blog') {
+            return $this->blogs()->count();
+        }
+        return 0;
     }
 }

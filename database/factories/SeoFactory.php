@@ -28,8 +28,6 @@ class SeoFactory extends Factory
             'title' => $this->faker->sentence,
             'meta_description' => $this->faker->text(56),
             'meta_keywords' => $this->faker->randomElements($keywords, rand(1, 5)),
-            'created_at' => now(),
-            'updated_at' => now(),
         ];
     }
 }

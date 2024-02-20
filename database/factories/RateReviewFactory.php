@@ -23,7 +23,7 @@ class RateReviewFactory extends Factory
         $types = ['company', 'product', 'event'];
 
         return [
-            'user_id' => User::pluck('id')->random(),
+            'user_id' => User::where('type', 'user')->pluck('id')->random(),
             'type' => $this->faker->randomElement($types),
             'item_id' => function (array $attributes) {
                 return $this->getAssociatedItemId($attributes['type']);

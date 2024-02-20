@@ -20,7 +20,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'type' => $this->faker->randomElement(['company', 'product', 'event', 'blog', 'job', 'forum']),
+            'type' => $this->faker->randomElement(['company', 'product', 'event', 'blog', 'job', 'forum', 'deal']),
             'slug' => $this->faker->slug,
             'description' => $this->faker->text,
             'image' => "category/".rand(1,5).".svg",
@@ -28,8 +28,6 @@ class CategoryFactory extends Factory
             'is_featured' => $this->faker->boolean,
             'parent_id' => null,
             'seo_id' => Seo::factory()->create()->id,
-            'created_at' => now(),
-            'updated_at' => now(),
         ];
     }
 }
