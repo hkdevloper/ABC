@@ -19,7 +19,7 @@
                 <div class="my-1"></div>
             @endforeach
         @endif
-        <form action="{{route('auth.register')}}" method="post" class="form__content">
+        <form action="{{route('auth.register')}}" method="post" class="form__content" id="form">
             @csrf
             <div class="form__content__header">
                 <h1 class="form__content__heading">Sign Up to HkDevelopers.</h1>

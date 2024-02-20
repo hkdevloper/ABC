@@ -18,7 +18,7 @@
                 <div class="my-1"></div>
             @endforeach
         @endif
-        <form action="{{route('auth.login')}}" method="post" class="form__content" id="loginForm">
+        <form action="{{route('auth.login')}}" method="post" class="form__content" id="form">
             @csrf
             <div class="form__content__header">
                 <h1 class="form__content__heading">Log In to HkDevelopers.</h1>
