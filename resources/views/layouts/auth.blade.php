@@ -12,14 +12,10 @@
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lecz3kpAAAAABBIpK8AnJSNd6MEgfg31w-ssBQi"></script>
     <script>
-        function submitForm(token) {
-            document.getElementById("loginForm").submit();
-        }
-
         function onSubmit(token) {
-            document.getElementById("demo-form").submit();
+            document.getElementById("loginForm").submit();
         }
     </script>
     <style>

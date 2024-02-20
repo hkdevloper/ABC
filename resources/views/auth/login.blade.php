@@ -42,11 +42,11 @@
                 <div class="my-1"></div>
             @endif
             <div class="flex items-center justify-center mb-2">
-                <div class="g-recaptcha" data-sitekey="6LcZaXgpAAAAALdqfOoIntb7Wlm5hOKvOQ0jza_b"></div>
+                <div class="g-recaptcha" data-sitekey="6Lecz3kpAAAAABBIpK8AnJSNd6MEgfg31w-ssBQi"></div>
             </div>
             <div class="form__field form__submit">
                 <button class="g-recaptcha btn bg-purple-400 hover:bg-purple-800"
-                        data-sitekey="6LcZaXgpAAAAALdqfOoIntb7Wlm5hOKvOQ0jza_b"
+                        data-sitekey="6Lecz3kpAAAAABBIpK8AnJSNd6MEgfg31w-ssBQi"
                         data-callback='onSubmit'
                         data-action='submit'>Log In</button>
                 <a href="{{url('user/password-reset/request')}}">Forgot password?</a>
