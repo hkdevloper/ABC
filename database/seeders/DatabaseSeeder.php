@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 //            BlogsSeeder::class,
 //            JobsTableSeeder::class,
 //            ForumSeeder::class,
-            Dealseeder::class,
+            //Dealseeder::class,
             RateReviewSeeder::class,
         ]);
     }
