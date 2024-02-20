@@ -1,7 +1,5 @@
+@php use App\classes\HelperFunctions; @endphp
 @extends('layouts.user')
-@php
-    use App\Classes\HelperFunctions;
-@endphp
 @section('content')
     <div class="container mx-auto">
         <x-user.bread-crumb :data="['Home', 'Deals', $deal->name]"/>
