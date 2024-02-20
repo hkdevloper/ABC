@@ -14,11 +14,6 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
-        let onloadCallback = function() {
-            grecaptcha.render('g-recaptcha', {
-                'sitekey' : '6LcJ1XkpAAAAAH3LBDb_OudLVSMCMZz1pG8psZv0'
-            });
-        };
         function onSubmit(token) {
             document.getElementById("loginForm").submit();
         }
