@@ -53,7 +53,6 @@
                 <div class="my-2"></div>
             @endif
             <div class="form__field form__submit">
-                <input class="btn bg-purple-400 hover:bg-purple-800" type="submit" value="">
                 <button class="g-recaptcha btn bg-purple-400 hover:bg-purple-800"
                         data-sitekey="6LcJ1XkpAAAAAH3LBDb_OudLVSMCMZz1pG8psZv0"
                         data-callback='onSubmit'
