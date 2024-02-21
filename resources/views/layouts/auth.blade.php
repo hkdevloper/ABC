@@ -9,7 +9,7 @@
     <link href="{{ asset('css/boxicons/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css')}}" rel="stylesheet">
     <script src="{{ asset('js/jquery.js')}}"></script>
-    <script src="{{ asset('js/helpers.js') }}"></script>
+    <script src="{{ asset('js/helper.js') }}"></script>
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -12,7 +12,7 @@
     <script src="{{ asset('js/jquery.js')}}"></script>
     <script src="{{ asset('js/alpine.js')}}" defer></script>
     <script src="{{ asset('js/fw.js')}}" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/helpers.js') }}"></script>
+    <script src="{{ asset('js/helper.js') }}"></script>
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/scroll-reveal.js')}}"></script>
     @include('includes.ads-config')
