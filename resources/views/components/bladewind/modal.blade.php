@@ -1,6 +1,6 @@
 @props([
     // determines types of icon to display. Available options: info, success, error, warning
-    // only the blank type (type='') has no icon. useful if you want your modal to contain a form 
+    // only the blank type (type='') has no icon. useful if you want your modal to contain a form
     // or other custom content
     'type' => '',
 
@@ -18,12 +18,12 @@
     'cancel_button_label' => 'Cancel',
     'cancelButtonLabel' => 'Cancel',
 
-    // action to perform when secondary button is clicked. default is close. 
+    // action to perform when secondary button is clicked. default is close.
     // provide a custom js function as string to execute that function. example "saveUser"
     'ok_button_action' => 'close',
     'okButtonAction' => 'close',
 
-    // action to perform when primary button is clicked. default is close. 
+    // action to perform when primary button is clicked. default is close.
     // provide a custom js function as a string to execute that function. example "confirmAction"
     'cancel_button_action' => 'close',
     'cancelButtonAction' => 'close',

@@ -11,14 +11,65 @@
     <script src="{{ asset('js/jquery.js')}}"></script>
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script>
-        function onSubmit(token) {
-            document.getElementById("form").submit();
-        }
-    </script>
     <style>
+        .special-elite-regular {
+            font-family: "Special Elite", system-ui;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .captcha {
+            font-family: "Special Elite", system-ui;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 1.5rem;
+            color: #a443f4;
+            background-color: #f0f0f0;
+            padding: 5px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .captcha::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 20px;
+            z-index: -1;
+        }
+
+        .captcha::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent 45%, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0.5) 55%, transparent 55%);
+            z-index: -1;
+            transform: translateY(-50%);
+        }
+
+        .captcha span {
+            position: relative;
+            display: inline-block;
+            transform: skew(-10deg);
+            margin: 0 2px;
+            text-decoration: line-through;
+            text-decoration-color: #a443f4;
+            text-decoration-thickness: 2px;
+
+        }
+
         body {
             font-family: "Roboto", sans-serif;
             font-size: 1rem;
@@ -205,5 +256,41 @@
     @include('includes.footer')
 </main>
 <script src="{{ asset('js/main.js')}}"></script>
+<script>
+    function generateCaptcha() {
+        const code = generateRandomCode(6); // Generate a new CAPTCHA code
+        document.getElementById('captcha-code').innerText = code; // Display CAPTCHA code in span
+        return code; // Return the generated code
+    }
+
+    function generateRandomCode(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+    }
+
+    // Call the function to generate CAPTCHA code when the page loads
+    window.onload = generateCaptcha;
+
+    function validateCaptcha() {
+        let captcha = document.getElementById('captcha').value; // Get the value of the user input
+        let code = document.getElementById('captcha-code').innerText; // Get the current CAPTCHA code
+        if (captcha === code) { // Check if the user input matches the CAPTCHA code
+            // submit the form
+            document.getElementById('form').submit();
+        } else {
+            alert('CAPTCHA validation failed! Please try again.'); // Display an error message
+            generateCaptcha(); // Generate a new CAPTCHA code
+            // Empty the user input
+            document.getElementById('captcha').value = '';
+        }
+    }
+
+    // Automatically refresh CAPTCHA after a certain period (e.g., every 5 minutes)
+    setInterval(generateCaptcha, 300000); // 300000 milliseconds = 5 minutes
+</script>
 </body>
 </html>

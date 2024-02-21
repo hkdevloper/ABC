@@ -4,8 +4,9 @@
         <div class="cta__content">
             <img src="{{asset('storage/image/auth.svg')}}" alt="Authentication" class="cta__image">
         </div>
-        <p  class="text-center">
-            lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <p class="text-center">
+            lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.
         </p>
     </div>
     <div class="form">
@@ -23,7 +24,9 @@
             <div class="form__content__header">
                 <h1 class="form__content__heading">Log In to HkDevelopers.</h1>
                 <div class="form__content__description">
-                    If you don’t have an account, <a href="{{url('user/register')}}" class="text-purple-500 underline hover:no-underline">you can create one</a>.
+                    If you don’t have an account, <a href="{{url('user/register')}}"
+                                                     class="text-purple-500 underline hover:no-underline">you can create
+                        one</a>.
                 </div>
             </div>
             <div class="form__field">
@@ -34,6 +37,16 @@
                 <label class="form__label" for="pwd">Password</label>
                 <input class="form__input" type="password" name="password" id="pwd" required>
             </div>
+            <div class="form__field">
+                <label class="form__label" for="captcha">CAPTCHA: <span class="captcha">
+                        <span id="captcha-code"></span>
+                    </span></label>
+                <input class="form__input" type="text" id="captcha" name="captcha" required>
+                <!-- Helper text -->
+                <small class="form__helper">Can't read the CAPTCHA?
+                    <span class="hover:underline text-purple-500 cursor-pointer" onclick="generateCaptcha()">Click here</span> to generate a new one.
+                </small>
+            </div>
             @if(session()->has('error'))
                 <x-bladewind.alert
                     type="error">
@@ -42,12 +55,11 @@
                 <div class="my-1"></div>
             @endif
             <div class="form__field form__submit">
-                <button class="g-recaptcha btn bg-purple-400 hover:bg-purple-800"
-                        data-sitekey="6LcJ1XkpAAAAAH3LBDb_OudLVSMCMZz1pG8psZv0"
-                        data-callback='onSubmit'
-                        data-action='submit'>Log In</button>
+                <button class="g-recaptcha btn bg-purple-400 hover:bg-purple-800" type="button" onclick="validateCaptcha()">Log In</button>
                 <a href="{{url('user/password-reset/request')}}">Forgot password?</a>
             </div>
         </form>
     </div>
 @endsection
+
+

@@ -45,6 +45,16 @@
                 <label class="form__label" for="cpwd">Confirm Password</label>
                 <input class="form__input" type="password" name="confirm_password" id="cpwd" required>
             </div>
+            <div class="form__field">
+                <label class="form__label" for="captcha">CAPTCHA: <span class="captcha">
+                        <span id="captcha-code"></span>
+                    </span></label>
+                <input class="form__input" type="text" id="captcha" name="captcha" required>
+                <!-- Helper text -->
+                <small class="form__helper">Can't read the CAPTCHA?
+                    <span class="hover:underline text-purple-500 cursor-pointer" onclick="generateCaptcha()">Click here</span> to generate a new one.
+                </small>
+            </div>
             @if(session()->has('error'))
                 <x-bladewind.alert
                     type="error">
@@ -53,10 +63,7 @@
                 <div class="my-2"></div>
             @endif
             <div class="form__field form__submit">
-                <button class="g-recaptcha btn bg-purple-400 hover:bg-purple-800"
-                        data-sitekey="6LcJ1XkpAAAAAH3LBDb_OudLVSMCMZz1pG8psZv0"
-                        data-callback='onSubmit'
-                        data-action='submit'>
+                <button class="g-recaptcha btn bg-purple-400 hover:bg-purple-800" type="button" onclick="validateCaptcha()">
                     Register Now
                 </button>
             </div>

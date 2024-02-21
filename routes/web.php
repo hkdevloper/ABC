@@ -35,21 +35,28 @@ use Illuminate\Http\Request;
 */
 Route::prefix('test')->group(function () {
     Route::get('/', function () {
-        $data = Product::with('seo')->where('is_active', 1)->where('is_approved', 1)->get();
-        $seo = [];
-        foreach ($data as $item) {
-            $seo[] = $item->seo;
-        }
-        return $seo;
+        // Generate a random CAPTCHA code
+        $captchaCode = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 6);
+        session(['captcha_code' => $captchaCode]);
+
+        $image = imagecreatetruecolor(200, 50);
+        $background_color = imagecolorallocate($image, 255, 255, 255);
+        $text_color = imagecolorallocate($image, 0, 0, 0);
+        imagefilledrectangle($image, 0, 0, 200, 50, $background_color);
+
+        header('Content-type: image/png');
+        $img = imagepng($image);
+        imagedestroy($image);
+        return $img;
     });
 });
 
-Route::get('login', function(){
+Route::get('login', function () {
     return redirect()->route('auth.login');
 })->name('login');
 
 Route::get('logout', function () {
-    if (Auth::check()){
+    if (Auth::check()) {
         Auth::logout();
     }
     return redirect()->back();
@@ -289,7 +296,7 @@ Route::get('/search', function (Request $request) {
     return view('search')->with($data);
 })->name('search');
 
-Route::get('/categories', function (Request $request){
+Route::get('/categories', function (Request $request) {
     // Clear session
     Session::forget('menu');
     $type = Category::pluck('type')->unique();
@@ -369,7 +376,7 @@ Route::prefix('protected')->middleware(['auth'])->group(function () {
 
 });
 
-Route::get('direct-message', function (Request $request){
+Route::get('direct-message', function (Request $request) {
     $request->validate([
         'company_id' => 'required',
     ]);
@@ -378,7 +385,7 @@ Route::get('direct-message', function (Request $request){
     return view('dm')->with($data);
 })->name('direct-message');
 
-Route::post('direct-message', function (Request $request){
+Route::post('direct-message', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
         'phone' => 'required',
