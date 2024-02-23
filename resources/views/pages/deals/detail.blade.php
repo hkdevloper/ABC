@@ -6,26 +6,13 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Image Side -->
-            <div class="md:flex md:flex-row-reverse items-center justify-between">
+            <div class="flex flex-col items-center justify-center">
                 <div class="overflow-hidden rounded-lg md:w-3/4">
                     <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" id="main-image" class="h-80 w-full object-contain img-remove-bg">
                 </div>
                 <div class="lg:order-1 lg:mt-2 lg:pl-4">
-                    <div class="hidden lg:block">
-                        <div class="grid grid-cols-1 gap-4">
-                            @forelse($deal->gallery as $image)
-                                <button type="button" class="thumbnail-button aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center" data-image="{{ url('storage/'.$image) }}">
-                                    <img src="{{ url('storage/'.$image) }}" alt="Product Image" class="h-full w-full object-contain bg-transparent img-remove-bg">
-                                </button>
-                            @empty
-                                <button type="button" class="thumbnail-button aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center" data-image="{{ url('storage/'.$deal->thumbnail) }}">
-                                    <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" class="h-full w-full object-contain bg-transparent img-remove-bg">
-                                </button>
-                            @endforelse
-                        </div>
-                    </div>
-                    <div class="lg:hidden mt-2">
-                        <div class="grid grid-cols-1 gap-4">
+                    <div class="mt-2">
+                        <div class="grid grid-cols-5 gap-10 overflow-x-auto">
                             <button type="button" class="thumbnail-button aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center" data-image="{{ url('storage/'.$deal->thumbnail) }}">
                                 <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" class="h-full w-full object-contain bg-transparent img-remove-bg">
                             </button>
@@ -42,7 +29,7 @@
             </div>
 
             <!-- Deals Details -->
-            <div class="flex flex-col p-4">
+            <div class="flex-col p-4">
                 <div class="flex flex-col items-center">
                     <img src="{{ url('storage/'.$deal->company->logo) }}" alt="Company Logo" class="h-32 w-32 object-contain">
                     <span class="text-base md:text-lg font-bold text-gray-500">{{ $deal->company->name }}</span>
