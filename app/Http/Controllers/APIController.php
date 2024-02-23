@@ -215,6 +215,8 @@ class APIController extends Controller
                 $item = Company::find($item_id);
             } elseif ($type == 'event') {
                 $item = Event::find($item_id);
+            } elseif ($type == 'deal') {
+                $item = Deal::find($item_id);
             } else {
                 return response()->json(['message' => 'Invalid item type'], 400);
             }

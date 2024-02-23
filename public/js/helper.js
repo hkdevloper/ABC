@@ -144,7 +144,7 @@ changeCss = (element, css, mode = 'add', elementIsDomObject = false) => {
 showModal = (element) => {
     unhide(`.bw-${element}-modal`);
     document.body.classList.add('overflow-hidden');
-    dom_el(`.bw-${element}-modal`).focus();
+    // dom_el(`.bw-${element}-modal`).focus();
     let current_index = (current_modal.length === 0) ? 0 : current_modal.length + 1;
     animateCSS(`.bw-${element}`, 'zoomIn').then(() => {
         current_modal[current_index] = element;

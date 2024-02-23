@@ -43,21 +43,35 @@
 
             <!-- Deals Details -->
             <div class="flex flex-col p-4">
-                <div class="flex items-center">
-                    <img src="{{ url('storage/'.$deal->company->logo) }}" alt="Company Logo" class="h-16 w-16 rounded-full object-contain mr-4">
-                    <div class="flex flex-col">
-                        <span class="text-xl font-bold">{{ $deal->name }}
-                            @if($deal->is_featured)
-                                <span class="inline-flex items-center bg-green-500 text-white rounded ml-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-1">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                                    </svg>
-                                    <span class="text-xs">Featured</span>
-                                </span>
-                            @endif
+                <div class="flex flex-col items-center">
+                    <img src="{{ url('storage/'.$deal->company->logo) }}" alt="Company Logo" class="h-32 w-32 object-contain">
+                    <span class="text-base md:text-lg font-bold text-gray-500">{{ $deal->company->name }}</span>
+                    <div class="flex items-center justify-start mb-2">
+                        @if($deal->company->is_featured)
+                            <span
+                                class="px-1 bg-green-200 text-green-700 rounded text-sm flex items-center justify-center">
+                            <i class='bx bx-star text-green-700 mr-2'></i>
+                            Featured
                         </span>
-                        <span class="text-sm text-gray-500">Published by {{ $deal->company->name }}</span>
-                        <span class="text-sm text-gray-500">Published on {{ $deal->created_at->format('d M Y') }} ({{ $deal->updated_at->diffForHumans() }})</span>
+                        @endif
+                        @if($deal->company->is_approved)
+                            <span
+                                class="px-1 bg-blue-200 text-blue-500 rounded m-1 text-sm flex items-center justify-center">
+                            <i class='bx bx-badge-check text-blue-500 mr-2'></i>Verified
+                        </span>
+                        @endif
+                    </div>
+                    <div class="flex items-center">
+                        <button class="inline-flex items-center mr-1 text-gray-500">
+                            <i class='bx bxs-star text-green-400 text-sm'></i>
+                            <span class="mx-1 text-gray-500 text-sm">{{\App\classes\HelperFunctions::getRatingAverage('company', $deal->id)}}</span>
+                            <span class="mx-1 text-gray-500 text-sm">({{\App\classes\HelperFunctions::getRatingCount('company', $deal->id)}} Review)</span>
+                        </button>
+                    </div>
+                    <!-- Location -->
+                    <div class="flex items-center justify-center mt-2">
+                        <i class="bx bx-map text-lg text-indigo-500 mr-2 rounded-full p-2"></i>
+                        <span class="text-base font-semibold text-gray-500">{{ $deal->company->address->city }}, {{ $deal->company->address->country->name }}</span>
                     </div>
                 </div>
                 <div class="flex flex-col items-center justify-center mt-4">
@@ -87,6 +101,7 @@
         <x-bladewind.tab-group name="product-info">
             <x-slot name="headings">
                 <x-bladewind.tab-heading active="true" name="desc" label="Description"/>
+                <x-bladewind.tab-heading name="rate" label="Rate & Reviews"/>
                 <x-bladewind.tab-heading name="tos" label="Terms & Condition"/>
             </x-slot>
 
@@ -120,6 +135,68 @@
                     </table>
                     <hr class="my-4">
                     <p class="text-sm text-gray-500">{!! $deal->description !!}</p>
+                </x-bladewind.tab-content>
+                <x-bladewind.tab-content name="rate">
+                    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+                        <div>
+                            <div class="rounded-lg border p-4">
+                                <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Customer Reviews</h2>
+
+                                <div class="mb-0.5 flex items-center gap-2">
+                                    <x-bladewind.rating name="star-rating" size="medium" clickable="false"
+                                                        rating="{{\App\classes\HelperFunctions::getRatingAverage('deal', $deal->id)}}"/>
+                                    <span class="text-sm font-semibold">{{\App\classes\HelperFunctions::getRatingAverage('deal', $deal->id)}}/5</span>
+                                </div>
+
+                                <span class="block text-sm text-gray-500">Bases on {{$deal->getReviews()->count()}} reviews</span>
+
+                                <hr class="my-4 border-t-2 border-gray-200">
+
+                                @auth
+                                    @if(auth()->user()->hasRated("deal", $deal->id))
+                                        <p class="text-sm text-gray-500">You have already rated this Deal.</p>
+                                    @else
+                                        <a href="#" onclick="showModal('rate')"
+                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
+                                            a review</a>
+                                    @endif
+                                @else
+                                    <a href="{{route('auth.login')}}"
+                                       class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Login
+                                        to write a review</a>
+                                @endauth
+                            </div>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div class="border-b pb-4 md:pb-6">
+                                <h2 class="text-lg font-bold text-gray-800 lg:text-xl">Top Reviews</h2>
+                            </div>
+                            <hr>
+                            <br>
+                            <div class="divide-y">
+                                @forelse($deal->getReviews() as $item)
+                                    <div class="flex flex-col gap-3 p-4 mb-2 bg-gray-100">
+                                        <div class="flex justify-between items-center">
+                                            <div>
+                                                <span class="block text-sm font-bold">{{$item->user->name}}</span>
+                                                <span
+                                                    class="block text-sm text-gray-500">{{$item->created_at->diffForHumans()}}</span>
+                                            </div>
+                                            <x-bladewind.rating name="star-rating" size="small" clickable="false"
+                                                                rating="{{$item->rating}}"/>
+                                        </div>
+                                        <p class="text-gray-600">{{$item->review}}</p>
+                                    </div>
+                                @empty
+                                    <div class="flex flex-col gap-3 p-4 mb-2 bg-gray-100">
+                                        <p class="text-gray-600">No reviews yet.</p>
+                                    </div>
+                                @endforelse
+                            </div>
+                            <!-- Pagination -->
+                            {{ $deal->getReviews()->links() }}
+                        </div>
+                    </div>
                 </x-bladewind.tab-content>
                 <x-bladewind.tab-content name="tos">
                     <table class="w-full border border-collapse rounded-lg">
@@ -179,6 +256,31 @@
             </div>
         </section>
     </div>
+    <x-bladewind::modal
+        backdrop_can_close="false"
+        name="rate"
+        ok_button_action="saveRating('rate-product')"
+        ok_button_label="Submit"
+        close_after_action="false"
+        center_action_buttons="true">
+        <form method="post" action="" id="rate-form">
+            @csrf
+            <b class="mt-0">Add your review</b>
+            <x-bladewind.rating name="rate-product" rating="1"/>
+            <x-bladewind.textarea name="review" label="Review" rows="3"/>
+            <input type="hidden" name="item_id" value="{{$deal->id}}">
+        </form>
+        <x-bladewind::processing
+            name="rate-processing"
+            message="Submitting your rating..."/>
+
+        <x-bladewind::process-complete
+            name="rate-complete"
+            process_completed_as="passed"
+            button_label="Done"
+            button_action="hideModal('rate')"
+            message="Your rating has been submitted successfully."/>
+    </x-bladewind::modal>
 @endsection
 @section('page-scripts')
     <script>
@@ -193,5 +295,38 @@
                 });
             });
         });
+        @auth
+            saveRating = async function (element) {
+            let form = document.getElementById('rate-form');
+            let item_id = form.querySelector('input[name="item_id"]').value;
+            let rating = dom_el(`.rating-value-${element}`).value;
+            let review = form.querySelector('textarea[name="review"]').value;
+            let url = '{{route('api.product.rate', ['type'=>'deal'])}}';
+            let headersList = {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+
+            let bodyContent = JSON.stringify({
+                "item_id": item_id,
+                "rating": rating,
+                "review": review,
+                "user_id": "{{auth()->user()->id}}"
+            });
+
+            let response = await fetch(url, {
+                method: "POST",
+                body: bodyContent,
+                headers: headersList
+            });
+
+            let data = await response.json();
+            if (data.status === 'success') {
+                hideModal('rate');
+                showModal('rate-complete');
+            }
+            window.location.reload();
+        }
+        @endauth
     </script>
 @endsection

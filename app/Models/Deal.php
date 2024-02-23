@@ -54,4 +54,13 @@ class Deal extends Model
     {
         return $this->belongsTo(Company::class, 'user_id', 'user_id');
     }
+    public function getReviews() : array | object
+    {
+        return RateReview::where('type', 'deal')->where('item_id', $this->id)->paginate(3);
+    }
+
+    public function getReviewsCount() : int
+    {
+        return RateReview::where('type', 'deal')->where('item_id', $this->id)->count();
+    }
 }

@@ -249,8 +249,7 @@
                                         <p class="text-sm text-gray-500">You have already rated this company.</p>
                                     @else
                                         <a href="#" onclick="showModal('rate')"
-                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
-                                            a review</a>
+                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write a review</a>
                                     @endif
                                 @else
                                     <a href="{{route('auth.login')}}"
