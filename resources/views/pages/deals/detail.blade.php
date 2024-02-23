@@ -73,32 +73,7 @@
                         <p class="text-sm text-gray-400">Inclusive of all taxes</p>
                     </div>
                 </div>
-                <table class="w-full rounded-lg mt-4">
-                    <!-- Category Section -->
-                    <tr>
-                        <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                            <div class="flex items-center">
-                                <i class="bx bx-category text-lg text-indigo-500 mr-2 border border-collapse rounded-full p-2"></i>
-                                <span class="text-base font-semibold text-gray-500">Category</span>
-                            </div>
-                        </td>
-                        <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                            <span class="text-base text-purple-500">{{ $deal->category->name }}</span>
-                        </td>
-                    </tr>
-                    <!-- Location Section -->
-                    <tr>
-                        <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                            <div class="flex items-center">
-                                <i class="bx bx-map text-lg text-indigo-500 mr-2 border border-collapse rounded-full p-2"></i>
-                                <span class="text-base font-semibold text-gray-500">Location</span>
-                            </div>
-                        </td>
-                        <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                            <span class="text-base text-gray-500">{{ $deal->company->address->country->name }}</span>
-                        </td>
-                    </tr>
-                </table>
+
                 <div class="flex justify-center items-center mt-4">
                     <a href="{{route('view.company', [$deal->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue">
                         Contact Now
@@ -117,6 +92,32 @@
 
             <x-bladewind.tab-body>
                 <x-bladewind.tab-content name="desc" active="true">
+                    <table class="w-full rounded-lg mt-4">
+                        <!-- Category Section -->
+                        <tr>
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <div class="flex items-center">
+                                    <i class="bx bx-category text-lg text-indigo-500 mr-2 border border-collapse rounded-full p-2"></i>
+                                    <span class="text-base font-semibold text-gray-500">Category</span>
+                                </div>
+                            </td>
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <span class="text-base text-purple-500">{{ $deal->category->name }}</span>
+                            </td>
+                        </tr>
+                        <!-- Location Section -->
+                        <tr>
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <div class="flex items-center">
+                                    <i class="bx bx-map text-lg text-indigo-500 mr-2 border border-collapse rounded-full p-2"></i>
+                                    <span class="text-base font-semibold text-gray-500">Location</span>
+                                </div>
+                            </td>
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <span class="text-base text-gray-500">{{ $deal->company->address->country->name }}</span>
+                            </td>
+                        </tr>
+                    </table>
                     <hr class="my-4">
                     <p class="text-sm text-gray-500">{!! $deal->description !!}</p>
                 </x-bladewind.tab-content>
@@ -192,39 +193,5 @@
                 });
             });
         });
-
-        @auth
-            saveRating = async function (element) {
-            let form = document.getElementById('rate-form');
-            let item_id = form.querySelector('input[name="item_id"]').value;
-            let rating = dom_el(`.rating-value-${element}`).value;
-            let review = form.querySelector('textarea[name="review"]').value;
-            let url = '{{route('api.product.rate', ['type'=>'product'])}}';
-            let headersList = {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            }
-
-            let bodyContent = JSON.stringify({
-                "item_id": item_id,
-                "rating": rating,
-                "review": review,
-                "user_id": "{{auth()->user()->id}}"
-            });
-
-            let response = await fetch(url, {
-                method: "POST",
-                body: bodyContent,
-                headers: headersList
-            });
-
-            let data = await response.json();
-            if (data.status === 'success') {
-                hideModal('rate');
-                showModal('rate-complete');
-                window.location.reload();
-            }
-        }
-        @endauth
     </script>
 @endsection
