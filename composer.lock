@@ -2645,18 +2645,6 @@
         },
         {
             "name": "laravel/framework",
-<<<<<<< HEAD
-            "version": "v10.44.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "1199dbe361787bbe9648131a79f53921b4148cf6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/1199dbe361787bbe9648131a79f53921b4148cf6",
-                "reference": "1199dbe361787bbe9648131a79f53921b4148cf6",
-=======
             "version": "v10.46.0",
             "source": {
                 "type": "git",
@@ -2667,7 +2655,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/5e95946a8283a8d5c015035793f9c61c297e937f",
                 "reference": "5e95946a8283a8d5c015035793f9c61c297e937f",
->>>>>>> b140daa8eb2a3f5cd89eb7765101d878158de1dd
                 "shasum": ""
             },
             "require": {
@@ -2860,11 +2847,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-<<<<<<< HEAD
-            "time": "2024-02-13T16:01:16+00:00"
-=======
             "time": "2024-02-27T16:46:54+00:00"
->>>>>>> b140daa8eb2a3f5cd89eb7765101d878158de1dd
         },
         {
             "name": "laravel/prompts",
@@ -8779,18 +8762,6 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-<<<<<<< HEAD
-            "version": "v3.10.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "09d3dc77d7dc1b063e3728a6029c39ee0fbebf1d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/09d3dc77d7dc1b063e3728a6029c39ee0fbebf1d",
-                "reference": "09d3dc77d7dc1b063e3728a6029c39ee0fbebf1d",
-=======
             "version": "v3.10.6",
             "source": {
                 "type": "git",
@@ -8801,7 +8772,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/1fcb37307ebb32207dce16fa160a92b14d8b671f",
                 "reference": "1fcb37307ebb32207dce16fa160a92b14d8b671f",
->>>>>>> b140daa8eb2a3f5cd89eb7765101d878158de1dd
                 "shasum": ""
             },
             "require": {
@@ -8860,11 +8830,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-debugbar/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.10.4"
-=======
                 "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.10.6"
->>>>>>> b140daa8eb2a3f5cd89eb7765101d878158de1dd
             },
             "funding": [
                 {
@@ -8876,11 +8842,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2024-02-14T08:52:12+00:00"
-=======
             "time": "2024-03-01T14:41:13+00:00"
->>>>>>> b140daa8eb2a3f5cd89eb7765101d878158de1dd
         },
         {
             "name": "fakerphp/faker",
@@ -9069,18 +9031,6 @@
         },
         {
             "name": "laravel/pint",
-<<<<<<< HEAD
-            "version": "v1.13.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/pint.git",
-                "reference": "60a163c3e7e3346a1dec96d3e6f02e6465452552"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/60a163c3e7e3346a1dec96d3e6f02e6465452552",
-                "reference": "60a163c3e7e3346a1dec96d3e6f02e6465452552",
-=======
             "version": "v1.14.0",
             "source": {
                 "type": "git",
@@ -9091,7 +9041,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/pint/zipball/6b127276e3f263f7bb17d5077e9e0269e61b2a0e",
                 "reference": "6b127276e3f263f7bb17d5077e9e0269e61b2a0e",
->>>>>>> b140daa8eb2a3f5cd89eb7765101d878158de1dd
                 "shasum": ""
             },
             "require": {
@@ -9144,22 +9093,6 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-<<<<<<< HEAD
-            "time": "2024-02-13T17:20:13+00:00"
-        },
-        {
-            "name": "laravel/sail",
-            "version": "v1.27.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/sail.git",
-                "reference": "3047e1a157fad968cc5f6e620d5cbe5c0867fffd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/3047e1a157fad968cc5f6e620d5cbe5c0867fffd",
-                "reference": "3047e1a157fad968cc5f6e620d5cbe5c0867fffd",
-=======
             "time": "2024-02-20T17:38:05+00:00"
         },
         {
@@ -9174,7 +9107,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/f84e444a3dbc1811803cd2a050bdd54ff6f5eef8",
                 "reference": "f84e444a3dbc1811803cd2a050bdd54ff6f5eef8",
->>>>>>> b140daa8eb2a3f5cd89eb7765101d878158de1dd
                 "shasum": ""
             },
             "require": {
@@ -9223,22 +9155,6 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-<<<<<<< HEAD
-            "time": "2024-02-08T15:24:21+00:00"
-        },
-        {
-            "name": "maximebf/debugbar",
-            "version": "v1.20.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "06ebf922ccedfa4cc43015825697ee8c1fb80f7e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/06ebf922ccedfa4cc43015825697ee8c1fb80f7e",
-                "reference": "06ebf922ccedfa4cc43015825697ee8c1fb80f7e",
-=======
             "time": "2024-02-23T00:24:47+00:00"
         },
         {
@@ -9253,7 +9169,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/484625c23a4fa4f303617f29fcacd42951c9c01d",
                 "reference": "484625c23a4fa4f303617f29fcacd42951c9c01d",
->>>>>>> b140daa8eb2a3f5cd89eb7765101d878158de1dd
                 "shasum": ""
             },
             "require": {
@@ -9304,15 +9219,9 @@
             ],
             "support": {
                 "issues": "https://github.com/maximebf/php-debugbar/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/maximebf/php-debugbar/tree/v1.20.1"
-            },
-            "time": "2024-02-13T19:03:14+00:00"
-=======
                 "source": "https://github.com/maximebf/php-debugbar/tree/v1.20.2"
             },
             "time": "2024-02-15T10:49:09+00:00"
->>>>>>> b140daa8eb2a3f5cd89eb7765101d878158de1dd
         },
         {
             "name": "mockery/mockery",
