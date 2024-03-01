@@ -2,12 +2,12 @@
 @extends('layouts.user')
 @section('content')
     <div class="container mx-auto">
-        <x-user.bread-crumb :data="['Home', 'Deals', $deal->name]"/>
+        <x-user.bread-crumb :data="['Home', 'Deals', $deal->title]"/>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Image Side -->
             <div class="flex flex-col items-center justify-center">
-                <div class="overflow-hidden rounded-lg md:w-3/4">
+                <div class="overflow-hidden rounded-lg md:w-3/4 border border-solid border-gray-300">
                     <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" id="main-image" class="h-80 w-full object-contain img-remove-bg">
                 </div>
                 <div class="lg:order-1 lg:mt-2 lg:pl-4">
@@ -48,6 +48,11 @@
                         </span>
                         @endif
                     </div>
+                    <!-- Location -->
+                    <div class="flex items-center justify-center my-2">
+                        <i class="bx bx-map text-lg text-indigo-500 mr-2 rounded-full p-2"></i>
+                        <span class="text-base font-semibold text-gray-500">{{ $deal->company->address->city }}, {{ $deal->company->address->country->name }}</span>
+                    </div>
                     <div class="flex items-center">
                         <button class="inline-flex items-center mr-1 text-gray-500">
                             <i class='bx bxs-star text-green-400 text-sm'></i>
@@ -55,13 +60,9 @@
                             <span class="mx-1 text-gray-500 text-sm">({{\App\classes\HelperFunctions::getRatingCount('company', $deal->id)}} Review)</span>
                         </button>
                     </div>
-                    <!-- Location -->
-                    <div class="flex items-center justify-center mt-2">
-                        <i class="bx bx-map text-lg text-indigo-500 mr-2 rounded-full p-2"></i>
-                        <span class="text-base font-semibold text-gray-500">{{ $deal->company->address->city }}, {{ $deal->company->address->country->name }}</span>
-                    </div>
+
                 </div>
-                <div class="flex flex-col items-center justify-center mt-4">
+                <div class="flex flex-col items-center justify-center my-4 hidden">
                     <div class="flex items-center justify-center">
                         <p class="text-3xl font-bold text-purple-500">
                             ₹{{ HelperFunctions::getDiscountedPrice($deal->price, $deal->discount_type, $deal->discount_value) }}</p>
@@ -75,8 +76,8 @@
                     </div>
                 </div>
 
-                <div class="flex justify-center items-center mt-4">
-                    <a href="{{route('view.company', [$deal->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue">
+                <div class="flex justify-center items-center my-4">
+                    <a href="{{route('view.company', [$deal->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue justify-center items-center">
                         Contact Now
                         <i class='bx bx-link-external ml-2'></i>
                     </a>
