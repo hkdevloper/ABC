@@ -45,7 +45,7 @@
 
         #content p{
             margin: 10px 0;
-            width: 90vw;
+            width: 100%;
             text-wrap: pretty;
         }
     </style>
