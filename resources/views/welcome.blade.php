@@ -108,64 +108,87 @@
                     <!-- Category Card 1 -->
                     @if(is_iterable($category))
                         @forelse($category as $item)
-                            <x-bladewind.card class="reveal cursor-pointer bg-indigo-100 hover:shadow-gray-400"
-                                              :reducePadding="true">
-                                <div class="flex flex-col items-center justify-center">
-                                    <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}"
-                                         class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded"/>
-                                    <p class="text-center text-xs md:text-sm lg:text-base bold italic mt-2">
-                                        {{ Str::limit($item->name, 15) }}
-                                    </p>
-                                    <p class="hidden md:block text-center text-base md:text-xl bold mt-2">
-                                        ({{ $item->countItem($item->type) }})</p>
-                                </div>
-                            </x-bladewind.card>
-
-                        @empty
-                            <p class="text-gray-700">No categories available.</p>
-                        @endforelse
-                    @else
-                        <p class="text-gray-700">Invalid category data.</p>
-                    @endif
+                            @php
+                                $route = '';
+                                switch ($item->type) {
+                                    case 'product':
+                                    $route = 'products';
+                                    break;
+                                    case 'event':
+                                        $route = 'events';
+                                        break;
+                                    case 'blog':
+                                        $route = 'blogs';
+                                        break;
+                                    case 'job':
+                                        $route = 'jobs';
+                                        break;
+                                    case 'forum':
+                                        $route = 'forum';
+                                        break;
+                                    default:
+                                        $route = 'company';
+                                        break;
+                                }
+                            @endphp
+                                <a href="{{route($route, ['category' => $item->name])}}">
+                                    <x-bladewind.card class="reveal cursor-pointer bg-indigo-100 hover:shadow-gray-400" :reducePadding="true">
+                                        <div class="flex flex-col items-center justify-center">
+                                            <img src="{{ url('storage/' . ($item->image ?? '')) }}" alt="{{ $item->name }}"
+                                                 class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain rounded"/>
+                                            <p class="text-center text-xs md:text-sm lg:text-base bold italic mt-2">
+                                                {{ Str::limit($item->name, 15) }}
+                                            </p>
+                                            <p class="hidden md:block text-center text-base md:text-xl bold mt-2">
+                                                ({{ $item->countItem($item->type) }})</p>
+                                        </div>
+                                    </x-bladewind.card>
+                                </a>
+                            @empty
+                                <p class="text-gray-700">No categories available.</p>
+                            @endforelse
+                        @else
+                            <p class="text-gray-700">Invalid category data.</p>
+                        @endif
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Featured Companies -->
-        <section class="p-2 my-1 md:p-8 md:my-4">
-            <div class="container mx-auto">
-                <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
-                        Companies</h1>
-                    <a href="{{ route('company') }}"
-                       class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
-                        <span class="text-purple-500 md:text-white">Explore All</span>
-                        {{-- Icon --}}
-                        <i class='bx bx-link-external p-1 text-purple-500 md:hidden'></i>
-                    </a>
-                </div>
-                <hr class="my-5">
-                <div class="md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mx-auto">
-                    @forelse($companies as $company)
-                        <div class="reveal hidden md:flex items-center justify-stretch flex-col bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 m-auto w-[90vw] md:w-full h-full">
-                            @if($company->is_featured)
-                                <div
-                                    class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
-                                    Featured
-                                </div>
-                            @endif
-                            <a href="{{ route('view.company', [$company->slug]) }}"
-                               class="w-[150px] h-[150px] md:w-full md:h-48 md:p-4 md:block object-contain">
-                                <img alt="company photo" src="{{ url('storage/' . $company->logo) }}"
-                                     class="w-[150px] h-[150px] object-contain md:w-full md:h-full"/>
-                            </a>
-                                <div class="flex flex-col items-center justify-center h-auto my-auto">
-                                    <div class="p-2 flex flex-col items-center justify-center m-auto">
-                                        <h3 class="text-base md:text-lg font-bold text-justify text-indigo-900 mb-2">{{ $company->name }}</h3>
-                                        <p class="text-red-700 text-center text-xs md:text-sm">{{ $company->address->country->name }}</p>
-                                        <h2 class="text-sm md:text-base bold italic underline text-indigo-700 mt-2">Deals In</h2>
-                                        @php
-                                            $limitedText = Str::limit($company->dealsIn(), 30, '...');
+            <!-- Featured Companies -->
+            <section class="p-2 my-1 md:p-8 md:my-4">
+                <div class="container mx-auto">
+                    <div class="flex justify-between items-center">
+                        <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
+                            Companies</h1>
+                        <a href="{{ route('company') }}"
+                           class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
+                            <span class="text-purple-500 md:text-white">Explore All</span>
+                            {{-- Icon --}}
+                            <i class='bx bx-link-external p-1 text-purple-500 md:hidden'></i>
+                        </a>
+                    </div>
+                    <hr class="my-5">
+                    <div class="md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mx-auto">
+                        @forelse($companies as $company)
+                            <div class="reveal hidden md:flex items-center justify-stretch flex-col bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 m-auto w-[90vw] md:w-full h-full">
+                                @if($company->is_featured)
+                                    <div
+                                        class="absolute top-0 left-0 bg-red-500 text-white p-1 px-2 text-xs font-bold rounded">
+                                        Featured
+                                    </div>
+                                @endif
+                                <a href="{{ route('view.company', [$company->slug]) }}"
+                                   class="w-[150px] h-[150px] md:w-full md:h-48 md:p-4 md:block object-contain">
+                                    <img alt="company photo" src="{{ url('storage/' . $company->logo) }}"
+                                         class="w-[150px] h-[150px] object-contain md:w-full md:h-full"/>
+                                </a>
+                                    <div class="flex flex-col items-center justify-center h-auto my-auto">
+                                        <div class="p-2 flex flex-col items-center justify-center m-auto">
+                                            <h3 class="text-base md:text-lg font-bold text-justify text-indigo-900 mb-2">{{ $company->name }}</h3>
+                                            <p class="text-red-700 text-center text-xs md:text-sm">{{ $company->address->country->name }}</p>
+                                            <h2 class="text-sm md:text-base bold italic underline text-indigo-700 mt-2">Deals In</h2>
+                                            @php
+                                                $limitedText = Str::limit($company->dealsIn(), 30, '...');
                                         @endphp
                                         <p class="text-gray-700 text-center text-xs md:text-sm">{{ $limitedText }}</p>
                                     </div>
