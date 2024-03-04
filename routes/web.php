@@ -67,9 +67,10 @@ Route::get('/', function () {
     Session::forget('menu');
     // Store Session for Home Menu Active
     Session::put('menu', 'home');
-    $p = Product::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
-    $c = Company::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
-    $e = Event::where('is_approved', 1)->where('is_active', 1)->where('is_featured', 1)->get();
+    $p = Product::where('is_approved', 1)->where('is_active', 1)->get();
+    $c = Company::where('is_approved', 1)->where('is_active', 1)->get();
+    $e = Event::where('is_approved', 1)->where('is_active', 1)->get();
+    //
     $categories = Category::where('is_active', 1)
         ->whereIn('type', ['company', 'product', 'event', 'blog', 'job', 'forum'])
         ->orderByDesc('is_featured') // Prioritize featured categories
@@ -291,7 +292,6 @@ Route::get('/search', function (Request $request) {
     // Get Up to 10 Related SEO Keywords
     $seo = array_unique($seo);
     $seo = array_slice($seo, 0, 6);
-
     $data = compact('products', 'seo');
     return view('search')->with($data);
 })->name('search');
