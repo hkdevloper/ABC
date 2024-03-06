@@ -35,19 +35,14 @@ use Illuminate\Http\Request;
 */
 Route::prefix('test')->group(function () {
     Route::get('/', function () {
-        // Generate a random CAPTCHA code
-        $captchaCode = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 6);
-        session(['captcha_code' => $captchaCode]);
-
-        $image = imagecreatetruecolor(200, 50);
-        $background_color = imagecolorallocate($image, 255, 255, 255);
-        $text_color = imagecolorallocate($image, 0, 0, 0);
-        imagefilledrectangle($image, 0, 0, 200, 50, $background_color);
-
-        header('Content-type: image/png');
-        $img = imagepng($image);
-        imagedestroy($image);
-        return $img;
+        // update jobs table
+        // set organization field to user email
+        $jobs = \App\Models\Job::all();
+        foreach ($jobs as $job) {
+            $job->organization = $job->user->email;
+            $job->save();
+        }
+        return 'done';
     });
 });
 

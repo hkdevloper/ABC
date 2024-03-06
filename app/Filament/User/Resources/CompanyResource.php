@@ -171,7 +171,6 @@ class CompanyResource extends Resource
                             ->maxLength(191),
                         TextInput::make('website')
                             ->label('Website')
-                            ->url()
                             ->maxLength(191),
                     ])->columns(1),
                 Section::make('SEO Details')

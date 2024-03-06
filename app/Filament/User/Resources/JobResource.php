@@ -65,9 +65,10 @@ class JobResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(70),
-                TextInput::make('organization')
-                    ->label('Organization')
-                    ->placeholder('Enter organization')
+                TextInput::make('HR Email')
+                    ->label('HR Email')
+                    ->email()
+                    ->placeholder('Enter HR email')
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('description')
                     ->required()

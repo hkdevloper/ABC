@@ -120,8 +120,10 @@ class JobResource extends Resource
                     ->suffix('INR')
                     ->label('Enter Salary')
                     ->maxLength(191),
-                TextInput::make('organization')
-                    ->label('Enter Organization')
+                TextInput::make('HR Email')
+                    ->label('HR Email')
+                    ->email()
+                    ->placeholder('Enter HR email')
                     ->maxLength(191),
                 Textarea::make('education')
                     ->id('education')
