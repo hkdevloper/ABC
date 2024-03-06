@@ -90,7 +90,7 @@ class DealResource extends Resource
                     ->dehydrated(false)
                     ->afterStateUpdated(function (Set $set, Get $get){
                        $percentage = ($get('discount_price') / $get('original_price')) * 100;
-                          $set('discount_value', $percentage);
+                       $set('discount_value', $percentage);
                     }),
                 Forms\Components\RichEditor::make('description')
                     ->toolbarButtons([
@@ -173,11 +173,8 @@ class DealResource extends Resource
 
                 Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('category.name'),
-                Tables\Columns\TextColumn::make('discount_type')
-                    ->description(function ($record){
-                        return $record->discount_type == 'percentage' ? $record->discount_value.'%' : '₹'.$record->discount_value;
-                    })
-                    ->label('Type')
+                Tables\Columns\TextColumn::make('discount_price')
+                    ->label('Discounted Price')
                     ->searchable(),
                 Tables\Columns\ToggleColumn::make('is_active')
                     ->label('Active'),
@@ -220,12 +217,12 @@ class DealResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
-            ->modifyQueryUsing(function (Builder $query) {
-                $query->where('user_id', auth()->user()->id);
-            })
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->where('user_id', auth()->user()->id);
+            });
     }
 
     public static function getRelations(): array
