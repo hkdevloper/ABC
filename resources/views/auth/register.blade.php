@@ -9,7 +9,7 @@
             lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
     </div>
-    <div class="form">
+    <div class="form md:my-10">
         @if($errors->any())
             @foreach ($errors->all() as $error)
                 <x-bladewind.alert
@@ -46,7 +46,7 @@
                 <input class="form__input" type="password" name="confirm_password" id="cpwd" required>
             </div>
             <div class="form__field">
-                <label class="form__label" for="captcha">CAPTCHA: <span class="captcha">
+                <label class="form__label" for="captcha">Fill this CAPTCHA: <span class="captcha">
                         <span id="captcha-code"></span>
                     </span></label>
                 <input class="form__input" type="text" id="captcha" name="captcha" required>
@@ -66,6 +66,12 @@
                 <button class="g-recaptcha btn bg-purple-400 hover:bg-purple-800" type="button" onclick="validateCaptcha()">
                     Register Now
                 </button>
+                <!-- Legal -->
+                <div class="form__legal">
+                    <p class="form__legal__text">
+                        By clicking "Register Now", you agree to our <a href="{{route('policy')}}" class="text-purple-500 underline hover:no-underline">Privacy Policy</a> and <a href="{{route('tos')}}" class="text-purple-500 underline hover:no-underline">Terms of Service</a>.
+                    </p>
+                </div>
             </div>
         </form>
     </div>

@@ -220,6 +220,15 @@ Route::prefix('forum')->group(function () {
     Route::post('/answer-forum', [UserForumController::class, 'answerForum'])->name('forum.reply');
 });
 
+Route::prefix('legal')->group(function () {
+    Route::get('privacy-policy', function () {
+        return view('legal.policy');
+    })->name('policy');
+    Route::get('terms-and-conditions', function () {
+        return view('legal.tos');
+    })->name('tos');
+});
+
 Route::post('/requirements/submit', function (Request $request) {
     // upload images to server and get the path
     $images = [];
@@ -302,7 +311,6 @@ Route::get('/categories', function (Request $request) {
     $type = Category::pluck('type')->unique();
     return view('category', compact('type'));
 })->name('categories');
-
 
 Route::prefix('protected')->middleware(['auth'])->group(function () {
     // route to add a company list into bookmarks

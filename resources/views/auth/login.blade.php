@@ -4,12 +4,28 @@
         <div class="cta__content">
             <img src="{{asset('storage/image/auth.svg')}}" alt="Authentication" class="cta__image">
         </div>
-        <p class="text-center">
-            lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
-        </p>
+        <ul class="list-unstyled px-2">
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class="icofont-check text-business-primary text-20"></i></span>
+                Connect With Millions of Buyers and Sellers</li>
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class="icofont-check text-business-primary text-20"></i></span>
+                Promote Business Profile with Product Showcase</li>
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class="icofont-check text-business-primary text-20"></i></span>
+                Expand Your Business Network – Smartly!</li>
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class="icofont-check text-business-primary text-20"></i></span>
+                Boost Your Search Engine Rankings</li>
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class="icofont-check text-business-primary text-20"></i></span>
+                Direct Buyer - Seller Communication</li>
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class="icofont-check text-business-primary text-20"></i></span>
+                Conduct New Business Opportunities</li>
+        </ul>
     </div>
-    <div class="form">
+    <div class="form md:my-10">
         @if($errors->any())
             @foreach ($errors->all() as $error)
                 <x-bladewind.alert
@@ -38,7 +54,7 @@
                 <input class="form__input" type="password" name="password" id="pwd" required>
             </div>
             <div class="form__field">
-                <label class="form__label" for="captcha">CAPTCHA: <span class="captcha">
+                <label class="form__label" for="captcha">Fill this CAPTCHA: <span class="captcha">
                         <span id="captcha-code"></span>
                     </span></label>
                 <input class="form__input" type="text" id="captcha" name="captcha" required>
