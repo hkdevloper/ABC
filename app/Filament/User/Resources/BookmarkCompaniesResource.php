@@ -26,18 +26,18 @@ class BookmarkCompaniesResource extends Resource
                 Tables\Columns\TextColumn::make('company.name')
                     ->label('Company')
                     ->wrap()
-                    ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('company.email')
-                    ->label('Email')
+                Tables\Columns\TextColumn::make('company.address.country.name')
+                    ->label('Location')
                     ->wrap()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('company.phone')
-                    ->label('Phone')
+                Tables\Columns\TextColumn::make('company.established_at')
+                    ->label('Established At')
+                    ->date('Y-m-d')
                     ->wrap()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('company.website')
-                    ->label('Website')
+                Tables\Columns\TextColumn::make('company.number_of_employees')
+                    ->label('Employees')
                     ->wrap()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -53,9 +53,12 @@ class BookmarkCompaniesResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\DeleteAction::make(),
-                ])
+                // View Company Profile
+                Tables\Actions\LinkAction::make('view')
+                    ->label('View')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn (BookmarkCompanies $bookmarkCompanies) => route('view.company', $bookmarkCompanies->company->slug)),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

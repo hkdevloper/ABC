@@ -28,6 +28,9 @@ class Product extends Model
         'brand',
         'thumbnail',
         'gallery',
+        'color',
+        'size',
+        'material'
     ];
     protected $casts = [
         'gallery' => 'array',

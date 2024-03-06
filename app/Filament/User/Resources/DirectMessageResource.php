@@ -24,9 +24,6 @@ class DirectMessageResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('company_id')
-                    ->relationship('company', 'name')
-                    ->required(),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
@@ -41,19 +38,15 @@ class DirectMessageResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(191),
+                Forms\Components\Select::make('status')
+                    ->default('Pending')
+                    ->native(false)
+                    ->options(['Pending' => 'Pending', 'Completed' => 'Completed', 'Cancelled' => 'Cancelled', 'Spam' => 'Spam', 'onHold' => 'On Hold'])
+                    ->required(),
                 Forms\Components\Textarea::make('message')
                     ->required()
                     ->maxLength(65535)
                     ->columnSpanFull(),
-                Forms\Components\Select::make('status')
-                    ->default('Pending')
-                    ->native(false)
-                    ->disabled(fn (DirectMessage $record): bool => $record->status === 'Approved' || $record->status === 'Rejected')
-                    ->options([
-                        'Pending' => 'Pending',
-                        'Completed' => 'Completed',
-                    ])
-                    ->required(),
             ]);
     }
 
@@ -61,18 +54,17 @@ class DirectMessageResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('company.name')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('email')
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('company_name')
+                    ->label('Company Name')
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Contact Person')
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
@@ -80,6 +72,8 @@ class DirectMessageResource extends Resource
                     ->color(fn (string $state): string => match ($state) {
                         'Pending' => 'warning',
                         'Completed' => 'success',
+                        'Cancelled', 'Spam' => 'danger',
+                        'onHold' => 'primary',
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -105,6 +99,10 @@ class DirectMessageResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
+            ->modifyQueryUsing(function (Builder $query) {
+                // show only the records of the logged-in user's company
+                $query->where('company_id', auth()->user()->company->id);
+            })
             ->emptyStateActions([ ]);
     }
 

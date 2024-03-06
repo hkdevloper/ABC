@@ -39,6 +39,9 @@ class Company extends Model
         'linkdin',
         'youtube',
         'address_id',
+        'established_at',
+        'number_of_employees',
+        'turnover'
     ];
 
     protected $casts = [

@@ -76,8 +76,8 @@
                     <div class="flex items-center justify-center md:justify-end overflow-x-auto md:overflow-x-visible md:mx-2">
                         @if($user->isCompanyBookmarked($company))
                             <a href="{{ route('remove.from.bookmark', ['company_id' => $company->id]) }}"
-                               class="bg-purple-400 hover:bg-purple-500 px-2 py-1 text-sm rounded text-white mr-1">
-                                <i class="fas fa-bookmark text-white"></i>&nbsp; Bookmarks
+                               class="bg-green-400 hover:bg-purple-500 px-2 py-1 text-sm rounded text-white mr-1">
+                                <i class="fas fa-bookmark text-white"></i>&nbsp; Bookmarked
                             </a>
                         @else
                             <a href="{{ route('add.to.bookmark', ['company_id' => $company->id]) }}"
@@ -91,6 +91,14 @@
                         Direct message
                     </a>
                 </div>
+                @if($user->isCompanyOwner($company))
+                    <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn1"
+                       class="text-blue-950 px-2 text-xs text-right block md:hidden mt-3"
+                       style="height: 30px;">
+                        Your Company?
+                        <span class="text-sm text-blue-950 font-semibold hover:underline">Claim Now</span>
+                    </a>
+                @endif
                 <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn1"
                    class="text-blue-950 px-2 text-xs text-right block md:hidden mt-3"
                    style="height: 30px;">

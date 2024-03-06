@@ -42,6 +42,26 @@ Route::prefix('test')->group(function () {
             $job->organization = $job->user->email;
             $job->save();
         }
+        // in All Companies add a faker data for newly added fields
+        $companies = \App\Models\Company::all();
+        foreach ($companies as $company) {
+            $company->established_at = \Carbon\Carbon::now()->subYears(rand(1, 100));
+            $company->number_of_employees = rand(1, 1000);
+            $company->turnover = rand(1000, 1000000);
+            $company->save();
+        }
+
+        // in All Products add a faker data for newly added fields
+        $products = \App\Models\Product::all();
+        foreach ($products as $product) {
+            $product->condition = 'New';
+            $product->brand = 'Brand';
+            $product->color = 'Color';
+            $product->size = 'Size';
+            $product->material = 'Material';
+            $product->save();
+        }
+
         return 'done';
     });
 });

@@ -161,9 +161,9 @@
                 <!-- legal -->
                 <div class="text-center mt-4">
                     <p class="text-gray-600 text-xs">
-                        By submitting this form, you agree to our <a href="{{ route('privacy') }}"
+                        By submitting this form, you agree to our <a href="{{ route('policy') }}"
                                                                      class="text-blue-500 hover:text-blue-700">Privacy
-                            Policy</a> and <a href="{{ route('terms') }}"
+                            Policy</a> and <a href="{{ route('tos') }}"
                                              class="text-blue-500 hover:text-blue-700">Terms of Service</a>.
                     </p>
                 </div>
@@ -178,6 +178,10 @@
         function generateCaptcha() {
             const code = generateRandomCode(6); // Generate a new CAPTCHA code
             document.getElementById('captcha-code').innerText = code; // Display CAPTCHA code in span
+            // if local prefill the input
+            if ({{ config('app.env') === 'local' ? 'true' : 'false' }}) {
+                document.getElementById('captcha').value = code;
+            }
             return code; // Return the generated code
         }
 

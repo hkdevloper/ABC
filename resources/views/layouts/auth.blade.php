@@ -260,6 +260,12 @@
     function generateCaptcha() {
         const code = generateRandomCode(6); // Generate a new CAPTCHA code
         document.getElementById('captcha-code').innerText = code; // Display CAPTCHA code in span
+        if ('{{config('app.env')}}' === 'local'){
+            document.getElementById('captcha').value = code;
+        }else{
+            // Empty the user input
+            document.getElementById('captcha').value = '';
+        }
         return code; // Return the generated code
     }
 
