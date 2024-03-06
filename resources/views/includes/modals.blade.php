@@ -62,6 +62,24 @@
                 />
             </div>
             <div class="mb-4">
+                <x-bladewind::textarea
+                    type="text"
+                    name="description"
+                    required="true"
+                    placeholder="Description"
+                    show_error_inline="true"
+                    error-message="Please enter your description."
+                    label="Enter Your Description"
+                />
+            </div>
+            <!-- Checkbox to upload File if user select -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="upload_file">
+                    Upload File
+                <input type="checkbox" id="upload_file" name="upload_file" value="1" class=" mx-5 bw-checkbox">
+                </label>
+            </div>
+            <div class="mb-4 hidden" id="file">
                 <x-bladewind.filepicker
                     name="img-1"
                     class="w-1/3"
@@ -77,17 +95,6 @@
                     class="w-1/3"
                     accepted-file-types="image/*"
                     placeholder="Upload Image"  />
-            </div>
-            <div class="mb-4">
-                <x-bladewind::textarea
-                    type="text"
-                    name="description"
-                    required="true"
-                    placeholder="Description"
-                    show_error_inline="true"
-                    error-message="Please enter your description."
-                    label="Enter Your Description"
-                />
             </div>
         </div>
         <div class="flex justify-center mt-4">
@@ -107,6 +114,15 @@
             if(validateForm('.requirement-form')){
                 unhide('.btn-save .bw-spinner');
                 this.submit();
+            }
+        });
+        const file = document.getElementById('file');
+        const upload_file = document.getElementById('upload_file');
+        upload_file.addEventListener('change', function(){
+            if(this.checked){
+                file.classList.remove('hidden');
+            }else{
+                file.classList.add('hidden');
             }
         });
     </script>
