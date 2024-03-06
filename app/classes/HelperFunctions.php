@@ -127,12 +127,14 @@ class HelperFunctions
     }
 
     // Function to get Discounted Price
-    public static function getDiscountedPrice($price, $discount_type, $discount_value): float
+    public static function getDiscountedPercentage($discount_price, $original_price): float
     {
-        if ($discount_type === 'percentage') {
-            return $price - ($price * $discount_value / 100);
+        if ($original_price > 0) {
+            $discount = $original_price - $discount_price;
+            $percentage = ($discount / $original_price) * 100;
+            return number_format((float)$percentage, 2, '.', '');
         } else {
-            return $price - $discount_value;
+            return 0;
         }
     }
 }

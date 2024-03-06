@@ -8,7 +8,8 @@
     <div class="flex flex-col justify-center items-center bg-green-50 h-[200px]">
         <h1 class="block text-lg md:text-4xl w-full text-center font-bold">Search for thousands of deals & Offers!</h1>
         <br>
-        <form action="" class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
+        <form action=""
+              class="mt-2 md:mt-4 flex items-center justify-center md:p-4 md:pl-2 relative bg-white md:w-2/3 shadow">
             <div class="relative flex items-center justify-between md:w-full s-form">
                 <label for="searchInput" class="sr-only">Search</label>
                 <input id="searchInput" name="q" type="text" placeholder="Search for deals here! 🚀✨" autocomplete="off"
@@ -22,7 +23,8 @@
                     </span>
                 </button>
             </div>
-            <div id="searchResults" class="search-results mt-2 overflow-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh]"></div>
+            <div id="searchResults"
+                 class="search-results mt-2 overflow-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh]"></div>
         </form>
     </div>
     <div class="container flex items-center justify-between my-4 mx-2 md:mx-auto w-[95vw]">
@@ -74,18 +76,12 @@
         <!-- Deals List -->
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             @forelse($deals as $item)
-                <div class="reveal flex flex-col items-center justify-center bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 w-[90vw] md:w-full">
+                <div
+                    class="reveal flex flex-col items-center justify-center bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 w-[90vw] md:w-full">
                     <!-- Discount ribbon -->
-                    @if($item->discount_type !== null && $item->discount_value !== null)
-                        <div class="absolute top-0 left-0 bg-red-500 text-white p-1">
-                            @if($item->discount_type == 'fixed')
-                                <p class="text-xs font-bold">{{ $item->discount_value }}₹ off</p>
-                            @endif
-                            @if($item->discount_type == 'percentage')
-                                <p class="text-xs font-bold">{{ $item->discount_value }}% off</p>
-                            @endif
-                        </div>
-                    @endif
+                    <div class="absolute top-0 left-0 bg-red-500 text-white p-1">
+                        <p class="text-xs font-bold">{{HelperFunctions::getDiscountedPercentage($item->discount_price, $item->original_price)}}% off</p>
+                    </div>
                     <a href="{{ route('view.deal', [$item->slug]) }}"
                        class="h-100 mx-auto p-2">
                         <img alt="deal thumbnail" src="{{ url('storage/' . $item->thumbnail) }}"
@@ -110,10 +106,10 @@
                     </div>
                     <div class="flex items-center justify-between w-full px-5">
                         <p class="text-xs text-gray-400 line-through">
-                            ₹{{ HelperFunctions::formatCurrency($item->price) }}
+                            ₹{{ HelperFunctions::formatCurrency($item->original_price) }}
                         </p>
                         <p class="text-lg font-bold text-gray-700">
-                            ₹{{ HelperFunctions::getDiscountedPrice($item->price, $item->discount_type, $item->discount_value) }}
+                            {{HelperFunctions::formatCurrency($item->discount_price)}}
                         </p>
                     </div>
                     <!-- Published time -->
@@ -212,7 +208,7 @@
                 } catch (error) {
                     console.error('Error fetching search results:', error);
                 }
-            }else{
+            } else {
                 searchResults.style.display = 'none';
             }
         });

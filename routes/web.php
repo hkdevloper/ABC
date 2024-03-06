@@ -62,6 +62,13 @@ Route::prefix('test')->group(function () {
             $product->save();
         }
 
+        // update deals table
+        $deals = \App\Models\Deal::all();
+        foreach ($deals as $deal) {
+            $deal->original_price = $deal->discount_price + rand(1, 100);
+            $deal->save();
+        }
+
         return 'done';
     });
 });

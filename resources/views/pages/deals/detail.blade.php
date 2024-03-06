@@ -62,13 +62,13 @@
                     </div>
 
                 </div>
-                <div class="flex flex-col items-center justify-center my-4 hidden">
+                <div class="flex flex-col items-center justify-center my-4">
                     <div class="flex items-center justify-center">
+                        @if($deal->discount_price && $deal->original_price)
                         <p class="text-3xl font-bold text-purple-500">
-                            ₹{{ HelperFunctions::getDiscountedPrice($deal->price, $deal->discount_type, $deal->discount_value) }}</p>
-                        @if($deal->discount_type && $deal->discount_value)
+                            ₹{{ HelperFunctions::formatCurrency($deal->discount_price) }}</p>
                             <p class="text-sm text-gray-400 line-through ml-2">
-                                ₹{{ HelperFunctions::formatCurrency($deal->price) }}</p>
+                                ₹{{ HelperFunctions::formatCurrency($deal->original_price) }}</p>
                         @endif
                     </div>
                     <div class="flex items-center justify-center mt-2">
@@ -211,11 +211,9 @@
                 @forelse($related_deals as $item)
                     <div class="reveal flex flex-col items-center justify-center bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 w-full">
                         <!-- Discount ribbon -->
-                        @if($item->discount_type && $item->discount_value)
-                            <div class="absolute top-0 left-0 bg-red-500 text-white p-1">
-                                <p class="text-xs font-bold">{{ $item->discount_type === 'fixed' ? $item->discount_value.'₹ off' : $item->discount_value.'% off' }}</p>
-                            </div>
-                        @endif
+                        <div class="absolute top-0 left-0 bg-red-500 text-white p-1">
+                            <p class="text-xs font-bold">{{HelperFunctions::getDiscountedPercentage($item->discount_price, $item->original_price)}}% off</p>
+                        </div>
                         <a href="{{ route('view.deal', [$item->slug]) }}" class="h-100 mx-auto p-2">
                             <img alt="deal thumbnail" src="{{ url('storage/' . $item->thumbnail) }}" class="w-48 h-48 object-contain md:w-full md:h-48"/>
                         </a>
@@ -231,10 +229,17 @@
                         </div>
                         <div class="flex items-center justify-between w-full px-5">
                             <p class="text-xs text-gray-400 line-through">
-                                ₹{{ HelperFunctions::formatCurrency($item->price) }}
+                                ₹{{ HelperFunctions::formatCurrency($item->original_price) }}
                             </p>
                             <p class="text-lg font-bold text-gray-700">
-                                ₹{{ HelperFunctions::getDiscountedPrice($item->price, $item->discount_type, $item->discount_value) }}
+                                {{HelperFunctions::formatCurrency($deal->discount_price)}}
+                            </p>
+                        </div>
+                        <!-- Published time -->
+                        <div class="flex items-center justify-center w-full px-5">
+                            <p class="text-xs text-gray-400 flex items-center justify-center">
+                                <i class='bx bx-time text-lg'></i>
+                                {{ $deal->created_at->diffForHumans() }}
                             </p>
                         </div>
                     </div>

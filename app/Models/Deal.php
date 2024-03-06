@@ -23,9 +23,8 @@ class Deal extends Model
         'title',
         'slug',
         'description',
-        'price',
-        'discount_type',
-        'discount_value',
+        'discount_price',
+        'original_price',
         'terms_and_conditions',
     ];
     protected $casts = [

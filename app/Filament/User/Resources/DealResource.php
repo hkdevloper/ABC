@@ -73,10 +73,25 @@ class DealResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(70),
-                TextInput::make('price')
-                    ->label('Price')
+                TextInput::make('discount_price')
+                    ->label('Deal Price')
                     ->numeric()
                     ->prefix('$'),
+                TextInput::make('original_price')
+                    ->label('MRP (Selling Price)')
+                    ->numeric()
+                    ->prefix('$'),
+                // Show Discount percentage
+                TextInput::make('discount_value')
+                    ->label('Discount Value')
+                    ->numeric()
+                    ->suffix('%')
+                    ->disabled()
+                    ->dehydrated(false)
+                    ->afterStateUpdated(function (Set $set, Get $get){
+                       $percentage = ($get('discount_price') / $get('original_price')) * 100;
+                          $set('discount_value', $percentage);
+                    }),
                 Forms\Components\RichEditor::make('description')
                     ->toolbarButtons([
                         'blockquote',
@@ -105,22 +120,6 @@ class DealResource extends Resource
                             ->maxFiles(4)
                             ->multiple(),
                     ])->columns(1),
-                Section::make('Discount Details')
-                ->schema([
-                    Select::make('discount_type')
-                        ->label('Select Discount Type')
-                        ->required()
-                        ->native(false)
-                        ->options([
-                            'percentage' => 'Percentage',
-                            'fixed' => 'Fixed',
-                        ])
-                        ->default('percentage'),
-                    TextInput::make('discount_value')
-                        ->label('Discount Value')
-                        ->required()
-                        ->maxLength(191),
-                ])->columns(),
                 Forms\Components\RichEditor::make('terms_and_conditions')
                     ->toolbarButtons([
                         'blockquote',
@@ -221,6 +220,9 @@ class DealResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->where('user_id', auth()->user()->id);
+            })
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
             ]);
