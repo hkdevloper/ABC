@@ -84,6 +84,7 @@ class ProductResource extends Resource
                             ->label('Price')
                             ->placeholder('Enter price')
                             ->numeric()
+                            ->default('0.00')
                             ->prefix('$'),
                         Select::make('condition')
                             ->label('Select Condition')
@@ -97,6 +98,18 @@ class ProductResource extends Resource
                         TextInput::make('brand')
                             ->label('Brand')
                             ->placeholder('Enter brand')
+                            ->maxLength(191),
+                        TextInput::make('color')
+                            ->required()
+                            ->label('Color')
+                            ->maxLength(191),
+                        TextInput::make('size')
+                            ->required()
+                            ->label('Size')
+                            ->maxLength(191),
+                        TextInput::make('material')
+                            ->required()
+                            ->label('Material')
                             ->maxLength(191),
                     ])->columns(3),
                 Section::make('Images')

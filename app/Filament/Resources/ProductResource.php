@@ -103,7 +103,7 @@ class ProductResource extends Resource
                     ->columnSpanFull(),
                 TextInput::make('price')
                     ->label('Price')
-                    ->required()
+                    ->default('0.00')
                     ->numeric()
                     ->prefix('$'),
                 Select::make('condition')
@@ -118,6 +118,18 @@ class ProductResource extends Resource
                 TextInput::make('brand')
                     ->required()
                     ->label('Brand')
+                    ->maxLength(191),
+                TextInput::make('color')
+                    ->required()
+                    ->label('Color')
+                    ->maxLength(191),
+                TextInput::make('size')
+                    ->required()
+                    ->label('Size')
+                    ->maxLength(191),
+                TextInput::make('material')
+                    ->required()
+                    ->label('Material')
                     ->maxLength(191),
                 Section::make('Images')
                     ->schema([
