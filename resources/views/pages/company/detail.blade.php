@@ -150,7 +150,7 @@
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
                                     <div class="flex items-center justify-start">
                                 <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
-                                    <i class='bx bx-map'></i>
+                                    <i class='bx bx-calendar'></i>
                                 </span>
                                         <div>
                                             <span class="text-sm md:text-base font-semibold text-gray-500">Established at</span>
@@ -166,7 +166,7 @@
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
                                     <div class="flex items-center justify-start">
                                 <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
-                                    <i class='bx bx-palette'></i>
+                                    <i class='bx bx-group' ></i>
                                 </span>
                                         <div>
                                             <span class="text-sm md:text-base font-semibold text-gray-500">Employees</span>
