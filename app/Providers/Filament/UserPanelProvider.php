@@ -14,8 +14,10 @@ use App\Filament\User\Resources\BookmarkCompaniesResource;
 use App\Filament\User\Resources\CompanyResource;
 use App\Filament\User\Resources\DealResource;
 use App\Filament\User\Resources\DirectMessageResource;
+use App\Filament\User\Resources\WalletHistoryResource;
 use App\Filament\Widgets\StatsOverview;
 use App\Http\Middleware\HkEmailVerification;
+use App\Models\WalletHistory;
 use Filament\Http\Controllers\Auth\EmailVerificationController;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -153,6 +155,19 @@ class UserPanelProvider extends PanelProvider
                         ->icon('heroicon-o-chat-bubble-left-ellipsis')
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.forum'))
                         ->url(fn (): string => ForumResource::getUrl())
+                        ->visible(function (){
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
+                            if($company){
+                                if($company->is_approved){
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }),
+                    NavigationItem::make('Wallet History')
+                        ->icon('heroicon-o-banknotes')
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.wallet-history'))
+                        ->url(fn (): string => WalletHistoryResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){

@@ -23,6 +23,7 @@
         "mews/purifier": "^3.4",
         "mkocansey/bladewind": "^2.3",
         "njxqlus/filament-progressbar": "^1.0",
+        "razorpay/razorpay": "^2.9",
         "solution-forest/filament-tree": "^2.0"
     },
     "require-dev": {

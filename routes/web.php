@@ -1,6 +1,7 @@
 <?php
 
 use App\classes\HelperFunctions;
+use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\UserBlogController;
 use App\Http\Controllers\UserCompanyController;
 use App\Http\Controllers\UserDealController;
@@ -35,43 +36,18 @@ use Illuminate\Http\Request;
 */
 Route::prefix('test')->group(function () {
     Route::get('/', function () {
-        // update jobs table
-        // set organization field to user email
-        $jobs = \App\Models\Job::all();
-        foreach ($jobs as $job) {
-            $job->organization = $job->user->email;
-            $job->save();
-        }
-        // in All Companies add a faker data for newly added fields
-        $companies = \App\Models\Company::all();
-        foreach ($companies as $company) {
-            $company->established_at = \Carbon\Carbon::now()->subYears(rand(1, 100));
-            $company->number_of_employees = rand(1, 1000);
-            $company->turnover = rand(1000, 1000000);
-            $company->save();
-        }
-
-        // in All Products add a faker data for newly added fields
-        $products = \App\Models\Product::all();
-        foreach ($products as $product) {
-            $product->condition = 'New';
-            $product->brand = 'Brand';
-            $product->color = 'Color';
-            $product->size = 'Size';
-            $product->material = 'Material';
-            $product->save();
-        }
-
-        // update deals table
-        $deals = \App\Models\Deal::all();
-        foreach ($deals as $deal) {
-            $deal->original_price = $deal->discount_price + rand(1, 100);
-            $deal->save();
-        }
-
         return 'done';
     });
 });
+
+Route::name('razorpay.')
+    ->controller(RazorpayController::class)
+    ->prefix('razorpay')
+    ->middleware('auth')
+    ->group(function () {
+        Route::view('payment', 'razorpay.index')->name('create.payment');
+        Route::post('handle-payment', 'handlePayment')->name('make.payment');
+    });
 
 Route::get('login', function () {
     return redirect()->route('auth.login');
