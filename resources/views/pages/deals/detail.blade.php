@@ -7,7 +7,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Image Side -->
             <div class="flex flex-col items-center justify-center">
-                <div class="overflow-hidden rounded-lg md:w-3/4 border border-solid border-gray-300">
+                <div class="overflow-hidden rounded-lg md:w-3/4 border border-solid border-gray-300 bg-white">
                     <img src="{{ url('storage/'.$deal->thumbnail) }}" alt="Product Image" id="main-image" class="h-80 w-full object-contain img-remove-bg">
                 </div>
                 <div class="lg:order-1 lg:mt-2 lg:pl-4">
@@ -122,7 +122,7 @@
 {{--                        </tr>--}}
                     </table>
                     <hr class="my-4">
-                    <p class="text-sm text-gray-500">{!! $deal->description !!}</p>
+                    <p class="text-sm text-gray-500 bg-white p-4 rounded">{!! $deal->description !!}</p>
                 </x-bladewind.tab-content>
                 <x-bladewind.tab-content name="rate">
                     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
