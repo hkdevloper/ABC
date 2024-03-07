@@ -89,12 +89,12 @@ class ProductResource extends Resource
                         Select::make('condition')
                             ->label('Select Condition')
                             ->native(false)
+                            ->default('new')
                             ->options([
                                 'new' => 'New',
                                 'used' => 'Used',
                                 'refurbished' => 'Refurbished',
-                            ])
-                            ->required(),
+                            ]),
                         TextInput::make('brand')
                             ->label('Brand')
                             ->placeholder('Enter brand')
