@@ -90,7 +90,6 @@ class CompanyResource extends Resource
                         'blockquote',
                         'bold',
                         'bulletList',
-                        'codeBlock',
                         'h2',
                         'h3',
                         'italic',
