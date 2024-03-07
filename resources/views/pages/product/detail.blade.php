@@ -60,7 +60,7 @@
                 </div>
             </div>
             <a href="{{route('view.company', [$product->user->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue">
-                Contact Now
+                Contact Seller
                 <i class='bx bx-link-external ml-2'></i>
             </a>
         </div>
@@ -158,9 +158,9 @@
                     <p class="text-sm text-gray-500">{!! $product->description !!}</p>
                     <div class="relative bottom-0 md:static right-1 mb-2 md:w-[calc(80%-1rem)] mt-4"
                          style="width: max-content;">
-                        <a href="{{ route('view.product', [$product->slug]) }}"
+                        <a href="{{route('view.company', [$product->user->company->slug])}}"
                            class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-2 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base ">
-                            <span class="ml-1">Enquire Now &nbsp;</span>
+                            <span class="ml-1">Contact Seller</span>
                             <i class='bx bx-link-external mr-2'></i>
                         </a>
                     </div>
