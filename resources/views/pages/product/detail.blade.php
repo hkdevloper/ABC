@@ -155,7 +155,7 @@
                         </tr>
                     </table>
                     <hr class="my-4">
-                    <p class="text-sm text-gray-500">{!! $product->description !!}</p>
+                    <p class="text-sm text-gray-500 bg-white p-4 shadow-md rounded">{!! $product->description !!}</p>
                     <div class="relative bottom-0 md:static right-1 mb-2 md:w-[calc(80%-1rem)] mt-4"
                          style="width: max-content;">
                         <a href="{{route('view.company', [$product->user->company->slug])}}"
