@@ -97,7 +97,7 @@
                                     <i class='bx bx-map'></i>
                                 </span>
                                     <div>
-                                        <span class="text-sm md:text-base font-semibold text-gray-500">Location</span>
+                                        <span class="text-sm md:text-base font-semibold text-gray-500">Country of Origin</span>
                                     </div>
                                 </div>
                             </td>
