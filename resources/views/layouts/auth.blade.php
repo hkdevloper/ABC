@@ -198,9 +198,31 @@
             flex-direction: column;
             padding: 4rem;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             text-align: center;
             width: 100%;
+        }
+
+        ul.list-styled {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.list-styled li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem !important;
+
+        }
+
+        ul.list-styled li span {
+            display: flex;
+            align-items: center;
+        }
+
+        ul.list-styled li span i {
+            font-size: 1.5rem;
         }
 
         @media (min-width: 48rem) {

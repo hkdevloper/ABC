@@ -5,9 +5,26 @@
         <div class="cta__content">
             <img src="{{asset('storage/image/auth.svg')}}" alt="Authentication" class="cta__image">
         </div>
-        <p  class="text-center">
-            lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
+        <ul class="list-styled px-2">
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class='bx bx-check'></i></span>
+                Connect With Millions of Buyers and Sellers</li>
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class='bx bx-check'></i></span>
+                Promote Business Profile with Product Showcase</li>
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class='bx bx-check'></i></span>
+                Expand Your Business Network – Smartly!</li>
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class='bx bx-check'></i></span>
+                Boost Your Search Engine Rankings</li>
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class='bx bx-check'></i></span>
+                Direct Buyer - Seller Communication</li>
+            <li class="d-flex mb-2">
+                <span class="mr-2"><i class='bx bx-check'></i></span>
+                Conduct New Business Opportunities</li>
+        </ul>
     </div>
     <div class="form md:my-10">
         @if($errors->any())
