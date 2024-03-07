@@ -94,7 +94,7 @@
                 </div>
                 @if($user->isCompanyOwner($company))
                     <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn1"
-                       class="text-blue-950 px-2 text-xs text-right block md:hidden mt-3"
+                       class="text-blue-950 px-2 text-xs text-right block mt-3"
                        style="height: 30px;">
                         Your Company?
                         <span class="text-sm text-blue-950 font-semibold hover:underline">Claim Now</span>
@@ -238,7 +238,7 @@
                                 <div
                                     class="hidden md:block absolute bottom-0 md:static right-1 mb-2 w-full md:w-[calc(80%-1rem)]">
                                     <a href="{{ route('view.product', [$item->slug]) }}"
-                                       class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                       class="text-purple-500 mb-1 bg-purple-300 hover:bg-purple-500 hover:text-white rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
                                         <span class="ml-1">Enquire Now &nbsp;</span>
                                         <i class='bx bx-link-external mr-2'></i>
                                     </a>
