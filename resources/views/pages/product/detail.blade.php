@@ -51,7 +51,7 @@
                     </span>
                     <span class="text-xs md:text-sm text-gray-500">Price: <span class="text-purple-500">₹{{ HelperFunctions::formatCurrency($product->price) }}</span></span>
                     <span class="text-xs md:text-sm text-gray-500">Published by {{ $product->user->company->name }}</span>
-                    <span class="text-xs md:text-sm text-gray-500">Published on {{ $product->created_at->format('d M Y') }} ({{ $product->updated_at->diffForHumans() }})</span>
+                    <span class="text-xs md:text-sm text-gray-500">Published on {{ $product->created_at->format('d M Y') }} ({{ $product->created_at->diffForHumans() }})</span>
                     <a href="{{route('view.company', [$product->user->company->slug])}}" class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-1 px-2 text-center mt-2 rounded-full hover:rounded-full transition-all duration-300 ease-in-out md:w-auto w-full md:hidden">
                         Contact Now
                         <i class='bx bx-link-external ml-2'></i>
@@ -102,6 +102,54 @@
                             </td>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
                                 <span class="text-sm: md:text-base text-gray-500">{{ $product->user->company->address->country->name }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- Location Section -->
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <div class="flex items-center justify-start">
+                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                    <i class='bx bx-palette'></i>
+                                </span>
+                                    <div>
+                                        <span class="text-sm md:text-base font-semibold text-gray-500">Color</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <span class="text-sm: md:text-base text-gray-500">{{ $product->color }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- Location Section -->
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <div class="flex items-center justify-start">
+                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                    <i class='bx bx-expand'></i>
+                                </span>
+                                    <div>
+                                        <span class="text-sm md:text-base font-semibold text-gray-500">Size</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <span class="text-sm: md:text-base text-gray-500">{{ $product->size }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- Location Section -->
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <div class="flex items-center justify-start">
+                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                   <i class='bx bxs-layer'></i>
+                                </span>
+                                    <div>
+                                        <span class="text-sm md:text-base font-semibold text-gray-500">Material</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                <span class="text-sm: md:text-base text-gray-500">{{ $product->material }}</span>
                             </td>
                         </tr>
                     </table>
