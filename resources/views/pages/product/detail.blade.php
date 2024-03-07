@@ -253,7 +253,7 @@
                             <p class="text-gray-700 text-xs md:text-sm">{{ $item->user->company? $item->user->company->address->country->name : '' }}</p>
                             <p class="text-gray-700 text-xs md:text-sm">Price: ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
                             <div class="block md:hidden md:static mb-2 w-full">
-                                <a href="{{ route('view.product', [$item->slug]) }}" class="text-purple-500 mb-1 rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base">
+                                <a href="{{ route('view.product', [$item->slug]) }}" class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base w-[calc(80%-1rem)]">
                                     <span class="ml-1">Enquire Now &nbsp;</span>
                                     <i class='bx bx-link-external mr-2'></i>
                                 </a>
