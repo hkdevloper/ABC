@@ -8,6 +8,10 @@
             height: 30px;
             margin: auto 0 auto auto;
         }
+        .company-logo{
+            border: 2px solid #f1f1f1;
+            padding: 10px;
+        }
     </style>
 @endsection
 
@@ -49,11 +53,7 @@
                         </span>
                         <span class="text-sm text-gray-500 font-semibold">{{ $company->category->name }}</span>
                     </p>
-                    <p class="text-center md:text-start">
-                        <span class="text-sm text-gray-500">Type:</span>
-                        <span class="text-sm text-gray-500 font-semibold">{{ $company->business_type }}</span>
-                    </p>
-                    <div class="flex items-center justify-center md:hidden">
+                    <div class="flex items-center justify-center">
                         <div class="flex flex-col items-center justify-center mx-2">
                             <h1 class="text-sm text-gray-500">Reviews</h1>
                             <span
@@ -142,7 +142,7 @@
                                     </div>
                                 </td>
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                    <span class="text-sm md:text-base text-justify text-purple-500">{{ $company->type }}</span>
+                                    <span class="text-sm md:text-base text-justify text-purple-500">{{ $company->business_type }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -174,7 +174,7 @@
                                     </div>
                                 </td>
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                    <span class="text-sm: md:text-base text-gray-500">{{ $company->number_of_employee }}</span>
+                                    <span class="text-sm: md:text-base text-gray-500">{{ $company->number_of_employees ? $company->number_of_employees : 'Not Disclosed' }}</span>
                                 </td>
                             </tr>
                             <tr>
