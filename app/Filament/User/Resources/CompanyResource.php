@@ -114,6 +114,7 @@ class CompanyResource extends Resource
                             ->required(),
                         FileUpload::make('banner')
                             ->label('Banner')
+                            ->hidden()
                             ->directory('companies/banner'),
                         FileUpload::make('gallery')
                             ->label('Gallery')
@@ -197,7 +198,7 @@ class CompanyResource extends Resource
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')
-                            ->maxLength(70),
+                            ->maxLength(191),
                     ])->columns(1),
             ])->columns(1);
     }
