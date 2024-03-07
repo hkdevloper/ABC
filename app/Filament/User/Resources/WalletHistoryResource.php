@@ -107,7 +107,7 @@ class WalletHistoryResource extends Resource
                 ]),
             ])
             ->modifyQueryUsing(function (Builder $builder) {
-                $builder->where('user_id', auth()->id());
+                $builder->where('user_id', auth()->id())->orderBy('created_at', 'desc');
             });
     }
 

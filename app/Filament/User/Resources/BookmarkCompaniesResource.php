@@ -67,7 +67,7 @@ class BookmarkCompaniesResource extends Resource
             ])
             ->emptyStateActions([])
             ->modifyQueryUsing(function (Builder $query) {
-                $query->where('user_id', auth()->user()->id);
+                $query->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc');
             });
     }
 

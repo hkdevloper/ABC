@@ -59,6 +59,7 @@ class EventResource extends Resource
                             ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')
                             ->label('Slug')
+                            ->hidden()
                             ->placeholder('Enter slug')
                             ->required()
                             ->unique(ignoreRecord: true)
@@ -205,7 +206,7 @@ class EventResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->modifyQueryUsing(function (Builder $query) {
-                $query->where('user_id', auth()->user()->id);
+                $query->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc');
             });
     }
 

@@ -57,6 +57,7 @@ class ProductResource extends Resource
                             ->label('Slug')
                             ->placeholder('Enter slug')
                             ->required()
+                            ->hidden()
                             ->unique(ignoreRecord: true)
                             ->maxLength(70),
                         Forms\Components\RichEditor::make('description')
@@ -193,7 +194,7 @@ class ProductResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->modifyQueryUsing(function (Builder $query) {
-                $query->where('user_id', auth()->user()->id);
+                $query->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc');
             });
     }
 

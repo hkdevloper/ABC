@@ -70,6 +70,7 @@ class DealResource extends Resource
                 }),
                 TextInput::make('slug')
                     ->label('Slug')
+                    ->hidden()
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(70),
@@ -81,17 +82,6 @@ class DealResource extends Resource
                     ->label('MRP (Selling Price)')
                     ->numeric()
                     ->prefix('$'),
-                // Show Discount percentage
-                TextInput::make('discount_value')
-                    ->label('Discount Value')
-                    ->numeric()
-                    ->suffix('%')
-                    ->disabled()
-                    ->dehydrated(false)
-                    ->afterStateUpdated(function (Set $set, Get $get){
-                       $percentage = ($get('discount_price') / $get('original_price')) * 100;
-                       $set('discount_value', $percentage);
-                    }),
                 Forms\Components\RichEditor::make('description')
                     ->toolbarButtons([
                         'blockquote',
@@ -221,7 +211,7 @@ class DealResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->modifyQueryUsing(function (Builder $query) {
-                $query->where('user_id', auth()->user()->id);
+                $query->where('user_id', auth()->id())->orderBy('created_at', 'desc');
             });
     }
 

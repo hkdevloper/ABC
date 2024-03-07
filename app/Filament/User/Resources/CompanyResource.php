@@ -69,6 +69,7 @@ class CompanyResource extends Resource
                     }),
                 TextInput::make('slug')
                     ->label('Enter Company Slug')
+                    ->hidden()
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(70),
