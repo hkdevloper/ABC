@@ -53,8 +53,8 @@
                     <hr>
                     <span class="text-xs md:text-sm text-gray-500">Published by {{ $product->user->company->name }}</span>
                     <span class="text-xs md:text-sm text-gray-500">Published on {{ $product->created_at->format('d M Y') }} ({{ $product->created_at->diffForHumans() }})</span>
-                    <a href="{{route('view.company', [$product->user->company->slug])}}" class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-1 px-2 text-center mt-2 rounded-full hover:rounded-full transition-all duration-300 ease-in-out md:w-auto w-full md:hidden">
-                        Contact Now
+                    <a href="{{route('view.company', [$product->user->company->slug])}}" class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-1 px-2 md:ml-5 text-center mt-2 rounded-full hover:rounded-full transition-all duration-300 ease-in-out md:w-auto w-full md:hidden">
+                        Contact Seller
                         <i class='bx bx-link-external ml-2'></i>
                     </a>
                 </div>
