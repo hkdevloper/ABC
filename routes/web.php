@@ -49,6 +49,11 @@ Route::name('razorpay.')
         Route::post('handle-payment', 'handlePayment')->name('make.payment');
     });
 
+// create a post wihtout csrf token
+Route::post('post', function (Request $request) {
+    return $request->all();
+});
+
 Route::get('login', function () {
     return redirect()->route('auth.login');
 })->name('login');

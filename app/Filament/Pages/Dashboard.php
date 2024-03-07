@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use Auth;
 use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
+use Razorpay\Api\Api;
 
 class Dashboard extends \Filament\Pages\Dashboard
 {
@@ -31,14 +32,9 @@ class Dashboard extends \Filament\Pages\Dashboard
         // Action to Add money in wallet
         return [
             Action::make('Add Money to Wallet')
-                ->form([
-                    TextInput::make('amount')
-                        ->label('Enter Amount')
-                        ->prefix('₹')
-                        ->required(),
-                ])
-                ->action(function (array $data) {
-
+                ->hidden(auth()->user()->type == 'Admin')
+                ->action(function () {
+                    return redirect()->route('razorpay.create.payment');
                 })
                 ->icon('heroicon-o-banknotes')
                 ->size('sm'),
