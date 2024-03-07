@@ -54,8 +54,8 @@
                         </span>
                         <span class="text-sm text-gray-500 font-semibold">{{ $company->category->name }}</span>
                     </p>
-                    <div class="flex items-center justify-center">
-                        <div class="flex flex-col items-center justify-center mx-2">
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col items-center justify-center">
                             <h1 class="text-sm text-gray-500">Reviews</h1>
                             <span
                                 class="text-xl font-semibold">{{HelperFunctions::getRatingCount('company', $company->id)}}</span>
@@ -65,7 +65,7 @@
                             <span
                                 class="text-xl font-semibold">{{HelperFunctions::getRatingAverage('company', $company->id)}}</span>
                         </div>
-                        <div class="flex flex-col items-center justify-center mx-2">
+                        <div class="flex flex-col items-center justify-center">
                             <h1 class="text-sm text-gray-500">Products</h1>
                             <span class="text-xl font-semibold">{{ $company->products->count() }}</span>
                         </div>
