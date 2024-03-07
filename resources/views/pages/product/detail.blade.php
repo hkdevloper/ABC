@@ -160,7 +160,7 @@
                          style="width: max-content;">
                         <a href="{{route('view.company', [$product->user->company->slug])}}"
                            class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-2 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base ">
-                            <span class="ml-1">Contact Seller&nbsp;&nbsp;</span>
+                            <span class="ml-1">Contact Seller&nbsp;</span>
                             <i class='bx bx-link-external mr-2'></i>
                         </a>
                     </div>
