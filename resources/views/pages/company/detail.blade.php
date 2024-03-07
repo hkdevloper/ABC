@@ -50,21 +50,6 @@
                         <span class="text-sm text-gray-500 font-semibold">{{ $company->category->name }}</span>
                     </p>
                     <p class="text-center md:text-start">
-                        <span class="text-sm text-gray-500">Established at:</span>
-                        @php
-                            $date = \Carbon\Carbon::parse($company->established_at);
-                        @endphp
-                        <span class="text-sm text-gray-500 font-semibold">{{ $date->diffForHumans() }}</span>
-                    </p>
-                    <p class="text-center md:text-start">
-                        <span class="text-sm text-gray-500">Employees:</span>
-                        <span class="text-sm text-gray-500 font-semibold">{{ $company->number_of_employees }}</span>
-                    </p>
-                    <p class="text-center md:text-start">
-                        <span class="text-sm text-gray-500">Turnover:</span>
-                        <span class="text-sm text-gray-500 font-semibold">₹{{ $company->turnover }}</span>
-                    </p>
-                    <p class="text-center md:text-start">
                         <span class="text-sm text-gray-500">Type:</span>
                         <span class="text-sm text-gray-500 font-semibold">{{ $company->business_type }}</span>
                     </p>
@@ -143,6 +128,89 @@
             <x-bladewind.tab-body>
                 <x-bladewind.tab-content name="desc" active="true">
                     <section class="card p-4 mx-[-15px]">
+                        <table class="w-full border border-collapse rounded-lg">
+                            <!-- Category Section -->
+                            <tr>
+                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                    <div class="flex items-center justify-start">
+                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                    <i class='bx bx-category'></i>
+                                </span>
+                                        <div>
+                                            <span class="text-sm md:text-base font-semibold text-gray-500">Type</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                    <span class="text-sm md:text-base text-justify text-purple-500">{{ $company->type }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- Location Section -->
+                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                    <div class="flex items-center justify-start">
+                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                    <i class='bx bx-map'></i>
+                                </span>
+                                        <div>
+                                            <span class="text-sm md:text-base font-semibold text-gray-500">Established at</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                    <span class="text-sm: md:text-base text-gray-500">{{ $company->established_at }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- Location Section -->
+                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                    <div class="flex items-center justify-start">
+                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                    <i class='bx bx-palette'></i>
+                                </span>
+                                        <div>
+                                            <span class="text-sm md:text-base font-semibold text-gray-500">Employees</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                    <span class="text-sm: md:text-base text-gray-500">{{ $company->number_of_employee }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- Location Section -->
+                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                    <div class="flex items-center justify-start">
+                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                    <i class='bx bx-expand'></i>
+                                </span>
+                                        <div>
+                                            <span class="text-sm md:text-base font-semibold text-gray-500">Turnover</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                    <span class="text-sm: md:text-base text-gray-500">{{ $company->turnover }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- Location Section -->
+                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                    <div class="flex items-center justify-start">
+                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                   <i class='bx bxs-layer'></i>
+                                </span>
+                                        <div>
+                                            <span class="text-sm md:text-base font-semibold text-gray-500">Material</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
+                                    <span class="text-sm: md:text-base text-gray-500">{{ $product->material }}</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <hr class="my-4">
                         <p class="text-sm">{!! $company->description !!}</p>
                     </section>
                 </x-bladewind.tab-content>
