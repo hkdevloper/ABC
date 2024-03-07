@@ -78,7 +78,7 @@
 
                 <div class="flex justify-center items-center my-4">
                     <a href="{{route('view.company', [$deal->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue justify-center items-center">
-                        Contact Now
+                        Contact Seller
                         <i class='bx bx-link-external ml-2'></i>
                     </a>
                 </div>
