@@ -96,8 +96,8 @@ class ProductResource extends Resource
                                 'refurbished' => 'Refurbished',
                             ]),
                         TextInput::make('brand')
-                            ->label('Brand')
-                            ->placeholder('Enter brand')
+                            ->label('Country of Origin')
+                            ->placeholder('Enter Country of origin')
                             ->maxLength(191),
                         TextInput::make('color')
                             ->required()

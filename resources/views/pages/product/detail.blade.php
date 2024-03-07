@@ -101,7 +101,7 @@
                                 </div>
                             </td>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span class="text-sm: md:text-base text-gray-500">{{ $product->user->company->address->country->name }}</span>
+                                <span class="text-sm: md:text-base text-gray-500">{{ $product->brand }}</span>
                             </td>
                         </tr>
                         <tr>
