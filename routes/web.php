@@ -42,18 +42,18 @@ Route::prefix('test')->group(function () {
 
 Route::name('razorpay.')
     ->controller(RazorpayController::class)
-    ->prefix('razorpay')
+    ->prefix('secure')
     ->middleware('auth')
     ->group(function () {
         Route::view('payment', 'razorpay.index')->name('create.payment');
         Route::post('handle-payment', 'handlePayment')->name('make.payment');
+        Route::get('redirect-to-dashboard', function () {
+            return redirect('/user');
+        })->name('user.dashboard');
     });
 
-// create a post wihtout csrf token
-Route::post('post', function (Request $request) {
-    return $request->all();
-});
 
+// create a post without csrf protection
 Route::get('login', function () {
     return redirect()->route('auth.login');
 })->name('login');

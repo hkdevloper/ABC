@@ -38,8 +38,8 @@ class RazorpayController extends Controller
                 // add this amount to user wallet
                 $user = auth()->user();
                 $user->balance += $response['amount'] / 100;
-                $user->saveOrFail(); 
-                return back()->withSuccess('Payment done.');
+                $user->saveOrFail();
+                return redirect()->route('user.dashboard')->with('success', 'Payment successful');
             } catch (Exception $e) {
                 Log::info($e->getMessage());
                 return back()->withError($e->getMessage());

@@ -3,18 +3,8 @@
 @section('head')
     <title>Razorpay Payment Gateway</title>
     <style>
-        .alert {
-            padding: 20px;
-            background-color: #f44336;
-            color: white;
-            margin-bottom: 15px;
-        }
         .panel {
             margin-top: 50px;
-        }
-
-        .panel-body {
-            padding: 50px;
         }
 
         form{
@@ -22,7 +12,7 @@
             margin: 0 auto;
         }
 
-        button{
+        .payment-btn{
             background-color: #4CAF50;
             color: white;
             padding: 14px 20px;
@@ -32,8 +22,14 @@
             width: 100%;
         }
 
-        button:hover {
+        .payment-btn:hover {
             opacity: 0.8;
+        }
+
+        @media only screen and (max-width: 600px) {
+            form{
+                width: 100%;
+            }
         }
     </style>
 @endsection
@@ -41,12 +37,7 @@
 @section('content')
     <div class="container panel panel-default">
         <div class="panel-body">
-            <h1 class="text-3xl md:text-5xl font-extrabold text-center uppercase mb-12 bg-gradient-to-r from-indigo-400 via-purple-500 to-indigo-600 bg-clip-text text-transparent">Razorpay Payment Gateway</h1>
-            @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session()->get('success') }}
-                </div>
-            @endif
+            <h1 class="text-lg md:text-3xl font-extrabold text-center uppercase mb-12 bg-gradient-to-r from-indigo-400 via-purple-500 to-indigo-600 bg-clip-text text-transparent mx-5">Razorpay Payment Gateway</h1>
             <form action="{{ route('razorpay.make.payment') }}" method="POST" class="shadow-lg p-4">
                 @csrf
                 <div class="mb-4">
@@ -57,7 +48,7 @@
                         Please enter the amount in INR.
                     </p>
                 </div>
-                <button id="rzp-button1">Pay</button>
+                <button id="rzp-button1" class="payment-btn">Pay</button>
                 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
                 <script>
                     document.getElementById('rzp-button1').onclick = function(e){
