@@ -54,7 +54,7 @@
                         </span>
                         <span class="text-sm text-gray-500 font-semibold">{{ $company->category->name }}</span>
                     </p>
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between mt-3">
                         <div class="flex flex-col items-center justify-center">
                             <h1 class="text-sm text-gray-500">Reviews</h1>
                             <span
