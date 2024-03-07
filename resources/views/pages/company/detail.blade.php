@@ -193,22 +193,6 @@
                                     <span class="text-sm: md:text-base text-gray-500">{{ $company->turnover }}</span>
                                 </td>
                             </tr>
-                            <tr>
-                                <!-- Location Section -->
-                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                    <div class="flex items-center justify-start">
-                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
-                                   <i class='bx bxs-layer'></i>
-                                </span>
-                                        <div>
-                                            <span class="text-sm md:text-base font-semibold text-gray-500">Material</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                    <span class="text-sm: md:text-base text-gray-500">{{ $product->material }}</span>
-                                </td>
-                            </tr>
                         </table>
                         <hr class="my-4">
                         <p class="text-sm">{!! $company->description !!}</p>
