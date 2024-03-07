@@ -50,6 +50,21 @@
                         <span class="text-sm text-gray-500 font-semibold">{{ $company->category->name }}</span>
                     </p>
                     <p class="text-center md:text-start">
+                        <span class="text-sm text-gray-500">Established at:</span>
+                        @php
+                            $date = \Carbon\Carbon::parse($company->established_at);
+                        @endphp
+                        <span class="text-sm text-gray-500 font-semibold">{{ $date->diffForHumans() }}</span>
+                    </p>
+                    <p class="text-center md:text-start">
+                        <span class="text-sm text-gray-500">Employees:</span>
+                        <span class="text-sm text-gray-500 font-semibold">{{ $company->number_of_employees }}</span>
+                    </p>
+                    <p class="text-center md:text-start">
+                        <span class="text-sm text-gray-500">Turnover:</span>
+                        <span class="text-sm text-gray-500 font-semibold">₹{{ $company->turnover }}</span>
+                    </p>
+                    <p class="text-center md:text-start">
                         <span class="text-sm text-gray-500">Type:</span>
                         <span class="text-sm text-gray-500 font-semibold">{{ $company->business_type }}</span>
                     </p>

@@ -72,6 +72,17 @@ class CompanyResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(70),
+                Forms\Components\DatePicker::make('established_at')
+                    ->label('Established At')
+                    ->required(),
+                TextInput::make('number_of_employees')
+                    ->label('Number of Employees')
+                    ->required()
+                    ->maxLength(191),
+                TextInput::make('turnover')
+                    ->label('Turnover')
+                    ->required()
+                    ->maxLength(191),
                 Forms\Components\RichEditor::make('description')
                     ->required()
                     ->toolbarButtons([
