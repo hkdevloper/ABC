@@ -74,6 +74,10 @@
             </div>
             <div class="w-full md:w-1/2 mt-4 md:mt-0 flex flex-col items-center justify-center md:items-end">
                 <div class="flex items-center justify-center">
+                    <a href="{{route('direct-message', ['company_id' => $company->id])}}"
+                       class="bg-purple-500 hover:bg-purple-900 px-2 py-1 text-sm text-white rounded">
+                        Send Message
+                    </a>
                     <div class="flex items-center justify-center md:justify-end overflow-x-auto md:overflow-x-visible md:mx-2">
                         @if($user->isCompanyBookmarked($company))
                             <a href="{{ route('remove.from.bookmark', ['company_id' => $company->id]) }}"
@@ -87,10 +91,6 @@
                             </a>
                         @endif
                     </div>
-                    <a href="{{route('direct-message', ['company_id' => $company->id])}}"
-                       class="bg-purple-500 hover:bg-purple-900 px-2 py-1 text-sm text-white rounded">
-                        Direct message
-                    </a>
                 </div>
                 @if($user->isCompanyOwner($company))
                     <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn1"
