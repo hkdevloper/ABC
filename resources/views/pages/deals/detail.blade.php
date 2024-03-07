@@ -31,6 +31,7 @@
             <!-- Deals Details -->
             <div class="flex-col p-4">
                 <div class="flex flex-col items-center">
+                    <h1 class="text-2xl font-semibold text-gray-800">Sold By</h1>
                     <img src="{{ url('storage/'.$deal->company->logo) }}" alt="Company Logo" class="h-32 w-32 object-contain">
                     <span class="text-base md:text-lg font-bold text-gray-500">{{ $deal->company->name }}</span>
                     <div class="flex items-center justify-start mb-2">
