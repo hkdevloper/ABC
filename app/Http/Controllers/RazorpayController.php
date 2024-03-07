@@ -35,6 +35,10 @@ class RazorpayController extends Controller
                     'fee' => $response['fee'],
                     'tax' => $response['tax'],
                 ]);
+                // add this amount to user wallet
+                $user = auth()->user();
+                $user->balance += $response['amount'] / 100;
+                $user->saveOrFail(); 
                 return back()->withSuccess('Payment done.');
             } catch (Exception $e) {
                 Log::info($e->getMessage());
