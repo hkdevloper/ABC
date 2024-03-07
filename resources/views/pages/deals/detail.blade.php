@@ -122,7 +122,9 @@
 {{--                        </tr>--}}
                     </table>
                     <hr class="my-4">
-                    <p class="text-sm text-gray-500 bg-white p-4 rounded">{!! $deal->description !!}</p>
+                    <div class="text-sm text-gray-500 bg-white p-4 rounded">
+                        {!! $deal->description !!}
+                    </div>
                 </x-bladewind.tab-content>
                 <x-bladewind.tab-content name="rate">
                     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
