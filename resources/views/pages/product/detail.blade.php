@@ -30,7 +30,7 @@
         <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2 flex md:flex-row flex-col md:items-center justify-between p-4">
             <div class="flex flex-auto">
                 <img src="{{ url('storage/'.$product->user->company->logo) }}" alt="Company Logo"
-                     class="h-16 w-16 rounded-full object-contain mr-4 mt-4">
+                     class="h-16 w-16 rounded-full object-contain mr-4 mt-4 hidden">
                 <!-- Published Details  -->
                 <div class="flex flex-col">
                     <span class="text-base md:text-xl sm:text-base font-bold">{{ $product->name }}
