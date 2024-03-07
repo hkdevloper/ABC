@@ -53,7 +53,7 @@ class UserDealController extends Controller
         }
 
         // Paginate the results
-        $deals = $query->paginate(10);
+        $deals = $query->paginate(12);
 
         // Fetch categories
         $categories = Category::where('is_active', 1)->where('type', 'deal')->get();
