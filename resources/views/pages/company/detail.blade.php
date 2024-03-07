@@ -190,7 +190,7 @@
                                     </div>
                                 </td>
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                    <span class="text-sm: md:text-base text-gray-500">{{ $company->turnover }}</span>
+                                    <span class="text-sm: md:text-base text-gray-500">{{ $company->turnover ? $company->turnover : 'Not Disclosed' }}</span>
                                 </td>
                             </tr>
                         </table>
