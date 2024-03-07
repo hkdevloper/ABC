@@ -22,7 +22,7 @@
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-center">
             <div class="w-full md:w-1/2 md:pr-4 mb-4 md:mb-0 flex items-center justify-center">
                 <img alt="" src="{{url('storage/', $company->logo)}}"
-                     class="company-logo w-16 h-16 md:w-32 md:h-32 object-contain rounded-full mx-auto md:mx-0 my-4">
+                     class="company-logo w-16 h-16 md:w-38 md:h-38 object-contain rounded-full mx-auto md:mx-0 my-4">
                 <div class="w-full md:w-2/3 mx-2 md:mx-10">
                     <div class="flex items-center justify-start mb-2">
                         @if($company->is_featured)
