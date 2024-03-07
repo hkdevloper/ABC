@@ -122,6 +122,7 @@
 {{--                        </tr>--}}
                     </table>
                     <hr class="my-4">
+                    <h1 class="text-2xl font-semibold text-gray-800 my-4">{{$deal->title}}</h1>
                     <div class="text-sm text-gray-500 bg-white p-4 rounded">
                         {!! $deal->description !!}
                     </div>
