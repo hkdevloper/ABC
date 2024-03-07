@@ -109,17 +109,17 @@
                             </td>
                         </tr>
                         <!-- Location Section -->
-                        <tr>
-                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <div class="flex items-center">
-                                    <i class="bx bx-map text-lg text-indigo-500 mr-2 border border-collapse rounded-full p-2"></i>
-                                    <span class="text-base font-semibold text-gray-500">Location</span>
-                                </div>
-                            </td>
-                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span class="text-base text-gray-500">{{ $deal->company->address->country->name }}</span>
-                            </td>
-                        </tr>
+{{--                        <tr>--}}
+{{--                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">--}}
+{{--                                <div class="flex items-center">--}}
+{{--                                    <i class="bx bx-map text-lg text-indigo-500 mr-2 border border-collapse rounded-full p-2"></i>--}}
+{{--                                    <span class="text-base font-semibold text-gray-500">Location</span>--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td class="w-1/2 py-3 px-4 border-b border-lightgray">--}}
+{{--                                <span class="text-base text-gray-500">{{ $deal->company->address->country->name }}</span>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
                     </table>
                     <hr class="my-4">
                     <p class="text-sm text-gray-500">{!! $deal->description !!}</p>
