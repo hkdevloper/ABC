@@ -11,6 +11,7 @@
         .company-logo{
             border: 2px solid #f1f1f1;
             padding: 10px;
+            background: white;
         }
     </style>
 @endsection
