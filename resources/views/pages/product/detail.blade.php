@@ -49,7 +49,7 @@
                             </span>
                         @endif
                     </span>
-                    <span class="text-xs md:text-sm text-gray-500">Price: <span class="text-purple-500">₹{{ HelperFunctions::formatCurrency($product->price) }}</span></span>
+                    <span class="text-xs md:text-base text-gray-500">Price: <span class="text-purple-500">₹{{ HelperFunctions::formatCurrency($product->price) }}</span></span>
                     <hr>
                     <span class="text-xs md:text-sm text-gray-500">Published by {{ $product->user->company->name }}</span>
                     <span class="text-xs md:text-sm text-gray-500">Published on {{ $product->created_at->format('d M Y') }} ({{ $product->created_at->diffForHumans() }})</span>
