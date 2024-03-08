@@ -24,7 +24,8 @@
         "mkocansey/bladewind": "^2.3",
         "njxqlus/filament-progressbar": "^1.0",
         "razorpay/razorpay": "^2.9",
-        "solution-forest/filament-tree": "^2.0"
+        "solution-forest/filament-tree": "^2.0",
+        "tapp/filament-auditing": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",

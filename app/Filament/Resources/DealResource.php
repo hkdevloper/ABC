@@ -168,7 +168,7 @@ class DealResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('discount_price'),
                 Tables\Columns\TextColumn::make('category.name'),
                 Tables\Columns\TextColumn::make('discount_price')
                     ->label('Discounted Price')

@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
 use Str;
+use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 
 class CompanyResource extends Resource
 {
@@ -312,7 +313,7 @@ class CompanyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AuditsRelationManager::class,
         ];
     }
 

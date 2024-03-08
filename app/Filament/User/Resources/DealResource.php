@@ -48,7 +48,7 @@ class DealResource extends Resource
                     ->native(false)
                     ->disabled()
                     ->hidden()
-                    ->default(auth()->user()->id)
+                    ->default(auth()->id())
                     ->label('Select User')
                     ->relationship('user', 'name'),
                 SelectTree::make('category_id')
@@ -114,7 +114,6 @@ class DealResource extends Resource
                         'blockquote',
                         'bold',
                         'bulletList',
-                        'codeBlock',
                         'h2',
                         'h3',
                         'italic',
@@ -146,10 +145,6 @@ class DealResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('thumbnail')
-                    ->label('Thumbnail')
-                    ->disk('public')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('title')
                     ->label('Title')
                     ->wrap()
@@ -169,9 +164,6 @@ class DealResource extends Resource
                     ->label('Active'),
                 Tables\Columns\ToggleColumn::make('is_featured')
                     ->label('Featured'),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -182,17 +174,6 @@ class DealResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                // filters for status
-                Tables\Filters\Filter::make('is_active')
-                    ->label('Active')
-                    ->modifyQueryUsing(function (Builder $query) {
-                        $query->where('is_active', 1);
-                    }),
-                Tables\Filters\Filter::make('is_featured')
-                    ->label('Featured')
-                    ->modifyQueryUsing(function (Builder $query) {
-                        $query->where('is_featured', 1);
-                    }),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
@@ -210,7 +191,7 @@ class DealResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->modifyQueryUsing(function (Builder $query) {
-                $query->where('user_id', auth()->id())->orderBy('created_at', 'desc');
+                $query->where('user_id', auth()->id())->orderBy('created_at', 'asc');
             });
     }
 

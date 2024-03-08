@@ -3,18 +3,18 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
-use App\Filament\Resources\EventResource;
-use App\Filament\Resources\ForumResource;
-use App\Filament\Resources\JobResource;
-use App\Filament\Resources\ProductResource;
-use App\Filament\User\Pages\LoginPage;
-use App\Filament\User\Pages\RegisterPage;
+use App\Filament\User\Resources\EventResource;
+use App\Filament\User\Resources\ForumResource;
+use App\Filament\User\Resources\JobResource;
+use App\Filament\User\Resources\ProductResource;
+use App\Filament\User\Resources\DealResource;
 use App\Filament\User\Resources\BlogResource;
 use App\Filament\User\Resources\BookmarkCompaniesResource;
 use App\Filament\User\Resources\CompanyResource;
-use App\Filament\User\Resources\DealResource;
 use App\Filament\User\Resources\DirectMessageResource;
 use App\Filament\User\Resources\WalletHistoryResource;
+use App\Filament\User\Pages\LoginPage;
+use App\Filament\User\Pages\RegisterPage;
 use App\Filament\Widgets\StatsOverview;
 use App\Http\Middleware\HkEmailVerification;
 use App\Models\WalletHistory;
@@ -51,7 +51,7 @@ class UserPanelProvider extends PanelProvider
             ->registration(RegisterPage::class)
             ->passwordReset()
             ->emailVerification(EmailVerificationPrompt::class)
-            ->profile()
+            ->profile(isSimple: false)
             ->colors([
                 'primary' => Color::Purple,
             ])
@@ -59,7 +59,7 @@ class UserPanelProvider extends PanelProvider
                 return $builder->items([
                     NavigationItem::make('Dashboard')
                         ->icon('heroicon-o-home')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.pages.dashboard'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs(Dashboard::getUrl()))
                         ->url(fn (): string => Dashboard::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
@@ -72,7 +72,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('Company Profile')
                         ->icon('heroicon-o-building-office-2')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.company'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs(CompanyResource::getUrl()))
                         ->url(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
@@ -100,7 +100,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('Deals')
                         ->icon('heroicon-o-gift-top')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.deals'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs(DealResource::getUrl()))
                         ->url(fn (): string => DealResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
