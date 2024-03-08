@@ -193,7 +193,12 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function isCompanyOwner(Company $company): bool
     {
-        return $this->company->id === $company->id;
+        if(auth()->check()){
+            if($company->user_id === $this->company->id){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
