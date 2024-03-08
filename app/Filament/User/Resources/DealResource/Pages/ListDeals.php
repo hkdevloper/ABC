@@ -4,6 +4,7 @@ namespace App\Filament\User\Resources\DealResource\Pages;
 
 use App\Filament\User\Resources\DealResource;
 use Filament\Actions;
+use Filament\Resources\Pages\ListRecords;
 
 class ListDeals extends ListRecords
 {
