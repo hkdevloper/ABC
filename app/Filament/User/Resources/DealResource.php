@@ -145,6 +145,10 @@ class DealResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->label('Thumbnail')
+                    ->disk('public')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('title')
                     ->label('Title')
                     ->wrap()
