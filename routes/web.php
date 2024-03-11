@@ -155,6 +155,18 @@ Route::prefix('auth')->group(function () {
                 Auth::logout();
                 return redirect()->back()->withInput()->with('error', 'Invalid credentials');
             }
+            // If user is banned then logout and redirect with error
+            if (Auth::user()->banned == 1) {
+                $message = Auth::user()->banned_reason ? Auth::user()->banned_reason : 'Your account has been banned';
+                Auth::logout();
+                return redirect()->back()->withInput()->with('error', $message);
+            }
+
+            // IF user is not Approved then logout and redirect with error
+            if (Auth::user()->approved == 0) {
+                Auth::logout();
+                return redirect()->back()->withInput()->with('error', 'Your account is not approved yet');
+            }
             return redirect('/user');
         }
         return redirect()->back()->withInput()->with('error', 'Invalid credentials');
@@ -174,7 +186,7 @@ Route::prefix('auth')->group(function () {
         $spamEmails = BlockedDomain::where('status', 1)->pluck('domain')->toArray();
         foreach ($spamEmails as $spamEmail) {
             if (str_contains(strtolower($request->email), strtolower($spamEmail))) {
-                return redirect()->back()->with('error', 'Invalid email')->withInput();
+                return redirect()->back()->with('error', 'This email is not allowed')->withInput();
             }
         }
         $user = new User();

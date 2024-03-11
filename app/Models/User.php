@@ -138,14 +138,6 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return false;
     }
 
-    public function save(array $options = []): bool
-    {
-        if($this->email_verified_at){
-            $this->email_verified_at = now();
-        }
-        return parent::save($options);
-    }
-
     public function delete() : bool
     {
         // Don't Delete Admin

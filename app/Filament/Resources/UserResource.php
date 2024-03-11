@@ -102,11 +102,10 @@ class UserResource extends Resource
                             ->dehydrated(false)
                             ->live(onBlur: true)
                             ->hidden(fn(Get $get) => !$get('id')),
-                        Toggle::make('email_verified_at')
+                        Toggle::make('is_verified')
                             ->label('Email Verified')
                             ->disabled(fn(Get $get) => $get('type') === 'Admin')
-                            ->default(false)
-                            ->dehydrated(false)
+                            ->default(fn(User $record): bool => $record->email_verified_at !== null)
                             ->required(),
                     ])->columns(3),
             ])->columns(3);
