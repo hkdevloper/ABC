@@ -20,9 +20,13 @@ use App\Models\Event;
 use App\Models\Requirement;
 use App\Models\Subscribe;
 use App\Models\User;
+use Filament\Facades\Filament;
+use Filament\Notifications\Auth\VerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -194,7 +198,35 @@ Route::prefix('auth')->group(function () {
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->saveOrFail();
-        Auth::login($user);
+        try {
+            if (!$user instanceof MustVerifyEmail) {
+                return redirect()->back()->with('success', 'Registered successfully');
+            }
+
+            if ($user->hasVerifiedEmail()) {
+                return redirect()->back()->with('success', 'Registered successfully');
+            }
+
+            if (!method_exists($user, 'notify')) {
+                $userClass = $user::class;
+
+                throw new Exception("Model [{$userClass}] does not have a [notify()] method.");
+            }
+
+            $notification = new VerifyEmail();
+            $notification->url = URL::temporarySignedRoute(
+                'filament.panel.auth.email-verification.verify',
+                now()->addMinutes(config('auth.verification.expire', 60)),
+                [
+                    'id' => $user->getKey(),
+                    'hash' => sha1($user->getEmailForVerification()),
+                    ...[],
+                ],
+            );
+            $user->notify($notification);
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', 'Registered successfully');
+        }
         return redirect()->back()->with('success', 'Registered successfully');
     })->name('auth.register');
 });
