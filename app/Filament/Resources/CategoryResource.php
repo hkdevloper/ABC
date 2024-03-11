@@ -66,6 +66,7 @@ class CategoryResource extends Resource
                     ->label('Select Type')
                     ->native(false)
                     ->required()
+                    ->live(true)
                     ->options([
                         "company" => "Company",
                         "product" => "Product",
@@ -79,10 +80,11 @@ class CategoryResource extends Resource
                     ->label('Select Parent Category')
                     ->withCount()
                     ->enableBranchNode()
+                    ->live(true)
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('parent', 'name', 'parent_id', function ($query, Forms\Get $get){
                         // Get only active categories and selected Type category
-                        $query->where('type', $get('type'));
+                        return $query->where('type', $get('type'));
                     }),
                 Forms\Components\RichEditor::make('description')
                     ->toolbarButtons([
