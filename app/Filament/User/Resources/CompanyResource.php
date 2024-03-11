@@ -102,7 +102,7 @@ class CompanyResource extends Resource
                     ->columnSpanFull(),
                 TagsInput::make('extra_things')
                     ->label('Products Name')
-                    ->splitKeys(['Tab', ' ', ','])
+                    ->splitKeys(['Tab', ','])
                     ->helperText('List your products name separated by comma')
                     ->required(),
                 Section::make('Images')
@@ -193,7 +193,7 @@ class CompanyResource extends Resource
                             ->required()
                             ->maxLength(70),
                         TagsInput::make('meta_keywords')
-                            ->splitKeys(['Tab', ' ', ','])
+                            ->splitKeys(['Tab', ','])
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')

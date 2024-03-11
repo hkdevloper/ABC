@@ -47,7 +47,7 @@ class CategoryResource extends Resource
                 FileUpload::make('image')
                     ->label('category image')
                     ->directory('category')
-                    ->required(),
+                    ->default(''),
 //                SpatieMediaLibraryFileUpload::make('image')
 //                    ->label('Category Image')
 //                    ->directory('category')
@@ -80,8 +80,9 @@ class CategoryResource extends Resource
                     ->withCount()
                     ->enableBranchNode()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('parent', 'name', 'parent_id', function ($query){
-                        return $query;
+                    ->relationship('parent', 'name', 'parent_id', function ($query, Forms\Get $get){
+                        // Get only active categories and selected Type category
+                        $query->where('type', $get('type'));
                     }),
                 Forms\Components\RichEditor::make('description')
                     ->toolbarButtons([
@@ -108,7 +109,7 @@ class CategoryResource extends Resource
                             ->required()
                             ->maxLength(70),
                         TagsInput::make('meta_keywords')
-                            ->splitKeys(['Tab', ' ', ','])
+                            ->splitKeys(['Tab', ','])
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')

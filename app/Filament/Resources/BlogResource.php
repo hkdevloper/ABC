@@ -77,7 +77,7 @@ class BlogResource extends Resource
                     ->required()
                     ->maxLength(70),
                 TagsInput::make('tags')
-                    ->splitKeys(['Tab', ' ', ','])
+                    ->splitKeys(['Tab', ','])
                     ->required(),
                 TinyEditor::make('content')
                     ->fileAttachmentsDisk('public')
@@ -99,7 +99,7 @@ class BlogResource extends Resource
                             ->required()
                             ->maxLength(70),
                         TagsInput::make('meta_keywords')
-                            ->splitKeys(['Tab', ' ', ','])
+                            ->splitKeys(['Tab', ','])
                             ->required()
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
