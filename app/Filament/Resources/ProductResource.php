@@ -116,7 +116,7 @@ class ProductResource extends Resource
                     ->required(),
                 TextInput::make('brand')
                     ->required()
-                    ->label('Brand')
+                    ->label('Country of Origin')
                     ->maxLength(191),
                 TextInput::make('color')
                     ->required()
