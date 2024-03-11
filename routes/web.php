@@ -224,6 +224,8 @@ Route::prefix('auth')->group(function () {
                 ],
             );
             $user->notify($notification);
+            Auth::login($user);
+            return redirect()->route('/user');
         } catch (Exception $e) {
             return redirect()->back()->with('success', 'Registered successfully');
         }
