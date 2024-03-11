@@ -18,7 +18,7 @@ class UserProductController extends Controller
         // Store Session for Home Menu Active
         Session::put('menu', 'product');
 
-        $query = Product::where('is_approved', 1);
+        $query = Product::where('is_approved', 1)->where('is_active', 1);
 
         if ($request->has('category')) {
             // Get Category I'd from Category Name
