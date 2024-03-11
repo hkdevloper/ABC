@@ -56,8 +56,16 @@
                 <p class="mt-1 text-sm text-gray-500">₹ {{ \App\classes\HelperFunctions::formatCurrency($job->salary) }}</p>
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Valid Until</label>
+                <label class="block text-sm font-medium text-gray-700">Last date for apply</label>
                 <p class="mt-1 text-sm text-gray-500">{{ $job->valid_until->format('d M Y') }}</p>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Education</label>
+                <p class="mt-1 text-sm text-gray-500">{{ $job->education }}</p>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Experience</label>
+                <p class="mt-1 text-sm text-gray-500">{{ $job->experience }}</p>
             </div>
         </section>
         <hr class="my-4">
