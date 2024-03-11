@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\Dashboard;
 use App\Filament\User\Resources\EventResource;
 use App\Filament\User\Resources\ForumResource;
@@ -51,7 +52,7 @@ class UserPanelProvider extends PanelProvider
             ->registration(RegisterPage::class)
             ->passwordReset()
             ->emailVerification(EmailVerificationPrompt::class)
-            ->profile(isSimple: false)
+            ->profile(EditProfile::class, isSimple: false)
             ->colors([
                 'primary' => Color::Purple,
             ])
