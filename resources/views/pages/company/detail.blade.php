@@ -3,12 +3,19 @@
 @endphp
 @extends('layouts.user')
 @section('head')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.css"
+          integrity="sha512-eG8C/4QWvW9MQKJNw2Xzr0KW7IcfBSxljko82RuSs613uOAg/jHEeuez4dfFgto1u6SRI/nXmTr9YPCjs1ozBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.js"
+            integrity="sha512-MdZwHb4u4qCy6kVoTLL8JxgPnARtbNCUIjTCihWcgWhCsLfDaQJib4+OV0O8IS+ea+3Xv/6pH3vYY4LWpU/gbQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         #slot-btn {
             height: 30px;
             margin: auto 0 auto auto;
         }
-        .company-logo{
+
+        .company-logo {
             border: 2px solid #f1f1f1;
             padding: 10px;
             background: white;
@@ -78,7 +85,8 @@
                        class="bg-purple-500 hover:bg-purple-900 px-2 py-1 text-sm text-white rounded">
                         Send Message
                     </a>
-                    <div class="flex items-center justify-center md:justify-end overflow-x-auto md:overflow-x-visible md:mx-2">
+                    <div
+                        class="flex items-center justify-center md:justify-end overflow-x-auto md:overflow-x-visible md:mx-2">
                         @if($user->isCompanyBookmarked($company))
                             <a href="{{ route('remove.from.bookmark', ['company_id' => $company->id]) }}"
                                class="bg-green-400 hover:bg-purple-500 px-2 py-1 text-sm rounded text-white mr-1">
@@ -134,7 +142,8 @@
                             <tr>
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
                                     <div class="flex items-center justify-start">
-                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                <span
+                                    class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
                                     <i class='bx bx-category'></i>
                                 </span>
                                         <div>
@@ -143,55 +152,64 @@
                                     </div>
                                 </td>
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                    <span class="text-sm md:text-base text-justify text-purple-500">{{ $company->business_type }}</span>
+                                    <span
+                                        class="text-sm md:text-base text-justify text-purple-500">{{ $company->business_type }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <!-- Location Section -->
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
                                     <div class="flex items-center justify-start">
-                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                <span
+                                    class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
                                     <i class='bx bx-calendar'></i>
                                 </span>
                                         <div>
-                                            <span class="text-sm md:text-base font-semibold text-gray-500">Established at</span>
+                                            <span class="text-sm md:text-base font-semibold text-gray-500">Established On</span>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                    <span class="text-sm: md:text-base text-gray-500">{{ $company->established_at }}</span>
+                                    <span
+                                        class="text-sm: md:text-base text-gray-500">{{ $company->established_at }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <!-- Location Section -->
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
                                     <div class="flex items-center justify-start">
-                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
-                                    <i class='bx bx-group' ></i>
+                                <span
+                                    class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                    <i class='bx bx-group'></i>
                                 </span>
                                         <div>
-                                            <span class="text-sm md:text-base font-semibold text-gray-500">Employees</span>
+                                            <span
+                                                class="text-sm md:text-base font-semibold text-gray-500">Employees</span>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                    <span class="text-sm: md:text-base text-gray-500">{{ $company->number_of_employees ? $company->number_of_employees : 'Not Disclosed' }}</span>
+                                    <span
+                                        class="text-sm: md:text-base text-gray-500">{{ $company->number_of_employees ? $company->number_of_employees : 'Not Disclosed' }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <!-- Location Section -->
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
                                     <div class="flex items-center justify-start">
-                                <span class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
+                                <span
+                                    class="text-lg font-semibold text-indigo-500 mr-2 border border-collapse rounded-full p-2 flex items-center justify-center">
                                     <i class='bx bx-expand'></i>
                                 </span>
                                         <div>
-                                            <span class="text-sm md:text-base font-semibold text-gray-500">Turnover</span>
+                                            <span
+                                                class="text-sm md:text-base font-semibold text-gray-500">Turnover</span>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                    <span class="text-sm: md:text-base text-gray-500">{{ $company->turnover ? $company->turnover : 'Not Disclosed' }}</span>
+                                    <span
+                                        class="text-sm: md:text-base text-gray-500">{{ $company->turnover ? $company->turnover : 'Not Disclosed' }}</span>
                                 </td>
                             </tr>
                         </table>
@@ -262,18 +280,18 @@
                         </div>
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">Email</label>
-                            <p class="mt-1 text-sm text-gray-500">{{ $company->email }}</p>
+                            <p class="mt-1 text-sm text-gray-500">{{ HelperFunctions::secureEmailAddress($company->email) }}</p>
                         </div>
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">Phone</label>
-                            <p class="mt-1 text-sm text-gray-500">{{ $company->phone }}</p>
+                            <p class="mt-1 text-sm text-gray-500">{{ HelperFunctions::securePhoneNumber($company->phone) }}</p>
                         </div>
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">Website</label>
-                            <p class="mt-1 text-sm text-gray-500">{{ $company->website }}</p>
+                            <p class="mt-1 text-sm text-gray-500">{{ HelperFunctions::secureWebsiteUrl($company->website) }}</p>
                         </div>
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">Social Media</label>
+                        <div class="mb-4 hidden">
+                            <label class="text-sm font-medium text-gray-700">Social Media</label>
                             <div class="mt-1 text-sm text-gray-500">
                                 <a href="{{ $company->facebook }}" target="_blank"
                                    class="text-blue-500 hover:text-blue-700">
@@ -325,7 +343,8 @@
                                         <p class="text-sm text-gray-500">You have already rated this company.</p>
                                     @else
                                         <a href="#" onclick="showModal('rate')"
-                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write a review</a>
+                                           class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
+                                            a review</a>
                                     @endif
                                 @else
                                     <a href="{{route('auth.login')}}"
@@ -372,7 +391,7 @@
         <!-- Gallery Grid -->
         <section class="card p-4 mb-4">
             <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Gallery</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-4" id="company-gallery">
                 @php
                     // if a gallery is array, convert it to string
                     if(is_array($company->gallery)){
@@ -380,14 +399,8 @@
                     }
                 @endphp
                 @forelse(json_decode($company->gallery) as $item)
-                    <div
-                        class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2">
-                        <a href="{{ url('storage/' . $item) }}"
-                           class="w-full h-[150px] object-contain">
-                            <img alt="company photo" src="{{ url('storage/' . $item) }}"
-                                 class="w-full h-[150px] object-contain img-remove-bg"/>
-                        </a>
-                    </div>
+                    <img alt="company photo" src="{{ url('storage/' . $item) }}"
+                         class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 w-full h-[150px] object-contain img-remove-bg"/>
                 @empty
                     <div class="dark:bg-neutral-700 w-full">
                         <div class="p-4 w-full">
@@ -461,18 +474,18 @@
             </div>
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Email</label>
-                <p class="mt-1 text-sm text-gray-500">{{ $company->email }}</p>
+                <p class="mt-1 text-sm text-gray-500">{{ HelperFunctions::secureEmailAddress($company->email)}}</p>
             </div>
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Phone</label>
-                <p class="mt-1 text-sm text-gray-500">{{ $company->phone }}</p>
+                <p class="mt-1 text-sm text-gray-500">{{ HelperFunctions::securePhoneNumber($company->phone) }}</p>
             </div>
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Website</label>
-                <p class="mt-1 text-sm text-gray-500">{{ $company->website }}</p>
+                <p class="mt-1 text-sm text-gray-500">{{ HelperFunctions::secureWebsiteUrl($company->website) }}</p>
             </div>
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Social Media</label>
+            <div class="mb-4 hidden">
+                <label class="text-sm font-medium text-gray-700">Social Media</label>
                 <div class="mt-1 text-sm text-gray-500">
                     <a href="{{ $company->facebook }}" target="_blank"
                        class="text-blue-500 hover:text-blue-700">
@@ -506,8 +519,7 @@
             <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
                 <div>
                     <div class="rounded-lg border p-4">
-                        <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Customer
-                            Reviews</h2>
+                        <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Customer Reviews</h2>
 
                         <div class="mb-0.5 flex items-center gap-2">
                             <x-bladewind.rating name="star-rating" size="medium" clickable="false"
@@ -522,8 +534,7 @@
 
                         @auth
                             @if(auth()->user()->hasRated("company", $company->id))
-                                <p class="text-sm text-gray-500">You have already rated this
-                                    company.</p>
+                                <p class="text-sm text-gray-500">You have already rated this company.</p>
                             @else
                                 <a href="#" onclick="showModal('rate')"
                                    class="mt-2 block rounded-lg border px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 bg-gray-100 hover:bg-gray-300 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">Write
@@ -624,6 +635,7 @@
             button_action="hideModal('rate')"
             message="Your rating has been submitted successfully."/>
     </x-bladewind::modal>
+    <div id="image-viewer"></div>
     <!-- Add this script at the end of your HTML file -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -638,6 +650,13 @@
             });
         });
 
+        const viewer = new Viewer(document.getElementById('image-viewer'), {
+            inline: true,
+            viewed() {
+                viewer.zoomTo(1);
+            },
+        });
+        const gallery = new Viewer(document.getElementById('company-gallery'));
         @auth
             saveRating = async function (element) {
             let form = document.getElementById('rate-form');

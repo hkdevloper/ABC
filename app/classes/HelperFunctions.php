@@ -137,4 +137,27 @@ class HelperFunctions
             return 0;
         }
     }
+
+    // Function to get Secure Email Address to Display
+    public static function secureEmailAddress($email): string
+    {
+        $em = explode("@", $email);
+        $em[0] = str_repeat("*", strlen($em[0]));
+        return implode("@", $em);
+    }
+
+    // Function to Hide Website Until user not Paid for it
+    public static function secureWebsiteUrl($url): string
+    {
+        return "www.********.com";
+    }
+
+    // Function to get Secure Phone Number to Display
+    public static function securePhoneNumber($phone): string
+    {
+        // Get the last 4 digits of the phone number
+        $last4Digits = substr($phone, -4);
+        // Replace the first 7 digits with asterisks
+        return '***-***-' . $last4Digits;
+    }
 }
