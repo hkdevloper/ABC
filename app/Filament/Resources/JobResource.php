@@ -106,7 +106,7 @@ class JobResource extends Resource
                 TextInput::make('HR Email')
                     ->label('HR Email')
                     ->email()
-                    ->placeholder('Enter HR email')
+                    ->placeholder('Enter Email Id to apply for a job')
                     ->maxLength(191),
                 Textarea::make('education')
                     ->id('education')

@@ -69,7 +69,7 @@ class JobResource extends Resource
                 TextInput::make('HR Email')
                     ->label('HR Email')
                     ->email()
-                    ->placeholder('Enter HR email')
+                    ->placeholder('Enter Email Id to apply for a job')
                     ->maxLength(191),
                 Section::make()->schema([
                     DatePicker::make('valid_until')
