@@ -82,22 +82,6 @@ class JobResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(70),
-                Forms\Components\RichEditor::make('description')
-                    ->required()
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'h2',
-                        'h3',
-                        'italic',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'underline',
-                        'undo',
-                    ])
-                    ->columnSpanFull(),
                 Forms\Components\DatePicker::make('valid_until')
                     ->label('Valid Until')
                     ->before(today()->addYear())
@@ -128,12 +112,10 @@ class JobResource extends Resource
                     ->id('education')
                     ->columnSpan('full')
                     ->required(),
-                TextInput::make('experience')
+                Textarea::make('experience')
                     ->label('Enter Experience Details')
-                    ->prefix('Years')
-                    ->numeric()
-                    ->helperText('Enter experience in years')
                     ->columnSpanFull(),
+
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
@@ -142,6 +124,22 @@ class JobResource extends Resource
                             ->directory('events/thumbnail')
                             ->required(),
                     ])->columns(1),
+                Forms\Components\RichEditor::make('description')
+                    ->required()
+                    ->toolbarButtons([
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
+                    ->columnSpanFull(),
                 Section::make('Address Details')
                     ->relationship('address')
                     ->schema([

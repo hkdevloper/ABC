@@ -49,6 +49,8 @@ class ForumResource extends Resource
                 Textarea::make('summary')
                     ->label('Enter Summary')
                     ->required()
+                    ->default('')
+                    ->hidden()
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('body')
                     ->toolbarButtons([
@@ -83,7 +85,7 @@ class ForumResource extends Resource
                     ->label('Title')
                     ->wrap()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('summary')
+                Tables\Columns\TextColumn::make('body')
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')

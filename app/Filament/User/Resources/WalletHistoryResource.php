@@ -24,6 +24,7 @@ class WalletHistoryResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
+                    ->hidden()
                     ->relationship('user', 'name')
                     ->required(),
                 Forms\Components\TextInput::make('type')
@@ -43,6 +44,7 @@ class WalletHistoryResource extends Resource
                 Forms\Components\TextInput::make('currency')
                     ->maxLength(191),
                 Forms\Components\TextInput::make('user_email')
+                    ->label('Payment Email')
                     ->email()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('contact')
@@ -52,6 +54,7 @@ class WalletHistoryResource extends Resource
                 Forms\Components\TextInput::make('tax')
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('json_response')
+                    ->hidden()
                     ->json(),
             ]);
     }

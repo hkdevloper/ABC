@@ -83,12 +83,14 @@ class BlogResource extends Resource
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsVisibility('public')
                     ->fileAttachmentsDirectory('editor/uploads')
-                    ->profile('custom')
+                    ->profile('simple')
                     ->columnSpan('full')
                     ->required(),
                 Textarea::make('summary')
                     ->label('Enter Summary')
                     ->columnSpan('full')
+                    ->default('')
+                    ->hidden()
                     ->required()
                     ->maxLength(191),
                 Section::make('SEO Details')

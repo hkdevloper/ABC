@@ -105,8 +105,7 @@ class EventResource extends Resource
                             ->directory('events/gallery')
                             ->multiple()
                             ->maxFiles(4)
-                            ->visibility('public')
-                            ->required(),
+                            ->visibility('public'),
                     ])->columns(2),
                 Section::make('Address Details')
                     ->relationship('address')

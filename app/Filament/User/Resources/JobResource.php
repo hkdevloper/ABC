@@ -71,6 +71,46 @@ class JobResource extends Resource
                     ->email()
                     ->placeholder('Enter HR email')
                     ->maxLength(191),
+                Section::make()->schema([
+                    DatePicker::make('valid_until')
+                        ->label('Valid Until')
+                        ->prefixIcon('heroicon-o-calendar'),
+                    Select::make('employment_type')
+                        ->label('Enter Employment Type')
+                        ->native(false)
+                        ->options([
+                            'full_time' => 'Full Time',
+                            'part_time' => 'Part Time',
+                            'contract' => 'Contract',
+                            'temporary' => 'Temporary',
+                            'internship' => 'Internship',
+                            'volunteer' => 'Volunteer',
+                            'other' => 'Other',
+                        ]),
+                    TextInput::make('salary')
+                        ->label('Salary')
+                        ->placeholder('Enter salary')
+                        ->prefixIcon('heroicon-o-currency-dollar')
+                        ->maxLength(191),
+                ])->columns(3),
+                Section::make()
+                    ->schema([
+                        Textarea::make('education')
+                            ->id('education')
+                            ->columnSpan('full')
+                            ->required(),
+                        Textarea::make('experience')
+                            ->label('Enter Experience Details')
+                            ->columnSpanFull(),
+                    ])->columns(2),
+                Section::make('Images')
+                    ->schema([
+                        FileUpload::make('thumbnail')
+                            ->label('Company Logo')
+                            ->directory('job/thumbnail')
+                            ->visibility('public')
+                            ->required(),
+                    ])->columns(1),
                 Forms\Components\RichEditor::make('description')
                     ->required()
                     ->toolbarButtons([
@@ -87,41 +127,6 @@ class JobResource extends Resource
                         'undo',
                     ])
                     ->columnSpanFull(),
-                Section::make()->schema([
-                    DatePicker::make('valid_until')
-                        ->label('Valid Until')
-                        ->prefixIcon('heroicon-o-calendar'),
-                    TextInput::make('employment_type')
-                        ->label('Employment Type')
-                        ->placeholder('Enter employment type')
-                        ->maxLength(191),
-                    TextInput::make('salary')
-                        ->label('Salary')
-                        ->placeholder('Enter salary')
-                        ->prefixIcon('heroicon-o-currency-dollar')
-                        ->maxLength(191),
-                ])->columns(3),
-                Section::make()
-                    ->schema([
-                        Textarea::make('education')
-                            ->id('education')
-                            ->columnSpan('full')
-                            ->required(),
-                        TextInput::make('experience')
-                            ->label('Enter Experience Details')
-                            ->prefix('Years')
-                            ->numeric()
-                            ->helperText('Enter experience in years')
-                            ->columnSpanFull(),
-                    ])->columns(2),
-                Section::make('Images')
-                    ->schema([
-                        FileUpload::make('thumbnail')
-                            ->label('Company Logo')
-                            ->directory('job/thumbnail')
-                            ->visibility('public')
-                            ->required(),
-                    ])->columns(1),
                 Section::make('Address Details')
                     ->relationship('address')
                     ->schema([

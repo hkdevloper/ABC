@@ -100,15 +100,12 @@ class ProductResource extends Resource
                             ->placeholder('Enter Country of origin')
                             ->maxLength(191),
                         TextInput::make('color')
-                            ->required()
                             ->label('Color')
                             ->maxLength(191),
                         TextInput::make('size')
-                            ->required()
                             ->label('Size')
                             ->maxLength(191),
                         TextInput::make('material')
-                            ->required()
                             ->label('Material')
                             ->maxLength(191),
                     ])->columns(3),

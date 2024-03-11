@@ -27,16 +27,20 @@ class DirectMessageResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
+                    ->disabled()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('phone')
                     ->tel()
+                    ->disabled()
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('company_name')
                     ->required()
+                    ->disabled()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->disabled()
                     ->maxLength(191),
                 Forms\Components\Select::make('status')
                     ->default('Pending')
@@ -45,6 +49,7 @@ class DirectMessageResource extends Resource
                     ->required(),
                 Forms\Components\Textarea::make('message')
                     ->required()
+                    ->disabled()
                     ->maxLength(65535)
                     ->columnSpanFull(),
             ]);
@@ -56,15 +61,22 @@ class DirectMessageResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('email')
                     ->wrap()
+                    ->hidden()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('company_name')
                     ->label('Company Name')
                     ->wrap()
+                    ->hidden()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Contact Person')
+                    ->wrap()
+                    ->hidden()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('message')
+                    ->label('Message')
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
