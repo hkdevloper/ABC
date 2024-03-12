@@ -46,21 +46,21 @@ class EventResource extends Resource
                     ->default(true)
                     ->label('Active')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Toggle::make('is_featured')
                     ->label('Featured')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Toggle::make('is_claimed')
                     ->label('Claimed')
                     ->live()
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Toggle::make('is_approved')
                     ->default(true)
                     ->label('Approved')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Select::make('company_id')
                     ->label('Select Company')
                     ->native(false)
@@ -71,7 +71,7 @@ class EventResource extends Resource
                     ->enableBranchNode()
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
+                    ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'event');
                     }),
                 TextInput::make('title')
@@ -79,7 +79,7 @@ class EventResource extends Resource
                     ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(function (Set $set, ?string $state){
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
                         $set('seo.title', $state);
                     }),
@@ -108,12 +108,12 @@ class EventResource extends Resource
                     ->label('Start Date')
                     ->before('end')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Forms\Components\DatePicker::make('end')
                     ->label('End Date')
                     ->after('start')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
@@ -138,19 +138,18 @@ class EventResource extends Resource
                         Select::make('country_id')
                             ->label('Country')
                             ->preload()
+                            ->default('1')
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()
-                            ->autofocus()
                             ->required(),
                         Select::make('state_id')
                             ->label('State')
-                            ->live(onBlur: true)
+                            ->default('1')
                             ->options(fn(Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
-                            ->autofocus()
                             ->required(),
                         TextInput::make('city')
                             ->label('City')
