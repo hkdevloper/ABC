@@ -47,7 +47,6 @@ class CompanyResource extends Resource
                     'retailer' => 'Retailer',
                 ])
                     ->native(false)
-                    ->autofocus()
                     ->required(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
