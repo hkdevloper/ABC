@@ -38,13 +38,15 @@
 @include('includes.header')
 <main class="mx-auto">
     @yield('content')
-    <livewire:requirement/>
+    @if(route('view.requirements.form') != request()->url())
+        <livewire:requirement/>
+    @endif
     <x-news-latter/>
     @include('includes.modals')
     @include('includes.footer')
 </main>
 <script src="{{ asset('js/tw-element-min.js') }}"></script>
-    <script type="text/javascript" src="{{asset('js/toastify.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/toastify.js')}}"></script>
 <script src="{{ asset('js/alpine.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
 <script>

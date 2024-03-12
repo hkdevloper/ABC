@@ -458,3 +458,8 @@ Route::post('direct-message', function (Request $request) {
     $dm->saveOrFail();
     return redirect()->back()->with('success', 'Message sent successfully');
 })->name('direct-message');
+
+Route::get('/custom-requirements', function () {
+    Session::forget('menu');
+    return view('requirements');
+})->name('view.requirements.form');
