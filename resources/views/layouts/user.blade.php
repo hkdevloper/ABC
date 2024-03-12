@@ -11,11 +11,11 @@
     <link href="{{ asset('css/main.css')}}" rel="stylesheet">
     <script src="{{ asset('js/jquery.js')}}"></script>
     <script src="{{ asset('js/alpine.js')}}" defer></script>
-    <script src="{{ asset('js/fw.js')}}" crossorigin="anonymous"></script>
+{{--    <script src="{{ asset('js/fw.js')}}" crossorigin="anonymous"></script>--}}
     <script src="{{ asset('js/helper.js') }}"></script>
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/scroll-reveal.js')}}"></script>
-    @include('includes.ads-config')
+{{--    @include('includes.ads-config')--}}
     @yield('head')
     <script>
         tailwind.config = {
@@ -47,7 +47,7 @@
 </main>
 <script src="{{ asset('js/tw-element-min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/toastify.js')}}"></script>
-<script src="{{ asset('js/alpine.js')}}"></script>
+{{--<script src="{{ asset('js/alpine.js')}}"></script>--}}
 <script src="{{ asset('js/main.js')}}"></script>
 <script>
     @if(session()->has('success'))

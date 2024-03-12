@@ -554,10 +554,8 @@
                             <div class="flex flex-col gap-3 p-4 mb-2 bg-gray-100">
                                 <div class="flex justify-between items-center">
                                     <div>
-                                                        <span
-                                                            class="block text-sm font-bold">{{$item->user->company->name}}</span>
-                                        <span
-                                            class="block text-sm text-gray-500">{{$item->created_at->diffForHumans()}}</span>
+                                        <span class="block text-sm font-bold">{{$item->name}}</span>
+                                        <span class="block text-sm text-gray-500">{{$item->created_at->diffForHumans()}}</span>
                                     </div>
                                     <x-bladewind.rating name="star-rating" size="small"
                                                         clickable="false"
