@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class UserProductController extends Controller
@@ -17,8 +18,32 @@ class UserProductController extends Controller
         Session::forget('menu');
         // Store Session for Home Menu Active
         Session::put('menu', 'product');
-
         $query = Product::where('is_approved', 1)->where('is_active', 1);
+        $categories = Category::where('type', 'product')->where('is_active', 1)->get();
+        if ($request->has('search')) {
+            $search = $request->search;
+            $products = DB::table('products as p')
+                ->join('seo as s', 'p.seo_id', '=', 's.id')
+                ->join('categories as c', 'p.category_id', '=', 'c.id')
+                ->select('p.*', 'c.name as category_name', 's.meta_keywords')
+                ->where('p.is_approved', 1)
+                ->where('p.is_active', 1)
+                ->where('s.meta_keywords', 'LIKE', '%' . $search . '%')
+                ->paginate(10);
+            // Get Related SEO Keywords
+            $seo = [];
+            foreach ($products as $product) {
+                foreach (json_decode($product->meta_keywords) as $keyword) {
+                    $seo[] = $keyword;
+                }
+            }
+
+            // Get Up to 10 Related SEO Keywords
+            $seo = array_unique($seo);
+            $seo = array_slice($seo, 0, 6);
+            $data = compact('products', 'seo', 'categories');
+            return view('pages.product.search-list')->with($data);
+        }
 
         if ($request->has('category')) {
             // Get Category I'd from Category Name
@@ -37,7 +62,7 @@ class UserProductController extends Controller
         }
 
         $products = $query->paginate(12);
-        $categories = Category::where('type', 'product')->where('is_active', 1)->get();
+
         // Get Random Companies for SEO
         $seo = Product::where('is_approved', 1)->inRandomOrder()->limit(6)->get()->pluck('seo');
         $data = compact('products', 'categories', 'seo');
