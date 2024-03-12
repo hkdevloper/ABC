@@ -214,6 +214,9 @@ class UserPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class
             ])
+            ->renderHook('panels::page.start', fn (array $scopes) => view('filament.hooks.company-profile-alert', ['scopes' => $scopes]), [
+                CompanyResource::class
+            ])
             ->discoverWidgets(in: app_path('Filament/User/Widgets'), for: 'App\\Filament\\User\\Widgets')
             ->widgets([
                 StatsOverview::class,
