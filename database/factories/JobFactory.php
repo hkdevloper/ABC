@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Address;
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\Seo;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,7 +22,7 @@ class JobFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::where('type', 'user')->pluck('id')->random(),
+            'company_id' => Company::where('is_active', 1)->pluck('id')->random(),
             'category_id' => Category::where('type', 'job')->pluck('id')->random(),
             'seo_id' => Seo::factory()->create()->id,
             'is_active' => true,

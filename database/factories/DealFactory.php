@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\Deal;
 use App\Models\Seo;
 use App\Models\User;
@@ -32,7 +33,7 @@ class DealFactory extends Factory
             'discount_type' => rand(1, 2) == 1 ? 'percentage' : 'fixed',
             'discount_value' => $this->faker->randomNumber(2),
             'terms_and_conditions' => $this->faker->word(),
-            'user_id' => User::where('type', 'user')->pluck('id')->random(),
+            'company_id' => Company::where('is_active', 1)->pluck('id')->random(),
             'category_id' => Category::where('type', 'deal')->pluck('id')->random(),
             'seo_id' => Seo::factory()->create()->id,
         ];

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\Seo;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -78,7 +79,7 @@ class BlogFactory extends Factory
             'tech enthusiasts', 'green living community', 'innovation discussion', 'health & wellness exchange', 'fashion enthusiasts',
         ];
         return [
-            'user_id' => User::where('type', 'user')->pluck('id')->random(),
+            'company_id' => Company::where('is_active', 1)->pluck('id')->random(),
             'seo_id' => Seo::factory()->create()->id,
             'category_id' => Category::where('type', 'blog')->pluck('id')->random(),
             'is_active' => $this->faker->boolean,
