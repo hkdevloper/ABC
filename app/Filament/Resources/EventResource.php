@@ -63,16 +63,9 @@ class EventResource extends Resource
                             ->required(),
                 Select::make('company_id')
                     ->label('Select Company')
+                    ->native(false)
+                    ->required()
                     ->relationship('company', 'name'),
-                Select::make('claimed_by')
-                    ->label('Claimed By User')
-                    ->default(1)
-                    ->disabled(fn(Get $get) => !$get('is_claimed'))
-                    ->options(fn(Get $get): Collection => User::query()
-                        ->where('is_approved', 1)
-                        ->where('is_banned', 0)
-                        ->pluck('name', 'id'))
-                    ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()

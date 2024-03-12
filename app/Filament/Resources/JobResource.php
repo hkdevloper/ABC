@@ -63,6 +63,7 @@ class JobResource extends Resource
                     ])->columns(3),
                 Select::make('company_id')
                     ->label('Select Company')
+                    ->required()
                     ->native(false)
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')

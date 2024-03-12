@@ -54,10 +54,10 @@ class CategoryResource extends Resource
 //                    ->label('Category Image')
 //                    ->directory('category')
 //                    ->autofocus()
-                            ->required(),
                 TextInput::make('name')
                     ->label('Enter Category Name')
                     ->live(onBlur: true)
+                    ->autofocus()
                     ->required()
                     ->maxLength(191)
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),

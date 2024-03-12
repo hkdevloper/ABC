@@ -54,6 +54,7 @@ class ProductResource extends Resource
                 ])->columns(3),
                 Select::make('company_id')
                     ->label('Select Company')
+                    ->required()
                     ->native(false)
                     ->relationship('company', 'name'),
                 Select::make('claimed_by')

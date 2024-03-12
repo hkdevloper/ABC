@@ -37,6 +37,8 @@ class BlogResource extends Resource
             ->schema([
                 Select::make('company_id')
                     ->label('Select Company')
+                    ->native(false)
+                    ->required()
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')

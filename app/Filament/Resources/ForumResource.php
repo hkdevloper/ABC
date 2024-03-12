@@ -70,6 +70,7 @@ class ForumResource extends Resource
                     })->placeholder('Select Category'),
                 Select::make('company_id')
                     ->label('Select Company')
+                    ->required()
                     ->native(false)
                     ->relationship('company', 'name'),
                 FileUpload::make('image')

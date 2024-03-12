@@ -48,6 +48,8 @@ class DealResource extends Resource
                 ])->columns(),
                 Select::make('company_id')
                     ->label('Select Company')
+                    ->native(false)
+                    ->required()
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')

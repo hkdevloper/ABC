@@ -170,7 +170,6 @@ class CompanyResource extends Resource
                             ->label('Logo')
                             ->directory('companies/logo')
                             ->autofocus()
-                            ->autofocus()
                             ->required(),
                         FileUpload::make('banner')
                             ->label('Banner')
