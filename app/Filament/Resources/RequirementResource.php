@@ -171,8 +171,8 @@ class RequirementResource extends Resource
     {
         return [
             'index' => Pages\ListRequirements::route('/'),
-            'create' => Pages\CreateRequirement::route('/create'),
-            'edit' => Pages\EditRequirement::route('/{record}/edit'),
+//            'create' => Pages\CreateRequirement::route('/create'),
+//            'edit' => Pages\EditRequirement::route('/{record}/edit'),
         ];
     }
 }

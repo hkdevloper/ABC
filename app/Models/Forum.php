@@ -19,6 +19,7 @@ class Forum extends Model
         'body',
         'category_id',
         'company_id',
+        'image'
     ];
     protected $casts = [
         'body' => CleanHtml::class

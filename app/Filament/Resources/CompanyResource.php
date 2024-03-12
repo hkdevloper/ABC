@@ -68,11 +68,17 @@ class CompanyResource extends Resource
                     Toggle::make('is_featured')
                         ->label('Featured')
                         ->required(),
-                ])->columns(4),
+                    Toggle::make('is_rejected')
+                        ->label('Rejected')
+                        ->live()
+                        ->default(false),
+                ])->columns(5),
                 Forms\Components\Hidden::make('user_id')
                     ->default(auth()->id()),
                 Select::make('claimed_by')
                     ->default(1)
+                    ->native(false)
+                    ->hidden(fn(Get $get) => !$get('is_claimed'))
                     ->disabled(fn(Get $get) => !$get('is_claimed'))
                     ->label('Claimed By')
                     ->options(fn(Get $get): Collection => User::query()
@@ -80,14 +86,22 @@ class CompanyResource extends Resource
                         ->where('is_banned', 0)
                         ->pluck('name', 'id'))
                     ->relationship('user', 'name'),
-                Select::make('business_type')->options([
-                    'manufacturer' => 'Manufacturer',
-                    'distributor' => 'Distributor',
-                    'retailer' => 'Retailer',
-                ])
+                Select::make('business_type')
+                    ->options([
+                        'manufacturer' => 'Manufacturer',
+                        'distributor' => 'Distributor',
+                        'retailer' => 'Retailer',
+                    ])
                     ->native(false)
                     ->label('Select Business Type')
                     ->required(),
+                TextInput::make('rejected_reason')
+                    ->label('Rejected Reason')
+                    ->helperText('Enter the reason for rejection')
+                    ->hidden(fn(Get $get) => !$get('is_rejected'))
+                    ->disabled(fn(Get $get) => !$get('is_rejected'))
+                    ->requiredIf('is_rejected', true)
+                    ->maxLength(191),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
@@ -324,7 +338,7 @@ class CompanyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AuditsRelationManager::class,
+//            AuditsRelationManager::class,
         ];
     }
 

@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactUsResource\Pages;
-use App\Filament\Resources\ContactUsResource\RelationManagers;
 use App\Models\ContactUs;
 use App\Models\Requirement;
 use Filament\Forms;
@@ -92,8 +91,8 @@ class ContactUsResource extends Resource
     {
         return [
             'index' => Pages\ListContactUs::route('/'),
-            'create' => Pages\CreateContactUs::route('/create'),
-            'edit' => Pages\EditContactUs::route('/{record}/edit'),
+//            'create' => Pages\CreateContactUs::route('/create'),
+//            'edit' => Pages\EditContactUs::route('/{record}/edit'),
         ];
     }
 }

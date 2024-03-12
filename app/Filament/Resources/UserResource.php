@@ -53,8 +53,24 @@ class UserResource extends Resource
                         'user' => 'User',
                         'Admin' => 'Admin',
                     ])
-                    ->required()
-                    ->default('user'),
+                    ->required(),
+                Select::make('currency')
+                    ->label('Select Preferred Currency')
+                    ->default('INR')
+                    ->native(false)
+                    ->preload(false)
+                    ->options(function(){
+                        $country = \App\Models\Country::where('currency', '!=', null)->get();
+                        $currency = [];
+                        foreach($country as $c){
+                            $currency[$c->currency] = $c->currency;
+                        }
+                        // If There is no currency, then add default
+                        if(count($currency) === 0){
+                            $currency['INR'] = 'INR';
+                        }
+                        return $currency;
+                    }),
                 TextInput::make('password')
                     ->password()
                     ->label('Password')
@@ -104,9 +120,14 @@ class UserResource extends Resource
                             ->hidden(fn(Get $get) => !$get('id')),
                         Toggle::make('is_verified')
                             ->label('Email Verified')
+                            ->live()
                             ->disabled(fn(Get $get) => $get('type') === 'Admin')
                             ->default(fn(User $record): bool => $record->email_verified_at !== null)
                             ->required(),
+                        // If Email is verified then set now
+                        Forms\Components\Hidden::make('email_verified_at')
+                            ->default(fn(User $record): string => $record->email_verified_at ? $record->email_verified_at->toDateTimeString() : now()->toDateTimeString())
+                            ->visible(fn(Get $get): bool => $get('is_verified')),
                     ])->columns(3),
             ])->columns(3);
     }

@@ -105,8 +105,8 @@ class CountryResource extends Resource
     {
         return [
             'index' => Pages\ListCountries::route('/'),
-            'create' => Pages\CreateCountry::route('/create'),
-            'edit' => Pages\EditCountry::route('/{record}/edit'),
+//            'create' => Pages\CreateCountry::route('/create'),
+//            'edit' => Pages\EditCountry::route('/{record}/edit'),
         ];
     }
 }

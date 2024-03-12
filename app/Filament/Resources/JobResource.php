@@ -60,6 +60,7 @@ class JobResource extends Resource
                     ])->columns(3),
                 Select::make('company_id')
                     ->label('Select Company')
+                    ->native(false)
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
@@ -98,7 +99,6 @@ class JobResource extends Resource
                     ]),
                 TextInput::make('salary')
                     ->prefix('RS.')
-                    ->suffix('INR')
                     ->label('Enter Salary')
                     ->maxLength(191),
                 TextInput::make('HR Email')

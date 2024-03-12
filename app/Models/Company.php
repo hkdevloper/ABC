@@ -12,6 +12,7 @@ use Mews\Purifier\Casts\CleanHtml;
 class Company extends Model
 {
     use HasFactory;
+
     protected $table = "companies";
     protected $primaryKey = "id";
     protected $fillable = [
@@ -41,7 +42,9 @@ class Company extends Model
         'address_id',
         'established_at',
         'number_of_employees',
-        'turnover'
+        'turnover',
+        'is_rejected',
+        'rejected_reason',
     ];
 
     protected $casts = [
@@ -51,16 +54,12 @@ class Company extends Model
         'is_claimed' => 'boolean',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
-        'description'    => CleanHtml::class, // cleans when setting the value
+        'description' => CleanHtml::class, // cleans when setting the value
     ];
-    public function user() : BelongsTo
+
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::class, 'company_id');
     }
 
     public function jobs(): HasMany
@@ -88,27 +87,12 @@ class Company extends Model
         return $this->hasMany(Deal::class, 'company_id');
     }
 
-    public function claimedBy() : BelongsTo
-    {
-        return $this->belongsTo(User::class, 'claimed_by', 'id');
-    }
-
-    public function category() : BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function seo() : BelongsTo
-    {
-        return $this->belongsTo(Seo::class, 'seo_id', 'id');
-    }
-
-    public function address() : BelongsTo
-    {
-        return $this->belongsTo(Address::class);
-    }
-
-    public function fullAddress() : string
+    public function fullAddress(): string
     {
         $address = $this->address;
         $addressString = "";
@@ -127,7 +111,7 @@ class Company extends Model
         return $addressString;
     }
 
-    public function dealsIn() : string
+    public function dealsIn(): string
     {
         $dealsIn = "";
         if ($this->extra_things) {
@@ -138,17 +122,17 @@ class Company extends Model
         return $dealsIn;
     }
 
-    public function getReviews() : array | object
+    public function getReviews(): array|object
     {
         return RateReview::where('type', 'company')->where('item_id', $this->id)->paginate(3);
     }
 
-    public function getReviewsCount() : int
+    public function getReviewsCount(): int
     {
         return RateReview::where('type', 'company')->where('item_id', $this->id)->count();
     }
 
-    public function getAverageRating() : float
+    public function getAverageRating(): float
     {
         $reviews = RateReview::where('type', 'company')->where('item_id', $this->id)->get();
         $totalRating = 0;
@@ -161,14 +145,7 @@ class Company extends Model
         return 0;
     }
 
-    // Bookmark
-    public function bookmarkCompanies() : HasMany
-    {
-        return $this->hasMany(BookmarkCompanies::class, 'company_id', 'id');
-    }
-
-    // override delete method
-    public function delete() : bool
+    public function delete(): bool
     {
         $this->bookmarkCompanies()->delete();
         $this->products()->delete();
@@ -176,5 +153,34 @@ class Company extends Model
         $this->address()->delete();
         $this->claimedBy()->delete();
         return parent::delete();
+    }
+
+    public function bookmarkCompanies(): HasMany
+    {
+        return $this->hasMany(BookmarkCompanies::class, 'company_id', 'id');
+    }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'company_id');
+    }
+
+    public function seo(): BelongsTo
+    {
+        return $this->belongsTo(Seo::class, 'seo_id', 'id');
+    }
+
+    // Bookmark
+
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
+
+    // override delete method
+
+    public function claimedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'claimed_by', 'id');
     }
 }

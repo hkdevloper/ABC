@@ -38,7 +38,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Purple,
             ])
             ->plugins([
-                //FilamentProgressbarPlugin::make()->color('#8f22e3'),
+                FilamentProgressbarPlugin::make()->color('transparent'),
                 QuickCreatePlugin::make(),
                 OverlookPlugin::make()
                     ->columns([

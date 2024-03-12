@@ -9,6 +9,7 @@ use App\Models\Forum;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\Actions;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
@@ -68,7 +69,12 @@ class ForumResource extends Resource
                     })->placeholder('Select Category'),
                 Select::make('company_id')
                     ->label('Select Company')
+                    ->native(false)
                     ->relationship('company', 'name'),
+                FileUpload::make('image')
+                    ->label('Attach Image')
+                    ->directory('forum/attachments')
+                    ->nullable(),
             ])->columns(1);
     }
 
@@ -76,12 +82,9 @@ class ForumResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
+                Tables\Columns\TextColumn::make('company.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
-                    ->wrap()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('body')
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')

@@ -62,6 +62,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'banned',
         'banned_reason',
         'balance',
+        'currency'
     ];
 
     /**

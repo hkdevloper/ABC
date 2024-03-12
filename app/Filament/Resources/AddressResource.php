@@ -128,8 +128,8 @@ class AddressResource extends Resource
     {
         return [
             'index' => Pages\ListAddresses::route('/'),
-            'create' => Pages\CreateAddress::route('/create'),
-            'edit' => Pages\EditAddress::route('/{record}/edit'),
+//            'create' => Pages\CreateAddress::route('/create'),
+//            'edit' => Pages\EditAddress::route('/{record}/edit'),
         ];
     }
 }

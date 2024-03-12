@@ -30,6 +30,9 @@ class ProductPolicy
     public function view(User $user, Product $product): bool
     {
         // Authorization logic...
+        if($user->type == 'Admin'){
+            return true;
+        }
         if(!$user->company){
             return false;
         }
@@ -53,6 +56,9 @@ class ProductPolicy
     public function update(User $user, Product $product): bool
     {
         // Authorization logic...
+        if($user->type == 'Admin'){
+            return true;
+        }
         if(!$user->company){
             return false;
         }
@@ -68,6 +74,9 @@ class ProductPolicy
     public function delete(User $user, Product $product): bool
     {
         // Authorization logic...
+        if($user->type == 'Admin'){
+            return true;
+        }
         if(!$user->company){
             return false;
         }
@@ -83,6 +92,9 @@ class ProductPolicy
     public function restore(User $user, Product $product): bool
     {
         // Authorization logic...
+        if($user->type == 'Admin'){
+            return true;
+        }
         if(!$user->company){
             return false;
         }
@@ -98,6 +110,9 @@ class ProductPolicy
     public function forceDelete(User $user, Product $product): bool
     {
         // Authorization logic...
+        if($user->type == 'Admin'){
+            return true;
+        }
         if(!$user->company){
             return false;
         }

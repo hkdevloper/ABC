@@ -120,7 +120,7 @@ class ClaimsResource extends Resource
     {
         return [
             'index' => Pages\ListClaims::route('/'),
-            'edit' => Pages\EditClaims::route('/{record}/edit'),
+//            'edit' => Pages\EditClaims::route('/{record}/edit'),
         ];
     }
 }

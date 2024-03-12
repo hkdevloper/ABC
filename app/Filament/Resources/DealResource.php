@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\DealResource\Pages;
-use App\Filament\Resources\DealResource\RelationManagers;
 use App\Models\Deal;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;

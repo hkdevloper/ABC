@@ -56,7 +56,7 @@ class StatsOverview extends BaseWidget
                 if (auth()->user()->type == 'Admin') {
                     return Product::count();
                 } else {
-                    return Product::where('user_id', auth()->user()->id)->count();
+                    return Product::where('company_id', auth()->user()->company->id)->count();
                 }
             })
                 ->url("$prefix/products")
@@ -65,7 +65,7 @@ class StatsOverview extends BaseWidget
                 if (auth()->user()->type == 'Admin') {
                     return Event::count();
                 } else {
-                    return Event::where('user_id', auth()->user()->id)->count();
+                    return Event::where('company_id', auth()->user()->company->id)->count();
                 }
             })
                 ->url("$prefix/events")
@@ -74,7 +74,7 @@ class StatsOverview extends BaseWidget
                 if (auth()->user()->type == 'Admin') {
                     return Job::count();
                 } else {
-                    return Job::where('user_id', auth()->user()->id)->count();
+                    return Job::where('company_id', auth()->user()->company->id)->count();
                 }
             })
                 ->url("$prefix/jobs")
@@ -83,7 +83,7 @@ class StatsOverview extends BaseWidget
                 if (auth()->user()->type == 'Admin') {
                     return Blog::count();
                 } else {
-                    return Blog::where('user_id', auth()->user()->id)->count();
+                    return Blog::where('company_id', auth()->user()->company->id)->count();
                 }
             })
                 ->url("$prefix/blogs")
@@ -92,7 +92,7 @@ class StatsOverview extends BaseWidget
                 if (auth()->user()->type == 'Admin') {
                     return Deal::count();
                 } else {
-                    return Deal::where('user_id', auth()->user()->id)->count();
+                    return Deal::where('company_id', auth()->user()->company->id)->count();
                 }
             })
                 ->url("$prefix/deals")

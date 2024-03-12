@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages\Auth;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\Auth\EditProfile as BaseEditProfile;
@@ -20,6 +21,23 @@ class EditProfile extends BaseEditProfile
                     ->disabled()
                     ->maxLength(255)
                     ->unique(ignoreRecord: true),
+                Select::make('currency')
+                    ->label('Select Preferred Currency')
+                    ->default('INR')
+                    ->native(false)
+                    ->preload(false)
+                    ->options(function(){
+                        $country = \App\Models\Country::where('currency', '!=', null)->get();
+                        $currency = [];
+                        foreach($country as $c){
+                            $currency[$c->currency] = $c->currency;
+                        }
+                        // If There is no currency, then add default
+                        if(count($currency) === 0){
+                            $currency['INR'] = 'INR';
+                        }
+                        return $currency;
+                    }),
                 $this->getPasswordFormComponent(),
                 $this->getPasswordConfirmationFormComponent(),
             ]);

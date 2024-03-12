@@ -65,7 +65,7 @@ class UserPanelProvider extends PanelProvider
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
-                                if($company->is_approved){
+                                if($company->is_approved && !$company->is_rejected){
                                     return true;
                                 }
                             }
@@ -77,7 +77,7 @@ class UserPanelProvider extends PanelProvider
                         ->url(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
-                                if($company->is_approved){
+                                if($company->is_approved && !$company->is_rejected){
                                     return CompanyResource::getUrl('view', [$company->id]);
                                 }else{
                                     $showNavigation = true;
@@ -93,7 +93,7 @@ class UserPanelProvider extends PanelProvider
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
-                                if($company->is_approved){
+                                if($company->is_approved && !$company->is_rejected){
                                     return true;
                                 }
                             }
@@ -106,7 +106,7 @@ class UserPanelProvider extends PanelProvider
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
-                                if($company->is_approved){
+                                if($company->is_approved && !$company->is_rejected){
                                     return true;
                                 }
                             }
@@ -119,7 +119,7 @@ class UserPanelProvider extends PanelProvider
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
-                                if($company->is_approved){
+                                if($company->is_approved && !$company->is_rejected){
                                     return true;
                                 }
                             }
@@ -132,7 +132,7 @@ class UserPanelProvider extends PanelProvider
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
-                                if($company->is_approved){
+                                if($company->is_approved && !$company->is_rejected){
                                     return true;
                                 }
                             }
@@ -145,7 +145,7 @@ class UserPanelProvider extends PanelProvider
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
-                                if($company->is_approved){
+                                if($company->is_approved && !$company->is_rejected){
                                     return true;
                                 }
                             }
@@ -159,7 +159,7 @@ class UserPanelProvider extends PanelProvider
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
-                                if($company->is_approved){
+                                if($company->is_approved && !$company->is_rejected){
                                     return true;
                                 }
                             }
@@ -172,7 +172,7 @@ class UserPanelProvider extends PanelProvider
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
-                                if($company->is_approved){
+                                if($company->is_approved && !$company->is_rejected){
                                     return true;
                                 }
                             }
@@ -185,7 +185,7 @@ class UserPanelProvider extends PanelProvider
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
-                                if($company->is_approved){
+                                if($company->is_approved && !$company->is_rejected){
                                     return true;
                                 }
                             }
@@ -198,7 +198,7 @@ class UserPanelProvider extends PanelProvider
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
-                                if($company->is_approved){
+                                if($company->is_approved && !$company->is_rejected){
                                     return true;
                                 }
                             }

@@ -38,37 +38,39 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Toggle::make('is_active')
-                    ->label('Active')
-                    ->default(true)
-                    ->required(),
-                Toggle::make('is_featured')
-                    ->label('Featured'),
-                Toggle::make('is_claimed')
-                    ->label('Claimed')
-                    ->live(),
-                Toggle::make('is_approved')
-                    ->label('Approved')
-                    ->default(true)
-                    ->required(),
-                Forms\Components\Hidden::make('user_id')
-                    ->default(auth()->id()),
+                Section::make('')->schema([
+                    Toggle::make('is_active')
+                        ->label('Active')
+                        ->default(true)
+                        ->required(),
+                    Toggle::make('is_featured')
+                        ->label('Featured'),
+                    Toggle::make('is_approved')
+                        ->label('Approved')
+                        ->default(true)
+                        ->required(),
+                ])->columns(3),
+                Select::make('company_id')
+                    ->label('Select Company')
+                    ->native(false)
+                    ->relationship('company', 'name'),
                 Select::make('claimed_by')
                     ->label('Claimed By User')
                     ->default(1)
+                    ->hidden()
                     ->disabled(fn(Get $get) => !$get('is_claimed'))
                     ->options(fn(Get $get): Collection => User::query()
                         ->where('is_approved', 1)
                         ->where('is_banned', 0)
-                        ->pluck('name', 'id'))
-                    ->relationship('user', 'name'),
+                        ->pluck('name', 'id')),
+                    //  ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->required()
                     ->enableBranchNode()
                     ->label('Select Category')
                     ->withCount()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
+                    ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'product');
                     }),
                 TextInput::make('name')
@@ -76,7 +78,7 @@ class ProductResource extends Resource
                     ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(function (Set $set, ?string $state){
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
                         $set('seo.title', $state);
                     }),
