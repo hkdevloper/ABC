@@ -18,4 +18,11 @@ class CreateDeal extends CreateRecord
             ->send();
     }
 
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        return array_merge($data, [
+            'company_id' => auth()->user()->company->id,
+        ]);
+    }
+
 }

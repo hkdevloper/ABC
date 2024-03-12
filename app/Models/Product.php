@@ -12,7 +12,7 @@ class Product extends Model
     use HasFactory;
     protected $table='products';
     protected $fillable = [
-        'user_id',
+        'company_id',
         'claimed_by', // 'claimed_by' is the id of the user who claimed the product
         'category_id',
         'seo_id',
@@ -41,9 +41,9 @@ class Product extends Model
         'is_featured' => 'boolean',
     ];
 
-    public function user() : BelongsTo
+    public function company() : BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function claimedBy() : BelongsTo
@@ -69,10 +69,5 @@ class Product extends Model
     public function getReviewsCount() : int
     {
         return RateReview::where('type', 'product')->where('item_id', $this->id)->count();
-    }
-
-    public function company() : BelongsTo
-    {
-        return $this->belongsTo(Company::class, 'user_id');
     }
 }

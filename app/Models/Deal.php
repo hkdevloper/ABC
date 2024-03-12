@@ -15,7 +15,7 @@ class Deal extends Model
     protected $fillable = [
         'thumbnail',
         'gallery',
-        'user_id',
+        'company_id',
         'category_id',
         'seo_id',
         'is_active',
@@ -34,9 +34,9 @@ class Deal extends Model
         'description' => CleanHtml::class
     ];
 
-    public function user() : BelongsTo
+    public function company() : BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function category() : BelongsTo
@@ -49,10 +49,6 @@ class Deal extends Model
         return $this->belongsTo(Seo::class);
     }
 
-    public function company() : BelongsTo
-    {
-        return $this->belongsTo(Company::class, 'user_id', 'user_id');
-    }
     public function getReviews() : array | object
     {
         return RateReview::where('type', 'deal')->where('item_id', $this->id)->paginate(3);

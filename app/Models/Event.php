@@ -13,7 +13,7 @@ class Event extends Model
     protected $table = "events";
     protected $primaryKey = "id";
     protected $fillable = [
-        'user_id',
+        'company_id',
         'claimed_by', // 'claimed_by' is the id of the user who claimed the event
         'category_id',
         'seo_id',
@@ -39,9 +39,9 @@ class Event extends Model
         'description' => CleanHtml::class
     ];
 
-    public function user() : BelongsTo
+    public function company() : BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
     public function claimedBy() : BelongsTo
     {

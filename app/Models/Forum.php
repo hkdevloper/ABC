@@ -18,15 +18,15 @@ class Forum extends Model
         'title',
         'body',
         'category_id',
-        'user_id',
+        'company_id',
     ];
     protected $casts = [
         'body' => CleanHtml::class
     ];
 
-    public function user() : BelongsTo
+    public function company() : BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function category() : BelongsTo

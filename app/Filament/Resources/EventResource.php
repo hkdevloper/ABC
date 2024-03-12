@@ -57,8 +57,9 @@ class EventResource extends Resource
                     ->default(true)
                     ->label('Approved')
                     ->required(),
-                Forms\Components\Hidden::make('user_id')
-                    ->default(auth()->id()),
+                Select::make('company_id')
+                    ->label('Select Company')
+                    ->relationship('company', 'name'),
                 Select::make('claimed_by')
                     ->label('Claimed By User')
                     ->default(1)

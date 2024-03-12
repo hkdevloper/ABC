@@ -23,7 +23,7 @@ class CreateProduct extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         return array_merge($data, [
-            'user_id' => auth()->user()->id,
+            'company_id' => auth()->user()->company->id,
         ]);
     }
 }

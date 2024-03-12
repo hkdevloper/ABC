@@ -35,10 +35,9 @@ class BlogResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('user_id')
-                    ->default(auth()->id())
-                    ->label('Select User')
-                    ->relationship('user', 'name'),
+                Select::make('company_id')
+                    ->label('Select Company')
+                    ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()

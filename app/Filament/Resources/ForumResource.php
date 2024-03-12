@@ -9,6 +9,7 @@ use App\Models\Forum;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\Actions;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -65,13 +66,9 @@ class ForumResource extends Resource
                     ->relationship('category', 'name', 'parent_id', function ($query){
                         return $query->where('type', 'forum');
                     })->placeholder('Select Category'),
-                Forms\Components\Select::make('user_id')
-                    ->label('Select User')
-                    ->relationship('user', 'name')
-                    ->default(function () {
-                        return auth()->user()->id;
-                    })
-                    ->required(),
+                Select::make('company_id')
+                    ->label('Select Company')
+                    ->relationship('company', 'name'),
             ])->columns(1);
     }
 

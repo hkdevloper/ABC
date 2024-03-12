@@ -71,9 +71,6 @@ class ForumResource extends Resource
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
                     ->required(),
-                Forms\Components\Hidden::make('user_id')
-                    ->default(fn() => auth()->user()->id)
-                    ->required(),
             ])->columns(1);
     }
 

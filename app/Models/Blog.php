@@ -14,7 +14,7 @@ class Blog extends Model
     protected $table = "blogs";
     protected $primaryKey = "id";
     protected $fillable = [
-        'user_id',
+        'company_id',
         'seo_id',
         'category_id',
         'is_active',
@@ -37,12 +37,10 @@ class Blog extends Model
     {
         return $this->belongsTo(Seo::class);
     }
-
-    public function user(): BelongsTo
+    public function company() : BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
-
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

@@ -58,11 +58,9 @@ class JobResource extends Resource
                             ->label('Featured')
                             ->required(),
                     ])->columns(3),
-                Select::make('user_id')
-                    ->native(false)
-                    ->default(1)
-                    ->label('Select User')
-                    ->relationship('user', 'name'),
+                Select::make('company_id')
+                    ->label('Select Company')
+                    ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()

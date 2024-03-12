@@ -13,7 +13,7 @@ class Job extends Model
     protected $table = 'jobs';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'user_id',
+        'company_id',
         'category_id',
         'seo_id',
         'is_active',
@@ -40,9 +40,9 @@ class Job extends Model
         'summary' => CleanHtml::class,
     ];
 
-    public function user() : BelongsTo
+    public function company() : BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function category() : BelongsTo

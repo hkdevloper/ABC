@@ -45,10 +45,9 @@ class DealResource extends Resource
                         ->label('Featured')
                         ->required(),
                 ])->columns(),
-                Select::make('user_id')
-                    ->native(false)
-                    ->label('Select User')
-                    ->relationship('user', 'name'),
+                Select::make('company_id')
+                    ->label('Select Company')
+                    ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
