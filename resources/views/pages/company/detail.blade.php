@@ -100,20 +100,14 @@
                         @endif
                     </div>
                 </div>
-                @if($user->isCompanyOwner($company))
+                @if($user->id != $company->user_id)
                     <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn1"
-                       class="text-blue-950 px-2 text-xs text-right block mt-3"
+                       class="text-blue-950 px-2 text-xs text-right block md:hidden mt-3"
                        style="height: 30px;">
                         Your Company?
                         <span class="text-sm text-blue-950 font-semibold hover:underline">Claim Now</span>
                     </a>
                 @endif
-                <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn1"
-                   class="text-blue-950 px-2 text-xs text-right block md:hidden mt-3"
-                   style="height: 30px;">
-                    Your Company?
-                    <span class="text-sm text-blue-950 font-semibold hover:underline">Claim Now</span>
-                </a>
             </div>
         </div>
     </section>
@@ -126,12 +120,14 @@
                 <x-custom-tab-heading name="product" label="Products"/>
                 <x-custom-tab-heading name="contact" label="Contact"/>
                 <x-custom-tab-heading name="rate" label="Rate & Reviews" hidden="true" class="hidden md:block"/>
-                <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn"
-                   class="bg-blue-100 text-blue-950 px-2 text-xs text-right hidden md:block"
-                   style="height: 30px;">
-                    Your Company?
-                    <span class="text-sm text-blue-950 font-semibold">Claim Now</span>
-                </a>
+                @if($user->id != $company->user_id)
+                    <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn"
+                       class="bg-blue-100 text-blue-950 px-2 text-xs text-right hidden md:block"
+                       style="height: 30px;">
+                        Your Company?
+                        <span class="text-sm text-blue-950 font-semibold">Claim Now</span>
+                    </a>
+                @endif
             </x-slot>
 
             <x-bladewind.tab-body>
