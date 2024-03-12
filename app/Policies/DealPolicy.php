@@ -30,7 +30,7 @@ class DealPolicy
     public function view(User $user, Deal $deal): bool
     {
         // Authorization logic...
-        if ($user->id === $deal->user_id || $user->type == 'Admin') {
+        if ($user->company->id === $deal->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -50,7 +50,7 @@ class DealPolicy
     public function update(User $user, Deal $deal): bool
     {
         // Authorization logic...
-        if ($user->id === $deal->user_id || $user->type == 'Admin') {
+        if ($user->company->id === $deal->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -62,7 +62,7 @@ class DealPolicy
     public function delete(User $user, Deal $deal): bool
     {
         // Authorization logic...
-        if ($user->id === $deal->user_id || $user->type == 'Admin') {
+        if ($user->company->id === $deal->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -74,7 +74,7 @@ class DealPolicy
     public function restore(User $user, Deal $deal): bool
     {
         // Authorization logic...
-        if ($user->id === $deal->user_id || $user->type == 'Admin') {
+        if ($user->company->id === $deal->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -86,7 +86,7 @@ class DealPolicy
     public function forceDelete(User $user, Deal $deal): bool
     {
         // Authorization logic...
-        if ($user->id === $deal->user_id || $user->type == 'Admin') {
+        if ($user->company->id === $deal->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;

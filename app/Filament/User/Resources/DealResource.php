@@ -188,7 +188,7 @@ class DealResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->modifyQueryUsing(function (Builder $query) {
-                $query->where('user_id', auth()->id())->orderBy('created_at', 'asc');
+                $query->where('company_id', auth()->user()->company->id)->orderBy('created_at', 'desc');
             });
     }
 

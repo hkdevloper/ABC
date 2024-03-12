@@ -190,7 +190,7 @@ class ProductResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->modifyQueryUsing(function (Builder $query) {
-                $query->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc');
+                $query->where('company_id', auth()->user()->company->id)->orderBy('created_at', 'desc');
             });
     }
 
