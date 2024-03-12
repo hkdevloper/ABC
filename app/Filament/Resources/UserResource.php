@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CompanyResource\RelationManagers\UserRelationManager;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\Country;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
@@ -53,21 +54,20 @@ class UserResource extends Resource
                         'user' => 'User',
                         'Admin' => 'Admin',
                     ])
-                    ->autofocus()
-                            ->required(),
+                    ->required(),
                 Select::make('currency')
                     ->label('Select Preferred Currency')
                     ->default('INR')
                     ->native(false)
                     ->preload(false)
-                    ->options(function(){
-                        $country = \App\Models\Country::where('currency', '!=', null)->get();
+                    ->options(function () {
+                        $country = Country::where('currency', '!=', null)->get();
                         $currency = [];
-                        foreach($country as $c){
+                        foreach ($country as $c) {
                             $currency[$c->currency] = $c->currency;
                         }
                         // If There is no currency, then add default
-                        if(count($currency) === 0){
+                        if (count($currency) === 0) {
                             $currency['INR'] = 'INR';
                         }
                         return $currency;
@@ -78,11 +78,11 @@ class UserResource extends Resource
                     ->live(onBlur: true)
                     ->required(fn(Get $get) => $get('update_password'))
                     ->visibleOn('create')
-                    ->visible(function(Get $get, string $operation):bool{
-                        if($operation === 'create'){
+                    ->visible(function (Get $get, string $operation): bool {
+                        if ($operation === 'create') {
                             return true;
                         }
-                        if($get('update_password')){
+                        if ($get('update_password')) {
                             return true;
                         }
                         return false;
@@ -91,11 +91,11 @@ class UserResource extends Resource
                 Placeholder::make('created')
                     ->label('Created')
                     ->hidden(fn(Get $get) => !$get('id'))
-                    ->content(fn (User $record): string => $record->created_at->toFormattedDateString()),
+                    ->content(fn(User $record): string => $record->created_at->toFormattedDateString()),
                 Placeholder::make('email_verified_at')
                     ->label('Email Verified At')
                     ->hidden(fn(Get $get) => !$get('id'))
-                    ->content(fn (User $record): string => $record->email_verified_at ? $record->email_verified_at->toFormattedDateString() : 'Not Verified'),
+                    ->content(fn(User $record): string => $record->email_verified_at ? $record->email_verified_at->toFormattedDateString() : 'Not Verified'),
                 TextInput::make('banned_reason')
                     ->label('Banned Reason')
                     ->live(onBlur: true)
@@ -114,7 +114,6 @@ class UserResource extends Resource
                             ->live(onBlur: true)
                             ->disabled(fn(Get $get) => $get('type') === 'Admin')
                             ->hidden(fn(Get $get) => !$get('id'))
-                            ->autofocus()
                             ->required(),
                         Toggle::make('update_password')
                             ->label('Update Password')
@@ -123,15 +122,10 @@ class UserResource extends Resource
                             ->hidden(fn(Get $get) => !$get('id')),
                         Toggle::make('is_verified')
                             ->label('Email Verified')
-                            ->live()
+                            ->live(debounce: 500)
+                            ->default(fn(User $record): bool => !$record->email_verified_at == null)
                             ->disabled(fn(Get $get) => $get('type') === 'Admin')
-                            ->default(fn(User $record): bool => $record->email_verified_at !== null)
-                            ->autofocus()
-                            ->required(),
-                        // If Email is verified then set now
-                        Forms\Components\Hidden::make('email_verified_at')
-                            ->default(fn(User $record): string => $record->email_verified_at ? $record->email_verified_at->toDateTimeString() : now()->toDateTimeString())
-                            ->visible(fn(Get $get): bool => $get('is_verified')),
+                            ->afterStateUpdated(fn(User $record, Get $get) => $record->email_verified_at = $get('is_verified') ? now() : null)
                     ])->columns(3),
             ])->columns(3);
     }

@@ -9,7 +9,11 @@
             align-items: center;
             color: white;
             justify-content: center;
-            @if(auth()->user()->company->is_approved)
+            @if(auth()->user()->company)
+                @if(auth()->user()->company->is_approved)
+                    display: none;
+                @endif
+            @else
                 display: none;
             @endif
             gap: 0.5rem;"
@@ -39,12 +43,14 @@
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
             transition: box-shadow 0.2s ease-in-out;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             color: white;
-            @if(!auth()->user()->company->is_rejected)
-                display: none;
+            @if(auth()->user()->company)
+                @if(auth()->user()->company->is_rejected)
+                    display: flex;
+                @endif
             @endif
             gap: 0.5rem;"
      onmouseover="this.style.boxShadow = '0 6px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.12)';"
@@ -59,7 +65,7 @@
                 Your company profile is rejected. Please contact the administrator for more information.
                 <!-- reason -->
                 <small style="font-size: 0.75rem; display: block;">
-                    Reason: {{ auth()->user()->company->rejected_reason }}
+                    Reason: {{ auth()->user()->company ? auth()->user()->company->rejected_reason : '' }}
                 </small>
                 <small style="font-size: 0.75rem; display: block;">
                     It may take 2–7 days to approve your company profile.

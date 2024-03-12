@@ -16,9 +16,9 @@ class UserPolicy
         if (!auth()->user()->canManageSettings()) {
             $company = Company::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
             if ($company) {
-                redirect('/user/dashboard/companies/' . $company->id);
+                redirect('/user/companies/' . $company->id);
             } else {
-                redirect('/user/dashboard/companies/create');
+                redirect('/user/companies/create');
             }
         }
         return true;

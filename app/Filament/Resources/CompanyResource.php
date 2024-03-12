@@ -47,29 +47,19 @@ class CompanyResource extends Resource
                     Toggle::make('is_approved')
                         ->label('Approved')
                         ->default(true)
-                        ->autofocus()
                         ->required(),
                     Toggle::make('is_claimed')
-                        ->default(function (Get $get, $action) {
-                            if ($action == 'edit') {
-                                if ($get('claimed_by') == null) {
-                                    return false;
-                                } else {
-                                    return true;
-                                }
-                            }
-                            return false;
+                        ->default(function ($record) {
+                            return (bool)$record ? $record->claimed_by ? 1 : 0 : 0;
                         })
                         ->label('Claimed')
                         ->live(onBlur: true),
                     Toggle::make('is_active')
                         ->label('Active')
                         ->default(true)
-                        ->autofocus()
                         ->required(),
                     Toggle::make('is_featured')
                         ->label('Featured')
-                        ->autofocus()
                         ->required(),
                     Toggle::make('is_rejected')
                         ->label('Rejected')
@@ -80,7 +70,6 @@ class CompanyResource extends Resource
                     ->default(auth()->id()),
                 Select::make('claimed_by')
                     ->default(1)
-                    ->autofocus()
                     ->native(false)
                     ->hidden(fn(Get $get) => !$get('is_claimed'))
                     ->disabled(fn(Get $get) => !$get('is_claimed'))
@@ -98,7 +87,6 @@ class CompanyResource extends Resource
                     ])
                     ->native(false)
                     ->label('Select Business Type')
-                    ->autofocus()
                     ->required(),
                 TextInput::make('rejected_reason')
                     ->label('Rejected Reason')
@@ -111,7 +99,6 @@ class CompanyResource extends Resource
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
-                    ->withCount()
                     ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query) {
@@ -122,7 +109,6 @@ class CompanyResource extends Resource
                     ->live(onBlur: true)
                     ->required()
                     ->autofocus()
-                    ->unique(ignoreRecord: true)
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
