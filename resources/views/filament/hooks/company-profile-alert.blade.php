@@ -20,7 +20,7 @@
             <span style="font-size: 1rem;">
                 Your company profile is pending for approval. Please contact the administrator for more information.
                 <small style="font-size: 0.75rem; display: block;">
-                    It may take 7-8 days to approve your company profile.
+                    It may take 2-7 days to approve your company profile.
                 </small>
             </span>
         </div>
