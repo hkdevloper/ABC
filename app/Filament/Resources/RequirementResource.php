@@ -52,7 +52,8 @@ class RequirementResource extends Resource
                     ->label('Select Status')
                     ->options(Requirement::$statusList)
                     ->native(false)
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 FileUpload::make('images')
                     ->label('Images')
                     ->directory('requirements')

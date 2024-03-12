@@ -54,6 +54,7 @@ class BlogResource extends Resource
                             ->label('Thumbnail Image')
                             ->directory('blog/thumbnail')
                             ->visibility('public')
+                            ->autofocus()
                             ->required(),
                     ]),
                 Section::make()
@@ -84,6 +85,7 @@ class BlogResource extends Resource
                             ->label('Tags')
                             ->splitKeys(['Tab', ','])
                             ->placeholder('Enter tags')
+                            ->autofocus()
                             ->required(),
                         TinyEditor::make('content')
                             ->fileAttachmentsDisk('public')
@@ -91,6 +93,7 @@ class BlogResource extends Resource
                             ->fileAttachmentsDirectory('editor/uploads')
                             ->profile('custom')
                             ->columnSpan('full')
+                            ->autofocus()
                             ->required(),
                         Textarea::make('summary')
                             ->label('Enter Summary')

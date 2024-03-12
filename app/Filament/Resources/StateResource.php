@@ -34,7 +34,8 @@ class StateResource extends Resource
                     ->maxLength(191),
                 Toggle::make('featured')
                     ->label('Featured')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Select::make('country_id')
                     ->label('Select Country')
                     ->preload()
@@ -43,7 +44,8 @@ class StateResource extends Resource
                     ->searchable()
                     ->default(1)
                     ->preload()
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
             ])->columns(3);
     }
 

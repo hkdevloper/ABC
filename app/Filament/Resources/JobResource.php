@@ -49,13 +49,16 @@ class JobResource extends Resource
                         Toggle::make('is_active')
                             ->default(true)
                             ->label('Active')
+                            ->autofocus()
                             ->required(),
                         Toggle::make('is_approved')
                             ->default(true)
                             ->label('Approved')
+                            ->autofocus()
                             ->required(),
                         Toggle::make('is_featured')
                             ->label('Featured')
+                            ->autofocus()
                             ->required(),
                     ])->columns(3),
                 Select::make('company_id')
@@ -84,7 +87,8 @@ class JobResource extends Resource
                 Forms\Components\DatePicker::make('valid_until')
                     ->label('Valid Until')
                     ->before(today()->addYear())
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Select::make('employment_type')
                     ->label('Enter Employment Type')
                     ->native(false)
@@ -109,7 +113,8 @@ class JobResource extends Resource
                 Textarea::make('education')
                     ->id('education')
                     ->columnSpan('full')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Textarea::make('experience')
                     ->label('Enter Experience Details')
                     ->columnSpanFull(),
@@ -120,6 +125,7 @@ class JobResource extends Resource
                             ->label('Thumbnail')
                             ->disk('public')
                             ->directory('events/thumbnail')
+                            ->autofocus()
                             ->required(),
                     ])->columns(1),
                 Forms\Components\RichEditor::make('description')
@@ -148,6 +154,7 @@ class JobResource extends Resource
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         Select::make('state_id')
                             ->label('State')
@@ -156,9 +163,11 @@ class JobResource extends Resource
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         TextInput::make('city')
                             ->label('City')
+                            ->autofocus()
                             ->required(),
                         TextInput::make('zip_code')
                             ->label('Zip Code')

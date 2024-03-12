@@ -85,12 +85,14 @@ class EventResource extends Resource
                                     ->label('Event Start Date')
                                     ->prefixIcon('heroicon-o-calendar')
                                     ->default(now())
-                                    ->required(),
+                                    ->autofocus()
+                            ->required(),
                                 DateTimePicker::make('end')
                                     ->label('Event End Date')
                                     ->prefixIcon('heroicon-o-calendar')
                                     ->default(now()->addDays(1))
-                                    ->required(),
+                                    ->autofocus()
+                            ->required(),
                             ])->columns(2),
                     ])->columnSpanFull(),
                 Section::make('Images')
@@ -99,6 +101,7 @@ class EventResource extends Resource
                             ->label('Thumbnail Image')
                             ->directory('events/thumbnail')
                             ->visibility('public')
+                            ->autofocus()
                             ->required(),
                         FileUpload::make('gallery')
                             ->label('Event gallery')
@@ -116,6 +119,7 @@ class EventResource extends Resource
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         Select::make('state_id')
                             ->label('State')
@@ -124,9 +128,11 @@ class EventResource extends Resource
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         TextInput::make('city')
                             ->label('City')
+                            ->autofocus()
                             ->required(),
                         TextInput::make('zip_code')
                             ->label('Zip Code')

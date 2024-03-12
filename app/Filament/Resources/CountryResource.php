@@ -46,7 +46,8 @@ class CountryResource extends Resource
                     ->maxLength(191),
                 Toggle::make('featured')
                     ->label('Featured')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
             ])->columns(2);
     }
 

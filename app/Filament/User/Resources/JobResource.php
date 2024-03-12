@@ -98,6 +98,7 @@ class JobResource extends Resource
                         Textarea::make('education')
                             ->id('education')
                             ->columnSpan('full')
+                            ->autofocus()
                             ->required(),
                         Textarea::make('experience')
                             ->label('Enter Experience Details')
@@ -109,6 +110,7 @@ class JobResource extends Resource
                             ->label('Company Logo')
                             ->directory('job/thumbnail')
                             ->visibility('public')
+                            ->autofocus()
                             ->required(),
                     ])->columns(1),
                 Forms\Components\RichEditor::make('description')
@@ -136,6 +138,7 @@ class JobResource extends Resource
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         Select::make('state_id')
                             ->label('State')
@@ -144,9 +147,11 @@ class JobResource extends Resource
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         TextInput::make('city')
                             ->label('City')
+                            ->autofocus()
                             ->required(),
                         TextInput::make('zip_code')
                             ->label('Zip Code')

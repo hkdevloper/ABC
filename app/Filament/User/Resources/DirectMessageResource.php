@@ -46,7 +46,8 @@ class DirectMessageResource extends Resource
                     ->default('Pending')
                     ->native(false)
                     ->options(['Pending' => 'Pending', 'Completed' => 'Completed', 'Cancelled' => 'Cancelled', 'Spam' => 'Spam', 'onHold' => 'On Hold'])
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Forms\Components\Textarea::make('message')
                     ->required()
                     ->disabled()

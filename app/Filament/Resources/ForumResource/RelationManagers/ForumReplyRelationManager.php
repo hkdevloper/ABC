@@ -29,7 +29,8 @@ class ForumReplyRelationManager extends RelationManager
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
             ])->columns(1);
     }
 

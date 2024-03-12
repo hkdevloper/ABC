@@ -70,7 +70,8 @@ class ForumResource extends Resource
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
             ])->columns(1);
     }
 

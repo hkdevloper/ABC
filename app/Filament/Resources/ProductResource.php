@@ -42,13 +42,15 @@ class ProductResource extends Resource
                     Toggle::make('is_active')
                         ->label('Active')
                         ->default(true)
-                        ->required(),
+                        ->autofocus()
+                            ->required(),
                     Toggle::make('is_featured')
                         ->label('Featured'),
                     Toggle::make('is_approved')
                         ->label('Approved')
                         ->default(true)
-                        ->required(),
+                        ->autofocus()
+                            ->required(),
                 ])->columns(3),
                 Select::make('company_id')
                     ->label('Select Company')
@@ -115,7 +117,8 @@ class ProductResource extends Resource
                         'used' => 'Used',
                         'refurbished' => 'Refurbished',
                     ])
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 TextInput::make('brand')
                     ->required()
                     ->label('Country of Origin')
@@ -138,6 +141,7 @@ class ProductResource extends Resource
                             ->label('Thumbnail Image')
                             ->directory('product/thumbnail')
                             ->visibility('public')
+                            ->autofocus()
                             ->required(),
                         FileUpload::make('gallery')
                             ->label('Product Photos')
@@ -145,6 +149,7 @@ class ProductResource extends Resource
                             ->multiple()
                             ->maxFiles(4)
                             ->visibility('public')
+                            ->autofocus()
                             ->required(),
                     ])->columns(2),
                 Section::make('SEO Details')

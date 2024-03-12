@@ -33,7 +33,8 @@ class AddressResource extends Resource
             ->schema([
                 Toggle::make('is_featured')
                     ->label('Featured')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 TextInput::make('address_line_1')
                     ->label('Address Line 1')
                     ->required()
@@ -44,17 +45,20 @@ class AddressResource extends Resource
                     ->default(1)
                     ->relationship('country', 'name')
                     ->searchable()
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Select::make('state_id')
                     ->label('Select State')
                     ->preload()
                     ->default(1)
                     ->relationship('state', 'name')
                     ->searchable()
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 TextInput::make('city')
                     ->label('City')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 TextInput::make('zip_code')
                     ->label('Zip Code')
                     ->required()

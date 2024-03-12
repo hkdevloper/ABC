@@ -115,6 +115,7 @@ class ProductResource extends Resource
                             ->label('Thumbnail Image')
                             ->directory('product/thumbnail')
                             ->visibility('public')
+                            ->autofocus()
                             ->required(),
                         FileUpload::make('gallery')
                             ->label('Product Photos')
@@ -122,6 +123,7 @@ class ProductResource extends Resource
                             ->multiple()
                             ->maxFiles(4)
                             ->visibility('public')
+                            ->autofocus()
                             ->required(),
                     ])->columns(2),
                 Section::make('SEO Details')

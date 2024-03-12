@@ -45,18 +45,22 @@ class EventResource extends Resource
                 Toggle::make('is_active')
                     ->default(true)
                     ->label('Active')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Toggle::make('is_featured')
                     ->label('Featured')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Toggle::make('is_claimed')
                     ->label('Claimed')
                     ->live()
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Toggle::make('is_approved')
                     ->default(true)
                     ->label('Approved')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Select::make('company_id')
                     ->label('Select Company')
                     ->relationship('company', 'name'),
@@ -110,11 +114,13 @@ class EventResource extends Resource
                 Forms\Components\DatePicker::make('start')
                     ->label('Start Date')
                     ->before('end')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Forms\Components\DatePicker::make('end')
                     ->label('End Date')
                     ->after('start')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
@@ -122,6 +128,7 @@ class EventResource extends Resource
                             ->disk('public')
                             ->directory('events/thumbnail')
                             ->visibility('public')
+                            ->autofocus()
                             ->required(),
                         FileUpload::make('gallery')
                             ->multiple()
@@ -141,6 +148,7 @@ class EventResource extends Resource
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         Select::make('state_id')
                             ->label('State')
@@ -149,9 +157,11 @@ class EventResource extends Resource
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         TextInput::make('city')
                             ->label('City')
+                            ->autofocus()
                             ->required(),
                         TextInput::make('zip_code')
                             ->label('Zip Code')

@@ -39,10 +39,12 @@ class DealResource extends Resource
                     Toggle::make('is_active')
                         ->label('Active')
                         ->default(true)
-                        ->required(),
+                        ->autofocus()
+                            ->required(),
                     Toggle::make('is_featured')
                         ->label('Featured')
-                        ->required(),
+                        ->autofocus()
+                            ->required(),
                 ])->columns(),
                 Select::make('company_id')
                     ->label('Select Company')
@@ -108,6 +110,7 @@ class DealResource extends Resource
                         FileUpload::make('thumbnail')
                             ->label('Thumbnail')
                             ->directory('deals/thumbnail')
+                            ->autofocus()
                             ->required(),
                         FileUpload::make('gallery')
                             ->label('Gallery')

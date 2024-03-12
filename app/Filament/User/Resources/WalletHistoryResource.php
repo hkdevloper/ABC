@@ -26,7 +26,8 @@ class WalletHistoryResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->hidden()
                     ->relationship('user', 'name')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Forms\Components\TextInput::make('type')
                     ->required()
                     ->maxLength(191),

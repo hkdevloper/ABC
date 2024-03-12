@@ -28,11 +28,13 @@ class ClaimsResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->disabled()
                     ->relationship('user', 'name')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Forms\Components\Select::make('company_id') // This is the company that the user is claiming
                     ->disabled()
                     ->relationship('company', 'name')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
@@ -60,7 +62,8 @@ class ClaimsResource extends Resource
                         'Approved' => 'Approved',
                         'Rejected' => 'Rejected',
                     ])
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
             ]);
     }
 

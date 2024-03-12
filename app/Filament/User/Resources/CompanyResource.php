@@ -47,7 +47,8 @@ class CompanyResource extends Resource
                     'retailer' => 'Retailer',
                 ])
                     ->native(false)
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
@@ -104,12 +105,14 @@ class CompanyResource extends Resource
                     ->label('Products Name')
                     ->splitKeys(['Tab', ','])
                     ->helperText('List your products name separated by comma')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('logo')
                             ->label('Logo')
                             ->directory('companies/logo')
+                            ->autofocus()
                             ->required(),
                         FileUpload::make('banner')
                             ->label('Banner')
@@ -149,6 +152,7 @@ class CompanyResource extends Resource
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         Select::make('state_id')
                             ->label('State')
@@ -157,9 +161,11 @@ class CompanyResource extends Resource
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         TextInput::make('city')
                             ->label('City')
+                            ->autofocus()
                             ->required(),
                         TextInput::make('zip_code')
                             ->label('Zip Code')

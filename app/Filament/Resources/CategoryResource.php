@@ -39,10 +39,12 @@ class CategoryResource extends Resource
                     Toggle::make('is_active')
                         ->default(1)
                         ->label('Active')
-                        ->required(),
+                        ->autofocus()
+                            ->required(),
                     Toggle::make('is_featured')
                         ->label('Featured')
-                        ->required(),
+                        ->autofocus()
+                            ->required(),
                 ])->columns(),
                 FileUpload::make('image')
                     ->label('category image')
@@ -51,7 +53,8 @@ class CategoryResource extends Resource
 //                SpatieMediaLibraryFileUpload::make('image')
 //                    ->label('Category Image')
 //                    ->directory('category')
-//                    ->required(),
+//                    ->autofocus()
+                            ->required(),
                 TextInput::make('name')
                     ->label('Enter Category Name')
                     ->live(onBlur: true)

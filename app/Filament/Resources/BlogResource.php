@@ -49,16 +49,19 @@ class BlogResource extends Resource
                 Toggle::make('is_active')
                     ->label('Is Active')
                     ->default(true)
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Toggle::make('is_featured')
                     ->label('Is Featured')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
                             ->label('Thumbnail Image')
                             ->directory('blog/thumbnail')
                             ->visibility('public')
+                            ->autofocus()
                             ->required(),
                     ]),
                 TextInput::make('title')
@@ -77,14 +80,16 @@ class BlogResource extends Resource
                     ->maxLength(70),
                 TagsInput::make('tags')
                     ->splitKeys(['Tab', ','])
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 TinyEditor::make('content')
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsVisibility('public')
                     ->fileAttachmentsDirectory('editor/uploads')
                     ->profile('simple')
                     ->columnSpan('full')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Textarea::make('summary')
                     ->label('Enter Summary')
                     ->columnSpan('full')

@@ -53,7 +53,8 @@ class UserResource extends Resource
                         'user' => 'User',
                         'Admin' => 'Admin',
                     ])
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 Select::make('currency')
                     ->label('Select Preferred Currency')
                     ->default('INR')
@@ -106,12 +107,14 @@ class UserResource extends Resource
                         Toggle::make('approved')
                             ->label('Approved')
                             ->disabled(fn(Get $get) => $get('type') === 'Admin')
+                            ->autofocus()
                             ->required(),
                         Toggle::make('banned')
                             ->label('Banned')
                             ->live(onBlur: true)
                             ->disabled(fn(Get $get) => $get('type') === 'Admin')
                             ->hidden(fn(Get $get) => !$get('id'))
+                            ->autofocus()
                             ->required(),
                         Toggle::make('update_password')
                             ->label('Update Password')
@@ -123,6 +126,7 @@ class UserResource extends Resource
                             ->live()
                             ->disabled(fn(Get $get) => $get('type') === 'Admin')
                             ->default(fn(User $record): bool => $record->email_verified_at !== null)
+                            ->autofocus()
                             ->required(),
                         // If Email is verified then set now
                         Forms\Components\Hidden::make('email_verified_at')

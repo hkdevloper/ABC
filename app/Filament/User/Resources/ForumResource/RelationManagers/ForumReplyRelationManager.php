@@ -26,7 +26,8 @@ class ForumReplyRelationManager extends RelationManager
                     ->fileAttachmentsDirectory('editor/uploads')
                     ->profile('minimal')
                     ->columnSpan('full')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
             ])->columns(1);
     }
 

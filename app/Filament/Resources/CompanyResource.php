@@ -47,7 +47,8 @@ class CompanyResource extends Resource
                     Toggle::make('is_approved')
                         ->label('Approved')
                         ->default(true)
-                        ->required(),
+                        ->autofocus()
+                            ->required(),
                     Toggle::make('is_claimed')
                         ->default(function (Get $get, $action){
                             if ($action == 'edit') {
@@ -64,10 +65,12 @@ class CompanyResource extends Resource
                     Toggle::make('is_active')
                         ->label('Active')
                         ->default(true)
-                        ->required(),
+                        ->autofocus()
+                            ->required(),
                     Toggle::make('is_featured')
                         ->label('Featured')
-                        ->required(),
+                        ->autofocus()
+                            ->required(),
                     Toggle::make('is_rejected')
                         ->label('Rejected')
                         ->live()
@@ -94,7 +97,8 @@ class CompanyResource extends Resource
                     ])
                     ->native(false)
                     ->label('Select Business Type')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 TextInput::make('rejected_reason')
                     ->label('Rejected Reason')
                     ->helperText('Enter the reason for rejection')
@@ -124,7 +128,8 @@ class CompanyResource extends Resource
                     ->label('Products Name')
                     ->splitKeys(['Tab', ','])
                     ->helperText('List your products name separated by comma')
-                    ->required(),
+                    ->autofocus()
+                            ->required(),
                 TextInput::make('slug')
                     ->label('Enter Company Slug')
                     ->unique(ignoreRecord: true)
@@ -164,6 +169,8 @@ class CompanyResource extends Resource
                         FileUpload::make('logo')
                             ->label('Logo')
                             ->directory('companies/logo')
+                            ->autofocus()
+                            ->autofocus()
                             ->required(),
                         FileUpload::make('banner')
                             ->label('Banner')
@@ -202,6 +209,7 @@ class CompanyResource extends Resource
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         Select::make('state_id')
                             ->label('State')
@@ -210,9 +218,11 @@ class CompanyResource extends Resource
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
+                            ->autofocus()
                             ->required(),
                         TextInput::make('city')
                             ->label('City')
+                            ->autofocus()
                             ->required(),
                         TextInput::make('zip_code')
                             ->label('Zip Code')
