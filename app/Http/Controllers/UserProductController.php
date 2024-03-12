@@ -52,7 +52,7 @@ class UserProductController extends Controller
 
         $product = Product::where('slug', $slug)->firstOrFail();
         //  check if product has a company
-        if ($product->user->company == null) {
+        if ($product->company == null) {
             // Store Session for Home Menu Active
             Session::put('menu', 'product');
             return redirect()->back();

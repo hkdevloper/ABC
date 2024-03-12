@@ -108,6 +108,7 @@ Route::get('/', function () {
 
     $category = $categories;
     $searchList = [];
+    $products = [];
 
     foreach ($p as $item) {
         $searchList[] = $item->name;
@@ -115,13 +116,9 @@ Route::get('/', function () {
     foreach ($c as $item) {
         $searchList[] = $item->name;
     }
-    // Get only products which have a company
-    $products = $p->filter(function ($value, $key) {
-        return $value->user->company != null;
-    });
     // get the 10-random records from the database if is less than 10 then it will return all
     if (count($p) > 8) {
-        $products = $products->random(8);
+        $products = $p->random(8);
     }
 
     if (count($c) > 8) {
@@ -229,7 +226,6 @@ Route::prefix('auth')->group(function () {
         } catch (Exception $e) {
             return redirect()->back()->with('success', 'Registered successfully');
         }
-        return redirect()->back()->with('success', 'Registered successfully');
     })->name('auth.register');
 });
 

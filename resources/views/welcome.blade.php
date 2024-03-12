@@ -315,8 +315,8 @@
                                 <p>{{ $item->category->name }}</p>
                             </header>
                             <p class="text-base font-medium mb-2 text-center">{{ Str::limit($item->name, 30, '...') }}</p>
-                            <p class="text-red-700 text-center text-xs md:text-sm">{{ $item->user->company->name }}</p>
-                            <p class="text-gray-700 text-center text-xs md:text-sm">{{ $item->user->company->address->country->name }}</p>
+                            <p class="text-red-700 text-center text-xs md:text-sm">{{ $item->company->name }}</p>
+                            <p class="text-gray-700 text-center text-xs md:text-sm">{{ $item->company->address->country->name }}</p>
                             <p class="text-gray-700 text-center text-xs md:text-sm">Price:
                                 ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
                         </div>
@@ -389,10 +389,10 @@
                                 <div class="desc p-4 text-gray-800">
                                     <div class="flex items-center mt-2">
                                         <img class='w-8 h-8 object-cover rounded-full' alt='User avatar'
-                                             src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
+                                             src='https://ui-avatars.com/api/?name={{$event->company->name}}'/>
                                         <div class="pl-3">
                                             <div class="font-medium text-sm">
-                                                {{$event->user->name}}
+                                                {{$event->company->name}}
                                             </div>
                                             <div class="text-gray-600 text-sm">
                                                 {{$event->created_at->diffForHumans()}}

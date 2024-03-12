@@ -29,7 +29,7 @@
 
         <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2 flex md:flex-row flex-col md:items-center justify-between p-4">
             <div class="flex flex-auto">
-                <img src="{{ url('storage/'.$product->user->company->logo) }}" alt="Company Logo"
+                <img src="{{ url('storage/'.$product->company->logo) }}" alt="Company Logo"
                      class="h-16 w-16 rounded-full object-contain mr-4 mt-4 hidden">
                 <!-- Published Details  -->
                 <div class="flex flex-col">
@@ -51,15 +51,15 @@
                     </span>
                     <span class="text-xs md:text-base text-gray-500">Price: <span class="text-purple-500">₹{{ HelperFunctions::formatCurrency($product->price) }}</span></span>
                     <hr>
-                    <span class="text-xs md:text-sm text-gray-500">Published by {{ $product->user->company->name }}</span>
+                    <span class="text-xs md:text-sm text-gray-500">Published by {{ $product->company->name }}</span>
                     <span class="text-xs md:text-sm text-gray-500">Published on {{ $product->created_at->format('d M Y') }} ({{ $product->created_at->diffForHumans() }})</span>
-                    <a href="{{route('view.company', [$product->user->company->slug])}}" class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-1 px-2 md:ml-5 text-center mt-2 rounded-full hover:rounded-full transition-all duration-300 ease-in-out md:w-auto w-full md:hidden">
+                    <a href="{{route('view.company', [$product->company->slug])}}" class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white py-1 px-2 md:ml-5 text-center mt-2 rounded-full hover:rounded-full transition-all duration-300 ease-in-out md:w-auto w-full md:hidden">
                         Contact Seller
                         <i class='bx bx-link-external ml-2'></i>
                     </a>
                 </div>
             </div>
-            <a href="{{route('view.company', [$product->user->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue hover:bg-purple-800">
+            <a href="{{route('view.company', [$product->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue hover:bg-purple-800">
                 Contact Seller
                 <i class='bx bx-link-external ml-2'></i>
             </a>
@@ -158,7 +158,7 @@
                     <p class="text-sm text-gray-500 bg-white p-4 shadow-md rounded">{!! $product->description !!}</p>
                     <div class="relative bottom-0 md:static right-1 mb-2 md:w-[calc(80%-1rem)] mt-4"
                          style="width: max-content;">
-                        <a href="{{route('view.company', [$product->user->company->slug])}}"
+                        <a href="{{route('view.company', [$product->company->slug])}}"
                            class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 hover:text-white rounded-full p-2 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base border border-purple-600">
                             <span class="ml-1">Contact Seller&nbsp;</span>
                             <i class='bx bx-link-external mr-2'></i>
@@ -250,8 +250,8 @@
                                 <p>{{ $item->category->name }}</p>
                             </header>
                             <p class="text-sm md:text-xl font-medium mb-2">{{ $item->name }}</p>
-                            <p class="text-red-700 text-xs md:text-sm">{{ $item->user->company ? $item->user->company->name: '' }}</p>
-                            <p class="text-gray-700 text-xs md:text-sm">{{ $item->user->company? $item->user->company->address->country->name : '' }}</p>
+                            <p class="text-red-700 text-xs md:text-sm">{{ $item->company ? $item->company->name: '' }}</p>
+                            <p class="text-gray-700 text-xs md:text-sm">{{ $item->company? $item->company->address->country->name : '' }}</p>
                             <p class="text-gray-700 text-xs md:text-sm">Price: ₹{{ HelperFunctions::formatCurrency($item->price) }}</p>
                             <div class="block md:hidden md:static mb-2 w-full">
                                 <a href="{{ route('view.product', [$item->slug]) }}" class="text-purple-500 mb-1 bg-purple-100 hover:bg-purple-500 rounded-full p-1 transition duration-300 ease-in-out flex items-center justify-center transform hover:-translate-y-1 hover:scale-60 text-center text-xs md:text-base w-[calc(80%-1rem)]">

@@ -60,7 +60,7 @@
                         <img src="https://via.placeholder.com/100x100" alt="User Avatar"
                              class="w-8 h-8 md:w-10 md:h-10 rounded-full mr-2 md:mr-4">
                         <div>
-                            <h2 class="text-base md:text-lg font-semibold text-gray-800">{{$forum->user->name}}</h2>
+                            <h2 class="text-base md:text-lg font-semibold text-gray-800">{{$forum->company->name}}</h2>
                             <p class="text-gray-500 text-xs md:text-sm">Posted on {{date_format($forum->created_at, 'd M y')}}</p>
                         </div>
                     </div>

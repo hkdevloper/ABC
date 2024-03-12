@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -18,6 +19,9 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    /**
+     * @throws Exception
+     */
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
@@ -186,7 +190,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     public function isCompanyOwner(Company $company): bool
     {
         if(auth()->check()){
-            if($company->user_id === $this->company->id){
+            if($company->user_id === auth()->id()){
                 return true;
             }
         }

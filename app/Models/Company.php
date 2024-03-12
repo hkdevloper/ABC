@@ -60,7 +60,32 @@ class Company extends Model
 
     public function products(): HasMany
     {
-        return $this->hasMany(Product::class, 'user_id', 'user_id');
+        return $this->hasMany(Product::class, 'company_id');
+    }
+
+    public function jobs(): HasMany
+    {
+        return $this->hasMany(Job::class, 'company_id');
+    }
+
+    public function events(): HasMany
+    {
+        return $this->hasMany(Event::class, 'company_id');
+    }
+
+    public function blogs(): HasMany
+    {
+        return $this->hasMany(Blog::class, 'company_id');
+    }
+
+    public function forums(): HasMany
+    {
+        return $this->hasMany(Forum::class, 'company_id');
+    }
+
+    public function deals(): HasMany
+    {
+        return $this->hasMany(Deal::class, 'company_id');
     }
 
     public function claimedBy() : BelongsTo

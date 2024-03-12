@@ -10,13 +10,13 @@
                  class="mb-6 rounded-lg shadow-lg object-contain w-100 h-40 md:h-80">
             <h1 class="text-3xl font-semibold mb-4">{{$event->title}}</h1>
             <p class="text-gray-500 mb-4">on {{ date('d M Y h:i a', (int)$event->start) }} Onwards</p>
-            <p class="text-gray-500 mb-4">Organized by {{$event->user->name}}</p>
+            <p class="text-gray-500 mb-4">Organized by {{$event->company->name}}</p>
             <div class="flex items-center mb-4">
                 <img class='w-10 h-10 object-cover rounded-full' alt='User avatar'
-                     src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
+                     src='https://ui-avatars.com/api/?name={{$event->company->name}}'/>
                 <div class="pl-3">
                     <div class="font-medium">
-                        {{$event->user->name}}
+                        {{$event->company->name}}
                     </div>
                     <div class="text-gray-600 text-sm">
                         {{$event->created_at->diffForHumans()}}
@@ -119,10 +119,10 @@
                         <div class="desc p-4 text-gray-800">
                             <div class="flex items-center mt-2">
                                 <img class='w-10 h-10 object-cover rounded-full' alt='User avatar'
-                                     src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
+                                     src='https://ui-avatars.com/api/?name={{$event->company->name}}'/>
                                 <div class="pl-3">
                                     <div class="font-medium">
-                                        {{$event->user->name}}
+                                        {{$event->company->name}}
                                     </div>
                                     <div class="text-gray-600 text-sm">
                                         {{$event->created_at->diffForHumans()}}

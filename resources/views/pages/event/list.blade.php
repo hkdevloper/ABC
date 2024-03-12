@@ -79,10 +79,10 @@
                         <div class="desc p-4 text-gray-800">
                             <div class="flex items-center mt-2">
                                 <img class='w-10 h-10 object-cover rounded-full' alt='User avatar'
-                                     src='https://ui-avatars.com/api/?name={{$event->user->name}}'/>
+                                     src='https://ui-avatars.com/api/?name={{$event->company->name}}'/>
                                 <div class="pl-3">
                                     <div class="font-medium">
-                                        {{$event->user->name}}
+                                        {{$event->company->name}}
                                     </div>
                                     <div class="text-gray-600 text-sm">
                                         {{$event->created_at->diffForHumans()}}

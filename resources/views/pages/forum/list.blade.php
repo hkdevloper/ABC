@@ -79,7 +79,7 @@
                     <div class="flex md:flex-row flex-col items-start justify-between mb-2 md:mb-4">
                         <div class="flex items-center">
                             <div>
-                                <h2 class="text-sm md:text-base font-semibold text-gray-800">{{$forum->user->name}}</h2>
+                                <h2 class="text-sm md:text-base font-semibold text-gray-800">{{$forum->company->name}}</h2>
                                 <p class="text-gray-500 text-xs md:text-sm">Posted on {{date_format($forum->created_at, 'd M y')}}</p>
                             </div>
                         </div>

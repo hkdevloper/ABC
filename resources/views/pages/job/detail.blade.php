@@ -7,7 +7,7 @@
             <div class="flex items-center">
                 <div class="flex-grow">
                     <h1 class="text-2xl font-semibold text-blue-900">{{$job->title}}</h1>
-                    <p class="text-gray-600">{{$job->user->company->name}}</p>
+                    <p class="text-gray-600">{{$job->company->name}}</p>
                     <div class="text-base text-gray-500">
                         <i class='bx bx-been-here text-red-500'></i> {{$job->address->state->name}}, {{$job->address->country->name}}
                     </div>
@@ -90,7 +90,7 @@
                                 <i class='bx bx-been-here text-red-500'></i> {{$job->address->state->name}}, {{$job->address->country->name}}
                             </div>
                             <div class="text-purple-600">
-                                {{$job->user->company->name}}
+                                {{$job->company->name}}
                             </div>
                         </div>
                         <div class="w-full mx-auto md:w-[calc(20%-1rem)]">

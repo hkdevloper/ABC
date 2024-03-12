@@ -7,12 +7,12 @@
             <div class="my-2 md:px-6">
                 <img src="{{url('storage/' . $blog->thumbnail)}}" class="mb-6 w-full rounded-lg shadow-lg dark:shadow-black/20" alt="image"/>
                 <div class="mb-6 flex items-center justify-start">
-                    <img src="{{ url('storage/' . $blog->user->company->logo) }}"
+                    <img src="{{ url('storage/' . $blog->company->logo) }}"
                          class="mr-2 w-10 h-10 md:w-[80px] md:h-[80px] rounded" alt="avatar" loading="lazy"/>
                     <div>
                         <span class="text-sm md:text-base"> Published <u>{{$blog->created_at->diffForHumans()}}</u> by </span>
-                        <a href="{{ route('view.company', [$blog->user->company->slug]) }}"
-                           class="font-medium text-sm md:text-base">{{$blog->user->company->name}}</a>
+                        <a href="{{ route('view.company', [$blog->company->slug]) }}"
+                           class="font-medium text-sm md:text-base">{{$blog->company->name}}</a>
                     </div>
                 </div>
                 <h1 class="mb-6 text-3xl font-bold">{{$blog->title}}</h1>
