@@ -19,15 +19,59 @@ class UserCompanyController extends Controller
         Session::put('menu', 'company');
 
         // Initialize the base query to retrieve companies with average rating
+//        $query = Company::select('companies.*', DB::raw('AVG(rate_reviews.rating) as avg_rating'))
+//            ->leftJoin('rate_reviews', function ($join) {
+//                $join->on('companies.id', '=', 'rate_reviews.item_id')
+//                    ->where('rate_reviews.type', '=', 'company');
+//            })
+//            ->join('seo', 'companies.seo_id', '=', 'seo.id')
+//            ->where('companies.is_approved', 1)
+//            ->where('companies.is_active', 1)
+//            ->groupBy('companies.id');
         $query = Company::select('companies.*', DB::raw('AVG(rate_reviews.rating) as avg_rating'))
             ->leftJoin('rate_reviews', function ($join) {
                 $join->on('companies.id', '=', 'rate_reviews.item_id')
                     ->where('rate_reviews.type', '=', 'company');
             })
             ->join('seo', 'companies.seo_id', '=', 'seo.id')
-            ->where('companies.is_approved', 1)
-            ->where('companies.is_active', 1)
-            ->groupBy('companies.id');
+            ->where('companies.is_approved', true)
+            ->where('companies.is_active', true)
+            ->groupBy(
+                'companies.id',
+                'companies.is_approved',
+                'companies.is_claimed',
+                'companies.is_active',
+                'companies.is_featured',
+                'companies.user_id',
+                'companies.claimed_by',
+                'companies.category_id',
+                'companies.business_type',
+                'companies.name',
+                'companies.slug',
+                'companies.description',
+                'companies.extra_things',
+                'companies.banner',
+                'companies.logo',
+                'companies.gallery',
+                'companies.phone',
+                'companies.email',
+                'companies.website',
+                'companies.facebook',
+                'companies.twitter',
+                'companies.instagram',
+                'companies.linkdin',
+                'companies.youtube',
+                'companies.address_id',
+                'companies.seo_id',
+                'companies.established_at',
+                'companies.number_of_employees',
+                'companies.turnover',
+                'companies.created_at',
+                'companies.updated_at',
+                'companies.is_rejected',
+                'companies.rejected_reason',
+
+            );
 
         // Search Query
         if ($request->has('q')) {
