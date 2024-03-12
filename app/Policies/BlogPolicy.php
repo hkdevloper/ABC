@@ -30,6 +30,9 @@ class BlogPolicy
     public function view(User $user, Blog $blog): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -49,6 +52,9 @@ class BlogPolicy
      */
     public function update(User $user, Blog $blog): bool
     {
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -60,6 +66,9 @@ class BlogPolicy
      */
     public function delete(User $user, Blog $blog): bool
     {
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -71,6 +80,9 @@ class BlogPolicy
      */
     public function restore(User $user, Blog $blog): bool
     {
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -82,6 +94,9 @@ class BlogPolicy
      */
     public function forceDelete(User $user, Blog $blog): bool
     {
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
             return true;
         }

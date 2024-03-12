@@ -30,6 +30,9 @@ class EventPolicy
     public function view(User $user, Event $event): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $event->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -50,6 +53,9 @@ class EventPolicy
     public function update(User $user, Event $event): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $event->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -62,6 +68,9 @@ class EventPolicy
     public function delete(User $user, Event $event): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $event->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -74,6 +83,9 @@ class EventPolicy
     public function restore(User $user, Event $event): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $event->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -86,6 +98,9 @@ class EventPolicy
     public function forceDelete(User $user, Event $event): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $event->company_id || $user->type == 'Admin') {
             return true;
         }

@@ -30,6 +30,9 @@ class ForumPolicy
     public function view(User $user, Forum $forum): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $forum->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -50,6 +53,9 @@ class ForumPolicy
     public function update(User $user, Forum $forum): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $forum->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -62,6 +68,9 @@ class ForumPolicy
     public function delete(User $user, Forum $forum): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $forum->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -74,6 +83,9 @@ class ForumPolicy
     public function restore(User $user, Forum $forum): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $forum->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -86,6 +98,9 @@ class ForumPolicy
     public function forceDelete(User $user, Forum $forum): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $forum->company_id || $user->type == 'Admin') {
             return true;
         }

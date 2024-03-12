@@ -30,7 +30,10 @@ class JobPolicy
     public function view(User $user, Job $job): bool
     {
         // Authorization logic...
-        if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
+        if(!$user->company){
+            return false;
+        }
+        if ($user->company->id === $job->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -50,7 +53,10 @@ class JobPolicy
     public function update(User $user, Job $job): bool
     {
         // Authorization logic...
-        if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
+        if(!$user->company){
+            return false;
+        }
+        if ($user->company->id === $job->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -62,7 +68,10 @@ class JobPolicy
     public function delete(User $user, Job $job): bool
     {
         // Authorization logic...
-        if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
+        if(!$user->company){
+            return false;
+        }
+        if ($user->company->id === $job->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -74,6 +83,9 @@ class JobPolicy
     public function restore(User $user, Job $job): bool
     {
         // Authorization logic...
+        if(!$user->company){
+            return false;
+        }
         if ($user->company->id === $job->company_id || $user->type == 'Admin') {
             return true;
         }
@@ -86,7 +98,10 @@ class JobPolicy
     public function forceDelete(User $user, Job $job): bool
     {
         // Authorization logic...
-        if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
+        if(!$user->company){
+            return false;
+        }
+        if ($user->company->id === $job->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
