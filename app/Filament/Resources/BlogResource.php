@@ -38,12 +38,14 @@ class BlogResource extends Resource
                 Select::make('company_id')
                     ->label('Select Company')
                     ->native(false)
+                    ->autofocus()
                     ->required()
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
+                    ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'blog');
@@ -52,11 +54,11 @@ class BlogResource extends Resource
                     ->label('Is Active')
                     ->default(true)
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Toggle::make('is_featured')
                     ->label('Is Featured')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
@@ -78,12 +80,13 @@ class BlogResource extends Resource
                 TextInput::make('slug')
                     ->label('Blog Slug url')
                     ->unique(ignoreRecord: true)
+                    ->autofocus()
                     ->required()
                     ->maxLength(70),
                 TagsInput::make('tags')
                     ->splitKeys(['Tab', ','])
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 TinyEditor::make('content')
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsVisibility('public')
@@ -91,7 +94,7 @@ class BlogResource extends Resource
                     ->profile('simple')
                     ->columnSpan('full')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Textarea::make('summary')
                     ->label('Enter Summary')
                     ->columnSpan('full')
@@ -105,10 +108,12 @@ class BlogResource extends Resource
                         TextInput::make('title')
                             ->label('Enter SEO Title')
                             ->required()
+                            ->autofocus()
                             ->maxLength(70),
                         TagsInput::make('meta_keywords')
                             ->splitKeys(['Tab', ','])
                             ->required()
+                            ->autofocus()
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
                             ->label('Enter SEO Meta Description')

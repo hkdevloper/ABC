@@ -45,31 +45,30 @@ class EventResource extends Resource
                 Toggle::make('is_active')
                     ->default(true)
                     ->label('Active')
-                    ->autofocus()
                     ->required(),
                 Toggle::make('is_featured')
                     ->label('Featured')
-                    ->autofocus()
                     ->required(),
                 Toggle::make('is_claimed')
                     ->label('Claimed')
                     ->live()
-                    ->autofocus()
                     ->required(),
                 Toggle::make('is_approved')
                     ->default(true)
                     ->label('Approved')
-                    ->autofocus()
                     ->required(),
                 Select::make('company_id')
                     ->label('Select Company')
                     ->native(false)
                     ->required()
+                    ->autofocus()
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
+                    ->required()
+                    ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'event');
@@ -78,6 +77,7 @@ class EventResource extends Resource
                     ->label('Enter Title')
                     ->live(onBlur: true)
                     ->required()
+                    ->autofocus()
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
@@ -87,9 +87,11 @@ class EventResource extends Resource
                     ->label('Slug')
                     ->unique(ignoreRecord: true)
                     ->required()
+                    ->autofocus()
                     ->maxLength(70),
                 Forms\Components\RichEditor::make('description')
                     ->required()
+                    ->autofocus()
                     ->toolbarButtons([
                         'blockquote',
                         'bold',
@@ -125,6 +127,7 @@ class EventResource extends Resource
                             ->required(),
                         FileUpload::make('gallery')
                             ->multiple()
+                            ->autofocus()
                             ->label('Gallery')
                             ->maxFiles(4)
                             ->disk('public')

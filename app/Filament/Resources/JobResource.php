@@ -49,27 +49,27 @@ class JobResource extends Resource
                         Toggle::make('is_active')
                             ->default(true)
                             ->label('Active')
-                            ->autofocus()
                             ->required(),
                         Toggle::make('is_approved')
                             ->default(true)
                             ->label('Approved')
-                            ->autofocus()
                             ->required(),
                         Toggle::make('is_featured')
                             ->label('Featured')
-                            ->autofocus()
                             ->required(),
                     ])->columns(3),
                 Select::make('company_id')
                     ->label('Select Company')
                     ->required()
+                    ->autofocus()
                     ->native(false)
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
+                    ->autofocus()
+                    ->required()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'job');
@@ -78,21 +78,25 @@ class JobResource extends Resource
                     ->label('Enter Title')
                     ->live(onBlur: true)
                     ->required()
+                    ->autofocus()
                     ->maxLength(191)
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
                     ->label('Slug')
                     ->unique(ignoreRecord: true)
                     ->required()
+                    ->autofocus()
                     ->maxLength(70),
                 Forms\Components\DatePicker::make('valid_until')
                     ->label('Valid Until')
                     ->before(today()->addYear())
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Select::make('employment_type')
                     ->label('Enter Employment Type')
                     ->native(false)
+                    ->required()
+                    ->autofocus()
                     ->options([
                         'full_time' => 'Full Time',
                         'part_time' => 'Part Time',
@@ -109,13 +113,14 @@ class JobResource extends Resource
                 TextInput::make('HR Email')
                     ->label('HR Email')
                     ->email()
+                    ->autofocus()
                     ->placeholder('Enter Email Id to apply for a job')
                     ->maxLength(191),
                 Textarea::make('education')
                     ->id('education')
                     ->columnSpan('full')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Textarea::make('experience')
                     ->label('Enter Experience Details')
                     ->columnSpanFull(),
@@ -131,6 +136,7 @@ class JobResource extends Resource
                     ])->columns(1),
                 Forms\Components\RichEditor::make('description')
                     ->required()
+                    ->autofocus()
                     ->toolbarButtons([
                         'blockquote',
                         'bold',

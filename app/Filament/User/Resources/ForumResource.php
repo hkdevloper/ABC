@@ -36,19 +36,22 @@ class ForumResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->label('Title')
                     ->required()
+                    ->autofocus()
                     ->maxLength(191),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
                     ->required()
+                    ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
+                    ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'forum');
                     })->placeholder('Select Category'),
                 Textarea::make('summary')
                     ->label('Enter Summary')
                     ->required()
+                    ->autofocus()
                     ->default('')
                     ->hidden()
                     ->maxLength(191),
@@ -67,11 +70,12 @@ class ForumResource extends Resource
                         'underline',
                         'undo',
                     ])
+                    ->autofocus()
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
             ])->columns(1);
     }
 

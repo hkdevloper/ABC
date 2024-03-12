@@ -31,6 +31,7 @@ class DealResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationGroup = 'Management';
     protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -39,24 +40,25 @@ class DealResource extends Resource
                     Toggle::make('is_active')
                         ->label('Active')
                         ->default(true)
-                        ->autofocus()
-                            ->required(),
+                        ->required(),
                     Toggle::make('is_featured')
                         ->label('Featured')
-                        ->autofocus()
-                            ->required(),
+                        ->required(),
                 ])->columns(),
                 Select::make('company_id')
                     ->label('Select Company')
                     ->native(false)
                     ->required()
+                    ->autofocus()
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
+                    ->autofocus()
+                    ->required()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
+                    ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'deal');
                     }),
                 TextInput::make('title')
@@ -64,10 +66,10 @@ class DealResource extends Resource
                     ->live(onBlur: true)
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(function (Set $set, ?string $state){
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
                         $set('seo.title', $state);
-                }),
+                    }),
                 TextInput::make('slug')
                     ->label('Slug')
                     ->unique(ignoreRecord: true)
@@ -75,23 +77,16 @@ class DealResource extends Resource
                     ->maxLength(70),
                 TextInput::make('discount_price')
                     ->label('Deal Price')
+                    ->required()
+                    ->autofocus()
                     ->numeric()
                     ->prefix('$'),
                 TextInput::make('original_price')
                     ->label('MRP (Selling Price)')
+                    ->required()
+                    ->autofocus()
                     ->numeric()
                     ->prefix('$'),
-                // Show Discount percentage
-                TextInput::make('discount_value')
-                    ->label('Discount Value')
-                    ->numeric()
-                    ->suffix('%')
-                    ->disabled()
-                    ->dehydrated(false)
-                    ->afterStateUpdated(function (Set $set, Get $get){
-                        $percentage = ($get('discount_price') / $get('original_price')) * 100;
-                        $set('discount_value', $percentage);
-                    }),
                 Forms\Components\RichEditor::make('description')
                     ->toolbarButtons([
                         'blockquote',
@@ -106,6 +101,7 @@ class DealResource extends Resource
                         'underline',
                         'undo',
                     ])
+                    ->autofocus()
                     ->columnSpanFull(),
                 Section::make('Images')
                     ->schema([
@@ -118,6 +114,7 @@ class DealResource extends Resource
                             ->label('Gallery')
                             ->directory('deals/gallery')
                             ->maxFiles(4)
+                            ->autofocus()
                             ->multiple(),
                     ])->columns(1),
                 Forms\Components\RichEditor::make('terms_and_conditions')
@@ -135,6 +132,7 @@ class DealResource extends Resource
                         'underline',
                         'undo',
                     ])
+                    ->autofocus()
                     ->columnSpanFull(),
                 Section::make('SEO Details')
                     ->relationship('seo')

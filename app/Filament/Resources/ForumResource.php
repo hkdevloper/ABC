@@ -31,6 +31,7 @@ class ForumResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->label('Enter Title')
+                    ->autofocus()
                     ->required()
                     ->maxLength(191),
                 Textarea::make('summary')
@@ -54,6 +55,7 @@ class ForumResource extends Resource
                         'underline',
                         'undo',
                     ])
+                    ->autofocus()
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
@@ -63,6 +65,7 @@ class ForumResource extends Resource
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
+                    ->autofocus()
                     ->required()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query){
@@ -71,10 +74,12 @@ class ForumResource extends Resource
                 Select::make('company_id')
                     ->label('Select Company')
                     ->required()
+                    ->autofocus()
                     ->native(false)
                     ->relationship('company', 'name'),
                 FileUpload::make('image')
                     ->label('Attach Image')
+                    ->autofocus()
                     ->directory('forum/attachments')
                     ->nullable(),
             ])->columns(1);

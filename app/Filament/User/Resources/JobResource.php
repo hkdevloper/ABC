@@ -48,6 +48,8 @@ class JobResource extends Resource
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
+                    ->required()
+                    ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'job');
@@ -57,6 +59,7 @@ class JobResource extends Resource
                     ->placeholder('Enter job title')
                     ->live(onBlur: true)
                     ->required()
+                    ->autofocus()
                     ->maxLength(191)
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
@@ -65,10 +68,12 @@ class JobResource extends Resource
                     ->placeholder('Enter slug')
                     ->unique(ignoreRecord: true)
                     ->required()
+                    ->autofocus()
                     ->maxLength(70),
                 TextInput::make('HR Email')
                     ->label('HR Email')
                     ->email()
+                    ->autofocus()
                     ->placeholder('Enter Email Id to apply for a job')
                     ->maxLength(191),
                 Section::make()->schema([

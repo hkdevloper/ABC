@@ -42,6 +42,8 @@ class ProductResource extends Resource
                             ->label('Select Category')
                             ->enableBranchNode()
                             ->withCount()
+                            ->required()
+                            ->autofocus()
                             ->emptyLabel('Oops! No Category Found')
                             ->relationship('category', 'name', 'parent_id', function ($query) {
                                 return $query->where('type', 'product');
@@ -51,6 +53,7 @@ class ProductResource extends Resource
                             ->placeholder('Enter product name')
                             ->live(onBlur: true)
                             ->required()
+                            ->autofocus()
                             ->maxLength(191)
                             ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')

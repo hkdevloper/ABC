@@ -31,6 +31,7 @@ class DealResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Management';
     protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -39,35 +40,37 @@ class DealResource extends Resource
                     Toggle::make('is_active')
                         ->label('Active')
                         ->default(true)
-                        ->autofocus()
-                            ->required(),
+                        ->required(),
                     Toggle::make('is_featured')
                         ->label('Featured')
-                        ->autofocus()
-                            ->required(),
+                        ->required(),
                 ])->columns(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
+                    ->required()
+                    ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
+                    ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'deal');
                     }),
                 TextInput::make('title')
                     ->label('Enter Title')
                     ->live(onBlur: true)
                     ->required()
+                    ->autofocus()
                     ->maxLength(191)
-                    ->afterStateUpdated(function (Set $set, ?string $state){
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
                         $set('seo.title', $state);
-                }),
+                    }),
                 TextInput::make('slug')
                     ->label('Slug')
                     ->hidden()
                     ->unique(ignoreRecord: true)
                     ->required()
+                    ->autofocus()
                     ->maxLength(70),
                 TextInput::make('discount_price')
                     ->label('Deal Price')
@@ -78,6 +81,7 @@ class DealResource extends Resource
                     ->numeric()
                     ->prefix('$'),
                 Forms\Components\RichEditor::make('description')
+                    ->autofocus()
                     ->toolbarButtons([
                         'blockquote',
                         'bold',
@@ -103,6 +107,7 @@ class DealResource extends Resource
                             ->label('Gallery')
                             ->directory('deals/gallery')
                             ->maxFiles(4)
+                            ->autofocus()
                             ->multiple(),
                     ])->columns(1),
                 Forms\Components\RichEditor::make('terms_and_conditions')

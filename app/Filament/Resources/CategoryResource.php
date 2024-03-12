@@ -63,12 +63,14 @@ class CategoryResource extends Resource
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
                     ->label('Slug')
+                    ->autofocus()
                     ->unique(ignoreRecord: true)
                     ->maxLength(70),
                 Select::make('type')
                     ->label('Select Type')
                     ->native(false)
                     ->required()
+                    ->autofocus()
                     ->live(true)
                     ->options([
                         "company" => "Company",
@@ -84,6 +86,7 @@ class CategoryResource extends Resource
                     ->withCount()
                     ->enableBranchNode()
                     ->live(true)
+                    ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('parent', 'name', 'parent_id', function ($query, Forms\Get $get){
                         // Get only active categories and selected Type category
@@ -105,6 +108,7 @@ class CategoryResource extends Resource
                     ])
                     ->label('Description')
                     ->maxLength(65535)
+                    ->autofocus()
                     ->columnSpanFull(),
                 Section::make('SEO Details')
                     ->relationship('seo')

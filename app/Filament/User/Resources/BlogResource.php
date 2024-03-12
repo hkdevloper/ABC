@@ -63,6 +63,8 @@ class BlogResource extends Resource
                             ->label('Select Category')
                             ->enableBranchNode()
                             ->withCount()
+                            ->required()
+                            ->autofocus()
                             ->emptyLabel('Oops! No Category Found')
                             ->relationship('category', 'name', 'parent_id', function ($query){
                                 return $query->where('type', 'blog');
@@ -72,6 +74,7 @@ class BlogResource extends Resource
                             ->placeholder('Enter title')
                             ->live(onBlur: true)
                             ->required()
+                            ->autofocus()
                             ->maxLength(191)
                             ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')
@@ -98,6 +101,7 @@ class BlogResource extends Resource
                         Textarea::make('summary')
                             ->label('Enter Summary')
                             ->required()
+                            ->autofocus()
                             ->maxLength(191),
                     ])->columnSpanFull(),
                 Section::make('SEO Details')

@@ -48,9 +48,9 @@ class CompanyResource extends Resource
                         ->label('Approved')
                         ->default(true)
                         ->autofocus()
-                            ->required(),
+                        ->required(),
                     Toggle::make('is_claimed')
-                        ->default(function (Get $get, $action){
+                        ->default(function (Get $get, $action) {
                             if ($action == 'edit') {
                                 if ($get('claimed_by') == null) {
                                     return false;
@@ -66,11 +66,11 @@ class CompanyResource extends Resource
                         ->label('Active')
                         ->default(true)
                         ->autofocus()
-                            ->required(),
+                        ->required(),
                     Toggle::make('is_featured')
                         ->label('Featured')
                         ->autofocus()
-                            ->required(),
+                        ->required(),
                     Toggle::make('is_rejected')
                         ->label('Rejected')
                         ->live()
@@ -80,6 +80,7 @@ class CompanyResource extends Resource
                     ->default(auth()->id()),
                 Select::make('claimed_by')
                     ->default(1)
+                    ->autofocus()
                     ->native(false)
                     ->hidden(fn(Get $get) => !$get('is_claimed'))
                     ->disabled(fn(Get $get) => !$get('is_claimed'))
@@ -98,9 +99,10 @@ class CompanyResource extends Resource
                     ->native(false)
                     ->label('Select Business Type')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 TextInput::make('rejected_reason')
                     ->label('Rejected Reason')
+                    ->autofocus()
                     ->helperText('Enter the reason for rejection')
                     ->hidden(fn(Get $get) => !$get('is_rejected'))
                     ->disabled(fn(Get $get) => !$get('is_rejected'))
@@ -110,6 +112,7 @@ class CompanyResource extends Resource
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
+                    ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'company');
@@ -118,6 +121,7 @@ class CompanyResource extends Resource
                     ->label('Enter Company Name')
                     ->live(onBlur: true)
                     ->required()
+                    ->autofocus()
                     ->unique(ignoreRecord: true)
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state) {
@@ -129,11 +133,12 @@ class CompanyResource extends Resource
                     ->splitKeys(['Tab', ','])
                     ->helperText('List your products name separated by comma')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 TextInput::make('slug')
                     ->label('Enter Company Slug')
                     ->unique(ignoreRecord: true)
                     ->required()
+                    ->autofocus()
                     ->unique(ignoreRecord: true)
                     ->live(onBlur: true)
                     ->maxLength(70),
@@ -150,6 +155,7 @@ class CompanyResource extends Resource
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('description')
                     ->required()
+                    ->autofocus()
                     ->toolbarButtons([
                         'blockquote',
                         'bold',
@@ -179,6 +185,7 @@ class CompanyResource extends Resource
                             ->helperText('Add your company photos, Certificates etc')
                             ->directory('companies/gallery')
                             ->maxFiles(4)
+                            ->autofocus()
                             ->multiple(),
                     ])->columns(1),
                 Section::make('Social Details')
@@ -237,10 +244,12 @@ class CompanyResource extends Resource
                         TextInput::make('phone')
                             ->label('Phone Number')
                             ->tel()
+                            ->autofocus()
                             ->maxLength(191),
                         TextInput::make('email')
                             ->label('Email Address')
                             ->email()
+                            ->autofocus()
                             ->maxLength(191),
                         TextInput::make('website')
                             ->label('Website')

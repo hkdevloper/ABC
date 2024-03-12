@@ -42,33 +42,23 @@ class ProductResource extends Resource
                     Toggle::make('is_active')
                         ->label('Active')
                         ->default(true)
-                        ->autofocus()
-                            ->required(),
+                        ->required(),
                     Toggle::make('is_featured')
                         ->label('Featured'),
                     Toggle::make('is_approved')
                         ->label('Approved')
                         ->default(true)
-                        ->autofocus()
-                            ->required(),
+                        ->required(),
                 ])->columns(3),
                 Select::make('company_id')
                     ->label('Select Company')
                     ->required()
+                    ->autofocus()
                     ->native(false)
                     ->relationship('company', 'name'),
-                Select::make('claimed_by')
-                    ->label('Claimed By User')
-                    ->default(1)
-                    ->hidden()
-                    ->disabled(fn(Get $get) => !$get('is_claimed'))
-                    ->options(fn(Get $get): Collection => User::query()
-                        ->where('is_approved', 1)
-                        ->where('is_banned', 0)
-                        ->pluck('name', 'id')),
-                    //  ->relationship('user', 'name'),
                 SelectTree::make('category_id')
                     ->required()
+                    ->autofocus()
                     ->enableBranchNode()
                     ->label('Select Category')
                     ->withCount()
@@ -80,6 +70,7 @@ class ProductResource extends Resource
                     ->label('Enter Product Name')
                     ->live(onBlur: true)
                     ->required()
+                    ->autofocus()
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('slug', Str::slug($state));
@@ -89,8 +80,10 @@ class ProductResource extends Resource
                     ->label('Slug')
                     ->unique(ignoreRecord: true)
                     ->required()
+                    ->autofocus()
                     ->maxLength(70),
                 Forms\Components\RichEditor::make('description')
+                    ->autofocus()
                     ->toolbarButtons([
                         'blockquote',
                         'bold',
@@ -119,7 +112,7 @@ class ProductResource extends Resource
                         'refurbished' => 'Refurbished',
                     ])
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 TextInput::make('brand')
                     ->required()
                     ->label('Country of Origin')

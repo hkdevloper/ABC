@@ -46,6 +46,8 @@ class EventResource extends Resource
                             ->label('Select Category')
                             ->enableBranchNode()
                             ->withCount()
+                            ->required()
+                            ->autofocus()
                             ->emptyLabel('Oops! No Category Found')
                             ->relationship('category', 'name', 'parent_id', function ($query) {
                                 return $query->where('type', 'event');
@@ -55,6 +57,7 @@ class EventResource extends Resource
                             ->placeholder('Enter event title')
                             ->live(onBlur: true)
                             ->required()
+                            ->autofocus()
                             ->maxLength(191)
                             ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')
@@ -62,6 +65,7 @@ class EventResource extends Resource
                             ->hidden()
                             ->placeholder('Enter slug')
                             ->required()
+                            ->autofocus()
                             ->unique(ignoreRecord: true)
                             ->maxLength(70),
                         Forms\Components\RichEditor::make('description')
@@ -108,6 +112,7 @@ class EventResource extends Resource
                             ->directory('events/gallery')
                             ->multiple()
                             ->maxFiles(4)
+                            ->autofocus()
                             ->visibility('public'),
                     ])->columns(2),
                 Section::make('Address Details')

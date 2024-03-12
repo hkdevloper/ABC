@@ -48,11 +48,13 @@ class CompanyResource extends Resource
                 ])
                     ->native(false)
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
+                    ->required()
+                    ->autofocus()
                     ->enableBranchNode()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query) {
@@ -62,6 +64,7 @@ class CompanyResource extends Resource
                     ->label('Enter Company Name')
                     ->live(onBlur: true)
                     ->required()
+                    ->autofocus()
                     ->unique(ignoreRecord: true)
                     ->maxLength(191)
                     ->afterStateUpdated(function (Set $set, ?string $state) {
@@ -87,6 +90,7 @@ class CompanyResource extends Resource
                     ->maxLength(191),
                 Forms\Components\RichEditor::make('description')
                     ->required()
+                    ->autofocus()
                     ->toolbarButtons([
                         'blockquote',
                         'bold',
@@ -106,7 +110,7 @@ class CompanyResource extends Resource
                     ->splitKeys(['Tab', ','])
                     ->helperText('List your products name separated by comma')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('logo')
@@ -123,6 +127,7 @@ class CompanyResource extends Resource
                             ->helperText('Add your company photos, Certificates etc')
                             ->directory('companies/gallery')
                             ->maxFiles(5)
+                            ->autofocus()
                             ->multiple(),
                     ])->columns(1),
                 Section::make('Social Details')
@@ -181,10 +186,12 @@ class CompanyResource extends Resource
                         TextInput::make('phone')
                             ->label('Phone Number')
                             ->tel()
+                            ->autofocus()
                             ->maxLength(191),
                         TextInput::make('email')
                             ->label('Email Address')
                             ->email()
+                            ->autofocus()
                             ->maxLength(191),
                         TextInput::make('website')
                             ->label('Website')
