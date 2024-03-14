@@ -78,6 +78,8 @@ class ForumResource extends Resource
                     ->native(false)
                     ->relationship('company', 'name'),
                 FileUpload::make('image')
+                    ->image()
+                    ->optimize('webp')
                     ->label('Attach Image')
                     ->autofocus()
                     ->directory('forum/attachments')

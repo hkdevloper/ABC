@@ -99,11 +99,15 @@ class DealResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Thumbnail')
                             ->directory('deals/thumbnail')
                             ->autofocus()
                             ->required(),
                         FileUpload::make('gallery')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Gallery')
                             ->directory('deals/gallery')
                             ->maxFiles(4)

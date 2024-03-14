@@ -128,6 +128,8 @@ class JobResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Thumbnail')
                             ->disk('public')
                             ->directory('events/thumbnail')

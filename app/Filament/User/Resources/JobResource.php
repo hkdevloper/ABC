@@ -112,6 +112,8 @@ class JobResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Company Logo')
                             ->directory('job/thumbnail')
                             ->visibility('public')

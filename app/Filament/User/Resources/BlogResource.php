@@ -51,6 +51,8 @@ class BlogResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Thumbnail Image')
                             ->directory('blog/thumbnail')
                             ->visibility('public')

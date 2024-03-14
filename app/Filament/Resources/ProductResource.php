@@ -132,12 +132,16 @@ class ProductResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Thumbnail Image')
                             ->directory('product/thumbnail')
                             ->visibility('public')
                             ->autofocus()
                             ->required(),
                         FileUpload::make('gallery')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Product Photos')
                             ->directory('product/gallery')
                             ->multiple()

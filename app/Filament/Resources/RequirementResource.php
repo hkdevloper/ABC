@@ -55,6 +55,8 @@ class RequirementResource extends Resource
                     ->autofocus()
                             ->required(),
                 FileUpload::make('images')
+                    ->image()
+                    ->optimize('webp')
                     ->label('Images')
                     ->directory('requirements')
                     ->maxFiles(3)

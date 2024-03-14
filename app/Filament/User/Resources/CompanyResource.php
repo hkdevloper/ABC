@@ -113,15 +113,21 @@ class CompanyResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('logo')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Logo')
                             ->directory('companies/logo')
                             ->autofocus()
                             ->required(),
                         FileUpload::make('banner')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Banner')
                             ->hidden()
                             ->directory('companies/banner'),
                         FileUpload::make('gallery')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Gallery')
                             ->helperText('Add your company photos, Certificates etc')
                             ->directory('companies/gallery')

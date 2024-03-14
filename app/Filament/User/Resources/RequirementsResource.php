@@ -54,6 +54,8 @@ class RequirementsResource extends Resource
                     ->disabled()
                     ->required(),
                 FileUpload::make('images')
+                    ->image()
+                    ->optimize('webp')
                     ->label('Images')
                     ->directory('requirements')
                     ->maxFiles(3)

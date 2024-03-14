@@ -102,12 +102,16 @@ class EventResource extends Resource
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Thumbnail Image')
                             ->directory('events/thumbnail')
                             ->visibility('public')
                             ->autofocus()
                             ->required(),
                         FileUpload::make('gallery')
+                            ->image()
+                            ->optimize('webp')
                             ->label('Event gallery')
                             ->directory('events/gallery')
                             ->multiple()
