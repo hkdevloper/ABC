@@ -47,13 +47,11 @@ class CategoryResource extends Resource
                             ->required(),
                 ])->columns(),
                 FileUpload::make('image')
+                    ->image()
+                    ->optimize('webp')
                     ->label('category image')
                     ->directory('category')
                     ->default(''),
-//                SpatieMediaLibraryFileUpload::make('image')
-//                    ->label('Category Image')
-//                    ->directory('category')
-//                    ->autofocus()
                 TextInput::make('name')
                     ->label('Enter Category Name')
                     ->live(onBlur: true)
