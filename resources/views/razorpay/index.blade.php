@@ -48,30 +48,81 @@
                         Please enter the amount in INR.
                     </p>
                 </div>
-                <button id="rzp-button1" class="payment-btn">Pay</button>
+                <button id="rzp-button1" class="payment-btn">Pay Now</button>
                 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
                 <script>
-                    document.getElementById('rzp-button1').onclick = function(e){
-                        const amount = document.getElementById('amount').value * 100;
-                        const options = {
-                            "key": "{{env('razorpay_api_key')}}",
-                            "amount": amount,
-                            "currency": "INR",
-                            "name": "Acme Corp",
-                            "description": "Test Transaction",
-                            "callback_url": "{{ route('razorpay.make.payment') }}",
-                            "prefill": {
-                                "name": '{{auth()->user()->name }}',
-                                "email": '{{auth()->user()->email }}',
-                                "contact": '{{auth()->user()->company->phone }}'
-                            },
-                            "theme": {
-                                "color": "#c177ff"
-                            }
-                        };
-                        let rzp1 = new Razorpay(options);
-                        rzp1.open();
+                    document.getElementById('rzp-button1').onclick = async function(e){
                         e.preventDefault();
+                        const amount = document.getElementById('amount').value * 100;
+                        if(amount < 100){
+                            alert("Amount should be greater than 1 INR");
+                            return;
+                        }
+                        let headersList = {
+                            "Content-Type": "application/json"
+                        }
+
+                        let bodyContent = JSON.stringify({
+                            "amount" : amount,
+                            "currency": "INR"
+                        });
+
+                        let response = await fetch("{{route('api.razorpay.order.create')}}", {
+                            method: "POST",
+                            body: bodyContent,
+                            headers: headersList
+                        });
+
+                        let data = await response.json();
+                        console.log(data);
+                        if(data){
+                            let order = data;
+                            const options = {
+                                "key": "rzp_test_S6OswYOR9CkFfd",
+                                "amount": order.amount,
+                                "currency": "INR",
+                                "name": "{{ auth()->user()->company->name }}",
+                                "order_id": order.id,
+                                "handler": async function (response){
+                                    let bodyContent = JSON.stringify({
+                                        "razorpay_payment_id" : response.razorpay_payment_id,
+                                        "razorpay_order_id": response.razorpay_order_id,
+                                        "razorpay_signature": response.razorpay_signature,
+                                        'user_id': '{{auth()->user()->id}}',
+                                    });
+
+                                    await fetch("{{route('api.razorpay.payment.verify')}}", {
+                                        method: "POST",
+                                        body: bodyContent,
+                                        headers: headersList
+                                    }).then((response) => {
+                                        return response.json();
+                                    }).then((data) => {
+                                        console.log(data);
+                                        if(data.status === "success"){
+                                            window.location.href = "/user";
+                                        }else{
+                                            alert("Payment Failed");
+                                        }
+                                    }).catch((error) => {
+                                        console.error('Error:', error);
+                                    });
+                                },
+                                "prefill": {
+                                    "name": '{{auth()->user()->name }}',
+                                    "email": '{{auth()->user()->email }}',
+                                    "contact": '{{auth()->user()->company->phone }}'
+                                },
+                                "theme": {
+                                    "color": "#c177ff"
+                                }
+                            };
+                            let rzp1 = new Razorpay(options);
+                            rzp1.open();
+                            e.preventDefault();
+                        }else{
+                            alert("Error in creating order");
+                        }
                     }
                 </script>
             </form>

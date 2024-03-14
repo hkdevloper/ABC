@@ -27,6 +27,7 @@ class UserRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->defaultSort('id', 'desc')
             ->recordTitleAttribute('user_id')
             ->columns([
                 Tables\Columns\TextColumn::make('user_id'),

@@ -13,6 +13,7 @@ use App\Models\RateReview;
 use App\Models\Seo;
 use Exception;
 use Illuminate\Http\Request;
+use Razorpay\Api\Api;
 
 class APIController extends Controller
 {
@@ -254,5 +255,4 @@ class APIController extends Controller
         ]);
         return $request->search;
     }
-
 }

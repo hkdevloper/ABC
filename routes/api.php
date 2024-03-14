@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\APIController;
+use App\Http\Controllers\RazorpayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,11 @@ Route::prefix('search')->group(function(){
     Route::get('/jobs', [APIController::class, 'searchJobs'])->name('api.search.jobs');
     Route::get('/blogs', [APIController::class, 'searchBlogs'])->name('api.search.blogs');
     Route::get('/forums', [APIController::class, 'searchForums'])->name('api.search.forums');
+});
+
+Route::prefix('razorpay')->group(function(){
+    Route::post('/order', [RazorpayController::class, 'createPaymentOrder'])->name('api.razorpay.order.create');
+    Route::post('/handle', [RazorpayController::class,'handlePayment'])->name('api.razorpay.payment.verify');
 });
 
 // Test Routes

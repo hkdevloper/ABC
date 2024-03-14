@@ -24,6 +24,7 @@ class ContactUsResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('id', 'desc')
             ->emptyStateHeading('No Contact Us yet')
             ->emptyStateDescription('Enjoy your day!')
             ->columns([

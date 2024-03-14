@@ -34,6 +34,7 @@ class ForumReplyRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->defaultSort('id', 'desc')
             ->recordTitleAttribute('ForumReply')
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')->label('Answered By User'),

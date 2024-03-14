@@ -21,6 +21,7 @@ class CompanyRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->defaultSort('id', 'desc')
             ->columns([
                 Tables\Columns\ImageColumn::make('logo')
                     ->label('Logo')

@@ -204,6 +204,7 @@ class JobResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('id', 'desc')
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail')
                     ->label('Thumbnail')

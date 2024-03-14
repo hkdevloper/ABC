@@ -130,6 +130,7 @@ class CategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('id', 'desc')
             ->modifyQueryUsing(function (Builder $query) {
                 $query->where('is_deleted', 0);
             })

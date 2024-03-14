@@ -32,6 +32,7 @@ class JobsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->defaultSort('id', 'desc')
             ->recordTitleAttribute('user_id')
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail')
