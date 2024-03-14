@@ -21,4 +21,4 @@ yarn-error.log
 *-lock.json
 *.lock
 *.log
-public/livewire/livewire1.js
+public/livewire/livewire.min.js
