@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\Dashboard;
+use App\Filament\Resources\RequirementResource;
 use App\Filament\User\Resources\EventResource;
 use App\Filament\User\Resources\ForumResource;
 use App\Filament\User\Resources\JobResource;
@@ -23,7 +24,6 @@ use Filament\Http\Controllers\Auth\EmailVerificationController;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Listeners\Auth\SendEmailVerificationNotification;
 use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\NavigationItem;
 use Filament\Pages\Auth\EmailVerification\EmailVerificationPrompt;
@@ -156,6 +156,19 @@ class UserPanelProvider extends PanelProvider
                         ->icon('heroicon-o-chat-bubble-left-ellipsis')
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.forum'))
                         ->url(fn (): string => ForumResource::getUrl())
+                        ->visible(function (){
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
+                            if($company){
+                                if($company->is_approved && !$company->is_rejected){
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }),
+                    NavigationItem::make('Global Requirements')
+                        ->icon('heroicon-o-presentation-chart-bar')
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.requirement'))
+                        ->url(fn (): string => RequirementResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){

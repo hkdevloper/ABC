@@ -13,10 +13,7 @@ class RequirementPolicy
      */
     public function viewAny(User $user): bool
     {
-        if($user->type == 'Admin'){
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**
@@ -24,10 +21,7 @@ class RequirementPolicy
      */
     public function view(User $user, Requirement $requirement): bool
     {
-        if($user->type == 'Admin'){
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**

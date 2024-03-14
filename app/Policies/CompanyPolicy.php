@@ -33,6 +33,10 @@ class CompanyPolicy
      */
     public function create(User $user): bool
     {
+        // if user has already created a company, then he can't create another company
+        if ($user->company && $user->type != 'Admin') {
+            return false;
+        }
         return true;
     }
 

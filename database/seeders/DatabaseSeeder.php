@@ -22,8 +22,9 @@ class DatabaseSeeder extends Seeder
 //            BlogsSeeder::class,
 //            JobsTableSeeder::class,
 //            ForumSeeder::class,
-            DealSeeder::class,
-            RateReviewSeeder::class,
+//            DealSeeder::class,
+//            RateReviewSeeder::class,
+        RequirementTableSeeder::class
         ]);
     }
 }

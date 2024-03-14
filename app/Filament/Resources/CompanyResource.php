@@ -165,6 +165,7 @@ class CompanyResource extends Resource
                             ->required(),
                         FileUpload::make('banner')
                             ->label('Banner')
+                            ->hidden()
                             ->directory('companies/banner'),
                         FileUpload::make('gallery')
                             ->label('Gallery')
