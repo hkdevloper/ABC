@@ -65,7 +65,6 @@ class ForumResource extends Resource
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
-                    ->autofocus()
                     ->required()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query){

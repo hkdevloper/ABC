@@ -53,7 +53,6 @@ class CompanyResource extends Resource
                     ->enableBranchNode()
                     ->withCount()
                     ->required()
-                    ->autofocus()
                     ->enableBranchNode()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query) {
