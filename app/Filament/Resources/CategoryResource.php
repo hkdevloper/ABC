@@ -83,7 +83,6 @@ class CategoryResource extends Resource
                     ->withCount()
                     ->enableBranchNode()
                     ->live(true)
-                    ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('parent', 'name', 'parent_id', function ($query, Forms\Get $get){
                         // Get only active categories and selected Type category

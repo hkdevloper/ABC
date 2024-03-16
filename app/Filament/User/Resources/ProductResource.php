@@ -43,7 +43,6 @@ class ProductResource extends Resource
                             ->enableBranchNode()
                             ->withCount()
                             ->required()
-                            ->autofocus()
                             ->emptyLabel('Oops! No Category Found')
                             ->relationship('category', 'name', 'parent_id', function ($query) {
                                 return $query->where('type', 'product');

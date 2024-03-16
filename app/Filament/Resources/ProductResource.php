@@ -57,7 +57,6 @@ class ProductResource extends Resource
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->required()
-                    ->autofocus()
                     ->enableBranchNode()
                     ->label('Select Category')
                     ->withCount()

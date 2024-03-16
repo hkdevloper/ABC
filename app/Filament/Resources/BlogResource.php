@@ -44,7 +44,6 @@ class BlogResource extends Resource
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
-                    ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'blog');

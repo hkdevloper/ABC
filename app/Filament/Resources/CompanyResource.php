@@ -99,7 +99,6 @@ class CompanyResource extends Resource
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
-                    ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'company');
