@@ -53,7 +53,6 @@ class ProductResource extends Resource
                 Select::make('company_id')
                     ->label('Select Company')
                     ->required()
-                    ->autofocus()
                     ->native(false)
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
@@ -111,7 +110,6 @@ class ProductResource extends Resource
                         'used' => 'Used',
                         'refurbished' => 'Refurbished',
                     ])
-                    ->autofocus()
                     ->required(),
                 TextInput::make('brand')
                     ->required()

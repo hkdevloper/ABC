@@ -74,7 +74,6 @@ class ForumResource extends Resource
                 Select::make('company_id')
                     ->label('Select Company')
                     ->required()
-                    ->autofocus()
                     ->native(false)
                     ->relationship('company', 'name'),
                 FileUpload::make('image')

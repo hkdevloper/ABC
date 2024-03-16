@@ -26,21 +26,21 @@ class PackageResource extends Resource
                 Forms\Components\Section::make()->schema([
                     Forms\Components\Toggle::make('is_featured')
                         ->autofocus()
-                            ->required(),
+                        ->required(),
                     Forms\Components\Toggle::make('is_popular')
                         ->autofocus()
-                            ->required(),
+                        ->required(),
                     Forms\Components\Toggle::make('is_trending')
                         ->autofocus()
-                            ->required(),
+                        ->required(),
                     Forms\Components\Toggle::make('is_new')
                         ->default(true)
                         ->autofocus()
-                            ->required(),
+                        ->required(),
                     Forms\Components\Toggle::make('is_active')
                         ->default(true)
                         ->autofocus()
-                            ->required(),
+                        ->required(),
                 ])->columns(5),
                 Forms\Components\TextInput::make('name')
                     ->required()
@@ -65,8 +65,7 @@ class PackageResource extends Resource
                         'month' => 'Month',
                         'year' => 'Year',
                     ])
-                    ->autofocus()
-                            ->required(),
+                    ->required(),
                 Forms\Components\RichEditor::make('description')
                     ->toolbarButtons([
                         'blockquote',

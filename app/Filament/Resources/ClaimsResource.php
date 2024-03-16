@@ -28,13 +28,11 @@ class ClaimsResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->disabled()
                     ->relationship('user', 'name')
-                    ->autofocus()
-                            ->required(),
+                    ->required(),
                 Forms\Components\Select::make('company_id') // This is the company that the user is claiming
                     ->disabled()
                     ->relationship('company', 'name')
-                    ->autofocus()
-                            ->required(),
+                    ->required(),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
@@ -56,14 +54,13 @@ class ClaimsResource extends Resource
                 Forms\Components\Select::make('status')
                     ->default('Pending')
                     ->native(false)
-                    ->disabled(fn (Claims $record): bool => $record->status === 'Approved' || $record->status === 'Rejected')
+                    ->disabled(fn(Claims $record): bool => $record->status === 'Approved' || $record->status === 'Rejected')
                     ->options([
                         'Pending' => 'Pending',
                         'Approved' => 'Approved',
                         'Rejected' => 'Rejected',
                     ])
-                    ->autofocus()
-                            ->required(),
+                    ->required(),
             ]);
     }
 
@@ -85,7 +82,7 @@ class ClaimsResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'Pending' => 'warning',
                         'Rejected' => 'danger',
                         'Approved' => 'success',

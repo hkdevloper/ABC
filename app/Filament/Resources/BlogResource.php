@@ -38,7 +38,6 @@ class BlogResource extends Resource
                 Select::make('company_id')
                     ->label('Select Company')
                     ->native(false)
-                    ->autofocus()
                     ->required()
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')

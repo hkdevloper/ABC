@@ -61,14 +61,12 @@ class EventResource extends Resource
                     ->label('Select Company')
                     ->native(false)
                     ->required()
-                    ->autofocus()
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
                     ->required()
-                    ->autofocus()
                     ->emptyLabel('Oops! No Category Found')
                     ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'event');

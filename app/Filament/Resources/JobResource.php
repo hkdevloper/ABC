@@ -61,7 +61,6 @@ class JobResource extends Resource
                 Select::make('company_id')
                     ->label('Select Company')
                     ->required()
-                    ->autofocus()
                     ->native(false)
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
@@ -96,7 +95,6 @@ class JobResource extends Resource
                     ->label('Enter Employment Type')
                     ->native(false)
                     ->required()
-                    ->autofocus()
                     ->options([
                         'full_time' => 'Full Time',
                         'part_time' => 'Part Time',

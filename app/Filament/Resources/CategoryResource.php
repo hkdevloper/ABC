@@ -68,7 +68,6 @@ class CategoryResource extends Resource
                     ->label('Select Type')
                     ->native(false)
                     ->required()
-                    ->autofocus()
                     ->live(true)
                     ->options([
                         "company" => "Company",

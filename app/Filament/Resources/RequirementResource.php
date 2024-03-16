@@ -26,7 +26,6 @@ class RequirementResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('subject')
                     ->label('Enter Subject')
-
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('customer_name')
@@ -52,8 +51,7 @@ class RequirementResource extends Resource
                     ->label('Select Status')
                     ->options(Requirement::$statusList)
                     ->native(false)
-                    ->autofocus()
-                            ->required(),
+                    ->required(),
                 FileUpload::make('images')
                     ->image()
                     ->optimize('webp')

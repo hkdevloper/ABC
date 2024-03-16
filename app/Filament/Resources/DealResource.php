@@ -49,7 +49,6 @@ class DealResource extends Resource
                     ->label('Select Company')
                     ->native(false)
                     ->required()
-                    ->autofocus()
                     ->relationship('company', 'name'),
                 SelectTree::make('category_id')
                     ->label('Select Category')

@@ -46,8 +46,7 @@ class DirectMessageResource extends Resource
                     ->default('Pending')
                     ->native(false)
                     ->options(['Pending' => 'Pending', 'Completed' => 'Completed', 'Cancelled' => 'Cancelled', 'Spam' => 'Spam', 'onHold' => 'On Hold'])
-                    ->autofocus()
-                            ->required(),
+                    ->required(),
                 Forms\Components\Textarea::make('message')
                     ->required()
                     ->disabled()
@@ -83,7 +82,7 @@ class DirectMessageResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'Pending' => 'warning',
                         'Completed' => 'success',
                         'Cancelled', 'Spam' => 'danger',
@@ -117,7 +116,7 @@ class DirectMessageResource extends Resource
                 // show only the records of the logged-in user's company
                 $query->where('company_id', auth()->user()->company->id)->orderBy('created_at', 'desc');
             })
-            ->emptyStateActions([ ]);
+            ->emptyStateActions([]);
     }
 
     public static function getRelations(): array
