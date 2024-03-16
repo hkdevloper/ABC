@@ -9,6 +9,7 @@ use App\Models\Forum;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Components\Actions;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Panel;
@@ -76,6 +77,14 @@ class ForumResource extends Resource
                     ->fileAttachmentsVisibility('public')
                     ->autofocus()
                     ->required(),
+                FileUpload::make('image')
+                    ->image()
+                    ->maxFiles(1)
+                    ->optimize('webp')
+                    ->label('Attach Image')
+                    ->autofocus()
+                    ->directory('forum/attachments')
+                    ->nullable(),
             ])->columns(1);
     }
 

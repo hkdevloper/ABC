@@ -79,6 +79,7 @@ class ForumResource extends Resource
                     ->relationship('company', 'name'),
                 FileUpload::make('image')
                     ->image()
+                    ->maxFiles(1)
                     ->optimize('webp')
                     ->label('Attach Image')
                     ->autofocus()
