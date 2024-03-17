@@ -58,6 +58,7 @@ class ProductResource extends Resource
                         TextInput::make('slug')
                             ->label('Slug')
                             ->placeholder('Enter slug')
+                            ->default('')
                             ->required()
                             ->hidden()
                             ->unique(ignoreRecord: true)
