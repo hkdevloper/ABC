@@ -6,10 +6,13 @@ use App\Filament\user\Resources\DealResource;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
+use Str;
 
 class CreateDeal extends CreateRecord
 {
     protected static string $resource = DealResource::class;
+
+    protected static bool $canCreateAnother = false;
     protected function onValidationError(\Illuminate\Validation\ValidationException $exception): void
     {
         Notification::make()
@@ -22,6 +25,7 @@ class CreateDeal extends CreateRecord
     {
         return array_merge($data, [
             'company_id' => auth()->user()->company->id,
+            'slug' => Str::slug($data['title']),
         ]);
     }
 

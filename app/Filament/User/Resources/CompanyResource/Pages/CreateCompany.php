@@ -7,6 +7,7 @@ use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Validation\ValidationException;
+use Str;
 
 class CreateCompany extends CreateRecord
 {
@@ -28,6 +29,7 @@ class CreateCompany extends CreateRecord
         $data['is_active'] = false;
         $data['is_featured'] = false;
         $data['is_claimed'] = false;
+        $data['slug'] = Str::slug($data['name']);
         return $data;
     }
 }
