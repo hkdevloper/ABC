@@ -5,16 +5,14 @@
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
             transition: box-shadow 0.2s ease-in-out;
-            display: flex;
+            display: none;
             align-items: center;
             color: white;
             justify-content: center;
             @if(auth()->user()->company)
-                @if(auth()->user()->company->is_approved)
-                    display: none;
+                @if(!auth()->user()->company->is_approved)
+                    display: flex;
                 @endif
-            @else
-                display: none;
             @endif
             gap: 0.5rem;"
      onmouseover="this.style.boxShadow = '0 6px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.12)';"
@@ -69,6 +67,43 @@
                 </small>
                 <small style="font-size: 0.75rem; display: block;">
                     It may take 2–7 days to approve your company profile.
+                </small>
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Company Active -->
+<div style="background: linear-gradient(to bottom left, #424cc0 40%, #424cc0 60%);
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: box-shadow 0.2s ease-in-out;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            @if(auth()->user()->company)
+                @if(!auth()->user()->company->is_active)
+                    display: flex;
+                @endif
+            @endif
+            gap: 0.5rem;"
+     onmouseover="this.style.boxShadow = '0 6px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.12)';"
+     onmouseout="this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)';">
+    @svg('heroicon-o-information-circle','w-10 h-10 text-green-500 dark:text-green-300')
+
+    <div style="width: 100%; color: white">
+        <div style="margin-top: 0.5rem;">
+            <span style="font-size: 1.25rem; font-weight: 600; color: white">Company Approved but pending Activation</span>
+            <br>
+            <span style="font-size: 1rem;">
+                Your company profile is approved but pending activation.
+                Please contact the administrator for more information.
+                <small style="font-size: 0.75rem; display: block;">
+                    It may take 2–7 days to activate your company profile.
                 </small>
             </span>
         </div>
