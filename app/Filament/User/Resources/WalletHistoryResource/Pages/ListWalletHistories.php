@@ -19,6 +19,7 @@ class ListWalletHistories extends ListRecords
                 ->action(function () {
                     return redirect()->route('razorpay.create.payment');
                 })
+                ->hidden()
                 ->icon('heroicon-o-banknotes')
                 ->size('sm'),
         ];

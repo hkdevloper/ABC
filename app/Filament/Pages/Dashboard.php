@@ -36,6 +36,7 @@ class Dashboard extends \Filament\Pages\Dashboard
                 ->action(function () {
                     return redirect()->route('razorpay.create.payment');
                 })
+                ->hidden()
                 ->icon('heroicon-o-banknotes')
                 ->size('sm'),
         ];
