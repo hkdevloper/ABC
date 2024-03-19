@@ -41,21 +41,23 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
-                Toggle::make('is_active')
-                    ->default(true)
-                    ->label('Active')
-                    ->required(),
-                Toggle::make('is_featured')
-                    ->label('Featured')
-                    ->required(),
-                Toggle::make('is_claimed')
-                    ->label('Claimed')
-                    ->live()
-                    ->required(),
-                Toggle::make('is_approved')
-                    ->default(true)
-                    ->label('Approved')
-                    ->required(),
+                Section::make([
+                    Toggle::make('is_active')
+                        ->default(true)
+                        ->label('Active')
+                        ->required(),
+                    Toggle::make('is_featured')
+                        ->label('Featured')
+                        ->required(),
+                    Toggle::make('is_claimed')
+                        ->label('Claimed')
+                        ->live()
+                        ->required(),
+                    Toggle::make('is_approved')
+                        ->default(true)
+                        ->label('Approved')
+                        ->required(),
+                ])->columns(4),
                 Select::make('company_id')
                     ->label('Select Company')
                     ->native(false)

@@ -34,6 +34,17 @@ class BlogResource extends Resource
     {
         return $form
             ->schema([
+                Section::make([
+                    Toggle::make('is_active')
+                        ->label('Is Active')
+                        ->default(true)
+                        ->autofocus()
+                        ->required(),
+                    Toggle::make('is_featured')
+                        ->label('Is Featured')
+                        ->autofocus()
+                        ->required(),
+                ])->columns(2),
                 Select::make('company_id')
                     ->label('Select Company')
                     ->native(false)
@@ -47,15 +58,6 @@ class BlogResource extends Resource
                     ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'blog');
                     }),
-                Toggle::make('is_active')
-                    ->label('Is Active')
-                    ->default(true)
-                    ->autofocus()
-                    ->required(),
-                Toggle::make('is_featured')
-                    ->label('Is Featured')
-                    ->autofocus()
-                    ->required(),
                 Section::make('Images')
                     ->schema([
                         FileUpload::make('thumbnail')
