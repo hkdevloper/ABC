@@ -31,6 +31,7 @@ class Job extends Model
         'experience',
         'thumbnail',
         'address_id',
+        'hr_email',
     ];
     protected $casts = [
         'valid_until' => 'datetime',

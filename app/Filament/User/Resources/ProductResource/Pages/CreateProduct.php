@@ -7,6 +7,7 @@ use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Validation\ValidationException;
+use Str;
 
 class CreateProduct extends CreateRecord
 {
@@ -22,8 +23,8 @@ class CreateProduct extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        return array_merge($data, [
-            'company_id' => auth()->user()->company->id,
-        ]);
+        $data['slug'] = Str::slug($data['name']);
+        $data['company_id'] = auth()->user()->company->id;
+        return $data;
     }
 }

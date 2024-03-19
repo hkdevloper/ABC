@@ -69,7 +69,7 @@ class JobResource extends Resource
                     ->required()
                     ->autofocus()
                     ->maxLength(70),
-                TextInput::make('HR Email')
+                TextInput::make('hr_email')
                     ->label('HR Email')
                     ->email()
                     ->autofocus()

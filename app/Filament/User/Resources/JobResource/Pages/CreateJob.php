@@ -7,6 +7,7 @@ use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Validation\ValidationException;
+use Str;
 
 class CreateJob extends CreateRecord
 {
@@ -23,6 +24,7 @@ class CreateJob extends CreateRecord
     {
         return array_merge($data, [
             'company_id' => auth()->user()->company->id,
+            'slug' => Str::slug($data['title']),
         ]);
     }
 }
