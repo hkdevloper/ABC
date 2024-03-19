@@ -112,7 +112,6 @@ class BlogResource extends Resource
                             ->maxLength(70),
                         TagsInput::make('meta_keywords')
                             ->splitKeys(['Tab', ','])
-                            ->required()
                             ->autofocus()
                             ->label('Enter SEO Meta Keywords'),
                         TextInput::make('meta_description')
@@ -196,6 +195,8 @@ class BlogResource extends Resource
     {
         return [
             'index' => Pages\ListBlogs::route('/'),
+            'create' => Pages\CreateBlog::route('/create'),
+            'edit' => Pages\EditBlog::route('/{record}/edit'),
         ];
     }
 }

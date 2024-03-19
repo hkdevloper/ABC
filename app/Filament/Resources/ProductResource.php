@@ -82,6 +82,7 @@ class ProductResource extends Resource
                     ->maxLength(70),
                 Forms\Components\RichEditor::make('description')
                     ->autofocus()
+                    ->required()
                     ->toolbarButtons([
                         'blockquote',
                         'bold',
@@ -108,22 +109,17 @@ class ProductResource extends Resource
                         'new' => 'New',
                         'used' => 'Used',
                         'refurbished' => 'Refurbished',
-                    ])
-                    ->required(),
+                    ]),
                 TextInput::make('brand')
-                    ->required()
                     ->label('Country of Origin')
                     ->maxLength(191),
                 TextInput::make('color')
-                    ->required()
                     ->label('Color')
                     ->maxLength(191),
                 TextInput::make('size')
-                    ->required()
                     ->label('Size')
                     ->maxLength(191),
                 TextInput::make('material')
-                    ->required()
                     ->label('Material')
                     ->maxLength(191),
                 Section::make('Images')
