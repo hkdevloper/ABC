@@ -126,6 +126,7 @@ class EventResource extends Resource
                             ->autofocus()
                             ->required(),
                         FileUpload::make('gallery')
+                            ->label('Product Photos')
                             ->image()
                             ->optimize('webp')
                             ->multiple()
@@ -247,7 +248,10 @@ class EventResource extends Resource
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->orderBy('created_at', 'desc');
+            });
     }
 
     public static function getRelations(): array

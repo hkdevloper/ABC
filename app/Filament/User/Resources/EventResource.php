@@ -109,6 +109,7 @@ class EventResource extends Resource
                             ->autofocus()
                             ->required(),
                         FileUpload::make('gallery')
+                            ->label('Product Photos')
                             ->image()
                             ->optimize('webp')
                             ->label('Event gallery')

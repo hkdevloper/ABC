@@ -32,10 +32,6 @@ class StateResource extends Resource
                     ->label('Enter State Name')
                     ->required()
                     ->maxLength(191),
-                Toggle::make('featured')
-                    ->label('Featured')
-                    ->autofocus()
-                    ->required(),
                 Select::make('country_id')
                     ->label('Select Country')
                     ->preload()
@@ -54,8 +50,6 @@ class StateResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('featured')
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('country.name')
                     ->numeric()
                     ->sortable(),
@@ -74,18 +68,18 @@ class StateResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
                     Tables\Actions\ViewAction::make(),
                 ])
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                //
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->orderBy('created_at', 'desc');
+            });
     }
 
     public static function getRelations(): array
@@ -99,8 +93,6 @@ class StateResource extends Resource
     {
         return [
             'index' => Pages\ListStates::route('/'),
-//            'create' => Pages\CreateState::route('/create'),
-//            'edit' => Pages\EditState::route('/{record}/edit'),
         ];
     }
 }

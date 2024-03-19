@@ -103,11 +103,12 @@ class ClaimsResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+
             ])
-            ->emptyStateActions([]);
+            ->emptyStateActions([])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->orderBy('created_at', 'desc');
+            });
     }
 
     public static function getRelations(): array

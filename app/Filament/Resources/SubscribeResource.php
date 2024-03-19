@@ -60,7 +60,10 @@ class SubscribeResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->orderBy('created_at', 'desc');
+            });
     }
 
     public static function getRelations(): array

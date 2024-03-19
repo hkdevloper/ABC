@@ -175,31 +175,34 @@ class CategoryResource extends Resource
                 ])
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
-                        ->requiresConfirmation()
-                        ->action(function (Collection $records) {
-                            $data = $records->all();
-                            foreach ($data as $item) {
-                                $category = Category::find($item->id);
-                                // Delete Related Data
-                                $category->seo()->delete();
-                                $category->children()->delete();
-                                $category->companies()->delete();
-                                $category->products()->delete();
-                                $category->jobs()->delete();
-                                $category->deals()->delete();
-                                $category->blogs()->delete();
-                                $category->events()->delete();
-                                $category->forums()->delete();
-                                $category->delete();
-                            }
-                        }),
-                ]),
+//                Tables\Actions\BulkActionGroup::make([
+//                    Tables\Actions\DeleteBulkAction::make()
+//                        ->requiresConfirmation()
+//                        ->action(function (Collection $records) {
+//                            $data = $records->all();
+//                            foreach ($data as $item) {
+//                                $category = Category::find($item->id);
+//                                // Delete Related Data
+//                                $category->seo()->delete();
+//                                $category->children()->delete();
+//                                $category->companies()->delete();
+//                                $category->products()->delete();
+//                                $category->jobs()->delete();
+//                                $category->deals()->delete();
+//                                $category->blogs()->delete();
+//                                $category->events()->delete();
+//                                $category->forums()->delete();
+//                                $category->delete();
+//                            }
+//                        }),
+//                ]),
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->orderBy('created_at', 'desc');
+            });
     }
 
     public static function getRelations(): array

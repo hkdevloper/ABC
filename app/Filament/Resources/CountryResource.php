@@ -44,10 +44,6 @@ class CountryResource extends Resource
                     ->label('Enter Currency')
                     ->required()
                     ->maxLength(191),
-                Toggle::make('featured')
-                    ->label('Featured')
-                    ->autofocus()
-                            ->required(),
             ])->columns(2);
     }
 
@@ -65,8 +61,6 @@ class CountryResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('currency')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('featured')
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -82,24 +76,24 @@ class CountryResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
                     Tables\Actions\ViewAction::make(),
                 ])
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                //
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->orderBy('created_at', 'desc');
+            });
     }
 
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\StatesRelationManager::class
         ];
     }
 
@@ -107,8 +101,8 @@ class CountryResource extends Resource
     {
         return [
             'index' => Pages\ListCountries::route('/'),
-//            'create' => Pages\CreateCountry::route('/create'),
-//            'edit' => Pages\EditCountry::route('/{record}/edit'),
+            'create' => Pages\CreateCountry::route('/create'),
+            'edit' => Pages\EditCountry::route('/{record}/edit'),
         ];
     }
 }

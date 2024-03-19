@@ -108,9 +108,7 @@ class DirectMessageResource extends Resource
                 ])
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                //
             ])
             ->modifyQueryUsing(function (Builder $query) {
                 // show only the records of the logged-in user's company

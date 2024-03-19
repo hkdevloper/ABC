@@ -38,6 +38,7 @@ class CompanyResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
     protected static ?string $navigationGroup = 'Management';
     protected static ?int $navigationSort = 1;
+    protected static bool $isLazy = false;
 
     public static function form(Form $form): Form
     {
@@ -336,13 +337,14 @@ class CompanyResource extends Resource
                 ])
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                //
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->orderBy('created_at', 'desc');
+            });
     }
 
     public static function getRelations(): array

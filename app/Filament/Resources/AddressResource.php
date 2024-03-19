@@ -31,10 +31,6 @@ class AddressResource extends Resource
     {
         return $form
             ->schema([
-                Toggle::make('is_featured')
-                    ->label('Featured')
-                    ->autofocus()
-                    ->required(),
                 TextInput::make('address_line_1')
                     ->label('Address Line 1')
                     ->required()
@@ -70,7 +66,6 @@ class AddressResource extends Resource
         return $table
             ->defaultSort('id', 'desc')
             ->columns([
-                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
                 Tables\Columns\TextColumn::make('address_line_1')
                     ->label('Address')
                     ->wrap()
@@ -97,28 +92,23 @@ class AddressResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                // filters for status
-                Tables\Filters\Filter::make('is_featured')
-                    ->label('Featured')
-                    ->modifyQueryUsing(function (Builder $query) {
-                        $query->where('is_featured', 1);
-                    }),
+                //
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
                     Tables\Actions\ViewAction::make(),
                 ])
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                //
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
-            ]);
+                //
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->orderBy('created_at', 'desc');
+            });
     }
 
     public static function getRelations(): array
@@ -132,8 +122,6 @@ class AddressResource extends Resource
     {
         return [
             'index' => Pages\ListAddresses::route('/'),
-//            'create' => Pages\CreateAddress::route('/create'),
-//            'edit' => Pages\EditAddress::route('/{record}/edit'),
         ];
     }
 }

@@ -62,9 +62,7 @@ class BookmarkCompaniesResource extends Resource
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                //
             ])
             ->emptyStateActions([])
             ->modifyQueryUsing(function (Builder $query) {

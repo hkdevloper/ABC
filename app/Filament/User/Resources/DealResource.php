@@ -112,7 +112,7 @@ class DealResource extends Resource
                             ->maxFiles(4)
                             ->autofocus()
                             ->multiple(),
-                    ])->columns(1),
+                    ])->columns(2),
                 Forms\Components\RichEditor::make('terms_and_conditions')
                     ->toolbarButtons([
                         'blockquote',
