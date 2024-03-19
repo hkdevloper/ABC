@@ -17,6 +17,7 @@
         "filament/filament": "^v3.2.42",
         "filament/spatie-laravel-media-library-plugin": "3.1",
         "guzzlehttp/guzzle": "^7.2",
+        "ibrahimbougaoua/filament-rating-star": "^1.0",
         "joshembling/image-optimizer": "^1.3",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
