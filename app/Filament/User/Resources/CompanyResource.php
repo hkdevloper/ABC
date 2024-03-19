@@ -16,6 +16,7 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -211,9 +212,10 @@ class CompanyResource extends Resource
                         TagsInput::make('meta_keywords')
                             ->splitKeys(['Tab', ','])
                             ->label('Enter SEO Meta Keywords'),
-                        TextInput::make('meta_description')
+                        Textarea::make('meta_description')
                             ->label('Enter SEO Meta Description')
-                            ->maxLength(191),
+                            ->rows(5)
+                            ->maxLength(160),
                     ])->columns(1),
             ])->columns(1);
     }
