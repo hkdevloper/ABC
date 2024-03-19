@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class DirectMessageResource extends Resource
 {
     protected static ?string $model = DirectMessage::class;
-
+    protected static ?string $navigationGroup = 'Support & Communication';
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
 
     public static function form(Form $form): Form

@@ -20,6 +20,7 @@ class RateReviewResource extends Resource
     protected static ?string $model = RateReview::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-star';
+    protected static ?string $navigationGroup = 'Customer Interaction';
 
     public static function form(Form $form): Form
     {

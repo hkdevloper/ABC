@@ -39,7 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentProgressbarPlugin::make()->color('transparent'),
-                QuickCreatePlugin::make(),
+//                QuickCreatePlugin::make(),
                 OverlookPlugin::make()
                     ->columns([
                         'default' => 1,
@@ -59,8 +59,11 @@ class AdminPanelProvider extends PanelProvider
                 // Pages\Dashboard::class,
             ])
             ->navigationGroups([
-                'Management',
-                'Locations',
+                'Modules',
+                'User Management',
+                'Location Management',
+                'Support & Communication',
+                'Customer Interaction',
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->middleware([

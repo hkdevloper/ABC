@@ -36,7 +36,7 @@ class CompanyResource extends Resource
     protected static ?string $model = Company::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
-    protected static ?string $navigationGroup = 'Management';
+    protected static ?string $navigationGroup = 'Modules';
     protected static ?int $navigationSort = 1;
     protected static bool $isLazy = false;
 

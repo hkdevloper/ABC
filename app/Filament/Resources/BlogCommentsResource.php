@@ -18,6 +18,7 @@ class BlogCommentsResource extends Resource
     protected static ?string $model = BlogComments::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-oval-left';
+    protected static ?string $navigationGroup = 'Customer Interaction';
 
     public static function form(Form $form): Form
     {

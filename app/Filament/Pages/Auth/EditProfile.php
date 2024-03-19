@@ -24,6 +24,7 @@ class EditProfile extends BaseEditProfile
                 Select::make('currency')
                     ->label('Select Preferred Currency')
                     ->default('INR')
+                    ->hidden()
                     ->native(false)
                     ->preload(false)
                     ->options(function(){

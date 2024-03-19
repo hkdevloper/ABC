@@ -17,6 +17,7 @@ class WalletHistoryResource extends Resource
     protected static ?string $model = WalletHistory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+    protected static ?string $navigationGroup = 'User Management';
 
     public static function form(Form $form): Form
     {

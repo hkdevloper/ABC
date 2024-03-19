@@ -20,6 +20,7 @@ class SubscribeResource extends Resource
     protected static ?string $label = 'Subscribers';
 
     protected static ?string $navigationIcon = 'heroicon-o-hashtag';
+    protected static ?string $navigationGroup = 'Customer Interaction';
 
     public static function form(Form $form): Form
     {
