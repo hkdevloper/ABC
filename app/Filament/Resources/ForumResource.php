@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ForumResource extends Resource
 {
     protected static ?string $model = Forum::class;
-    protected static ?string $navigationGroup = 'Modules';
     protected static ?int $navigationSort = 7;
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
 
