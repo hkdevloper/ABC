@@ -88,7 +88,7 @@ class ProductResource extends Resource
                             ->placeholder('Enter price')
                             ->numeric()
                             ->default('0.00')
-                            ->prefix('₹'),
+                            ->prefix('$'),
                         Select::make('condition')
                             ->label('Select Condition')
                             ->native(false)

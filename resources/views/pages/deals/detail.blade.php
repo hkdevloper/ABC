@@ -67,9 +67,9 @@
                     <div class="flex items-center justify-center">
                         @if($deal->discount_price && $deal->original_price)
                         <p class="text-3xl font-bold text-purple-500">
-                            ₹{{ HelperFunctions::formatCurrency($deal->discount_price) }}</p>
+                            ${{ HelperFunctions::formatCurrency($deal->discount_price) }}</p>
                             <p class="text-sm text-gray-400 line-through ml-2">
-                                ₹{{ HelperFunctions::formatCurrency($deal->original_price) }}</p>
+                                ${{ HelperFunctions::formatCurrency($deal->original_price) }}</p>
                         @endif
                     </div>
                     <div class="flex items-center justify-center mt-2">
@@ -233,7 +233,7 @@
                         </div>
                         <div class="flex items-center justify-between w-full px-5">
                             <p class="text-xs text-gray-400 line-through">
-                                ₹{{ HelperFunctions::formatCurrency($item->original_price) }}
+                                ${{ HelperFunctions::formatCurrency($item->original_price) }}
                             </p>
                             <p class="text-lg font-bold text-gray-700">
                                 {{HelperFunctions::formatCurrency($deal->discount_price)}}

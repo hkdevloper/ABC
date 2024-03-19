@@ -45,7 +45,7 @@
                     <input type="text" name="amount" id="amount" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                     <!-- Helper Text -->
                     <p class="text-orange-500 text-xs italic">
-                        Please enter the amount in INR.
+                        Please enter the amount in USD.
                     </p>
                 </div>
                 <button id="rzp-button1" class="payment-btn">Pay Now</button>
@@ -55,7 +55,7 @@
                         e.preventDefault();
                         const amount = document.getElementById('amount').value * 100;
                         if(amount < 100){
-                            alert("Amount should be greater than 1 INR");
+                            alert("Amount should be greater than 1 USD");
                             return;
                         }
                         let headersList = {
@@ -64,7 +64,7 @@
 
                         let bodyContent = JSON.stringify({
                             "amount" : amount,
-                            "currency": "INR"
+                            "currency": "USD"
                         });
 
                         let response = await fetch("{{route('api.razorpay.order.create')}}", {
@@ -80,7 +80,7 @@
                             const options = {
                                 "key": "rzp_test_S6OswYOR9CkFfd",
                                 "amount": order.amount,
-                                "currency": "INR",
+                                "currency": "USD",
                                 "name": "{{ auth()->user()->company->name }}",
                                 "order_id": order.id,
                                 "handler": async function (response){

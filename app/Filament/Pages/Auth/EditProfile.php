@@ -23,7 +23,7 @@ class EditProfile extends BaseEditProfile
                     ->unique(ignoreRecord: true),
                 Select::make('currency')
                     ->label('Select Preferred Currency')
-                    ->default('INR')
+                    ->default('$')
                     ->hidden()
                     ->native(false)
                     ->preload(false)
@@ -35,7 +35,7 @@ class EditProfile extends BaseEditProfile
                         }
                         // If There is no currency, then add default
                         if(count($currency) === 0){
-                            $currency['INR'] = 'INR';
+                            $currency['$'] = '$';
                         }
                         return $currency;
                     }),

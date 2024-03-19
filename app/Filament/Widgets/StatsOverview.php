@@ -31,12 +31,11 @@ class StatsOverview extends BaseWidget
         }
         $walletTitle = auth()->user()->type == 'Admin' ? 'Total Balance' : 'Wallet Balance';
         return [
-            // State for Wallet Balance in INR
             Stat::make($walletTitle, function () {
                 if (auth()->user()->type == 'Admin') {
-                    return '₹' . number_format(User::sum('balance'), 2);
+                    return '$' . number_format(User::sum('balance'), 2);
                 } else {
-                    return '₹' . number_format(auth()->user()->balance, 2);
+                    return '$' . number_format(auth()->user()->balance, 2);
                 }
             })
                 ->color('#363062')

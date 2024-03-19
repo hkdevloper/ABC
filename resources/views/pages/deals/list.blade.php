@@ -106,7 +106,7 @@
                     </div>
                     <div class="flex items-center justify-between w-full px-5">
                         <p class="text-xs text-gray-400 line-through">
-                            ₹{{ HelperFunctions::formatCurrency($item->original_price) }}
+                            ${{ HelperFunctions::formatCurrency($item->original_price) }}
                         </p>
                         <p class="text-lg font-bold text-gray-700">
                             {{HelperFunctions::formatCurrency($item->discount_price)}}

@@ -82,7 +82,7 @@
                         <span class="text-base text-gray-500 -mb-1">Condition: {{$item->condition}}</span>
                         <span class="text-base text-gray-500 -mb-1">Brand: {{$item->brand}}</span>
                         <span
-                            class="bg-white rounded-full text-orange-500 text-base font-bold px-3 py-2 leading-none flex items-center">₹ {{$item->price}}</span>
+                            class="bg-white rounded-full text-orange-500 text-base font-bold px-3 py-2 leading-none flex items-center">$ {{$item->price}}</span>
                     </div>
                 </div>
                 <!-- Product List Action -->
