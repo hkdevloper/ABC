@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\BlogCommentsResource\Pages;
 use App\Models\BlogComments;
 use Filament\Forms;
@@ -32,10 +33,14 @@ class BlogCommentsResource extends Resource
                     ->native(false)
                     ->disabled()
                     ->required(),
-                Forms\Components\Textarea::make('comment')
-                    ->required()
-                    ->disabled()
-                    ->columnSpanFull(),
+                TinyEditor::make('comment')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('editor/uploads')
+                    ->profile('simple')
+                    ->columnSpan('full')
+                    ->autofocus()
+                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->disabled()
@@ -87,6 +92,7 @@ class BlogCommentsResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ])
             ])
