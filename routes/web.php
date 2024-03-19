@@ -294,7 +294,7 @@ Route::post('/requirements/submit', function (Request $request) {
     $requirement->email = $request->email;
     $requirement->phone = $request->phone;
     $requirement->description = $request->description;
-    $requirement->images = json_encode($images);
+    $requirement->images = $images;
     $requirement->status = 'Pending';
     $requirement->saveOrFail();
     return redirect()->back()->with('success', 'Requirement submitted successfully');

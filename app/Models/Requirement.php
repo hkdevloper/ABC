@@ -22,6 +22,9 @@ class Requirement extends Model
         'created_at',
         'updated_at'
     ];
+    protected $casts = [
+        'images' => 'array',
+    ];
     public static array $statusList = [
         'Pending' => 'Pending',
         'Accepted' => 'Accepted',

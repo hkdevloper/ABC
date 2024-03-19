@@ -40,7 +40,6 @@ class RequirementResource extends Resource
                 Forms\Components\TextInput::make('phone')
                     ->label('Enter Phone')
                     ->required()
-                    ->tel()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('country')
                     ->label('Country')
@@ -57,8 +56,10 @@ class RequirementResource extends Resource
                     ->optimize('webp')
                     ->label('Images')
                     ->directory('requirements')
+                    ->multiple()
                     ->maxFiles(3)
-                    ->multiple(),
+                    ->visibility('public')
+                    ->required(),
                 Forms\Components\RichEditor::make('description')
                     ->required()
                     ->toolbarButtons([
@@ -174,8 +175,8 @@ class RequirementResource extends Resource
     {
         return [
             'index' => Pages\ListRequirements::route('/'),
-//            'create' => Pages\CreateRequirement::route('/create'),
-//            'edit' => Pages\EditRequirement::route('/{record}/edit'),
+            'create' => Pages\CreateRequirement::route('/create'),
+            'edit' => Pages\EditRequirement::route('/{record}/edit'),
         ];
     }
 }
