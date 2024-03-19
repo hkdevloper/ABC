@@ -105,7 +105,7 @@ class JobResource extends Resource
                     ->prefix('$')
                     ->label('Enter Salary')
                     ->maxLength(191),
-                TextInput::make('HR Email')
+                TextInput::make('hr_email')
                     ->label('HR Email')
                     ->email()
                     ->autofocus()
