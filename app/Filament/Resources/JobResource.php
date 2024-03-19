@@ -102,7 +102,7 @@ class JobResource extends Resource
                         'other' => 'Other',
                     ]),
                 TextInput::make('salary')
-                    ->prefix('RS.')
+                    ->prefix('$')
                     ->label('Enter Salary')
                     ->maxLength(191),
                 TextInput::make('HR Email')
