@@ -22,7 +22,12 @@
                         {{$event->created_at->diffForHumans()}}
                     </div>
                 </div>
+                <a href="{{route('view.company', [$event->company->slug])}}" class="hidden md:flex text-purple-600 md:bg-purple-500 md:text-white md:py-2 md:px-4 rounded focus:outline-none focus:shadow-outline-blue hover:bg-purple-800 ml-auto px-4 py-2 text-center text-sm outline-none ring-indigo-300 transition duration-100 bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base items-center justify-center">
+                    Contact Organizer
+                    <i class='bx bx-link-external ml-2'></i>
+                </a>
             </div>
+
             <x-bladewind.tab-group name="product-info">
                 <x-slot name="headings">
                     <x-bladewind.tab-heading name="desc" label="Description" active="true"/>
