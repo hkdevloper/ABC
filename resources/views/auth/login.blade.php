@@ -38,7 +38,7 @@
         <form action="{{route('auth.login')}}" method="post" class="form__content" id="form">
             @csrf
             <div class="form__content__header">
-                <h1 class="form__content__heading">Log In to HkDevelopers.</h1>
+                <h1 class="form__content__heading">Log In to {{config()->get('app.name') }}.</h1>
                 <div class="form__content__description">
                     If you don’t have an account, <a href="{{url('user/register')}}"
                                                      class="text-purple-500 underline hover:no-underline">you can create

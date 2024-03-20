@@ -39,7 +39,7 @@
         <form action="{{route('auth.register')}}" method="post" class="form__content" id="form">
             @csrf
             <div class="form__content__header">
-                <h1 class="form__content__heading">Sign Up to HkDevelopers.</h1>
+                <h1 class="form__content__heading">Sign Up to {{config()->get('app.name') }}.</h1>
                 <div class="form__content__description">
                     <p>
                         Already have an account? <a href="{{url('user/login')}}" class="text-purple-500 underline hover:no-underline">Log In</a>

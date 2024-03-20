@@ -18,8 +18,8 @@
                 </div>
             @else
                 <div class="md:hidden flex space-x-4 items-center">
-                    <a href="{{url('user/dashboard/login')}}" class="text-gray-700 hover:text-purple-600">Login</a>
-                    <a href="{{url('user/dashboard/register')}}"
+                    <a href="{{url('user/login')}}" class="text-gray-700 hover:text-purple-600">Login</a>
+                    <a href="{{url('user/register')}}"
                        class="text-white bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-white">Register</a>
                 </div>
             @endif
