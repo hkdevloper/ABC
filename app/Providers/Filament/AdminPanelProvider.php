@@ -39,7 +39,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentProgressbarPlugin::make()->color('transparent'),
-//                QuickCreatePlugin::make(),
                 OverlookPlugin::make()
                     ->columns([
                         'default' => 1,
@@ -77,6 +76,7 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->authMiddleware([
                 Authenticate::class,
             ]);
