@@ -15,6 +15,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -31,6 +32,38 @@ class UserResource extends Resource
     {
         return $form
             ->schema(components: [
+                Forms\Components\Hidden::make('type')
+                    ->default('user')
+                    ->required(),
+                Forms\Components\Hidden::make('email_verified_at'),
+                Forms\Components\Section::make([
+                    Toggle::make('approved')
+                        ->label('Approved')
+                        ->disabled(fn(Get $get) => $get('type') === 'Admin')
+                        ->autofocus()
+                        ->required(),
+                    Toggle::make('banned')
+                        ->label('Banned')
+                        ->live(onBlur: true)
+                        ->disabled(fn(Get $get) => $get('type') === 'Admin')
+                        ->hidden(fn(Get $get) => !$get('id'))
+                        ->required(),
+                    Toggle::make('update_password')
+                        ->label('Update Password')
+                        ->dehydrated(false)
+                        ->live(onBlur: true)
+                        ->hidden(fn(Get $get) => !$get('id')),
+                    Toggle::make('is_verified')
+                        ->label('Email Verified')
+                        ->dehydrated(false)
+                        ->hidden(fn(Get $get) => $get('email_verified_at'))
+                        ->afterStateUpdated(function(User $record, Get $get, Set $set){
+                            $record->email_verified_at = $get('is_verified') ? now() : null;
+                            $set('email_verified_at', $record->email_verified_at);
+                        })
+                ])
+                    ->hidden(fn(Get $get) => !$get('id'))
+                    ->columns(4),
                 TextInput::make('name')
                     ->label('Enter User Full Name')
                     ->required()
@@ -40,21 +73,10 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(191),
-                TextInput::make('balance')
-                    ->label('Balance')
-                    ->required()
-                    ->maxLength(191)
-                    ->default(0),
-                Select::make('type')
-                    ->label('Select Type')
-                    ->default('user')
-                    ->native(false)
-                    ->live()
-                    ->options([
-                        'user' => 'User',
-                        'Admin' => 'Admin',
-                    ])
-                    ->required(),
+                Placeholder::make('email_verified_at_placeholder')
+                    ->label('Email Verified At')
+                    ->hidden(fn(Get $get) => !$get('id'))
+                    ->content(fn(User $record): string => $record->email_verified_at ? $record->email_verified_at->toFormattedDateString() : 'Not Verified'),
                 Select::make('currency')
                     ->label('Select Preferred Currency')
                     ->default('INR')
@@ -88,45 +110,23 @@ class UserResource extends Resource
                         return false;
                     })
                     ->maxLength(191),
+                TextInput::make('balance')
+                    ->prefix('$')
+                    ->numeric()
+                    ->minValue(0)
+                    ->label('Wallet Amount')
+                    ->required()
+                    ->default(0),
                 Placeholder::make('created')
                     ->label('Created')
                     ->hidden(fn(Get $get) => !$get('id'))
                     ->content(fn(User $record): string => $record->created_at->toFormattedDateString()),
-                Placeholder::make('email_verified_at')
-                    ->label('Email Verified At')
-                    ->hidden(fn(Get $get) => !$get('id'))
-                    ->content(fn(User $record): string => $record->email_verified_at ? $record->email_verified_at->toFormattedDateString() : 'Not Verified'),
                 TextInput::make('banned_reason')
                     ->label('Banned Reason')
                     ->live(onBlur: true)
                     ->hidden(fn(Get $get) => !$get('banned'))
                     ->required(fn(Get $get) => $get('banned'))
                     ->maxLength(500),
-                Forms\Components\Section::make('Status')
-                    ->schema([
-                        Toggle::make('approved')
-                            ->label('Approved')
-                            ->disabled(fn(Get $get) => $get('type') === 'Admin')
-                            ->autofocus()
-                            ->required(),
-                        Toggle::make('banned')
-                            ->label('Banned')
-                            ->live(onBlur: true)
-                            ->disabled(fn(Get $get) => $get('type') === 'Admin')
-                            ->hidden(fn(Get $get) => !$get('id'))
-                            ->required(),
-                        Toggle::make('update_password')
-                            ->label('Update Password')
-                            ->dehydrated(false)
-                            ->live(onBlur: true)
-                            ->hidden(fn(Get $get) => !$get('id')),
-                        Toggle::make('is_verified')
-                            ->label('Email Verified')
-                            ->live(debounce: 500)
-                            ->default(fn(User $record): bool => !$record->email_verified_at == null)
-                            ->disabled(fn(Get $get) => $get('type') === 'Admin')
-                            ->afterStateUpdated(fn(User $record, Get $get) => $record->email_verified_at = $get('is_verified') ? now() : null)
-                    ])->columns(3),
             ])->columns(3);
     }
 

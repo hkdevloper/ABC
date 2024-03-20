@@ -16,8 +16,15 @@ class HkEmailVerification
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user()->email_verified_at === null){
-            return \response()->view('filament-panels::pages.auth.email-verification.email-verification-prompt');
+        if(auth()->check()){
+            // Check if user is Approved or not
+            if(!auth()->user()->email_verified_at){
+                return $next($request);
+            }
+
+            if(!auth()->user()->approved){
+                auth()->logout();
+            }
         }
         return $next($request);
     }

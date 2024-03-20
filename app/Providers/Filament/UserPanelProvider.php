@@ -244,6 +244,7 @@ class UserPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                HkEmailVerification::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
