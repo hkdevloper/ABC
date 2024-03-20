@@ -63,7 +63,7 @@ class UserResource extends Resource
                         })
                 ])
                     ->hidden(fn(Get $get) => !$get('id'))
-                    ->columns(4),
+                    ->columns(3),
                 TextInput::make('name')
                     ->label('Enter User Full Name')
                     ->required()
