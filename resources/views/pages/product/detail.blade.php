@@ -64,10 +64,10 @@
                 <i class='bx bx-link-external ml-2'></i>
             </a>
         </div>
-        <x-bladewind.tab-group name="product-info">
+        <x-bladewind.tab-group name="product-info" color="blue">
             <x-slot name="headings">
-                <x-bladewind.tab-heading active="true" name="desc" label="Description"/>
-                <x-bladewind.tab-heading name="rate" label="Rate & Reviews"/>
+                <x-custom-tab-heading active="true" name="desc" label="Description"/>
+                <x-custom-tab-heading name="rate" label="Rate & Reviews"/>
             </x-slot>
 
             <x-bladewind.tab-body>

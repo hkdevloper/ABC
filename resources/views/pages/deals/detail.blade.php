@@ -89,9 +89,9 @@
         <!-- Tab Group -->
         <x-bladewind.tab-group name="product-info">
             <x-slot name="headings">
-                <x-bladewind.tab-heading active="true" name="desc" label="Description"/>
-                <x-bladewind.tab-heading name="rate" label="Rate & Reviews"/>
-                <x-bladewind.tab-heading name="tos" label="Terms & Condition"/>
+                <x-custom-tab-heading active="true" name="desc" label="Description"/>
+                <x-custom-tab-heading name="rate" label="Rate & Reviews"/>
+                <x-custom-tab-heading name="tos" label="Terms & Condition"/>
             </x-slot>
 
             <x-bladewind.tab-body>
