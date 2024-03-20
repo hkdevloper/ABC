@@ -22,3 +22,4 @@ yarn-error.log
 *.lock
 *.log
 public/livewire/livewire.min.js
+storage
