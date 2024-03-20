@@ -143,14 +143,12 @@ class UserResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\ToggleColumn::make('approved')->label('Approved'),
-                Tables\Columns\ToggleColumn::make('banned')->label('Banned'),
+                Tables\Columns\IconColumn::make('approved')->label('Approved'),
+                Tables\Columns\IconColumn::make('banned')->label('Banned'),
                 Tables\Columns\TextColumn::make('banned_reason')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('balance')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -173,12 +171,17 @@ class UserResource extends Resource
                     ->modifyQueryUsing(function (Builder $query) {
                         $query->where('is_active', 1);
                     }),
+                Tables\Filters\Filter::make('banned')
+                    ->label('Banned')
+                    ->modifyQueryUsing(function (Builder $query) {
+                        $query->where('banned', 1);
+                    }),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
-                    Tables\Actions\ViewAction::make(),
                 ])
             ])
             ->bulkActions([
@@ -188,7 +191,7 @@ class UserResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->modifyQueryUsing(function (Builder $query) {
-                $query->orderBy('created_at', 'desc');
+                $query->where('type', '!=', 'Admin')->orderBy('created_at', 'desc');
             });
     }
 
