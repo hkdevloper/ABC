@@ -66,6 +66,7 @@ class BlogCommentsResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('blog.title')
+                      ->label("Blog Title")
                     ->numeric()
                     ->wrap()
                     ->sortable(),
