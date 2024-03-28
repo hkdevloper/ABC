@@ -36,7 +36,7 @@ class BlogPolicy
         if(!$user->company){
             return false;
         }
-        if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
+        if ($user->company->id == $blog->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -61,7 +61,7 @@ class BlogPolicy
         if(!$user->company){
             return false;
         }
-        if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
+        if ($user->company->id == $blog->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -78,7 +78,7 @@ class BlogPolicy
         if(!$user->company){
             return false;
         }
-        if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
+        if ($user->company->id == $blog->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -95,7 +95,7 @@ class BlogPolicy
         if(!$user->company){
             return false;
         }
-        if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
+        if ($user->company->id == $blog->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -112,7 +112,7 @@ class BlogPolicy
         if(!$user->company){
             return false;
         }
-        if ($user->company->id === $blog->company_id || $user->type == 'Admin') {
+        if ($user->company->id == $blog->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;

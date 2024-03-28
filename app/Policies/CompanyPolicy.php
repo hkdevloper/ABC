@@ -22,7 +22,7 @@ class CompanyPolicy
     public function view(User $user, Company $company): bool
     {
         // Authorization logic...
-        if ($user->id === $company->user_id || $user->type == 'Admin') {
+        if ($user->id == $company->user_id || $user->type == 'Admin' || $company->claimed_by == $user->id) {
             return true;
         }
         return false;
@@ -46,7 +46,7 @@ class CompanyPolicy
     public function update(User $user, Company $company): bool
     {
         // Authorization logic...
-        if ($user->id === $company->user_id || $user->type == 'Admin') {
+        if ($user->id == $company->user_id || $user->type == 'Admin' || $company->claimed_by == $user->id) {
             return true;
         }
         return false;
@@ -58,7 +58,7 @@ class CompanyPolicy
     public function delete(User $user, Company $company): bool
     {
         // Authorization logic...
-        if ($user->id === $company->user_id || $user->type == 'Admin') {
+        if ($user->id == $company->user_id || $user->type == 'Admin' || $company->claimed_by == $user->id) {
             return true;
         }
         return false;
@@ -70,7 +70,7 @@ class CompanyPolicy
     public function restore(User $user, Company $company): bool
     {
         // Authorization logic...
-        if ($user->id === $company->user_id || $user->type == 'Admin') {
+        if ($user->id == $company->user_id || $user->type == 'Admin' || $company->claimed_by == $user->id) {
             return true;
         }
         return false;
@@ -82,7 +82,7 @@ class CompanyPolicy
     public function forceDelete(User $user, Company $company): bool
     {
         // Authorization logic...
-        if ($user->id === $company->user_id || $user->type == 'Admin') {
+        if ($user->id == $company->user_id || $user->type == 'Admin' || $company->claimed_by == $user->id) {
             return true;
         }
         return false;

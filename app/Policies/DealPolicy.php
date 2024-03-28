@@ -36,7 +36,7 @@ class DealPolicy
         if(!$user->company){
             return false;
         }
-        if ($user->company->id === $deal->company_id || $user->type == 'Admin') {
+        if ($user->company->id == $deal->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -62,7 +62,7 @@ class DealPolicy
         if(!$user->company){
             return false;
         }
-        if ($user->company->id === $deal->company_id || $user->type == 'Admin') {
+        if ($user->company->id == $deal->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -80,7 +80,7 @@ class DealPolicy
         if(!$user->company){
             return false;
         }
-        if ($user->company->id === $deal->company_id || $user->type == 'Admin') {
+        if ($user->company->id == $deal->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -98,7 +98,7 @@ class DealPolicy
         if(!$user->company){
             return false;
         }
-        if ($user->company->id === $deal->company_id || $user->type == 'Admin') {
+        if ($user->company->id == $deal->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
@@ -116,7 +116,7 @@ class DealPolicy
         if(!$user->company){
             return false;
         }
-        if ($user->company->id === $deal->company_id || $user->type == 'Admin') {
+        if ($user->company->id == $deal->company_id || $user->type == 'Admin') {
             return true;
         }
         return false;
