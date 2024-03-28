@@ -1,8 +1,24 @@
+@php
+    $name = auth()->user()->name;
+    $image = "https://ui-avatars.com/api/?name=$name";
+    // check if user has a company
+    if(auth()->user()->company != null && auth()->user()->company->logo != null){
+        $image = url('storage/' . auth()->user()->company->logo);
+    }
+@endphp
 <!-- Navbar Section -->
 <header class="bg-neutral-100 py-2 shadow">
     <div class="mx-auto flex flex-wrap items-center justify-between px-4">
-        <a alt="company Logo" href="{{url('/')}}" class="flex items-center">
+        <a alt="company Logo" href="{{url('/')}}" class="hidden md:flex items-center">
             <img alt="company Logo" src="{{asset('storage/image/logo.png')}}" class=" h-[27px] w-[150px] md:h-[27px] md:w-[150px]">
+        </a>
+        <button id="menu-toggle" class="lg:hidden flex text-gray-700 hover:text-purple-600 focus:outline-none">
+            <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M3 18h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2zm0-5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2zm0-5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2z"/>
+            </svg>
+        </button>
+        <a alt="company Logo" href="{{url('/')}}" class="md:hidden flex items-center">
+            <img alt="company Logo" src="{{asset('storage/image/logo.png')}}" class=" h-[27px] w-[140px]">
         </a>
         <div class="lg:hidden flex ">
             @if(auth()->user() && auth()->user()->name != "")
@@ -10,24 +26,19 @@
                     <div class="relative">
                         <a href="{{auth()->user()->type == 'Admin' ? url('admin') : url('user')}}"
                            class="flex items-center">
-                            <span class="text-gray-700">{{ auth()->user()->name }}</span>
-                            <img src="https://ui-avatars.com/api/?name={{auth()->user()->name}}" alt="User Avatar"
+                            <span class="text-gray-700 hidden">{{ auth()->user()->name }}</span>
+
+                            <img src="{{$image}}" alt="User Avatar"
                                  class="w-10 h-10 rounded-full mx-2">
                         </a>
                     </div>
                 </div>
             @else
-                <div class="md:hidden flex space-x-4 items-center">
-                    <a href="{{url('user/login')}}" class="text-gray-700 hover:text-purple-600">Login</a>
-                    <a href="{{url('user/register')}}"
-                       class="text-white bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-white">Register</a>
+                <div class="md:hidden flex items-center">
+                    <a href="{{url('user/login')}}"
+                       class="text-white bg-purple-600 hover:bg-purple-700 py-2 px-2 rounded-full transition-all duration-300 ease-in-out hover:text-white">Login</a>
                 </div>
             @endif
-            <button id="menu-toggle" class="text-gray-700 hover:text-purple-600 focus:outline-none">
-                <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M3 18h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2zm0-5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2zm0-5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2z"/>
-                </svg>
-            </button>
         </div>
         <nav class="hidden lg:flex md:flex space-x-4 items-center">
             <ul class="hidden lg:flex space-x-10 items-center">
@@ -71,7 +82,7 @@
                     <a href="{{auth()->user()->type == 'Admin' ? url('admin') : url('user')}}"
                        class="flex items-center">
                         <span class="text-gray-700">{{ auth()->user()->name }}</span>
-                        <img src="https://ui-avatars.com/api/?name={{auth()->user()->name}}" alt="User Avatar"
+                        <img src="{{$image}}" alt="User Avatar"
                              class="w-10 h-10 rounded-full mx-2">
                     </a>
                 </div>
