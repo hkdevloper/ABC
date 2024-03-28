@@ -1,11 +1,13 @@
-@php
+@auth
+    @php
     $name = auth()->user()->name;
     $image = "https://ui-avatars.com/api/?name=$name";
     // check if user has a company
     if(auth()->user()->company != null && auth()->user()->company->logo != null){
         $image = url('storage/' . auth()->user()->company->logo);
     }
-@endphp
+    @endphp
+@endauth
 <!-- Navbar Section -->
 <header class="bg-neutral-100 py-2 shadow">
     <div class="mx-auto flex flex-wrap items-center justify-between px-4">
