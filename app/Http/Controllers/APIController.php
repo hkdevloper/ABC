@@ -26,7 +26,10 @@ class APIController extends Controller
         foreach ($products as $item) {
             $seo = $item->seo;
             foreach ($seo->meta_keywords as $keyword) {
-                if (str_contains(strtolower($keyword), strtolower($search))) {
+                if (
+                    str_contains(strtolower($keyword), strtolower($search))
+                    || str_contains(strtolower($item->name), strtolower($search))
+                ) {
                     $searchList[] = $keyword;
                 }
             }
