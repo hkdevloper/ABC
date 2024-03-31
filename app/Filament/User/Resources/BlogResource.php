@@ -100,6 +100,8 @@ class BlogResource extends Resource
                             ->autofocus()
                             ->required(),
                         Textarea::make('summary')
+                            ->hidden()
+                            ->default('')
                             ->label('Enter Summary')
                             ->required()
                             ->autofocus()
