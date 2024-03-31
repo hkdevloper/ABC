@@ -28,7 +28,7 @@ class UserProductController extends Controller
                 ->select('p.*', 'c.name as category_name', 's.meta_keywords')
                 ->where('p.is_approved', 1)
                 ->where('p.is_active', 1)
-                ->where('s.meta_keywords', 'LIKE', '%' . $search . '%')
+                ->whereRaw('JSON_UNQUOTE(JSON_EXTRACT(s.meta_keywords, "$[*]")) LIKE ?', ['%'.$search.'%'])
                 ->paginate(10);
             // Get Related SEO Keywords
             $seo = [];
