@@ -100,7 +100,7 @@
                         @endif
                     </div>
                 </div>
-                @if($user->id != $company->user_id)
+                @if($user->id != $company->user_id && !$company->is_claimed)
                     <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn1"
                        class="text-blue-950 px-2 text-xs text-right block md:hidden mt-3"
                        style="height: 30px;">
@@ -120,7 +120,7 @@
                 <x-custom-tab-heading name="product" label="Products"/>
                 <x-custom-tab-heading name="contact" label="Contact"/>
                 <x-custom-tab-heading name="rate" label="Rate & Reviews" hidden="true" class="hidden md:block"/>
-                @if($user->id != $company->user_id)
+                @if($user->id != $company->user_id && !$company->is_claimed)
                     <a href="{{route('view.claim.company', ['company_id' => $company->id])}}" id="slot-btn"
                        class="bg-blue-100 text-blue-950 px-2 text-xs text-right hidden md:block"
                        style="height: 30px;">

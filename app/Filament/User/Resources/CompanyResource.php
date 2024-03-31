@@ -230,7 +230,7 @@ class CompanyResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCompanies::route('/'),
+            'index' => Pages\CreateCompany::route('/'),
             'create' => Pages\CreateCompany::route('/create'),
             'edit' => Pages\EditCompany::route('/{record}/edit'),
             'view' => Pages\ViewCompany::route('/{record}'),
