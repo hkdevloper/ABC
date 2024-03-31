@@ -414,7 +414,7 @@ Route::prefix('protected')->middleware(['auth'])->group(function () {
         // If a user has a company registered, then they can't claim another company
         $company = Company::where('user_id', Auth::user()->id)->first();
         if ($company) {
-            return redirect()->back()->with('error', 'You already have a company registered, Can\'t claim another company');
+            return redirect()->back()->with('error', "You already have a company registered, Can't claim another company");
         }
         $claim = new Claims();
         $claim->user_id = Auth::user()->id;
