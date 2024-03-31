@@ -1,4 +1,4 @@
-name: Deploy to DigitalOcean
+name: Test Workflow
 
 on:
   push:
@@ -6,14 +6,10 @@ on:
       - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  test:
+    name: Test Job
+    runs-on: self-hosted
 
     steps:
-      - name: Deploy to DigitalOcean
-        run: |
-          ssh root@68.183.103.93 "cd /home/bisdir/htdocs/bisdir.hkdevs.tech/ && git pull origin main"
-        env:
-          VPS_IP: 68.183.103.93
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        shell: bash
+    - name: Do nothing
+      run: echo "This workflow does nothing."
