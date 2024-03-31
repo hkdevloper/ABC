@@ -26,6 +26,9 @@ class UserBlogController extends Controller
         // Initialize the query to retrieve deals
         $blogsQuery = Blog::select('blogs.*', 'seo.title as seo_title')
             ->join('seo', 'blogs.seo_id', '=', 'seo.id')
+            ->join('companies as co', 'blogs.company_id', '=', 'co.id')
+            ->where('co.is_approved', 1)
+            ->where('co.is_active', 1)
             ->where('blogs.is_active', 1)
             ->where('blogs.is_approved', 1);
 

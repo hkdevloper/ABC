@@ -23,6 +23,9 @@ class UserDealController extends Controller
         // Initialize the query to retrieve deals
         $query = Deal::select('deals.*')
             ->join('seo', 'deals.seo_id', '=', 'seo.id')
+            ->join('companies as co', 'deals.company_id', '=', 'co.id')
+            ->where('co.is_approved', 1)
+            ->where('co.is_active', 1)
             ->where('deals.is_active', 1);
 
         // Search Query

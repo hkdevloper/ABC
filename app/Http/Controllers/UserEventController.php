@@ -22,6 +22,9 @@ class UserEventController extends Controller
         // Initialize the query to retrieve deals
         $eventQuery = Event::select('events.*')
             ->join('seo', 'events.seo_id', '=', 'seo.id')
+            ->join('companies as co', 'events.company_id', '=', 'co.id')
+            ->where('co.is_approved', 1)
+            ->where('co.is_active', 1)
             ->where('events.is_active', 1)
             ->where('events.is_approved', 1);
 

@@ -25,6 +25,9 @@ class UserJobController extends Controller
         // Initialize the query to retrieve deals
         $jobsQuery = Job::select('jobs.*', 'seo.title as seo_title')
             ->join('seo', 'jobs.seo_id', '=', 'seo.id')
+            ->join('companies as co', 'jobs.company_id', '=', 'co.id')
+            ->where('co.is_approved', 1)
+            ->where('co.is_active', 1)
             ->where('jobs.is_active', 1)
             ->where('jobs.is_approved', 1);
 
