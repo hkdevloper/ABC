@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ClaimsResource\Pages;
-use App\Filament\Resources\ClaimsResource\RelationManagers;
 use App\Filament\Resources\UserResource\RelationManagers\CompanyRelationManager;
 use App\Models\Claims;
 use App\Models\Company;
@@ -36,20 +35,25 @@ class ClaimsResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('email')
                     ->email()
+                    ->disabled()
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('phone')
                     ->tel()
+                    ->disabled()
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('website')
                     ->required()
+                    ->disabled()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('company_name')
                     ->required()
+                    ->disabled()
                     ->maxLength(191),
                 Forms\Components\Textarea::make('message')
                     ->required()
+                    ->disabled()
                     ->maxLength(65535)
                     ->columnSpanFull(),
                 Forms\Components\Select::make('status')
@@ -62,7 +66,7 @@ class ClaimsResource extends Resource
                         'Rejected' => 'Rejected',
                     ])
                     ->required(),
-            ]);
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
@@ -123,7 +127,7 @@ class ClaimsResource extends Resource
     {
         return [
             'index' => Pages\ListClaims::route('/'),
-//            'edit' => Pages\EditClaims::route('/{record}/edit'),
+            'edit' => Pages\EditClaims::route('/{record}/edit'),
         ];
     }
 }
