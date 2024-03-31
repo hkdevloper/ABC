@@ -630,7 +630,9 @@
             message="Your rating has been submitted successfully."/>
     </x-bladewind::modal>
     <div id="image-viewer"></div>
-    <!-- Add this script at the end of your HTML file -->
+@endsection
+
+@section('page-scripts')
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Gallery View

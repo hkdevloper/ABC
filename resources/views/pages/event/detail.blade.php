@@ -1,11 +1,18 @@
 @php use App\classes\HelperFunctions; @endphp
 @php use Carbon\Carbon; @endphp
 @extends('layouts.user')
-
+@section('head')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.css"
+          integrity="sha512-eG8C/4QWvW9MQKJNw2Xzr0KW7IcfBSxljko82RuSs613uOAg/jHEeuez4dfFgto1u6SRI/nXmTr9YPCjs1ozBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.js"
+            integrity="sha512-MdZwHb4u4qCy6kVoTLL8JxgPnARtbNCUIjTCihWcgWhCsLfDaQJib4+OV0O8IS+ea+3Xv/6pH3vYY4LWpU/gbQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@endsection
 @section('content')
     <x-user.bread-crumb :data="['Home', 'Events', $event->title]"/>
     <div class="container py-6 mx-auto flex flex-wrap">
-        <div class="w-[95vw] md:w-auto mx-auto">
+        <div class="w-full p-3 md:p-0 mx-auto">
             <img src="{{url('storage/' . $event->thumbnail)}}" alt="Event Thumbnail"
                  class="mb-6 rounded-lg shadow-lg object-contain w-100 h-40 md:h-80">
             <h1 class="text-3xl font-semibold mb-4">{{$event->title}}</h1>
@@ -31,12 +38,36 @@
             <x-bladewind.tab-group name="product-info">
                 <x-slot name="headings">
                     <x-custom-tab-heading name="desc" label="Description" active="true"/>
+                    <x-custom-tab-heading name="gallery" label="Gallery"/>
                     <x-custom-tab-heading name="rate" label="Rate & Reviews"/>
                 </x-slot>
 
                 <x-bladewind.tab-body>
                     <x-bladewind.tab-content name="desc" active="true">
                         {!! $event->description !!}
+                    </x-bladewind.tab-content>
+                    <x-bladewind.tab-content name="gallery">
+                        <div class="card p-4 mb-4 w-full">
+                            <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Gallery</h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-4 w-full" id="company-gallery">
+                                @php
+                                    // if a gallery is array, convert it to string
+                                    if(is_array($event->gallery)){
+                                        $event->gallery = json_encode($event->gallery);
+                                    }
+                                @endphp
+                                @forelse(json_decode($event->gallery) as $item)
+                                    <img alt="company photo" src="{{ url('storage/' . $item) }}"
+                                         class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 ease-in-out hover:-translate-y-2 w-full h-[150px] object-contain img-remove-bg"/>
+                                @empty
+                                    <div class="dark:bg-neutral-700 w-full">
+                                        <div class="p-4 w-full">
+                                            <h2 class="text-gray-900 text-base font-semibold mb-1">No Image Found</h2>
+                                        </div>
+                                    </div>
+                                @endforelse
+                            </div>
+                        </div>
                     </x-bladewind.tab-content>
                     <x-bladewind.tab-content name="rate">
                         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
@@ -178,6 +209,7 @@
             button_action="hideModal('rate')"
             message="Your rating has been submitted successfully."/>
     </x-bladewind::modal>
+    <div id="image-viewer"></div>
 @endsection
 
 @section('page-scripts')
@@ -193,6 +225,13 @@
                 });
             });
         });
+        const viewer = new Viewer(document.getElementById('image-viewer'), {
+            inline: true,
+            viewed() {
+                viewer.zoomTo(1);
+            },
+        });
+        const gallery = new Viewer(document.getElementById('company-gallery'));
 
         @auth
             saveRating = async function (element) {
