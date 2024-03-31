@@ -1,0 +1,66 @@
+@layer components {
+    .bw-table.divided tr {
+        @apply border-t border-gray-200 border-b-8 border-b-gray-200/40 dark:border-b-dark-800/40
+    }
+
+    .bw-table.divided.thin tr {
+        @apply border-b border-t border-gray-200 border-b-gray-200/60 dark:border-b-dark-800 dark:border-t-dark-900
+    }
+
+    .bw-table.striped tr:nth-child(even) > td, .bw-table.striped tr:nth-child(even):hover > td {
+        @apply bg-gray-50 dark:bg-dark-900/40
+    }
+
+    .bw-table thead > tr > th {
+        @apply
+        bg-white dark:bg-dark-900
+        text-black/80 dark:text-dark-400
+        text-left
+        text-xs
+        font-semibold
+        tracking-widest
+        px-5 py-4
+        border-t border-gray-200/20 dark:border-dark-800
+    }
+
+    .bw-table.uppercase-headers thead > tr > th {
+        @apply uppercase
+    }
+
+    .bw-table-filter-bar {
+        @apply bg-slate-100 p-1 dark:bg-dark-900
+    }
+
+    .bw-table-filter-bar input {
+        @apply dark:border-0 dark:bg-transparent dark:focus:outline-0 dark:focus:border-0
+    }
+
+    .bw-table.compact thead > tr > th {
+        @apply !py-2
+    }
+
+    .bw-table tr > td {
+        @apply p-5 align-top text-slate-600/80 text-sm leading-6 bg-white dark:text-dark-400 dark:bg-dark-900/60 border-x-2 border-gray-50/10 dark:border-dark-900/50
+    }
+
+    .bw-table.compact tr > td {
+        @apply !py-2
+    }
+
+    .bw-table td.double-underline {
+        @apply border-x-0 border-t-0 border-b-4 border-double border-gray-700 dark:border-dark-700 border-separate
+    }
+
+    .bw-table.with-hover-effect tr:hover > td {
+        @apply bg-gray-100/40 dark:bg-dark-900
+    }
+
+    .bw-table.with-hover-effect tr:hover > td:first-child {
+        @apply border-l-2 border-l-green-300 dark:border-l-dark-500
+    }
+
+    .bw-table.with-hover-effect tr:hover > td:last-child {
+        @apply border-r-2 border-r-green-300 dark:border-r-dark-500
+    }
+
+}

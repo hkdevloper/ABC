@@ -1,10 +1,6 @@
 /.phpunit.cache
-/node_modules
-/public/build
-/public/vendor
 /public/hot
 /storage/*.key
-/vendor
 /laravel-9
 .env
 .env.backup
@@ -22,4 +18,3 @@ yarn-error.log
 *.lock
 *.log
 public/livewire/livewire.min.js
-storage
