@@ -18,6 +18,7 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            cd /home/hkdevs-bisdir/htdocs/bisdir.hkdevs.tech/
             git fetch origin main
             git pull origin main
             echo "Done"
