@@ -3,7 +3,7 @@ name: CPanel Deployment
 on:
   push:
     branches:
-      - main # Change this to your main branch name if different
+      - user-ui # Change this to your main branch name if different
 
 jobs:
   deploy:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        
+
       - name: moved to the directory
         run: cd public_html
 
