@@ -1,6 +1,23 @@
-Deployments:
-  tasks:
-    - cd public_html/
-    - git fetch origin main
-    - git pull origin main
-    - echo "Done"
+name: CPanel Deployment
+
+on:
+  push:
+    branches:
+      - main # Change this to your main branch name if different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
+      - name: moved to the directory
+        run: cd public_html
+
+      - name: Fetch latest changes
+        run: git fetch origin
+
+      - name: Pull latest changes
+        run: git pull origin main # Change 'main' to your main branch name if different
