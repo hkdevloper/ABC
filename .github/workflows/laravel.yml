@@ -18,8 +18,6 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "Hello World"
-            ls -al
-            pwd
-            whoami
+            git fetch origin main
+            git pull origin main
             echo "Done"
