@@ -7,11 +7,11 @@ on:
 
 jobs:
   test:
-    name: Test Job
+    name: HKdevs
     runs-on: ubuntu-latest
 
     steps:
-      - name: Do nothing
+      - name: Deploying to VPS
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
