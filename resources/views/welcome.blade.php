@@ -22,7 +22,7 @@
 
             // Check if inputValue is at least 3 characters
             if (inputValue.length >= 3) {
-                const searchURL = "{{ route('api.search', ['search' => '__input__']) }}".replace('__input__', inputValue);
+                const searchURL = "{{ route('api.search.product', ['search' => '__input__']) }}".replace('__input__', inputValue);
 
                 try {
                     await fetch(searchURL)
@@ -46,7 +46,7 @@
                             data.forEach(result => {
                                 const resultElement = document.createElement('a');
                                 resultElement.textContent = result;
-                                resultElement.href = "{{ route('search', ['q' => '__slug__']) }}".replace('__slug__', result);
+                                resultElement.href = "{{ route('products', ['search' => '__slug__']) }}".replace('__slug__', result);
                                 console.log(resultElement.href)
 
                                 searchResults.appendChild(resultElement);
@@ -70,13 +70,12 @@
         <div class="absolute inset-0 bg-gradient-to-r from-purple-500 via-green-300 to-purple-500 opacity-25"></div>
         <div class="mx-auto text-center relative z-10 ">
             <h1 class="md:text-3xl text-xl lg:text-5xl font-semibold text-dark mb-2">Discover Top Companies and Products</h1>
-            <p class="text-dark text-xs md:text-lg mb-4">Explore a vast network of five lakh+ businesses and products
-                for your needs</p>
-            <form action="{{ route('search') }}"
+            <p class="text-dark text-xs md:text-lg mb-4">Explore a vast network of five lakh+ businesses and products for your needs</p>
+            <form action="{{ route('products') }}"
                   class="mt-2 md:mt-4 flex items-center justify-center rounded-full p-2 pl-1 relative bg-white w-[80vw] md:w-full m-auto md:p-4 md:pl-2" style="z-index: 99;">
                 <div class="relative flex items-center justify-between w-full s-form">
                     <label for="searchInput" class="sr-only">Search</label>
-                    <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters" autocomplete="off"
+                    <input id="searchInput" name="search" type="text" placeholder="Type at least 3 characters" autocomplete="off"
                            class="search-input focus:outline-none px-1 py-1 rounded-full border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full placeholder:text-xs md:placeholder:text-base md:px-6 md-py-2">
                     <button type="submit"
                             class="bg-blue-500 text-white py-2 px-4 w-auto rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse">
