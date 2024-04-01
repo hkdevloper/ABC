@@ -8,8 +8,18 @@ on:
 jobs:
   test:
     name: Test Job
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Do nothing
-      run: echo "This workflow does nothing."
+      - name: Do nothing
+        uses: appleboy/ssh-actions@v0.1.2
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "Hello World"
+            ls -al
+            pwd
+            whoami
+            echo "Done"
