@@ -1,24 +1,6 @@
-name: Deploy to abc.mitra.com
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  test:
-    name: Connect to VPS and deploy code
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Deploying to VPS
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.ABC_VPS_HOST }}
-          username: ${{ secrets.ABC_VPS_USERNAME }}
-          key: ${{ secrets.ABC_SSH_PRIVATE_KEY }}
-          script: |
-            cd public_html/
-            git fetch origin main
-            git pull origin main
-            echo "Done"
+Deployments:
+  tasks:
+    - cd public_html/
+    - git fetch origin main
+    - git pull origin main
+    - echo "Done"
