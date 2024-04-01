@@ -70,7 +70,7 @@
         <div class="absolute inset-0 bg-gradient-to-r from-purple-500 via-green-300 to-purple-500 opacity-25"></div>
         <div class="mx-auto text-center relative z-10 ">
             <h1 class="md:text-3xl text-xl lg:text-5xl font-semibold text-dark mb-2">Discover Top Companies and
-                Products test workflow</h1>
+                Products</h1>
             <p class="text-dark text-xs md:text-lg mb-4">Explore a vast network of five lakh+ businesses and products
                 for your needs</p>
             <form action="{{ route('search') }}"
