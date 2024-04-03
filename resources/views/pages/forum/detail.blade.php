@@ -1,43 +1,19 @@
 @extends('layouts.user')
 
 @section('head')
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.4/dist/quill.snow.css" rel="stylesheet" />
+
     <style>
         #container {
             margin: 0 auto;
         }
 
-        .ck-editor__editable[role="textbox"] {
-            /* Editing area */
-            min-height: 200px;
+        #editor {
+            height: 200px;
+            width: 100%;
+            background: white;
         }
-
-        .ck-content .image {
-            /* Block images */
-            /*max-width: 100%;*/
-            /*margin: 0 auto;*/
-        }
-
-        .fixed-img {
-            /*width: 250px;*/
-            /*height: 250px;*/
-            /*object-fit: contain;*/
-        }
-
-        pre{
-            background-color: #f5f5f5;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 5px auto;
-            text-wrap: pretty;
-        }
-
-        code {
-            background-color: #f5f5f5;
-            padding: 5px;
-            border-radius: 5px;
-        }
-
+ 
         #content img {
             max-width: 100%;
             height: auto;
@@ -169,6 +145,8 @@
 @endsection
 
 @section('page-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.4/dist/quill.js"></script>
+
     <script>
         let content = document.getElementById('content');
         let images = content.getElementsByTagName('img');
@@ -190,22 +168,29 @@
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-            // Get CKEditor instance
-            ClassicEditor
-                .create( document.querySelector( '#editor' ), {
-                    //plugins: [ Base64UploadAdapter, /* ... */ ],
-                    //toolbar: [ /* ... */ ]
-                } )
-                .then(editor => {
-                    console.log(editor);
-                    editor.model.document.on('change:data', () => {
-                        // Update hidden textarea with CKEditor content
-                        document.querySelector('#reply').value = editor.getData();
-                    });
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+            const toolbarOptions = [
+                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote'],
+                ['link', 'image'],
+
+                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+
+                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                [{ 'align': [] }],
+            ];
+            const options = {
+                debug: 'info',
+                modules: {
+                    toolbar: toolbarOptions,
+                },
+                placeholder: 'Compose an answer...',
+                theme: 'snow'
+            };
+            const quill = new Quill('#editor', options);
         });
     </script>
 @endsection
