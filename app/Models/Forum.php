@@ -22,7 +22,7 @@ class Forum extends Model
         'image'
     ];
     protected $casts = [
-        'body' => CleanHtml::class
+        //'body' => CleanHtml::class
     ];
 
     public function company() : BelongsTo
