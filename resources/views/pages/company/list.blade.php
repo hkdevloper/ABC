@@ -18,7 +18,7 @@
             color: black;
         }
 
-        /* New styles for card list layout */
+        /* New styles for card list layouts */
         .company-card {
             display: flex;
             flex-direction: column;
@@ -29,7 +29,7 @@
             transition: transform 0.3s ease-in-out;
         }
 
-        /* Additional responsive styles for card list layout */
+        /* Additional responsive styles for card list layouts */
         @media (min-width: 768px) {
             .company-card {
                 flex-direction: row;
