@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
 use App\Filament\Resources\ProductResource;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -23,6 +24,18 @@ class ProductRelationManager extends RelationManager
 
     public function table(Table $table): Table
     {
-        return ProductResource::table($table);
+        $user = User::find($this->getOwnerRecord()->id);
+        return ProductResource::table($table)->modifyQueryUsing(function (Builder $query) use ($user) {
+            $query->where('company_id', $user->company->id);
+        });
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ProductResource\Pages\ListProducts::route('/'),
+            'create' => ProductResource\Pages\CreateProduct::route('/create'),
+            'edit' => ProductResource\Pages\EditProduct::route('/{record}/edit'),
+        ];
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
 use App\Filament\Resources\CompanyResource;
+use App\Filament\Resources\CompanyResource\Pages\CreateCompany;
+use App\Filament\Resources\CompanyResource\Pages\EditCompany;
+use App\Filament\Resources\CompanyResource\Pages\ListCompanies;
 use App\Models\State;
 use App\Models\User;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
@@ -34,5 +37,14 @@ class CompanyRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return CompanyResource::table($table);
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListCompanies::route('/'),
+            'create' => CreateCompany::route('/create'),
+            'edit' => EditCompany::route('/{record}/edit'),
+        ];
     }
 }
