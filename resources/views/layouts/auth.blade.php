@@ -194,13 +194,15 @@
 
         .cta {
             display: flex;
-            flex: 1;
             flex-direction: column;
-            padding: 4rem;
-            align-items: center;
-            justify-content: space-between;
+            padding: 3rem;
             text-align: center;
             width: 100%;
+        }
+
+        .cta__image {
+            width: 275px;
+            height: 42px;
         }
 
         ul.list-styled {
