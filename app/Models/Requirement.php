@@ -27,8 +27,6 @@ class Requirement extends Model
     ];
     public static array $statusList = [
         'Pending' => 'Pending',
-        'Accepted' => 'Accepted',
-        'Rejected' => 'Rejected',
-        'Completed' => 'Completed',
+        'Approved' => 'Approved',
     ];
 }

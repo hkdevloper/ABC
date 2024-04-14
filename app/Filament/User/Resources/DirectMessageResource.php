@@ -111,7 +111,9 @@ class DirectMessageResource extends Resource
             ])
             ->modifyQueryUsing(function (Builder $query) {
                 // show only the records of the logged-in user's company
-                $query->where('company_id', auth()->user()->company->id)->orderBy('created_at', 'desc');
+                $query->where('company_id', auth()->user()->company->id)
+                    ->where('status', 'Approved')
+                    ->orderBy('created_at', 'desc');
             })
             ->emptyStateActions([]);
     }

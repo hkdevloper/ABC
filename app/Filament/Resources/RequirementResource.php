@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\RequirementResource\Pages;
-use App\Filament\Resources\RequirementResource\RelationManagers;
 use App\Models\Requirement;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -102,9 +101,7 @@ class RequirementResource extends Resource
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'Pending' => 'warning',
-                        'Accepted' => 'primary',
-                        'Rejected' => 'danger',
-                        'Completed' => 'success',
+                        'Approved' => 'success',
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')

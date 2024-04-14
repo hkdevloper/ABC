@@ -20,6 +20,14 @@ class DirectMessage extends Model
         'message',
         'status'
     ];
+
+    public static array $statusList = [
+        'Pending' => 'Pending',
+        'Completed' => 'Completed',
+        'Cancelled' => 'Cancelled',
+        'Spam' => 'Spam',
+        'onHold' => 'On Hold'
+    ];
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);

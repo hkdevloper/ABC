@@ -121,6 +121,9 @@ class RequirementsResource extends Resource
             ->bulkActions([
                 //
             ])
+            ->modifyQueryUsing(function (Builder $query){
+                $query->where('status', 'Approved');
+            })
             ->emptyStateHeading('No Requirements yet')
             ->emptyStateDescription('Enjoy your day!')
             ->emptyStateActions([
