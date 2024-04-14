@@ -3,7 +3,7 @@
 @section('content')
     <div class="cta">
         <div class="cta__content">
-            <img src="{{asset('storage/image/logo.png')}}" alt="Authentication" class="cta__image">
+            <img src="{{asset('storage/image/logo1.png')}}" alt="Authentication" class="cta__image">
         </div>
         <ul class="list-styled px-2">
             <li class="d-flex mb-2">

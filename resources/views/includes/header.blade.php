@@ -12,7 +12,7 @@
 <header class="bg-neutral-100 py-2 shadow">
     <div class="mx-auto flex flex-wrap items-center justify-between px-4">
         <a alt="company Logo" href="{{url('/')}}" class="hidden md:flex items-center">
-            <img alt="company Logo" src="{{asset('storage/image/logo.png')}}" class=" h-[27px] w-[150px] md:h-[27px] md:w-[150px]">
+            <img alt="company Logo" src="{{asset('storage/image/logo1.png')}}" class=" h-[27px] w-[150px] md:h-[27px] md:w-[150px]">
         </a>
         <button id="menu-toggle" class="lg:hidden flex text-gray-700 hover:text-purple-600 focus:outline-none">
             <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -20,7 +20,7 @@
             </svg>
         </button>
         <a alt="company Logo" href="{{url('/')}}" class="md:hidden flex items-center">
-            <img alt="company Logo" src="{{asset('storage/image/logo.png')}}" class=" h-[27px] w-[140px]">
+            <img alt="company Logo" src="{{asset('storage/image/logo1.png')}}" class=" h-[27px] w-[140px]">
         </a>
         <div class="lg:hidden flex ">
             @if(auth()->user() && auth()->user()->name != "")

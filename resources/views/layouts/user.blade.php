@@ -15,7 +15,7 @@
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/scroll-reveal.js')}}"></script>
     <meta name="theme-color" content="#6777ef"/>
-    <link rel="apple-touch-icon" href="{{ asset('storage/image/logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('storage/image/logo1.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
     @yield('head')
     <script>
