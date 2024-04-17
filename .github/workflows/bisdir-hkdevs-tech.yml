@@ -27,8 +27,8 @@ jobs:
             chmod -R ugo+rw storage
             chown -R www-data.www-data storage
             chown -R www-data.www-data bootstrap/cache
-            php artisan migrate --force
             php artisan config:cache
+            php artisan migrate --force
             php artisan storage:unlink
             php artisan storage:link
             echo "Done"

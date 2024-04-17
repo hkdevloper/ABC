@@ -10,7 +10,7 @@
             color: white;
             justify-content: center;
             @if(auth()->user()->company)
-                @if(!auth()->user()->company->is_approved)
+                @if(!auth()->user()->company->is_approved && !auth()->user()->company->is_rejected)
                     display: flex;
                 @endif
             @endif
@@ -86,7 +86,7 @@
             justify-content: center;
             color: white;
             @if(auth()->user()->company)
-                @if(!auth()->user()->company->is_active)
+                @if(!auth()->user()->company->is_active && auth()->user()->company->is_approved && !auth()->user()->company->is_rejected)
                     display: flex;
                 @endif
             @endif
