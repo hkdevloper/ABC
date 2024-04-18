@@ -3,6 +3,7 @@
 namespace App\Filament\User\Resources\ForumResource\Pages;
 
 use App\Filament\User\Resources\ForumResource;
+use App\Models\User;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
@@ -23,6 +24,15 @@ class CreateForum extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        // Send Notification to Admin when a new forum is created
+        Notification::make()
+            ->title('New Forum Created.')
+            ->body(Str::limit($data['title'], 70, '...'))
+            ->actions([
+                Actions\Action::make('view')
+                    ->url('/user/forums'),
+            ])
+            ->sendToDatabase(User::find(1));
         return array_merge($data, [
             'company_id' => auth()->user()->company->id,
         ]);
