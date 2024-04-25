@@ -1,14 +1,14 @@
 {
     "name": "ABC Mitra -Application",
     "short_name": "ABC-MITRA",
-    "start_url": "/",
+    "start_url": "/index.php",
     "background_color": "#6777ef",
     "description": "ABC Mitra -Application",
     "display": "fullscreen",
     "theme_color": "#6777ef",
     "icons": [
         {
-            "src": "logo.PNG",
+            "src": "logo.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
