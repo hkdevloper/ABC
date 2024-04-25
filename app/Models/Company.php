@@ -162,7 +162,9 @@ class Company extends Model
 
     public function products(): HasMany
     {
-        return $this->hasMany(Product::class, 'company_id')->where('is_approved', true)->where('is_active', true);
+        return $this->hasMany(Product::class, 'company_id')
+            ->where('is_approved', true)
+            ->where('is_active', true);
     }
 
     public function seo(): BelongsTo

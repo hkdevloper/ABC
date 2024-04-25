@@ -2,11 +2,7 @@
 
 namespace App\Filament\User\Resources;
 
-use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\User\Resources\CompanyResource\Pages;
-use App\Filament\User\Resources\CompanyResource\RelationManagers;
-use App\Forms\Components\LeafletMap;
-use App\Models\City;
 use App\Models\Company;
 use App\Models\State;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
@@ -18,21 +14,17 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
 use Str;
 
 class CompanyResource extends Resource
 {
     protected static ?string $model = Company::class;
+    protected static ?string $modelLabel = 'Company Profile';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

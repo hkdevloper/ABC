@@ -15,6 +15,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <script src="//unpkg.com/alpinejs" defer></script>
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('logo.PNG') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
     <style>
         .special-elite-regular {
             font-family: "Special Elite", system-ui;
@@ -194,13 +197,15 @@
 
         .cta {
             display: flex;
-            flex: 1;
             flex-direction: column;
-            padding: 4rem;
-            align-items: center;
-            justify-content: space-between;
+            padding: 3rem;
             text-align: center;
             width: 100%;
+        }
+
+        .cta__image {
+            width: 275px;
+            height: 42px;
         }
 
         ul.list-styled {
@@ -319,6 +324,19 @@
 
     // Automatically refresh CAPTCHA after a certain period (e.g., every 5 minutes)
     setInterval(generateCaptcha, 300000); // 300000 milliseconds = 5 minutes
+
+    // prevent selection and copy functionality for the whole page
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('copy', event => event.preventDefault());
+    document.addEventListener('selectstart', event => event.preventDefault());
+</script>
+<script src="{{ asset('/sw.js') }}"></script>
+<script>
+    if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker.register("/sw.js").then(function (reg) {
+            console.log("Service worker has been registered for scope: " + reg.scope);
+        });
+    }
 </script>
 </body>
 </html>

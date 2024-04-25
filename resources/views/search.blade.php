@@ -109,7 +109,7 @@
                   class="mt-2 md:mt-4 flex items-center justify-center rounded-full p-2 pl-1 relative bg-white w-[80vw] md:w-full m-auto md:p-4 md:pl-2" style="z-index: 99;">
                 <div class="relative flex items-center justify-between w-full s-form">
                     <label for="searchInput" class="sr-only">Search</label>
-                    <input id="searchInput" name="q" type="text" placeholder="Type at least 3 characters" autocomplete="off"
+                    <input id="searchInput" name="search" type="text" placeholder="Type at least 3 characters" autocomplete="off"
                            class="search-input focus:outline-none px-1 py-1 rounded-full border-none outline-none focus:border-none transition-all duration-300 ease-in-out w-full placeholder:text-xs md:placeholder:text-base md:px-6 md-py-2">
                     <button type="submit"
                             class="bg-blue-500 text-white py-2 px-4 w-auto rounded-full ml-2 hover:bg-blue-600 transition-all duration-300 ease-in-out flex items-center justify-center flex-row-reverse">

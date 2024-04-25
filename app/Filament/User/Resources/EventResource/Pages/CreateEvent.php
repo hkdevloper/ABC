@@ -3,6 +3,7 @@
 namespace App\Filament\User\Resources\EventResource\Pages;
 
 use App\Filament\User\Resources\EventResource;
+use App\Models\User;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
@@ -23,6 +24,15 @@ class CreateEvent extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        // Send Notification to Admin when a new event is created
+        Notification::make()
+            ->title('New Event Created.')
+            ->body(Str::limit($data['title'], 70, '...'))
+            ->actions([
+                Actions\Action::make('view')
+                    ->url('/user/events'),
+            ])
+            ->sendToDatabase(User::find(1));
         return array_merge($data, [
             'company_id' => auth()->user()->company->id,
             'slug' => Str::slug($data['title']),

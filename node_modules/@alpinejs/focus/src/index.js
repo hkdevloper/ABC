@@ -90,7 +90,7 @@ export default function (Alpine) {
                 setTimeout(() => {
                     if (! el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0')
 
-                    el.focus({ preventScroll: this._noscroll })
+                    el.focus({ preventScroll: this.__noscroll })
                 })
             }
         }
@@ -108,9 +108,13 @@ export default function (Alpine) {
                 fallbackFocus: () => el,
             }
 
-            let autofocusEl = el.querySelector('[autofocus]')
+            if (modifiers.includes('noautofocus')) {
+                options.initialFocus = false
+            } else {
+                let autofocusEl = el.querySelector('[autofocus]')
 
-            if (autofocusEl) options.initialFocus = autofocusEl
+                if (autofocusEl) options.initialFocus = autofocusEl
+            }
 
             let trap = createFocusTrap(el, options)
 
@@ -134,12 +138,13 @@ export default function (Alpine) {
 
                 // Start trapping.
                 if (value && ! oldValue) {
-                    setTimeout(() => {
-                        if (modifiers.includes('inert')) undoInert = setInert(el)
-                        if (modifiers.includes('noscroll')) undoDisableScrolling = disableScrolling()
+                    if (modifiers.includes('noscroll')) undoDisableScrolling = disableScrolling()
+                    if (modifiers.includes('inert')) undoInert = setInert(el)
 
+                    // Activate the trap after a generous tick. (Needed to play nice with transitions...)
+                    setTimeout(() => {
                         trap.activate()
-                    });
+                    }, 15)
                 }
 
                 // Stop trapping.

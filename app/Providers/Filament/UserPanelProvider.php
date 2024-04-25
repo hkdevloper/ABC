@@ -53,6 +53,7 @@ class UserPanelProvider extends PanelProvider
             ->passwordReset()
             ->emailVerification(EmailVerificationPrompt::class)
             ->profile(EditProfile::class, isSimple: false)
+            ->databaseNotifications()
             ->colors([
                 'primary' => Color::Purple,
             ])

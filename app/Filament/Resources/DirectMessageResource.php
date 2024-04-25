@@ -49,7 +49,7 @@ class DirectMessageResource extends Resource
                 Forms\Components\Select::make('status')
                     ->default('Pending')
                     ->native(false)
-                    ->options(['Pending' => 'Pending', 'Completed' => 'Completed', 'Cancelled' => 'Cancelled', 'Spam' => 'Spam', 'onHold' => 'On Hold'])
+                    ->options(DirectMessage::$adminStatusList)
                     ->required(),
                 Forms\Components\Textarea::make('message')
                     ->required()
@@ -74,7 +74,12 @@ class DirectMessageResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                    ->badge()
+                    ->formatStateUsing(fn(string $state): string => $state == 'adminApproved' ? 'Approved' : $state)
+                    ->color(fn(string $state): string => match ($state) {
+                        'Pending' => 'warning',
+                        'adminApproved' => 'success',
+                    }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

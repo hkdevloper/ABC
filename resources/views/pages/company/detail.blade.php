@@ -312,10 +312,10 @@
                             </div>
                         </div>
                         <!-- direct message button -->
-                        <button
+                        <a href="{{route('direct-message', ['company_id' => $company->id])}}"
                             class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded">
                             Direct message
-                        </button>
+                        </a>
                     </section>
                 </x-bladewind.tab-content>
                 <x-bladewind.tab-content name="rate">
@@ -506,9 +506,9 @@
                 </div>
             </div>
             <!-- direct message button -->
-            <button class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded">
+            <a href="{{route('direct-message', ['company_id' => $company->id])}}" class="m-1 bg-purple-500 hover:bg-purple-900 px-2 py-1 text-base text-white rounded">
                 Direct message
-            </button>
+            </a>
         </section>
         <!-- Rate & Reviews Section -->
         <section class="mb-4 card p-4">

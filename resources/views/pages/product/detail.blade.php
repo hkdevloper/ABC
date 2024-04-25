@@ -86,7 +86,7 @@
                                 </div>
                             </td>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span class="text-sm md:text-base text-justify text-purple-500">{{ $product->category->name }}</span>
+                                <span class="text-sm md:text-base text-justify text-purple-500">{{ $product->category->name ?? 'N/A' }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -102,7 +102,7 @@
                                 </div>
                             </td>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span class="text-sm: md:text-base text-gray-500">{{ $product->brand }}</span>
+                                <span class="text-sm: md:text-base text-gray-500">{{ $product->brand ?? 'N/A' }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -118,7 +118,7 @@
                                 </div>
                             </td>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span class="text-sm: md:text-base text-gray-500">{{ $product->color }}</span>
+                                <span class="text-sm: md:text-base text-gray-500">{{ $product->color ?? 'N/A' }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -134,7 +134,7 @@
                                 </div>
                             </td>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span class="text-sm: md:text-base text-gray-500">{{ $product->size }}</span>
+                                <span class="text-sm: md:text-base text-gray-500">{{ $product->size ?? 'N/A' }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -150,7 +150,7 @@
                                 </div>
                             </td>
                             <td class="w-1/2 py-3 px-4 border-b border-lightgray">
-                                <span class="text-sm: md:text-base text-gray-500">{{ $product->material }}</span>
+                                <span class="text-sm: md:text-base text-gray-500">{{ $product->material ?? 'N/A' }}</span>
                             </td>
                         </tr>
                     </table>

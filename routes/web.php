@@ -275,6 +275,14 @@ Route::prefix('legal')->group(function () {
 });
 
 Route::post('/requirements/submit', function (Request $request) {
+    $request->validate([
+        'subject' => 'max:70|required',
+        'email' => 'email|required',
+        'description' => 'required',
+        'customer_name' => 'required',
+        'country' => 'required',
+        'phone' => 'required'
+    ]);
     // upload images to server and get the path
     $images = [];
 
@@ -297,6 +305,11 @@ Route::post('/requirements/submit', function (Request $request) {
     $requirement->images = $images;
     $requirement->status = 'Pending';
     $requirement->saveOrFail();
+    // Send Online Notification to Admin and User
+    \Filament\Notifications\Notification::make()
+        ->title('New Requirement posted')
+        ->body($request->subject)
+        ->sendToDatabase(User::find(1));
     return redirect()->back()->with('success', 'Requirement submitted successfully');
 })->name('requirements.submit');
 

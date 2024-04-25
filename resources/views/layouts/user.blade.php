@@ -11,11 +11,12 @@
     <link href="{{ asset('css/main.css')}}" rel="stylesheet">
     <script src="{{ asset('js/jquery.js')}}"></script>
     <script src="{{ asset('js/alpine.js')}}" defer></script>
-{{--    <script src="{{ asset('js/fw.js')}}" crossorigin="anonymous"></script>--}}
     <script src="{{ asset('js/helper.js') }}"></script>
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/scroll-reveal.js')}}"></script>
-{{--    @include('includes.ads-config')--}}
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('storage/image/logo.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
     @yield('head')
     <script>
         tailwind.config = {
@@ -64,6 +65,10 @@
     showToast('error', '{{$error}}');
     @endforeach
     @endif
+    // prevent selection and copy functionality for the whole page
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('copy', event => event.preventDefault());
+    document.addEventListener('selectstart', event => event.preventDefault());
 </script>
 <script>
     ScrollReveal().reveal('.reveal', {
@@ -78,5 +83,13 @@
 
 @yield('page-scripts')
 @yield('components-scripts')
+<script src="{{ asset('/sw.js') }}"></script>
+<script>
+    if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker.register("/sw.js").then(function (reg) {
+            console.log("Service worker has been registered for scope: " + reg.scope);
+        });
+    }
+</script>
 </body>
 </html>
