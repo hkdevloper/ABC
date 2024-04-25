@@ -35,20 +35,16 @@
     <div class="form md:my-10">
         @if($errors->any())
             @foreach ($errors->all() as $error)
-                <x-bladewind.alert
-                    type="warning">
+                <x-bladewind.alert type="warning">
                     {{ $error }}
                 </x-bladewind.alert>
-                <div class="my-1"></div>
             @endforeach
         @endif
-            @if(session()->has('error'))
-                <x-bladewind.alert
-                    type="error">
-                    {{session()->get('error')}}
-                </x-bladewind.alert>
-                <div class="my-2"></div>
-            @endif
+        @if(session()->has('error'))
+            <x-bladewind.alert type="error">
+                {{session()->get('error')}}
+            </x-bladewind.alert>
+        @endif
         <form action="{{route('auth.register')}}" method="post" class="form__content" id="form">
             @csrf
             <div class="form__content__header">
