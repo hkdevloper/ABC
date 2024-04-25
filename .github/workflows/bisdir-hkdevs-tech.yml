@@ -33,7 +33,7 @@ jobs:
             php artisan storage:unlink
             php artisan storage:link
             git checkout -b pipeline
-            git add .
+            git add . 
             git commit -m "Deployed from Github Action"
             git push origin pipeline
             echo "Done"
