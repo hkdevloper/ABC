@@ -44,7 +44,7 @@ class DirectMessageResource extends Resource
                 Forms\Components\Select::make('status')
                     ->default('Pending')
                     ->native(false)
-                    ->options(['Pending' => 'Pending', 'Completed' => 'Completed', 'Cancelled' => 'Cancelled', 'Spam' => 'Spam', 'onHold' => 'On Hold'])
+                    ->options(DirectMessage::$userStatusList)
                     ->required(),
                 Forms\Components\Textarea::make('message')
                     ->required()
@@ -83,7 +83,7 @@ class DirectMessageResource extends Resource
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'Pending' => 'warning',
-                        'Completed' => 'success',
+                        'Approved', 'Completed' => 'success',
                         'Cancelled', 'Spam' => 'danger',
                         'onHold' => 'primary',
                     }),
@@ -112,7 +112,7 @@ class DirectMessageResource extends Resource
             ->modifyQueryUsing(function (Builder $query) {
                 // show only the records of the logged-in user's company
                 $query->where('company_id', auth()->user()->company->id)
-                    ->where('status', 'Approved')
+                    ->where('status', 'adminApproved')
                     ->orderBy('created_at', 'desc');
             })
             ->emptyStateActions([]);
