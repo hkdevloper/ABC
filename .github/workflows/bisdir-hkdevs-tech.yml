@@ -33,5 +33,5 @@ jobs:
             php artisan storage:link
             git add .
             git commit -m "Deployed from Github Action"
-            git push origin main 
+            git push origin pipeline
             echo "Done"
