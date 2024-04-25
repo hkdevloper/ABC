@@ -19,6 +19,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/hkdevs-bisdir/htdocs/bisdir.hkdevs.tech/
+            git checkout -b main
             git fetch origin main
             git pull origin main
             composer install
@@ -31,6 +32,7 @@ jobs:
             php artisan migrate --force
             php artisan storage:unlink
             php artisan storage:link
+            git checkout -b pipeline
             git add .
             git commit -m "Deployed from Github Action"
             git push origin pipeline
