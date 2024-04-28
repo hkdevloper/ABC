@@ -78,7 +78,9 @@ class DirectMessageResource extends Resource
                     ->formatStateUsing(fn(string $state): string => $state == 'adminApproved' ? 'Approved' : $state)
                     ->color(fn(string $state): string => match ($state) {
                         'Pending' => 'warning',
-                        'adminApproved' => 'success',
+                        'adminApproved', 'Approved', 'Completed' => 'success',
+                        'Cancelled', 'Spam' => 'danger',
+                        'onHold' => 'primary',
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
