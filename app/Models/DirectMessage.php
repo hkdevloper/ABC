@@ -22,12 +22,12 @@ class DirectMessage extends Model
     ];
 
     public static array $userStatusList = [
-        'Pending' => 'Pending',
+        'Pending', 'adminApproved' => 'Pending',
         'Approved' => 'Approved',
         'Completed' => 'Completed',
         'Cancelled' => 'Cancelled',
         'Spam' => 'Spam',
-        'onHold' => 'On Hold'
+        'onHold' => 'On Hold',
     ];
     public static array $adminStatusList = [
         'Pending' => 'Pending',
