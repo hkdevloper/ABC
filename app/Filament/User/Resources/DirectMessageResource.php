@@ -81,8 +81,9 @@ class DirectMessageResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
+                    ->formatStateUsing(fn(string $state): string => $state == 'adminApproved' ? 'Pending' : $state)
                     ->color(fn(string $state): string => match ($state) {
-                        'Pending' => 'warning',
+                        'adminApproved' => 'warning',
                         'Approved', 'Completed' => 'success',
                         'Cancelled', 'Spam' => 'danger',
                         'onHold' => 'primary',
