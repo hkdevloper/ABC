@@ -44,7 +44,14 @@ class DirectMessageResource extends Resource
                 Forms\Components\Select::make('status')
                     ->default('Pending')
                     ->native(false)
-                    ->options(DirectMessage::$userStatusList)
+                    ->options(function (){
+                        // If selected status is 'adminApproved', then show 'Pending' in the dropdown
+                        if (request()->input('status') == 'adminApproved') {
+                            return DirectMessage::$userStatusList;
+                        }else{
+                            return ['adminApproved' => 'Approved'];
+                        }
+                    })
                     ->required(),
                 Forms\Components\Textarea::make('message')
                     ->required()
