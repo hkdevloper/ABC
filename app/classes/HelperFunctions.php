@@ -141,10 +141,19 @@ class HelperFunctions
     // Function to get Secure Email Address to Display
     public static function secureEmailAddress($email): string
     {
-        // return Secure Email Address
-        // eg: *******@******.com
-        $domain = explode('.', $email)[1];
-        return "*******@******.$domain";
+        // Extract domain
+        $parts = explode('@', $email);
+        $username = $parts[0];
+        $domainParts = explode('.', $parts[1]);
+        $domain = end($domainParts);
+
+        // Secure the username
+        $securedUsername = str_repeat('*', strlen($username));
+
+        // Secure the domain
+        $securedDomain = str_repeat('*', strlen($parts[1]));
+
+        return $securedUsername . '@' . $securedDomain . '.' . $domain;
     }
 
 
