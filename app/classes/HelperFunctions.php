@@ -141,10 +141,12 @@ class HelperFunctions
     // Function to get Secure Email Address to Display
     public static function secureEmailAddress($email): string
     {
-        $em = explode("@", $email);
-        $em[0] = str_repeat("*", strlen($em[0]));
-        return implode("@", $em);
+        // return Secure Email Address
+        // eg: *******@******.com
+        $domain = explode('.', $email)[1];
+        return "*******@******.$domain";
     }
+
 
     // Function to Hide Website Until user not Paid for it
     public static function secureWebsiteUrl($url): string
