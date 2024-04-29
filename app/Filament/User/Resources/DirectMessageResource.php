@@ -44,7 +44,7 @@ class DirectMessageResource extends Resource
                 Forms\Components\Select::make('status')
                     ->default('Pending')
                     ->native(false)
-                    ->options(DirectMessage::$userStatusList)
+                    ->options(DirectMessage::$statusList)
                     ->required(),
                 Forms\Components\Textarea::make('message')
                     ->required()
