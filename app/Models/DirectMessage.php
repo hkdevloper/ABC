@@ -21,17 +21,10 @@ class DirectMessage extends Model
         'status'
     ];
 
-    public static array $userStatusList = [
-        'Pending', 'adminApproved' => 'Pending',
-        'Approved' => 'Approved',
-        'Completed' => 'Completed',
-        'Cancelled' => 'Cancelled',
-        'Spam' => 'Spam',
-        'onHold' => 'On Hold',
-    ];
-    public static array $adminStatusList = [
+    public static array $statusList = [
         'Pending' => 'Pending',
-        'adminApproved' => 'Admin Approved',
+        'Completed' => 'Completed',
+        'Spam' => 'Spam',
     ];
     public function company(): BelongsTo
     {

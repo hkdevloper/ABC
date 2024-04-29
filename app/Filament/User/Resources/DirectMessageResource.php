@@ -81,9 +81,8 @@ class DirectMessageResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->formatStateUsing(fn(string $state): string => $state == 'adminApproved' ? 'Pending' : $state)
                     ->color(fn(string $state): string => match ($state) {
-                        'adminApproved' => 'warning',
+                        'Pending' => 'warning',
                         'Approved', 'Completed' => 'success',
                         'Cancelled', 'Spam' => 'danger',
                         'onHold' => 'primary',
@@ -113,7 +112,7 @@ class DirectMessageResource extends Resource
             ->modifyQueryUsing(function (Builder $query) {
                 // show only the records of the logged-in user's company
                 $query->where('company_id', auth()->user()->company->id)
-                    ->where('status', 'adminApproved')
+                    ->where('is_approved', true)
                     ->orderBy('created_at', 'desc');
             })
             ->emptyStateActions([]);
