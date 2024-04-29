@@ -52,12 +52,8 @@
                         <span class="text-gray-600 text-sm">{{$forum->countAnswers()}} Answers</span>
                         <span class="ml-4 text-gray-600 text-sm">{{$viewCount}} Views</span>
                     </div>
-                    <div>
-                        <button class="text-purple-500 hover:underline ml-2">
-                            Share
-                        </button>
-                    </div>
                 </div>
+                <div class="sharethis-inline-share-buttons"></div>
             </div>
         </div>
         <div class="w-full my-5 p-2">

@@ -34,6 +34,7 @@
             },
         };
     </script>
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=662fb580a67ccd0019e8e820&product=inline-share-buttons&source=platform" async="async"></script>
 </head>
 
 <body>
