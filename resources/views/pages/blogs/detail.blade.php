@@ -17,6 +17,7 @@
                 </div>
                 <h1 class="mb-6 text-3xl font-bold">{{$blog->title}}</h1>
                 <div class="text-sm">{!! $blog->content !!}</div>
+                <!-- ShareThis BEGIN --><div class="sharethis-inline-reaction-buttons"></div><!-- ShareThis END -->
             </div>
             <!-- Leave Reply -->
             <section class="my-8">

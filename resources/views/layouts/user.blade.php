@@ -93,5 +93,6 @@
         });
     }
 </script>
+<div class="sharethis-sticky-share-buttons"></div>
 </body>
 </html>
