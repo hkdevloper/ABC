@@ -69,18 +69,22 @@
             Claim your Business
         </h1>
         <p class="text-center mt-2">
-            <a href="{{ route('view.company', $company->slug) }}" class="text-blue-500 hover:text-blue-700">Back to Company</a>
+            <a href="{{ route('view.company', $company->slug) }}" class="text-blue-500 hover:text-blue-700">Back to
+                Company</a>
         </p>
     </div>
     <div class="container mx-auto py-8">
-        <form id="form" action="{{ route('view.claim.company') }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form id="form" action="{{ route('view.claim.company') }}" method="POST"
+              class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             @csrf
 
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                     Email
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') border-red-500 @enderror" id="email" type="email" placeholder="Email" name="email" value="{{ old('email') }}" required>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') border-red-500 @enderror"
+                    id="email" type="email" placeholder="Email" name="email" value="{{ old('email') }}" required>
                 @error('email')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -90,7 +94,9 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="website">
                     Website
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('website') border-red-500 @enderror" id="website" type="text" placeholder="Website" name="website" value="{{ old('website') }}" required>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('website') border-red-500 @enderror"
+                    id="website" type="text" placeholder="Website" name="website" value="{{ old('website') }}" required>
                 @error('website')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -100,7 +106,9 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
                     Phone
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('phone') border-red-500 @enderror" id="phone" type="text" placeholder="Phone" name="phone" value="{{ old('phone') }}" required>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('phone') border-red-500 @enderror"
+                    id="phone" type="text" placeholder="Phone" name="phone" value="{{ old('phone') }}" required>
                 @error('phone')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -110,7 +118,10 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="company_name">
                     Company Name
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('company_name') border-red-500 @enderror" id="company_name" type="text" placeholder="Company Name" name="company_name" value="{{ old('company_name') }}" required>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('company_name') border-red-500 @enderror"
+                    id="company_name" type="text" placeholder="Company Name" name="company_name"
+                    value="{{ old('company_name') }}" required>
                 @error('company_name')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -120,16 +131,21 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="message">
                     Message
                 </label>
-                <textarea rows="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('message') border-red-500 @enderror" id="message" placeholder="Message" name="message" required>{{ old('message') }}</textarea>
+                <textarea rows="10"
+                          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('message') border-red-500 @enderror"
+                          id="message" placeholder="Message" name="message" required>{{ old('message') }}</textarea>
                 @error('message')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="captcha">Fill this CAPTCHA: <span class="captcha">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="captcha">Fill this CAPTCHA: <span
+                        class="captcha">
                         <span id="captcha-code"></span>
                     </span></label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" id="captcha" name="captcha" required>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    type="text" id="captcha" name="captcha" required>
                 <!-- Helper text -->
                 <small class="form__helper">Can't read the CAPTCHA?
                     <span class="hover:underline text-purple-500 cursor-pointer"
@@ -141,7 +157,9 @@
             <input type="hidden" name="company_id" value="{{ $company->id }}">
 
             <div class="flex items-center justify-between w-full">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-80 mx-auto" type="button" onclick="validateCaptcha()">
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-80 mx-auto"
+                    type="button" onclick="validateCaptcha()">
                     Submit
                 </button>
             </div>
@@ -151,6 +169,12 @@
 @endsection
 
 @section('page-scripts')
+    <script>
+        // prevent selection and copy functionality for the whole page
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('selectstart', event => event.preventDefault());
+    </script>
     <script>
         function generateCaptcha() {
             const code = generateRandomCode(6); // Generate a new CAPTCHA code
