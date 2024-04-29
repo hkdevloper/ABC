@@ -101,32 +101,32 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function blogs() : BelongsTo
     {
-        return $this->belongsTo(Blog::class, 'id', 'company_id');
+        return $this->belongsTo(Blog::class, 'id');
     }
 
     public function deals() : BelongsTo
     {
-        return $this->belongsTo(Deal::class, 'id', 'company_id');
+        return $this->belongsTo(Deal::class, 'id');
     }
 
     public function events() : BelongsTo
     {
-        return $this->belongsTo(Event::class, 'id', 'company_id');
+        return $this->belongsTo(Event::class, 'id');
     }
 
     public function forums() : BelongsTo
     {
-        return $this->belongsTo(Forum::class, 'id', 'company_id');
+        return $this->belongsTo(Forum::class, 'id');
     }
 
     public function jobs() : BelongsTo
     {
-        return $this->belongsTo(Job::class, 'id', 'company_id');
+        return $this->belongsTo(Job::class, 'id');
     }
 
     public function products() : BelongsTo
     {
-        return $this->belongsTo(Product::class, 'id', 'company_id');
+        return $this->belongsTo(Product::class, 'id');
     }
 
     public function forumReplies() : BelongsTo

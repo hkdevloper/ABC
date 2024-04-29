@@ -87,6 +87,13 @@ class Company extends Model
         return $this->hasMany(Deal::class, 'company_id');
     }
 
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'company_id')
+            ->where('is_approved', true)
+            ->where('is_active', true);
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -160,12 +167,7 @@ class Company extends Model
         return $this->hasMany(BookmarkCompanies::class, 'company_id', 'id');
     }
 
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::class, 'company_id')
-            ->where('is_approved', true)
-            ->where('is_active', true);
-    }
+
 
     public function seo(): BelongsTo
     {
