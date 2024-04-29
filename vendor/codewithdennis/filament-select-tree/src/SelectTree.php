@@ -27,8 +27,8 @@ class SelectTree extends Field implements HasAffixActions
     use CanBeSearchable;
     use HasActions;
     use HasAffixes;
-    use HasPlaceholder;
     use HasPivotData;
+    use HasPlaceholder;
 
     protected string $view = 'select-tree::select-tree';
 
@@ -59,6 +59,8 @@ class SelectTree extends Field implements HasAffixActions
     protected string|Closure $relationship;
 
     protected ?Closure $modifyQueryUsing;
+
+    protected ?Closure $modifyChildQueryUsing;
 
     protected Closure|int $defaultOpenLevel = 0;
 
@@ -111,7 +113,7 @@ class SelectTree extends Field implements HasAffixActions
                 // Sync the relationship with the provided state (IDs).
                 if ($pivotData === []) {
                     $component->getRelationship()->sync($state ?? []);
-    
+
                     return;
                 }
 
@@ -144,6 +146,11 @@ class SelectTree extends Field implements HasAffixActions
         // If we're not at the root level and a modification callback is provided, apply it to null query
         if ($this->modifyQueryUsing) {
             $nullParentQuery = $this->evaluate($this->modifyQueryUsing, ['query' => $nullParentQuery]);
+        }
+
+        // If we're at the child level and a modification callback is provided, apply it to non null query
+        if ($this->modifyChildQueryUsing) {
+            $nonNullParentQuery = $this->evaluate($this->modifyChildQueryUsing, ['query' => $nonNullParentQuery]);
         }
 
         if ($this->withTrashed) {
@@ -231,12 +238,13 @@ class SelectTree extends Field implements HasAffixActions
         return $node;
     }
 
-    public function relationship(string $relationship, string $titleAttribute, string $parentAttribute, ?Closure $modifyQueryUsing = null): self
+    public function relationship(string $relationship, string $titleAttribute, string $parentAttribute, ?Closure $modifyQueryUsing = null, ?Closure $modifyChildQueryUsing = null): self
     {
         $this->relationship = $relationship;
         $this->titleAttribute = $titleAttribute;
         $this->parentAttribute = $parentAttribute;
         $this->modifyQueryUsing = $modifyQueryUsing;
+        $this->modifyChildQueryUsing = $modifyChildQueryUsing;
 
         return $this;
     }

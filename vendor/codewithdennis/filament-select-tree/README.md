@@ -7,7 +7,6 @@ This package adds a dynamic select tree field to your Laravel / Filament applica
 
 ![Select Tree](https://github.com/CodeWithDennis/filament-select-tree/assets/23448484/d944b896-134b-414a-b654-9adecc43ba5e)
 
-
 ## Installation
 
 You can install the package via composer:
@@ -25,8 +24,6 @@ php artisan filament:assets
 Use the tree for a `BelongsToMany` relationship
 
 ```PHP
-use CodeWithDennis\FilamentSelectTree\SelectTree;
-
 SelectTree::make('categories')
     ->relationship('categories', 'name', 'parent_id')
 ```
@@ -34,10 +31,24 @@ SelectTree::make('categories')
 Use the tree for a `BelongsTo` relationship
 
 ```PHP
-use CodeWithDennis\FilamentSelectTree\SelectTree;
-
 SelectTree::make('category_id')
     ->relationship('category', 'name', 'parent_id')
+```
+
+## Custom Query
+
+Customize the parent query
+
+```PHP
+SelectTree::make('categories')
+    ->relationship(relationship: 'categories', titleAttribute: 'name', parentAttribute: 'parent_id', modifyQueryUsing: fn($query) => $query));
+```
+
+Customize the child query
+
+```PHP
+SelectTree::make('categories')
+    ->relationship(relationship: 'categories', titleAttribute: 'name', parentAttribute: 'parent_id', modifyChildQueryUsing: fn($query) => $query));
 ```
 
 ## Methods
@@ -138,14 +149,28 @@ Allow soft deleted items to be displayed
 ->withTrashed()
 ```
 
-Specify a different key for your model. 
+Specify a different key for your model.
 For example: you have id, code and parent_code. Your model uses id as key, but the parent-child relation is established between code and parent_code
 
 ```PHP
 ->withKey('code')
 ```
 
+Store fetched models for additional functionality
+
+```PHP
+->storeResults()
+```
+
+```php
+// Now you can access the results in `afterStateUpdated`
+->afterStateUpdated(function ($state, SelectTree $component) {
+    $component->getResults();
+}),
+```
+
 ## Filters
+
 Use the tree in your table filters. Here's an example to show you how.
 
 ```bash
@@ -177,7 +202,9 @@ use CodeWithDennis\FilamentSelectTree\SelectTree;
         })
 ])
 ```
+
 ## Screenshots
+
 ![download.png](./resources/images/example.png)
 
 ## Contributing
