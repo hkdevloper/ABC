@@ -1,6 +1,6 @@
 <div class="quick-create-component">
 @if ($resources && $this->shouldBeHidden() === false)
-    <x-filament::dropdown placement="bottom-end">
+    <x-filament::dropdown placement="bottom-end" :teleport="true">
         <x-slot name="trigger">
             <button
                 @class([
