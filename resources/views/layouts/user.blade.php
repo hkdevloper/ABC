@@ -50,7 +50,6 @@
 </main>
 <script src="{{ asset('js/tw-element-min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/toastify.js')}}"></script>
-{{--<script src="{{ asset('js/alpine.js')}}"></script>--}}
 <script src="{{ asset('js/main.js')}}"></script>
 <script>
     @if(session()->has('success'))
@@ -67,10 +66,6 @@
     showToast('error', '{{$error}}');
     @endforeach
     @endif
-    // prevent selection and copy functionality for the whole page
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.addEventListener('copy', event => event.preventDefault());
-    document.addEventListener('selectstart', event => event.preventDefault());
 </script>
 <script>
     ScrollReveal().reveal('.reveal', {
@@ -82,7 +77,6 @@
         reset: true    // Reset animation on scroll up
     });
 </script>
-
 @yield('page-scripts')
 @yield('components-scripts')
 <script src="{{ asset('/sw.js') }}"></script>

@@ -324,11 +324,6 @@
 
     // Automatically refresh CAPTCHA after a certain period (e.g., every 5 minutes)
     setInterval(generateCaptcha, 300000); // 300000 milliseconds = 5 minutes
-
-    // prevent selection and copy functionality for the whole page
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.addEventListener('copy', event => event.preventDefault());
-    document.addEventListener('selectstart', event => event.preventDefault());
 </script>
 <script src="{{ asset('/sw.js') }}"></script>
 <script>
