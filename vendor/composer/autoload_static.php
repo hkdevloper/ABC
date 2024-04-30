@@ -1027,6 +1027,7 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Livewire\\ForumAnswer' => __DIR__ . '/../..' . '/app/Livewire/ForumAnswer.php',
         'App\\Livewire\\Header' => __DIR__ . '/../..' . '/app/Livewire/Header.php',
         'App\\Livewire\\Requirement' => __DIR__ . '/../..' . '/app/Livewire/Requirement.php',
         'App\\Models\\Address' => __DIR__ . '/../..' . '/app/Models/Address.php',
