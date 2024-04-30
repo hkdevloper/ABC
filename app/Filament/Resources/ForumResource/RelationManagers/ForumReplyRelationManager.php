@@ -29,6 +29,7 @@ class ForumReplyRelationManager extends RelationManager
                     ->default(request()->route('record')),
                 Forms\Components\RichEditor::make('body')
                     ->toolbarButtons([
+                        'attachFiles',
                         'blockquote',
                         'bold',
                         'bulletList',
@@ -41,7 +42,6 @@ class ForumReplyRelationManager extends RelationManager
                         'underline',
                         'undo',
                     ])
-                    ->autofocus()
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')

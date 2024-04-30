@@ -1,29 +1,23 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Filament\User\Resources;
 
-use App\Models\Forum;
-use Filament\Forms\Components\Hidden;
+use App\Filament\User\Resources\ForumReplyResource\Pages;
+use App\Models\ForumReply;
 use Filament\Forms\Components\RichEditor;
-use Illuminate\Contracts\View\View;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use JetBrains\PhpStorm\NoReturn;
-use Livewire\Component;
+use Filament\Resources\Resource;
 
-class ForumAnswer extends Component implements HasForms
+class ForumReplyResource extends Resource
 {
-    use InteractsWithForms;
+    protected static ?string $model = ForumReply::class;
 
-    public ?array $data = [];
-    public Forum $forum;
-    public function form(Form $form): Form
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Hidden::make('forum_id')
-                    ->default($this->forum->id ?? null),
                 RichEditor::make('body')
                     ->label('')
                     ->toolbarButtons([
@@ -43,24 +37,17 @@ class ForumAnswer extends Component implements HasForms
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
+                    ->columnSpanFull()
                     ->required()
-            ])
-            ->statePath('data');
+            ]);
     }
 
-    public function mount(): void
+    public static function getPages(): array
     {
-        $this->form->fill();
-    }
-
-    #[NoReturn] public function create(): void
-    {
-        $this->validate();
-        dd($this->data);
-    }
-
-    public function render(): View
-    {
-        return view('livewire.forum-answer');
+        return [
+            'index' => Pages\ListForumReplies::route('/'),
+            //'create' => Pages\CreateForumReply::route('/create'),
+            'edit' => Pages\EditForumReply::route('/{record}/edit'),
+        ];
     }
 }
