@@ -74,6 +74,7 @@ class UserForumController extends Controller
 
     public function answerForum(Request $request)
     {
+        return $request->all();
         $request->validate([
             'body' => 'required',
             'forum_id' => 'required'
@@ -81,7 +82,6 @@ class UserForumController extends Controller
         if (!auth()->user()) {
             return redirect()->route('auth.login')->with('error', 'You must login to answer this forum');
         }
-        return $request->all();
         $forum = Forum::find($request->forum_id);
         if (!$forum) {
             return redirect()->back()->with('error', 'Forum not found');

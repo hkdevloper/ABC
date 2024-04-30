@@ -11,7 +11,7 @@ self.addEventListener("install", function (event) {
 
 const filesToCache = [
     '/',
-    '/offline.html'
+    '/offline123.html'
 ];
 
 const checkResponse = function (request) {
@@ -38,7 +38,7 @@ const returnFromCache = function (request) {
     return caches.open("offline").then(function (cache) {
         return cache.match(request).then(function (matching) {
             if (!matching || matching.status === 404) {
-                return cache.match("offline.html");
+                return cache.match("offline123.html");
             } else {
                 return matching;
             }
