@@ -2,7 +2,7 @@
 @extends('layouts.user')
 @section('content')
     <div class="container mx-auto">
-        <x-user.bread-crumb :data="['Home', 'Products', $product->name]"/>
+        <x-user.bread-crumb :data="['Home', 'Product', $product->name]"/>
         <div class="w-full overflow-hidden shadow-md backdrop-blur bg-white rounded-lg">
             <img src="{{ url('storage/'.$product->thumbnail) }}" alt="Product Image" id="main-image"
                  class="h-80 w-full max-w-full object-contain img-remove-bg">

@@ -2,7 +2,7 @@
 @extends('layouts.user')
 @section('content')
     <div class="container mx-auto">
-        <x-user.bread-crumb :data="['Home', 'Deals', $deal->title]"/>
+        <x-user.bread-crumb :data="['Home', 'Deal', $deal->title]"/>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Image Side -->

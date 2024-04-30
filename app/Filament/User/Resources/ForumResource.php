@@ -60,7 +60,7 @@ class ForumResource extends Resource
                         'blockquote',
                         'bold',
                         'bulletList',
-                        'codeBlock',
+//                        'codeBlock',
                         'h2',
                         'h3',
                         'italic',
