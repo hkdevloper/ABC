@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
-    <x-user.bread-crumb :data="['Home', 'Products', $blog->title]"/>
+    <x-user.bread-crumb :data="['Home', 'Blog', $blog->title]"/>
     <div class="container py-6 mx-auto flex flex-wrap">
         <div class="w-full mb-10 lg:mb-0 overflow-hidden px-2">
             <div class="my-2 md:px-6">

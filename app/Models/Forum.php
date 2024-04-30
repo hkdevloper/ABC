@@ -37,7 +37,7 @@ class Forum extends Model
 
     public function forumReplies() : HasMany
     {
-        return $this->hasMany(ForumReply::class);
+        return $this->hasMany(ForumReply::class)->orderBy('created_at', 'desc');
     }
 
     public function countAnswers() : int
