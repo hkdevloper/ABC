@@ -123,23 +123,29 @@
                                 };
                                 $is_featured = $item->is_featured ? 'bg-yellow-200 hover:shadow-gray-400' : 'bg-indigo-100 hover:shadow-gray-400';
                             @endphp
-                            <a href="{{ route($route, ['category' => $item->name]) }}" class="flex justify-center items-center w-full mb-6 relative">
+                            <a href="{{ route($route, ['category' => $item->name]) }}"
+                               class="flex justify-center items-center w-full mb-6 relative">
                                 @if($item->is_featured)
-                                    <div class="absolute top-0 left-0 bg-blue-500 text-white p-1 px-2 text-xs font-bold rounded">
+                                    <div
+                                        class="absolute top-0 left-0 bg-blue-500 text-white p-1 px-2 text-xs font-bold rounded">
                                         Featured
                                     </div>
                                 @endif
                                 <div class="w-64 bg-white rounded-lg shadow-lg overflow-hidden">
                                     @if($item->image)
-                                        <img src="{{ url('storage/' . $item->image) }}" alt="{{ $item->name }}" class="w-full h-48 object-cover"/>
+                                        <img src="{{ url('storage/' . $item->image) }}" alt="{{ $item->name }}"
+                                             class="w-full h-48 object-cover"/>
                                     @else
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-48 object-cover">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                             stroke-width="1.5" stroke="currentColor" class="w-full h-48 object-cover">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                  d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
                                         </svg>
                                     @endif
                                     <div class="p-4">
                                         <p class="text-gray-700 font-semibold">{{ Str::limit($item->name, 20) }}</p>
-                                        <p class="text-gray-600 text-sm mt-1">{{ $item->countItem($item->type) }} Items</p>
+                                        <p class="text-gray-600 text-sm mt-1">{{ $item->countItem($item->type) }}
+                                            Items</p>
                                     </div>
                                 </div>
                             </a>
@@ -282,17 +288,16 @@
                             </ul>
                         </div>
                     @empty
-                        <p class="text-gray-700">No featured companies available.</p>
-                    @endforelse
                 </div>
+                <p class="text-gray-700 w-100">No featured companies available.</p>
+                @endforelse
             </div>
         </section>
 
         <!-- Top Products -->
         <section class="p-2 my-1 md:p-8 md:my-4">
             <div class="flex justify-between items-center">
-                <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Explore Top
-                    Products</h1>
+                <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Explore Top Products</h1>
                 <a href="{{ route('products') }}"
                    class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
                     <span class="text-purple-500 md:text-white">Explore All</span>
@@ -375,7 +380,7 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-gray-700 text-center col-span-full">No listings found.</p>
+                    <p class="text-gray-700 col-span-full">No listings found.</p>
                 @endforelse
             </div>
         </section>
@@ -384,8 +389,7 @@
         <section class="p-2 my-1 md:p-8 md:my-4">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured
-                        Events</h1>
+                    <h1 class="text-base sm:text-2xl md:text-3xl font-semibold inline-block text-blue-900">Featured Events</h1>
                     <a href="{{ route('events') }}"
                        class="md:bg-purple-700 text-white rounded-full flex items-center hover:bg-purple-600 transition duration-300 ease-in-out underline md:no-underline md:px-4 md:py-2">
                         <span class="text-purple-500 md:text-white">Explore All</span>
@@ -464,15 +468,12 @@
                     <div class="p-4 flex flex-col text-center items-center card reveal">
                         <div
                             class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 14V21h1a1 1 0 001-1v-4a3 3 0 00-3-3h-1zm0 0V10M12 7V3m0 4h3m-3 0H9m3 4h3m-3 0H9"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
                             </svg>
                         </div>
                         <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Promote your business
-                                worldwide</h2>
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Promote your business worldwide</h2>
                             <p class="leading-relaxed text-base">
                                 As a full-stack apprentice intern in the heart of Kathiawar, specializing in Angular and
                                 .NET Core,
@@ -483,10 +484,8 @@
                     <div class="p-4 flex flex-col text-center items-center card reveal">
                         <div
                             class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 14V21h1a1 1 0 001-1v-4a3 3 0 00-3-3h-1zm0 0V10M12 7V3m0 4h3m-3 0H9m3 4h3m-3 0H9"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                             </svg>
                         </div>
                         <div class="flex-grow">
@@ -501,10 +500,8 @@
                     <div class="p-4 flex flex-col text-center items-center card reveal">
                         <div
                             class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 14V21h1a1 1 0 001-1v-4a3 3 0 00-3-3h-1zm0 0V10M12 7V3m0 4h3m-3 0H9m3 4h3m-3 0H9"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
                             </svg>
                         </div>
                         <div class="flex-grow">
