@@ -40,7 +40,7 @@ class UserDealController extends Controller
         if ($request->has('category')) {
             $category = $request->category;
             $category = Category::where('name', $category)->first();
-            $query->where('category_id', $category->id);
+            $query->where('deals.category_id', $category->id);
         }
 
         // Country Filter
