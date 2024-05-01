@@ -38,7 +38,6 @@ class StateResource extends Resource
                     ->relationship('country', 'name')
                     ->native(false)
                     ->searchable()
-                    ->default(1)
                     ->required(),
             ])->columns(3);
     }
