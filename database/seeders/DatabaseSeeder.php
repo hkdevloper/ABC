@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
 //            CountrySeeder::class,
 //            StateSeeder::class,
 //            CategoryTableSeeder::class,
-//            CompanyTableSeeder::class,
+            CompanyTableSeeder::class,
 //            ProductSeeder::class,
 //            EventsSeeder::class,
 //            BlogsSeeder::class,
@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
 //            ForumSeeder::class,
 //            DealSeeder::class,
 //            RateReviewSeeder::class,
-        RequirementTableSeeder::class
+//            RequirementTableSeeder::class
         ]);
     }
 }
