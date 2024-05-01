@@ -47,7 +47,7 @@ class UserEventController extends Controller
         if ($request->has('category')) {
             // Get Category I'd from Category Name
             $cat_id = Category::where('name', $request->category)->first();
-            $eventQuery->where('category_id', $cat_id->id);
+            $eventQuery->where('events.category_id', $cat_id->id);
         }
         $events = $eventQuery->paginate(12);
         $categories = Category::where('type', 'event')->where('is_active', 1)->get();

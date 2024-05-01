@@ -35,7 +35,7 @@ class UserBlogController extends Controller
         if (!empty($categoryFilter)) {
             // Get Category I'd from Category Name
             $catId = Category::where('name', $categoryFilter)->first();
-            $blogsQuery->where('category_id', $catId->id);
+            $blogsQuery->where('blogs.category_id', $catId->id);
         }
 
 
