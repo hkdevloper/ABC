@@ -575,34 +575,36 @@
             </div>
         </section>
         <!-- Claim listing section -->
-        <section class="card p-4 mb-4">
-            <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Is this your Listing?</h2>
-            <div class="card bg-gray-50 p-4">
-                <h2 class="mb-3 text-large text-gray-800 lg:text-xl">Claim it To:</h2>
-                <ul class="list-disc list-inside pl-4">
-                    <li class="mb-2 flex items-start">
-                        <i class='bx bx-badge-check text-blue-950 mx-2'></i>
-                        Update your company information
-                    </li>
-                    <li class="mb-2 flex items-start">
-                        <i class='bx bx-badge-check text-blue-950 mx-2'></i>
-                        Respond to reviews
-                    </li>
-                    <li class="mb-2 flex items-start">
-                        <i class='bx bx-badge-check text-blue-950 mx-2'></i>
-                        Access exclusive tools for free
-                    </li>
-                    <li class="mb-2 flex items-start">
-                        <i class='bx bx-badge-check text-blue-950 mx-2'></i>
-                        And much more...
-                    </li>
-                </ul>
-            </div>
-            <a href="{{route('view.claim.company', ['company_id' => $company->id])}}"
-               class="m-4 bg-purple-500 hover:bg-purple-700 px-4 py-2 text-base text-white rounded-full focus:outline-none focus:shadow-outline-purple">
-                Claim Now
-            </a>
-        </section>
+        @if($user->id != $company->user_id && !$company->is_claimed)
+            <section class="card p-4 mb-4">
+                <h2 class="mb-3 text-lg font-bold text-gray-800 lg:text-xl">Is this your Listing?</h2>
+                <div class="card bg-gray-50 p-4">
+                    <h2 class="mb-3 text-large text-gray-800 lg:text-xl">Claim it To:</h2>
+                    <ul class="list-disc list-inside pl-4">
+                        <li class="mb-2 flex items-start">
+                            <i class='bx bx-badge-check text-blue-950 mx-2'></i>
+                            Update your company information
+                        </li>
+                        <li class="mb-2 flex items-start">
+                            <i class='bx bx-badge-check text-blue-950 mx-2'></i>
+                            Respond to reviews
+                        </li>
+                        <li class="mb-2 flex items-start">
+                            <i class='bx bx-badge-check text-blue-950 mx-2'></i>
+                            Access exclusive tools for free
+                        </li>
+                        <li class="mb-2 flex items-start">
+                            <i class='bx bx-badge-check text-blue-950 mx-2'></i>
+                            And much more...
+                        </li>
+                    </ul>
+                </div>
+                <a href="{{route('view.claim.company', ['company_id' => $company->id])}}"
+                   class="m-4 bg-purple-500 hover:bg-purple-700 px-4 py-2 text-base text-white rounded-full focus:outline-none focus:shadow-outline-purple">
+                    Claim Now
+                </a>
+            </section>
+        @endif
     </div>
     <x-bladewind::modal
         backdrop_can_close="false"

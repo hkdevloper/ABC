@@ -95,9 +95,6 @@ class ForumResource extends Resource
                     ->label('Title')
                     ->wrap()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('body')
-                    ->wrap()
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -115,8 +112,6 @@ class ForumResource extends Resource
                     Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
-                    Tables\Actions\Action::make('Reply')
-                        ->icon('heroicon-o-chat-bubble-bottom-center-text')
                 ])
             ])->actionsColumnLabel('Actions')
             ->bulkActions([

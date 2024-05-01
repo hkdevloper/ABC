@@ -18,16 +18,6 @@ class UserCompanyController extends Controller
         // Store Session for Home Menu Active
         Session::put('menu', 'company');
 
-        // Initialize the base query to retrieve companies with average rating
-//        $query = Company::select('companies.*', DB::raw('AVG(rate_reviews.rating) as avg_rating'))
-//            ->leftJoin('rate_reviews', function ($join) {
-//                $join->on('companies.id', '=', 'rate_reviews.item_id')
-//                    ->where('rate_reviews.type', '=', 'company');
-//            })
-//            ->join('seo', 'companies.seo_id', '=', 'seo.id')
-//            ->where('companies.is_approved', 1)
-//            ->where('companies.is_active', 1)
-//            ->groupBy('companies.id');
         $query = Company::select('companies.*', DB::raw('AVG(rate_reviews.rating) as avg_rating'))
             ->leftJoin('rate_reviews', function ($join) {
                 $join->on('companies.id', '=', 'rate_reviews.item_id')
@@ -70,14 +60,13 @@ class UserCompanyController extends Controller
                 'companies.updated_at',
                 'companies.is_rejected',
                 'companies.rejected_reason',
-
             );
 
         // Search Query
         if ($request->has('q')) {
             $search = $request->q;
             $query->whereHas('seo', function ($seoQuery) use ($search) {
-                $seoQuery->whereJsonContains('meta_keywords', $search);
+                $seoQuery->where('title', 'like', '%' . $search . '%')->orwhereJsonContains('meta_keywords', $search);
             });
         }
 
@@ -89,7 +78,9 @@ class UserCompanyController extends Controller
                 $query->where('companies.category_id', $category->id);
             }
         }
-
+        // Default Sorting by Featured and rating desc order
+        $query->orderBy('companies.is_featured', 'desc');
+        $query->orderBy('avg_rating', 'desc');
         // Sorting
         if ($request->has('sort')) {
             $sortField = $request->sort;
@@ -106,7 +97,7 @@ class UserCompanyController extends Controller
         $companies = $query->paginate(10);
 
         // Get Random Companies for SEO
-        $seo = Company::where('is_approved', 1)->inRandomOrder()->limit(6)->get()->pluck('seo');
+        $seo = $query->inRandomOrder()->limit(6)->get()->pluck('seo');
 
         // Fetch categories
         $categories = Category::where('type', 'company')->where('is_active', 1)->get();

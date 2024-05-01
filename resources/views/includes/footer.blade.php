@@ -5,7 +5,7 @@
             <img alt="company Logo" src="{{asset('storage/image/logo.png')}}" class="h-[27px] w-[150px] md:h-[27px] md:w-[150px]">
         </a>
         <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-            &copy; 2023 {{config()->get('app.name') }} — All Rights Reserved
+            &copy; {{ date('Y') }} {{config()->get('app.name') }} — All Rights Reserved
         </p>
         <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
             <a class="text-gray-500">
