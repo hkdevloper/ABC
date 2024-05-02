@@ -63,6 +63,7 @@ class BlogResource extends Resource
                         FileUpload::make('thumbnail')
                             ->image()
                             ->optimize('webp')
+                            ->resize(50)
                             ->label('Thumbnail Image')
                             ->directory('blog/thumbnail')
                             ->visibility('public')
