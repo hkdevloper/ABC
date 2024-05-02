@@ -44,6 +44,7 @@ class CategoryResource extends Resource
                 FileUpload::make('image')
                     ->image()
                     ->optimize('webp')
+                    ->resize(50)
                     ->label('category image')
                     ->directory('category')
                     ->default(''),
