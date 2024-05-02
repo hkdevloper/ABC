@@ -113,6 +113,7 @@ class JobResource extends Resource
                         FileUpload::make('thumbnail')
                             ->image()
                             ->optimize('webp')
+                            ->resize(50)
                             ->label('Company Logo')
                             ->directory('job/thumbnail')
                             ->visibility('public')

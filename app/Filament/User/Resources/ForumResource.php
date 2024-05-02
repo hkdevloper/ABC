@@ -79,6 +79,7 @@ class ForumResource extends Resource
                     ->image()
                     ->maxFiles(1)
                     ->optimize('webp')
+                    ->resize(50)
                     ->label('Attach Image')
                     ->autofocus()
                     ->directory('forum/attachments')
