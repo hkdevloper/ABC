@@ -3,8 +3,12 @@
 namespace App\Livewire;
 
 use App\Models\Forum;
+use App\Models\ForumReply;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Illuminate\Contracts\View\View;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -18,12 +22,13 @@ class ForumAnswer extends Component implements HasForms
 
     public ?array $data = [];
     public Forum $forum;
+
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Hidden::make('forum_id')
-                    ->default($this->forum->id ?? null),
+                    ->default($this->forum->id),
                 RichEditor::make('body')
                     ->label('')
                     ->toolbarButtons([
@@ -43,6 +48,9 @@ class ForumAnswer extends Component implements HasForms
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
+                    ->default(function (Get $get) {
+                        $get('body');
+                    })
                     ->required()
             ])
             ->statePath('data');
@@ -53,10 +61,9 @@ class ForumAnswer extends Component implements HasForms
         $this->form->fill();
     }
 
-    #[NoReturn] public function create(): void
+    public function create(): void
     {
-        $this->validate();
-        $this->forum->forumReplies->create($this->data);
+        dd($this->data);
     }
 
     public function render(): View
