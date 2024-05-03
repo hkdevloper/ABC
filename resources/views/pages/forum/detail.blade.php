@@ -1,5 +1,12 @@
 @extends('layouts.user')
-
+@section('head')
+    <style>
+        img {
+            height: auto;
+            width: auto;
+        }
+    </style>
+@endsection
 @section('content')
     <x-user.bread-crumb :data="['Home', 'Forum', $forum->title]"/>
     <div class="container py-6 mx-auto flex flex-wrap items-center justify-center">
@@ -26,9 +33,12 @@
                     <div>
                         <span class="text-gray-600 text-sm">{{$forum->countAnswers()}} Answers</span>
                         <span class="ml-4 text-gray-600 text-sm">{{$viewCount}} Views</span>
-                        <a href="{{url('storage/' . $forum->image)}}" class="text-blue-500 hover:underline text-xs md:text-sm ml-2 inline-flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
+                        <a href="{{url('storage/' . $forum->image)}}"
+                           class="text-blue-500 hover:underline text-xs md:text-sm ml-2 inline-flex justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"/>
                             </svg>
                             &nbsp;Attachments
                         </a>
@@ -74,7 +84,8 @@
                             <div class="flex items center mt-2">
                                 @auth
                                     @if(auth()->id() === $ans->user_id)
-                                        <a href="{{url('/user/forum-replies/'.$ans->id.'/edit')}}" class="text-blue-500 hover:underline text-xs md:text-sm ml-2">
+                                        <a href="{{url('/user/forum-replies/'.$ans->id.'/edit')}}"
+                                           class="text-blue-500 hover:underline text-xs md:text-sm ml-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -98,7 +109,8 @@
             @empty
                 <div class="w-full md:p-2 p-6 card bg-white mb-5">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">No Answers Yet</h2>
-                    <p class="text-gray-700">There are currently no answers to this question. Be the first to provide an answer!</p>
+                    <p class="text-gray-700">There are currently no answers to this question. Be the first to provide an
+                        answer!</p>
                 </div>
             @endforelse
 

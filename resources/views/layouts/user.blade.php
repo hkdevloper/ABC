@@ -6,7 +6,6 @@
     <title>{{ config()->get('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="{{ asset('js/tailwind.js')}}"></script>
-{{--    <script src="https://cdn.tailwindcss.com"></script>--}}
     <link href="{{ asset('css/boxicons/css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/toastify.min.css')}}">
     <link href="{{ asset('css/main.css')}}" rel="stylesheet">
@@ -18,6 +17,9 @@
     <meta name="theme-color" content="#6777ef"/>
     <link rel="apple-touch-icon" href="{{ asset('storage/image/logo.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
+    @filamentStyles
     @yield('head')
     <script>
         tailwind.config = {
@@ -48,6 +50,8 @@
     @include('includes.modals')
     @include('includes.footer')
 </main>
+@livewireScripts
+@filamentScripts
 <script src="{{ asset('js/tw-element-min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/toastify.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
