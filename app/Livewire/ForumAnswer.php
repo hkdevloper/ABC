@@ -56,7 +56,7 @@ class ForumAnswer extends Component implements HasForms
     #[NoReturn] public function create(): void
     {
         $this->validate();
-        dd($this->data);
+        $this->forum->forumReplies->create($this->data);
     }
 
     public function render(): View
