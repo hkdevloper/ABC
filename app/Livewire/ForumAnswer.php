@@ -48,9 +48,6 @@ class ForumAnswer extends Component implements HasForms
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
-                    ->default(function (Get $get) {
-                        $get('body');
-                    })
                     ->required()
             ])
             ->statePath('data');
@@ -63,7 +60,8 @@ class ForumAnswer extends Component implements HasForms
 
     public function create(): void
     {
-        dd($this->data);
+        $data = $this->form->getState();
+        dd($data);
     }
 
     public function render(): View
