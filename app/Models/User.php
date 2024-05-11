@@ -101,37 +101,37 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function blogs() : BelongsTo
     {
-        return $this->belongsTo(Blog::class, $this->company->id, 'company_id');
+        return $this->belongsTo(Blog::class, $this->company?->id, 'company_id');
     }
 
     public function deals() : BelongsTo
     {
-        return $this->belongsTo(Deal::class, $this->company->id, 'company_id');
+        return $this->belongsTo(Deal::class, $this->company?->id, 'company_id');
     }
 
     public function events() : BelongsTo
     {
-        return $this->belongsTo(Event::class, $this->company->id, 'company_id');
+        return $this->belongsTo(Event::class, $this->company?->id, 'company_id');
     }
 
     public function forums() : BelongsTo
     {
-        return $this->belongsTo(Forum::class, $this->company->id, 'company_id');
+        return $this->belongsTo(Forum::class, $this->company?->id, 'company_id');
     }
 
     public function jobs() : BelongsTo
     {
-        return $this->belongsTo(Job::class, $this->company->id, 'company_id');
+        return $this->belongsTo(Job::class, $this->company?->id, 'company_id');
     }
 
     public function products() : BelongsTo
     {
-        return $this->belongsTo(Product::class, $this->company->id, 'company_id');
+        return $this->belongsTo(Product::class, $this->company?->id, 'company_id');
     }
 
     public function forumReplies() : BelongsTo
     {
-        return $this->belongsTo(ForumReply::class, 'id', 'company_id');
+        return $this->belongsTo(ForumReply::class, 'id');
     }
 
     public function hasRated($type, $item_id) : bool
