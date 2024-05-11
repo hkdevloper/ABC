@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
 use App\Filament\Resources\DealResource;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -23,6 +24,9 @@ class DealsRelationManager extends RelationManager
 
     public function table(Table $table): Table
     {
-        return DealResource::table($table);
+        $user = User::find($this->getOwnerRecord()->id ?? 0);
+        return DealResource::table($table)->modifyQueryUsing(function (Builder $query) use ($user) {
+            $query->orWhere('company_id',$user->company->id);
+        });
     }
 }
