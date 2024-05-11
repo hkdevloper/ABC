@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
 use App\Filament\Resources\JobResource;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -23,6 +24,9 @@ class JobsRelationManager extends RelationManager
 
     public function table(Table $table): Table
     {
-        return JobResource::table($table);
+        $user = User::find($this->getOwnerRecord()->id ?? 0);
+        return JobResource::table($table)->modifyQueryUsing(function (Builder $query) use ($user) {
+            $query->orWhere('company_id',$user->company->id);
+        });
     }
 }

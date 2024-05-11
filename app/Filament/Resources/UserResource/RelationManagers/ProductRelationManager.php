@@ -26,7 +26,7 @@ class ProductRelationManager extends RelationManager
     {
         $user = User::find($this->getOwnerRecord()->id ?? 0);
         return ProductResource::table($table)->modifyQueryUsing(function (Builder $query) use ($user) {
-            $query->where('company_id', $user->company->id);
+            $query->orWhere('company_id',$user->company->id);
         });
     }
 
