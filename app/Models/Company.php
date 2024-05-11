@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 use Mews\Purifier\Casts\CleanHtml;
 
 class Company extends Model
@@ -154,12 +155,14 @@ class Company extends Model
 
     public function delete(): bool
     {
-        $this->bookmarkCompanies()->delete();
-        $this->products()->delete();
-        $this->seo()->delete();
-        $this->address()->delete();
-        $this->claimedBy()->delete();
-        return parent::delete();
+        return DB::transaction(function () {
+            $this->bookmarkCompanies()->delete();
+            $this->products()->delete();
+            $this->seo()->delete();
+            $this->address()->delete();
+            $this->claimedBy()->delete();
+            return parent::delete();
+        });
     }
 
     public function bookmarkCompanies(): HasMany
