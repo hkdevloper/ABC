@@ -139,6 +139,7 @@ class ForumResource extends Resource
     {
         return [
             'index' => Pages\ListForums::route('/'),
+            'view' => Pages\ViewForum::route('/{record}'),
             'create' => Pages\CreateForum::route('/create'),
             'edit' => Pages\EditForum::route('/{record}/edit'),
         ];
