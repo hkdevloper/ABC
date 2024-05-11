@@ -991,6 +991,7 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'App\\Filament\\User\\Resources\\ForumResource\\Pages\\CreateForum' => __DIR__ . '/../..' . '/app/Filament/User/Resources/ForumResource/Pages/CreateForum.php',
         'App\\Filament\\User\\Resources\\ForumResource\\Pages\\EditForum' => __DIR__ . '/../..' . '/app/Filament/User/Resources/ForumResource/Pages/EditForum.php',
         'App\\Filament\\User\\Resources\\ForumResource\\Pages\\ListForums' => __DIR__ . '/../..' . '/app/Filament/User/Resources/ForumResource/Pages/ListForums.php',
+        'App\\Filament\\User\\Resources\\ForumResource\\Pages\\ViewForum' => __DIR__ . '/../..' . '/app/Filament/User/Resources/ForumResource/Pages/ViewForum.php',
         'App\\Filament\\User\\Resources\\ForumResource\\RelationManagers\\ForumReplyRelationManager' => __DIR__ . '/../..' . '/app/Filament/User/Resources/ForumResource/RelationManagers/ForumReplyRelationManager.php',
         'App\\Filament\\User\\Resources\\JobResource' => __DIR__ . '/../..' . '/app/Filament/User/Resources/JobResource.php',
         'App\\Filament\\User\\Resources\\JobResource\\Pages\\CreateJob' => __DIR__ . '/../..' . '/app/Filament/User/Resources/JobResource/Pages/CreateJob.php',

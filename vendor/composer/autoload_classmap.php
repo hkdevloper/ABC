@@ -148,6 +148,7 @@ return array(
     'App\\Filament\\User\\Resources\\ForumResource\\Pages\\CreateForum' => $baseDir . '/app/Filament/User/Resources/ForumResource/Pages/CreateForum.php',
     'App\\Filament\\User\\Resources\\ForumResource\\Pages\\EditForum' => $baseDir . '/app/Filament/User/Resources/ForumResource/Pages/EditForum.php',
     'App\\Filament\\User\\Resources\\ForumResource\\Pages\\ListForums' => $baseDir . '/app/Filament/User/Resources/ForumResource/Pages/ListForums.php',
+    'App\\Filament\\User\\Resources\\ForumResource\\Pages\\ViewForum' => $baseDir . '/app/Filament/User/Resources/ForumResource/Pages/ViewForum.php',
     'App\\Filament\\User\\Resources\\ForumResource\\RelationManagers\\ForumReplyRelationManager' => $baseDir . '/app/Filament/User/Resources/ForumResource/RelationManagers/ForumReplyRelationManager.php',
     'App\\Filament\\User\\Resources\\JobResource' => $baseDir . '/app/Filament/User/Resources/JobResource.php',
     'App\\Filament\\User\\Resources\\JobResource\\Pages\\CreateJob' => $baseDir . '/app/Filament/User/Resources/JobResource/Pages/CreateJob.php',
