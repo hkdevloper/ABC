@@ -44,9 +44,10 @@ class ForumReplyResource extends Resource
 
     public static function getPages(): array
     {
+        //php artisan make:filament-page ViewForum --resource=ForumResource --type=ViewRecord
         return [
-            'index' => Pages\ListForumReplies::route('/'),
-            //'create' => Pages\CreateForumReply::route('/create'),
+            //'index' => Pages\ListForumReplies::route('/'),
+            'create' => Pages\CreateForumReply::route('/create'),
             'edit' => Pages\EditForumReply::route('/{record}/edit'),
         ];
     }
