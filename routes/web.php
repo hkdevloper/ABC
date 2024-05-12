@@ -110,6 +110,7 @@ Route::get('/', function () {
     $searchList = [];
     $products = [];
 
+
     foreach ($p as $item) {
         $searchList[] = $item->name;
     }
@@ -168,7 +169,7 @@ Route::prefix('auth')->group(function () {
                 Auth::logout();
                 return redirect()->back()->withInput()->with('error', 'Your account is not approved yet');
             }
-            return redirect('/user');
+            return redirect()->back();
         }
         return redirect()->back()->withInput()->with('error', 'Invalid credentials');
     })->name('auth.login');
@@ -222,7 +223,7 @@ Route::prefix('auth')->group(function () {
             );
             $user->notify($notification);
             Auth::login($user);
-            return redirect()->route('/user');
+            return redirect()->back();
         } catch (Exception $e) {
             return redirect()->back()->with('success', 'Registered successfully');
         }
