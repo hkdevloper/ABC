@@ -407,11 +407,10 @@
                                      class="w-full h-48 object-cover rounded-t-lg" alt="Event">
                                 <div class="desc p-4 text-gray-800">
                                     <div class="flex items-center mt-2">
-                                        <img class='w-8 h-8 object-cover rounded-full' alt='User avatar'
-                                             src='https://ui-avatars.com/api/?name={{$event->company->name}}'/>
+                                        <img class='w-8 h-8 object-cover rounded-full' alt='User avatar' src='https://ui-avatars.com/api/?name={{$event->company?->name}}'/>
                                         <div class="pl-3">
                                             <div class="font-medium text-sm">
-                                                {{$event->company->name}}
+                                                {{$event->company?->name}}
                                             </div>
                                             <div class="text-gray-600 text-sm">
                                                 {{$event->created_at->diffForHumans()}}
