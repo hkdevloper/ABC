@@ -31,8 +31,8 @@ class DealFactory extends Factory
             'description' => $this->faker->text(),
             'discount_price' => $this->faker->randomNumber(5),
             'original_price' => $this->faker->randomNumber(5),
-            'terms_and_conditions' => $this->faker->word(),
-            'company_id' => Company::where('is_active', 1)->pluck('id')->random(),
+            'terms_and_conditions' => $this->faker->realText(500),
+            'company_id' => Company::pluck('id')->random(),
             'category_id' => Category::where('type', 'deal')->pluck('id')->random(),
             'seo_id' => Seo::factory()->create()->id,
         ];

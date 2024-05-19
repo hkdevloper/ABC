@@ -46,7 +46,7 @@ class CompanyFactory extends Factory
             'is_claimed' => false,
             'is_active' => true,
             'is_featured' => $this->faker->boolean,
-            'user_id' => 1,
+            'user_id' => User::factory()->create()->id,
             'category_id' => Category::where('type', 'company')->pluck('id')->random(),
             'business_type' => $this->faker->randomElement(['manufacturer', 'distributor',  'retailer']),
             'name' => $name,

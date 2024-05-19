@@ -16,14 +16,14 @@ class ForumFactory extends Factory
     public function definition(): array
     {
         return [
-            'is_approved' => $this->faker->boolean(),
+            'is_approved' => true,
             'is_featured' => $this->faker->boolean(),
             'title' => $this->faker->sentence,
             'body' => $this->faker->paragraphs(10, true),
-            'is_active' => $this->faker->boolean(),
+            'is_active' => true,
             'summary' => $this->faker->sentence,
             'category_id' => Category::where('type', 'forum')->pluck('id')->random(),
-            'company_id' => Company::where('is_active', 1)->pluck('id')->random(),
+            'company_id' => Company::pluck('id')->random(),
         ];
     }
 }

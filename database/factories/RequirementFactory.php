@@ -21,8 +21,6 @@ class RequirementFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'description' => $this->faker->text(),
             'status' => 'Pending',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
         ];
     }
 }

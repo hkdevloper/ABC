@@ -433,8 +433,7 @@
                                         <div class="flex items-center justify-between mt-4">
                                             <div class="flex items-center">
                                                 <i class='bx bx-current-location text-gray-600'></i>
-                                                <span
-                                                    class="text-gray-600 text-sm ml-1">{{$event->address->country->name}}</span>
+                                                <span class="text-gray-600 text-sm ml-1">{{$event->address->country->name}}</span>
                                             </div>
                                         </div>
                                     </div>
