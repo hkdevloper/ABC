@@ -73,7 +73,6 @@ Route::name('razorpay.')
         })->name('user.dashboard');
     });
 
-
 // create a post without csrf protection
 Route::get('login', function () {
     return redirect()->route('auth.login');
@@ -288,7 +287,7 @@ Route::prefix('job')->group(function () {
 Route::prefix('forum')->group(function () {
     Route::get('/', [UserForumController::class, 'viewForumList'])->name('forum');
     Route::get('/{id}/{title}', [UserForumController::class, 'viewForumDetails'])->name('view.forum');
-    Route::post('/answer-forum', [UserForumController::class, 'answerForum'])->name('forum.reply');
+    Route::get('/answer-forum', [UserForumController::class, 'answerForum'])->name('forum.reply');
 });
 
 Route::prefix('legal')->group(function () {
