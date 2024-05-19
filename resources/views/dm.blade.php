@@ -139,10 +139,13 @@
                 @enderror
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="captcha">Fill this CAPTCHA: <span class="captcha">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="captcha">Fill this CAPTCHA: <span
+                        class="captcha">
                         <span id="captcha-code"></span>
                     </span></label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" id="captcha" name="captcha" required>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    type="text" id="captcha" name="captcha" required>
                 <!-- Helper text -->
                 <small class="form__helper">Can't read the CAPTCHA?
                     <span class="hover:underline text-purple-500 cursor-pointer"
@@ -154,8 +157,8 @@
 
             <div class="flex items-center justify-between w-full">
                 <button onclick="validateCaptcha()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-80 mx-auto"
-                    type="button">
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-80 mx-auto"
+                        type="button">
                     Submit
                 </button>
                 <!-- legal -->
@@ -164,7 +167,7 @@
                         By submitting this form, you agree to our <a href="{{ route('policy') }}"
                                                                      class="text-blue-500 hover:text-blue-700">Privacy
                             Policy</a> and <a href="{{ route('tos') }}"
-                                             class="text-blue-500 hover:text-blue-700">Terms of Service</a>.
+                                              class="text-blue-500 hover:text-blue-700">Terms of Service</a>.
                     </p>
                 </div>
             </div>
@@ -174,6 +177,12 @@
 @endsection
 
 @section('page-scripts')
+    <script>
+        // prevent selection and copy functionality for the whole page
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('selectstart', event => event.preventDefault());
+    </script>
     <script>
         function generateCaptcha() {
             const code = generateRandomCode(6); // Generate a new CAPTCHA code

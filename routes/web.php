@@ -40,7 +40,24 @@ use Illuminate\Support\Facades\URL;
 */
 Route::prefix('test')->group(function () {
     Route::get('/', function () {
-        return 'done';
+        foreach (User::all() as $user) {
+            // Create a new wallet history
+            $wallet = new \App\Models\WalletHistory();
+            $wallet->user_id = $user->id;
+            $wallet->amount = $user->balance;
+            $wallet->type = 'credit';
+            $wallet->transaction_id = 'TXN' . time();
+            $wallet->status = 'success';
+            $wallet->json_response = json_encode(['message' => 'Wallet credited']);
+            $wallet->method = 'Razorpay';
+            $wallet->currency = 'USD';
+            $wallet->user_email = $user->email;
+            $wallet->contact = $user->phone;
+            $wallet->fee = 0;
+            $wallet->tax = 0;
+            $wallet->saveOrFail();
+        }
+        return 'Done';
     });
 });
 
@@ -55,7 +72,6 @@ Route::name('razorpay.')
             return redirect('/user');
         })->name('user.dashboard');
     });
-
 
 // create a post without csrf protection
 Route::get('login', function () {
@@ -110,6 +126,7 @@ Route::get('/', function () {
     $searchList = [];
     $products = [];
 
+
     foreach ($p as $item) {
         $searchList[] = $item->name;
     }
@@ -139,6 +156,8 @@ Route::get('/', function () {
 
 Route::prefix('auth')->group(function () {
     Route::get('login', function () {
+        // store previous url in session
+        session(['url.intended' => url()->previous()]);
         return view('auth.login');
     })->name('auth.login');
     Route::get('register', function () {
@@ -168,7 +187,13 @@ Route::prefix('auth')->group(function () {
                 Auth::logout();
                 return redirect()->back()->withInput()->with('error', 'Your account is not approved yet');
             }
-            return redirect('/user');
+            // Redirect to previous page if exists
+            if (session('url.intended')) {
+                return redirect(session('url.intended'));
+            } else {
+                // redirect to user dashboard URL
+                return redirect('/user');
+            }
         }
         return redirect()->back()->withInput()->with('error', 'Invalid credentials');
     })->name('auth.login');
@@ -222,7 +247,7 @@ Route::prefix('auth')->group(function () {
             );
             $user->notify($notification);
             Auth::login($user);
-            return redirect()->route('/user');
+            return redirect()->back();
         } catch (Exception $e) {
             return redirect()->back()->with('success', 'Registered successfully');
         }
@@ -262,7 +287,7 @@ Route::prefix('job')->group(function () {
 Route::prefix('forum')->group(function () {
     Route::get('/', [UserForumController::class, 'viewForumList'])->name('forum');
     Route::get('/{id}/{title}', [UserForumController::class, 'viewForumDetails'])->name('view.forum');
-    Route::post('/answer-forum', [UserForumController::class, 'answerForum'])->name('forum.reply');
+    Route::get('/answer-forum', [UserForumController::class, 'answerForum'])->name('forum.reply');
 });
 
 Route::prefix('legal')->group(function () {

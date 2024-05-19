@@ -100,6 +100,7 @@ class DealResource extends Resource
                         FileUpload::make('thumbnail')
                             ->image()
                             ->optimize('webp')
+                            ->resize(50)
                             ->label('Thumbnail')
                             ->directory('deals/thumbnail')
                             ->autofocus()
@@ -107,6 +108,7 @@ class DealResource extends Resource
                         FileUpload::make('gallery')
                             ->image()
                             ->optimize('webp')
+                            ->resize(50)
                             ->label('Gallery')
                             ->directory('deals/gallery')
                             ->maxFiles(4)
@@ -165,7 +167,9 @@ class DealResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('original_price')
+                    ->label('Price')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('category.name'),
                 Tables\Columns\TextColumn::make('discount_price')
                     ->label('Discounted Price')

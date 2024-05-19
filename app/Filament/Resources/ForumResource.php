@@ -45,7 +45,6 @@ class ForumResource extends Resource
                         'blockquote',
                         'bold',
                         'bulletList',
-                        'codeBlock',
                         'h2',
                         'h3',
                         'italic',
@@ -60,14 +59,14 @@ class ForumResource extends Resource
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
                     ->withCount()
                     ->required()
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query){
+                    ->relationship('category', 'name', 'parent_id', function ($query) {
                         return $query->where('type', 'forum');
                     })->placeholder('Select Category'),
                 Select::make('company_id')
@@ -79,6 +78,7 @@ class ForumResource extends Resource
                     ->image()
                     ->maxFiles(1)
                     ->optimize('webp')
+                    ->resize(50)
                     ->label('Attach Image')
                     ->autofocus()
                     ->directory('forum/attachments')

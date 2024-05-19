@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\APIController;
 use App\Http\Controllers\RazorpayController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,5 +41,7 @@ Route::prefix('razorpay')->group(function(){
 
 // Test Routes
 Route::get('/test', function (Request $request){
-
-});
+    $data = [];
+    $data = User::find(3);
+    return response()->json($data->company);
+})->name('api.test');

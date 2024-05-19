@@ -4,12 +4,14 @@ namespace Database\Factories;
 
 use App\Models\Address;
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\Seo;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Company>
+ * @extends Factory<Company>
  */
 class CompanyFactory extends Factory
 {
@@ -35,6 +37,10 @@ class CompanyFactory extends Factory
             'Software Engineer at Tech Solutions Inc.', 'Environmental Analyst at Green Earth Industries', 'Product Designer at Global Innovators Co.', 'HealthCare Specialist at HealthCare Providers Ltd.', 'Fashion Designer at Smart Solutions Group',
             'Tech Enthusiasts Hub', 'Green Living Community', 'Innovation Discussion Forum', 'Health & Wellness Exchange', 'Fashion Enthusiasts Club',
         ];
+        $name = $this->faker->randomElement($companies);
+        $slug = Str::slug($name);
+        $keywords = $this->faker->randomElements($products, rand(1, 5));
+        $keywords[] = $name;
         return [
             'is_approved' => true,
             'is_claimed' => false,
@@ -42,9 +48,9 @@ class CompanyFactory extends Factory
             'is_featured' => $this->faker->boolean,
             'user_id' => User::factory()->create()->id,
             'category_id' => Category::where('type', 'company')->pluck('id')->random(),
-            'business_type' => $this->faker->randomElement(['private', 'public',  'partnership', 'sole proprietorship', 'limited liability company', 'cooperative']),
-            'name' => $this->faker->randomElement($companies),
-            'slug' => $this->faker->unique()->slug,
+            'business_type' => $this->faker->randomElement(['manufacturer', 'distributor',  'retailer']),
+            'name' => $name,
+            'slug' => $slug,
             'description' => $this->faker->realText(1000),
             'extra_things' => $this->faker->randomElements($products, rand(1,5)),
             'banner' => "companies/banner/1 (".rand(1,13).").jpg",
@@ -65,7 +71,11 @@ class CompanyFactory extends Factory
             'linkdin' => $this->faker->url,
             'youtube' => $this->faker->url,
             'address_id' => Address::factory()->create()->id,
-            'seo_id' => Seo::factory()->create()->id,
+            'seo_id' => Seo::create([
+                'title' => $name,
+                'meta_description' => $this->faker->realText(170),
+                'meta_keywords' => $keywords,
+            ])->id,
         ];
     }
 }

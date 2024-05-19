@@ -2,17 +2,13 @@
 
 namespace App\Filament\Resources;
 
-use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\JobResource\Pages;
-use App\Filament\Resources\JobResource\RelationManagers;
 use App\Models\City;
 use App\Models\Job;
 use App\Models\State;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -26,7 +22,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
 use Str;
 
@@ -125,6 +120,7 @@ class JobResource extends Resource
                         FileUpload::make('thumbnail')
                             ->image()
                             ->optimize('webp')
+                            ->resize(50)
                             ->label('Thumbnail')
                             ->disk('public')
                             ->directory('events/thumbnail')
@@ -154,14 +150,13 @@ class JobResource extends Resource
                         Select::make('country_id')
                             ->label('Country')
                             ->preload()
-                            ->default('1')
                             ->live(onBlur: true)
                             ->relationship('country', 'name')
                             ->searchable()
                             ->required(),
                         Select::make('state_id')
                             ->label('State')
-                            ->default('1')
+                            ->preload()
                             ->options(fn(Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))

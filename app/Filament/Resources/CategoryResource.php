@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
@@ -20,9 +19,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Joshembling\ImageOptimizer\Components\SpatieMediaLibraryFileUpload;
 use Str;
 
 class CategoryResource extends Resource
@@ -39,15 +35,16 @@ class CategoryResource extends Resource
                         ->default(1)
                         ->label('Active')
                         ->autofocus()
-                            ->required(),
+                        ->required(),
                     Toggle::make('is_featured')
                         ->label('Featured')
                         ->autofocus()
-                            ->required(),
+                        ->required(),
                 ])->columns(),
                 FileUpload::make('image')
                     ->image()
                     ->optimize('webp')
+                    ->resize(50)
                     ->label('category image')
                     ->directory('category')
                     ->default(''),
@@ -57,7 +54,10 @@ class CategoryResource extends Resource
                     ->autofocus()
                     ->required()
                     ->maxLength(191)
-                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
+                        $set('slug', Str::slug($state));
+                        $set('seo.title', $state);
+                    }),
                 TextInput::make('slug')
                     ->label('Slug')
                     ->autofocus()
@@ -83,8 +83,7 @@ class CategoryResource extends Resource
                     ->enableBranchNode()
                     ->live(true)
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('parent', 'name', 'parent_id', function ($query, Forms\Get $get){
-                        // Get only active categories and selected Type category
+                    ->relationship('parent', 'name', 'parent_id', function ($query, Forms\Get $get) {
                         return $query->where('type', $get('type'));
                     }),
                 Forms\Components\RichEditor::make('description')

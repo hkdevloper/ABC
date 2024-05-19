@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>{{ config()->get('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ asset('js/tailwind.js')}}"></script>
     <link href="{{ asset('css/boxicons/css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/toastify.min.css')}}">
     <link href="{{ asset('css/main.css')}}" rel="stylesheet">
@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#6777ef"/>
     <link rel="apple-touch-icon" href="{{ asset('storage/image/logo.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
+    @filamentStyles
     @yield('head')
     <script>
         tailwind.config = {
@@ -33,6 +36,7 @@
             },
         };
     </script>
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=662fb580a67ccd0019e8e820&product=inline-share-buttons&source=platform" async="async"></script>
 </head>
 
 <body>
@@ -46,9 +50,10 @@
     @include('includes.modals')
     @include('includes.footer')
 </main>
+@livewireScripts
+@filamentScripts
 <script src="{{ asset('js/tw-element-min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/toastify.js')}}"></script>
-{{--<script src="{{ asset('js/alpine.js')}}"></script>--}}
 <script src="{{ asset('js/main.js')}}"></script>
 <script>
     @if(session()->has('success'))
@@ -65,10 +70,6 @@
     showToast('error', '{{$error}}');
     @endforeach
     @endif
-    // prevent selection and copy functionality for the whole page
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.addEventListener('copy', event => event.preventDefault());
-    document.addEventListener('selectstart', event => event.preventDefault());
 </script>
 <script>
     ScrollReveal().reveal('.reveal', {
@@ -80,7 +81,6 @@
         reset: true    // Reset animation on scroll up
     });
 </script>
-
 @yield('page-scripts')
 @yield('components-scripts')
 <script src="{{ asset('/sw.js') }}"></script>
@@ -91,5 +91,6 @@
         });
     }
 </script>
+<div class="sharethis-sticky-share-buttons"></div>
 </body>
 </html>

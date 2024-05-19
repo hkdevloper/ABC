@@ -75,25 +75,16 @@ class UserForumController extends Controller
     public function answerForum(Request $request)
     {
         $request->validate([
-            'body' => 'required',
-            'forum_id' => 'required'
+            'id' => 'required',
+            'action' => 'nullable'
         ]);
-        if (!auth()->user()) {
-            return redirect()->route('auth.login')->with('error', 'You must login to answer this forum');
+        Forum::findOrFail($request->id);
+        // Store Forum ID in Session
+        Session::put('forum_id', $request->id);
+        if ($request->action == 'edit') {
+            return redirect('/user/forum-replies/edit');
+        } else {
+            return redirect('/user/forum-replies');
         }
-        $forum = Forum::find($request->forum_id);
-        if (!$forum) {
-            return redirect()->back()->with('error', 'Forum not found');
-        }
-
-        $data = new ForumReply();
-        $data->body = $request->body;
-        $data->user_id = auth()->user()->id;
-        $data->forum_id = $request->forum_id;
-        try {
-            $data->saveOrFail();
-        } catch (Throwable $e) {
-        }
-        return redirect()->back()->with('success', 'Forum answered successfully');
     }
 }

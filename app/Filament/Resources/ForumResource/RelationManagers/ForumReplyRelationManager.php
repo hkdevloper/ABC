@@ -3,6 +3,9 @@
 namespace App\Filament\Resources\ForumResource\RelationManagers;
 
 use AmidEsfahani\FilamentTinyEditor\TinyEditor;
+use App\Filament\Resources\ForumResource\Pages\CreateForum;
+use App\Filament\Resources\ForumResource\Pages\EditForum;
+use App\Filament\Resources\ForumResource\Pages\ListForums;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -24,13 +27,26 @@ class ForumReplyRelationManager extends RelationManager
                     ->default(auth()->user()->id),
                 Forms\Components\Hidden::make('forum_id')
                     ->default(request()->route('record')),
-                TinyEditor::make('body')
-                    ->profile('minimal')
+                Forms\Components\RichEditor::make('body')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('forumReplies')
                     ->fileAttachmentsVisibility('public')
                     ->autofocus()
-                            ->required(),
+                    ->required(),
             ])->columns(1);
     }
 
@@ -68,5 +84,14 @@ class ForumReplyRelationManager extends RelationManager
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make()->createAnother(false),
             ]);
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListForums::route('/'),
+            'create' => CreateForum::route('/create'),
+            'edit' => EditForum::route('/{record}/edit'),
+        ];
     }
 }

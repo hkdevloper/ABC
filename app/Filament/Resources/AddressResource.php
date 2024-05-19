@@ -39,14 +39,12 @@ class AddressResource extends Resource
                 Select::make('country_id')
                     ->label('Select Country')
                     ->preload()
-                    ->default(1)
                     ->relationship('country', 'name')
                     ->searchable()
                     ->required(),
                 Select::make('state_id')
                     ->label('Select State')
                     ->preload()
-                    ->default(1)
                     ->relationship('state', 'name')
                     ->searchable()
                     ->required(),

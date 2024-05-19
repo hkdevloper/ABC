@@ -44,7 +44,7 @@ class DirectMessageResource extends Resource
                 Forms\Components\Select::make('status')
                     ->default('Pending')
                     ->native(false)
-                    ->options(DirectMessage::$userStatusList)
+                    ->options(DirectMessage::$statusList)
                     ->required(),
                 Forms\Components\Textarea::make('message')
                     ->required()
@@ -112,7 +112,7 @@ class DirectMessageResource extends Resource
             ->modifyQueryUsing(function (Builder $query) {
                 // show only the records of the logged-in user's company
                 $query->where('company_id', auth()->user()->company->id)
-                    ->where('status', 'adminApproved')
+                    ->where('is_approved', true)
                     ->orderBy('created_at', 'desc');
             })
             ->emptyStateActions([]);

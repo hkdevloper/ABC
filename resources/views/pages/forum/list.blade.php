@@ -43,7 +43,7 @@
                 @endforeach
             </select>
         </div>
-        {{-- Total Products --}}
+        {{-- Total Forums --}}
         <div class="hidden sm:block text-center md:text-left mb-4 md:mb-0">
             <p>
                 Showing {{ $forums->firstItem() }} - {{ $forums->lastItem() }} of {{ $forums->total() }} results
@@ -92,7 +92,9 @@
                         </div>
                     </div>
                     <h1 class="text-base md:text-lg font-semibold text-gray-900 mb-4">{{$forum->title}}</h1>
-                    <p class="text-gray-700 text-xs md:text-sm w-100"> {!! \Illuminate\Support\Str::limit($forum->body, 300) !!} </p>
+                    <div class="text-gray-700 text-xs md:text-sm w-full h-[130px] overflow-hidden">
+                        {!! $forum->body !!}
+                    </div>
                     <hr class="my-4 border-t-2 border-gray-200">
                     <div class="flex justify-center md:justify-between items-center">
                         <div class="md:block hidden">

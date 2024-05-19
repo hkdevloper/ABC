@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 use Mews\Purifier\Casts\CleanHtml;
 
 class Company extends Model
@@ -87,6 +88,13 @@ class Company extends Model
         return $this->hasMany(Deal::class, 'company_id');
     }
 
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'company_id')
+            ->where('is_approved', true)
+            ->where('is_active', true);
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -147,12 +155,14 @@ class Company extends Model
 
     public function delete(): bool
     {
-        $this->bookmarkCompanies()->delete();
-        $this->products()->delete();
-        $this->seo()->delete();
-        $this->address()->delete();
-        $this->claimedBy()->delete();
-        return parent::delete();
+        return DB::transaction(function () {
+            $this->bookmarkCompanies()->delete();
+            $this->products()->delete();
+            $this->seo()->delete();
+            $this->address()->delete();
+            $this->claimedBy()->delete();
+            return parent::delete();
+        });
     }
 
     public function bookmarkCompanies(): HasMany
@@ -160,12 +170,7 @@ class Company extends Model
         return $this->hasMany(BookmarkCompanies::class, 'company_id', 'id');
     }
 
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::class, 'company_id')
-            ->where('is_approved', true)
-            ->where('is_active', true);
-    }
+
 
     public function seo(): BelongsTo
     {

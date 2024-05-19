@@ -22,7 +22,7 @@ class JobFactory extends Factory
     public function definition(): array
     {
         return [
-            'company_id' => Company::where('is_active', 1)->pluck('id')->random(),
+            'company_id' => Company::pluck('id')->random(),
             'category_id' => Category::where('type', 'job')->pluck('id')->random(),
             'seo_id' => Seo::factory()->create()->id,
             'is_active' => true,

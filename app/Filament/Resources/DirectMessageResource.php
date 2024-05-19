@@ -23,6 +23,16 @@ class DirectMessageResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Section::make([
+                    Forms\Components\Toggle::make('is_approved')
+                        ->label('Approve Direct Message')
+                        ->default(false),
+                    Forms\Components\Select::make('status')
+                        ->default('Pending')
+                        ->native(false)
+                        ->options(DirectMessage::$statusList)
+                        ->required(),
+                ])->columns(2),
                 Forms\Components\Select::make('company_id')
                     ->relationship('company', 'name')
                     ->native(false)
@@ -46,11 +56,7 @@ class DirectMessageResource extends Resource
                     ->required()
                     ->disabled()
                     ->maxLength(191),
-                Forms\Components\Select::make('status')
-                    ->default('Pending')
-                    ->native(false)
-                    ->options(DirectMessage::$adminStatusList)
-                    ->required(),
+
                 Forms\Components\Textarea::make('message')
                     ->required()
                     ->disabled()
@@ -75,10 +81,11 @@ class DirectMessageResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->formatStateUsing(fn(string $state): string => $state == 'adminApproved' ? 'Approved' : $state)
                     ->color(fn(string $state): string => match ($state) {
                         'Pending' => 'warning',
-                        'adminApproved' => 'success',
+                        'Approved', 'Completed' => 'success',
+                        'Cancelled', 'Spam' => 'danger',
+                        'onHold' => 'primary',
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

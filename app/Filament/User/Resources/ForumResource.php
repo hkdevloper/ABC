@@ -60,7 +60,6 @@ class ForumResource extends Resource
                         'blockquote',
                         'bold',
                         'bulletList',
-                        'codeBlock',
                         'h2',
                         'h3',
                         'italic',
@@ -80,6 +79,7 @@ class ForumResource extends Resource
                     ->image()
                     ->maxFiles(1)
                     ->optimize('webp')
+                    ->resize(50)
                     ->label('Attach Image')
                     ->autofocus()
                     ->directory('forum/attachments')
@@ -94,9 +94,6 @@ class ForumResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->label('Title')
-                    ->wrap()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('body')
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -116,8 +113,6 @@ class ForumResource extends Resource
                     Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
-                    Tables\Actions\Action::make('Reply')
-                        ->icon('heroicon-o-chat-bubble-bottom-center-text')
                 ])
             ])->actionsColumnLabel('Actions')
             ->bulkActions([
@@ -144,6 +139,7 @@ class ForumResource extends Resource
     {
         return [
             'index' => Pages\ListForums::route('/'),
+            'view' => Pages\ViewForum::route('/{record}'),
             'create' => Pages\CreateForum::route('/create'),
             'edit' => Pages\EditForum::route('/{record}/edit'),
         ];

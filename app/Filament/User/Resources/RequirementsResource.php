@@ -56,6 +56,7 @@ class RequirementsResource extends Resource
                 FileUpload::make('images')
                     ->image()
                     ->optimize('webp')
+                    ->resize(50)
                     ->label('Images')
                     ->directory('requirements')
                     ->maxFiles(3)

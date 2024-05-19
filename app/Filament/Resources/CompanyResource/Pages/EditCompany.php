@@ -45,32 +45,38 @@ class EditCompany extends EditRecord
 
         $user = User::find($data['user_id']);
         $company = $user->company;
-        if ($company->is_approved != $data['is_approved'] ||
-            $company->is_active != $data['is_active'] ||
-            $company->is_rejected != $data['is_rejected']
-        ) {
-            // Send Online notification about Company profile status update
-            if ($data['is_approved'] == 1 && $data['is_active'] == null && $data['is_rejected'] == null) {
-                Notification::make()
-                    ->title('Your request has been approved!')
-                    ->body('Congratulations! Your request has been approved by the admin.')
-                    ->sendToDatabase($user);
-            }
+        // check property exist or not
+        if ($company && array_key_exists('is_approved', $data)
+            && array_key_exists('is_active', $data)
+            && array_key_exists('is_rejected', $data)) {
+            if ($company->is_approved != $data['is_approved'] ||
+                $company->is_active != $data['is_active'] ||
+                $company->is_rejected != $data['is_rejected']
+            ) {
+                // Send Online notification about Company profile status update
+                if ($data['is_approved'] == 1 && $data['is_active'] == null && $data['is_rejected'] == null) {
+                    Notification::make()
+                        ->title('Your request has been approved!')
+                        ->body('Congratulations! Your request has been approved by the admin.')
+                        ->sendToDatabase($user);
+                }
 
-            if ($data['is_active'] == 1 && $data['is_approved'] == 1 && $data['is_rejected'] == null) {
-                Notification::make()
-                    ->title('Account activated')
-                    ->body('Your account has been activated by the admin.')
-                    ->sendToDatabase($user);
-            }
+                if ($data['is_active'] == 1 && $data['is_approved'] == 1 && $data['is_rejected'] == null) {
+                    Notification::make()
+                        ->title('Account activated')
+                        ->body('Your account has been activated by the admin.')
+                        ->sendToDatabase($user);
+                }
 
-            if ($data['is_rejected'] == 1) {
-                Notification::make()
-                    ->title('Your request has been rejected')
-                    ->body('Sorry, your request has been rejected by the admin.')
-                    ->sendToDatabase($user);
+                if ($data['is_rejected'] == 1) {
+                    Notification::make()
+                        ->title('Your request has been rejected')
+                        ->body('Sorry, your request has been rejected by the admin.')
+                        ->sendToDatabase($user);
+                }
             }
         }
+
         return parent::mutateFormDataBeforeSave($data);
     }
 }

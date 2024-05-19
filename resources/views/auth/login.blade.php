@@ -82,5 +82,13 @@
         </form>
     </div>
 @endsection
+@section('page-scripts')
+    <script>
+        // prevent selection and copy functionality for the whole page
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('selectstart', event => event.preventDefault());
+    </script>
+@endsection
 
 

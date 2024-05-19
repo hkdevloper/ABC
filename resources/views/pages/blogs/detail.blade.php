@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
-    <x-user.bread-crumb :data="['Home', 'Products', $blog->title]"/>
+    <x-user.bread-crumb :data="['Home', 'Blog', $blog->title]"/>
     <div class="container py-6 mx-auto flex flex-wrap">
         <div class="w-full mb-10 lg:mb-0 overflow-hidden px-2">
             <div class="my-2 md:px-6">
@@ -17,6 +17,7 @@
                 </div>
                 <h1 class="mb-6 text-3xl font-bold">{{$blog->title}}</h1>
                 <div class="text-sm">{!! $blog->content !!}</div>
+                <!-- ShareThis BEGIN --><div class="sharethis-inline-reaction-buttons"></div><!-- ShareThis END -->
             </div>
             <!-- Leave Reply -->
             <section class="my-8">

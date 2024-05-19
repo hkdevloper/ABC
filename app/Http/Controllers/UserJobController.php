@@ -43,7 +43,7 @@ class UserJobController extends Controller
         if (!empty($categoryFilter)) {
             // Get Category I'd from Category Name
             $catId = Category::where('name', $categoryFilter)->first();
-            $jobsQuery->where('category_id', $catId->id);
+            $jobsQuery->where('jobs.category_id', $catId->id);
         }
         /** Get Jobs Country
          * Job->address->country
