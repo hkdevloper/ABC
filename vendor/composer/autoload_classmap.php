@@ -233,6 +233,7 @@ return array(
     'App\\Policies\\RateReviewPolicy' => $baseDir . '/app/Policies/RateReviewPolicy.php',
     'App\\Policies\\RequirementPolicy' => $baseDir . '/app/Policies/RequirementPolicy.php',
     'App\\Policies\\UserPolicy' => $baseDir . '/app/Policies/UserPolicy.php',
+    'App\\Policies\\WalletHistory' => $baseDir . '/app/Policies/WalletHistory.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

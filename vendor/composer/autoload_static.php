@@ -1076,6 +1076,7 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'App\\Policies\\RateReviewPolicy' => __DIR__ . '/../..' . '/app/Policies/RateReviewPolicy.php',
         'App\\Policies\\RequirementPolicy' => __DIR__ . '/../..' . '/app/Policies/RequirementPolicy.php',
         'App\\Policies\\UserPolicy' => __DIR__ . '/../..' . '/app/Policies/UserPolicy.php',
+        'App\\Policies\\WalletHistory' => __DIR__ . '/../..' . '/app/Policies/WalletHistory.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
