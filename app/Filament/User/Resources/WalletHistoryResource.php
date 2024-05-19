@@ -3,7 +3,6 @@
 namespace App\Filament\User\Resources;
 
 use App\Filament\User\Resources\WalletHistoryResource\Pages;
-use App\Filament\User\Resources\WalletHistoryResource\RelationManagers;
 use App\Models\WalletHistory;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,7 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class WalletHistoryResource extends Resource
 {
@@ -82,8 +80,6 @@ class WalletHistoryResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('currency')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('user_email')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('contact')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('fee')
@@ -99,17 +95,11 @@ class WalletHistoryResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                //
-            ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
             ])
-            ->bulkActions([
-                //
-            ])
-            ->modifyQueryUsing(function (Builder $builder) {
-                $builder->where('user_id', auth()->id())->orderBy('id', 'desc');
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->where('user_id', auth()->id());
             });
     }
 

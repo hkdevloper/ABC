@@ -40,7 +40,24 @@ use Illuminate\Support\Facades\URL;
 */
 Route::prefix('test')->group(function () {
     Route::get('/', function () {
-        return 'done';
+        foreach (User::all() as $user) {
+            // Create a new wallet history
+            $wallet = new \App\Models\WalletHistory();
+            $wallet->user_id = $user->id;
+            $wallet->amount = $user->balance;
+            $wallet->type = 'credit';
+            $wallet->transaction_id = 'TXN' . time();
+            $wallet->status = 'success';
+            $wallet->json_response = json_encode(['message' => 'Wallet credited']);
+            $wallet->method = 'Razorpay';
+            $wallet->currency = 'USD';
+            $wallet->user_email = $user->email;
+            $wallet->contact = $user->phone;
+            $wallet->fee = 0;
+            $wallet->tax = 0;
+            $wallet->saveOrFail();
+        }
+        return 'Done';
     });
 });
 
@@ -140,6 +157,8 @@ Route::get('/', function () {
 
 Route::prefix('auth')->group(function () {
     Route::get('login', function () {
+        // store previous url in session
+        session(['url.intended' => url()->previous()]);
         return view('auth.login');
     })->name('auth.login');
     Route::get('register', function () {
@@ -169,7 +188,13 @@ Route::prefix('auth')->group(function () {
                 Auth::logout();
                 return redirect()->back()->withInput()->with('error', 'Your account is not approved yet');
             }
-            return redirect()->back();
+            // Redirect to previous page if exists
+            if (session('url.intended')) {
+                return redirect(session('url.intended'));
+            } else {
+                // redirect to user dashboard URL
+                return redirect('/user');
+            }
         }
         return redirect()->back()->withInput()->with('error', 'Invalid credentials');
     })->name('auth.login');
