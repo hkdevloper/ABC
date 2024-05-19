@@ -34,13 +34,14 @@ class UserForumController extends Controller
         }
 
         if (!empty($countryFilter)) {
-            $forumQuery->whereHas('user', function ($query) use ($countryFilter) {
-                $query->whereHas('company', function ($innerQuery) use ($countryFilter) {
-                    $innerQuery->whereHas('address', function ($innerInnerQuery) use ($countryFilter) {
-                        $innerInnerQuery->where('country_id', $countryFilter);
+            if ($request->has('country')) {
+                $country = $request->country;
+                $forumQuery->whereHas('company', function ($query) use ($country) {
+                    $query->whereHas('address', function ($innerQuery) use ($country) {
+                        $innerQuery->where('country_id', $country);
                     });
                 });
-            });
+            }
         }
 
         if (!empty($query)) {

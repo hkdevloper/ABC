@@ -46,11 +46,9 @@ class UserDealController extends Controller
         // Country Filter
         if ($request->has('country')) {
             $country = $request->country;
-            $query->whereHas('user', function ($query) use ($country) {
-                $query->whereHas('company', function ($innerQuery) use ($country) {
-                    $innerQuery->whereHas('address', function ($innerInnerQuery) use ($country) {
-                        $innerInnerQuery->where('country_id', $country);
-                    });
+            $query->whereHas('company', function ($query) use ($country) {
+                $query->whereHas('address', function ($innerQuery) use ($country) {
+                    $innerQuery->where('country_id', $country);
                 });
             });
         }
