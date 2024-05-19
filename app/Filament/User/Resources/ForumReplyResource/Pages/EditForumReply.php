@@ -18,11 +18,6 @@ class EditForumReply extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
-
-    protected function getRedirectUrl(): string
-    {
-        return ;
-    }
     protected function getSavedNotification(): ?Notification
     {
         return null;
