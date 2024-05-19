@@ -52,9 +52,14 @@ class UserJobController extends Controller
          * Country has id
         */
         if (!empty($countryFilter)) {
-            $jobsQuery->whereHas('address', function ($query) use ($countryFilter) {
-                $query->where('country_id', $countryFilter);
-            });
+            if ($request->has('country')) {
+                $country = $request->country;
+                $jobsQuery->whereHas('company', function ($query) use ($country) {
+                    $query->whereHas('address', function ($innerQuery) use ($country) {
+                        $innerQuery->where('country_id', $country);
+                    });
+                });
+            }
         }
 
         $jobs = $jobsQuery->paginate(12);
