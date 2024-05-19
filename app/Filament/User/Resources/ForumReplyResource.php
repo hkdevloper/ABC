@@ -4,7 +4,9 @@ namespace App\Filament\User\Resources;
 
 use App\Filament\User\Resources\ForumReplyResource\Pages;
 use App\Models\ForumReply;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 
@@ -18,6 +20,10 @@ class ForumReplyResource extends Resource
     {
         return $form
             ->schema([
+                Hidden::make('user_id')
+                    ->default(auth()->id()),
+                Hidden::make('forum_id')
+                    ->default(session('forum_id')),
                 RichEditor::make('body')
                     ->label('')
                     ->toolbarButtons([
@@ -44,10 +50,8 @@ class ForumReplyResource extends Resource
 
     public static function getPages(): array
     {
-        //php artisan make:filament-page ViewForum --resource=ForumResource --type=ViewRecord
         return [
-            //'index' => Pages\ListForumReplies::route('/'),
-            'create' => Pages\CreateForumReply::route('/create'),
+            'index' => Pages\CreateForumReply::route('/'),
             'edit' => Pages\EditForumReply::route('/{record}/edit'),
         ];
     }

@@ -62,7 +62,7 @@ class ForumReplyPolicy
         if(!$user->company){
             return false;
         }
-        if ($user->company->id == $forumReply->user_id || $user->type == 'Admin') {
+        if ($user->id == $forumReply->user_id || $user->type == 'Admin') {
             return true;
         }
         return false;

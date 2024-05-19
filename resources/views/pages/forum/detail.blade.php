@@ -48,8 +48,8 @@
             </div>
         </div>
         <div class="w-full my-5 p-2">
-            <button onclick="showAnswerForm()"
-                    class="block text-white bg-purple-500 hover:bg-purple-800 font-bold uppercase text-xs px-4 py-2 rounded-full focus:outline-none w-full text-center p-2">
+            <a href="{{route('forum.reply', ['id'=>$forum->id])}}" _target="_blank"
+               class="block text-white bg-purple-500 hover:bg-purple-800 font-bold uppercase text-xs px-4 py-2 rounded-full focus:outline-none w-full text-center p-2">
                 @auth
                     @if(auth()->id() === $forum->user_id)
                         <span class="text-white">You cannot answer your own question</span>
@@ -58,7 +58,7 @@
                     @endif
                 @endauth
                 Leave an Answer
-            </button>
+            </a>
         </div>
         <!-- Reply Form -->
         <div id="answer-block" class="mb-6 p-2 w-full hidden">

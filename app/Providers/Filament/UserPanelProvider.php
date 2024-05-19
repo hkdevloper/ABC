@@ -6,6 +6,7 @@ use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Resources\RequirementResource;
 use App\Filament\User\Resources\EventResource;
+use App\Filament\User\Resources\ForumReplyResource;
 use App\Filament\User\Resources\ForumResource;
 use App\Filament\User\Resources\JobResource;
 use App\Filament\User\Resources\ProductResource;
@@ -192,6 +193,9 @@ class UserPanelProvider extends PanelProvider
                             }
                             return false;
                         }),
+//                    NavigationItem::make('Forum Reply')
+//                        ->icon('heroicon-o-banknotes')
+//                        ->url(fn (): string => ForumReplyResource::getUrl()),
                     NavigationItem::make('Direct Messages')
                         ->icon('heroicon-o-chat-bubble-left-right')
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.direct-message'))
