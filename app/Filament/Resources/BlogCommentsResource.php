@@ -29,11 +29,8 @@ class BlogCommentsResource extends Resource
                     ->native(false)
                     ->disabled()
                     ->required(),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->native(false)
-                    ->disabled()
-                    ->required(),
+                Forms\Components\Hidden::make('user_id')
+                    ->default(auth()->user()->id),
                 TinyEditor::make('comment')
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsVisibility('public')

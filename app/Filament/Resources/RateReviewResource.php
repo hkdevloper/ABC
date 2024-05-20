@@ -26,10 +26,8 @@ class RateReviewResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->native(false)
-                    ->required(),
+                Forms\Components\Hidden::make('user_id')
+                    ->default(auth()->user()->id),
                 Forms\Components\Hidden::make('type')
                     ->required()
                     ->default('product'),
