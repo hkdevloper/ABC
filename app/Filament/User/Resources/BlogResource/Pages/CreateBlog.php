@@ -24,15 +24,6 @@ class CreateBlog extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        // Send Notification to Admin when a new blog is created
-        Notification::make()
-            ->title('New Blog Created.')
-            ->body(Str::limit($data['title'], 70, '...'))
-            ->actions([
-                Actions\Action::make('view')
-                    ->url('/user/blogs'),
-            ])
-            ->sendToDatabase(User::find(1));
         return array_merge($data, [
             'company_id' => auth()->user()->company->id,
             'slug' => Str::slug($data['title']),
