@@ -4,7 +4,7 @@ namespace App\Filament\User\Resources\BlogResource\Pages;
 
 use App\Filament\User\Resources\BlogResource;
 use App\Models\User;
-use Filament\Actions;
+use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Validation\ValidationException;
