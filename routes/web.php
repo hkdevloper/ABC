@@ -20,9 +20,11 @@ use App\Models\Event;
 use App\Models\Requirement;
 use App\Models\Subscribe;
 use App\Models\User;
+use App\Models\WalletHistory;
 use Filament\Facades\Filament;
 use Filament\Notifications\Auth\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -42,7 +44,7 @@ Route::prefix('test')->group(function () {
     Route::get('/', function () {
         foreach (User::all() as $user) {
             // Create a new wallet history
-            $wallet = new \App\Models\WalletHistory();
+            $wallet = new WalletHistory();
             $wallet->user_id = $user->id;
             $wallet->amount = $user->balance;
             $wallet->type = 'credit';
@@ -84,6 +86,22 @@ Route::get('logout', function () {
     }
     return redirect()->back();
 })->name('logout');
+
+
+Route::get('/user/email-verification/verify/{id}/{hash}', function ($id, $hash) {
+    $user = User::findOrFail($id);
+    if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+        return redirect()->route('auth.login')->with('error', 'Invalid verification link');
+    }
+
+    if ($user->hasVerifiedEmail()) {
+        return redirect()->route('auth.login')->with('error', 'Email already verified');
+    }
+
+    $user->markEmailAsVerified();
+    return view('auth.email')->with('success', 'Email verified successfully');
+})->name('filament.panel.auth.email-verification.verify');
+
 
 Route::get('/', function () {
     // Forgot session
