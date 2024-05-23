@@ -89,6 +89,9 @@ Route::get('logout', function () {
 
 
 Route::get('/user/email-verification/verify/{id}/{hash}', function ($id, $hash) {
+    if (Auth::check()) {
+        Auth::logout();
+    }
     $user = User::findOrFail($id);
     if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
         return redirect()->route('auth.login')->with('error', 'Invalid verification link');
