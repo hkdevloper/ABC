@@ -98,13 +98,6 @@ class CompanyResource extends Resource
                     ->maxLength(191),
                 SelectTree::make('category_id')
                     ->label('Select Category')
-                    ->default(function($action, $record){
-                        if($action == 'edit'){
-                            return $record->category_id ?? 1;
-                        }else{
-                            return 0;
-                        }
-                    })
                     ->enableBranchNode()
                     ->live(onBlur: true)
                     ->emptyLabel('Oops! No Category Found')
