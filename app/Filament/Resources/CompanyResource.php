@@ -99,10 +99,9 @@ class CompanyResource extends Resource
                 SelectTree::make('category_id')
                     ->label('Select Category')
                     ->enableBranchNode()
+                    ->live(onBlur: true)
                     ->emptyLabel('Oops! No Category Found')
-                    ->relationship('category', 'name', 'parent_id', function ($query) {
-                        return $query->where('type', 'company');
-                    }),
+                    ->relationship('category', 'name', 'parent_id'),
                 TextInput::make('name')
                     ->label('Enter Company Name')
                     ->live(onBlur: true)
