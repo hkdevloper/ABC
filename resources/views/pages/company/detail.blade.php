@@ -59,7 +59,7 @@
                         <span class="text-sm text-gray-500">
                             <i class='bx bx-box text-purple-500 mr-1'></i>
                         </span>
-                        <span class="text-sm text-gray-500 font-semibold">{{ $company->category->name }}</span>
+                        <span class="text-sm text-gray-500 font-semibold">{{ $company?->category?->name }}</span>
                     </p>
                     <div class="flex items-center justify-between mt-3">
                         <div class="flex flex-col items-center justify-center">
@@ -234,7 +234,7 @@
                                     class="p-1 ml-2 md:p-2 flex flex-col items-start md:items-center md:justify-center w-full">
                                     <header class="flex my-2 font-light text-xs md:text-base items-center">
                                         <i class="bx bx-category text-indigo-500 mr-1"></i>
-                                        <p>{{ $item->category->name }}</p>
+                                        <p>{{ $item->category?->name }}</p>
                                     </header>
                                     <p class="text-sm md:text-xl font-medium mb-2">{{ $item->name }}</p>
                                     <p class="text-red-700 text-xs md:text-sm">{{ $item->company ? $item->company->name: '' }}</p>
@@ -428,7 +428,7 @@
                         <div class="p-1 ml-2 md:p-2 flex flex-col items-start md:items-center md:justify-center w-full">
                             <header class="flex my-2 font-light text-xs md:text-base items-center">
                                 <i class="bx bx-category text-indigo-500 mr-1"></i>
-                                <p>{{ $item->category->name }}</p>
+                                <p>{{ $item?->category?->name }}</p>
                             </header>
                             <p class="text-sm md:text-xl font-medium mb-2">{{ $item->name }}</p>
                             <p class="text-red-700 text-xs md:text-sm">{{ $item->company ? $item->company->name: '' }}</p>
