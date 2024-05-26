@@ -55,6 +55,8 @@ class UserPanelProvider extends PanelProvider
             ->emailVerification(EmailVerificationPrompt::class)
             ->profile(EditProfile::class, isSimple: false)
             ->databaseNotifications()
+            ->spa()
+            ->unsavedChangesAlerts()
             ->colors([
                 'primary' => Color::Purple,
             ])
