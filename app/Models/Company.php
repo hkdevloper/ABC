@@ -97,7 +97,7 @@ class Company extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class)->where('type', 'company');
+        return $this->belongsTo(Category::class, 'category_id', 'id', 'companies')->where('type', 'company');
     }
 
     public function fullAddress(): string
