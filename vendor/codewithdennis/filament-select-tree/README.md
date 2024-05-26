@@ -162,11 +162,12 @@ Store fetched models for additional functionality
 ->storeResults()
 ```
 
-```php
-// Now you can access the results in `afterStateUpdated`
-->afterStateUpdated(function ($state, SelectTree $component) {
-    $component->getResults();
-}),
+Now you can access the results in `disabledOptions` or `hiddenOptions`
+
+```PHP
+->disabledOptions(function ($state, SelectTree $component) {
+    $results = $component->getResults();
+})
 ```
 
 ## Filters

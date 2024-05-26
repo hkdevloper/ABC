@@ -333,7 +333,22 @@ use Filament\Tables\Table;
 public function table(Table $table): Table
 {
     return $table
-		->defaultGroup('status');
+		->defaultGroup('status')
         ->groupingSettingsHidden();
+}
+```
+
+### Hiding the grouping direction setting only
+
+You can hide the grouping direction select interface using the `groupingDirectionSettingHidden()` method:
+
+```php
+use Filament\Tables\Table;
+
+public function table(Table $table): Table
+{
+    return $table
+		->defaultGroup('status')
+        ->groupingDirectionSettingHidden();
 }
 ```
