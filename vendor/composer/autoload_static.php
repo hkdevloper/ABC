@@ -502,8 +502,8 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -920,6 +920,11 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'App\\Filament\\Resources\\JobResource\\Pages\\CreateJob' => __DIR__ . '/../..' . '/app/Filament/Resources/JobResource/Pages/CreateJob.php',
         'App\\Filament\\Resources\\JobResource\\Pages\\EditJob' => __DIR__ . '/../..' . '/app/Filament/Resources/JobResource/Pages/EditJob.php',
         'App\\Filament\\Resources\\JobResource\\Pages\\ListJobs' => __DIR__ . '/../..' . '/app/Filament/Resources/JobResource/Pages/ListJobs.php',
+        'App\\Filament\\Resources\\PackageResource' => __DIR__ . '/../..' . '/app/Filament/Resources/PackageResource.php',
+        'App\\Filament\\Resources\\PackageResource\\Pages\\CreatePackage' => __DIR__ . '/../..' . '/app/Filament/Resources/PackageResource/Pages/CreatePackage.php',
+        'App\\Filament\\Resources\\PackageResource\\Pages\\EditPackage' => __DIR__ . '/../..' . '/app/Filament/Resources/PackageResource/Pages/EditPackage.php',
+        'App\\Filament\\Resources\\PackageResource\\Pages\\ListPackages' => __DIR__ . '/../..' . '/app/Filament/Resources/PackageResource/Pages/ListPackages.php',
+        'App\\Filament\\Resources\\PackageResource\\Pages\\ViewPackage' => __DIR__ . '/../..' . '/app/Filament/Resources/PackageResource/Pages/ViewPackage.php',
         'App\\Filament\\Resources\\ProductResource' => __DIR__ . '/../..' . '/app/Filament/Resources/ProductResource.php',
         'App\\Filament\\Resources\\ProductResource\\Pages\\CreateProduct' => __DIR__ . '/../..' . '/app/Filament/Resources/ProductResource/Pages/CreateProduct.php',
         'App\\Filament\\Resources\\ProductResource\\Pages\\EditProduct' => __DIR__ . '/../..' . '/app/Filament/Resources/ProductResource/Pages/EditProduct.php',
@@ -1053,6 +1058,7 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'App\\Models\\ForumReply' => __DIR__ . '/../..' . '/app/Models/ForumReply.php',
         'App\\Models\\Job' => __DIR__ . '/../..' . '/app/Models/Job.php',
         'App\\Models\\Package' => __DIR__ . '/../..' . '/app/Models/Package.php',
+        'App\\Models\\PackageUser' => __DIR__ . '/../..' . '/app/Models/PackageUser.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\RateReview' => __DIR__ . '/../..' . '/app/Models/RateReview.php',
         'App\\Models\\Requirement' => __DIR__ . '/../..' . '/app/Models/Requirement.php',
@@ -1286,6 +1292,8 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'Database\\Factories\\FavoriteCompaniesFactory' => __DIR__ . '/../..' . '/database/factories/FavoriteCompaniesFactory.php',
         'Database\\Factories\\ForumFactory' => __DIR__ . '/../..' . '/database/factories/ForumFactory.php',
         'Database\\Factories\\JobFactory' => __DIR__ . '/../..' . '/database/factories/JobFactory.php',
+        'Database\\Factories\\PackageFactory' => __DIR__ . '/../..' . '/database/factories/PackageFactory.php',
+        'Database\\Factories\\PackageUserFactory' => __DIR__ . '/../..' . '/database/factories/PackageUserFactory.php',
         'Database\\Factories\\ProductFactory' => __DIR__ . '/../..' . '/database/factories/ProductFactory.php',
         'Database\\Factories\\RateReviewFactory' => __DIR__ . '/../..' . '/database/factories/RateReviewFactory.php',
         'Database\\Factories\\RequirementFactory' => __DIR__ . '/../..' . '/database/factories/RequirementFactory.php',
@@ -6378,7 +6386,6 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'OwenIt\\Auditing\\Audit' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Audit.php',
         'OwenIt\\Auditing\\Auditable' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Auditable.php',
         'OwenIt\\Auditing\\AuditableObserver' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/AuditableObserver.php',
-        'OwenIt\\Auditing\\AuditingEventServiceProvider' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/AuditingEventServiceProvider.php',
         'OwenIt\\Auditing\\AuditingServiceProvider' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/AuditingServiceProvider.php',
         'OwenIt\\Auditing\\Auditor' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Auditor.php',
         'OwenIt\\Auditing\\Console\\AuditDriverCommand' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Console/AuditDriverCommand.php',
