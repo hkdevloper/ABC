@@ -5,8 +5,10 @@ namespace App\Filament\User\Resources;
 use App\Filament\User\Resources\PackageResource\Pages;
 use App\Models\Package;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -25,17 +27,27 @@ class PackageResource extends Resource
                 Forms\Components\Group::make()->schema([
                     Forms\Components\Placeholder::make('name')
                         ->label('Package Name')
-                        ->content(fn (Package $record): string => $record->name),
+                        ->content(fn(Package $record): string => $record->name),
                     Forms\Components\Placeholder::make('duration')
-                        ->content(fn (Package $record): string => $record->duration . ' ' . $record->duration_type),
+                        ->content(fn(Package $record): string => $record->duration . ' ' . $record->duration_type),
                     Forms\Components\Placeholder::make('price')
-                        ->content(fn (Package $record): string => $record->price . ' / ' . $record->duration_type),
+                        ->content(fn(Package $record): string => $record->price . ' / ' . $record->duration_type),
                     Forms\Components\Placeholder::make('discount_price')
-                        ->content(fn (Package $record): string => $record->discount_price . ' / ' . $record->duration_type),
+                        ->content(fn(Package $record): string => $record->discount_price . ' / ' . $record->duration_type),
                     Forms\Components\RichEditor::make('description')
                         ->columnSpanFull(),
                 ])->columnSpan(2)->columns(2),
                 Forms\Components\Group::make()->schema([
+                    FileUpload::make('image')
+                        ->image()
+                        ->disabled()
+                        ->optimize('webp')
+                        ->resize(50)
+                        ->label('Thumbnail Image')
+                        ->directory('packages/')
+                        ->visibility('public')
+
+                        ->required(),
                     Forms\Components\KeyValue::make('featured')
                         ->label('Featured Items available in this package')
                         ->keyLabel('Items')
@@ -49,43 +61,41 @@ class PackageResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\ColumnGroup::make('duration')
-                    ->label('Duration')
-                    ->columns([
-                        Tables\Columns\TextColumn::make('duration')
-                            ->searchable(),
-                        Tables\Columns\TextColumn::make('duration_type')
-                            ->searchable(),
+                Tables\Columns\Layout\Stack::make([
+                    Tables\Columns\ImageColumn::make('image')
+                        ->height('150px')
+                        ->width('150px')->alignCenter(),
+                    Tables\Columns\Layout\Stack::make([
+                        Tables\Columns\TextColumn::make('name')
+                            ->weight(FontWeight::Bold)->alignCenter(),
+                        Tables\Columns\TextColumn::make('price')
+                            ->money('INR')
+                            ->color('gray')
+                            ->alignCenter(),
                     ]),
-                Tables\Columns\TextColumn::make('price')
-                    ->money()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('discount_price')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->label('Active')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_popular')
-                    ->label('Popular')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                ])->space(3),
+            ])
+            ->filters([
+                //
+            ])
+            ->contentGrid([
+                'md' => 2,
+                'xl' => 3,
+            ])
+            ->paginated([
+                18,
+                36,
+                72,
+                'all',
             ])
             ->filters([
                 //
             ])
             ->actions([
-
-            ])
+                Tables\Actions\ViewAction::make()
+                    ->icon('heroicon-o-eye')
+                    ->label('View Package'),
+            ])->actionsAlignment('center')
             ->bulkActions([]);
     }
 

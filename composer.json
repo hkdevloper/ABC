@@ -18,6 +18,7 @@
         "filament/spatie-laravel-media-library-plugin": "^3.1",
         "guzzlehttp/guzzle": "^7.2",
         "ibrahimbougaoua/filament-rating-star": "^1.0",
+        "joaopaulolndev/filament-general-settings": "^1.0",
         "joshembling/image-optimizer": "^1.3",
         "ladumor/laravel-pwa": "^0.0.4",
         "laravel/framework": "^10.10",
@@ -26,9 +27,11 @@
         "mews/purifier": "^3.4",
         "mkocansey/bladewind": "^2.3",
         "njxqlus/filament-progressbar": "^1.0",
+        "pelmered/filament-money-field": "^1.3",
         "razorpay/razorpay": "2.*",
         "solution-forest/filament-tree": "^2.0",
-        "tapp/filament-auditing": "^3.0"
+        "tapp/filament-auditing": "^3.0",
+        "valentin-morice/filament-json-column": "^1.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",

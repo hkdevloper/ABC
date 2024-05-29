@@ -71,6 +71,10 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
+        'V' => 
+        array (
+            'ValentinMorice\\FilamentJsonColumn\\' => 34,
+        ),
         'T' => 
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
@@ -144,6 +148,7 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
             'Psr\\Cache\\' => 10,
             'PhpParser\\' => 10,
             'PhpOption\\' => 10,
+            'Pelmered\\FilamentMoneyField\\' => 28,
         ),
         'O' => 
         array (
@@ -158,6 +163,7 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Money\\' => 6,
             'Mockery\\' => 8,
             'Mkocansey\\Bladewind\\' => 20,
             'Mews\\Purifier\\' => 14,
@@ -187,6 +193,8 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'J' => 
         array (
             'Joshembling\\ImageOptimizer\\' => 27,
+            'Joaopaulolndev\\FilamentGeneralSettings\\Database\\Factories\\' => 58,
+            'Joaopaulolndev\\FilamentGeneralSettings\\' => 39,
         ),
         'I' => 
         array (
@@ -283,6 +291,10 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'ValentinMorice\\FilamentJsonColumn\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/valentin-morice/filament-json-column/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -533,6 +545,10 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
+        'Pelmered\\FilamentMoneyField\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pelmered/filament-money-field/src',
+        ),
         'OwenIt\\Auditing\\' => 
         array (
             0 => __DIR__ . '/..' . '/owen-it/laravel-auditing/src',
@@ -552,6 +568,10 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Money\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moneyphp/money/src',
         ),
         'Mockery\\' => 
         array (
@@ -633,6 +653,14 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'Joshembling\\ImageOptimizer\\' => 
         array (
             0 => __DIR__ . '/..' . '/joshembling/image-optimizer/src',
+        ),
+        'Joaopaulolndev\\FilamentGeneralSettings\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/database/factories',
+        ),
+        'Joaopaulolndev\\FilamentGeneralSettings\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src',
         ),
         'Intervention\\Image\\' => 
         array (
@@ -1002,6 +1030,9 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'App\\Filament\\User\\Resources\\JobResource\\Pages\\CreateJob' => __DIR__ . '/../..' . '/app/Filament/User/Resources/JobResource/Pages/CreateJob.php',
         'App\\Filament\\User\\Resources\\JobResource\\Pages\\EditJob' => __DIR__ . '/../..' . '/app/Filament/User/Resources/JobResource/Pages/EditJob.php',
         'App\\Filament\\User\\Resources\\JobResource\\Pages\\ListJobs' => __DIR__ . '/../..' . '/app/Filament/User/Resources/JobResource/Pages/ListJobs.php',
+        'App\\Filament\\User\\Resources\\PackageResource' => __DIR__ . '/../..' . '/app/Filament/User/Resources/PackageResource.php',
+        'App\\Filament\\User\\Resources\\PackageResource\\Pages\\ListPackages' => __DIR__ . '/../..' . '/app/Filament/User/Resources/PackageResource/Pages/ListPackages.php',
+        'App\\Filament\\User\\Resources\\PackageResource\\Pages\\ViewPackage' => __DIR__ . '/../..' . '/app/Filament/User/Resources/PackageResource/Pages/ViewPackage.php',
         'App\\Filament\\User\\Resources\\ProductResource' => __DIR__ . '/../..' . '/app/Filament/User/Resources/ProductResource.php',
         'App\\Filament\\User\\Resources\\ProductResource\\Pages\\CreateProduct' => __DIR__ . '/../..' . '/app/Filament/User/Resources/ProductResource/Pages/CreateProduct.php',
         'App\\Filament\\User\\Resources\\ProductResource\\Pages\\EditProduct' => __DIR__ . '/../..' . '/app/Filament/User/Resources/ProductResource/Pages/EditProduct.php',
@@ -5089,6 +5120,30 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'Intervention\\Image\\Point' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Point.php',
         'Intervention\\Image\\Response' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Response.php',
         'Intervention\\Image\\Size' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Size.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Commands\\FilamentGeneralSettingsCommand' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Commands/FilamentGeneralSettingsCommand.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Enums\\EmailProviderEnum' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Enums/EmailProviderEnum.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Enums\\SocialNetworkEnum' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Enums/SocialNetworkEnum.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Enums\\TypeFieldEnum' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Enums/TypeFieldEnum.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Facades\\FilamentGeneralSettings' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Facades/FilamentGeneralSettings.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\FilamentGeneralSettings' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/FilamentGeneralSettings.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\FilamentGeneralSettingsPlugin' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/FilamentGeneralSettingsPlugin.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\FilamentGeneralSettingsServiceProvider' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/FilamentGeneralSettingsServiceProvider.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Forms\\AnalyticsFieldsForm' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Forms/AnalyticsFieldsForm.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Forms\\ApplicationFieldsForm' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Forms/ApplicationFieldsForm.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Forms\\CustomForms' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Forms/CustomForms.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Forms\\EmailFieldsForm' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Forms/EmailFieldsForm.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Forms\\SeoFieldsForm' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Forms/SeoFieldsForm.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Forms\\SocialNetworkFieldsForm' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Forms/SocialNetworkFieldsForm.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Helpers\\EmailDataHelper' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Helpers/EmailDataHelper.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Helpers\\SocialNetworkDataHelper' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Helpers/SocialNetworkDataHelper.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Mail\\TestMail' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Mail/TestMail.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Middleware\\FilamentGeneralSettingsMiddleware' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Middleware/FilamentGeneralSettingsMiddleware.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Models\\GeneralSetting' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Models/GeneralSetting.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Pages\\GeneralSettingsPage' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Pages/GeneralSettingsPage.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Services\\GeneralSettingsService' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Services/GeneralSettingsService.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Services\\MailSettingsService' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Services/MailSettingsService.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Testing\\TestsFilamentGeneralSettings' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Testing/TestsFilamentGeneralSettings.php',
+        'Joaopaulolndev\\FilamentGeneralSettings\\Traits\\WithOptions' => __DIR__ . '/..' . '/joaopaulolndev/filament-general-settings/src/Traits/WithOptions.php',
         'Joshembling\\ImageOptimizer\\Components\\BaseFileUpload' => __DIR__ . '/..' . '/joshembling/image-optimizer/src/Components/BaseFileUpload.php',
         'Joshembling\\ImageOptimizer\\Components\\SpatieMediaLibraryFileUpload' => __DIR__ . '/..' . '/joshembling/image-optimizer/src/Components/SpatieMediaLibraryFileUpload.php',
         'Joshembling\\ImageOptimizer\\Facades\\ImageOptimizer' => __DIR__ . '/..' . '/joshembling/image-optimizer/src/Facades/ImageOptimizer.php',
@@ -6022,6 +6077,49 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'Mockery\\Undefined' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Undefined.php',
         'Mockery\\VerificationDirector' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationDirector.php',
         'Mockery\\VerificationExpectation' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
+        'Money\\Calculator' => __DIR__ . '/..' . '/moneyphp/money/src/Calculator.php',
+        'Money\\Calculator\\BcMathCalculator' => __DIR__ . '/..' . '/moneyphp/money/src/Calculator/BcMathCalculator.php',
+        'Money\\Calculator\\GmpCalculator' => __DIR__ . '/..' . '/moneyphp/money/src/Calculator/GmpCalculator.php',
+        'Money\\Converter' => __DIR__ . '/..' . '/moneyphp/money/src/Converter.php',
+        'Money\\Currencies' => __DIR__ . '/..' . '/moneyphp/money/src/Currencies.php',
+        'Money\\Currencies\\AggregateCurrencies' => __DIR__ . '/..' . '/moneyphp/money/src/Currencies/AggregateCurrencies.php',
+        'Money\\Currencies\\BitcoinCurrencies' => __DIR__ . '/..' . '/moneyphp/money/src/Currencies/BitcoinCurrencies.php',
+        'Money\\Currencies\\CachedCurrencies' => __DIR__ . '/..' . '/moneyphp/money/src/Currencies/CachedCurrencies.php',
+        'Money\\Currencies\\CryptoCurrencies' => __DIR__ . '/..' . '/moneyphp/money/src/Currencies/CryptoCurrencies.php',
+        'Money\\Currencies\\CurrencyList' => __DIR__ . '/..' . '/moneyphp/money/src/Currencies/CurrencyList.php',
+        'Money\\Currencies\\ISOCurrencies' => __DIR__ . '/..' . '/moneyphp/money/src/Currencies/ISOCurrencies.php',
+        'Money\\Currency' => __DIR__ . '/..' . '/moneyphp/money/src/Currency.php',
+        'Money\\CurrencyPair' => __DIR__ . '/..' . '/moneyphp/money/src/CurrencyPair.php',
+        'Money\\Exception' => __DIR__ . '/..' . '/moneyphp/money/src/Exception.php',
+        'Money\\Exception\\FormatterException' => __DIR__ . '/..' . '/moneyphp/money/src/Exception/FormatterException.php',
+        'Money\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/moneyphp/money/src/Exception/InvalidArgumentException.php',
+        'Money\\Exception\\ParserException' => __DIR__ . '/..' . '/moneyphp/money/src/Exception/ParserException.php',
+        'Money\\Exception\\UnknownCurrencyException' => __DIR__ . '/..' . '/moneyphp/money/src/Exception/UnknownCurrencyException.php',
+        'Money\\Exception\\UnresolvableCurrencyPairException' => __DIR__ . '/..' . '/moneyphp/money/src/Exception/UnresolvableCurrencyPairException.php',
+        'Money\\Exchange' => __DIR__ . '/..' . '/moneyphp/money/src/Exchange.php',
+        'Money\\Exchange\\ExchangerExchange' => __DIR__ . '/..' . '/moneyphp/money/src/Exchange/ExchangerExchange.php',
+        'Money\\Exchange\\FixedExchange' => __DIR__ . '/..' . '/moneyphp/money/src/Exchange/FixedExchange.php',
+        'Money\\Exchange\\IndirectExchange' => __DIR__ . '/..' . '/moneyphp/money/src/Exchange/IndirectExchange.php',
+        'Money\\Exchange\\IndirectExchangeQueuedItem' => __DIR__ . '/..' . '/moneyphp/money/src/Exchange/IndirectExchangeQueuedItem.php',
+        'Money\\Exchange\\ReversedCurrenciesExchange' => __DIR__ . '/..' . '/moneyphp/money/src/Exchange/ReversedCurrenciesExchange.php',
+        'Money\\Exchange\\SwapExchange' => __DIR__ . '/..' . '/moneyphp/money/src/Exchange/SwapExchange.php',
+        'Money\\Formatter\\AggregateMoneyFormatter' => __DIR__ . '/..' . '/moneyphp/money/src/Formatter/AggregateMoneyFormatter.php',
+        'Money\\Formatter\\BitcoinMoneyFormatter' => __DIR__ . '/..' . '/moneyphp/money/src/Formatter/BitcoinMoneyFormatter.php',
+        'Money\\Formatter\\DecimalMoneyFormatter' => __DIR__ . '/..' . '/moneyphp/money/src/Formatter/DecimalMoneyFormatter.php',
+        'Money\\Formatter\\IntlLocalizedDecimalFormatter' => __DIR__ . '/..' . '/moneyphp/money/src/Formatter/IntlLocalizedDecimalFormatter.php',
+        'Money\\Formatter\\IntlMoneyFormatter' => __DIR__ . '/..' . '/moneyphp/money/src/Formatter/IntlMoneyFormatter.php',
+        'Money\\Money' => __DIR__ . '/..' . '/moneyphp/money/src/Money.php',
+        'Money\\MoneyFactory' => __DIR__ . '/..' . '/moneyphp/money/src/MoneyFactory.php',
+        'Money\\MoneyFormatter' => __DIR__ . '/..' . '/moneyphp/money/src/MoneyFormatter.php',
+        'Money\\MoneyParser' => __DIR__ . '/..' . '/moneyphp/money/src/MoneyParser.php',
+        'Money\\Number' => __DIR__ . '/..' . '/moneyphp/money/src/Number.php',
+        'Money\\PHPUnit\\Comparator' => __DIR__ . '/..' . '/moneyphp/money/src/PHPUnit/Comparator.php',
+        'Money\\Parser\\AggregateMoneyParser' => __DIR__ . '/..' . '/moneyphp/money/src/Parser/AggregateMoneyParser.php',
+        'Money\\Parser\\BitcoinMoneyParser' => __DIR__ . '/..' . '/moneyphp/money/src/Parser/BitcoinMoneyParser.php',
+        'Money\\Parser\\DecimalMoneyParser' => __DIR__ . '/..' . '/moneyphp/money/src/Parser/DecimalMoneyParser.php',
+        'Money\\Parser\\IntlLocalizedDecimalParser' => __DIR__ . '/..' . '/moneyphp/money/src/Parser/IntlLocalizedDecimalParser.php',
+        'Money\\Parser\\IntlMoneyParser' => __DIR__ . '/..' . '/moneyphp/money/src/Parser/IntlMoneyParser.php',
+        'Money\\Teller' => __DIR__ . '/..' . '/moneyphp/money/src/Teller.php',
         'Monolog\\Attribute\\AsMonologProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Attribute/AsMonologProcessor.php',
         'Monolog\\Attribute\\WithMonologChannel' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Attribute/WithMonologChannel.php',
         'Monolog\\DateTimeImmutable' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/DateTimeImmutable.php',
@@ -7304,6 +7402,16 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'PHPUnit\\Util\\Xml' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/Xml.php',
         'PHPUnit\\Util\\Xml\\Loader' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/Loader.php',
         'PHPUnit\\Util\\Xml\\XmlException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Exception/XmlException.php',
+        'Pelmered\\FilamentMoneyField\\Exceptions\\UnsupportedCurrency' => __DIR__ . '/..' . '/pelmered/filament-money-field/src/Exceptions/UnsupportedCurrency.php',
+        'Pelmered\\FilamentMoneyField\\FilamentMoneyFieldServiceProvider' => __DIR__ . '/..' . '/pelmered/filament-money-field/src/FilamentMoneyFieldServiceProvider.php',
+        'Pelmered\\FilamentMoneyField\\Forms\\Components\\MoneyInput' => __DIR__ . '/..' . '/pelmered/filament-money-field/src/Forms/Components/MoneyInput.php',
+        'Pelmered\\FilamentMoneyField\\Forms\\Rules\\MaxValueRule' => __DIR__ . '/..' . '/pelmered/filament-money-field/src/Forms/Rules/MaxValueRule.php',
+        'Pelmered\\FilamentMoneyField\\Forms\\Rules\\MinValueRule' => __DIR__ . '/..' . '/pelmered/filament-money-field/src/Forms/Rules/MinValueRule.php',
+        'Pelmered\\FilamentMoneyField\\HasMoneyAttributes' => __DIR__ . '/..' . '/pelmered/filament-money-field/src/HasMoneyAttributes.php',
+        'Pelmered\\FilamentMoneyField\\Infolists\\Components\\MoneyEntry' => __DIR__ . '/..' . '/pelmered/filament-money-field/src/Infolists/Components/MoneyEntry.php',
+        'Pelmered\\FilamentMoneyField\\MoneyFormatter' => __DIR__ . '/..' . '/pelmered/filament-money-field/src/MoneyFormatter.php',
+        'Pelmered\\FilamentMoneyField\\MoneyFormattingRules' => __DIR__ . '/..' . '/pelmered/filament-money-field/src/MoneyFormattingRules.php',
+        'Pelmered\\FilamentMoneyField\\Tables\\Columns\\MoneyColumn' => __DIR__ . '/..' . '/pelmered/filament-money-field/src/Tables/Columns/MoneyColumn.php',
         'PharIo\\Manifest\\Application' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Application.php',
         'PharIo\\Manifest\\ApplicationName' => __DIR__ . '/..' . '/phar-io/manifest/src/values/ApplicationName.php',
         'PharIo\\Manifest\\Author' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Author.php',
@@ -9695,6 +9803,8 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+        'ValentinMorice\\FilamentJsonColumn\\FilamentJsonColumn' => __DIR__ . '/..' . '/valentin-morice/filament-json-column/src/FilamentJsonColumn.php',
+        'ValentinMorice\\FilamentJsonColumn\\FilamentJsonColumnServiceProvider' => __DIR__ . '/..' . '/valentin-morice/filament-json-column/src/FilamentJsonColumnServiceProvider.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',

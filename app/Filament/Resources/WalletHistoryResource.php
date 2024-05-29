@@ -11,6 +11,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use ValentinMorice\FilamentJsonColumn\FilamentJsonColumn;
 
 class WalletHistoryResource extends Resource
 {
@@ -51,8 +52,8 @@ class WalletHistoryResource extends Resource
                     ->maxLength(191),
                 Forms\Components\TextInput::make('tax')
                     ->maxLength(191),
-                Forms\Components\Textarea::make('json_response')
-                    ->rows(10)
+                FilamentJsonColumn::make('json_response')
+                    ->disabled()
                     ->columnSpanFull(),
             ]);
     }
