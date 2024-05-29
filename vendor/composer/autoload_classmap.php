@@ -160,7 +160,6 @@ return array(
     'App\\Filament\\User\\Resources\\JobResource\\Pages\\EditJob' => $baseDir . '/app/Filament/User/Resources/JobResource/Pages/EditJob.php',
     'App\\Filament\\User\\Resources\\JobResource\\Pages\\ListJobs' => $baseDir . '/app/Filament/User/Resources/JobResource/Pages/ListJobs.php',
     'App\\Filament\\User\\Resources\\PackageResource' => $baseDir . '/app/Filament/User/Resources/PackageResource.php',
-    'App\\Filament\\User\\Resources\\PackageResource\\Pages\\EditPackage' => $baseDir . '/app/Filament/User/Resources/PackageResource/Pages/EditPackage.php',
     'App\\Filament\\User\\Resources\\PackageResource\\Pages\\ListPackages' => $baseDir . '/app/Filament/User/Resources/PackageResource/Pages/ListPackages.php',
     'App\\Filament\\User\\Resources\\PackageResource\\Pages\\ViewPackage' => $baseDir . '/app/Filament/User/Resources/PackageResource/Pages/ViewPackage.php',
     'App\\Filament\\User\\Resources\\ProductResource' => $baseDir . '/app/Filament/User/Resources/ProductResource.php',

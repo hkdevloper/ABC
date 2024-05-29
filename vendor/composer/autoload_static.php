@@ -1003,7 +1003,6 @@ class ComposerStaticInitffccf415b405805d73e98be635e24f90
         'App\\Filament\\User\\Resources\\JobResource\\Pages\\EditJob' => __DIR__ . '/../..' . '/app/Filament/User/Resources/JobResource/Pages/EditJob.php',
         'App\\Filament\\User\\Resources\\JobResource\\Pages\\ListJobs' => __DIR__ . '/../..' . '/app/Filament/User/Resources/JobResource/Pages/ListJobs.php',
         'App\\Filament\\User\\Resources\\PackageResource' => __DIR__ . '/../..' . '/app/Filament/User/Resources/PackageResource.php',
-        'App\\Filament\\User\\Resources\\PackageResource\\Pages\\EditPackage' => __DIR__ . '/../..' . '/app/Filament/User/Resources/PackageResource/Pages/EditPackage.php',
         'App\\Filament\\User\\Resources\\PackageResource\\Pages\\ListPackages' => __DIR__ . '/../..' . '/app/Filament/User/Resources/PackageResource/Pages/ListPackages.php',
         'App\\Filament\\User\\Resources\\PackageResource\\Pages\\ViewPackage' => __DIR__ . '/../..' . '/app/Filament/User/Resources/PackageResource/Pages/ViewPackage.php',
         'App\\Filament\\User\\Resources\\ProductResource' => __DIR__ . '/../..' . '/app/Filament/User/Resources/ProductResource.php',
