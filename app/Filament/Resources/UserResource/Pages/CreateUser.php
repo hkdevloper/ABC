@@ -37,7 +37,7 @@ class CreateUser extends CreateRecord
                 $transaction = new WalletHistory();
                 $transaction->user_id = $user->id;
                 $transaction->type = $type;
-                $transaction->transaction_id = 'TRX-' . time() . rand(1000, 9999);
+                $transaction->transaction_id = 'TRX-' . time();
                 $transaction->amount = $amount;
                 $transaction->status = 'captured';
                 $transaction->method = 'admin';

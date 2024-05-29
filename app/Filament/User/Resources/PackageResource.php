@@ -16,26 +16,33 @@ class PackageResource extends Resource
 {
     protected static ?string $model = Package::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Placeholder::make('name')
-                    ->columnSpanFull(),
-                Forms\Components\Placeholder::make('description')
-                    ->columnSpanFull(),
-                Forms\Components\Placeholder::make('duration'),
-                Forms\Components\Placeholder::make('duration_type'),
-                Forms\Components\Placeholder::make('price'),
-                Forms\Components\Placeholder::make('discount_price'),
-                Forms\Components\Placeholder::make('featured'),
-                Forms\Components\Toggle::make('is_active')
-                    ->required(),
-                Forms\Components\Toggle::make('is_popular')
-                    ->required(),
-            ]);
+                Forms\Components\Group::make()->schema([
+                    Forms\Components\Placeholder::make('name')
+                        ->label('Package Name')
+                        ->content(fn (Package $record): string => $record->name),
+                    Forms\Components\Placeholder::make('duration')
+                        ->content(fn (Package $record): string => $record->duration . ' ' . $record->duration_type),
+                    Forms\Components\Placeholder::make('price')
+                        ->content(fn (Package $record): string => $record->price . ' / ' . $record->duration_type),
+                    Forms\Components\Placeholder::make('discount_price')
+                        ->content(fn (Package $record): string => $record->discount_price . ' / ' . $record->duration_type),
+                    Forms\Components\RichEditor::make('description')
+                        ->columnSpanFull(),
+                ])->columnSpan(2)->columns(2),
+                Forms\Components\Group::make()->schema([
+                    Forms\Components\KeyValue::make('featured')
+                        ->label('Featured Items available in this package')
+                        ->keyLabel('Items')
+                        ->valueLabel('Count')
+                        ->helperText('Number of items to be featured in this package'),
+                ])->columnSpan(1),
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
@@ -44,11 +51,14 @@ class PackageResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('duration')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('duration_type')
-                    ->searchable(),
+                Tables\Columns\ColumnGroup::make('duration')
+                    ->label('Duration')
+                    ->columns([
+                        Tables\Columns\TextColumn::make('duration')
+                            ->searchable(),
+                        Tables\Columns\TextColumn::make('duration_type')
+                            ->searchable(),
+                    ]),
                 Tables\Columns\TextColumn::make('price')
                     ->money()
                     ->sortable(),
@@ -56,8 +66,10 @@ class PackageResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label('Active')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_popular')
+                    ->label('Popular')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -72,7 +84,7 @@ class PackageResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+
             ])
             ->bulkActions([]);
     }
