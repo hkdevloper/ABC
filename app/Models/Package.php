@@ -28,6 +28,9 @@ class Package extends Model
         'featured',
         'is_active',
         'is_popular',
+        'image',
+        'req_available',
+        'dm_available'
     ];
 
     protected $casts = [
@@ -41,7 +44,7 @@ class Package extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'package_user')
-            ->withPivot('started_at', 'expired_at', 'is_active', 'is_expired', 'duration', 'duration_type', 'purchased_price', 'featured')
+            ->withPivot('started_at', 'expired_at', 'is_active', 'is_expired', 'duration', 'duration_type', 'purchased_price', 'featured', 'image', 'req_available', 'dm_available')
             ->withTimestamps();
     }
 

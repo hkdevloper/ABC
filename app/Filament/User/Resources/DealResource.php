@@ -169,10 +169,12 @@ class DealResource extends Resource
 
                 Tables\Columns\TextColumn::make('original_price')
                     ->label('Price')
+                    ->money('INR')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name'),
                 Tables\Columns\TextColumn::make('discount_price')
                     ->label('Discounted Price')
+                    ->money('INR')
                     ->searchable(),
                 Tables\Columns\ToggleColumn::make('is_active')
                     ->label('Active'),

@@ -6,10 +6,12 @@ use App\Filament\Resources\PackageResource\Pages;
 use App\Filament\Resources\PackageResource\RelationManagers;
 use App\Models\Package;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 
 class PackageResource extends Resource
 {
@@ -38,22 +40,45 @@ class PackageResource extends Resource
                     Forms\Components\Select::make('duration_type')
                         ->native(false)
                         ->options(Package::$durationTypes),
-                    Forms\Components\TextInput::make('price')
+                    MoneyInput::make('price')
+                        ->required()
+                        ->prefix('₹')
+                        ->numeric()
+                        ->minValue(0.00)
+                        ->default(0.00),
+                    MoneyInput::make('discount_price')
                         ->required()
                         ->numeric()
+                        ->minValue(0.00)
                         ->default(0.00),
-                    Forms\Components\TextInput::make('discount_price')
+                    Forms\Components\TextInput::make('dm_available')
+                        ->label('Direct Messages')
+                        ->helperText('Enter the number of Direct Messages count which is Available to view. If you want to set Unlimited then enter 0. If you want to set only 5 messages as available then enter')
                         ->required()
                         ->numeric()
-                        ->default(0.00),
+                        ->default(0),
+                    Forms\Components\TextInput::make('req_available')
+                        ->label('Global Requirement Messages')
+                        ->helperText('Enter the number of Requirement Messages count which is Available to view. If you want to set Unlimited then enter 0. If you want to set only 5 messages as available then enter 5.')
+                        ->required()
+                        ->numeric()
+                        ->default(0),
                     Forms\Components\RichEditor::make('description')
                         ->required()
                         ->columnSpanFull(),
                 ])
                     ->columns()
                     ->columnSpan(2),
-
                 Forms\Components\Group::make()->schema([
+                    FileUpload::make('image')
+                        ->image()
+                        ->optimize('webp')
+                        ->resize(50)
+                        ->label('Thumbnail Image')
+                        ->directory('packages/')
+                        ->visibility('public')
+                        ->helperText('Upload image in 300px X 250px')
+                        ->required(),
                     Forms\Components\KeyValue::make('featured')
                         ->addable(false)
                         ->deletable(false)
