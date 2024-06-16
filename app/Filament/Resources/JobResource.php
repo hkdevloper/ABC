@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\JobResource\Pages;
-use App\Models\City;
 use App\Models\Job;
 use App\Models\State;
 use CodeWithDennis\FilamentSelectTree\SelectTree;

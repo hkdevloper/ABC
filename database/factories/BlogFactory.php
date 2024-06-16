@@ -1,15 +1,14 @@
 <?php
-
 namespace Database\Factories;
 
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Seo;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Blogs>
+ * @extends Factory<Blog>
  */
 class BlogFactory extends Factory
 {

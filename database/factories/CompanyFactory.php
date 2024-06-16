@@ -1,14 +1,13 @@
 <?php
 
 namespace Database\Factories;
-
 use App\Models\Address;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Seo;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Str;
+use Illuminate\Support\Str;
 
 /**
  * @extends Factory<Company>

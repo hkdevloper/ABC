@@ -33,9 +33,7 @@ Certain entries support "affix actions", which are buttons that can be placed be
 To define an affix action, you can pass it to either `prefixAction()` or `suffixAction()`:
 
 ```php
-use App\Models\Product;
-use Filament\Infolists\Components\Actions\Action;
-use Filament\Infolists\Components\TextEntry;
+use App\Models\Product;use Filament\Infolists\Components\Actions\Action;use Filament\Infolists\Components\TextEntry;
 
 TextEntry::make('cost')
     ->prefix('€')
@@ -78,9 +76,7 @@ TextEntry::make('cost')
 All entries support "hint actions", which are rendered aside the entry's [hint](entries/getting-started#adding-a-hint-next-to-the-label). To add a hint action to a entry, you may pass it to `hintAction()`:
 
 ```php
-use App\Models\Product;
-use Filament\Infolists\Components\Actions\Action;
-use Filament\Infolists\Components\TextEntry;
+use App\Models\Product;use Filament\Infolists\Components\Actions\Action;use Filament\Infolists\Components\TextEntry;
 
 TextEntry::make('cost')
     ->prefix('€')

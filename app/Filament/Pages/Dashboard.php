@@ -2,10 +2,7 @@
 
 namespace App\Filament\Pages;
 
-use Auth;
 use Filament\Actions\Action;
-use Filament\Forms\Components\TextInput;
-use Razorpay\Api\Api;
 
 class Dashboard extends \Filament\Pages\Dashboard
 {
