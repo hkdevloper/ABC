@@ -12,7 +12,7 @@ return [
 
             'columns' => [
 
-                'label' => 'الأعمدة',
+                'label' => 'العواميد',
 
                 'form' => [
 

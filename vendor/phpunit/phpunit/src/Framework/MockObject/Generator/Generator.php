@@ -578,20 +578,7 @@ final class Generator
     private function getObject(MockType $mockClass, string $type = '', bool $callOriginalConstructor = false, array $arguments = [], bool $callOriginalMethods = false, ?object $proxyTarget = null, bool $returnValueGeneration = true): object
     {
         $className = $mockClass->generate();
-
-        try {
-            $object = (new ReflectionClass($className))->newInstanceWithoutConstructor();
-            // @codeCoverageIgnoreStart
-        } catch (\ReflectionException $e) {
-            throw new ReflectionException(
-                $e->getMessage(),
-                $e->getCode(),
-                $e,
-            );
-            // @codeCoverageIgnoreEnd
-        }
-
-        $reflector = new ReflectionObject($object);
+        $object    = $this->instantiate($className, $callOriginalConstructor, $arguments);
 
         if ($object instanceof StubInternal && $mockClass instanceof MockClass) {
             /**
@@ -599,27 +586,13 @@ final class Generator
              *
              * @noinspection PhpUnhandledExceptionInspection
              */
-            $reflector->getProperty('__phpunit_state')->setValue(
+            (new ReflectionObject($object))->getProperty('__phpunit_state')->setValue(
                 $object,
                 new TestDoubleState($mockClass->configurableMethods(), $returnValueGeneration),
             );
 
             if ($callOriginalMethods) {
                 $this->instantiateProxyTarget($proxyTarget, $object, $type, $arguments);
-            }
-        }
-
-        if ($callOriginalConstructor && $reflector->getConstructor() !== null) {
-            try {
-                $reflector->getConstructor()->invokeArgs($object, $arguments);
-                // @codeCoverageIgnoreStart
-            } catch (\ReflectionException $e) {
-                throw new ReflectionException(
-                    $e->getMessage(),
-                    $e->getCode(),
-                    $e,
-                );
-                // @codeCoverageIgnoreEnd
             }
         }
 
@@ -1027,6 +1000,44 @@ final class Generator
             interface_exists($className, false) ||
             trait_exists($className, false)) {
             throw new NameAlreadyInUseException($className);
+        }
+    }
+
+    /**
+     * @psalm-param class-string $className
+     *
+     * @throws ReflectionException
+     */
+    private function instantiate(string $className, bool $callOriginalConstructor, array $arguments): object
+    {
+        if ($callOriginalConstructor) {
+            if (count($arguments) === 0) {
+                return new $className;
+            }
+
+            try {
+                return (new ReflectionClass($className))->newInstanceArgs($arguments);
+                // @codeCoverageIgnoreStart
+            } catch (\ReflectionException $e) {
+                throw new ReflectionException(
+                    $e->getMessage(),
+                    $e->getCode(),
+                    $e,
+                );
+            }
+            // @codeCoverageIgnoreEnd
+        }
+
+        try {
+            return (new ReflectionClass($className))->newInstanceWithoutConstructor();
+            // @codeCoverageIgnoreStart
+        } catch (\ReflectionException $e) {
+            throw new ReflectionException(
+                $e->getMessage(),
+                $e->getCode(),
+                $e,
+            );
+            // @codeCoverageIgnoreEnd
         }
     }
 

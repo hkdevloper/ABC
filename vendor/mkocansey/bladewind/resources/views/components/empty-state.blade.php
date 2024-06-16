@@ -1,12 +1,11 @@
 @props([
-    'image' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
+    'image' => asset('vendor/bladewind/images/empty-state.svg'),
     'heading' => '',
     'button_label' => '', // button will not be displayed if no text is passed
     'buttonLabel' => '',
     'message' => '',   // message to display
-    // true or false. set to false if you want to fully control the content
-    'show_image' => config('bladewind.empty_state.show_image', true),
-    'showImage' => config('bladewind.empty_state.show_image', true),
+    'show_image' => true, // true or false. set to false if you want to fully control the content
+    'showImage' => true,
     'onclick' => '',
     'class' => '',
 ])

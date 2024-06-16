@@ -3,11 +3,11 @@
     // https://heroicons.com
     'name' => '',
     // available values are solid and outline. Determines the weight of the icon
-    'type' => config('bladewind.icon.type', 'outline'),
+    'type' => 'outline',
     // css classes to append to the svg file
     'class' => '',
     // specify directory to load icons from
-    'dir' => config('bladewind.icon.dir', ''),
+    'dir' => '',
     // javascript to execute on click
     // this was introduced to allow show/hide password feature in the Input component
     'action' => null,

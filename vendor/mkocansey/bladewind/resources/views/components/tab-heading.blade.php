@@ -17,10 +17,10 @@
     // display optional icon prefix
     'icon' => null,
     'icon_css' => '',
-    'icon_type' => config('bladewind.tab.heading.icon_type', 'outline'),
-    'icon_dir' => config('bladewind.tab.heading.icon_dir', ''),
+    'icon_type' => 'outline',
+    'icon_dir' => '',
 ])
-@aware(['color' => 'primary', 'style' => 'simple'])
+@aware(['color' => 'blue', 'style' => 'linear'])
 @php
     $name = preg_replace('/[\s]/', '-', $name);
     $active = filter_var($active, FILTER_VALIDATE_BOOLEAN);

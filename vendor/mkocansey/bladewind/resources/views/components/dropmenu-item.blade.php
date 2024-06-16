@@ -1,15 +1,15 @@
 @props([
     'class' => '',
     'icon' => '',
-    'dir' => config('bladewind.dropmenu.item.dir', ''),
+    'dir' => '',
     'icon_css' => '',
     'divider' => false,
     'header' => false,
-    'hover' => config('bladewind.dropmenu.item.hover', true),
-    'divided' => config('bladewind.dropmenu.item.divided', false),
+    'hover' => true,
+    'divided' => false,
 ])
 @aware([
-    'iconRight' => config('bladewind.dropmenu.item.icon_right', false),
+    'iconRight' => false,
 ])
 @php
     $divider = filter_var($divider, FILTER_VALIDATE_BOOLEAN);

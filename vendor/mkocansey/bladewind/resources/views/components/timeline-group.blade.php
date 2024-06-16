@@ -1,8 +1,8 @@
 @props([
-    'stacked' => config('bladewind.timeline.group.stacked', false),
+    'stacked' => false,
     'completed' => false,
-    'color' => config('bladewind.timeline.group.color', 'gray'),
-    'anchor' => config('bladewind.timeline.group.anchor', 'small'),
+    'color' => 'gray',
+    'anchor' => 'small',
     'anchor_css' => '',
     'icon' => '',
     'icon_css' => '',

@@ -7,7 +7,7 @@
     'name' => 'tab',
     // additional css to add to the tab content
     // prodbably you'd want to reduce the paddings
-    'class' => config('bladewind.tab.content.class', ''),
+    'class' => '',
 ])
 @php 
     $name = preg_replace('/[\s]/', '-', $name);

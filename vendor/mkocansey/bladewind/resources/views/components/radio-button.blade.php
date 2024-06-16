@@ -8,7 +8,6 @@
     'labelCss' => 'mr-6',
     'color' => 'blue',
     'checked' => false,
-    'add_clearing' => config('bladewind.radio_button.add_clearing', true),
     'class' => '',
     'disabled' => false,
 ])

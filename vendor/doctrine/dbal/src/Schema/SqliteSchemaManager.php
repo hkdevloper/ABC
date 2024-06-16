@@ -202,7 +202,7 @@ class SqliteSchemaManager extends AbstractSchemaManager
     {
         $table = $this->normalizeName($table);
 
-        $columns = $this->selectForeignKeyColumns($database ?? 'main', $table)
+        $columns = $this->selectForeignKeyColumns('', $table)
             ->fetchAllAssociative();
 
         if (count($columns) > 0) {

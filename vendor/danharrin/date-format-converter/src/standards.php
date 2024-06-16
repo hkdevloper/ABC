@@ -108,8 +108,8 @@ const DATE_FORMAT_STANDARDS = [
         'moment.js' => '',
     ],
     'S' => [
-        'day.js' => 'o',
-        'moment.js' => 'o',
+        'day.js' => '',
+        'moment.js' => '',
     ],
     's' => [
         'day.js' => 'ss',

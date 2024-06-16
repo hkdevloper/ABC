@@ -22,16 +22,8 @@ return [
 
     'actions' => [
 
-        'first' => [
-            'label' => 'الأولي',
-        ],
-
         'go_to_page' => [
             'label' => 'انتقل إلى صفحة :page',
-        ],
-
-        'last' => [
-            'label' => 'الأخيرة',
         ],
 
         'next' => [
