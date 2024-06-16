@@ -23,13 +23,13 @@ class UserJobController extends Controller
         $countryFilter = $request->input('country');
 
         // Initialize the query to retrieve deals
-        $jobsQuery = Job::select('jobs.*', 'seo.title as seo_title')
-            ->join('seo', 'jobs.seo_id', '=', 'seo.id')
-            ->join('companies as co', 'jobs.company_id', '=', 'co.id')
+        $jobsQuery = Job::select('company_jobs.*', 'seo.title as seo_title')
+            ->join('seo', 'company_jobs.seo_id', '=', 'seo.id')
+            ->join('companies as co', 'company_jobs.company_id', '=', 'co.id')
             ->where('co.is_approved', 1)
             ->where('co.is_active', 1)
-            ->where('jobs.is_active', 1)
-            ->where('jobs.is_approved', 1);
+            ->where('company_jobs.is_active', 1)
+            ->where('company_jobs.is_approved', 1);
 
         // Search Query
         if ($request->has('q')) {
@@ -43,7 +43,7 @@ class UserJobController extends Controller
         if (!empty($categoryFilter)) {
             // Get Category I'd from Category Name
             $catId = Category::where('name', $categoryFilter)->first();
-            $jobsQuery->where('jobs.category_id', $catId->id);
+            $jobsQuery->where('company_jobs.category_id', $catId->id);
         }
         /** Get Jobs Country
          * Job->address->country

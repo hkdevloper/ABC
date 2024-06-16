@@ -19,12 +19,12 @@ class DealFactory extends Factory
         return [
             'is_active' => $this->faker->boolean(),
             'is_featured' => $this->faker->boolean(),
-            'thumbnail' => 'product/thumbnail/prod- (' . rand(1, 99) . ').jpg',
+            'thumbnail' => 'image/404.png',
             'gallery' => [
-                'product/gallery/prod-gallery- (' . rand(1, 100) . ').jpg',
-                'product/gallery/prod-gallery- (' . rand(1, 100) . ').jpg',
-                'product/gallery/prod-gallery- (' . rand(1, 100) . ').jpg',
-                'product/gallery/prod-gallery- (' . rand(1, 100) . ').jpg',
+                'image/404.png',
+                'image/404.png',
+                'image/404.png',
+                'image/404.png',
             ],
             'title' => $this->faker->word(),
             'slug' => $this->faker->slug(),

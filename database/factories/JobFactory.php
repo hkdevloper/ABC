@@ -37,7 +37,7 @@ class JobFactory extends Factory
             'organization' => $this->faker->company,
             'education' => $this->faker->randomElement(['high school', 'bachelor', 'master', 'doctorate', 'associate', 'diploma']),
             'experience' => $this->faker->randomElement(['entry level', 'associate', 'mid-senior level', 'director', 'internship', 'executive']),
-            'thumbnail' => "companies/logo/".rand(1,50).".webp",
+            'thumbnail' => "image/404.png",
             'address_id' => Address::factory()->create()->id,
         ];
     }

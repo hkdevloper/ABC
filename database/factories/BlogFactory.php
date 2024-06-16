@@ -85,7 +85,7 @@ class BlogFactory extends Factory
             'is_active' => $this->faker->boolean,
             'is_featured' => $this->faker->boolean,
             'is_approved' => $this->faker->boolean,
-            'thumbnail' => 'blog/thumbnail/blog- ('. rand(1, 60) .').jpg',
+            'thumbnail' => 'image/404.png',
             'title' => $this->faker->randomElement($blogTitles),
             'slug' => $this->faker->slug,
             'tags' => $this->faker->randomElements($tags, rand(1,5)),

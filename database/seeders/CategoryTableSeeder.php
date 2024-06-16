@@ -21,12 +21,12 @@ class CategoryTableSeeder extends Seeder
             'forum' => ['Tech Enthusiasts Hub', 'Green Living Community', 'Innovation Discussion Forum', 'Health & Wellness Exchange', 'Fashion Enthusiasts Club'],
             'deal' => ['Tech Solutions Inc. Discount', 'Green Earth Industries Sale', 'Global Innovators Co. Offer', 'HealthCare Providers Ltd. Promo', 'Smart Solutions Group Deal'],
         ];
-        // \App\Models\Category::factory()->count(10)->create();
         foreach ($categories as $type => $names) {
             foreach ($names as $name) {
                 \App\Models\Category::factory()->create([
                     'name' => $name,
                     'type' => $type,
+                    'thumbnail' => 'image/404.png'
                 ]);
             }
         }

@@ -21,13 +21,14 @@ use App\Models\Requirement;
 use App\Models\Subscribe;
 use App\Models\User;
 use App\Models\WalletHistory;
-use Filament\Facades\Filament;
 use Filament\Notifications\Auth\VerifyEmail;
+use Filament\Notifications\Notification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
 /*
@@ -253,7 +254,7 @@ Route::prefix('auth')->group(function () {
             if (!method_exists($user, 'notify')) {
                 $userClass = $user::class;
 
-                throw new Exception("Model [{$userClass}] does not have a [notify()] method.");
+                throw new Exception("Model [$userClass] does not have a [notify()] method.");
             }
 
             $notification = new VerifyEmail();
@@ -270,7 +271,7 @@ Route::prefix('auth')->group(function () {
             Auth::login($user);
             return redirect()->back();
         } catch (Exception $e) {
-            return redirect()->back()->with('success', 'Registered successfully');
+            return redirect()->back()->with('error', "Error: " . $e->getMessage());
         }
     })->name('auth.register');
 });
@@ -352,7 +353,7 @@ Route::post('/requirements/submit', function (Request $request) {
     $requirement->status = 'Pending';
     $requirement->saveOrFail();
     // Send Online Notification to Admin and User
-    \Filament\Notifications\Notification::make()
+    Notification::make()
         ->title('New Requirement posted')
         ->body($request->subject)
         ->sendToDatabase(User::find(1));
