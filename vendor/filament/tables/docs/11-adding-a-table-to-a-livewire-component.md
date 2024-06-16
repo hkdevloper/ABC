@@ -93,7 +93,9 @@ Visit your Livewire component in the browser, and you should see the table.
 If you want to build a table for an Eloquent relationship, you can use the `relationship()` and `inverseRelationship()` methods on the `$table` instead of passing a `query()`. `HasMany`, `HasManyThrough`, `BelongsToMany`, `MorphMany` and `MorphToMany` relationships are compatible:
 
 ```php
-use Filament\Tables\Table;use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Category;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 public Category $category;
 
