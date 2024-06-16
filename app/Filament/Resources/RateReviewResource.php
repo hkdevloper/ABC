@@ -12,8 +12,6 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use IbrahimBougaoua\FilamentRatingStar\Actions\RatingStar;
 use IbrahimBougaoua\FilamentRatingStar\Columns\RatingStarColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RateReviewResource extends Resource
 {

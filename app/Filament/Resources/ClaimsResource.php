@@ -5,14 +5,12 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ClaimsResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers\CompanyRelationManager;
 use App\Models\Claims;
-use App\Models\Company;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ClaimsResource extends Resource
 {

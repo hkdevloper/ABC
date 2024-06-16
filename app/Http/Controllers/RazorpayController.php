@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\WalletHistory;
 use Exception;
 use Illuminate\Http\Request;
-use Log;
 use Razorpay\Api\Api;
 
 class RazorpayController extends Controller

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('company_jobs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
             $table->foreignId('category_id')->nullable()->constrained('categories');
             $table->foreignId('seo_id')->nullable()->constrained('seo')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('salary')->nullable();
             $table->string('organization')->nullable();
             $table->text('education')->nullable();
+            $table->string('hr_email')->nullable();
             $table->text('experience')->nullable();
             $table->string('thumbnail')->nullable();
             $table->foreignId('address_id')->nullable()->constrained('addresses')->cascadeOnDelete();

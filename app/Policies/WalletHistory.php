@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\WalletHistory as WH;
 use App\Models\User;
+use App\Models\WalletHistory as WH;
 
 class WalletHistory
 {

@@ -457,7 +457,7 @@ class SelectTree extends Field implements HasAffixActions
 
     public function getEmptyLabel(): string
     {
-        return $this->emptyLabel ? $this->evaluate($this->emptyLabel) : __('No results found');
+        return $this->emptyLabel ? $this->evaluate($this->emptyLabel) : __('No options match your search.');
     }
 
     public function getDirection(): string

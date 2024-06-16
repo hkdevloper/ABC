@@ -2,15 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\CompanyResource\Pages;
-use App\Forms\Components\LeafletMap;
-use App\Models\City;
 use App\Models\Company;
 use App\Models\State;
 use App\Models\User;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
-use Filament\Actions\ViewAction;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -26,10 +22,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
 use Str;
-use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 
 class CompanyResource extends Resource
 {

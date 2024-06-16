@@ -762,6 +762,17 @@ class Str
     }
 
     /**
+     * Remove all non-numeric characters from a string.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public static function numbers($value)
+    {
+        return preg_replace('/[^0-9]/', '', $value);
+    }
+
+    /**
      * Pad both sides of a string with another.
      *
      * @param  string  $value
@@ -959,7 +970,7 @@ class Str
      * @param  callable|null  $factory
      * @return void
      */
-    public static function createRandomStringsUsing(callable $factory = null)
+    public static function createRandomStringsUsing(?callable $factory = null)
     {
         static::$randomStringFactory = $factory;
     }
@@ -1189,7 +1200,7 @@ class Str
      * Replace the patterns matching the given regular expression.
      *
      * @param  array|string  $pattern
-     * @param  \Closure|string  $replace
+     * @param  \Closure|string[]|string  $replace
      * @param  array|string  $subject
      * @param  int  $limit
      * @return string|string[]|null
@@ -1409,6 +1420,54 @@ class Str
     }
 
     /**
+     * Remove all whitespace from both ends of a string.
+     *
+     * @param  string  $value
+     * @param  string|null  $charlist
+     * @return string
+     */
+    public static function trim($value, $charlist = null)
+    {
+        if ($charlist === null) {
+            return preg_replace('~^[\s\x{FEFF}\x{200B}\x{200E}]+|[\s\x{FEFF}\x{200B}\x{200E}]+$~u', '', $value) ?? trim($value);
+        }
+
+        return trim($value, $charlist);
+    }
+
+    /**
+     * Remove all whitespace from the beginning of a string.
+     *
+     * @param  string  $value
+     * @param  string|null  $charlist
+     * @return string
+     */
+    public static function ltrim($value, $charlist = null)
+    {
+        if ($charlist === null) {
+            return preg_replace('~^[\s\x{FEFF}\x{200B}\x{200E}]+~u', '', $value) ?? ltrim($value);
+        }
+
+        return ltrim($value, $charlist);
+    }
+
+    /**
+     * Remove all whitespace from the end of a string.
+     *
+     * @param  string  $value
+     * @param  string|null  $charlist
+     * @return string
+     */
+    public static function rtrim($value, $charlist = null)
+    {
+        if ($charlist === null) {
+            return preg_replace('~[\s\x{FEFF}\x{200B}\x{200E}]+$~u', '', $value) ?? rtrim($value);
+        }
+
+        return rtrim($value, $charlist);
+    }
+
+    /**
      * Remove all "extra" blank space from the given string.
      *
      * @param  string  $value
@@ -1416,7 +1475,7 @@ class Str
      */
     public static function squish($value)
     {
-        return preg_replace('~(\s|\x{3164}|\x{1160})+~u', ' ', preg_replace('~^[\s\x{FEFF}]+|[\s\x{FEFF}]+$~u', '', $value));
+        return preg_replace('~(\s|\x{3164}|\x{1160})+~u', ' ', static::trim($value));
     }
 
     /**
@@ -1665,7 +1724,7 @@ class Str
      * @param  callable|null  $factory
      * @return void
      */
-    public static function createUuidsUsing(callable $factory = null)
+    public static function createUuidsUsing(?callable $factory = null)
     {
         static::$uuidFactory = $factory;
     }
@@ -1710,7 +1769,7 @@ class Str
      * @param  \Closure|null  $callback
      * @return \Ramsey\Uuid\UuidInterface
      */
-    public static function freezeUuids(Closure $callback = null)
+    public static function freezeUuids(?Closure $callback = null)
     {
         $uuid = Str::uuid();
 
@@ -1772,7 +1831,7 @@ class Str
      * @param  callable|null  $factory
      * @return void
      */
-    public static function createUlidsUsing(callable $factory = null)
+    public static function createUlidsUsing(?callable $factory = null)
     {
         static::$ulidFactory = $factory;
     }
@@ -1817,7 +1876,7 @@ class Str
      * @param  Closure|null  $callback
      * @return Ulid
      */
-    public static function freezeUlids(Closure $callback = null)
+    public static function freezeUlids(?Closure $callback = null)
     {
         $ulid = Str::ulid();
 

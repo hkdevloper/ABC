@@ -4,7 +4,6 @@ namespace App\Filament\User\Resources;
 
 use App\Filament\User\Resources\EventResource\Pages;
 use App\Filament\User\Resources\EventResource\RelationManagers;
-use App\Models\City;
 use App\Models\Event;
 use App\Models\State;
 use Cheesegrits\FilamentGoogleMaps\Fields\Map;
@@ -17,7 +16,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -25,7 +23,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
 use Str;
 

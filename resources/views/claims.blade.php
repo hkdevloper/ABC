@@ -1,4 +1,4 @@
-@php use App\Models\Category; @endphp
+@php @endphp
 @extends('layouts.user')
 
 @section('head')
@@ -83,8 +83,8 @@
                     Email
                 </label>
                 <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') border-red-500 @enderror"
-                    id="email" type="email" placeholder="Email" name="email" value="{{ old('email') }}" required>
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') border-red-500 @enderror"
+                        id="email" type="email" placeholder="Email" name="email" value="{{ old('email') }}" required>
                 @error('email')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -95,8 +95,9 @@
                     Website
                 </label>
                 <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('website') border-red-500 @enderror"
-                    id="website" type="text" placeholder="Website" name="website" value="{{ old('website') }}" required>
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('website') border-red-500 @enderror"
+                        id="website" type="text" placeholder="Website" name="website" value="{{ old('website') }}"
+                        required>
                 @error('website')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -107,8 +108,8 @@
                     Phone
                 </label>
                 <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('phone') border-red-500 @enderror"
-                    id="phone" type="text" placeholder="Phone" name="phone" value="{{ old('phone') }}" required>
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('phone') border-red-500 @enderror"
+                        id="phone" type="text" placeholder="Phone" name="phone" value="{{ old('phone') }}" required>
                 @error('phone')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -119,9 +120,9 @@
                     Company Name
                 </label>
                 <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('company_name') border-red-500 @enderror"
-                    id="company_name" type="text" placeholder="Company Name" name="company_name"
-                    value="{{ old('company_name') }}" required>
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('company_name') border-red-500 @enderror"
+                        id="company_name" type="text" placeholder="Company Name" name="company_name"
+                        value="{{ old('company_name') }}" required>
                 @error('company_name')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -140,12 +141,12 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="captcha">Fill this CAPTCHA: <span
-                        class="captcha">
+                            class="captcha">
                         <span id="captcha-code"></span>
                     </span></label>
                 <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    type="text" id="captcha" name="captcha" required>
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text" id="captcha" name="captcha" required>
                 <!-- Helper text -->
                 <small class="form__helper">Can't read the CAPTCHA?
                     <span class="hover:underline text-purple-500 cursor-pointer"
@@ -158,8 +159,8 @@
 
             <div class="flex items-center justify-between w-full">
                 <button
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-80 mx-auto"
-                    type="button" onclick="validateCaptcha()">
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-80 mx-auto"
+                        type="button" onclick="validateCaptcha()">
                     Submit
                 </button>
             </div>

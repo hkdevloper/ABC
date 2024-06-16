@@ -395,8 +395,7 @@ public function resolveRecord(): ?Product
 If you'd like to fail the import row if no record is found, you can throw a `RowImportFailedException` with a message:
 
 ```php
-use App\Models\Product;
-use Filament\Actions\Imports\Exceptions\RowImportFailedException;
+use App\Models\Product;use Filament\Actions\Imports\Exceptions\RowImportFailedException;
 
 public function resolveRecord(): ?Product
 {
@@ -705,6 +704,22 @@ use Filament\Actions\Imports\ImportColumn;
 
 ImportColumn::make('name')
     ->validationAttribute('full name')
+```
+
+## Customizing import file validation
+
+You can add new [Laravel validation rules](https://laravel.com/docs/validation#available-validation-rules) for the import file using the `fileRules()` method:
+
+```php
+use Illuminate\Validation\Rules\File;
+
+ImportAction::make()
+    ->importer(ProductImporter::class)
+    ->fileRules([
+        'max:1024',
+        // or
+        File::types(['csv', 'txt'])->max(1024),
+    ]),
 ```
 
 ## Lifecycle hooks
