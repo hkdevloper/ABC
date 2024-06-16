@@ -1,0 +1,67 @@
+{
+    "name": "mokhosh/filament-rating",
+    "description": "Add rating fields and columns to Filament forms and tables",
+    "keywords": [
+        "mokhosh",
+        "laravel",
+        "filament-rating"
+    ],
+    "homepage": "https://github.com/mokhosh/filament-rating",
+    "support": {
+        "issues": "https://github.com/mokhosh/filament-rating/issues",
+        "source": "https://github.com/mokhosh/filament-rating"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mo Khosh",
+            "email": "mskhoshnazar@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "filament/filament": "^3.0",
+        "spatie/laravel-package-tools": "^1.15.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^7.9",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^2.1",
+        "pestphp/pest-plugin-arch": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mokhosh\\FilamentRating\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mokhosh\\FilamentRating\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mokhosh\\FilamentRating\\FilamentRatingServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
