@@ -9,51 +9,31 @@
  */
 namespace PHPUnit\TextUI\Command;
 
-use function array_merge;
-use function array_unique;
 use function sort;
 use function sprintf;
 use function str_starts_with;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Runner\PhptTestCase;
+use PHPUnit\Framework\TestSuite;
+use PHPUnit\TextUI\Configuration\Registry;
 
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class ListGroupsCommand implements Command
+final class ListGroupsCommand implements Command
 {
-    /**
-     * @psalm-var list<TestCase|PhptTestCase>
-     */
-    private array $tests;
+    private readonly TestSuite $suite;
 
-    /**
-     * @psalm-param list<TestCase|PhptTestCase> $tests
-     */
-    public function __construct(array $tests)
+    public function __construct(TestSuite $suite)
     {
-        $this->tests = $tests;
+        $this->suite = $suite;
     }
 
     public function execute(): Result
     {
-        $groups = [];
+        $buffer = $this->warnAboutConflictingOptions();
+        $buffer .= 'Available test group(s):' . PHP_EOL;
 
-        foreach ($this->tests as $test) {
-            if ($test instanceof PhptTestCase) {
-                $groups[] = 'default';
-
-                continue;
-            }
-
-            $groups = array_merge($groups, $test->groups());
-        }
-
-        $groups = array_unique($groups);
-
+        $groups = $this->suite->groups();
         sort($groups);
-
-        $buffer = 'Available test group(s):' . PHP_EOL;
 
         foreach ($groups as $group) {
             if (str_starts_with($group, '__phpunit_')) {
@@ -67,5 +47,34 @@ final readonly class ListGroupsCommand implements Command
         }
 
         return Result::from($buffer);
+    }
+
+    private function warnAboutConflictingOptions(): string
+    {
+        $buffer = '';
+
+        $configuration = Registry::get();
+
+        if ($configuration->hasFilter()) {
+            $buffer .= 'The --filter and --list-groups options cannot be combined, --filter is ignored' . PHP_EOL;
+        }
+
+        if ($configuration->hasGroups()) {
+            $buffer .= 'The --group and --list-groups options cannot be combined, --group is ignored' . PHP_EOL;
+        }
+
+        if ($configuration->hasExcludeGroups()) {
+            $buffer .= 'The --exclude-group and --list-groups options cannot be combined, --exclude-group is ignored' . PHP_EOL;
+        }
+
+        if ($configuration->includeTestSuite() !== '') {
+            $buffer .= 'The --testsuite and --list-groups options cannot be combined, --exclude-group is ignored' . PHP_EOL;
+        }
+
+        if (!empty($buffer)) {
+            $buffer .= PHP_EOL;
+        }
+
+        return $buffer;
     }
 }

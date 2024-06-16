@@ -14,7 +14,7 @@ use function sprintf;
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class HtmlRenderer
+final class HtmlRenderer
 {
     /**
      * @var string

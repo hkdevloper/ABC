@@ -14,15 +14,15 @@ namespace PHPUnit\TextUI\Configuration;
  *
  * @psalm-immutable
  */
-final readonly class TestSuite
+final class TestSuite
 {
     /**
      * @psalm-var non-empty-string
      */
-    private string $name;
-    private TestDirectoryCollection $directories;
-    private TestFileCollection $files;
-    private FileCollection $exclude;
+    private readonly string $name;
+    private readonly TestDirectoryCollection $directories;
+    private readonly TestFileCollection $files;
+    private readonly FileCollection $exclude;
 
     /**
      * @psalm-param non-empty-string $name

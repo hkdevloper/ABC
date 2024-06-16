@@ -62,7 +62,7 @@ class Authorize
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  array|null  $models
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Model|array|string
      */
     protected function getGateArguments($request, $models)
     {

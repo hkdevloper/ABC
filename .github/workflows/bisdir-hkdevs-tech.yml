@@ -22,8 +22,6 @@ jobs:
             git checkout main
             git fetch origin main
             git pull origin main
-            composer install
-            npm install
             chmod -R 775 storage
             chmod -R ugo+rw storage
             chown -R www-data.www-data storage
@@ -33,9 +31,4 @@ jobs:
             rm -r /home/hkdevs-bisdir/htdocs/bisdir.hkdevs.tech/public/storage
             php artisan storage:unlink
             php artisan storage:link
-            git checkout pipeline
-            git add .
-            git commit -m "Deployed from Github Action"
-            git push origin pipeline
-            git checkout main
             echo "Done"

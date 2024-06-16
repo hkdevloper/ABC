@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('seo_id')->nullable()->constrained('seo')->cascadeOnDelete();
             $table->foreignId('category_id')->nullable()->constrained('categories')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('slug');
             $table->json('tags')->nullable();
             $table->longText('content')->nullable();
-            $table->text('summary')->nullable();
             $table->timestamps();
         });
     }

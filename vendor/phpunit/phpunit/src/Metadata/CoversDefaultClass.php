@@ -14,12 +14,12 @@ namespace PHPUnit\Metadata;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class CoversDefaultClass extends Metadata
+final class CoversDefaultClass extends Metadata
 {
     /**
      * @psalm-var class-string
      */
-    private string $className;
+    private readonly string $className;
 
     /**
      * @psalm-param 0|1 $level

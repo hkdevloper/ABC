@@ -18,10 +18,8 @@ return new class extends Migration
             $table->string('title');
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->longText('body');
-            $table->text('summary')->nullable();
-            $table->string('image')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('claimed_by')->nullable()->constrained('users');
             $table->foreignId('category_id')->nullable()->constrained('categories');
             $table->foreignId('seo_id')->nullable()->constrained('seo')->cascadeOnDelete();
@@ -29,9 +29,6 @@ return new class extends Migration
             $table->string('brand')->nullable();
             $table->string('thumbnail')->nullable();
             $table->json('gallery')->nullable();
-            $table->string('color')->nullable();
-            $table->string('size')->nullable();
-            $table->string('material')->nullable();
             $table->timestamps();
         });
     }

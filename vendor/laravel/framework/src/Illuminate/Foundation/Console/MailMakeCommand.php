@@ -4,7 +4,6 @@ namespace Illuminate\Foundation\Console;
 
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -49,10 +48,6 @@ class MailMakeCommand extends GeneratorCommand
         if ($this->option('markdown') !== false) {
             $this->writeMarkdownTemplate();
         }
-
-        if ($this->option('view') !== false) {
-            $this->writeView();
-        }
     }
 
     /**
@@ -66,31 +61,11 @@ class MailMakeCommand extends GeneratorCommand
             str_replace('.', '/', $this->getView()).'.blade.php'
         );
 
-        $this->files->ensureDirectoryExists(dirname($path));
+        if (! $this->files->isDirectory(dirname($path))) {
+            $this->files->makeDirectory(dirname($path), 0755, true);
+        }
 
         $this->files->put($path, file_get_contents(__DIR__.'/stubs/markdown.stub'));
-    }
-
-    /**
-     * Write the Blade template for the mailable.
-     *
-     * @return void
-     */
-    protected function writeView()
-    {
-        $path = $this->viewPath(
-            str_replace('.', '/', $this->getView()).'.blade.php'
-        );
-
-        $this->files->ensureDirectoryExists(dirname($path));
-
-        $stub = str_replace(
-            '{{ quote }}',
-            Inspiring::quotes()->random(),
-            file_get_contents(__DIR__.'/stubs/view.stub')
-        );
-
-        $this->files->put($path, $stub);
     }
 
     /**
@@ -107,7 +82,7 @@ class MailMakeCommand extends GeneratorCommand
             parent::buildClass($name)
         );
 
-        if ($this->option('markdown') !== false || $this->option('view') !== false) {
+        if ($this->option('markdown') !== false) {
             $class = str_replace(['DummyView', '{{ view }}'], $this->getView(), $class);
         }
 
@@ -121,7 +96,7 @@ class MailMakeCommand extends GeneratorCommand
      */
     protected function getView()
     {
-        $view = $this->option('markdown') ?: $this->option('view');
+        $view = $this->option('markdown');
 
         if (! $view) {
             $name = str_replace('\\', '/', $this->argument('name'));
@@ -141,15 +116,10 @@ class MailMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        if ($this->option('markdown') !== false) {
-            return $this->resolveStubPath('/stubs/markdown-mail.stub');
-        }
-
-        if ($this->option('view') !== false) {
-            return $this->resolveStubPath('/stubs/view-mail.stub');
-        }
-
-        return $this->resolveStubPath('/stubs/mail.stub');
+        return $this->resolveStubPath(
+            $this->option('markdown') !== false
+                ? '/stubs/markdown-mail.stub'
+                : '/stubs/mail.stub');
     }
 
     /**
@@ -186,7 +156,6 @@ class MailMakeCommand extends GeneratorCommand
         return [
             ['force', 'f', InputOption::VALUE_NONE, 'Create the class even if the mailable already exists'],
             ['markdown', 'm', InputOption::VALUE_OPTIONAL, 'Create a new Markdown template for the mailable', false],
-            ['view', null, InputOption::VALUE_OPTIONAL, 'Create a new Blade template for the mailable', false],
         ];
     }
 }

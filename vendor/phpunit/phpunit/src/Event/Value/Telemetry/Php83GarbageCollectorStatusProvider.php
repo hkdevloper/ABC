@@ -14,7 +14,7 @@ use function gc_status;
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class Php83GarbageCollectorStatusProvider implements GarbageCollectorStatusProvider
+final class Php83GarbageCollectorStatusProvider implements GarbageCollectorStatusProvider
 {
     public function status(): GarbageCollectorStatus
     {

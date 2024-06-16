@@ -12,19 +12,24 @@ namespace PHPUnit\Event\Code;
 use function assert;
 use function debug_backtrace;
 use function is_numeric;
+use PHPUnit\Event\Facade as EventFacade;
 use PHPUnit\Event\TestData\DataFromDataProvider;
 use PHPUnit\Event\TestData\DataFromTestDependency;
+use PHPUnit\Event\TestData\MoreThanOneDataSetFromDataProviderException;
 use PHPUnit\Event\TestData\TestDataCollection;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Metadata\Parser\Registry as MetadataRegistry;
+use PHPUnit\Util\Exporter;
 use PHPUnit\Util\Reflection;
-use SebastianBergmann\Exporter\Exporter;
 
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class TestMethodBuilder
+final class TestMethodBuilder
 {
+    /**
+     * @throws MoreThanOneDataSetFromDataProviderException
+     */
     public static function fromTestCase(TestCase $testCase): TestMethod
     {
         $methodName = $testCase->name();
@@ -58,9 +63,11 @@ final readonly class TestMethodBuilder
         throw new NoTestCaseObjectOnCallStackException;
     }
 
+    /**
+     * @throws MoreThanOneDataSetFromDataProviderException
+     */
     private static function dataFor(TestCase $testCase): TestDataCollection
     {
-        $exporter = new Exporter;
         $testData = [];
 
         if ($testCase->usesDataProvider()) {
@@ -72,14 +79,14 @@ final readonly class TestMethodBuilder
 
             $testData[] = DataFromDataProvider::from(
                 $dataSetName,
-                $exporter->export($testCase->providedData()),
+                Exporter::export($testCase->providedData(), EventFacade::emitter()->exportsObjects()),
                 $testCase->dataSetAsStringWithData(),
             );
         }
 
         if ($testCase->hasDependencyInput()) {
             $testData[] = DataFromTestDependency::from(
-                $exporter->export($testCase->dependencyInput()),
+                Exporter::export($testCase->dependencyInput(), EventFacade::emitter()->exportsObjects()),
             );
         }
 

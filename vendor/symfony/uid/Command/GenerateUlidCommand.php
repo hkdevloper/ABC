@@ -25,9 +25,12 @@ use Symfony\Component\Uid\Factory\UlidFactory;
 #[AsCommand(name: 'ulid:generate', description: 'Generate a ULID')]
 class GenerateUlidCommand extends Command
 {
-    public function __construct(
-        private UlidFactory $factory = new UlidFactory(),
-    ) {
+    private UlidFactory $factory;
+
+    public function __construct(?UlidFactory $factory = null)
+    {
+        $this->factory = $factory ?? new UlidFactory();
+
         parent::__construct();
     }
 
@@ -76,7 +79,7 @@ EOF
 
         $formatOption = $input->getOption('format');
 
-        if (\in_array($formatOption, $this->getAvailableFormatOptions(), true)) {
+        if (\in_array($formatOption, $this->getAvailableFormatOptions())) {
             $format = 'to'.ucfirst($formatOption);
         } else {
             $io->error(sprintf('Invalid format "%s", supported formats are "%s".', $formatOption, implode('", "', $this->getAvailableFormatOptions())));

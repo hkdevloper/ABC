@@ -85,7 +85,7 @@ final class Facade
      *
      * @noinspection PhpUnused
      */
-    public function initForIsolation(HRTime $offset): CollectingDispatcher
+    public function initForIsolation(HRTime $offset, bool $exportObjects): CollectingDispatcher
     {
         $dispatcher = new CollectingDispatcher;
 
@@ -97,6 +97,10 @@ final class Facade
                 $this->garbageCollectorStatusProvider(),
             ),
         );
+
+        if ($exportObjects) {
+            $this->emitter->exportObjects();
+        }
 
         $this->sealed = true;
 
@@ -175,6 +179,8 @@ final class Facade
             Test\AfterLastTestMethodFinished::class,
             Test\AfterTestMethodCalled::class,
             Test\AfterTestMethodFinished::class,
+            Test\AssertionSucceeded::class,
+            Test\AssertionFailed::class,
             Test\BeforeFirstTestMethodCalled::class,
             Test\BeforeFirstTestMethodErrored::class,
             Test\BeforeFirstTestMethodFinished::class,

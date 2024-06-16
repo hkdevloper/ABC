@@ -5,10 +5,13 @@ namespace App\Filament\User\Resources;
 use App\Filament\User\Resources\BookmarkCompaniesResource\Pages;
 use App\Filament\User\Resources\BookmarkCompaniesResource\RelationManagers;
 use App\Models\BookmarkCompanies;
+use Filament\Forms;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BookmarkCompaniesResource extends Resource
 {

@@ -16,14 +16,14 @@ use function class_exists;
  *
  * @deprecated https://github.com/sebastianbergmann/phpunit/issues/5243
  */
-final readonly class MockTrait implements MockType
+final class MockTrait implements MockType
 {
-    private string $classCode;
+    private readonly string $classCode;
 
     /**
      * @psalm-var class-string
      */
-    private string $mockName;
+    private readonly string $mockName;
 
     /**
      * @psalm-param class-string $mockName

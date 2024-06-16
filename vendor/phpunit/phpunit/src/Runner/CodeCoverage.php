@@ -12,6 +12,7 @@ namespace PHPUnit\Runner;
 use function file_put_contents;
 use function sprintf;
 use PHPUnit\Event\Facade as EventFacade;
+use PHPUnit\Event\TestData\MoreThanOneDataSetFromDataProviderException;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\TextUI\Configuration\CodeCoverageFilterRegistry;
 use PHPUnit\TextUI\Configuration\Configuration;
@@ -139,6 +140,9 @@ final class CodeCoverage
         return $this->driver;
     }
 
+    /**
+     * @throws MoreThanOneDataSetFromDataProviderException
+     */
     public function start(TestCase $test): void
     {
         if ($this->collecting) {

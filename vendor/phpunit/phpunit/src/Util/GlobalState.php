@@ -34,7 +34,7 @@ use Closure;
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class GlobalState
+final class GlobalState
 {
     /**
      * @psalm-var list<string>

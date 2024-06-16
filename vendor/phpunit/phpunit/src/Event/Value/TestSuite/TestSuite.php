@@ -16,14 +16,14 @@ use PHPUnit\Event\Code\TestCollection;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-abstract readonly class TestSuite
+abstract class TestSuite
 {
     /**
      * @psalm-var non-empty-string
      */
-    private string $name;
-    private int $count;
-    private TestCollection $tests;
+    private readonly string $name;
+    private readonly int $count;
+    private readonly TestCollection $tests;
 
     /**
      * @psalm-param non-empty-string $name

@@ -10,13 +10,10 @@ use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Database\SQLiteDatabaseDoesNotExistException;
 use Illuminate\Database\SqlServerConnection;
 use PDOException;
-use RuntimeException;
-use Symfony\Component\Console\Attribute\AsCommand;
 use Throwable;
 
 use function Laravel\Prompts\confirm;
 
-#[AsCommand(name: 'migrate')]
 class MigrateCommand extends BaseCommand implements Isolatable
 {
     use ConfirmableTrait;
@@ -34,8 +31,7 @@ class MigrateCommand extends BaseCommand implements Isolatable
                 {--pretend : Dump the SQL queries that would be run}
                 {--seed : Indicates if the seed task should be re-run}
                 {--seeder= : The class name of the root seeder}
-                {--step : Force the migrations to be run so they can be rolled back individually}
-                {--graceful : Return a successful exit code even if an error occurs}';
+                {--step : Force the migrations to be run so they can be rolled back individually}';
 
     /**
      * The console command description.
@@ -84,28 +80,6 @@ class MigrateCommand extends BaseCommand implements Isolatable
             return 1;
         }
 
-        try {
-            $this->runMigrations();
-        } catch (Throwable $e) {
-            if ($this->option('graceful')) {
-                $this->components->warn($e->getMessage());
-
-                return 0;
-            }
-
-            throw $e;
-        }
-
-        return 0;
-    }
-
-    /**
-     * Run the pending migrations.
-     *
-     * @return void
-     */
-    protected function runMigrations()
-    {
         $this->migrator->usingConnection($this->option('database'), function () {
             $this->prepareDatabase();
 
@@ -128,6 +102,8 @@ class MigrateCommand extends BaseCommand implements Isolatable
                 ]);
             }
         });
+
+        return 0;
     }
 
     /**
@@ -172,7 +148,7 @@ class MigrateCommand extends BaseCommand implements Isolatable
                 if (
                     $e->getPrevious() instanceof PDOException &&
                     $e->getPrevious()->getCode() === 1049 &&
-                    in_array($connection->getDriverName(), ['mysql', 'mariadb'])) {
+                    $connection->getDriverName() === 'mysql') {
                     return $this->createMissingMysqlDatabase($connection);
                 }
 
@@ -188,8 +164,6 @@ class MigrateCommand extends BaseCommand implements Isolatable
      *
      * @param  string  $path
      * @return bool
-     *
-     * @throws \RuntimeException
      */
     protected function createMissingSqliteDatabase($path)
     {
@@ -201,12 +175,10 @@ class MigrateCommand extends BaseCommand implements Isolatable
             return false;
         }
 
-        $this->components->warn('The SQLite database configured for this application does not exist: '.$path);
+        $this->components->warn('The SQLite database does not exist: '.$path);
 
-        if (! confirm('Would you like to create it?', default: true)) {
-            $this->components->info('Operation cancelled. No database was created.');
-
-            throw new RuntimeException('Database was not created. Aborting migration.');
+        if (! confirm('Would you like to create it?', default: false)) {
+            return false;
         }
 
         return touch($path);
@@ -216,8 +188,6 @@ class MigrateCommand extends BaseCommand implements Isolatable
      * Create a missing MySQL database.
      *
      * @return bool
-     *
-     * @throws \RuntimeException
      */
     protected function createMissingMysqlDatabase($connection)
     {
@@ -232,10 +202,8 @@ class MigrateCommand extends BaseCommand implements Isolatable
         if (! $this->option('force') && ! $this->option('no-interaction')) {
             $this->components->warn("The database '{$connection->getDatabaseName()}' does not exist on the '{$connection->getName()}' connection.");
 
-            if (! confirm('Would you like to create it?', default: true)) {
-                $this->components->info('Operation cancelled. No database was created.');
-
-                throw new RuntimeException('Database was not created. Aborting migration.');
+            if (! confirm('Would you like to create it?', default: false)) {
+                return false;
             }
         }
 

@@ -23,22 +23,22 @@ use SebastianBergmann\Exporter\Exporter;
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class Invocation implements SelfDescribing
+final class Invocation implements SelfDescribing
 {
     /**
      * @psalm-var class-string
      */
-    private string $className;
+    private readonly string $className;
 
     /**
      * @psalm-var non-empty-string
      */
-    private string $methodName;
-    private array $parameters;
-    private string $returnType;
-    private bool $isReturnTypeNullable;
-    private bool $proxiedCall;
-    private MockObjectInternal|StubInternal $object;
+    private readonly string $methodName;
+    private readonly array $parameters;
+    private readonly string $returnType;
+    private readonly bool $isReturnTypeNullable;
+    private readonly bool $proxiedCall;
+    private readonly MockObjectInternal|StubInternal $object;
 
     /**
      * @psalm-param class-string $className

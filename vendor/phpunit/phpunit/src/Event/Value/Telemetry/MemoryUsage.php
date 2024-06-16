@@ -14,9 +14,9 @@ namespace PHPUnit\Event\Telemetry;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class MemoryUsage
+final class MemoryUsage
 {
-    private int $bytes;
+    private readonly int $bytes;
 
     public static function fromBytes(int $bytes): self
     {

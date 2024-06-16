@@ -5,9 +5,9 @@ namespace App\Filament\User\Resources\ForumReplyResource\Pages;
 use AllowDynamicProperties;
 use App\Filament\User\Resources\ForumReplyResource;
 use App\Models\Forum;
-use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Session;
+use Filament\Notifications\Notification;
 
 #[AllowDynamicProperties] class CreateForumReply extends CreateRecord
 {

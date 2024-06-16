@@ -6,7 +6,7 @@ class BladewindNotification {
     dismissInSeconds;
     name;
     timeoutName;
-    colors;
+    borderColors;
 
     constructor(title, message, type, dismissInMinutes) {
         this.title = title || '';
@@ -16,15 +16,16 @@ class BladewindNotification {
         this.dismissInSeconds = this.dismissInMinutes * 1000;
         this.name = `notification-${Math.floor((Math.random() * 100) + 1)}`;
         this.timeoutName = this.name.replace('notification-', 'timeout_');
-        this.colors = {
-            "success": {"border": "border-green-500", "bg": "bg-green-100"},
-            "error": {"border": "border-red-500", "bg": "bg-red-100"},
-            "warning": {"border": "border-amber-500", "bg": "bg-amber-100"},
-            "info": {"border": "border-blue-500", "bg": "bg-blue-100"},
+        this.borderColors = {
+            "success": "border-green-500",
+            "error": "border-red-500",
+            "warning": "border-amber-500",
+            "info": "border-blue-500",
         };
     }
 
     show = () => {
+        // dom_el('.bw-notification-container').innerHTML += this.template();
         dom_el('.bw-notification-container').insertAdjacentHTML('beforeend', this.template());
         animateCSS(`.${this.name}`, 'fadeInRight').then(() => {
             this.timeoutName = setTimeout(() => {
@@ -48,12 +49,12 @@ class BladewindNotification {
     }
 
     modalIcon = function () {
-        changeCss(`.bw-notification-icons .${this.type}`, 'hidden', 'remove');
-        return dom_el(`.bw-notification-icons .${this.type}`).outerHTML.replaceAll('[type]', this.type);
+        return dom_el(`.bw-notification-icons .${this.type}`).outerHTML.replace('hidden', '');
     }
 
     template = () => {
-        return `<div class="flex border-l-[6px] border-opacity-80 ${this.name} border-${this.type}-500 bg-white dark:bg-slate-700 dark:shadow-xl dark:shadow-slack-900 shadow-xl  p-4 rounded-lg mb-3">
+        let border_color = eval(`this.borderColors.${this.type}`);
+        return `<div class="flex border-2 ${this.name} ${border_color} bg-white dark:bg-slate-700 dark:border-0 dark:shadow-xl dark:shadow-slack-900 shadow-xl  p-4 rounded-lg mb-3">
             <div class="pr-4 grow-0">${this.modalIcon()}</div>
             <div class="pb-1 pr-4 relative grow">
                 <h1 class="font-semibold text-gray-700 dark:text-slate-300">${this.title}</h1>
@@ -70,8 +71,4 @@ class BladewindNotification {
                     stroke-width="3" d="M6 18L18 6M6 6l12 12" /></svg>`;
     }
 
-}
-
-var showNotification = (title, message, type, dismiss_in) => {
-    new BladewindNotification(title, message, type, dismiss_in).show();
 }

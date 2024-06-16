@@ -6,8 +6,10 @@ use App\classes\HelperFunctions;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Forum;
+use App\Models\ForumReply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Throwable;
 
 class UserForumController extends Controller
 {

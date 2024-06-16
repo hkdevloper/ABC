@@ -3,6 +3,7 @@
 namespace App\View\Components\User;
 
 use App\Models\Category;
+use App\Models\Company;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;

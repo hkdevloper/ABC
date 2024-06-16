@@ -75,7 +75,7 @@ class Connector
      * @param  array  $options
      * @return \PDO
      *
-     * @throws \Throwable
+     * @throws \Exception
      */
     protected function tryAgainIfCausedByLostConnection(Throwable $e, $dsn, $username, $password, $options)
     {

@@ -14,10 +14,9 @@ use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\ViewErrorBag;
-use Stringable;
 use Throwable;
 
-class View implements ArrayAccess, Htmlable, Stringable, ViewContract
+class View implements ArrayAccess, Htmlable, ViewContract
 {
     use Macroable {
         __call as macroCall;
@@ -154,7 +153,7 @@ class View implements ArrayAccess, Htmlable, Stringable, ViewContract
      *
      * @throws \Throwable
      */
-    public function render(?callable $callback = null)
+    public function render(callable $callback = null)
     {
         try {
             $contents = $this->renderContents();

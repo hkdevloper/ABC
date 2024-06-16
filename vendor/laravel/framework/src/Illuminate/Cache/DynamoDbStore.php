@@ -305,7 +305,7 @@ class DynamoDbStore implements LockProvider, Store
      *
      * @param  string  $key
      * @param  mixed  $value
-     * @return int|false
+     * @return int|bool
      */
     public function increment($key, $value = 1)
     {
@@ -350,7 +350,7 @@ class DynamoDbStore implements LockProvider, Store
      *
      * @param  string  $key
      * @param  mixed  $value
-     * @return int|false
+     * @return int|bool
      */
     public function decrement($key, $value = 1)
     {
@@ -531,7 +531,7 @@ class DynamoDbStore implements LockProvider, Store
      */
     public function setPrefix($prefix)
     {
-        $this->prefix = $prefix;
+        $this->prefix = ! empty($prefix) ? $prefix.':' : '';
     }
 
     /**

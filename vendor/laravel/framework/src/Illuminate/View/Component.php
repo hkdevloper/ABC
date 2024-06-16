@@ -76,13 +76,6 @@ abstract class Component
     protected static $constructorParametersCache = [];
 
     /**
-     * The cache of ignored parameter names.
-     *
-     * @var array
-     */
-    protected static $ignoredParameterNames = [];
-
-    /**
      * Get the view / view contents that represent the component.
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\Support\Htmlable|\Closure|string
@@ -177,7 +170,7 @@ abstract class Component
             return static::$bladeViewCache[$key];
         }
 
-        if ($this->factory()->exists($contents)) {
+        if (strlen($contents) <= PHP_MAXPATHLEN && $this->factory()->exists($contents)) {
             return static::$bladeViewCache[$key] = $contents;
         }
 
@@ -422,30 +415,6 @@ abstract class Component
         }
 
         return static::$factory;
-    }
-
-    /**
-     * Get the cached set of anonymous component constructor parameter names to exclude.
-     *
-     * @return array
-     */
-    public static function ignoredParameterNames()
-    {
-        if (! isset(static::$ignoredParameterNames[static::class])) {
-            $constructor = (new ReflectionClass(
-                static::class
-            ))->getConstructor();
-
-            if (! $constructor) {
-                return static::$ignoredParameterNames[static::class] = [];
-            }
-
-            static::$ignoredParameterNames[static::class] = collect($constructor->getParameters())
-                ->map->getName()
-                ->all();
-        }
-
-        return static::$ignoredParameterNames[static::class];
     }
 
     /**

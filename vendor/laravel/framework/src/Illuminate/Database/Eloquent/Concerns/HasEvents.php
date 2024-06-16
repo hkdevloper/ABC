@@ -387,16 +387,6 @@ trait HasEvents
     }
 
     /**
-     * Get the event map for the model.
-     *
-     * @return array
-     */
-    public function dispatchesEvents()
-    {
-        return $this->dispatchesEvents;
-    }
-
-    /**
      * Get the event dispatcher instance.
      *
      * @return \Illuminate\Contracts\Events\Dispatcher

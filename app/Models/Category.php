@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use LaravelIdea\Helper\App\Models\_IH_Category_C;
+use Spatie\MediaLibrary\HasMedia;
 
 class Category extends Model
 {
     use HasFactory;
-
-
 
     protected $table = 'categories';
     protected $primaryKey = 'id';

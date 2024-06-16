@@ -6,6 +6,7 @@ use App\Filament\User\Resources\ForumReplyResource\Pages;
 use App\Models\ForumReply;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 

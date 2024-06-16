@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('package_user');
+        Schema::dropIfExists('packages');
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -19,9 +21,6 @@ return new class extends Migration
             $table->string('duration_type')->nullable();
             $table->float('price')->default(0);
             $table->float('discount_price')->default(0);
-            $table->string('image')->nullable();
-            $table->string('dm_available')->nullable();
-            $table->string('req_available')->nullable();
             $table->json('featured')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_popular')->default(false);
@@ -40,8 +39,6 @@ return new class extends Migration
             $table->string('duration_type')->nullable();
             $table->float('purchased_price')->default(0);
             $table->json('featured')->nullable();
-            $table->string('dm_available')->nullable();
-            $table->string('req_available')->nullable();
             $table->timestamps();
         });
     }

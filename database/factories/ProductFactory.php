@@ -1,14 +1,16 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\Company;
-use App\Models\Product;
+use App\Models\Products;
 use App\Models\Seo;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Product>
+ * @extends Factory<Products>
  */
 class ProductFactory extends Factory
 {
@@ -53,8 +55,8 @@ class ProductFactory extends Factory
                 'product/gallery/prod-gallery- (' . rand(1, 100) . ').jpg',
                 'product/gallery/prod-gallery- (' . rand(1, 100) . ').jpg',
             ],
-            'created_at' => $this->faker->dateTime('now - 1 year'),
-            'updated_at' => $this->faker->dateTime('now'),
+            'created_at' => $this->faker->dateTime,
+            'updated_at' => $this->faker->dateTime,
         ];
     }
 }

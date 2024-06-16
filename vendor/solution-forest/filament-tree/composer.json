@@ -1,0 +1,75 @@
+{
+    "name": "solution-forest/filament-tree",
+    "description": "This is a tree layout plugin for Filament Admin",
+    "keywords": [
+        "Solution Forest",
+        "laravel",
+        "filament-tree"
+    ],
+    "homepage": "https://github.com/solution-forest/filament-tree",
+    "support": {
+        "issues": "https://github.com/solution-forest/filament-tree/issues",
+        "source": "https://github.com/solution-forest/filament-tree"
+    },
+    "license": "MIT",
+    "authors": [{
+        "name": "Carly",
+        "email": "info@solutionforest.net",
+        "role": "Developer"
+    }],
+    "require": {
+        "php": "^8.1",
+        "filament/filament": "^3.0",
+        "filament/support": "^3.0",
+        "spatie/laravel-package-tools": "^1.15.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^7.9",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^2.0",
+        "pestphp/pest-plugin-arch": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "spatie/laravel-ray": "^1.26"
+    },
+    "autoload": {
+        "psr-4": {
+            "SolutionForest\\FilamentTree\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SolutionForest\\FilamentTree\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "pint": "vendor/bin/pint",
+        "test:pest": "vendor/bin/pest",
+        "test:phpstan": "vendor/bin/phpstan analyse",
+        "test": [
+            "@test:pest",
+            "@test:phpstan"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SolutionForest\\FilamentTree\\FilamentTreeServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

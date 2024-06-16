@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Requirement;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class RequirementTableSeeder extends Seeder

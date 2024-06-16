@@ -14,12 +14,12 @@ namespace PHPUnit\Event\Code;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-abstract readonly class Test
+abstract class Test
 {
     /**
      * @psalm-var non-empty-string
      */
-    private string $file;
+    private readonly string $file;
 
     /**
      * @psalm-param non-empty-string $file

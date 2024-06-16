@@ -24,7 +24,7 @@ use ReflectionMethod;
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class TestSuiteBuilder
+final class TestSuiteBuilder
 {
     /**
      * @throws RuntimeException

@@ -14,19 +14,19 @@ namespace PHPUnit\Metadata;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class DependsOnMethod extends Metadata
+final class DependsOnMethod extends Metadata
 {
     /**
      * @psalm-var class-string
      */
-    private string $className;
+    private readonly string $className;
 
     /**
      * @psalm-var non-empty-string
      */
-    private string $methodName;
-    private bool $deepClone;
-    private bool $shallowClone;
+    private readonly string $methodName;
+    private readonly bool $deepClone;
+    private readonly bool $shallowClone;
 
     /**
      * @psalm-param 0|1 $level

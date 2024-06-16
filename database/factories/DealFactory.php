@@ -1,11 +1,14 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Deal;
 use App\Models\Seo;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 
 class DealFactory extends Factory
 {

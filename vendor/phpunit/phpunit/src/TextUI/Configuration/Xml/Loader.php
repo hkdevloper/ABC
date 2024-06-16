@@ -77,7 +77,7 @@ use SebastianBergmann\CodeCoverage\Report\Thresholds;
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class Loader
+final class Loader
 {
     /**
      * @throws Exception
@@ -107,8 +107,6 @@ final readonly class Loader
         }
 
         $configurationFileRealpath = realpath($filename);
-
-        assert($configurationFileRealpath !== false && $configurationFileRealpath !== '');
 
         return new LoadedFromFileConfiguration(
             $configurationFileRealpath,
@@ -259,9 +257,6 @@ final readonly class Loader
         $ignoreSuppressionOfPhpNotices      = false;
         $ignoreSuppressionOfWarnings        = false;
         $ignoreSuppressionOfPhpWarnings     = false;
-        $ignoreSelfDeprecations             = false;
-        $ignoreDirectDeprecations           = false;
-        $ignoreIndirectDeprecations         = false;
 
         $element = $this->element($xpath, 'source');
 
@@ -282,26 +277,6 @@ final readonly class Loader
             $ignoreSuppressionOfPhpNotices      = $this->getBooleanAttribute($element, 'ignoreSuppressionOfPhpNotices', false);
             $ignoreSuppressionOfWarnings        = $this->getBooleanAttribute($element, 'ignoreSuppressionOfWarnings', false);
             $ignoreSuppressionOfPhpWarnings     = $this->getBooleanAttribute($element, 'ignoreSuppressionOfPhpWarnings', false);
-            $ignoreSelfDeprecations             = $this->getBooleanAttribute($element, 'ignoreSelfDeprecations', false);
-            $ignoreDirectDeprecations           = $this->getBooleanAttribute($element, 'ignoreDirectDeprecations', false);
-            $ignoreIndirectDeprecations         = $this->getBooleanAttribute($element, 'ignoreIndirectDeprecations', false);
-        }
-
-        $deprecationTriggers = [
-            'functions' => [],
-            'methods'   => [],
-        ];
-
-        foreach ($xpath->query('source/deprecationTrigger/function') as $functionNode) {
-            assert($functionNode instanceof DOMElement);
-
-            $deprecationTriggers['functions'][] = $functionNode->textContent;
-        }
-
-        foreach ($xpath->query('source/deprecationTrigger/method') as $methodNode) {
-            assert($methodNode instanceof DOMElement);
-
-            $deprecationTriggers['methods'][] = $methodNode->textContent;
         }
 
         return new Source(
@@ -321,15 +296,12 @@ final readonly class Loader
             $ignoreSuppressionOfPhpNotices,
             $ignoreSuppressionOfWarnings,
             $ignoreSuppressionOfPhpWarnings,
-            $deprecationTriggers,
-            $ignoreSelfDeprecations,
-            $ignoreDirectDeprecations,
-            $ignoreIndirectDeprecations,
         );
     }
 
     private function codeCoverage(string $filename, DOMXPath $xpath): CodeCoverage
     {
+        $cacheDirectory            = null;
         $pathCoverage              = false;
         $includeUncoveredFiles     = true;
         $ignoreDeprecatedCodeUnits = false;
@@ -338,6 +310,14 @@ final readonly class Loader
         $element = $this->element($xpath, 'coverage');
 
         if ($element) {
+            $cacheDirectory = $this->getStringAttribute($element, 'cacheDirectory');
+
+            if ($cacheDirectory !== null) {
+                $cacheDirectory = new Directory(
+                    $this->toAbsolutePath($filename, $cacheDirectory),
+                );
+            }
+
             $pathCoverage = $this->getBooleanAttribute(
                 $element,
                 'pathCoverage',
@@ -476,6 +456,11 @@ final readonly class Loader
         }
 
         return new CodeCoverage(
+            $cacheDirectory,
+            $this->readFilterDirectories($filename, $xpath, 'coverage/include/directory'),
+            $this->readFilterFiles($filename, $xpath, 'coverage/include/file'),
+            $this->readFilterDirectories($filename, $xpath, 'coverage/exclude/directory'),
+            $this->readFilterFiles($filename, $xpath, 'coverage/exclude/file'),
             $pathCoverage,
             $includeUncoveredFiles,
             $ignoreDeprecatedCodeUnits,
@@ -779,6 +764,12 @@ final readonly class Loader
             $cacheDirectory = $this->toAbsolutePath($filename, $cacheDirectory);
         }
 
+        $cacheResultFile = $this->getStringAttribute($document->documentElement, 'cacheResultFile');
+
+        if ($cacheResultFile !== null) {
+            $cacheResultFile = $this->toAbsolutePath($filename, $cacheResultFile);
+        }
+
         $bootstrap = $this->getStringAttribute($document->documentElement, 'bootstrap');
 
         if ($bootstrap !== null) {
@@ -795,23 +786,30 @@ final readonly class Loader
 
         if ($document->documentElement->hasAttribute('backupStaticProperties')) {
             $backupStaticProperties = $this->getBooleanAttribute($document->documentElement, 'backupStaticProperties', false);
+        } elseif ($document->documentElement->hasAttribute('backupStaticAttributes')) {
+            $backupStaticProperties = $this->getBooleanAttribute($document->documentElement, 'backupStaticAttributes', false);
         }
 
         $requireCoverageMetadata = false;
 
         if ($document->documentElement->hasAttribute('requireCoverageMetadata')) {
             $requireCoverageMetadata = $this->getBooleanAttribute($document->documentElement, 'requireCoverageMetadata', false);
+        } elseif ($document->documentElement->hasAttribute('forceCoversAnnotation')) {
+            $requireCoverageMetadata = $this->getBooleanAttribute($document->documentElement, 'forceCoversAnnotation', false);
         }
 
         $beStrictAboutCoverageMetadata = false;
 
         if ($document->documentElement->hasAttribute('beStrictAboutCoverageMetadata')) {
             $beStrictAboutCoverageMetadata = $this->getBooleanAttribute($document->documentElement, 'beStrictAboutCoverageMetadata', false);
+        } elseif ($document->documentElement->hasAttribute('forceCoversAnnotation')) {
+            $beStrictAboutCoverageMetadata = $this->getBooleanAttribute($document->documentElement, 'beStrictAboutCoversAnnotation', false);
         }
 
         return new PHPUnit(
             $cacheDirectory,
             $this->getBooleanAttribute($document->documentElement, 'cacheResult', true),
+            $cacheResultFile,
             $this->getColumns($document),
             $this->getColors($document),
             $this->getBooleanAttribute($document->documentElement, 'stderr', false),
@@ -857,6 +855,7 @@ final readonly class Loader
             $defectsFirst,
             $this->getBooleanAttribute($document->documentElement, 'backupGlobals', false),
             $backupStaticProperties,
+            $this->getBooleanAttribute($document->documentElement, 'registerMockObjectsFromTestArgumentsRecursively', false),
             $this->getBooleanAttribute($document->documentElement, 'testdox', false),
             $this->getBooleanAttribute($document->documentElement, 'controlGarbageCollector', false),
             $this->getIntegerAttribute($document->documentElement, 'numberOfTestsBeforeGarbageCollection', 100),
@@ -945,27 +944,12 @@ final readonly class Loader
                     $phpVersionOperator = new VersionComparisonOperator($directoryNode->getAttribute('phpVersionOperator'));
                 }
 
-                $groups = [];
-
-                if ($directoryNode->hasAttribute('groups')) {
-                    foreach (explode(',', $directoryNode->getAttribute('groups')) as $group) {
-                        $group = trim($group);
-
-                        if (empty($group)) {
-                            continue;
-                        }
-
-                        $groups[] = $group;
-                    }
-                }
-
                 $directories[] = new TestDirectory(
                     $this->toAbsolutePath($filename, $directory),
                     $prefix,
                     $suffix,
                     $phpVersion,
                     $phpVersionOperator,
-                    $groups,
                 );
             }
 
@@ -992,25 +976,10 @@ final readonly class Loader
                     $phpVersionOperator = new VersionComparisonOperator($fileNode->getAttribute('phpVersionOperator'));
                 }
 
-                $groups = [];
-
-                if ($fileNode->hasAttribute('groups')) {
-                    foreach (explode(',', $fileNode->getAttribute('groups')) as $group) {
-                        $group = trim($group);
-
-                        if (empty($group)) {
-                            continue;
-                        }
-
-                        $groups[] = $group;
-                    }
-                }
-
                 $files[] = new TestFile(
                     $this->toAbsolutePath($filename, $file),
                     $phpVersion,
                     $phpVersionOperator,
-                    $groups,
                 );
             }
 

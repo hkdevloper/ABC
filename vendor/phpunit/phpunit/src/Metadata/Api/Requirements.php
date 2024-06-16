@@ -35,7 +35,7 @@ use PHPUnit\Runner\Version;
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class Requirements
+final class Requirements
 {
     /**
      * @psalm-param class-string $className

@@ -14,17 +14,17 @@ namespace PHPUnit\Metadata;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class RequiresSetting extends Metadata
+final class RequiresSetting extends Metadata
 {
     /**
      * @psalm-var non-empty-string
      */
-    private string $setting;
+    private readonly string $setting;
 
     /**
      * @psalm-var non-empty-string
      */
-    private string $value;
+    private readonly string $value;
 
     /**
      * @psalm-param 0|1 $level

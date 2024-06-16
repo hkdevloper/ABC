@@ -14,12 +14,12 @@ namespace PHPUnit\Metadata;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class RequiresOperatingSystemFamily extends Metadata
+final class RequiresOperatingSystemFamily extends Metadata
 {
     /**
      * @psalm-var non-empty-string
      */
-    private string $operatingSystemFamily;
+    private readonly string $operatingSystemFamily;
 
     /**
      * @psalm-param 0|1 $level

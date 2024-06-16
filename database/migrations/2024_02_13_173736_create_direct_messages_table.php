@@ -20,9 +20,6 @@ return new class extends Migration
             $table->string('name');
             $table->text('message');
             $table->string('status')->default('Pending');
-            $table->string('thumbnail')->nullable();
-            $table->json('gallery')->nullable();
-            $table->boolean('is_approved')->default(false);
             $table->timestamps();
         });
     }

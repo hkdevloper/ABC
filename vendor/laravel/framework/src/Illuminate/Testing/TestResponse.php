@@ -16,7 +16,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
-use Illuminate\Support\Traits\Dumpable;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Traits\Tappable;
 use Illuminate\Support\ViewErrorBag;
@@ -35,16 +34,9 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  */
 class TestResponse implements ArrayAccess
 {
-    use Concerns\AssertsStatusCodes, Conditionable, Dumpable, Tappable, Macroable {
+    use Concerns\AssertsStatusCodes, Conditionable, Tappable, Macroable {
         __call as macroCall;
     }
-
-    /**
-     * The original request.
-     *
-     * @var \Illuminate\Http\Request|null
-     */
-    public $baseRequest;
 
     /**
      * The response to delegate to.
@@ -71,13 +63,11 @@ class TestResponse implements ArrayAccess
      * Create a new test response instance.
      *
      * @param  \Illuminate\Http\Response  $response
-     * @param  \Illuminate\Http\Request|null  $request
      * @return void
      */
-    public function __construct($response, $request = null)
+    public function __construct($response)
     {
         $this->baseResponse = $response;
-        $this->baseRequest = $request;
         $this->exceptions = new Collection;
     }
 
@@ -85,12 +75,11 @@ class TestResponse implements ArrayAccess
      * Create a new TestResponse from another response.
      *
      * @param  \Illuminate\Http\Response  $response
-     * @param  \Illuminate\Http\Request|null  $request
      * @return static
      */
-    public static function fromBaseResponse($response, $request = null)
+    public static function fromBaseResponse($response)
     {
-        return new static($response, $request);
+        return new static($response);
     }
 
     /**
@@ -432,7 +421,7 @@ class TestResponse implements ArrayAccess
             "Cookie [{$cookieName}] not present on response."
         );
 
-        $expiresAt = Carbon::createFromTimestamp($cookie->getExpiresTime(), date_default_timezone_get());
+        $expiresAt = Carbon::createFromTimestamp($cookie->getExpiresTime());
 
         PHPUnit::assertTrue(
             $cookie->getExpiresTime() !== 0 && $expiresAt->lessThan(Carbon::now()),
@@ -455,7 +444,7 @@ class TestResponse implements ArrayAccess
             "Cookie [{$cookieName}] not present on response."
         );
 
-        $expiresAt = Carbon::createFromTimestamp($cookie->getExpiresTime(), date_default_timezone_get());
+        $expiresAt = Carbon::createFromTimestamp($cookie->getExpiresTime());
 
         PHPUnit::assertTrue(
             $cookie->getExpiresTime() === 0 || $expiresAt->greaterThan(Carbon::now()),
@@ -810,7 +799,7 @@ class TestResponse implements ArrayAccess
      * @param  array|null  $responseData
      * @return $this
      */
-    public function assertJsonStructure(?array $structure = null, $responseData = null)
+    public function assertJsonStructure(array $structure = null, $responseData = null)
     {
         $this->decodeResponseJson()->assertStructure($structure, $responseData);
 
@@ -1481,6 +1470,18 @@ class TestResponse implements ArrayAccess
         }
 
         return $session;
+    }
+
+    /**
+     * Dump the content from the response and end the script.
+     *
+     * @return never
+     */
+    public function dd()
+    {
+        $this->dump();
+
+        exit(1);
     }
 
     /**

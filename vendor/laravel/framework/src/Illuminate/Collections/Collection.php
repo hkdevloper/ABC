@@ -76,6 +76,25 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     }
 
     /**
+     * Get the average value of a given key.
+     *
+     * @param  (callable(TValue): float|int)|string|null  $callback
+     * @return float|int|null
+     */
+    public function avg($callback = null)
+    {
+        $callback = $this->valueRetriever($callback);
+
+        $items = $this
+            ->map(fn ($value) => $callback($value))
+            ->filter(fn ($value) => ! is_null($value));
+
+        if ($count = $items->count()) {
+            return $items->sum() / $count;
+        }
+    }
+
+    /**
      * Get the median of a given key.
      *
      * @param  string|array<array-key, string>|null  $key
@@ -362,7 +381,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
      * @param  (callable(TValue, TKey): bool)|null  $callback
      * @return static
      */
-    public function filter(?callable $callback = null)
+    public function filter(callable $callback = null)
     {
         if ($callback) {
             return new static(Arr::where($this->items, $callback));
@@ -380,7 +399,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
      * @param  TFirstDefault|(\Closure(): TFirstDefault)  $default
      * @return TValue|TFirstDefault
      */
-    public function first(?callable $callback = null, $default = null)
+    public function first(callable $callback = null, $default = null)
     {
         return Arr::first($this->items, $callback, $default);
     }
@@ -728,7 +747,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
      * @param  TLastDefault|(\Closure(): TLastDefault)  $default
      * @return TValue|TLastDefault
      */
-    public function last(?callable $callback = null, $default = null)
+    public function last(callable $callback = null, $default = null)
     {
         return Arr::last($this->items, $callback, $default);
     }
@@ -736,7 +755,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Get the values of a given key.
      *
-     * @param  string|int|array<array-key, string>|null  $value
+     * @param  string|int|array<array-key, string>  $value
      * @param  string|null  $key
      * @return static<array-key, mixed>
      */
@@ -977,19 +996,6 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     }
 
     /**
-     * Prepend one or more items to the beginning of the collection.
-     *
-     * @param  TValue  ...$values
-     * @return $this
-     */
-    public function unshift(...$values)
-    {
-        array_unshift($this->items, ...$values);
-
-        return $this;
-    }
-
-    /**
      * Push all of the given items onto the collection.
      *
      * @template TConcatKey of array-key
@@ -1143,11 +1149,12 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Shuffle the items in the collection.
      *
+     * @param  int|null  $seed
      * @return static
      */
-    public function shuffle()
+    public function shuffle($seed = null)
     {
-        return new static(Arr::shuffle($this->items));
+        return new static(Arr::shuffle($this->items, $seed));
     }
 
     /**

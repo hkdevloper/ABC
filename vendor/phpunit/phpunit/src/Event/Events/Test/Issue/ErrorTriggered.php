@@ -10,7 +10,6 @@
 namespace PHPUnit\Event\Test;
 
 use const PHP_EOL;
-use function implode;
 use function sprintf;
 use PHPUnit\Event\Code\Test;
 use PHPUnit\Event\Event;
@@ -21,26 +20,26 @@ use PHPUnit\Event\Telemetry;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class ErrorTriggered implements Event
+final class ErrorTriggered implements Event
 {
-    private Telemetry\Info $telemetryInfo;
-    private Test $test;
+    private readonly Telemetry\Info $telemetryInfo;
+    private readonly Test $test;
 
     /**
      * @psalm-var non-empty-string
      */
-    private string $message;
+    private readonly string $message;
 
     /**
      * @psalm-var non-empty-string
      */
-    private string $file;
+    private readonly string $file;
 
     /**
      * @psalm-var positive-int
      */
-    private int $line;
-    private bool $suppressed;
+    private readonly int $line;
+    private readonly bool $suppressed;
 
     /**
      * @psalm-param non-empty-string $message
@@ -104,15 +103,10 @@ final readonly class ErrorTriggered implements Event
             $message = PHP_EOL . $message;
         }
 
-        $details = [$this->test->id()];
-
-        if ($this->suppressed) {
-            $details[] = 'suppressed using operator';
-        }
-
         return sprintf(
-            'Test Triggered Error (%s)%s',
-            implode(', ', $details),
+            'Test Triggered %sError (%s)%s',
+            $this->wasSuppressed() ? 'Suppressed ' : '',
+            $this->test->id(),
             $message,
         );
     }

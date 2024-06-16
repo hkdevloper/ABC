@@ -28,7 +28,7 @@ use Throwable;
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class PharLoader
+final class PharLoader
 {
     /**
      * @psalm-param non-empty-string $directory

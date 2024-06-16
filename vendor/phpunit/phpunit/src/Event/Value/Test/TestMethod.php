@@ -20,25 +20,25 @@ use PHPUnit\Metadata\MetadataCollection;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class TestMethod extends Test
+final class TestMethod extends Test
 {
     /**
      * @psalm-var class-string
      */
-    private string $className;
+    private readonly string $className;
 
     /**
      * @psalm-var non-empty-string
      */
-    private string $methodName;
+    private readonly string $methodName;
 
     /**
      * @psalm-var non-negative-int
      */
-    private int $line;
-    private TestDox $testDox;
-    private MetadataCollection $metadata;
-    private TestDataCollection $testData;
+    private readonly int $line;
+    private readonly TestDox $testDox;
+    private readonly MetadataCollection $metadata;
+    private readonly TestDataCollection $testData;
 
     /**
      * @psalm-param class-string $className

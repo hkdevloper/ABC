@@ -14,12 +14,12 @@ namespace PHPUnit\Metadata;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class RequiresFunction extends Metadata
+final class RequiresFunction extends Metadata
 {
     /**
      * @psalm-var non-empty-string
      */
-    private string $functionName;
+    private readonly string $functionName;
 
     /**
      * @psalm-param 0|1 $level

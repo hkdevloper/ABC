@@ -4,10 +4,8 @@ namespace Illuminate\Database\Console\Migrations;
 
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Database\Migrations\Migrator;
-use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-#[AsCommand('migrate:rollback')]
 class RollbackCommand extends BaseCommand
 {
     use ConfirmableTrait;

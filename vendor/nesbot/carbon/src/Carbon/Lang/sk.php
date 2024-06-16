@@ -32,7 +32,6 @@
  * - Jakub ADAMEC
  * - Marek Adamický
  * - AlterwebStudio
- * - Peter Kundis
  */
 
 use Carbon\CarbonInterface;
@@ -57,15 +56,13 @@ $ago = function ($time) {
     ];
 
     $replacementsPlural = [
-        '/\b(?:hodiny|hodín)\b/' => 'hodinami',
-        '/\b(?:minúty|minút)\b/' => 'minútami',
-        '/\b(?:sekundy|sekúnd)\b/' => 'sekundami',
-        '/\bdeň\b/' => 'dňom',
+        '/\bhodiny\b/' => 'hodinami',
+        '/\bminúty\b/' => 'minútami',
+        '/\bsekundy\b/' => 'sekundami',
         '/\bdni\b/' => 'dňami',
-        '/\bdní\b/u' => 'dňami',
-        '/\b(?:týždne|týždňov)\b/' => 'týždňami',
-        '/\b(?:mesiace|mesiacov)\b/' => 'mesiacmi',
-        '/\b(?:roky|rokov)\b/' => 'rokmi',
+        '/\btýždne\b/' => 'týždňami',
+        '/\bmesiace\b/' => 'mesiacmi',
+        '/\broky\b/' => 'rokmi',
     ];
 
     foreach ($replacements + $replacementsPlural as $pattern => $replacement) {

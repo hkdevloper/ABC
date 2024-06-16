@@ -3,6 +3,7 @@
 namespace App\Filament\User\Resources;
 
 use App\Filament\User\Resources\DirectMessageResource\Pages;
+use App\Models\Claims;
 use App\Models\DirectMessage;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -10,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class DirectMessageResource extends Resource
 {

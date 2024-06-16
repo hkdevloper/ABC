@@ -16,7 +16,7 @@ use PHPUnit\Metadata\Version\Requirement;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-abstract readonly class Metadata
+abstract class Metadata
 {
     private const CLASS_LEVEL  = 0;
     private const METHOD_LEVEL = 1;
@@ -24,7 +24,7 @@ abstract readonly class Metadata
     /**
      * @psalm-var 0|1
      */
-    private int $level;
+    private readonly int $level;
 
     public static function after(): After
     {
@@ -72,23 +72,6 @@ abstract readonly class Metadata
     public static function coversClass(string $className): CoversClass
     {
         return new CoversClass(self::CLASS_LEVEL, $className);
-    }
-
-    /**
-     * @psalm-param trait-string $traitName
-     */
-    public static function coversTrait(string $traitName): CoversTrait
-    {
-        return new CoversTrait(self::CLASS_LEVEL, $traitName);
-    }
-
-    /**
-     * @psalm-param class-string $className
-     * @psalm-param non-empty-string $methodName
-     */
-    public static function coversMethod(string $className, string $methodName): CoversMethod
-    {
-        return new CoversMethod(self::CLASS_LEVEL, $className, $methodName);
     }
 
     /**
@@ -157,11 +140,6 @@ abstract readonly class Metadata
     public static function dependsOnMethod(string $className, string $methodName, bool $deepClone, bool $shallowClone): DependsOnMethod
     {
         return new DependsOnMethod(self::METHOD_LEVEL, $className, $methodName, $deepClone, $shallowClone);
-    }
-
-    public static function disableReturnValueGenerationForTestDoubles(): DisableReturnValueGenerationForTestDoubles
-    {
-        return new DisableReturnValueGenerationForTestDoubles(self::CLASS_LEVEL);
     }
 
     public static function doesNotPerformAssertionsOnClass(): DoesNotPerformAssertions
@@ -235,19 +213,28 @@ abstract readonly class Metadata
     }
 
     /**
-     * @internal This method is not covered by the backward compatibility promise for PHPUnit
+     * @psalm-param class-string $className
      */
-    public static function ignorePhpunitDeprecationsOnClass(): IgnorePhpunitDeprecations
+    public static function ignoreClassForCodeCoverage(string $className): IgnoreClassForCodeCoverage
     {
-        return new IgnorePhpunitDeprecations(self::CLASS_LEVEL);
+        return new IgnoreClassForCodeCoverage(self::CLASS_LEVEL, $className);
     }
 
     /**
-     * @internal This method is not covered by the backward compatibility promise for PHPUnit
+     * @psalm-param class-string $className
+     * @psalm-param non-empty-string $methodName
      */
-    public static function ignorePhpunitDeprecationsOnMethod(): IgnorePhpunitDeprecations
+    public static function ignoreMethodForCodeCoverage(string $className, string $methodName): IgnoreMethodForCodeCoverage
     {
-        return new IgnorePhpunitDeprecations(self::METHOD_LEVEL);
+        return new IgnoreMethodForCodeCoverage(self::CLASS_LEVEL, $className, $methodName);
+    }
+
+    /**
+     * @psalm-param non-empty-string $functionName
+     */
+    public static function ignoreFunctionForCodeCoverage(string $functionName): IgnoreFunctionForCodeCoverage
+    {
+        return new IgnoreFunctionForCodeCoverage(self::CLASS_LEVEL, $functionName);
     }
 
     public static function postCondition(): PostCondition
@@ -426,12 +413,9 @@ abstract readonly class Metadata
         return new TestDox(self::METHOD_LEVEL, $text);
     }
 
-    /**
-     * @psalm-param ?non-empty-string $name
-     */
-    public static function testWith(array $data, ?string $name = null): TestWith
+    public static function testWith(array $data): TestWith
     {
-        return new TestWith(self::METHOD_LEVEL, $data, $name);
+        return new TestWith(self::METHOD_LEVEL, $data);
     }
 
     /**
@@ -443,28 +427,11 @@ abstract readonly class Metadata
     }
 
     /**
-     * @psalm-param trait-string $traitName
-     */
-    public static function UsesTrait(string $traitName): UsesTrait
-    {
-        return new UsesTrait(self::CLASS_LEVEL, $traitName);
-    }
-
-    /**
      * @psalm-param non-empty-string $functionName
      */
     public static function usesFunction(string $functionName): UsesFunction
     {
         return new UsesFunction(self::CLASS_LEVEL, $functionName);
-    }
-
-    /**
-     * @psalm-param class-string $className
-     * @psalm-param non-empty-string $methodName
-     */
-    public static function usesMethod(string $className, string $methodName): UsesMethod
-    {
-        return new UsesMethod(self::CLASS_LEVEL, $className, $methodName);
     }
 
     /**
@@ -587,25 +554,9 @@ abstract readonly class Metadata
     }
 
     /**
-     * @psalm-assert-if-true CoversTrait $this
-     */
-    public function isCoversTrait(): bool
-    {
-        return false;
-    }
-
-    /**
      * @psalm-assert-if-true CoversFunction $this
      */
     public function isCoversFunction(): bool
-    {
-        return false;
-    }
-
-    /**
-     * @psalm-assert-if-true CoversMethod $this
-     */
-    public function isCoversMethod(): bool
     {
         return false;
     }
@@ -638,14 +589,6 @@ abstract readonly class Metadata
      * @psalm-assert-if-true DependsOnMethod $this
      */
     public function isDependsOnMethod(): bool
-    {
-        return false;
-    }
-
-    /**
-     * @psalm-assert-if-true DisableReturnValueGenerationForTestDoubles $this
-     */
-    public function isDisableReturnValueGenerationForTestDoubles(): bool
     {
         return false;
     }
@@ -691,11 +634,25 @@ abstract readonly class Metadata
     }
 
     /**
-     * @psalm-assert-if-true IgnorePhpunitDeprecations $this
-     *
-     * @internal This method is not covered by the backward compatibility promise for PHPUnit
+     * @psalm-assert-if-true IgnoreClassForCodeCoverage $this
      */
-    public function isIgnorePhpunitDeprecations(): bool
+    public function isIgnoreClassForCodeCoverage(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @psalm-assert-if-true IgnoreMethodForCodeCoverage $this
+     */
+    public function isIgnoreMethodForCodeCoverage(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @psalm-assert-if-true IgnoreFunctionForCodeCoverage $this
+     */
+    public function isIgnoreFunctionForCodeCoverage(): bool
     {
         return false;
     }
@@ -861,25 +818,9 @@ abstract readonly class Metadata
     }
 
     /**
-     * @psalm-assert-if-true UsesTrait $this
-     */
-    public function isUsesTrait(): bool
-    {
-        return false;
-    }
-
-    /**
      * @psalm-assert-if-true UsesFunction $this
      */
     public function isUsesFunction(): bool
-    {
-        return false;
-    }
-
-    /**
-     * @psalm-assert-if-true UsesMethod $this
-     */
-    public function isUsesMethod(): bool
     {
         return false;
     }

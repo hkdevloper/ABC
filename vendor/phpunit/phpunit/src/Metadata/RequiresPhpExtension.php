@@ -16,13 +16,13 @@ use PHPUnit\Metadata\Version\Requirement;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class RequiresPhpExtension extends Metadata
+final class RequiresPhpExtension extends Metadata
 {
     /**
      * @psalm-var non-empty-string
      */
-    private string $extension;
-    private ?Requirement $versionRequirement;
+    private readonly string $extension;
+    private readonly ?Requirement $versionRequirement;
 
     /**
      * @psalm-param 0|1 $level

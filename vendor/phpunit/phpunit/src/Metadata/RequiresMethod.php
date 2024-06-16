@@ -14,17 +14,17 @@ namespace PHPUnit\Metadata;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class RequiresMethod extends Metadata
+final class RequiresMethod extends Metadata
 {
     /**
      * @psalm-var class-string
      */
-    private string $className;
+    private readonly string $className;
 
     /**
      * @psalm-var non-empty-string
      */
-    private string $methodName;
+    private readonly string $methodName;
 
     /**
      * @psalm-param 0|1 $level

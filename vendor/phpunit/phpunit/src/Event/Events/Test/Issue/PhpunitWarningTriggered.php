@@ -20,15 +20,15 @@ use PHPUnit\Event\Telemetry;
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class PhpunitWarningTriggered implements Event
+final class PhpunitWarningTriggered implements Event
 {
-    private Telemetry\Info $telemetryInfo;
-    private Test $test;
+    private readonly Telemetry\Info $telemetryInfo;
+    private readonly Test $test;
 
     /**
      * @psalm-var non-empty-string
      */
-    private string $message;
+    private readonly string $message;
 
     /**
      * @psalm-param non-empty-string $message
