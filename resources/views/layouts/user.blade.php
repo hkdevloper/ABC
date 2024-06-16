@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <title>{{ config()->get('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     @filamentStyles
     <script src="{{ asset('js/tailwind.js')}}"></script>
