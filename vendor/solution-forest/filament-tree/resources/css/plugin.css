@@ -1,8 +1,0 @@
-@import '../css/jquery.nestable.css';
-@import '../css/button.css';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import '../../vendor/filament/filament/resources/css/theme.css';
