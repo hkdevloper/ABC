@@ -45,6 +45,7 @@ img{
 }
 
 .container{
+    display: block !important;
     width: 100%;
     max-width: 1000px !important;
     margin: 0 auto;
