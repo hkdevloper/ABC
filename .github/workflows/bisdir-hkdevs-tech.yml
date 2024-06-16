@@ -27,7 +27,7 @@ jobs:
             chown -R www-data.www-data storage
             chown -R www-data.www-data bootstrap/cache
             php artisan config:cache
-            php artisan migrate --force
+            php artisan migrate
             rm -r /home/hkdevs-bisdir/htdocs/bisdir.hkdevs.tech/public/storage
             php artisan storage:unlink
             php artisan storage:link
