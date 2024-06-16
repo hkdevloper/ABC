@@ -6,8 +6,10 @@
 @props([
     'alignment' => Alignment::Start,
     'ariaLabelledby' => null,
+    'autofocus' => \Filament\Support\View\Components\Modal::$isAutofocused,
     'closeButton' => \Filament\Support\View\Components\Modal::$hasCloseButton,
     'closeByClickingAway' => \Filament\Support\View\Components\Modal::$isClosedByClickingAway,
+    'closeByEscaping' => \Filament\Support\View\Components\Modal::$isClosedByEscaping,
     'closeEventName' => 'close-modal',
     'description' => null,
     'displayClasses' => 'inline-block',
@@ -94,7 +96,7 @@
         x-on:{{ $closeEventName }}.window="if ($event.detail.id === '{{ $id }}') close()"
         x-on:{{ $openEventName }}.window="if ($event.detail.id === '{{ $id }}') open()"
     @endif
-    x-trap.noscroll="isOpen"
+    x-trap.noscroll{{ $autofocus ? '' : '.noautofocus' }}="isOpen"
     x-bind:class="{
         'fi-modal-open': isOpen,
     }"
@@ -155,7 +157,9 @@
                             $watch('isOpen', () => (isShown = isOpen))
                         })
                     "
-                    x-on:keydown.window.escape="{{ $closeEventHandler }}"
+                    @if ($closeByEscaping)
+                        x-on:keydown.window.escape="{{ $closeEventHandler }}"
+                    @endif
                     x-show="isShown"
                     x-transition:enter="duration-300"
                     x-transition:leave="duration-300"

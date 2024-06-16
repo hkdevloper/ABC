@@ -5,7 +5,6 @@ namespace App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource;
 use App\Models\User;
 use App\Models\WalletHistory;
-use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Validation\ValidationException;
@@ -37,7 +36,7 @@ class CreateUser extends CreateRecord
                 $transaction = new WalletHistory();
                 $transaction->user_id = $user->id;
                 $transaction->type = $type;
-                $transaction->transaction_id = 'TRX-' . time() . rand(1000, 9999);
+                $transaction->transaction_id = 'TRX-' . time();
                 $transaction->amount = $amount;
                 $transaction->status = 'captured';
                 $transaction->method = 'admin';

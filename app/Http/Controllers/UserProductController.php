@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Company;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +50,7 @@ class UserProductController extends Controller
         if ($request->has('category')) {
             // Get Category I'd from Category Name
             $cat_id = Category::where('name', $request->category)->first();
-            $query->where('p.category_id', $cat_id->id);
+            $query->where('category_id', $cat_id->id);
         }
 
         if ($request->has('sort')) {

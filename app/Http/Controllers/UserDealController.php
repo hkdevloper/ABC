@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Company;
 use App\Models\Country;
 use App\Models\Deal;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class UserDealController extends Controller
@@ -46,11 +44,9 @@ class UserDealController extends Controller
         // Country Filter
         if ($request->has('country')) {
             $country = $request->country;
-            $query->whereHas('user', function ($query) use ($country) {
-                $query->whereHas('company', function ($innerQuery) use ($country) {
-                    $innerQuery->whereHas('address', function ($innerInnerQuery) use ($country) {
-                        $innerInnerQuery->where('country_id', $country);
-                    });
+            $query->whereHas('company', function ($query) use ($country) {
+                $query->whereHas('address', function ($innerQuery) use ($country) {
+                    $innerQuery->where('country_id', $country);
                 });
             });
         }

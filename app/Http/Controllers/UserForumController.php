@@ -6,10 +6,8 @@ use App\classes\HelperFunctions;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Forum;
-use App\Models\ForumReply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Throwable;
 
 class UserForumController extends Controller
 {
@@ -34,13 +32,14 @@ class UserForumController extends Controller
         }
 
         if (!empty($countryFilter)) {
-            $forumQuery->whereHas('user', function ($query) use ($countryFilter) {
-                $query->whereHas('company', function ($innerQuery) use ($countryFilter) {
-                    $innerQuery->whereHas('address', function ($innerInnerQuery) use ($countryFilter) {
-                        $innerInnerQuery->where('country_id', $countryFilter);
+            if ($request->has('country')) {
+                $country = $request->country;
+                $forumQuery->whereHas('company', function ($query) use ($country) {
+                    $query->whereHas('address', function ($innerQuery) use ($country) {
+                        $innerQuery->where('country_id', $country);
                     });
                 });
-            });
+            }
         }
 
         if (!empty($query)) {

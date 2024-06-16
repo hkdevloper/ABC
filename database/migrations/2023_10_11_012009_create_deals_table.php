@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('deals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete();
             $table->foreignId('category_id')->nullable()->constrained('categories');
             $table->foreignId('seo_id')->nullable()->constrained('seo')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
@@ -21,13 +21,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->longText('description')->nullable();
-            $table->datetime('offer_start_date')->nullable();
-            $table->dateTime('offer_end_date')->nullable();
-            $table->string('price')->nullable();
-            $table->string('discount_type')->default('percentage'); //  ['percentage', 'fixed']
-            $table->string('discount_value');
-            $table->string('discount_code');
+            $table->string('discount_price')->nullable();
+            $table->string('original_price')->nullable();
             $table->longText('terms_and_conditions')->nullable();
+            $table->string('thumbnail')->nullable();
+            $table->json('gallery')->nullable();
             $table->timestamps();
         });
     }

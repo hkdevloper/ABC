@@ -7,7 +7,6 @@ use App\Models\Company;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 

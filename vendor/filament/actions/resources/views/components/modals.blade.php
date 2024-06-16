@@ -6,8 +6,10 @@
 
         <x-filament::modal
             :alignment="$action?->getModalAlignment()"
+            :autofocus="$action?->isModalAutofocused()"
             :close-button="$action?->hasModalCloseButton()"
             :close-by-clicking-away="$action?->isModalClosedByClickingAway()"
+            :close-by-escaping="$action?->isModalClosedByEscaping()"
             :description="$action?->getModalDescription()"
             display-classes="block"
             :extra-modal-window-attribute-bag="$action?->getExtraModalWindowAttributeBag()"
@@ -66,8 +68,10 @@
 
         <x-filament::modal
             :alignment="$action?->getModalAlignment()"
+            :autofocus="$action?->isModalAutofocused()"
             :close-button="$action?->hasModalCloseButton()"
             :close-by-clicking-away="$action?->isModalClosedByClickingAway()"
+            :close-by-escaping="$action?->isModalClosedByEscaping()"
             :description="$action?->getModalDescription()"
             display-classes="block"
             :extra-modal-window-attribute-bag="$action?->getExtraModalWindowAttributeBag()"
@@ -120,8 +124,10 @@
 
         <x-filament::modal
             :alignment="$action?->getModalAlignment()"
+            :autofocus="$action?->isModalAutofocused()"
             :close-button="$action?->hasModalCloseButton()"
             :close-by-clicking-away="$action?->isModalClosedByClickingAway()"
+            :close-by-escaping="$action?->isModalClosedByEscaping()"
             :description="$action?->getModalDescription()"
             display-classes="block"
             :extra-modal-window-attribute-bag="$action?->getExtraModalWindowAttributeBag()"
@@ -180,8 +186,10 @@
 
         <x-filament::modal
             :alignment="$action?->getModalAlignment()"
+            :autofocus="$action?->isModalAutofocused()"
             :close-button="$action?->hasModalCloseButton()"
             :close-by-clicking-away="$action?->isModalClosedByClickingAway()"
+            :close-by-escaping="$action?->isModalClosedByEscaping()"
             :description="$action?->getModalDescription()"
             display-classes="block"
             :extra-modal-window-attribute-bag="$action?->getExtraModalWindowAttributeBag()"
@@ -240,8 +248,10 @@
     <form wire:submit.prevent="callMountedFormComponentAction">
         <x-filament::modal
             :alignment="$action?->getModalAlignment()"
+            :autofocus="$action?->isModalAutofocused()"
             :close-button="$action?->hasModalCloseButton()"
             :close-by-clicking-away="$action?->isModalClosedByClickingAway()"
+            :close-by-escaping="$action?->isModalClosedByEscaping()"
             :description="$action?->getModalDescription()"
             display-classes="block"
             :extra-modal-window-attribute-bag="$action?->getExtraModalWindowAttributeBag()"

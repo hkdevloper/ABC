@@ -10,10 +10,8 @@ use App\Models\Forum;
 use App\Models\Job;
 use App\Models\Product;
 use App\Models\RateReview;
-use App\Models\Seo;
 use Exception;
 use Illuminate\Http\Request;
-use Razorpay\Api\Api;
 
 class APIController extends Controller
 {

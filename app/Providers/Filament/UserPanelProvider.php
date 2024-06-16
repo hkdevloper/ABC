@@ -5,23 +5,21 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Resources\RequirementResource;
-use App\Filament\User\Resources\EventResource;
-use App\Filament\User\Resources\ForumReplyResource;
-use App\Filament\User\Resources\ForumResource;
-use App\Filament\User\Resources\JobResource;
-use App\Filament\User\Resources\ProductResource;
-use App\Filament\User\Resources\DealResource;
+use App\Filament\User\Pages\LoginPage;
+use App\Filament\User\Pages\RegisterPage;
 use App\Filament\User\Resources\BlogResource;
 use App\Filament\User\Resources\BookmarkCompaniesResource;
 use App\Filament\User\Resources\CompanyResource;
+use App\Filament\User\Resources\DealResource;
 use App\Filament\User\Resources\DirectMessageResource;
+use App\Filament\User\Resources\EventResource;
+use App\Filament\User\Resources\ForumResource;
+use App\Filament\User\Resources\JobResource;
+use App\Filament\User\Resources\PackageResource;
+use App\Filament\User\Resources\ProductResource;
 use App\Filament\User\Resources\WalletHistoryResource;
-use App\Filament\User\Pages\LoginPage;
-use App\Filament\User\Pages\RegisterPage;
 use App\Filament\Widgets\StatsOverview;
 use App\Http\Middleware\HkEmailVerification;
-use App\Models\WalletHistory;
-use Filament\Http\Controllers\Auth\EmailVerificationController;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -33,7 +31,6 @@ use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
@@ -55,6 +52,8 @@ class UserPanelProvider extends PanelProvider
             ->emailVerification(EmailVerificationPrompt::class)
             ->profile(EditProfile::class, isSimple: false)
             ->databaseNotifications()
+            ->spa()
+            ->unsavedChangesAlerts()
             ->colors([
                 'primary' => Color::Purple,
             ])
@@ -62,7 +61,7 @@ class UserPanelProvider extends PanelProvider
                 return $builder->items([
                     NavigationItem::make('Dashboard')
                         ->icon('heroicon-o-home')
-                        ->isActiveWhen(fn (): bool => request()->routeIs(Dashboard::getUrl()))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.pages.dashboard'))
                         ->url(fn (): string => Dashboard::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
@@ -75,7 +74,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('Company Profile')
                         ->icon('heroicon-o-building-office-2')
-                        ->isActiveWhen(fn (): bool => request()->routeIs(CompanyResource::getUrl()))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.companies.view') || request()->routeIs('filament.panel.resources.companies.create') || request()->routeIs('filament.panel.resources.companies.edit'))
                         ->url(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
@@ -90,7 +89,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('Products')
                         ->icon('heroicon-o-shopping-cart')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.product'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.products.index') || request()->routeIs('filament.panel.resources.products.view') || request()->routeIs('filament.panel.resources.products.create') || request()->routeIs('filament.panel.resources.products.edit'))
                         ->url(fn (): string => ProductResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
@@ -103,7 +102,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('Deals')
                         ->icon('heroicon-o-gift-top')
-                        ->isActiveWhen(fn (): bool => request()->routeIs(DealResource::getUrl()))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.deals.index') || request()->routeIs('filament.panel.resources.deals.view') || request()->routeIs('filament.panel.resources.deals.create') || request()->routeIs('filament.panel.resources.deals.edit'))
                         ->url(fn (): string => DealResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
@@ -116,7 +115,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('Blog')
                         ->icon('heroicon-o-fire')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.blog'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.blogs.index') || request()->routeIs('filament.panel.resources.blogs.view') || request()->routeIs('filament.panel.resources.blogs.create') || request()->routeIs('filament.panel.resources.blogs.edit'))
                         ->url(fn (): string => BlogResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
@@ -129,7 +128,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('Events')
                         ->icon('heroicon-o-calendar')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.event'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.events.index') || request()->routeIs('filament.panel.resources.events.view') || request()->routeIs('filament.panel.resources.events.create') || request()->routeIs('filament.panel.resources.events.edit'))
                         ->url(fn (): string => EventResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
@@ -142,7 +141,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('Jobs')
                         ->icon('heroicon-o-briefcase')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.job'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.jobs.index') || request()->routeIs('filament.panel.resources.jobs.view') || request()->routeIs('filament.panel.resources.jobs.create') || request()->routeIs('filament.panel.resources.jobs.edit'))
                         ->url(fn (): string => JobResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
@@ -156,8 +155,21 @@ class UserPanelProvider extends PanelProvider
 
                     NavigationItem::make('Forums')
                         ->icon('heroicon-o-chat-bubble-left-ellipsis')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.forum'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.forums.index') || request()->routeIs('filament.panel.resources.forums.view') || request()->routeIs('filament.panel.resources.forums.create') || request()->routeIs('filament.panel.resources.forums.edit'))
                         ->url(fn (): string => ForumResource::getUrl())
+                        ->visible(function (){
+                            $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
+                            if($company){
+                                if($company->is_approved && !$company->is_rejected){
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }),
+                    NavigationItem::make('Packages')
+                        ->icon('heroicon-o-banknotes')
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.packages.view') || request()->routeIs('filament.panel.resources.packages.index'))
+                        ->url(fn (): string => PackageResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
                             if($company){
@@ -169,7 +181,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('Global Requirements')
                         ->icon('heroicon-o-presentation-chart-bar')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.requirement'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.requirements.index') || request()->routeIs('filament.panel.resources.requirements.view') || request()->routeIs('filament.panel.resources.requirements.create') || request()->routeIs('filament.panel.resources.requirements.edit'))
                         ->url(fn (): string => RequirementResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
@@ -182,7 +194,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('Wallet History')
                         ->icon('heroicon-o-banknotes')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.wallet-history'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.wallet-histories.index') || request()->routeIs('filament.panel.resources.wallet-history.view') || request()->routeIs('filament.panel.resources.wallet-history.create') || request()->routeIs('filament.panel.resources.wallet-history.edit'))
                         ->url(fn (): string => WalletHistoryResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
@@ -198,7 +210,7 @@ class UserPanelProvider extends PanelProvider
 //                        ->url(fn (): string => ForumReplyResource::getUrl()),
                     NavigationItem::make('Direct Messages')
                         ->icon('heroicon-o-chat-bubble-left-right')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.direct-message'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.direct-messages.index') || request()->routeIs('filament.panel.resources.direct-messages.view') || request()->routeIs('filament.panel.resources.direct-messages.create') || request()->routeIs('filament.panel.resources.direct-messages.edit'))
                         ->url(fn (): string => DirectMessageResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
@@ -211,7 +223,7 @@ class UserPanelProvider extends PanelProvider
                         }),
                     NavigationItem::make('My Bookmarks')
                         ->icon('heroicon-o-bookmark-square')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.user.resources.bookmark-companies'))
+                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.panel.resources.bookmark-companies.index') || request()->routeIs('filament.panel.resources.bookmark-companies.view') || request()->routeIs('filament.panel.resources.bookmark-companies.create') || request()->routeIs('filament.panel.resources.bookmark-companies.edit'))
                         ->url(fn (): string => BookmarkCompaniesResource::getUrl())
                         ->visible(function (){
                             $company = \App\Models\Company::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();

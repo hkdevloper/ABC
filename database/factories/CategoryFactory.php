@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
             'type' => $this->faker->randomElement(['company', 'product', 'event', 'blog', 'job', 'forum', 'deal']),
             'slug' => $this->faker->slug,
             'description' => $this->faker->text,
-            'image' => "category/".rand(1,5).".svg",
+            'image' => 'category/' . rand(1, 5) . '.svg',
             'is_active' => 1,
             'is_featured' => $this->faker->boolean,
             'parent_id' => null,

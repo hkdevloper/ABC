@@ -3,9 +3,6 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Widgets\StatsOverview;
-use Awcodes\FilamentQuickCreate\QuickCreatePlugin;
-use Awcodes\Overlook\OverlookPlugin;
-use Awcodes\Overlook\Widgets\OverlookWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -21,7 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Njxqlus\FilamentProgressbar\FilamentProgressbarPlugin;
+use Joaopaulolndev\FilamentGeneralSettings\FilamentGeneralSettingsPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -35,38 +32,29 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->passwordReset()
             ->databaseNotifications()
+            ->spa()
+            ->unsavedChangesAlerts()
             ->colors([
                 'primary' => Color::Purple,
-            ])
-            ->plugins([
-                FilamentProgressbarPlugin::make()->color('transparent'),
-//                QuickCreatePlugin::make(),
-                OverlookPlugin::make()
-                    ->columns([
-                        'default' => 1,
-                        'sm' => 2,
-                        'md' => 3,
-                        'lg' => 4,
-                        'xl' => 5,
-                        '2xl' => null,
-                    ]),
-            ])
-            ->widgets([
-                StatsOverview::class,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                // Pages\Dashboard::class,
-            ])
-            ->navigationGroups([
-                'Modules',
-                'User Management',
-                'Location Management',
-                'Support & Communication',
-                'Customer Interaction',
+                Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->plugins([
+                FilamentGeneralSettingsPlugin::make()
+                    ->canAccess(fn() => auth()->user()->type === 'Admin')
+                    ->setSort(30)
+                    ->setIcon('heroicon-o-cog')
+                    ->setNavigationGroup('Settings')
+                    ->setTitle('General Settings')
+                    ->setNavigationLabel('General Settings'),
+            ])
+            ->widgets([
+                StatsOverview::class,
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

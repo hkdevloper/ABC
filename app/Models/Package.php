@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Package extends Model
 {
@@ -11,27 +12,40 @@ class Package extends Model
 
     protected $table = 'packages';
     protected $primaryKey = 'id';
+    public static array $durationTypes = [
+        'day' => 'Day',
+        'week' => 'Week',
+        'month' => 'Month',
+        'year' => 'Year',
+    ];
     protected $fillable = [
         'name',
         'description',
-        'price',
-        'balance',
         'duration',
-        'status',
-        'is_featured',
+        'duration_type',
+        'price',
+        'discount_price',
+        'featured',
+        'is_active',
         'is_popular',
-        'is_trending',
-        'is_new'
+        'image',
+        'req_available',
+        'dm_available'
     ];
 
     protected $casts = [
-        'is_featured' => 'boolean',
+        'featured' => 'array',
+        'is_active' => 'boolean',
         'is_popular' => 'boolean',
-        'is_trending' => 'boolean',
-        'is_new' => 'boolean',
         'price' => 'float',
-        'balance' => 'float',
-        'duration' => 'custom_datetime',
+        'discount_price' => 'float',
     ];
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'package_user')
+            ->withPivot('started_at', 'expired_at', 'is_active', 'is_expired', 'duration', 'duration_type', 'purchased_price', 'featured', 'image', 'req_available', 'dm_available')
+            ->withTimestamps();
+    }
 
 }

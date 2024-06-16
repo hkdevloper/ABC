@@ -2,13 +2,11 @@
 
 namespace App\Filament\User\Resources;
 
-use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\User\Resources\ForumResource\Pages;
 use App\Filament\User\Resources\ForumResource\RelationManagers;
 use App\Models\Forum;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
-use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
@@ -17,7 +15,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ForumResource extends Resource
 {

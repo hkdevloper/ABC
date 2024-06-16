@@ -12,8 +12,6 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use IbrahimBougaoua\FilamentRatingStar\Actions\RatingStar;
 use IbrahimBougaoua\FilamentRatingStar\Columns\RatingStarColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RateReviewResource extends Resource
 {
@@ -26,10 +24,8 @@ class RateReviewResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->native(false)
-                    ->required(),
+                Forms\Components\Hidden::make('user_id')
+                    ->default(auth()->user()->id),
                 Forms\Components\Hidden::make('type')
                     ->required()
                     ->default('product'),

@@ -1,7 +1,6 @@
 <?php
 
 namespace Database\Factories;
-
 use App\Models\Company;
 use App\Models\Event;
 use App\Models\Product;

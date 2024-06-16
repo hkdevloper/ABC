@@ -187,4 +187,9 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     {
         return $this->bookmarkCompanies()->where('company_id', $company->id)->exists();
     }
+
+    public function packages(): BelongsToMany
+    {
+        return $this->belongsToMany(Package::class, 'package_user', 'user_id', 'package_id');
+    }
 }

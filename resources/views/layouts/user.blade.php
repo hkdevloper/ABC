@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <title>{{ config()->get('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @livewireStyles
+    @filamentStyles
     <script src="{{ asset('js/tailwind.js')}}"></script>
     <link href="{{ asset('css/boxicons/css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/toastify.min.css')}}">
@@ -17,9 +19,6 @@
     <meta name="theme-color" content="#6777ef"/>
     <link rel="apple-touch-icon" href="{{ asset('storage/image/logo.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
-    @filamentStyles
     @yield('head')
     <script>
         tailwind.config = {

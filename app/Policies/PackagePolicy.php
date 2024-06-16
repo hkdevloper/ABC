@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Package;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class PackagePolicy
 {
@@ -13,10 +12,7 @@ class PackagePolicy
      */
     public function viewAny(User $user): bool
     {
-        if($user->type == 'Admin'){
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**
@@ -24,10 +20,7 @@ class PackagePolicy
      */
     public function view(User $user, Package $package): bool
     {
-        if($user->type == 'Admin'){
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**

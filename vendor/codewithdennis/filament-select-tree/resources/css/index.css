@@ -24,6 +24,48 @@ html.dark .treeselect > .treeselect-input {
     background: transparent;
 }
 
+.treeselect-list__empty-icon {
+    display: none;
+}
+
+.treeselect-input__edit::placeholder, .treeselect-list__empty {
+    --tw-text-opacity: 1;
+    color: rgba(var(--gray-400), var(--tw-text-opacity));
+    cursor: default;
+}
+
+.treeselect-input__clear svg {
+    display: none;
+}
+
+.treeselect-input__clear {
+    background-color: transparent;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMSIgaGVpZ2h0PSIyMSI+PGcgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJtMi41OTIuMDQ0IDE4LjM2NCAxOC4zNjQtMi41NDggMi41NDhMLjA0NCAyLjU5MnoiLz48cGF0aCBkPSJNMCAxOC4zNjQgMTguMzY0IDBsMi41NDggMi41NDhMMi41NDggMjAuOTEyeiIvPjwvZz48L3N2Zz4=);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: .7142em .7142em;
+    border-width: 0;
+    inset-inline-end: 0;
+    margin-inline-end: 2.25rem;
+    opacity: .5;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    padding: 0;
+    position: absolute;
+    text-indent: -9999px;
+    top: calc(50% - 0.38em);
+    transition-duration: 75ms;
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    width: 1rem;
+    height: 10px;
+}
+
+.treeselect-list__empty {
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
 .treeselect-input__tags-count {
     margin-left: 9px;
 }
@@ -258,4 +300,12 @@ html.dark
 
 [dir='rtl'] .treeselect-input {
     padding: 2px 4px 2px 40px;
+}
+
+.treeselect-input__arrow svg, .treeselect-input__arrow svg:hover {
+    stroke: #6b7280;
+    height: 20px;
+    min-width: 18px;
+    width: 15px;
+    cursor: auto;
 }

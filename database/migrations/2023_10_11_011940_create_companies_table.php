@@ -36,6 +36,11 @@ return new class extends Migration
             $table->string('instagram')->nullable();
             $table->string('linkdin')->nullable();
             $table->string('youtube')->nullable();
+            $table->date('established_at')->nullable();
+            $table->string('number_of_employees')->nullable();
+            $table->string('turnover')->nullable();
+            $table->boolean('is_rejected')->default(false);
+            $table->string('rejected_reason')->nullable();
             $table->foreignId('address_id')->nullable()->constrained('addresses')->cascadeOnDelete();
             $table->foreignId('seo_id')->nullable()->constrained('seo')->onDelete('cascade');
             $table->timestamps();

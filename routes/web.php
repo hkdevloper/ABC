@@ -15,34 +15,27 @@ use App\Models\Category;
 use App\Models\Claims;
 use App\Models\Company;
 use App\Models\DirectMessage;
-use App\Models\Product;
 use App\Models\Event;
+use App\Models\Product;
 use App\Models\Requirement;
 use App\Models\Subscribe;
 use App\Models\User;
-use Filament\Facades\Filament;
+use App\Models\WalletHistory;
 use Filament\Notifications\Auth\VerifyEmail;
+use Filament\Notifications\Notification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 Route::prefix('test')->group(function () {
     Route::get('/', function () {
         foreach (User::all() as $user) {
             // Create a new wallet history
-            $wallet = new \App\Models\WalletHistory();
+            $wallet = new WalletHistory();
             $wallet->user_id = $user->id;
             $wallet->amount = $user->balance;
             $wallet->type = 'credit';
@@ -84,6 +77,25 @@ Route::get('logout', function () {
     }
     return redirect()->back();
 })->name('logout');
+
+
+Route::get('/user/email-verification/verify/{id}/{hash}', function ($id, $hash) {
+    if (Auth::check()) {
+        Auth::logout();
+    }
+    $user = User::findOrFail($id);
+    if (!hash_equals((string)$hash, sha1($user->getEmailForVerification()))) {
+        return redirect()->route('auth.login')->with('error', 'Invalid verification link');
+    }
+
+    if ($user->hasVerifiedEmail()) {
+        return redirect()->route('auth.login')->with('error', 'Email already verified');
+    }
+
+    $user->markEmailAsVerified();
+    return view('auth.email')->with('success', 'Email verified successfully');
+})->name('filament.panel.auth.email-verification.verify');
+
 
 Route::get('/', function () {
     // Forgot session
@@ -331,7 +343,7 @@ Route::post('/requirements/submit', function (Request $request) {
     $requirement->status = 'Pending';
     $requirement->saveOrFail();
     // Send Online Notification to Admin and User
-    \Filament\Notifications\Notification::make()
+    Notification::make()
         ->title('New Requirement posted')
         ->body($request->subject)
         ->sendToDatabase(User::find(1));
@@ -356,7 +368,7 @@ Route::post('comment', function (Request $request) {
     $comment = new BlogComments();
     $comment->comment = $request->comment;
     $comment->name = $request->name;
-    $comment->email = "";
+    $comment->email = '';
     $comment->user_id = $request->user_id;
     $comment->blog_id = $request->blog_id;
     $comment->saveOrFail();

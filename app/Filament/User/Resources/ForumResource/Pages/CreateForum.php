@@ -24,15 +24,6 @@ class CreateForum extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        // Send Notification to Admin when a new forum is created
-        Notification::make()
-            ->title('New Forum Created.')
-            ->body(Str::limit($data['title'], 70, '...'))
-            ->actions([
-                Actions\Action::make('view')
-                    ->url('/user/forums'),
-            ])
-            ->sendToDatabase(User::find(1));
         return array_merge($data, [
             'company_id' => auth()->user()->company->id,
         ]);

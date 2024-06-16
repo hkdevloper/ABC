@@ -11,7 +11,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BlogCommentsResource extends Resource
 {
@@ -29,11 +28,8 @@ class BlogCommentsResource extends Resource
                     ->native(false)
                     ->disabled()
                     ->required(),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->native(false)
-                    ->disabled()
-                    ->required(),
+                Forms\Components\Hidden::make('user_id')
+                    ->default(auth()->user()->id),
                 TinyEditor::make('comment')
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsVisibility('public')

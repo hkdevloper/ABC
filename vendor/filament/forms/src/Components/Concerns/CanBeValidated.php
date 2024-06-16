@@ -328,6 +328,11 @@ trait CanBeValidated
         return $this->multiFieldValueComparisonRule('required_if', $statePath, $stateValues, $isStatePathAbsolute);
     }
 
+    public function requiredIfAccepted(string | Closure $statePath, bool $isStatePathAbsolute = false): static
+    {
+        return $this->fieldComparisonRule('required_if_accepted', $statePath, $isStatePathAbsolute);
+    }
+
     public function requiredUnless(string | Closure $statePath, mixed $stateValues, bool $isStatePathAbsolute = false): static
     {
         return $this->multiFieldValueComparisonRule('required_unless', $statePath, $stateValues, $isStatePathAbsolute);
@@ -426,10 +431,19 @@ trait CanBeValidated
     }
 
     /**
-     * @param  string | array<mixed>  $rules
+     * @param  string | array<mixed> | Closure  $rules
      */
-    public function rules(string | array $rules, bool | Closure $condition = true): static
+    public function rules(string | array | Closure $rules, bool | Closure $condition = true): static
     {
+        if ($rules instanceof Closure) {
+            $this->rules = [
+                ...$this->rules,
+                [$rules, $condition],
+            ];
+
+            return $this;
+        }
+
         if (is_string($rules)) {
             $rules = explode('|', $rules);
         }
@@ -666,9 +680,26 @@ trait CanBeValidated
         foreach ($this->rules as [$rule, $condition]) {
             if (is_numeric($rule)) {
                 $rules[] = $this->evaluate($condition);
-            } elseif ($this->evaluate($condition)) {
-                $rules[] = $this->evaluate($rule);
+
+                continue;
             }
+
+            if (! $this->evaluate($condition)) {
+                continue;
+            }
+
+            $rule = $this->evaluate($rule);
+
+            if (is_array($rule)) {
+                $rules = [
+                    ...$rules,
+                    ...$rule,
+                ];
+
+                continue;
+            }
+
+            $rules[] = $rule;
         }
 
         return $rules;
@@ -810,6 +841,8 @@ trait CanBeValidated
 
             if (is_array($stateValues)) {
                 $stateValues = implode(',', $stateValues);
+            } elseif (is_bool($stateValues)) {
+                $stateValues = $stateValues ? 'true' : 'false';
             }
 
             return "{$rule}:{$statePath},{$stateValues}";
