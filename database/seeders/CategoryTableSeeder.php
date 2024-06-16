@@ -26,7 +26,7 @@ class CategoryTableSeeder extends Seeder
                 \App\Models\Category::factory()->create([
                     'name' => $name,
                     'type' => $type,
-                    'thumbnail' => 'image/404.png'
+                    'image' => 'image/404.png'
                 ]);
             }
         }
