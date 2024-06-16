@@ -9,12 +9,12 @@
     @filamentStyles
     <script src="{{ asset('js/tailwind.js')}}"></script>
     <link href="{{ asset('css/boxicons/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/toastify.min.css')}}">
     <link href="{{ asset('css/main.css')}}" rel="stylesheet">
     <script src="{{ asset('js/jquery.js')}}"></script>
     <script src="{{ asset('js/alpine.js')}}" defer></script>
     <script src="{{ asset('js/helper.js') }}"></script>
-    <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/scroll-reveal.js')}}"></script>
     <meta name="theme-color" content="#6777ef"/>
     <link rel="apple-touch-icon" href="{{ asset('storage/image/logo.png') }}">
