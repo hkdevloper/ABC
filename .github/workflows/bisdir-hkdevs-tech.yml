@@ -19,8 +19,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/hkdevs-bisdir/htdocs/bisdir.hkdevs.tech/
-            git checkout main
             git fetch origin main
+            git reset --hard origin/main
             git pull origin main
             chmod -R 775 storage
             chmod -R ugo+rw storage
