@@ -114,6 +114,14 @@
                     Submit
                 </x-bladewind.button>
             </div>
+            <div class="text-center mt-4">
+                <p class="text-gray-600 text-xs">
+                    By submitting this form, you agree to our <a href="{{ route('policy') }}"
+                                                                 class="text-blue-500 hover:text-blue-700">Privacy
+                        Policy</a> and <a href="{{ route('tos') }}"
+                                          class="text-blue-500 hover:text-blue-700">Terms of Service</a>.
+                </p>
+            </div>
         </form>
         <script>
             dom_el('.requirement-form').addEventListener('submit', function (e){
