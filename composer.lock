@@ -2732,16 +2732,16 @@
         },
         {
             "name": "joaopaulolndev/filament-general-settings",
-            "version": "v1.0.10",
+            "version": "v1.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joaopaulolndev/filament-general-settings.git",
-                "reference": "876b7f41ec30c0e66e3ac3c94f7483f5f6f89dd6"
+                "reference": "86ca37c6610a214d0d26bd9cbd31d19887e7a6cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joaopaulolndev/filament-general-settings/zipball/876b7f41ec30c0e66e3ac3c94f7483f5f6f89dd6",
-                "reference": "876b7f41ec30c0e66e3ac3c94f7483f5f6f89dd6",
+                "url": "https://api.github.com/repos/joaopaulolndev/filament-general-settings/zipball/86ca37c6610a214d0d26bd9cbd31d19887e7a6cb",
+                "reference": "86ca37c6610a214d0d26bd9cbd31d19887e7a6cb",
                 "shasum": ""
             },
             "require": {
@@ -2807,7 +2807,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-04T14:11:38+00:00"
+            "time": "2024-06-16T10:11:06+00:00"
         },
         {
             "name": "joshembling/image-optimizer",
