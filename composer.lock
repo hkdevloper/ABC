@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a3c3b37fab4c57e64232fa8b2dc8466",
+    "content-hash": "55dafaf7314351c20faa4219f55fa53d",
     "packages": [
         {
             "name": "amidesfahani/filament-tinyeditor",
@@ -9342,6 +9342,88 @@
                 "source": "https://github.com/TappNetwork/filament-auditing"
             },
             "time": "2024-05-31T21:48:56+00:00"
+        },
+        {
+            "name": "tapp/filament-maillog",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TappNetwork/filament-maillog.git",
+                "reference": "7d5f1fff0241179e6e0898ea16d02b68b4c8d8a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TappNetwork/filament-maillog/zipball/7d5f1fff0241179e6e0898ea16d02b68b4c8d8a9",
+                "reference": "7d5f1fff0241179e6e0898ea16d02b68b4c8d8a9",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0-stable",
+                "illuminate/contracts": "^10.0||^11.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.16"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.9",
+                "laravel/pint": "^1.14",
+                "nunomaduro/collision": "^8.1.1||^7.10.0",
+                "orchestra/testbench": "^9.0.0||^8.22.0",
+                "pestphp/pest": "^2.34",
+                "pestphp/pest-plugin-arch": "^2.7",
+                "pestphp/pest-plugin-laravel": "^2.3",
+                "pestphp/pest-plugin-livewire": "^2.1",
+                "phpstan/extension-installer": "^1.3",
+                "phpstan/phpstan-deprecation-rules": "^1.1",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "spatie/laravel-ray": "^1.35"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Tapp\\FilamentMailLog\\FilamentMailLogServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentMailLog": "Tapp\\FilamentMailLog\\Facades\\FilamentMailLog"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tapp\\FilamentMailLog\\": "src/",
+                    "Tapp\\FilamentMailLog\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Steve Williamson",
+                    "email": "steve@tappnetwork.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Filament plugin to view outgoing mail",
+            "homepage": "https://github.com/tapp/filament-maillog",
+            "keywords": [
+                "filament-maillog",
+                "laravel",
+                "mailog",
+                "tapp network"
+            ],
+            "support": {
+                "issues": "https://github.com/TappNetwork/filament-maillog/issues",
+                "source": "https://github.com/TappNetwork/filament-maillog/tree/v1.0.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/TappNetwork",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-05-31T21:04:51+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

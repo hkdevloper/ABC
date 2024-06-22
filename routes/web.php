@@ -203,6 +203,10 @@ Route::prefix('auth')->group(function () {
                 Auth::logout();
                 return redirect()->back()->withInput()->with('error', $message);
             }
+            // IF a user has not verified email, then Login
+            if (!Auth::user()->hasVerifiedEmail()) {
+                return redirect('/user');
+            }
 
             // IF user is not Approved then logout and redirect with error
             if (Auth::user()->approved == 0) {
@@ -267,7 +271,7 @@ Route::prefix('auth')->group(function () {
                     ...[],
                 ],
             );
-            $user->notify($notification);
+            $user->notifyNow($notification);
             Auth::login($user);
             return redirect()->back();
         } catch (Exception $e) {

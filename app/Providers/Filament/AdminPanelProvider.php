@@ -23,6 +23,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Joaopaulolndev\FilamentGeneralSettings\FilamentGeneralSettingsPlugin;
 use Njxqlus\FilamentProgressbar\FilamentProgressbarPlugin;
+use Tapp\FilamentMailLog\FilamentMailLogPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -42,6 +43,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Purple,
             ])
             ->plugins([
+                FilamentMailLogPlugin::make(),
                 FilamentProgressbarPlugin::make()->color('transparent'),
                 OverlookPlugin::make()
                     ->columns([

@@ -80,6 +80,8 @@ class ComposerStaticInitac121959cb4896372d230dcf7b824d43
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
             'Termwind\\' => 9,
+            'Tapp\\FilamentMailLog\\Database\\Factories\\' => 40,
+            'Tapp\\FilamentMailLog\\' => 21,
             'Tapp\\FilamentAuditing\\' => 22,
         ),
         'S' => 
@@ -308,6 +310,14 @@ class ComposerStaticInitac121959cb4896372d230dcf7b824d43
         'Termwind\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/termwind/src',
+        ),
+        'Tapp\\FilamentMailLog\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tapp/filament-maillog/database/factories',
+        ),
+        'Tapp\\FilamentMailLog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tapp/filament-maillog/src',
         ),
         'Tapp\\FilamentAuditing\\' => 
         array (
@@ -9766,6 +9776,16 @@ class ComposerStaticInitac121959cb4896372d230dcf7b824d43
         'Symfony\\Polyfill\\Uuid\\Uuid' => __DIR__ . '/..' . '/symfony/polyfill-uuid/Uuid.php',
         'Tapp\\FilamentAuditing\\FilamentAuditingServiceProvider' => __DIR__ . '/..' . '/tapp/filament-auditing/src/FilamentAuditingServiceProvider.php',
         'Tapp\\FilamentAuditing\\RelationManagers\\AuditsRelationManager' => __DIR__ . '/..' . '/tapp/filament-auditing/src/RelationManagers/AuditsRelationManager.php',
+        'Tapp\\FilamentMailLog\\Database\\Factories\\MailLogFactory' => __DIR__ . '/..' . '/tapp/filament-maillog/database/factories/MailLogFactory.php',
+        'Tapp\\FilamentMailLog\\Events\\MailLogEventHandler' => __DIR__ . '/..' . '/tapp/filament-maillog/src/Events/MailLogEventHandler.php',
+        'Tapp\\FilamentMailLog\\Facades\\FilamentMailLog' => __DIR__ . '/..' . '/tapp/filament-maillog/src/Facades/FilamentMailLog.php',
+        'Tapp\\FilamentMailLog\\FilamentMailLog' => __DIR__ . '/..' . '/tapp/filament-maillog/src/FilamentMailLog.php',
+        'Tapp\\FilamentMailLog\\FilamentMailLogPlugin' => __DIR__ . '/..' . '/tapp/filament-maillog/src/FilamentMailLogPlugin.php',
+        'Tapp\\FilamentMailLog\\FilamentMailLogServiceProvider' => __DIR__ . '/..' . '/tapp/filament-maillog/src/FilamentMailLogServiceProvider.php',
+        'Tapp\\FilamentMailLog\\Models\\MailLog' => __DIR__ . '/..' . '/tapp/filament-maillog/src/Models/MailLog.php',
+        'Tapp\\FilamentMailLog\\Resources\\MailLogResource' => __DIR__ . '/..' . '/tapp/filament-maillog/src/Resources/MailLogResource.php',
+        'Tapp\\FilamentMailLog\\Resources\\MailLogResource\\Pages\\ListMailLogs' => __DIR__ . '/..' . '/tapp/filament-maillog/src/Resources/MailLogResource/Pages/ListMailLogs.php',
+        'Tapp\\FilamentMailLog\\Resources\\MailLogResource\\Pages\\ViewMailLog' => __DIR__ . '/..' . '/tapp/filament-maillog/src/Resources/MailLogResource/Pages/ViewMailLog.php',
         'Termwind\\Actions\\StyleToMethod' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Actions/StyleToMethod.php',
         'Termwind\\Components\\Anchor' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Components/Anchor.php',
         'Termwind\\Components\\BreakLine' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Components/BreakLine.php',
