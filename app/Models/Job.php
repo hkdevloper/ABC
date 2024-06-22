@@ -10,7 +10,7 @@ use Mews\Purifier\Casts\CleanHtml;
 class Job extends Model
 {
     use HasFactory;
-    protected $table = 'jobs';
+    protected $table = 'company_jobs';
     protected $primaryKey = 'id';
     protected $fillable = [
         'company_id',
