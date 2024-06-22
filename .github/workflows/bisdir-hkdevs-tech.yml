@@ -26,6 +26,8 @@ jobs:
             chmod -R ugo+rw storage
             chown -R www-data.www-data storage
             chown -R www-data.www-data bootstrap/cache
+            cp .env.abc .env
+            php artisan key:generate
             php artisan config:cache
             php artisan migrate
             rm -r /home/hkdevs-bisdir/htdocs/bisdir.hkdevs.tech/public/storage
