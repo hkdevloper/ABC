@@ -27,6 +27,7 @@ jobs:
             chown -R www-data.www-data storage
             chown -R www-data.www-data bootstrap/cache
             cp .env.abc .env
+            cp /home/hkdevs-bisdir/htdocs/bisdir.hkdevs.tech/public/css/app/app.css /home/hkdevs-bisdir/htdocs/bisdir.hkdevs.tech/public/css/app/app1.css
             php artisan key:generate
             php artisan config:cache
             php artisan migrate
