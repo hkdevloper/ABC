@@ -43,11 +43,7 @@ pre.prettyjson {
 }
 
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    border-bottom: #e5e7eb solid 1px;
+
 }
 
 :is(.dark) .container {
