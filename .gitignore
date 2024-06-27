@@ -20,3 +20,4 @@ yarn-error.log
 /public/storage/category
 /public/storage/companies
 /public/storage/packages
+*.webp
