@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CompanyResource\RelationManagers\UserRelationManager;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\Country;
@@ -20,7 +19,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
@@ -36,34 +34,7 @@ class UserResource extends Resource
                     ->default('user')
                     ->required(),
                 Forms\Components\Hidden::make('email_verified_at'),
-                Forms\Components\Section::make([
-                    Toggle::make('approved')
-                        ->label('Approved')
-                        ->disabled(fn(Get $get) => $get('type') === 'Admin')
-                        ->autofocus()
-                        ->required(),
-                    Toggle::make('banned')
-                        ->label('Banned')
-                        ->live(onBlur: true)
-                        ->disabled(fn(Get $get) => $get('type') === 'Admin')
-                        ->hidden(fn(Get $get) => !$get('id'))
-                        ->required(),
-                    Toggle::make('update_password')
-                        ->label('Update Password')
-                        ->dehydrated(false)
-                        ->live(onBlur: true)
-                        ->hidden(fn(Get $get) => !$get('id')),
-                    Toggle::make('is_verified')
-                        ->label('Email Verified')
-                        ->dehydrated(false)
-                        ->hidden(fn(Get $get) => $get('email_verified_at'))
-                        ->afterStateUpdated(function(User $record, Get $get, Set $set){
-                            $record->email_verified_at = $get('is_verified') ? now() : null;
-                            $set('email_verified_at', $record->email_verified_at);
-                        })
-                ])
-                    ->hidden(fn(Get $get) => !$get('id'))
-                    ->columns(3),
+                Forms\Components\Group::make()->schema([
                 TextInput::make('name')
                     ->label('Enter User Full Name')
                     ->required()
@@ -73,11 +44,8 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(191),
-                Placeholder::make('email_verified_at_placeholder')
-                    ->label('Email Verified At')
-                    ->hidden(fn(Get $get) => !$get('id'))
-                    ->content(fn(User $record): string => $record->email_verified_at ? $record->email_verified_at->toFormattedDateString() : 'Not Verified'),
                 Select::make('currency')
+                    ->hidden()
                     ->label('Select Preferred Currency')
                     ->default('INR')
                     ->native(false)
@@ -94,22 +62,6 @@ class UserResource extends Resource
                         }
                         return $currency;
                     }),
-                TextInput::make('password')
-                    ->password()
-                    ->label('Password')
-                    ->live(onBlur: true)
-                    ->required(fn(Get $get) => $get('update_password'))
-                    ->visibleOn('create')
-                    ->visible(function (Get $get, string $operation): bool {
-                        if ($operation === 'create') {
-                            return true;
-                        }
-                        if ($get('update_password')) {
-                            return true;
-                        }
-                        return false;
-                    })
-                    ->maxLength(191),
                 TextInput::make('balance')
                     ->prefix('$')
                     ->numeric()
@@ -117,19 +69,73 @@ class UserResource extends Resource
                     ->label('Wallet Amount')
                     ->required()
                     ->default(0),
-                Placeholder::make('created')
-                    ->label('Created')
-                    ->hidden(fn(Get $get) => !$get('id'))
-                    ->content(fn(User $record): string => $record->created_at->toFormattedDateString()),
-                TextInput::make('banned_reason')
-                    ->label('Banned Reason')
-                    ->live(onBlur: true)
-                    ->hidden(fn(Get $get) => !$get('banned'))
-                    ->required(fn(Get $get) => $get('banned'))
-                    ->maxLength(500),
+                    TextInput::make('banned_reason')
+                        ->label('Banned Reason')
+                        ->live(onBlur: true)
+                        ->hidden(fn(Get $get) => !$get('banned'))
+                        ->required(fn(Get $get) => $get('banned'))
+                        ->maxLength(500),
+                    TextInput::make('password')
+                        ->password()
+                        ->label('Password')
+                        ->live(onBlur: true)
+                        ->required(fn(Get $get) => $get('update_password'))
+                        ->visibleOn('create')
+                        ->visible(function (Get $get, string $operation): bool {
+                            if ($operation === 'create') {
+                                return true;
+                            }
+                            if ($get('update_password')) {
+                                return true;
+                            }
+                            return false;
+                        })
+                        ->maxLength(191),
+                ])->columnSpan(2),
+                Forms\Components\Group::make()->schema([
+                    Forms\Components\Section::make([
+                        Toggle::make('approved')
+                            ->label('Approved')
+                            ->disabled(fn(Get $get) => $get('type') === 'Admin')
+                            ->autofocus()
+                            ->required(),
+                        Toggle::make('banned')
+                            ->label('Banned')
+                            ->live(onBlur: true)
+                            ->disabled(fn(Get $get) => $get('type') === 'Admin')
+                            ->hidden(fn(Get $get) => !$get('id'))
+                            ->required(),
+                        Toggle::make('update_password')
+                            ->label('Update Password')
+                            ->dehydrated(false)
+                            ->live(onBlur: true)
+                            ->hidden(fn(Get $get) => !$get('id')),
+                        Toggle::make('is_verified')
+                            ->label('Email Verified')
+                            ->dehydrated(false)
+                            ->hidden(fn(Get $get) => $get('email_verified_at'))
+                            ->afterStateUpdated(function(User $record, Get $get, Set $set){
+                                $record->email_verified_at = $get('is_verified') ? now() : null;
+                                $set('email_verified_at', $record->email_verified_at);
+                            })
+                    ])
+                        ->hidden(fn(Get $get) => !$get('id'))
+                        ->columns(1),
+                    Placeholder::make('email_verified_at_placeholder')
+                        ->label('Email Verified At')
+                        ->hidden(fn(Get $get) => !$get('id'))
+                        ->content(fn(User $record): string => $record->email_verified_at ? $record->email_verified_at->toFormattedDateString() : 'Not Verified'),
+                    Placeholder::make('created')
+                        ->label('Created')
+                        ->hidden(fn(Get $get) => !$get('id'))
+                        ->content(fn(User $record): string => $record->created_at->toFormattedDateString()),
+                ])->columnSpan(1),
             ])->columns(3);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table

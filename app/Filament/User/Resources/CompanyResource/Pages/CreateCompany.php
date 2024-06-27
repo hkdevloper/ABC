@@ -7,7 +7,7 @@ use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Validation\ValidationException;
-use Str;
+use Illuminate\Support\Str;
 
 class CreateCompany extends CreateRecord
 {

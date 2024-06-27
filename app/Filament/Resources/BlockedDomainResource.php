@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BlockedDomainResource\Pages;
-use App\Filament\Resources\BlockedDomainResource\RelationManagers;
 use App\Models\BlockedDomain;
 use Filament\Forms;
 use Filament\Forms\Form;

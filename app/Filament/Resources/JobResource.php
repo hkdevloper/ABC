@@ -23,7 +23,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
-use Str;
+use Illuminate\Support\Str;
 
 class JobResource extends Resource
 {

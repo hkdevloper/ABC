@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\RateReviewResource\Pages;
-use App\Filament\Resources\RateReviewResource\RelationManagers;
 use App\Models\RateReview;
 use Filament\Forms;
 use Filament\Forms\Form;

@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PackageResource\Pages;
-use App\Filament\Resources\PackageResource\RelationManagers;
 use App\Models\Package;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -40,17 +39,18 @@ class PackageResource extends Resource
                     Forms\Components\Select::make('duration_type')
                         ->native(false)
                         ->options(Package::$durationTypes),
-                    MoneyInput::make('price')
+                    Forms\Components\TextInput::make('price')
                         ->required()
-                        ->prefix('₹')
+                        ->prefix('$')
                         ->numeric()
-                        ->minValue(0.00)
-                        ->default(0.00),
-                    MoneyInput::make('discount_price')
+                        ->minValue(0)
+                        ->default(0),
+                    Forms\Components\TextInput::make('discount_price')
                         ->required()
+                        ->prefix('$')
                         ->numeric()
-                        ->minValue(0.00)
-                        ->default(0.00),
+                        ->minValue(0)
+                        ->default(0),
                     Forms\Components\TextInput::make('dm_available')
                         ->label('Direct Messages')
                         ->helperText('Enter the number of Direct Messages count which is Available to view. If you want to set Unlimited then enter 0. If you want to set only 5 messages as available then enter')
@@ -114,7 +114,7 @@ class PackageResource extends Resource
                     ->money()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('discount_price')
-                    ->numeric()
+                    ->money()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),

@@ -19,7 +19,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Str;
+use Illuminate\Support\Str;
 
 class CategoryResource extends Resource
 {
@@ -30,96 +30,100 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                Section::make()->schema([
-                    Toggle::make('is_active')
-                        ->default(1)
-                        ->label('Active')
+                Forms\Components\Group::make([
+                    TextInput::make('name')
+                        ->label('Enter Category Name')
+                        ->live(onBlur: true)
                         ->autofocus()
-                        ->required(),
-                    Toggle::make('is_featured')
-                        ->label('Featured')
+                        ->required()
+                        ->maxLength(191)
+                        ->afterStateUpdated(function (Set $set, ?string $state) {
+                            $set('slug', Str::slug($state));
+                            $set('seo.title', $state);
+                        }),
+                    TextInput::make('slug')
+                        ->label('Slug')
                         ->autofocus()
-                        ->required(),
-                ])->columns(),
-                FileUpload::make('image')
-                    ->image()
-                    ->optimize('webp')
-                    ->resize(50)
-                    ->label('category image')
-                    ->directory('category')
-                    ->default(''),
-                TextInput::make('name')
-                    ->label('Enter Category Name')
-                    ->live(onBlur: true)
-                    ->autofocus()
-                    ->required()
-                    ->maxLength(191)
-                    ->afterStateUpdated(function (Set $set, ?string $state) {
-                        $set('slug', Str::slug($state));
-                        $set('seo.title', $state);
-                    }),
-                TextInput::make('slug')
-                    ->label('Slug')
-                    ->autofocus()
-                    ->unique(ignoreRecord: true)
-                    ->maxLength(70),
-                Select::make('type')
-                    ->label('Select Type')
-                    ->native(false)
-                    ->required()
-                    ->live(true)
-                    ->options([
-                        "company" => "Company",
-                        "product" => "Product",
-                        "job" => "Job",
-                        "deal" => "Deals",
-                        "blog" => "Blog",
-                        "event" => "Event",
-                        "forum" => "Forum",
-                    ]),
-                SelectTree::make('parent_id')
-                    ->label('Select Parent Category')
-                    ->withCount()
-                    ->enableBranchNode()
-                    ->live(true)
-                    ->emptyLabel('Oops! No Category Found')
-                    ->relationship('parent', 'name', 'parent_id', function ($query, Forms\Get $get) {
-                        return $query->where('type', $get('type'));
-                    }),
-                Forms\Components\RichEditor::make('description')
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'h2',
-                        'h3',
-                        'italic',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'underline',
-                        'undo',
-                    ])
-                    ->label('Description')
-                    ->maxLength(65535)
-                    ->autofocus()
-                    ->columnSpanFull(),
-                Section::make('SEO Details')
-                    ->relationship('seo')
-                    ->schema([
-                        TextInput::make('title')
-                            ->label('Enter SEO Title')
-                            ->required()
-                            ->maxLength(70),
-                        TagsInput::make('meta_keywords')
-                            ->splitKeys(['Tab', ','])
-                            ->label('Enter SEO Meta Keywords'),
-                        Textarea::make('meta_description')
-                            ->label('Enter SEO Meta Description')
-                            ->rows(5)
-                            ->maxLength(160),
-                    ])->columns(1),
-            ])->columns(2);
+                        ->unique(ignoreRecord: true)
+                        ->maxLength(70),
+                    SelectTree::make('parent_id')
+                        ->label('Select Parent Category')
+                        ->withCount()
+                        ->enableBranchNode()
+                        ->live(true)
+                        ->emptyLabel('Oops! No Category Found')
+                        ->relationship('parent', 'name', 'parent_id', function ($query, Forms\Get $get) {
+                            return $query->where('type', $get('type'));
+                        }),
+                    Forms\Components\RichEditor::make('description')
+                        ->toolbarButtons([
+                            'blockquote',
+                            'bold',
+                            'bulletList',
+                            'h2',
+                            'h3',
+                            'italic',
+                            'orderedList',
+                            'redo',
+                            'strike',
+                            'underline',
+                            'undo',
+                        ])
+                        ->label('Description')
+                        ->maxLength(65535)
+                        ->autofocus()
+                        ->columnSpanFull(),
+                ])->columnSpan(2),
+                Forms\Components\Group::make([
+                    Section::make()->schema([
+                        Toggle::make('is_active')
+                            ->default(1)
+                            ->label('Active')
+                            ->autofocus()
+                            ->required(),
+                        Toggle::make('is_featured')
+                            ->label('Featured')
+                            ->autofocus()
+                            ->required(),
+                    ])->columns(),
+                    Select::make('type')
+                        ->label('Select Type')
+                        ->native(false)
+                        ->required()
+                        ->live(true)
+                        ->options([
+                            'company' => 'Company',
+                            'product' => 'Product',
+                            'job' => 'Job',
+                            'deal' => 'Deals',
+                            'blog' => 'Blog',
+                            'event' => 'Event',
+                            'forum' => 'Forum',
+                        ]),
+                    FileUpload::make('image')
+                        ->image()
+                        ->optimize('webp')
+                        ->resize(50)
+                        ->label('category image')
+                        ->directory('category')
+                        ->default(''),
+                    Section::make('SEO Details')
+                        ->relationship('seo')
+                        ->schema([
+                            TextInput::make('title')
+                                ->label('Enter SEO Title')
+                                ->required()
+                                ->maxLength(70),
+                            TagsInput::make('meta_keywords')
+                                ->splitKeys(['Tab', ','])
+                                ->label('Enter SEO Meta Keywords'),
+                            Textarea::make('meta_description')
+                                ->label('Enter SEO Meta Description')
+                                ->rows(5)
+                                ->maxLength(160),
+                        ])->columns(1),
+                ])->columnSpan(1),
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table

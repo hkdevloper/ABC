@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\DirectMessageResource\Pages;
-use App\Filament\Resources\DirectMessageResource\RelationManagers;
 use App\Models\DirectMessage;
 use Filament\Forms;
 use Filament\Forms\Form;

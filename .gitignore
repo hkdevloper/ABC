@@ -18,3 +18,5 @@ yarn-error.log
 /storage/app/purifier
 /storage/app/public/category
 /public/storage/category
+/public/storage/companies
+/public/storage/packages

@@ -31,23 +31,13 @@ class PackageResource extends Resource
                     Forms\Components\Placeholder::make('duration')
                         ->content(fn(Package $record): string => $record->duration . ' ' . $record->duration_type),
                     Forms\Components\Placeholder::make('price')
-                        ->content(fn(Package $record): string => $record->price . ' / ' . $record->duration_type),
+                        ->content(fn(Package $record): string => $record->price . '$ / ' . $record->duration_type),
                     Forms\Components\Placeholder::make('discount_price')
-                        ->content(fn(Package $record): string => $record->discount_price . ' / ' . $record->duration_type),
+                        ->content(fn(Package $record): string => $record->discount_price . '$ / ' . $record->duration_type),
                     Forms\Components\RichEditor::make('description')
                         ->columnSpanFull(),
                 ])->columnSpan(2)->columns(2),
                 Forms\Components\Group::make()->schema([
-                    FileUpload::make('image')
-                        ->image()
-                        ->disabled()
-                        ->optimize('webp')
-                        ->resize(50)
-                        ->label('Thumbnail Image')
-                        ->directory('packages/')
-                        ->visibility('public')
-
-                        ->required(),
                     Forms\Components\KeyValue::make('featured')
                         ->label('Featured Items available in this package')
                         ->keyLabel('Items')
@@ -64,23 +54,25 @@ class PackageResource extends Resource
                 Tables\Columns\Layout\Stack::make([
                     Tables\Columns\ImageColumn::make('image')
                         ->height('150px')
-                        ->width('150px')->alignCenter(),
+                        ->width('150px')
+                        ->alignCenter(),
                     Tables\Columns\Layout\Stack::make([
                         Tables\Columns\TextColumn::make('name')
-                            ->weight(FontWeight::Bold)->alignCenter(),
+                            ->weight(FontWeight::Bold)
+                            ->alignCenter(),
                         Tables\Columns\TextColumn::make('price')
-                            ->money('INR')
+                            ->money('USD')
                             ->color('gray')
                             ->alignCenter(),
                     ]),
-                ])->space(3),
+                ]),
             ])
             ->filters([
                 //
             ])
             ->contentGrid([
-                'md' => 2,
-                'xl' => 3,
+                'md' => 3,
+                'xl' => 4,
             ])
             ->paginated([
                 18,
@@ -92,10 +84,18 @@ class PackageResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()
-                    ->icon('heroicon-o-eye')
-                    ->label('View Package'),
-            ])->actionsAlignment('center')
+                Tables\Actions\ViewAction::make('View')
+                    ->icon('heroicon-o-eye'),
+                Tables\Actions\Action::make('Buy Now')
+                    ->button()
+                    ->action(function(Package $package) {
+                        // Open modal
+
+                    })
+                    ->color('primary')
+                    ->icon('heroicon-o-shopping-cart')
+                    ->label('Buy Now'),
+            ])
             ->bulkActions([]);
     }
 
