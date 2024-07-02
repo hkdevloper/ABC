@@ -4,6 +4,7 @@ namespace App\Filament\User\Resources;
 
 use App\Filament\User\Resources\PackageResource\Pages;
 use App\Models\Package;
+use App\Models\PackageUser;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
@@ -103,14 +104,32 @@ class PackageResource extends Resource
                                 ->warning()
                                 ->body('You do not have enough funds to buy this package, please top up your account wallet.')
                                 ->send();
+                        }else{
+                            // deduct the amount from user wallet
+                            auth()->user()->balance -= $package->price;
+                            auth()->user()->save();
+
+                            // add the package to a user account
+                            $package_user = new PackageUser();
+                            $package_user->user_id = auth()->id();
+                            $package_user->package_id = $package->id;
+                            $package_user->started_at = now();
+                            $package_user->expired_at = now()->add($package->duration_type, $package->duration);
+                            $package_user->is_active = true;
+                            $package_user->is_expired = false;
+                            $package_user->purchased_price = $package->price;
+                            $package_user->dm_available = $package->dm_available;
+                            $package_user->req_available = $package->req_available;
+                            $package_user->featured = $package->featured;
+                            $package_user->save();
+
+                            // show success notification
+                            Notification::make('success')
+                                ->title('Package Purchased')
+                                ->body('You have successfully purchased the package, enjoy the benefits.')
+                                ->success()
+                                ->send();
                         }
-                        // deduct the amount from user wallet
-                        auth()->user()->balance -= $package->price;
-                        auth()->user()->save();
-
-                        // add the package to user account
-                        
-
                     })
                     ->color('primary')
                     ->icon('heroicon-o-shopping-cart')
