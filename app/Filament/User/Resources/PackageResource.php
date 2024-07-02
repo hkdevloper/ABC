@@ -7,12 +7,14 @@ use App\Models\Package;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Log;
 
 class PackageResource extends Resource
 {
@@ -88,8 +90,26 @@ class PackageResource extends Resource
                     ->icon('heroicon-o-eye'),
                 Tables\Actions\Action::make('Buy Now')
                     ->button()
-                    ->action(function(Package $package) {
-                        // Open modal
+                    ->requiresConfirmation()
+                    ->modalIcon('heroicon-o-shopping-cart')
+                    ->modalHeading('Buy Now')
+                    ->modalDescription('Are you sure you want to buy this package?, the amount will be deducted from your account wallet.')
+                    ->modalSubmitActionLabel('Buy Now')
+                    ->action(function (Package $package) {
+                        // check if user has enough funds to buy the package
+                        if (auth()->user()->balance < $package->price) {
+                            Notification::make('error')
+                                ->title('Insufficient Funds')
+                                ->warning()
+                                ->body('You do not have enough funds to buy this package, please top up your account wallet.')
+                                ->send();
+                        }
+                        // deduct the amount from user wallet
+                        auth()->user()->balance -= $package->price;
+                        auth()->user()->save();
+
+                        // add the package to user account
+                        
 
                     })
                     ->color('primary')
